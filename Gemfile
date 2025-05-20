@@ -21,4 +21,5 @@ group :jekyll_plugins do
     gem 'tzinfo-data'
     gem 'tzinfo'
     gem 'rouge'
+    gem 'kramdown-math-katex'
 end

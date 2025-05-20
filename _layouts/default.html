@@ -34,6 +34,9 @@
       gtag("config", "{{site.ganalytics}}");
     </script>
     {% endif %}
+
+    <!-- KaTeX -->
+    {% include katex.html %}
   </head>
 
   {% capture layout %}{% if page.layout %}layout-{{ page.layout }}{% endif %}{%
