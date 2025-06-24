@@ -2,7 +2,7 @@
 layout: page
 title: Activities
 permalink: "/activities/"
-image: assets/images/logo.png
+image: assets/images/logo.webp
 ---
 
 ## Hugging Face KREW 활동 🦸‍♀️🦸‍♂️

@@ -8,47 +8,48 @@ post_class: post-template
 <!-- Begin Article
 ================================================== -->
 
-<div class="row">
 
+	<div class="row" style="margin-top: 1rem;">
+		
 
-    <!-- Post -->
-    {% assign author = site.authors[page.author] %}
+		<!-- Post -->        
+        {% assign author = site.authors[page.author] %}
+        
+		<div class="col-sm-8">
+            <!-- Post Featured Image -->
+			{% if page.image %}<img class="featured-image img-fluid rounded" src="{{ site.baseurl }}/{{ page.image }}" alt="{{ page.title }}">{% endif %}
+			<!-- End Featured Image -->
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        {% assign sortedCategories = page.categories | sort %}
+                        {% for category in sortedCategories %}
+                        <li>
+                         <a href="{{ site.baseurl }}/categories#{{ category | slugify }}">{{ category }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">{{ page.title }}</h1> 
+                
+			</div>
 
-    <div class="col-sm-8">
-        <!-- Post Featured Image -->
-        {% if page.image %}<img class="featured-image img-fluid rounded" src="{{ site.baseurl }}/{{ page.image }}"
-            alt="{{ page.title }}">{% endif %}
-        <!-- End Featured Image -->
-        <div class="mainheading">
+			
 
-            <!-- Post Categories -->
-            <div class="after-post-tags">
-                <ul class="tags">
-                    {% assign sortedCategories = page.categories | sort %}
-                    {% for category in sortedCategories %}
-                    <li>
-                        <a href="{{ site.baseurl }}/categories#{{ category | slugify }}">{{ category }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <!-- End Categories -->
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				{{content}}
+                <div class="clearfix"></div>
+			</div>
 
-            <!-- Post Title -->
-            <h1 class="posttitle">{{ page.title }}</h1>
+            <!-- Post Date -->
+            <p>
 
-        </div>
-
-
-
-        <!-- Post Content -->
-        <div class="article-post serif-font">
-            {{content}}
-            <div class="clearfix"></div>
-        </div>
-
-        <!-- Post Date -->
-        <p>
             <small>
                 <span class="post-date"><time class="post-date" datetime="{{ page.date | date:" %Y-%m-%d" }}">{{
                         page.date | date_to_string }}</time></span>

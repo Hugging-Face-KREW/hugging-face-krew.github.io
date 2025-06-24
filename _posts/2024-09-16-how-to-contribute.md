@@ -3,7 +3,7 @@ layout: post
 title: "🤗 어떻게 기여하나요?"
 author: admin
 categories: [contribute, tutorial]
-image: assets/images/hfkr_logo.png
+image: assets/images/logo.webp
 ---
 
 Hugging Face KREW의 일원으로 🤗 Hugging Face 생태계에 기여하는 방법을 안내합니다.

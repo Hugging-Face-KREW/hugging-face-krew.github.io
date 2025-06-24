@@ -154,7 +154,7 @@ small, .small {
 ================================================== */
 .hero {
     background: #fdd93d;
-    padding: 5rem 5rem;
+    padding: 0rem 5rem;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -643,4 +643,11 @@ span.navigation:before {
 .hover-opacity:hover {
     transition: all 0.3s;
     opacity:.8;
+}
+
+/* 좌측 상단로고 사이즈 조정 */
+.navbar-brand .mr-2 {
+  width: 70px;
+  height: 70px;
+  object-fit: contain; 
 }
