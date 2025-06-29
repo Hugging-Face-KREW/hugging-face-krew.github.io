@@ -5,7 +5,9 @@ author: chaewon
 categories: [NLP, Web]
 image: assets/images/gradio_free.png
 ---
-
+* TOC
+{:toc}
+<!--toc-->
 안녕하세요🤗 오늘은 Hugging Face에서 개발한 Gradio 라이브러리를 사용하여 머신러닝 모델을 위한 웹 인터페이스를 쉽고 빠르게 만드는 방법을 알아보겠습니다. Gradio를 사용하면 복잡한 웹 개발 지식 없이도 데모나 인터페이스를 빠르게 제작할 수 있습니다.
 
 ## <a href="#introduction">1. Gradio 소개</a><a id="introduction"></a>

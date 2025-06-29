@@ -5,12 +5,10 @@ author: minju
 categories: [HuggingFaceKREW]
 image: assets/images/blog/posts/2025-05-27-2024-open-source-academy-recap/title.png
 ---
-
-안녕하세요! 
-
-Hugging Face KREW의 민주입니다. 
-
-작년 2024년에는 Hugging Face OSS 프로젝트에 참여하며 Open Source Contribution Academy (OSSCA)에서의 여정을 마무리하였습니다. 
+* TOC
+{:toc}
+<!--toc-->
+안녕하세요! Hugging Face KREW의 민주입니다. 작년 2024년에는 Hugging Face OSS 프로젝트에 참여하며 Open Source Contribution Academy (OSSCA)에서의 여정을 마무리하였습니다. 
 
 약 13주간의 시간 동안(2024. 7. 13 - 2024. 11. 2) 정말 많은 것을 배우고 기여할 수 있었습니다. 이 글에서는 제가 OSSCA 프로젝트에 참여하게 된 계기와 초반에 어떤 분야에 관심을 두고 활동했는지 이야기하며 그 경험을 회고해 보려고 합니다.
 

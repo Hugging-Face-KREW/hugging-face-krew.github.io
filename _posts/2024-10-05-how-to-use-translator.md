@@ -5,7 +5,9 @@ author: minju
 categories: [Transformers, Translation]
 image: assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png
 ---
-
+* TOC
+{:toc}
+<!--toc-->
 Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
 
 ## 목차

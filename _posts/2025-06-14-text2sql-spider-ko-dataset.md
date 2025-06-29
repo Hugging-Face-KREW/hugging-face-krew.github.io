@@ -5,7 +5,9 @@ author: sohyun
 categories: [NLP, SQL]
 image: assets/images/blog/posts/2025-06-14-text2sql-spider-ko-dataset/text2sql-thumbnail.png
 ---
-
+* TOC
+{:toc}
+<!--toc-->
 2025년 상반기에 가짜연구소의 Hugging Face Hub Garden 스터디에서는 **Text2SQL 한국어 데이터셋 구축 프로젝트**가 진행되었습니다.
 
 이번 포스트에서는 Spider 데이터셋을 한국어로 번역하면서 발견한 다양한 문제점들과 이를 해결하여 데이터셋 품질을 개선한 과정을 자세히 공유하려고 합니다.
