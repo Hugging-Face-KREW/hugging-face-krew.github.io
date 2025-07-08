@@ -56,6 +56,14 @@ authors:
     email: sohyun.sim27@gmail.com 
     web: https://github.com/sim-so/
     description: "Hello, I'm sohyun, a data analyst who explores the world of data with curiosity and passion. 🤗"
+  jeong:
+    name: Ahn Jeong
+    display_name: jeong 
+    avatar: 'assets/images/author/jeong.png'
+    email: ahnjj.dev@gmail.com 
+    web: https://github.com/ahnjj/
+    description: "Hello, I'm jeong!🤗"
+
 
 # Social
 social:
