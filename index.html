@@ -6,32 +6,51 @@ background: '/img/bg-index.jpg'
 
 <!-- Home Intro
 ================================================== -->
-{% if page.url == "/" %} 
+<!-- {% if page.url == "/" %} 
 <div class="rounded mb-5 hero">
 </div>
-{% endif %}
+{% endif %} -->
+
+<!-- Category Filter Section
+================================================== -->
+<section class="category-filter-section mb-5" style="margin-top: 2rem;">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">{{ site.posts.size }}</span>
+      </button>
+      {% assign sorted_categories = site.categories | sort %}
+      {% for category in sorted_categories %}
+      <button class="filter-btn" data-category="{{ category[0] | slugify }}">
+        {{ category[0] }}
+        <span class="count">{{ category[1].size }}</span>
+      </button>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
 <!-- Featured
 ================================================== -->
-<section class="row">
+<section class="row featured-posts">
   {% for post in site.posts %}
       {% if post.featured == true %}
-          <div class="col-md-4 mb-5">
+          <div class="col-md-4 mb-5 post-item" data-categories="{% for cat in post.categories %}{{ cat | slugify }} {% endfor %}">
           {% include postbox.html %}
           </div>
       {% endif %}
   {% endfor %}
-  </div>
 </section>
 
 <!-- Posts List with Sidebar (except featured)
 ================================================== -->
 <section class="row">
   <div class="col-sm-8">
-    <div class="row">
+    <div class="row posts-container">
       {% for post in paginator.posts %}
       {% unless post.featured == true %}
-      <div class="col-md-6 mb-5">
+      <div class="col-md-6 mb-5 post-item" data-categories="{% for cat in post.categories %}{{ cat | slugify }} {% endfor %}">
         {% include postbox.html %}
       </div>
       {% endunless %}
