@@ -3,7 +3,7 @@ layout: post
 title: "HuggingFace KREW in 2025 PseudoCon"
 author: Jeong
 categories: [contribute]
-image: assets/images/blog/posts/2025-05-31-2025-PseudoCon-recap/thumbnail.png
+image: assets/images/blog/posts/2025-05-31-2025-PseudoCon-recap/수도콘.webp
 ---
 * TOC
 {:toc}

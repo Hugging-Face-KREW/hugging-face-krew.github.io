@@ -3,7 +3,7 @@ layout: post
 title: "🤗 어떻게 기여하나요?"
 author: admin
 categories: [contribute, tutorial]
-image: assets/images/thumbnail_default.png
+image: assets/images/logo.webp
 ---
 * TOC
 {:toc}
