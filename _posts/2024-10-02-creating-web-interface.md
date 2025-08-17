@@ -3,7 +3,7 @@ layout: post
 title: "Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기"
 author: chaewon
 categories: [NLP, Web]
-image: assets/images/gradio_free.png
+image: assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png
 ---
 * TOC
 {:toc}
