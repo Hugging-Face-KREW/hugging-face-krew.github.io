@@ -5,6 +5,12 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+  pull-requests: write
+  pages: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,7 +20,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.x
+          ruby-version: '3.2.0'
           bundler-cache: true
 
       - name: Install dependencies
@@ -27,20 +33,23 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
-          git clone --branch gh-pages https://github.com/${{ github.repository }} preview
+          # 토큰을 포함한 URL로 gh-pages 브랜치 클론
+          git clone --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git preview
           mkdir -p preview/pull/${{ github.event.number }}
           cp -r _site/* preview/pull/${{ github.event.number }}/
           cd preview
           git add .
           git commit -m "Deploy PR #${{ github.event.number }} preview"
+          # 토큰 포함 URL로 원격 설정 후 푸시
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git push origin gh-pages
 
       - name: Comment PR with Preview URL
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.MY_GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            github.issues.createComment({
+            github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
