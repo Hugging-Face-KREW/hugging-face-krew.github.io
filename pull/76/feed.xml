@@ -1,4 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2025-09-15T18:48:05+09:00</updated><id>/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</title><link href="/python-tiny-agents-ko/" rel="alternate" type="text/html" title="파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기" /><published>2025-09-14T00:00:00+09:00</published><updated>2025-09-14T00:00:00+09:00</updated><id>/python-tiny-agents-ko</id><content type="html" xml:base="/python-tiny-agents-ko/"><![CDATA[<h1 id="파이썬-tiny-agents-약-70줄의-코드로-mcp-기반-에이전트-구현하기">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2025-09-15T18:51:04+09:00</updated><id>/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</title><link href="/python-tiny-agents-ko/" rel="alternate" type="text/html" title="파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기" /><published>2025-09-14T00:00:00+09:00</published><updated>2025-09-14T00:00:00+09:00</updated><id>/python-tiny-agents-ko</id><content type="html" xml:base="/python-tiny-agents-ko/"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#파이썬-tiny-agents-약-70줄의-코드로-mcp-기반-에이전트-구현하기" id="markdown-toc-파이썬-tiny-agents-약-70줄의-코드로-mcp-기반-에이전트-구현하기">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</a>    <ul>
+      <li><a href="#데모-실행-방법" id="markdown-toc-데모-실행-방법">데모 실행 방법</a>        <ul>
+          <li><a href="#에이전트-설정" id="markdown-toc-에이전트-설정">에이전트 설정</a></li>
+          <li><a href="#llm은-도구를-사용할-수-있습니다" id="markdown-toc-llm은-도구를-사용할-수-있습니다">LLM은 도구를 사용할 수 있습니다.</a></li>
+        </ul>
+      </li>
+      <li><a href="#파이썬-mcp-클라이언트-구축" id="markdown-toc-파이썬-mcp-클라이언트-구축">파이썬 MCP 클라이언트 구축</a></li>
+      <li><a href="#도구-사용-스트리밍-및-처리" id="markdown-toc-도구-사용-스트리밍-및-처리">도구 사용: 스트리밍 및 처리</a>        <ul>
+          <li><a href="#1-도구-준비-및-llm-호출" id="markdown-toc-1-도구-준비-및-llm-호출">1. 도구 준비 및 LLM 호출</a></li>
+          <li><a href="#2-도구-실행" id="markdown-toc-2-도구-실행">2. 도구 실행</a></li>
+        </ul>
+      </li>
+      <li><a href="#우리의-tiny-python-agent-거의-루프일-뿐입니다" id="markdown-toc-우리의-tiny-python-agent-거의-루프일-뿐입니다">우리의 Tiny Python Agent: 거의 루프일 뿐입니다!</a>        <ul>
+          <li><a href="#1-에이전트-초기화" id="markdown-toc-1-에이전트-초기화">1. 에이전트 초기화</a></li>
+          <li><a href="#2-에이전트의-핵심-루프" id="markdown-toc-2-에이전트의-핵심-루프">2. 에이전트의 핵심: 루프</a></li>
+        </ul>
+      </li>
+      <li><a href="#다음-단계" id="markdown-toc-다음-단계">다음 단계</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/python-tiny-agents">Tiny Agents in Python: an MCP-powered agent in ~70 lines of code</a>를 한국어로 번역한 글입니다.</em></p>
+
+<hr />
+<h1 id="파이썬-tiny-agents-약-70줄의-코드로-mcp-기반-에이전트-구현하기">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</h1>
 
 <blockquote>
   <p>[!TIP]
@@ -371,7 +398,7 @@ Agent 클래스는 작고 대화 루프에 중점을 둡니다. 코드는 <a hre
   <li>.. 물론 기여하세요! Hugging Face Hub의 <a href="https://huggingface.co/datasets/tiny-agents/tiny-agents">tiny-agents/tiny-agents</a> 데이터셋에 자신만의 고유한 Tiny Agent를 공유하고 PR을 엽니다.</li>
 </ul>
 
-<p>풀 리퀘스트 및 기여를 환영합니다! 다시 한 번, 여기 있는 모든 것은 <a href="https://github.com/huggingface/huggingface_hub">오픈 소스</a>입니다! 💎❤️</p>]]></content><author><name>{&quot;user&quot;=&gt;&quot;celinah&quot;}</name></author><summary type="html"><![CDATA[파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기]]></summary></entry><entry><title type="html">Hugging Face transformers 기술 문서 번역 가이드</title><link href="/HuggingFace-Docs-Translation-Guide/" rel="alternate" type="text/html" title="Hugging Face transformers 기술 문서 번역 가이드" /><published>2025-06-22T00:00:00+09:00</published><updated>2025-06-22T00:00:00+09:00</updated><id>/HuggingFace-Docs-Translation-Guide</id><content type="html" xml:base="/HuggingFace-Docs-Translation-Guide/"><![CDATA[<ul id="markdown-toc">
+<p>풀 리퀘스트 및 기여를 환영합니다! 다시 한 번, 여기 있는 모든 것은 <a href="https://github.com/huggingface/huggingface_hub">오픈 소스</a>입니다! 💎❤️</p>]]></content><author><name>minju</name></author><category term="Agent" /><summary type="html"><![CDATA[]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" /><media:content medium="image" url="/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Hugging Face transformers 기술 문서 번역 가이드</title><link href="/HuggingFace-Docs-Translation-Guide/" rel="alternate" type="text/html" title="Hugging Face transformers 기술 문서 번역 가이드" /><published>2025-06-22T00:00:00+09:00</published><updated>2025-06-22T00:00:00+09:00</updated><id>/HuggingFace-Docs-Translation-Guide</id><content type="html" xml:base="/HuggingFace-Docs-Translation-Guide/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#작업-준비" id="markdown-toc-작업-준비">작업 준비</a>    <ul>
       <li><a href="#1-transformers-레포지토리-포크-하기" id="markdown-toc-1-transformers-레포지토리-포크-하기">1. transformers 레포지토리 포크 하기</a></li>
       <li><a href="#2-레포지토리-클론-받기" id="markdown-toc-2-레포지토리-클론-받기">2. 레포지토리 클론 받기</a></li>
