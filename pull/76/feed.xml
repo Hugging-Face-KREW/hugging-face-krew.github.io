@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2025-09-19T06:08:33+09:00</updated><id>/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</title><link href="/python-tiny-agents-ko/" rel="alternate" type="text/html" title="파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기" /><published>2025-09-14T00:00:00+09:00</published><updated>2025-09-14T00:00:00+09:00</updated><id>/python-tiny-agents-ko</id><content type="html" xml:base="/python-tiny-agents-ko/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2025-09-19T06:55:19+09:00</updated><id>/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</title><link href="/python-tiny-agents-ko/" rel="alternate" type="text/html" title="파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기" /><published>2025-09-14T00:00:00+09:00</published><updated>2025-09-14T00:00:00+09:00</updated><id>/python-tiny-agents-ko</id><content type="html" xml:base="/python-tiny-agents-ko/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#파이썬-tiny-agents-약-70줄의-코드로-mcp-기반-에이전트-구현하기" id="markdown-toc-파이썬-tiny-agents-약-70줄의-코드로-mcp-기반-에이전트-구현하기">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</a>    <ul>
       <li><a href="#데모-실행-방법" id="markdown-toc-데모-실행-방법">데모 실행 방법</a>        <ul>
           <li><a href="#에이전트-설정" id="markdown-toc-에이전트-설정">에이전트 설정</a></li>
@@ -477,52 +477,8 @@ Agent 클래스는 작고 대화 루프에 중점을 둡니다. 코드는 <a hre
 
 <h3 id="tiny-agents--agent--mcp-server--tool-호출-흐름">Tiny-Agents → Agent → MCP Server → Tool 호출 흐름</h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>User
- │
- │ 1. user_input
- ▼
-┌──────────────────────────────┐
-│        Tiny-Agents           │
-│ (Agent Manager / Launcher)   │
-└─────────────┬────────────────┘
-              │
-              ▼
-       ┌───────────────┐
-       │     Agent     │
-       │ (messages 관리)│
-       └─────┬─────────┘
-             │
-             │ 2. load_tools() 실행
-             ▼
-   ┌─────────────────────────┐
-   │   MCP 서버 등록           │
-   │  Server 1               │
-   │  Server 2               │
-   └─────────────┬───────────┘
-                 │
-                 │ 3. process_single_turn_with_tools 호출
-                 ▼
-         ┌───────────────┐
-         │ Tool 호출 관리  │
-         │   (Agent)     │
-         └─────┬─────────┘
-          ┌────┴────┐
-          ▼         ▼
-┌─────────────────┐ ┌─────────────────┐
-│   MCP Server 1  │ │   MCP Server 2  │
-│ provider=nebius │ │ provider=nebius │
-│ + Tools         │ │ + Tools         │
-└─────┬───────────┘ └─────┬───────────┘
-      │                   │
-      ▼                   ▼
-   결과 반환            결과 반환
-      └──────────┬────────┘
-                 ▼
-         Agent messages 업데이트
-                 │
-                 ▼
-          최종 결과 → User
-</code></pre></div></div>
+<p><img src="../assets/images/blog/posts/2015-09-14-python-tiny-agents/image-4.png" alt="image-4" />
+(LLM으로 생성된 이미지입니다.)</p>
 
 <hr />
 
@@ -605,39 +561,13 @@ Agent 클래스는 작고 대화 루프에 중점을 둡니다. 코드는 <a hre
 <p>이러한 상황일 경우,  tiny-agents에서 multi-agent 기능이 필요할 것 같다는 생각이 들었습니다.</p>
 
 <p><strong>상상하는 동작 원리:</strong></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         ┌───────────────────────────┐
-         │        Tiny-Agents        │
-         │ (Agent Manager / Launcher)│
-         └─────────────┬─────────────┘
-                       │
-       ┌───────────────┴───────────────┐
-       │                               │
-       v                               v
-┌────────────────┐               ┌──────────────────────┐
-│   Agent A      │               │       Agent B        │
-│ (agent.json)   │               │     (agent.json)     │
-│provider: nebius│               │ provider:hf-inference│
-└───────┬────────┘               └───────┬──────────────┘
-        │                                │
-        │ MCP Client 초기화                │ MCP Client 초기화
-        │                                │
-        v                                v
- ┌───────────────┐                ┌───────────────┐
- │ MCP Server    │                │ MCP Server    │
- │provider=nebius│                │ provider=hf   │
- │ + Tools       │                │ + Tools       │
- └───────┬───────┘                └───────┬───────┘
-         │                                │
-         │ 결과 반환                        │ 결과 반환
-         └──────────────┬─────────────────┘
-                        v
-                 Tiny-Agents Manager
-                 (결과 수집, 필요 시 조합)
 
-</code></pre></div></div>
+<p><img src="../assets/images/blog/posts/2015-09-14-python-tiny-agents/image-5.png" alt="image-5" />
+(LLM으로 생성된 이미지 입니다.)</p>
+
 <hr />
 
-<p>이제까지 Tiny Agents 에 대해서 알아보았습니다. 앞으로의 발전도 꽤 기대되는 프로젝트인 것 같습니다.</p>]]></content><author><name>minju</name></author><category term="스터디" /><summary type="html"><![CDATA[]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" /><media:content medium="image" url="/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Hugging Face transformers 기술 문서 번역 가이드</title><link href="/HuggingFace-Docs-Translation-Guide/" rel="alternate" type="text/html" title="Hugging Face transformers 기술 문서 번역 가이드" /><published>2025-06-22T00:00:00+09:00</published><updated>2025-06-22T00:00:00+09:00</updated><id>/HuggingFace-Docs-Translation-Guide</id><content type="html" xml:base="/HuggingFace-Docs-Translation-Guide/"><![CDATA[<ul id="markdown-toc">
+<p>이제까지 Tiny Agents에 대해서 알아보았습니다. 앞으로의 발전도 꽤 기대되는 프로젝트인 것 같습니다.</p>]]></content><author><name>minju</name></author><category term="스터디" /><summary type="html"><![CDATA[]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" /><media:content medium="image" url="/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Hugging Face transformers 기술 문서 번역 가이드</title><link href="/HuggingFace-Docs-Translation-Guide/" rel="alternate" type="text/html" title="Hugging Face transformers 기술 문서 번역 가이드" /><published>2025-06-22T00:00:00+09:00</published><updated>2025-06-22T00:00:00+09:00</updated><id>/HuggingFace-Docs-Translation-Guide</id><content type="html" xml:base="/HuggingFace-Docs-Translation-Guide/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#작업-준비" id="markdown-toc-작업-준비">작업 준비</a>    <ul>
       <li><a href="#1-transformers-레포지토리-포크-하기" id="markdown-toc-1-transformers-레포지토리-포크-하기">1. transformers 레포지토리 포크 하기</a></li>
       <li><a href="#2-레포지토리-클론-받기" id="markdown-toc-2-레포지토리-클론-받기">2. 레포지토리 클론 받기</a></li>
