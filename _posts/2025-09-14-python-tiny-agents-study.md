@@ -45,53 +45,8 @@ Demo에서 사용하는 [tiny-agent datasets](https://huggingface.co/datasets/ti
 
 ### Tiny-Agents → Agent → MCP Server → Tool 호출 흐름
 
-```
-User
- │
- │ 1. user_input
- ▼
-┌──────────────────────────────┐
-│        Tiny-Agents           │
-│ (Agent Manager / Launcher)   │
-└─────────────┬────────────────┘
-              │
-              ▼
-       ┌───────────────┐
-       │     Agent     │
-       │ (messages 관리)│
-       └─────┬─────────┘
-             │
-             │ 2. load_tools() 실행
-             ▼
-   ┌─────────────────────────┐
-   │   MCP 서버 등록           │
-   │  Server 1               │
-   │  Server 2               │
-   └─────────────┬───────────┘
-                 │
-                 │ 3. process_single_turn_with_tools 호출
-                 ▼
-         ┌───────────────┐
-         │ Tool 호출 관리  │
-         │   (Agent)     │
-         └─────┬─────────┘
-          ┌────┴────┐
-          ▼         ▼
-┌─────────────────┐ ┌─────────────────┐
-│   MCP Server 1  │ │   MCP Server 2  │
-│ provider=nebius │ │ provider=nebius │
-│ + Tools         │ │ + Tools         │
-└─────┬───────────┘ └─────┬───────────┘
-      │                   │
-      ▼                   ▼
-   결과 반환            결과 반환
-      └──────────┬────────┘
-                 ▼
-         Agent messages 업데이트
-                 │
-                 ▼
-          최종 결과 → User
-```
+![image-4](../assets/images/blog/posts/2015-09-14-python-tiny-agents/image-4.png)
+(LLM으로 생성된 이미지입니다.)
 
 ---
 
@@ -148,37 +103,10 @@ step 5. 에이전트에 자신만의 prompt를 던져서 원하는 도구 호출
 이러한 상황일 경우,  tiny-agents에서 multi-agent 기능이 필요할 것 같다는 생각이 들었습니다.
 
 **상상하는 동작 원리:**
-```
-         ┌───────────────────────────┐
-         │        Tiny-Agents        │
-         │ (Agent Manager / Launcher)│
-         └─────────────┬─────────────┘
-                       │
-       ┌───────────────┴───────────────┐
-       │                               │
-       v                               v
-┌────────────────┐               ┌──────────────────────┐
-│   Agent A      │               │       Agent B        │
-│ (agent.json)   │               │     (agent.json)     │
-│provider: nebius│               │ provider:hf-inference│
-└───────┬────────┘               └───────┬──────────────┘
-        │                                │
-        │ MCP Client 초기화                │ MCP Client 초기화
-        │                                │
-        v                                v
- ┌───────────────┐                ┌───────────────┐
- │ MCP Server    │                │ MCP Server    │
- │provider=nebius│                │ provider=hf   │
- │ + Tools       │                │ + Tools       │
- └───────┬───────┘                └───────┬───────┘
-         │                                │
-         │ 결과 반환                        │ 결과 반환
-         └──────────────┬─────────────────┘
-                        v
-                 Tiny-Agents Manager
-                 (결과 수집, 필요 시 조합)
 
-```
+![image-5](../assets/images/blog/posts/2015-09-14-python-tiny-agents/image-5.png)
+(LLM으로 생성된 이미지 입니다.)
+
 ---
 
-이제까지 Tiny Agents 에 대해서 알아보았습니다. 앞으로의 발전도 꽤 기대되는 프로젝트인 것 같습니다.
+이제까지 Tiny Agents에 대해서 알아보았습니다. 앞으로의 발전도 꽤 기대되는 프로젝트인 것 같습니다.
