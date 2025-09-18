@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기"
+title: "파이썬 Tiny Agents 스터디"
 author: minju
-categories: [Agent]
+categories: [스터디]
 image: assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png
 ---
 * TOC
