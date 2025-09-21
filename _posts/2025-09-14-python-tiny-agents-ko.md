@@ -17,7 +17,7 @@ _이 글은 Hugging Face 블로그의 [Tiny Agents in Python: an MCP-powered age
 > [!TIP]
 > NEW: tiny-agents가 이제 [AGENTS.md](https://agents.md/) 표준을 지원합니다. 🥳
 
-[Tiny Agents in JS](https://huggingface.co/blog/tiny-agents)에서 영감을 받아, 이 아이디어를 파이썬 🐍으로 개발하고 [`huggingface_hub`](https://github.com/huggingface/huggingface_hub/) 클라이언트 SDK를 확장하여 MCP 클라이언트로써 MCP 서버에서 도구를 가져와 추론 중에 LLM에 전달할 수 있도록 했습니다. 
+[Tiny Agents in JS](https://huggingface.co/blog/tiny-agents)에서 영감을 받아, 이 아이디어를 파이썬 🐍으로 개발하고 [`huggingface_hub`](https://github.com/huggingface/huggingface_hub/) 클라이언트 SDK를 확장하여 MCP 클라이언트로서 MCP 서버에서 도구를 가져와 추론 중에 LLM에 전달할 수 있도록 했습니다. 
 
 MCP ([Model Context Protocol](https://modelcontextprotocol.io/))는 대규모 언어 모델(LLM)이 외부 도구 및 API와 상호 작용하는 방식을 표준화하는 개방형 프로토콜입니다. 본질적으로 각 도구에 대한 개별적인 통합을 개발할 필요가 없어졌으며, 이를 통해 LLM에 새로운 기능을 더 쉽게 연결할 수 있습니다.
 
@@ -38,7 +38,7 @@ pip install "huggingface_hub[mcp]>=0.32.0"
 
 이제 CLI를 사용하여 에이전트를 실행해 봅시다!
 
-가장 멋진 점은 Hugging Face Hub [tiny-agents](https://huggingface.co/datasets/tiny-agents/tiny-agents) 데이터셋에서 직접 에이전트를 로드하거나, 자신만의 로컬 에이전트 설정에 경로를 지정할 수 있다는 것입니다!
+가장 멋진 점은 Hugging Face Hub [tiny-agents](https://huggingface.co/datasets/tiny-agents/tiny-agents) 데이터셋에서 바로 에이전트를 불러올 수도 있고, 혹은 로컬 에이전트 설정에 경로를 직접 지정할 수 있다는 것입니다!
 
 ```bash
 > tiny-agents run --help
@@ -65,7 +65,7 @@ pip install "huggingface_hub[mcp]>=0.32.0"
 - 샌드박스 환경의 Chromium 브라우저를 사용하는 방법을 아는 [Playwright MCP](https://github.com/microsoft/playwright-mcp) 서버.
 
 
-다음 예시는 Nebius 추론 공급자를 통해 [Qwen/Qwen2.5-72B-Instruct](https://huggingface.co/Qwen/Qwen2.5-72B-Instruct) 모델을 사용하도록 구성된 웹 탐색 에이전트를 보여줍니다. 이 에이전트에는 웹 브라우저를 사용할 수 있게 해주는 Playwright MCP 서버가 함께 제공됩니다! 에이전트 설정은 Hugging Face 데이터셋의 [tiny-agents/tiny-agents](https://huggingface.co/datasets/tiny-agents/tiny-agents/tree/main/celinah/web-browser)에 있는 경로를 지정하여 불립니다.
+다음 예시는 Nebius 추론 공급자를 통해 [Qwen/Qwen2.5-72B-Instruct](https://huggingface.co/Qwen/Qwen2.5-72B-Instruct) 모델을 사용하도록 구성된 웹 탐색 에이전트를 보여줍니다. 이 에이전트에는 웹 브라우저를 사용할 수 있게 해주는 Playwright MCP 서버가 함께 제공됩니다! 에이전트 설정은 Hugging Face 데이터셋의 [tiny-agents/tiny-agents](https://huggingface.co/datasets/tiny-agents/tiny-agents/tree/main/celinah/web-browser)에 있는 경로를 지정하여 불러옵니다.
 
 <video controls autoplay loop>
   <source src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/python-tiny-agents/web_browser_agent.mp4" type="video/mp4">
@@ -160,7 +160,7 @@ tools = [
 > [!TIP]
 > 전체 `MCPClient` 코드는 [여기](https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/inference/_mcp/mcp_client.py)에서 찾을 수 있습니다. 실제 코드를 따라가고 싶다면 참고하세요 🤓
 
-`MCPClient`의 주요 책임:
+`MCPClient`의 주요 역할:
 
 - 하나 이상의 MCP 서버에 대한 비동기 연결 관리.
 - 이러한 서버에서 도구 검색.
@@ -210,11 +210,11 @@ class MCPClient:
 
 ## 도구 사용: 스트리밍 및 처리
 
-`MCPClient`의 `process_single_turn_with_tools` 메서드는 LLM 상호 작용이 발생하는 곳입니다. 대화 기록과 사용 가능한 도구를 `AsyncInferenceClient.chat.completions.create(..., stream=True)`를 통해 LLM에 보냅니다.
+`MCPClient`의 `process_single_turn_with_tools` 메서드에서는 LLM 상호 작용이 일어납니다. 대화 기록과 사용 가능한 도구를 `AsyncInferenceClient.chat.completions.create(..., stream=True)`를 통해 LLM에 보냅니다.
 
 ### 1. 도구 준비 및 LLM 호출
 
-먼저, 이 메서드는 현재 차례에 LLM이 알아야 할 모든 도구를 결정합니다. 여기에는 MCP 서버의 도구와 에이전트 제어를 위한 특별한 "루프 종료" 도구가 포함됩니다. 그런 다음 LLM에 스트리밍 호출을 합니다.
+먼저, 이 메서드는 현재 차례에 LLM이 알아야 할 모든 도구를 결정합니다. 여기에는 MCP 서버의 도구와 에이전트 제어를 위한 특별한 "루프 종료(loop exit)" 도구가 포함됩니다. 그런 다음 LLM에 스트리밍 호출을 합니다.
 
 ```python
 # `MCPClient.process_single_turn_with_tools`의 241-251줄
@@ -235,7 +235,7 @@ class MCPClient:
 
 ```
 
-LLM으로부터 청크가 도착하면, 메서드는 이를 반복합니다. 각 청크는 즉시 반환되며, 그런 다음 완전한 텍스트 응답과 모든 도구 호출을 재구성합니다.
+LLM으로부터 청크가 도착하면, 메서드는 청크 처리를 반복합니다. 각 청크는 즉시 반환되며, 그런 다음 완전한 텍스트 응답과 모든 도구 호출을 재구성합니다.
 
 ```python
 # `MCPClient.process_single_turn_with_tools`의 258-290줄 
@@ -283,9 +283,9 @@ for tool_call in final_tool_calls.values():
 
 ```
 
-먼저 호출된 도구가 루프를 종료하는지(`exit_loop_tool`) 확인합니다. 그렇지 않으면 해당 도구에 대한 올바른 MCP 세션을 찾아 `session.call_tool()`을 호출합니다. 결과(또는 오류 응답)는 형식화되어 대화 기록에 추가되고 반환되어 에이전트가 도구의 출력을 알 수 있도록 합니다.
+먼저 호출된 도구가 루프를 종료하는지(`exit_loop_tool`) 확인합니다. 그렇지 않으면 해당 도구에 대한 올바른 MCP 세션을 찾아 `session.call_tool()`을 호출합니다. 결과(또는 오류 응답)는 형식화되어 대화 기록에 추가되며, 에이전트가 도구의 출력을 인식할 수 있도록 반환됩니다.
 
-## 우리의 Tiny Python Agent: 거의 루프일 뿐입니다!
+## 우리의 Tiny Python Agent: 사실상 루프일 뿐입니다!
 
 `MCPClient`가 도구 상호 작용에 대한 모든 작업을 수행하므로 `Agent` 클래스는 놀랍도록 간단해집니다. `MCPClient`를 상속하고 대화 관리 로직을 추가합니다.
 
@@ -294,7 +294,7 @@ for tool_call in final_tool_calls.values():
 
 ### 1. 에이전트 초기화
 
-에이전트가 생성될 때, 에이전트 구성(모델, 공급자, 사용할 MCP 서버, 시스템 프롬프트)을 가져와 시스템 프롬프트로 대화 기록을 초기화합니다. `load_tools()` 메서드는 서버 구성(agent.json에 정의됨)을 반복하고 각 구성에 대해 `add_mcp_server`(부모 `MCPClient`에서)를 호출하여 에이전트의 도구 상자를 채웁니다.
+에이전트가 생성될 때, 구성 정보(모델, 공급자, 사용할 MCP 서버, 시스템 프롬프트)를 불러와 시스템 프롬프트로 대화 기록을 초기화합니다. `load_tools()` 메서드는  `agent.json`에 정의된 서버 구성을 반복하고 각 구성에 부모 클래스인 `MCPClient`의 `add_mcp_server`를 호출해 에이전트의 도구 상자를 채웁니다.
 
 ```python
 # `Agent`의 12-54줄 
@@ -376,4 +376,4 @@ MCP 클라이언트와 Tiny Agent를 탐색하고 확장할 수 있는 멋진 �
 - [llama.cpp](https://github.com/ggerganov/llama.cpp) 또는 [LM Studio](https://lmstudio.ai/)와 같은 로컬 LLM 추론 서버로 Tiny Agent를 실행합니다.
 - .. 물론 기여하세요! Hugging Face Hub의 [tiny-agents/tiny-agents](https://huggingface.co/datasets/tiny-agents/tiny-agents) 데이터셋에 자신만의 고유한 Tiny Agent를 공유하고 PR을 엽니다.
 
-풀 리퀘스트 및 기여를 환영합니다! 다시 한 번, 여기 있는 모든 것은 [오픈 소스](https://github.com/huggingface/huggingface_hub)입니다! 💎❤️
+풀 리퀘스트 및 기여를 환영합니다! 다시 한 번 말하지만 여기 있는 모든 것은 [오픈 소스](https://github.com/huggingface/huggingface_hub)입니다! 💎❤️
