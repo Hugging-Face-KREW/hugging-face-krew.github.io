@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2025-09-19T06:55:19+09:00</updated><id>/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</title><link href="/python-tiny-agents-ko/" rel="alternate" type="text/html" title="파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기" /><published>2025-09-14T00:00:00+09:00</published><updated>2025-09-14T00:00:00+09:00</updated><id>/python-tiny-agents-ko</id><content type="html" xml:base="/python-tiny-agents-ko/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2025-09-22T08:57:13+09:00</updated><id>/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</title><link href="/python-tiny-agents-ko/" rel="alternate" type="text/html" title="파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기" /><published>2025-09-14T00:00:00+09:00</published><updated>2025-09-14T00:00:00+09:00</updated><id>/python-tiny-agents-ko</id><content type="html" xml:base="/python-tiny-agents-ko/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#파이썬-tiny-agents-약-70줄의-코드로-mcp-기반-에이전트-구현하기" id="markdown-toc-파이썬-tiny-agents-약-70줄의-코드로-mcp-기반-에이전트-구현하기">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</a>    <ul>
       <li><a href="#데모-실행-방법" id="markdown-toc-데모-실행-방법">데모 실행 방법</a>        <ul>
           <li><a href="#에이전트-설정" id="markdown-toc-에이전트-설정">에이전트 설정</a></li>
@@ -11,7 +11,7 @@
           <li><a href="#2-도구-실행" id="markdown-toc-2-도구-실행">2. 도구 실행</a></li>
         </ul>
       </li>
-      <li><a href="#우리의-tiny-python-agent-거의-루프일-뿐입니다" id="markdown-toc-우리의-tiny-python-agent-거의-루프일-뿐입니다">우리의 Tiny Python Agent: 거의 루프일 뿐입니다!</a>        <ul>
+      <li><a href="#우리의-tiny-python-agent-사실상-루프일-뿐입니다" id="markdown-toc-우리의-tiny-python-agent-사실상-루프일-뿐입니다">우리의 Tiny Python Agent: 사실상 루프일 뿐입니다!</a>        <ul>
           <li><a href="#1-에이전트-초기화" id="markdown-toc-1-에이전트-초기화">1. 에이전트 초기화</a></li>
           <li><a href="#2-에이전트의-핵심-루프" id="markdown-toc-2-에이전트의-핵심-루프">2. 에이전트의 핵심: 루프</a></li>
         </ul>
@@ -32,7 +32,7 @@
 NEW: tiny-agents가 이제 <a href="https://agents.md/">AGENTS.md</a> 표준을 지원합니다. 🥳</p>
 </blockquote>
 
-<p><a href="https://huggingface.co/blog/tiny-agents">Tiny Agents in JS</a>에서 영감을 받아, 이 아이디어를 파이썬 🐍으로 개발하고 <a href="https://github.com/huggingface/huggingface_hub/"><code class="language-plaintext highlighter-rouge">huggingface_hub</code></a> 클라이언트 SDK를 확장하여 MCP 클라이언트로써 MCP 서버에서 도구를 가져와 추론 중에 LLM에 전달할 수 있도록 했습니다.</p>
+<p><a href="https://huggingface.co/blog/tiny-agents">Tiny Agents in JS</a>에서 영감을 받아, 이 아이디어를 파이썬 🐍으로 개발하고 <a href="https://github.com/huggingface/huggingface_hub/"><code class="language-plaintext highlighter-rouge">huggingface_hub</code></a> 클라이언트 SDK를 확장하여 MCP 클라이언트로서 MCP 서버에서 도구를 가져와 추론 중에 LLM에 전달할 수 있도록 했습니다.</p>
 
 <p>MCP (<a href="https://modelcontextprotocol.io/">Model Context Protocol</a>)는 대규모 언어 모델(LLM)이 외부 도구 및 API와 상호 작용하는 방식을 표준화하는 개방형 프로토콜입니다. 본질적으로 각 도구에 대한 개별적인 통합을 개발할 필요가 없어졌으며, 이를 통해 LLM에 새로운 기능을 더 쉽게 연결할 수 있습니다.</p>
 
@@ -54,7 +54,7 @@ NEW: tiny-agents가 이제 <a href="https://agents.md/">AGENTS.md</a> 표준을 
 
 <p>이제 CLI를 사용하여 에이전트를 실행해 봅시다!</p>
 
-<p>가장 멋진 점은 Hugging Face Hub <a href="https://huggingface.co/datasets/tiny-agents/tiny-agents">tiny-agents</a> 데이터셋에서 직접 에이전트를 로드하거나, 자신만의 로컬 에이전트 설정에 경로를 지정할 수 있다는 것입니다!</p>
+<p>가장 멋진 점은 Hugging Face Hub <a href="https://huggingface.co/datasets/tiny-agents/tiny-agents">tiny-agents</a> 데이터셋에서 바로 에이전트를 불러올 수도 있고, 혹은 로컬 에이전트 설정에 경로를 직접 지정할 수 있다는 것입니다!</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> tiny-agents run <span class="nt">--help</span>
                                                                                                                                                                                      
@@ -81,7 +81,7 @@ NEW: tiny-agents가 이제 <a href="https://agents.md/">AGENTS.md</a> 표준을 
   <li>샌드박스 환경의 Chromium 브라우저를 사용하는 방법을 아는 <a href="https://github.com/microsoft/playwright-mcp">Playwright MCP</a> 서버.</li>
 </ul>
 
-<p>다음 예시는 Nebius 추론 공급자를 통해 <a href="https://huggingface.co/Qwen/Qwen2.5-72B-Instruct">Qwen/Qwen2.5-72B-Instruct</a> 모델을 사용하도록 구성된 웹 탐색 에이전트를 보여줍니다. 이 에이전트에는 웹 브라우저를 사용할 수 있게 해주는 Playwright MCP 서버가 함께 제공됩니다! 에이전트 설정은 Hugging Face 데이터셋의 <a href="https://huggingface.co/datasets/tiny-agents/tiny-agents/tree/main/celinah/web-browser">tiny-agents/tiny-agents</a>에 있는 경로를 지정하여 불립니다.</p>
+<p>다음 예시는 Nebius 추론 공급자를 통해 <a href="https://huggingface.co/Qwen/Qwen2.5-72B-Instruct">Qwen/Qwen2.5-72B-Instruct</a> 모델을 사용하도록 구성된 웹 탐색 에이전트를 보여줍니다. 이 에이전트에는 웹 브라우저를 사용할 수 있게 해주는 Playwright MCP 서버가 함께 제공됩니다! 에이전트 설정은 Hugging Face 데이터셋의 <a href="https://huggingface.co/datasets/tiny-agents/tiny-agents/tree/main/celinah/web-browser">tiny-agents/tiny-agents</a>에 있는 경로를 지정하여 불러옵니다.</p>
 
 <video controls="" autoplay="" loop="">
   <source src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/python-tiny-agents/web_browser_agent.mp4" type="video/mp4" />
@@ -180,7 +180,7 @@ Hugging Face 추론 공급자에 대한 자세한 내용은 <a href="https://hug
 전체 <code class="language-plaintext highlighter-rouge">MCPClient</code> 코드는 <a href="https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/inference/_mcp/mcp_client.py">여기</a>에서 찾을 수 있습니다. 실제 코드를 따라가고 싶다면 참고하세요 🤓</p>
 </blockquote>
 
-<p><code class="language-plaintext highlighter-rouge">MCPClient</code>의 주요 책임:</p>
+<p><code class="language-plaintext highlighter-rouge">MCPClient</code>의 주요 역할:</p>
 
 <ul>
   <li>하나 이상의 MCP 서버에 대한 비동기 연결 관리.</li>
@@ -231,11 +231,11 @@ Hugging Face 추론 공급자에 대한 자세한 내용은 <a href="https://hug
 
 <h2 id="도구-사용-스트리밍-및-처리">도구 사용: 스트리밍 및 처리</h2>
 
-<p><code class="language-plaintext highlighter-rouge">MCPClient</code>의 <code class="language-plaintext highlighter-rouge">process_single_turn_with_tools</code> 메서드는 LLM 상호 작용이 발생하는 곳입니다. 대화 기록과 사용 가능한 도구를 <code class="language-plaintext highlighter-rouge">AsyncInferenceClient.chat.completions.create(..., stream=True)</code>를 통해 LLM에 보냅니다.</p>
+<p><code class="language-plaintext highlighter-rouge">MCPClient</code>의 <code class="language-plaintext highlighter-rouge">process_single_turn_with_tools</code> 메서드에서는 LLM 상호 작용이 일어납니다. 대화 기록과 사용 가능한 도구를 <code class="language-plaintext highlighter-rouge">AsyncInferenceClient.chat.completions.create(..., stream=True)</code>를 통해 LLM에 보냅니다.</p>
 
 <h3 id="1-도구-준비-및-llm-호출">1. 도구 준비 및 LLM 호출</h3>
 
-<p>먼저, 이 메서드는 현재 차례에 LLM이 알아야 할 모든 도구를 결정합니다. 여기에는 MCP 서버의 도구와 에이전트 제어를 위한 특별한 “루프 종료” 도구가 포함됩니다. 그런 다음 LLM에 스트리밍 호출을 합니다.</p>
+<p>먼저, 이 메서드는 현재 차례에 LLM이 알아야 할 모든 도구를 결정합니다. 여기에는 MCP 서버의 도구와 에이전트 제어를 위한 특별한 “루프 종료(loop exit)” 도구가 포함됩니다. 그런 다음 LLM에 스트리밍 호출을 합니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># `MCPClient.process_single_turn_with_tools`의 241-251줄
 # https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/inference/_mcp/mcp_client.py#L241:L251
@@ -255,7 +255,7 @@ Hugging Face 추론 공급자에 대한 자세한 내용은 <a href="https://hug
 
 </code></pre></div></div>
 
-<p>LLM으로부터 청크가 도착하면, 메서드는 이를 반복합니다. 각 청크는 즉시 반환되며, 그런 다음 완전한 텍스트 응답과 모든 도구 호출을 재구성합니다.</p>
+<p>LLM으로부터 청크가 도착하면, 메서드는 청크 처리를 반복합니다. 각 청크는 즉시 반환되며, 그런 다음 완전한 텍스트 응답과 모든 도구 호출을 재구성합니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># `MCPClient.process_single_turn_with_tools`의 258-290줄 
 # https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/inference/_mcp/mcp_client.py#L258:L290
@@ -301,9 +301,9 @@ Hugging Face 추론 공급자에 대한 자세한 내용은 <a href="https://hug
 
 </code></pre></div></div>
 
-<p>먼저 호출된 도구가 루프를 종료하는지(<code class="language-plaintext highlighter-rouge">exit_loop_tool</code>) 확인합니다. 그렇지 않으면 해당 도구에 대한 올바른 MCP 세션을 찾아 <code class="language-plaintext highlighter-rouge">session.call_tool()</code>을 호출합니다. 결과(또는 오류 응답)는 형식화되어 대화 기록에 추가되고 반환되어 에이전트가 도구의 출력을 알 수 있도록 합니다.</p>
+<p>먼저 호출된 도구가 루프를 종료하는지(<code class="language-plaintext highlighter-rouge">exit_loop_tool</code>) 확인합니다. 그렇지 않으면 해당 도구에 대한 올바른 MCP 세션을 찾아 <code class="language-plaintext highlighter-rouge">session.call_tool()</code>을 호출합니다. 결과(또는 오류 응답)는 형식화되어 대화 기록에 추가되며, 에이전트가 도구의 출력을 인식할 수 있도록 반환됩니다.</p>
 
-<h2 id="우리의-tiny-python-agent-거의-루프일-뿐입니다">우리의 Tiny Python Agent: 거의 루프일 뿐입니다!</h2>
+<h2 id="우리의-tiny-python-agent-사실상-루프일-뿐입니다">우리의 Tiny Python Agent: 사실상 루프일 뿐입니다!</h2>
 
 <p><code class="language-plaintext highlighter-rouge">MCPClient</code>가 도구 상호 작용에 대한 모든 작업을 수행하므로 <code class="language-plaintext highlighter-rouge">Agent</code> 클래스는 놀랍도록 간단해집니다. <code class="language-plaintext highlighter-rouge">MCPClient</code>를 상속하고 대화 관리 로직을 추가합니다.</p>
 
@@ -314,7 +314,7 @@ Agent 클래스는 작고 대화 루프에 중점을 둡니다. 코드는 <a hre
 
 <h3 id="1-에이전트-초기화">1. 에이전트 초기화</h3>
 
-<p>에이전트가 생성될 때, 에이전트 구성(모델, 공급자, 사용할 MCP 서버, 시스템 프롬프트)을 가져와 시스템 프롬프트로 대화 기록을 초기화합니다. <code class="language-plaintext highlighter-rouge">load_tools()</code> 메서드는 서버 구성(agent.json에 정의됨)을 반복하고 각 구성에 대해 <code class="language-plaintext highlighter-rouge">add_mcp_server</code>(부모 <code class="language-plaintext highlighter-rouge">MCPClient</code>에서)를 호출하여 에이전트의 도구 상자를 채웁니다.</p>
+<p>에이전트가 생성될 때, 구성 정보(모델, 공급자, 사용할 MCP 서버, 시스템 프롬프트)를 불러와 시스템 프롬프트로 대화 기록을 초기화합니다. <code class="language-plaintext highlighter-rouge">load_tools()</code> 메서드는  <code class="language-plaintext highlighter-rouge">agent.json</code>에 정의된 서버 구성을 반복하고 각 구성에 부모 클래스인 <code class="language-plaintext highlighter-rouge">MCPClient</code>의 <code class="language-plaintext highlighter-rouge">add_mcp_server</code>를 호출해 에이전트의 도구 상자를 채웁니다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># `Agent`의 12-54줄 
 # https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/inference/_mcp/agent.py#L12:L54
@@ -398,7 +398,7 @@ Agent 클래스는 작고 대화 루프에 중점을 둡니다. 코드는 <a hre
   <li>.. 물론 기여하세요! Hugging Face Hub의 <a href="https://huggingface.co/datasets/tiny-agents/tiny-agents">tiny-agents/tiny-agents</a> 데이터셋에 자신만의 고유한 Tiny Agent를 공유하고 PR을 엽니다.</li>
 </ul>
 
-<p>풀 리퀘스트 및 기여를 환영합니다! 다시 한 번, 여기 있는 모든 것은 <a href="https://github.com/huggingface/huggingface_hub">오픈 소스</a>입니다! 💎❤️</p>]]></content><author><name>minju</name></author><category term="Agent" /><summary type="html"><![CDATA[]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" /><media:content medium="image" url="/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">파이썬 Tiny Agents 스터디</title><link href="/python-tiny-agents-study/" rel="alternate" type="text/html" title="파이썬 Tiny Agents 스터디" /><published>2025-09-14T00:00:00+09:00</published><updated>2025-09-14T00:00:00+09:00</updated><id>/python-tiny-agents-study</id><content type="html" xml:base="/python-tiny-agents-study/"><![CDATA[<ul id="markdown-toc">
+<p>풀 리퀘스트 및 기여를 환영합니다! 다시 한 번 말하지만 여기 있는 모든 것은 <a href="https://github.com/huggingface/huggingface_hub">오픈 소스</a>입니다! 💎❤️</p>]]></content><author><name>minju</name></author><category term="Agent" /><summary type="html"><![CDATA[]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" /><media:content medium="image" url="/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">파이썬 Tiny Agents 스터디</title><link href="/python-tiny-agents-study/" rel="alternate" type="text/html" title="파이썬 Tiny Agents 스터디" /><published>2025-09-14T00:00:00+09:00</published><updated>2025-09-14T00:00:00+09:00</updated><id>/python-tiny-agents-study</id><content type="html" xml:base="/python-tiny-agents-study/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#주요-개념" id="markdown-toc-주요-개념">주요 개념</a></li>
   <li><a href="#tiny-agents-구조" id="markdown-toc-tiny-agents-구조">Tiny Agents 구조</a></li>
   <li><a href="#agent-구조-및-mcp-server-설정" id="markdown-toc-agent-구조-및-mcp-server-설정">Agent 구조 및 MCP server 설정</a></li>
