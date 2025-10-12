@@ -96,7 +96,7 @@ step 5. 에이전트에 자신만의 prompt를 던져서 원하는 도구 호출
  제가 사용한 프롬프트는 `Hugging Face의 허기(Huggie) 캐릭터를 20대 여성 버전으로 만들어줘`였는데,
  허기 캐릭터 정보가 MCP 서버 혹은 Agent에 없었던지라 기대했던 모습은 잘 드러나지 않았습니다.
 조금 더 제 의도에 가까운 결과는 오른쪽 사진처럼 나오길 바랐습니다.
-(오른쪽 사진은 HFBA 사이트에서 받을 수 있어요: https://lnkd.in/g4Wxpnzt)
+(오른쪽 사진은 [HFBA 사이트](https://lnkd.in/g4Wxpnzt)에서 받을 수 있어요.)
 
 ![image-1](../assets/images/blog/posts/2015-09-14-python-tiny-agents/flux-generated-image.png)
 
