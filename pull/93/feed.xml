@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2025-10-12T17:28:13+09:00</updated><id>/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">Hugging Face MCP 서버 구축기</title><link href="/building-hf-mcp-ko/" rel="alternate" type="text/html" title="Hugging Face MCP 서버 구축기" /><published>2025-09-29T00:00:00+09:00</published><updated>2025-09-29T00:00:00+09:00</updated><id>/building-hf-mcp-ko</id><content type="html" xml:base="/building-hf-mcp-ko/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2025-10-12T17:41:34+09:00</updated><id>/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">Hugging Face MCP 서버 구축기</title><link href="/building-hf-mcp-ko/" rel="alternate" type="text/html" title="Hugging Face MCP 서버 구축기" /><published>2025-09-29T00:00:00+09:00</published><updated>2025-09-29T00:00:00+09:00</updated><id>/building-hf-mcp-ko</id><content type="html" xml:base="/building-hf-mcp-ko/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#hugging-face-mcp-서버-구축기" id="markdown-toc-hugging-face-mcp-서버-구축기">Hugging Face MCP 서버 구축기</a>    <ul>
       <li><a href="#소개" id="markdown-toc-소개">소개</a></li>
       <li><a href="#설계-선택" id="markdown-toc-설계-선택">설계 선택</a></li>
@@ -1610,7 +1610,7 @@ Agent 클래스는 작고 대화 루프에 중점을 둡니다. 코드는 <a hre
 <p>제가 사용한 프롬프트는 <code class="language-plaintext highlighter-rouge">Hugging Face의 허기(Huggie) 캐릭터를 20대 여성 버전으로 만들어줘</code>였는데,
  허기 캐릭터 정보가 MCP 서버 혹은 Agent에 없었던지라 기대했던 모습은 잘 드러나지 않았습니다.
 조금 더 제 의도에 가까운 결과는 오른쪽 사진처럼 나오길 바랐습니다.
-(오른쪽 사진은 HFBA 사이트에서 받을 수 있어요: https://lnkd.in/g4Wxpnzt)</p>
+(오른쪽 사진은 <a href="https://lnkd.in/g4Wxpnzt">HFBA 사이트</a>에서 받을 수 있어요.)</p>
 
 <p><img src="../assets/images/blog/posts/2015-09-14-python-tiny-agents/flux-generated-image.png" alt="image-1" /></p>
 
