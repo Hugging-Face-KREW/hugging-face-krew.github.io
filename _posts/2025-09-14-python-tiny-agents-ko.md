@@ -8,7 +8,6 @@ image: assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png
 * TOC
 {:toc}
 <!--toc-->
-
 _이 글은 Hugging Face 블로그의 [Tiny Agents in Python: an MCP-powered agent in ~70 lines of code](https://huggingface.co/blog/python-tiny-agents)를 한국어로 번역한 글입니다._
 
 ---

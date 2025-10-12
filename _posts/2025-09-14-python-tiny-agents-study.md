@@ -3,12 +3,11 @@ layout: post
 title: "파이썬 Tiny Agents 스터디"
 author: minju
 categories: [스터디]
-image: assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png
+image: assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail2.png
 ---
 * TOC
 {:toc}
 <!--toc-->
-
 이 글은 Hugging Face 블로그의 [Tiny Agents in Python: an MCP-powered agent in ~70 lines of code](https://huggingface.co/blog/python-tiny-agents)를 읽고 공부한 내용을 바탕으로 정리했습니다. 
 
 ---
@@ -86,14 +85,28 @@ step 4. `tiny-agents run`
 > Q. 여기서 몇 개의 도구 리스트가 보이나요? (path를 지정하지 않을 경우  [`DEFAULT_AGENT`](https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/inference/_mcp/constants.py#L13)를 사용합니다.)
 
 step 5. 에이전트에 자신만의 prompt를 던져서 원하는 도구 호출이 잘 되는지 확인합니다.
-      
-`julien-c/flux-schnell-generator` 서버를 사용해 생성된 이미지: 
- https://evalstate-flux1-schnell.hf.space/gradio_api/file=/tmp/gradio/d76c19778adf529c2fbbc6685b41d53acd15d64ce597e4f1dfa8c4eb18321325/image.webp
 
+- (1) 번역글의 첫 번째 데모를 따라하며 웹 검색 MCP 서버를 통해 사이트 자동 검색을 구현해보고,
+ (2) 두 번째 데모로 Flux MCP 서버로 원하는 이미지를 생성하는 과정이 매우 흥미로웠습니다.
+- 또한 Nebius AI Studio를 API 공급자로 사용해 본 점 또한 색다른 재미였습니다.
+- 다만 무료 크레딧이 금방 소진돼 여러 시도를 다양하게 해보진 못한 건 아쉬웠지만, 그 안에서도 배울 점이 분명 있었습니다.
 
+아래 왼쪽 사진 속 캐릭터는 `julien-c/flux-schnell-generator` 서버로 생성한 이미지입니다! 어떤 프롬프트를 사용했을까요?
+
+ 제가 사용한 프롬프트는 `Hugging Face의 허기(Huggie) 캐릭터를 20대 여성 버전으로 만들어줘`였는데,
+ 허기 캐릭터 정보가 MCP 서버 혹은 Agent에 없었던지라 기대했던 모습은 잘 드러나지 않았습니다.
+조금 더 제 의도에 가까운 결과는 오른쪽 사진처럼 나오길 바랐습니다.
+(오른쪽 사진은 HFBA 사이트에서 받을 수 있어요: https://lnkd.in/g4Wxpnzt)
+
+![image-1](../assets/images/blog/posts/2015-09-14-python-tiny-agents/flux-generated-image.png)
 
 ### 생각해볼 것
-여러 에이전트가 섞여 있을 때는 어떤 것이 필요할지 고민해보았습니다.
+
+오른쪽 사진 처럼 결과물이 나오려면 웹 검색 MCP 서버에서 허기 캐릭터에 대한 정보를 먼저 수집하고, 이를 Flux MCP 서버 이미지 생성에 활용할 수 있었다면 의도한대로 이미지를 얻을 수 있었을 것 같아요.
+
+서로 다른 MCP 서버를 연계하여 정보를 주고받고, 복잡한 작업을 효율적으로 처리할 수 있다는 아이디어입니다. 
+
+그래서 tiny-agent에서 여러 에이전트를 실행하려면 어떤 것이 필요할지 고민해보았습니다.
 
 #### 예시 상황:
 
