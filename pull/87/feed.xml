@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2025-10-13T11:48:34+09:00</updated><id>/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">MCP for Research: AI와 연구 도구 연결하기</title><link href="/mcp-for-research/" rel="alternate" type="text/html" title="MCP for Research: AI와 연구 도구 연결하기" /><published>2025-10-06T00:00:00+09:00</published><updated>2025-10-06T00:00:00+09:00</updated><id>/mcp-for-research</id><content type="html" xml:base="/mcp-for-research/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2025-10-13T11:48:41+09:00</updated><id>/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">MCP for Research: AI와 연구 도구 연결하기</title><link href="/mcp-for-research/" rel="alternate" type="text/html" title="MCP for Research: AI와 연구 도구 연결하기" /><published>2025-10-06T00:00:00+09:00</published><updated>2025-10-06T00:00:00+09:00</updated><id>/mcp-for-research</id><content type="html" xml:base="/mcp-for-research/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#연구를-위한-mcp-mcp-for-research-ai와-연구-도구research-tools-연결하기" id="markdown-toc-연구를-위한-mcp-mcp-for-research-ai와-연구-도구research-tools-연결하기">연구를 위한 MCP (MCP for Research): AI와 연구 도구(Research Tools) 연결하기</a>    <ul>
       <li><a href="#연구-탐색-세-가지-추상화-계층" id="markdown-toc-연구-탐색-세-가지-추상화-계층">연구 탐색: 세 가지 추상화 계층</a>        <ul>
           <li><a href="#1-수동-연구-manual-research" id="markdown-toc-1-수동-연구-manual-research">1. 수동 연구 (Manual Research)</a></li>
@@ -44,7 +44,7 @@
 5. 수동으로 결과 정리
 </code></pre></div></div>
 
-<p>이러한 수동 접근 방식은 여러 연구 주제를 추적하거나 체계적인 문헌 검토를 수행할 때 비효율적입니다. 여러 플랫폼에서 반복적으로 검색하고, 메타데이터를 추출하고, 정보를 상호 참조하는 과정은 스크립트를 통한 자동화의 필요성으로 이어집니다.</p>
+<p>이러한 수동적인 접근 방식은 여러 연구 주제를 추적하거나 문헌을 체계적으로 검토할 때 비효율적입니다. 여러 플랫폼에서 검색을 반복하고, 메타데이터를 추출하며 정보를 교차 검증하는 과정은 스크립트를 통한 자동화를 필요로 하게 됩니다.</p>
 
 <h3 id="2-스크립트-도구-scripted-tools">2. 스크립트 도구 (Scripted Tools)</h3>
 
@@ -88,7 +88,7 @@
 <span class="n">ai</span><span class="p">:</span> <span class="c1"># 여러 도구를 결합하여 완전한 정보 수집
 </span></code></pre></div></div>
 
-<p>이는 스크립트 단계 위에 존재하는 추상화의 추가 계층으로 볼 수 있으며, 여기서 “프로그래밍 언어”는 자연어가 됩니다. 이는 <a href="https://youtu.be/LCEmiRjPEtQ?si=J7elM86eW9XCkMFj">Software 3.0 개념</a>과 유사하며, 자연어 연구 지시가 곧 소프트웨어 구현이 됩니다.</p>
+<p>이는 스크립트 단계보다 한 단계 높은 추상화 수준으로 볼 수 있으며, 이때 “프로그래밍 언어”는 자연어가 됩니다. 이는 <a href="https://youtu.be/LCEmiRjPEtQ?si=J7elM86eW9XCkMFj">Software 3.0 개념</a>과 유사하며, 여기서 자연어로 하는 연구 지시가 실제 소프트웨어 구현 역할을 합니다.</p>
 
 <p>다만, 스크립트와 동일한 한계를 가지고 있습니다.</p>
 
