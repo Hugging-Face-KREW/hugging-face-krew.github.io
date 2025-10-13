@@ -19,14 +19,14 @@
 <meta name="description" content="이 글은 Hugging Face 블로그의 Building the Hugging Face MCP Server를 읽고 공부한 내용을 바탕으로 정리했습니다." />
 <meta property="og:description" content="이 글은 Hugging Face 블로그의 Building the Hugging Face MCP Server를 읽고 공부한 내용을 바탕으로 정리했습니다." />
 <meta property="og:site_name" content="Hugging Face KREW" />
-<meta property="og:image" content="/assets/images/blog/posts/2025-09-29-building-hf-mcp/thumbnail.png" />
+<meta property="og:image" content="/assets/images/blog/posts/2025-09-29-building-hf-mcp/thumbnail-study.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2025-09-29T00:00:00+09:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="/assets/images/blog/posts/2025-09-29-building-hf-mcp/thumbnail.png" />
+<meta property="twitter:image" content="/assets/images/blog/posts/2025-09-29-building-hf-mcp/thumbnail-study.png" />
 <meta property="twitter:title" content="Hugging Face MCP 서버 스터디" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"hyeonseo"},"dateModified":"2025-09-29T00:00:00+09:00","datePublished":"2025-09-29T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Building the Hugging Face MCP Server를 읽고 공부한 내용을 바탕으로 정리했습니다.","headline":"Hugging Face MCP 서버 스터디","image":"/assets/images/blog/posts/2025-09-29-building-hf-mcp/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/building-hf-mcp-study/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/hfkr_logo.png"},"name":"hyeonseo"},"url":"/building-hf-mcp-study/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"hyeonseo"},"dateModified":"2025-09-29T00:00:00+09:00","datePublished":"2025-09-29T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Building the Hugging Face MCP Server를 읽고 공부한 내용을 바탕으로 정리했습니다.","headline":"Hugging Face MCP 서버 스터디","image":"/assets/images/blog/posts/2025-09-29-building-hf-mcp/thumbnail-study.png","mainEntityOfPage":{"@type":"WebPage","@id":"/building-hf-mcp-study/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/hfkr_logo.png"},"name":"hyeonseo"},"url":"/building-hf-mcp-study/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -162,7 +162,7 @@
         
 		<div class="col-sm-8">
             <!-- Post Featured Image -->
-			<img class="featured-image img-fluid rounded" src="/assets/images/blog/posts/2025-09-29-building-hf-mcp/thumbnail.png" alt="Hugging Face MCP 서버 스터디">
+			<img class="featured-image img-fluid rounded" src="/assets/images/blog/posts/2025-09-29-building-hf-mcp/thumbnail-study.png" alt="Hugging Face MCP 서버 스터디">
 			<!-- End Featured Image -->
 			<div class="mainheading">             
                 
@@ -205,22 +205,71 @@
 <p>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/building-hf-mcp">Building the Hugging Face MCP Server</a>를 읽고 공부한 내용을 바탕으로 정리했습니다.</p>
 
 <hr />
+
 <h2 id="주요-개념">주요 개념</h2>
-<p>| 원문 용어 (English)            | 번역 용어 (Korean)               |
-| —————————- | —————————- |
-| Model Context Protocol (MCP) | 모델 컨텍스트 프로토콜(MCP)            |
-| STDIO                        | STDIO                        |
-| HTTP with SSE                | HTTP with SSE                     |
-| Server Sent Events (SSE)     | 서버 전송 이벤트                    |
-| Streamable HTTP              | Streamable HTTP                 |
-| Direct Response              | 직접 응답                        |
-| Request Scoped Streams       | 요청 범위 스트림                    |
-| Server Push Streams          | 서버 푸시 스트림                    |
-| Stateless                    | 무상태                          |
-| Stateful                     | 상태 유지                        |
-| Session Affinity             | 세션 어피니티                      |
-| Sampling                     | 샘플링                          |
-| Elicitation                  | 추가 정보 요청                     |</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>원문 용어 (English)</th>
+      <th>번역 용어 (Korean)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Model Context Protocol (MCP)</td>
+      <td>모델 컨텍스트 프로토콜(MCP)</td>
+    </tr>
+    <tr>
+      <td>STDIO</td>
+      <td>STDIO</td>
+    </tr>
+    <tr>
+      <td>HTTP with SSE</td>
+      <td>HTTP with SSE</td>
+    </tr>
+    <tr>
+      <td>Server Sent Events (SSE)</td>
+      <td>서버 전송 이벤트</td>
+    </tr>
+    <tr>
+      <td>Streamable HTTP</td>
+      <td>Streamable HTTP</td>
+    </tr>
+    <tr>
+      <td>Direct Response</td>
+      <td>직접 응답</td>
+    </tr>
+    <tr>
+      <td>Request Scoped Streams</td>
+      <td>요청 범위 스트림</td>
+    </tr>
+    <tr>
+      <td>Server Push Streams</td>
+      <td>서버 푸시 스트림</td>
+    </tr>
+    <tr>
+      <td>Stateless</td>
+      <td>무상태</td>
+    </tr>
+    <tr>
+      <td>Stateful</td>
+      <td>상태 유지</td>
+    </tr>
+    <tr>
+      <td>Session Affinity</td>
+      <td>세션 어피니티</td>
+    </tr>
+    <tr>
+      <td>Sampling</td>
+      <td>샘플링</td>
+    </tr>
+    <tr>
+      <td>Elicitation</td>
+      <td>추가 정보 요청</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="mcp-서버-설계-의사결정-흐름-블로그-글-기준">MCP 서버 설계 의사결정 흐름 (블로그 글 기준)</h2>
 <ol>
@@ -399,11 +448,6 @@ Stateful 구조에서 특정 클라이언트 요청을 항상 같은 서버 인�
   <li>HuggingFace MCP 서버 기동
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build --no-cache -t hf-mcp-server:latest .
 $ docker run --rm -p 3000:3000 hf-mcp-server:latest
-</code></pre></div>    </div>
-  </li>
-</ol>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm -p 3000:3000 hf-mcp-server:lf
 Starting MCP server with transport type: streamablehttpjson on port 3000
 Using standard HF_TOKEN authentication.
 Using streamableHttpJson transport type (JSON response mode enabled)
@@ -414,7 +458,9 @@ Using streamableHttpJson transport type (JSON response mode enabled)
 {"level":30,"time":"2025-09-28T02:49:19.181Z","pid":11,"hostname":"179a01035eed","transportType":"streamableHttpJson","mode":"production","msg":"Server configuration"}   
 {"level":30,"time":"2025-09-28T02:49:19.181Z","pid":11,"hostname":"179a01035eed","msg":"HTTP JSON transport initialized (stateless mode)"}
 {"level":30,"time":"2025-09-28T02:49:19.182Z","pid":11,"hostname":"179a01035eed","msg":"Starting API polling with interval 5000ms"}
-</code></pre></div></div>
+</code></pre></div>    </div>
+  </li>
+</ol>
 
 <p><img src="../assets/images/blog/posts/2025-09-29-building-hf-mcp/hf-mcp-dashborad.png" alt="hf-mcp-dashborad" /></p>
 
