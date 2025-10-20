@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://hugging-face-krew.github.io/sitemap.xml
