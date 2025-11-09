@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/assets/images/favicon.ico" />
+
+    <title>2025년의 VLM : 더 좋아지고, 더 빠르고, 더 강해진 비전 언어 모델 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>2025년의 VLM : 더 좋아지고, 더 빠르고, 더 강해진 비전 언어 모델 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="2025년의 VLM : 더 좋아지고, 더 빠르고, 더 강해진 비전 언어 모델" />
+<meta name="author" content="youngjun" />
+<meta property="og:locale" content="en_us" />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/assets/images/blog/posts/2025-10-20-2025-VLM/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-10-20T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/assets/images/blog/posts/2025-10-20-2025-VLM/thumbnail.png" />
+<meta property="twitter:title" content="2025년의 VLM : 더 좋아지고, 더 빠르고, 더 강해진 비전 언어 모델" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"youngjun"},"dateModified":"2025-10-20T00:00:00+09:00","datePublished":"2025-10-20T00:00:00+09:00","headline":"2025년의 VLM : 더 좋아지고, 더 빠르고, 더 강해진 비전 언어 모델","image":"/assets/images/blog/posts/2025-10-20-2025-VLM/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/2025-VLM/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/hfkr_logo.png"},"name":"youngjun"},"url":"/2025-VLM/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/assets/css/custom.css" rel="stylesheet" />
+    <link href="/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/"
+          >
+            
+            <img class="mr-2" src="/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row" style="margin-top: 1rem;">
+		
+
+		<!-- Post -->        
+        
+        
+		<div class="col-sm-8">
+            <!-- Post Featured Image -->
+			<img class="featured-image img-fluid rounded" src="/assets/images/blog/posts/2025-10-20-2025-VLM/thumbnail.png" alt="2025년의 VLM : 더 좋아지고, 더 빠르고, 더 강해진 비전 언어 모델">
+			<!-- End Featured Image -->
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/categories#vlm">VLM</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">2025년의 VLM : 더 좋아지고, 더 빠르고, 더 강해진 비전 언어 모델</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#들어가며" id="markdown-toc-들어가며">들어가며</a></li>
+  <li><a href="#모델-살펴보기" id="markdown-toc-모델-살펴보기">모델 살펴보기</a>    <ul>
+      <li><a href="#any-to-any-모델" id="markdown-toc-any-to-any-모델">Any-to-any 모델</a></li>
+      <li><a href="#추론-모델" id="markdown-toc-추론-모델">추론 모델</a></li>
+      <li><a href="#작지만-강력한-모델" id="markdown-toc-작지만-강력한-모델">작지만 강력한 모델</a></li>
+      <li><a href="#디코더로서의-전문가-혼합mixture-of-experts-moe" id="markdown-toc-디코더로서의-전문가-혼합mixture-of-experts-moe">디코더로서의 전문가 혼합(Mixture-of-Experts, MoE)</a></li>
+      <li><a href="#vla비전-언어-행동-모델" id="markdown-toc-vla비전-언어-행동-모델">VLA(비전-언어-행동 모델)</a></li>
+    </ul>
+  </li>
+  <li><a href="#특화된-기능들" id="markdown-toc-특화된-기능들">특화된 기능들</a>    <ul>
+      <li><a href="#vlm을-이용한-객체-감지-분할-계수" id="markdown-toc-vlm을-이용한-객체-감지-분할-계수">VLM을 이용한 객체 감지, 분할, 계수</a></li>
+      <li><a href="#멀티모달-안전multimodal-safety-모델" id="markdown-toc-멀티모달-안전multimodal-safety-모델">멀티모달 안전(Multimodal Safety) 모델</a></li>
+      <li><a href="#멀티모달-rag-retrievers-rerankers" id="markdown-toc-멀티모달-rag-retrievers-rerankers">멀티모달 RAG: Retrievers, Rerankers</a></li>
+    </ul>
+  </li>
+  <li><a href="#멀티모달-에이전트" id="markdown-toc-멀티모달-에이전트">멀티모달 에이전트</a></li>
+  <li><a href="#비디오-언어-모델" id="markdown-toc-비디오-언어-모델">비디오 언어 모델</a></li>
+  <li><a href="#vlm을-위한-새로운-정렬alignment-기법" id="markdown-toc-vlm을-위한-새로운-정렬alignment-기법">VLM을 위한 새로운 정렬(alignment) 기법</a></li>
+  <li><a href="#새로운-벤치마크" id="markdown-toc-새로운-벤치마크">새로운 벤치마크</a>    <ul>
+      <li><a href="#mmt-bench" id="markdown-toc-mmt-bench">MMT-Bench</a></li>
+      <li><a href="#mmmu-pro" id="markdown-toc-mmmu-pro">MMMU-Pro</a></li>
+    </ul>
+  </li>
+  <li><a href="#추가--추천-모델" id="markdown-toc-추가--추천-모델">추가 : 추천 모델</a></li>
+  <li><a href="#읽어볼만한-글" id="markdown-toc-읽어볼만한-글">읽어볼만한 글</a></li>
+</ul>
+<!--toc-->
+
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/vlms-2025">Vision Language Models (Better, Faster, Stronger)</a>를 한국어로 번역한 글입니다.</em></p>
+
+<hr />
+<h2 id="들어가며">들어가며</h2>
+<p>비전 언어 모델(VLM)이 요즘 화제입니다. 이전 <a href="https://huggingface.co/blog/vlms">블로그 포스트</a>(2024년 4월 포스팅)에서 우리는 VLM들에 대해 깊이 있게 다뤘습니다. 그중 상당 부분은 최초의 성공적이고 재현이 용이한 오픈소스 VLM인 LLaVA에 관한 내용이었으며, 오픈 모델을 발견하고 평가하며 미세 조정하는 방법에 대한 팁도 함께 소개했습니다.</p>
+
+<p>그 이후로 많은 변화가 있었습니다. 모델들은 더 작아졌지만 더 강력해졌습니다. 새로운 아키텍처와 기능들(추론, 자율성, 긴 영상 이해 등)이 등장했습니다. 동시에 멀티모달 검색-증강 생성(Multimodal RAG)과 멀티모달 에이전트(Multimodal Agent)와 같은 완전히 새로운 패러다임이 형성되었습니다.</p>
+
+<p>이 포스트에서는 지난 한 해 동안 VLM에서 일어난 모든 일들을 되돌아보고 분석해 보겠습니다. 주요 변화, 떠오르는 트렌드, 그리고 주목할 만한 발전사항들을 확인하실 수 있을 것입니다.</p>
+
+<blockquote>
+  <p>비전 언어 모델이 어떻게 작동하는지에 대한 좋은 입문서를 원하신다면, <a href="https://huggingface.co/blog/vlms">첫 번째 블로그 포스트</a>를 읽어보시길 강력히 권장합니다. (Hugging Face KREW Blog 블로그에서도 번역했답니다!)</p>
+</blockquote>
+
+<h2 id="모델-살펴보기">모델 살펴보기</h2>
+<p>이 섹션에서는 새로운 유형의 VLM을 살펴보겠습니다. 일부는 완전히 새로운 반면, 다른 일부는 기존 연구의 개선된 버전입니다.</p>
+
+<h3 id="any-to-any-모델">Any-to-any 모델</h3>
+<p>Any-to-any 모델은 이름에서 알 수 있듯이 모든 모달리티를 입력으로 받아 모든 모달리티(이미지, 텍스트, 오디오)를 출력할 수 있는 모델입니다. 이는 모달리티간 정렬(align)을 통해 이루어지며, 한 모달리티의 입력을 다른 모달리티로 변환할 수 있습니다(예: “개”라는 단어가 개의 이미지나 해당 단어의 발화음과 연관됨).</p>
+
+<p>이러한 모델들은 다중 인코더(각 모달리티당 하나)를 가지고 있으며, 임베딩을 함께 융합하여 공유 표현 공간을 만듭니다. 디코더(다중 또는 단일)는 공유 잠재 공간을 입력받아 선택한 모달리티로 디코딩합니다. 최초의 any-to-any 모델 구축 시도는 <code class="language-plaintext highlighter-rouge">Meta</code>의 <a href="https://huggingface.co/collections/facebook/chameleon-668da9663f80d483b4c61f58">Chameleon</a>으로, 이미지와 텍스트를 입력받아 이미지와 텍스트를 출력할 수 있습니다. Meta는 이 모델의 이미지 생성 기능을 공개하지 않았기 때문에, <code class="language-plaintext highlighter-rouge">Alpha-VLLM</code>이 Chameleon 위에 이미지 생성을 구축한 <a href="https://huggingface.co/collections/Alpha-VLLM/lumina-mgpt-family-66ae48a59a973eeae4513848">Lumina-mGPT</a>를 출시했습니다.</p>
+
+<p>가장 최신이자 가장 강력한 any-to-any 모델은 <a href="https://huggingface.co/collections/Qwen/qwen25-omni-67de1e5f0f9464dc6314b36e">Qwen 2.5 Omni</a>로, 그 구조를 살펴보면 any-to-any 모델의 아키텍처를 이해하기 좋은 예입니다.</p>
+
+<p><img src="https://i.imgur.com/Zmerw7r.png" alt="" /></p>
+
+<p>Qwen2.5-Omni는 새로운 “Thinker-Talker” 아키텍처를 사용하는데, “Thinker”가 텍스트 생성을 담당하고, “Talker”가 스트리밍 방식으로 자연스러운 음성 응답을 생성합니다. <a href="https://huggingface.co/openbmb/MiniCPM-o-2_6">MiniCPM-o 2.6</a>은 8B 파라미터를 가진 멀티모달 모델로, 비전, 음성, 언어 모달리티에 걸쳐 콘텐츠를 이해하고 생성할 수 있습니다. DeepSeek AI가 소개한 <a href="https://huggingface.co/deepseek-ai/Janus-Pro-7B">Janus-Pro-7B</a>는 모달리티 간 콘텐츠 이해와 생성 모두에 뛰어난 통합 멀티모달 모델입니다. 이해와 생성 프로세스를 분리하는 분리된 시각적 인코딩 아키텍처가 특징입니다.</p>
+
+<p>우리는 앞으로 이러한 모델의 수가 증가할 것으로 예상합니다. 멀티모달 학습이 심층 표현을 더 잘 학습할 수 있는 유일한 방법이라는 것은 널리 알려진 사실입니다. 우리는 이러한 any-to-any 모델들과 데모를 선별해 모은 <a href="https://huggingface.co/collections/merve/any-to-any-models-datasets-spaces-6822042ee8eb7fb5e38f9b62">컬렉션</a>을 준비했습니다.</p>
+
+<h3 id="추론-모델">추론 모델</h3>
+<p>추론 모델은 복잡한 문제를 해결할 수 있는 모델입니다. 이러한 모델은 처음에는 대규모 언어 모델에서 등장했으며, 최근에는 VLM 영역으로 확장되고 있습니다. 2025년까지는 Qwen의 <a href="https://huggingface.co/Qwen/QVQ-72B-Preview">QVQ-72B-preview</a>라는 단 하나의 오픈소스 멀티모달 추론 모델만 있었습니다. 이것은 <code class="language-plaintext highlighter-rouge">Alibaba Qwen</code> 팀이 개발한 실험적 모델로 많은 제한 사항이 있었습니다.</p>
+
+<p>2025년 올해, 새로운 멀티모달 추론 모델 주자가 등장했습니다. <code class="language-plaintext highlighter-rouge">Moonshot AI</code> 팀의 <a href="https://huggingface.co/moonshotai/Kimi-VL-A3B-Thinking">Kimi-VL-A3B-Thinking</a>입니다. 이 모델은 이미지 인코더로 MoonViT(SigLIP-so-400M)를 사용하고, 총 16B 파라미터에 2.8B의 활성 파라미터만 있는 전문가 혼합(MoE) 디코더를 사용합니다. 이 모델은 Kimi-VL 기반 VLM을 긴 생각의 연쇄(long chain-of-thought) 방식으로 미세 조정 후 추가 정렬(reinforcement learning, 강화 학습)한 버전입니다. <a href="https://huggingface.co/spaces/moonshotai/Kimi-VL-A3B-Thinking">여기서</a> 모델을 체험해볼 수 있습니다.</p>
+
+<blockquote>
+  <p>저자들은 <a href="https://huggingface.co/moonshotai/Kimi-VL-A3B-Instruct">Kimi-VL-A3B-Instruct</a>라는 지시문 미세 조정 버전도 출시했습니다.</p>
+</blockquote>
+
+<p><img src="https://i.imgur.com/d3ACkiw.png" alt="d3ACkiw.png" /></p>
+
+<p>이 모델은 긴 영상, PDF, 스크린샷 등을 입력받을 수 있습니다. 에이전트 기능도 가지고 있습니다.</p>
+
+<h3 id="작지만-강력한-모델">작지만 강력한 모델</h3>
+<p>커뮤니티는 과거에 파라미터 수를 통해 지능을 확장하고, 이후 고품질 합성 데이터를 활용하곤 했습니다. 특정 시점이 지나자 벤치마크가 포화 상태에 이르렀고, 모델 확장은 수익이 감소했습니다. 커뮤니티는 증류(distillation)와 같은 다양한 방법을 통해 대규모 모델을 축소하기 시작했습니다. 이는 컴퓨팅 비용을 절감하고 배포를 단순화하며, 로컬 실행과 같은 사용 사례를 가능하게 하여 데이터 프라이버시를 강화하기 때문에 합리적인 접근입니다.</p>
+
+<p>작은 VLM이란 일반적으로 소비자용 GPU에서 실행할 수 있는 2B 파라미터 미만의 모델을 말합니다. SmolVLM은 소형 VLM의 대표적인 모델 계열입니다. 더 큰 모델을 축소하는 대신, 저자들은 대형 모델을 축소하는 방식이 아니라, <strong>아예</strong> 256M, 500M, 2.2B처럼 극히 적은 파라미터 규모에 모델을 맞추는 정반대의 접근을 시도했습니다. 예를 들어 SmolVLM2는 이러한 크기에서 영상 이해 문제를 해결하려고 시도했고, 500M이 적절한 균형점임을 발견했습니다. Hugging Face에서 이러한 모델 규모로도 소비자 기기에서 영상 이해가 가능함을 보여주기 위해 HuggingSnap이라는 iPhone 애플리케이션을 만들었습니다.</p>
+
+<p>또 다른 주목할 만한 모델은 <code class="language-plaintext highlighter-rouge">Google DeepMind</code>의 <a href="https://huggingface.co/google/gemma-3-4b-it">gemma3-4b-it</a>입니다. 이 모델에서 흥미로운 점은, 현재까지 가장 작은 멀티모달 모델 중 하나이며, 128k 토큰 컨텍스트 윈도우를 가지고 있으며, 140개 이상의 언어를 지원한다는 점입니다! 이 모델은 Gemma 3 모델 패밀리의 일부로, 가장 큰 모델은 당시 Chatbot Arena에서 1위를 차지했습니다. 그 후 가장 큰 모델이 1B 변형으로 증류되었습니다.</p>
+
+<p>마지막으로, 가장 작은 모델은 아니지만 <a href="https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct">Qwen2.5-VL-3B-Instruct</a>도 주목할 만합니다. 이 모델은 지역화(객체 감지 및 포인팅)부터 문서 이해, 에이전트 작업까지 다양한 작업을 수행할 수 있으며, 컨텍스트 길이는 최대 32k 토큰입니다.</p>
+
+<p>MLX 및 Llama.cpp 통합을 통해 작은 모델을 사용할 수 있습니다. MLX의 경우, 설치되어 있다고 가정하고, 이 한 줄로 SmolVLM-500M-Instruct를 시작할 수 있습니다:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> mlx_vlm.generate <span class="nt">--model</span> HuggingfaceTB/SmolVLM-500M-Instruct <span class="nt">--max-tokens</span> 400 <span class="nt">--temp</span> 0.0 <span class="nt">--image</span> https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/vlm_example.jpg <span class="nt">--prompt</span> <span class="s2">"What is in this image?"</span>
+</code></pre></div></div>
+
+<p>CLI로 llama.cpp를 통해 GGUF 형식의 <a href="https://huggingface.co/collections/google/gemma-3-release-67c6c6f89c4f76621268bb6d">gemma-3-4b-it</a> 모델 사용도 이 한 줄로 시작할 수 있습니다:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>llama-mtmd-cli <span class="nt">-hf</span> ggml-org/gemma-3-4b-it-GGUF
+</code></pre></div></div>
+
+<p>또한 다음과 같이 동일한 모델을 서빙할 수 있습니다:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>llama-server <span class="nt">-hf</span> ggml-org/gemma-3-4b-it-GGUF
+</code></pre></div></div>
+
+<p>가장 초기의 VLM 시도로 <a href="https://huggingface.co/vikhyatk/moondream2">moondream2</a>와 <a href="https://huggingface.co/collections/microsoft/florence-6669f44df0d87d9c3bfb76de">Florence-2</a>를 소개합니다. 이 블로그에서는 주로 새로운 모델들(대부분 2024년 4월 이후 출시된 모델)을 다룹니다.</p>
+
+<h3 id="디코더로서의-전문가-혼합mixture-of-experts-moe">디코더로서의 전문가 혼합(Mixture-of-Experts, MoE)</h3>
+<p>전문가 혼합(MoE) 모델은 주어진 입력 데이터 세그먼트를 처리하기 위해 “전문가”라고 불리는, 가장 관련성 있는 하위 모델만 동적으로 선택하고 활성화함으로써 밀집 아키텍처에 대한 대안을 제공합니다. 이 선택적 활성화(라우터에 의해 수행됨) 메커니즘은 더 적은 계산 리소스를 사용하면서도 모델 성능과 운영 효율성을 크게 향상시킬 수 있는 잠재력을 보여주었습니다.</p>
+
+<p>MoE는 네트워크의 더 작은 부분만 선택적으로 활성화하기 때문에 유사한 파라미터 밀집 모델보다 추론 속도가 빠릅니다. 또한 훈련 중에 빠르게 수렴합니다. 모든 좋은 것에는 비용이 따르는데, MoE는 작은 청크만 사용되더라도 모든 모델이 GPU에 있어야 하므로 더 많은 메모리 비용이 필요합니다.</p>
+
+<p>널리 채택된 Transformer 아키텍처에서 MoE 레이어는 가장 일반적으로 각 Transformer 블록 내의 표준 피드포워드 네트워크(FFN) 레이어를 대체하여 통합됩니다. 밀집 네트워크는 추론을 실행하기 위해 전체 모델을 사용하는 반면, 유사한 크기의 MoE 네트워크는 일부 ‘전문가’만 선택적으로 활성화합니다. 이것은 더 나은 계산 활용과 더 빠른 추론에 도움이 됩니다.</p>
+
+<p>전문가 혼합 디코더를 가진 VLM은 성능이 향상된 것으로 보입니다. 예를 들어, Kimi-VL은 현재 전문가 혼합 디코더를 가진 가장 진보된 개방형 추론 모델입니다. 전문가 혼합은 <a href="https://huggingface.co/papers/2401.15947">MoE-LLaVA</a>의 효율성과 환각 감소에 대한 초점, <a href="https://huggingface.co/deepseek-ai/deepseek-vl2">DeepSeek-VL2</a>의 광범위한 멀티모달 기능에서도 유망한 결과를 보여줍니다. Llama의 최신 버전(Llama 4)은 비전 기능을 가진 MoE입니다. 디코더로서의 MoE는 유망한 연구 분야이며, 이와 유사한 모델의 증가가 예상됩니다.</p>
+
+<blockquote>
+  <p>MoE에 대해 더 잘 이해하고 싶으면, <a href="https://huggingface.co/blog/moe">이 글</a>을 읽어보시는 것을 추천드립니다.</p>
+</blockquote>
+
+<h3 id="vla비전-언어-행동-모델">VLA(비전-언어-행동 모델)</h3>
+<p>VLM은 로보틱스 분야에서도 두각을 나타내고 있습니다! 이 분야에서는 비전-언어-행동 모델(Vision-Language Action, VLA) 모델이라고 부릅니다. 하지만 속지 마세요, 사실상 VLA는 작은 콧수염과 모자를 쓴 VLM에 불과합니다. VLA는 이미지와 텍스트 지시문을 입력으로 받아 로봇이 직접 취해야 할 행동을 나타내는 텍스트를 반환합니다. VLA는 물리적 환경과 상호작용하고 제어하기 위해 행동 및 상태 토큰을 추가하여 비전 언어 모델을 확장합니다. 이러한 추가 토큰은 시스템의 내부 상태(환경을 인지하는 방법), 행동(명령에 기반한 수행 내용), 시간 관련 정보(작업의 단계 순서같은)를 나타냅니다. 이러한 토큰은 행동이나 정책을 생성하기 위해 비전 언어 입력에 추가됩니다.</p>
+
+<p>VLA는 보통 기본 VLM 위에 미세 조정됩니다. 일부 사람들은 이 정의를 확장하여 실제 또는 디지털 세계와 시각적으로 상호작용하는 모든 모델을 VLA로 정의하기도 합니다. 이 정의에 따르면 VLA는 UI 탐색을 수행하거나 에이전트 워크플로우에 사용될 수 있습니다. 하지만 많은 사람들은 이러한 애플리케이션이 VLM 도메인에 속한다고 믿습니다.</p>
+
+<p>대표적인 VLA 모델로는 <code class="language-plaintext highlighter-rouge">Physical Intelligence</code>의 π0과 π0-FAST가 있습니다. 이 두 모델은 최초의 로보틱스 파운데이션 모델(robotics foundation models)로, 현재 Hugging Face의 LeRobot 라이브러리에 포팅되어 있습니다. 이 모델들은 7개의 로봇 플랫폼과 68개의 고유한 작업을 학습했습니다. 이들은 빨래 접기, 테이블 정리, 식료품 포장, 상자 조립, 물체 찾기과 같은 복잡한 실제 환경 작업에서 모두 강력한 제로샷 및 미세 조정 성능을 보여줍니다.</p>
+
+<p><a href="https://huggingface.co/nvidia/GR00T-N1-2B">GR00T N1</a>은 NVIDIA의 범용 휴머노이드 로봇을 위한 오픈 VLA 파운데이션 모델입니다. 이미지와 언어를 이해하고, 지능적 추론과 실시간 동작 제어를 결합한 시스템 덕분에 팔을 움직이거나 지시를 따르는 등의 행동으로 변환합니다. GR00T N1은 또한 로봇 시연을 공유하고 훈련하는 것을 단순화하기 위해 만들어진 오픈 표준인 LeRobot 데이터셋 포맷 위에 구축되었습니다.</p>
+
+<p><img src="https://i.imgur.com/9gI91Wh.png" alt="" /></p>
+
+<p>이제 최신 VLM 모델 혁신을 살펴보았으니, 더 확립된 기능들이 어떻게 발전했는지 탐구해봅시다.</p>
+
+<h2 id="특화된-기능들">특화된 기능들</h2>
+
+<h3 id="vlm을-이용한-객체-감지-분할-계수">VLM을 이용한 객체 감지, 분할, 계수</h3>
+<p>앞서 살펴본 바와 같이, VLM은 전통적인 컴퓨터 비전 작업에 대한 일반화를 가능하게 합니다. 이제 모델은 이미지와 개방형 텍스트와 같은 다양한 프롬프트를 입력받아, 감지, 분할을 위한 지역화 토큰이 포함된 구조화된 텍스트를 출력할 수 있습니다.</p>
+
+<p>지난해 <a href="https://huggingface.co/blog/paligemma">PaliGemma</a>는 이러한 과제 해결을 시도한 최초의 모델이었습니다. 이 모델은 이미지와 텍스트(관심 객체에 대한 설명) 및 작업 접두사를 입력으로 받습니다. 텍스트 프롬프트는 “줄무늬 고양이를 분할하세요(segment striped cat)” 또는 “지붕 위의 새를 감지하세요(detect bird on the roof)”와 같습니다.</p>
+
+<p>감지의 경우, 모델은 경계 상자 좌표를 토큰으로 출력합니다. 반면 분할의 경우, 모델은 감지 토큰과 분할 토큰을 출력합니다. 이러한 분할 토큰은 모든 분할된 픽셀 좌표가 아니라, 이러한 토큰을 유효한 분할 마스크로 디코딩하도록 훈련된 변분 오토인코더(VAE)에 의해 디코딩되는 코드북 인덱스입니다(아래 그림 참조).</p>
+
+<p><img src="https://i.imgur.com/c8tC5pd.png" alt="" /></p>
+
+<p>PaliGemma 이후 많은 모델들이 지역화 작업을 수행하기 위해 도입되었습니다. 작년 말, PaliGemma의 업그레이드 버전인 PaliGemma 2가 동일한 기능과 더 나은 성능으로 등장했습니다. 나중에 나온 또 다른 모델은 <code class="language-plaintext highlighter-rouge">Allen AI</code>의 Molmo로, 점으로 인스턴스를 가리키고 객체 인스턴스를 계수할 수 있습니다.</p>
+
+<p><img src="https://i.imgur.com/OT4oTEb.png" alt="" /></p>
+
+<p>Qwen2.5-VL도 객체를 감지하고, 가리키고, 계수할 수 있으며, 이는 UI 요소도 객체로 포함합니다!</p>
+
+<p><img src="https://i.imgur.com/63hKnua.png" alt="" /></p>
+
+<h3 id="멀티모달-안전multimodal-safety-모델">멀티모달 안전(Multimodal Safety) 모델</h3>
+<p>프로덕션의 VLM은 탈옥과 규정 준수를 위한 유해한 출력을 방지하기 위해 입력과 출력을 필터링해야 합니다. 유해한 콘텐츠는 폭력적 입력부터 성적으로 노골적인 콘텐츠까지 다양합니다. 바로 여기에 멀티모달 안전 모델이 활용됩니다: 이들은 VLM의 입력과 출력을 필터링하기 위해 모델 전후에 배치됩니다. 이는 LLM 안전 모델과 유사하지만 추가 이미지 입력을 처리할 수 있습니다.</p>
+
+<p>2025년 초, <code class="language-plaintext highlighter-rouge">Google</code>은 최초의 오픈 멀티모달 안전 모델인 <a href="https://huggingface.co/google/shieldgemma-2-4b-it">ShieldGemma 2</a>를 소개했습니다. 이 모델은 텍스트 전용 안전 모델인 ShieldGemma를 기반으로 구축되었습니다. 이 모델은 이미지와 콘텐츠 정책을 입력받아 주어진 정책에 대해 이미지가 안전한지 여부를 반환합니다. 정책은 이미지가 부적절한 기준을 말합니다. ShieldGemma 2는 이미지 생성 모델의 출력을 필터링하는 데에도 사용될 수 있습니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Meta</code>의 <a href="https://huggingface.co/spaces/merve/llama-guard-4">Llama Guard 4</a>는 밀집 멀티모달 및 다국어 안전 모델입니다. 안전성 미세 조정과 함께 Llama 4 Scout(멀티모달 전문가 혼합 모델)에서 밀집하게 가지치기되었습니다.</p>
+
+<p><img src="https://i.imgur.com/CZdcvHf.png" alt="" /></p>
+
+<p>이 모델은 텍스트 전용 및 멀티모달 추론에 사용될 수 있습니다. 또한 VLM의 출력을 입력받아 대화를 완성하고, 사용자에게 전송하기 전에 필터링할 수 있습니다.</p>
+
+<h3 id="멀티모달-rag-retrievers-rerankers">멀티모달 RAG: Retrievers, Rerankers</h3>
+<p>이제 멀티모달 공간에서 검색-증강 생성(RAG)이 어떻게 진화했는지 살펴봅시다. 일반적으로 PDF로 된 복잡한 문서에 대한 RAG는 세 단계로 처리됩니다:</p>
+<ol>
+  <li>문서를 완전히 텍스트로 파싱</li>
+  <li>일반 텍스트와 쿼리를 검색기(Retriever)와 재정렬기(Reranker)에 전달하여 가장 관련성 있는 문서 얻기</li>
+  <li>관련 컨텍스트와 쿼리를 LLM에 전달</li>
+</ol>
+
+<p>기존 PDF 파서는 문서의 구조와 시각적 요소(레이아웃, 표, 이미지, 차트 등)를 보존하기 위해 여러 구성 요소로 이루어져 있으며, 이 모든 요소가 마크다운으로 변환됩니다. 하지만 이 설정은 유지 관리가 어려울 수 있습니다.</p>
+
+<p><img src="https://i.imgur.com/ysyxqdg.png" alt="" /></p>
+
+<p>그러나 VLM의 등장과 함께 이 문제가 해결되었습니다: 이제 멀티모달 검색기와 리랭커가 있습니다.</p>
+
+<p><img src="https://i.imgur.com/EDpIFVL.png" alt="" /></p>
+
+<p>멀티모달 검색기는 PDF 문서 스택과 쿼리를 입력으로 받아 신뢰도 점수와 함께 가장 관련성 있는 페이지 번호를 반환합니다. 점수는 페이지가 쿼리에 대한 답변을 포함할 가능성 또는 쿼리가 페이지와 얼마나 관련이 있는지를 나타냅니다. 이것은 취약한 파싱 단계를 우회합니다.</p>
+
+<p>가장 관련성 있는 페이지는 쿼리와 함께 VLM에 공급되고, VLM이 답변을 생성합니다.</p>
+
+<p>주요 멀티모달 리트리버 아키텍처는 두 가지입니다:</p>
+<ul>
+  <li>문서 스크린샷 임베딩(DSE, MCDSE)</li>
+  <li>ColBERT 계열 모델(ColPali, ColQwen2, ColSmolVLM)</li>
+</ul>
+
+<p>DSE 모델은 텍스트 인코더와 이미지 인코더로 구성되어 쿼리당 단일 벡터를 반환합니다. 반환된 점수는 임베딩의 내적에 대한 소프트맥스입니다. 구절당 단일 벡터를 반환합니다.</p>
+
+<blockquote>
+  <p>소프트맥스?
+소프트맥스는 DSE 모델이 계산한 여러 문장의 ‘유사도 점수’를 ‘정답일 확률’로 변환하여, 모델이 가장 가능성 높은 선택지를 고르거나 학습할 수 있도록 돕는 핵심적인 장치입니다.</p>
+</blockquote>
+
+<p><img src="https://i.imgur.com/7oWZXCp.png" alt="" /></p>
+
+<p>ColPali와 같은 ColBERT류 모델도 이중 인코더 모델이지만 한 가지 차이점이 있습니다: ColPali는 이미지 인코더로 VLM을, 텍스트 인코더로 LLM을 가지고 있습니다. 이러한 모델은 본질적으로 인코더가 아니지만, 모델이 임베딩을 출력하고, 이것이 “MaxSim”으로 전달됩니다. 출력은 DSE와 달리 각 토큰당 하나씩 총 여러 개의 벡터로 이루어집니다. MaxSim에서 각 텍스트 토큰 임베딩과 각 이미지 패치 임베딩 간의 유사성이 계산되며, 이 접근 방식은 뉘앙스를 더 잘 포착합니다. 이러한 이유로 ColBERT류 모델은 비용 효율성이 낮지만 성능이 더 좋습니다.</p>
+
+<p>아래는 ColPali의 인덱싱 지연 시간을 볼 수 있습니다. 단일 모델이기 때문에 유지 관리도 더 쉽습니다.</p>
+
+<p><img src="https://i.imgur.com/nllvvh5.png" alt="" /></p>
+
+<p>Hugging Face Hub에서 이러한 모델들은 “<a href="https://huggingface.co/models?pipeline_tag=visual-document-retrieval&amp;sort=trending">Visual Document Retrieval</a>” 작업 아래에서 찾을 수 있습니다.</p>
+
+<p>이 작업에 가장 인기 있는 벤치마크는 ViDoRe로, 재무 보고서, 과학 그림부터 행정 문서까지 다양한 <strong>영어</strong> 및 <strong>프랑스어</strong> 문서로 구성되어 있습니다. ViDoRe의 각 예제에는 문서 이미지, 쿼리 및 잠재적 답변이 있습니다. 쿼리와 일치하는 문서는 대조 사전 훈련에 도움이 되므로 ViDoRe 훈련 세트는 새로운 모델을 훈련하는 데 사용됩니다.</p>
+
+<h2 id="멀티모달-에이전트">멀티모달 에이전트</h2>
+<p>VLM은 문서를 이용한 대화부터 컴퓨터 사용까지 많은 에이전트 워크플로우를 가능하게 합니다. 여기서는 고급 에이전트 기능이 필요하기 때문에 ‘컴퓨터 사용’을 다룹니다. 최근 UI를 이해하고 조작하는 VLM이 다수 출시되었습니다. 최신 모델은 <code class="language-plaintext highlighter-rouge">ByteDance</code>의 UI-TARS-1.5로, 브라우저, 컴퓨터 및 휴대폰 사용에서 훌륭한 결과를 보여주었습니다. 추론과 함께 게임플레이도 할 수 있으며 오픈 월드 게임 내 조작 가능합니다. 올해의 또 다른 주목할 만한 모델은 MAGMA-8B로, UI 탐색과 현실 세계의 물리적 상호작용 모두를 지원하는 파운데이션 모델입니다. 또한 Qwen2.5-VL(특히 에이전트 작업에 대해 추가 훈련된 32B 변형)과 Kimi-VL 추론 모델은 GUI 에이전트 작업에 탁월합니다.</p>
+
+<p>2025년 초, 우리는 ReAct 프레임워크를 구현하는 새로운 경량 에이전트 라이브러리인 smolagents를 소개했습니다.(smolagents는 블로그의 <a href="https://hugging-face-krew.github.io/Introducing-smolagents/">다른 포스트</a>에서도 번역 작업이 이루어졌습니다!) 그 직후, 라이브러리에 VLM 지원을 구현했습니다. 이 통합은 두 가지 사용 사례에서 이루어졌습니다:</p>
+
+<ul>
+  <li>실행 시작 시 한 번만 이미지 제공. 이것은 도구 사용이 포함된 문서 AI에 유용합니다.</li>
+  <li>동적으로 이미지 검색. VLM 에이전트를 통한 GUI 제어와 같이 에이전트가 반복적으로 스크린샷을 찍는 경우에 유용합니다.</li>
+</ul>
+
+<p>라이브러리는 사용자가 이미지 이해 기능을 탑재한 자신만의 에이전트 워크플로우를 구축할 수 있는 빌딩 블록을 제공합니다. 우리는 사용자가 쉽게 시작할 수 있도록 다양한 스크립트와 한 줄로 된 CLI 명령을 제공합니다.</p>
+
+<p>첫 번째 사례에서는 문서를 설명하는 에이전트가 필요하다고 가정합니다(에이전트적 특성은 약하지만 최소한의 사용 사례에는 좋습니다). 다음과 같이 CodeAgent(자체 코드를 작성하는 에이전트)를 초기화할 수 있습니다:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">agent</span> <span class="o">=</span> <span class="nc">CodeAgent</span><span class="p">(</span><span class="n">tools</span><span class="o">=</span><span class="p">[],</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span> <span class="c1"># 도구 불필요
+</span><span class="n">agent</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="sh">"</span><span class="s">Describe these documents:</span><span class="sh">"</span><span class="p">,</span> <span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">document_1</span><span class="p">,</span> <span class="n">document_2</span><span class="p">,</span> <span class="n">document_3</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>스크린샷을 가져와야 하는 후자의 사용 사례의 경우, 각 ActionStep 끝에 실행될 콜백을 정의할 수 있습니다. 동적으로 이미지를 가져와야 하는 여러분의 사용 사례에 맞게 콜백을 자유롭게 수정하세요. 간결함을 위해 여기서 자세히는 정의하지 않겠습니다. 선택적으로, 이 블로그 포스트 끝의 블로그 포스트와 스크립트 자체를 참고할 수 있습니다. 지금은 콜백과 브라우저 제어 단계를 통해 에이전트를 초기화하는 방법을 봅시다:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">save_screenshot</span><span class="p">(</span><span class="n">memory_step</span><span class="p">:</span> <span class="n">ActionStep</span><span class="p">,</span> <span class="n">agent</span><span class="p">:</span> <span class="n">CodeAgent</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">
+    스크린샷을 찍어 관찰 로그에 기록합니다.
+    </span><span class="sh">"""</span>
+    <span class="n">png_bytes</span> <span class="o">=</span> <span class="n">driver</span><span class="p">.</span><span class="nf">get_screenshot_as_png</span><span class="p">()</span>
+    <span class="n">memory_step</span><span class="p">.</span><span class="n">observations_images</span> <span class="o">=</span> <span class="p">[</span><span class="n">image</span><span class="p">.</span><span class="nf">copy</span><span class="p">()]</span> <span class="c1"># memory_step에 이미지 유지
+</span>    <span class="n">url_info</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Current url: </span><span class="si">{</span><span class="n">driver</span><span class="p">.</span><span class="n">current_url</span><span class="si">}</span><span class="sh">"</span>
+    <span class="n">memory_step</span><span class="p">.</span><span class="n">observations</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">url_info</span> <span class="k">if</span> <span class="n">memory_step</span><span class="p">.</span><span class="n">observations</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">memory_step</span><span class="p">.</span><span class="n">observations</span> <span class="o">+</span> <span class="sh">"</span><span class="se">\n</span><span class="sh">"</span> <span class="o">+</span> <span class="n">url_info</span>
+    <span class="p">)</span>
+    <span class="k">return</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="nc">CodeAgent</span><span class="p">(</span>
+    <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">go_back</span><span class="p">,</span> <span class="n">close_popups</span><span class="p">,</span> <span class="n">search_item_ctrl_f</span><span class="p">],</span> <span class="c1"># 탐색 도구 전달
+</span>    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">additional_authorized_imports</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">helium</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">step_callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">save_screenshot</span><span class="p">],</span> <span class="c1"># 콜백 전달
+</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>다음 CLI 명령을 실행하여 전체 예제를 간단히 시도해 볼 수 있습니다. 이 명령어는 웹 자동화 작업을 수행하기 위해 VLM로 구동되는 웹 브라우저에 대한 제어 권한이 있는 에이전트를 시작합니다(원하는 웹사이트로 교체하세요):</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>webagent <span class="s2">"go to xyz.com/men, get to sale section, click the first clothing item you see. Get the product details, and the price, return them. note that I'm shopping from France"</span>
+</code></pre></div></div>
+
+<p>smolagents는 로컬 트랜스포머 모델, 추론 제공자를 사용하여 제공되는 오픈소스 모델 또는 엔드포인트 폐쇄 소스 모델 제공자와 같은 다양한 모델 유형을 제공합니다. 현재 많은 에이전트 워크플로우가 추론을 필요로 하기 때문에 오픈소스 모델의 사용을 권장하며, 이는 많은 수의 파라미터를 가진 모델의 이점을 받습니다. 2025년 4월 기준으로 Qwen 2.5 VL은 에이전트 작업에 대해 추가로 훈련되었기 때문에 에이전트 워크플로우에 좋은 후보입니다.</p>
+
+<h2 id="비디오-언어-모델">비디오 언어 모델</h2>
+<p>요즘 대부분의 VLM은 비디오를 처리할 수 있는데, 비디오는 프레임 시퀀스로 표현될 수 있기 때문입니다. 그러나 프레임 간의 시간적 관계와 많은 양의 프레임 때문에 비디오 이해가 까다로우므로, 대표성이 있는 비디오 프레임 집합을 선택하기 위해 다양한 기법이 사용됩니다.</p>
+
+<p><img src="https://i.imgur.com/4LKdfx6.png" alt="" /></p>
+
+<p>작년부터 커뮤니티는 이 문제를 해결하기 위한 다양한 접근 방식과 트릭에 무게를 두고 있습니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Meta</code>의 <a href="https://huggingface.co/collections/Vision-CAIR/longvu">LongVU</a> 모델이 좋은 예시입니다. 이 모델은 DINOv2에 비디오 프레임을 통과시켜 가장 유사한 프레임을 선택하여 제거함으로써 비디오 프레임을 다운샘플링하고, 그런 다음 텍스트 쿼리에 따라 가장 관련성 있는 프레임을 추가로 선별하여 프레임을 더욱 정제하는데, 여기서 텍스트와 프레임 모두 동일한 공간에 투영되고 유사성이 계산됩니다. <a href="https://huggingface.co/collections/Qwen/qwen25-vl">Qwen2.5VL</a>은 긴 컨텍스트를 처리할 수 있고 모델이 다른 프레임 속도의 비디오로 훈련되기 때문에 동적 FPS 속도에 적응됩니다. 확장된 멀티모달 RoPE를 통해 프레임의 절대 시간 위치를 이해하고, 서로 다른 속도를 처리할 수 있으며 실제 생활에서 발생하는 사건의 속도를 여전히 이해할 수 있습니다. 또 다른 모델인 <a href="https://huggingface.co/collections/google/gemma-3-release">Gemma 3</a>은 텍스트 프롬프트에 타임스탬프가 삽입된 비디오 프레임을 수용할 수 있습니다(예: “Frame 00.00: &lt;image&gt;..”). 이 모델은 비디오 이해 작업에서 매우 우수한 성능을 보입니다.</p>
+
+<p><img src="https://i.imgur.com/Lr0A4Vt.png" alt="" /></p>
+
+<h2 id="vlm을-위한-새로운-정렬alignment-기법">VLM을 위한 새로운 정렬(alignment) 기법</h2>
+<p><strong>선호도 최적화</strong>는 VLM으로도 확장될 수 있는, 언어 모델을 위한 대체 미세 조정 접근법입니다. 고정된 레이블에 의존하는 대신, 이 방법은 선호도에 기반하여 후보 응답을 비교하고 순위를 매기는 데 중점을 둡니다. <a href="https://huggingface.co/docs/trl/en/index">trl</a> 라이브러리는 VLM을 포함한 직접 선호도 최적화(DPO)를 지원합니다.</p>
+
+<p>아래는 VLM 미세 조정의 DPO를 위한 선호도 데이터셋의 구조 예입니다. 각 항목은 이미지 + 질문 쌍과 두 개의 대응 답변(선택된 답변과 거부된 답변)으로 구성됩니다. VLM은 선호되는(선택된) 답변과 정렬된 응답을 생성하도록 미세 조정됩니다.</p>
+
+<p><img src="https://i.imgur.com/JniGe5G.png" alt="" /></p>
+
+<p>이 절차를 위한 예제 데이터셋은 <a href="https://huggingface.co/datasets/openbmb/RLAIF-V-Dataset">RLAIF-V</a>로, 위에서 설명한 구조에 따라 포맷된 83000개 이상의 주석이 달린 샘플을 포함합니다. 각 항목에는 이미지 목록(보통 하나), 프롬프트, 선택된 답변, 거부된 답변이 포함되어 있으며, 이는 DPOTrainer가 예상하는 대로입니다.</p>
+
+<p>이미 해당 형식으로 적절하게 포맷된 <a href="https://huggingface.co/datasets/HuggingFaceH4/rlaif-v_formatted">RLAIF-V 포맷 데이터셋</a>이 있습니다. 아래는 단일 샘플의 예입니다:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="sh">'</span><span class="s">images</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">PIL</span><span class="p">.</span><span class="n">JpegImagePlugin</span><span class="p">.</span><span class="n">JpegImageFile</span> <span class="n">image</span> <span class="n">mode</span><span class="o">=</span><span class="n">L</span> <span class="n">size</span><span class="o">=</span><span class="mi">980</span><span class="n">x812</span> <span class="n">at</span> <span class="mh">0x154505570</span><span class="o">&gt;</span><span class="p">],</span>
+ <span class="sh">'</span><span class="s">prompt</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span> <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">image</span><span class="sh">"</span> <span class="p">},</span> <span class="p">{</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">What should this catcher be using?</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span> <span class="p">}</span> <span class="p">],</span> <span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span> <span class="p">}</span> <span class="p">],</span>
+ <span class="sh">'</span><span class="s">rejected</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">The catcher, identified by the number...</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span> <span class="p">}</span> <span class="p">],</span> <span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">assistant</span><span class="sh">"</span> <span class="p">}</span> <span class="p">],</span>
+ <span class="sh">'</span><span class="s">chosen</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">The catcher in the image should be using a baseball glove...</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span> <span class="p">}</span> <span class="p">],</span> <span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">assistant</span><span class="sh">"</span> <span class="p">}</span> <span class="p">]}</span>
+</code></pre></div></div>
+
+<p>데이터셋이 준비되면 trl 라이브러리의 DPOConfig 및 DPOTrainer 클래스를 사용하여 미세 조정 프로세스를 구성하고 시작할 수 있습니다.</p>
+
+<p>아래는 DPOConfig를 사용한 예제 구성입니다:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">trl</span> <span class="kn">import</span> <span class="n">DPOConfig</span>
+
+<span class="n">training_args</span> <span class="o">=</span> <span class="nc">DPOConfig</span><span class="p">(</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="sh">"</span><span class="s">smolvlm-instruct-trl-dpo-rlaif-v</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">bf16</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">gradient_checkpointing</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">per_device_eval_batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">gradient_accumulation_steps</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+    <span class="n">num_train_epochs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">dataset_num_proc</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="c1"># 토큰화는 8개 프로세스 사용
+</span>    <span class="n">dataloader_num_workers</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="c1"># 데이터 로딩은 8개 워커 사용
+</span>    <span class="n">logging_steps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">report_to</span><span class="o">=</span><span class="sh">"</span><span class="s">tensorboard</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">push_to_hub</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">save_strategy</span><span class="o">=</span><span class="sh">"</span><span class="s">steps</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">save_steps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">save_total_limit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">eval_steps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="c1"># 평가를 위한 단계 간격
+</span>    <span class="n">eval_strategy</span><span class="o">=</span><span class="sh">"</span><span class="s">steps</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>DPOTrainer를 사용하여 모델을 훈련하기 위해 보상 차이를 계산하려면 참조 모델을 선택적으로 제공할 수도 있습니다. 파라미터 효율적 미세 조정(PEFT)을 사용하는 경우 <code class="language-plaintext highlighter-rouge">ref_model=None</code>을 설정하여 참조 모델을 생략할 수 있습니다:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">trl</span> <span class="kn">import</span> <span class="n">DPOTrainer</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="nc">DPOTrainer</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">ref_model</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">args</span><span class="o">=</span><span class="n">training_args</span><span class="p">,</span>
+    <span class="n">train_dataset</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span>
+    <span class="n">eval_dataset</span><span class="o">=</span><span class="n">test_dataset</span><span class="p">,</span>
+    <span class="n">peft_config</span><span class="o">=</span><span class="n">peft_config</span><span class="p">,</span>
+    <span class="n">tokenizer</span><span class="o">=</span><span class="n">processor</span>
+<span class="p">)</span>
+<span class="n">trainer</span><span class="p">.</span><span class="nf">train</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="새로운-벤치마크">새로운 벤치마크</h2>
+<p>벤치마크 역시 지난 1년간 크게 발전했습니다. 이전 블로그에서 우리는 VLM을 평가하기 위한 두 가지 신흥 벤치마크로 MMMU와 MMBench를 소개했습니다. 해당 분야의 빠른 진전으로 모델들이 이러한 벤치마크에서 포화되었고, 더 나은 평가 도구가 필요합니다. 이를 달성하기 위해서는 범용 벤치마크 위에 특정 기능을 평가하는 도구가 필요합니다.</p>
+
+<p><img src="https://i.imgur.com/YaT28j7.png" alt="" /></p>
+
+<p>이제 두 가지 두드러진 범용 벤치마크인 MMT-Bench와 MMMU-Pro를 소개합니다.</p>
+<h3 id="mmt-bench">MMT-Bench</h3>
+<p>MMT-Bench는 전문 지식, 정확한 시각적 인식, 지역화, 추론 및 계획이 필요한 광범위한 멀티모달 작업에 걸쳐 VLM을 평가하도록 설계되었습니다. 벤치마크는 이미지, 텍스트, 비디오 및 포인트 클라우드 모달리티의 다양한 멀티모달 시나리오에서 추출한 31325개의 객관식 시각 질문을 포함합니다. 162개의 하위 태스크가 있는 32개의 다른 메타 태스크로 OCR, 시각적 인식 또는 시각-언어 검색을 포함한 다양한 작업을 다룹니다.</p>
+
+<h3 id="mmmu-pro">MMMU-Pro</h3>
+<p>MMMU-Pro는 원래 MMMU 벤치마크의 더 나은 버전입니다. 여러 모달리티에 걸쳐 고급 AI 모델의 진정한 이해 능력을 평가합니다.
+MMMU보다 더 복잡한 구조를 가지며, 예를 들어 비전 전용 입력 설정이 있고 후보 옵션 수가 4개에서 10개로 증가했습니다. 이 벤치마크는 실제 환경 시뮬레이션을 통합하여, 시뮬레이션된 디스플레이 내에서 캡처된 스크린샷이나 사진에서 파생된 비전 전용 문제를 포함합니다. 다양한 배경, 글꼴 스타일 및 크기를 적용하여 실제 환경 조건을 모방합니다.</p>
+
+<h2 id="추가--추천-모델">추가 : 추천 모델</h2>
+<p>주목할 만한 모델 몇 가지를 소개합니다. 선호하는 모델은 많지만, 아래는 최신 버전(2025년 5월 기준)입니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>모델명</th>
+      <th>파라미터</th>
+      <th>왜 추천하나요?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Qwen2.5-VL</td>
+      <td>from 3B to 72B</td>
+      <td>에이전트 기능, 수학 등 다양한 기능을 갖춘 뛰어난 다목적 모델</td>
+    </tr>
+    <tr>
+      <td>RolmOCR</td>
+      <td>7B</td>
+      <td>매우 성능이 우수한 OCR 모델</td>
+    </tr>
+    <tr>
+      <td>Kimi-VL-Thinking</td>
+      <td>16B MoE with 3B active parameters</td>
+      <td>가장 추론 능력이 우수한 모델</td>
+    </tr>
+    <tr>
+      <td>SmolVLM2</td>
+      <td>256M, 500M (our favorite!), 2.2B</td>
+      <td>가장 작은 VLM</td>
+    </tr>
+    <tr>
+      <td>Llama 4 Scout &amp; Maverick</td>
+      <td>109B/400B MoE with 17B active parameters</td>
+      <td>너어어어어무 긴 컨텍스트</td>
+    </tr>
+    <tr>
+      <td>Molmo</td>
+      <td>1B, 7B, 72B and MoE with 1B active parameters</td>
+      <td>완전 개방형 모델에 지역화기능 추가됨</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>여기까지입니다! 아래에는 위 포스트의 각 주제에 대한 보다 심층적인 설명을 제공하는 링크입니다 :)</p>
+
+<h2 id="읽어볼만한-글">읽어볼만한 글</h2>
+<ul>
+  <li><a href="https://huggingface.co/collections/sergiopaniego/vision-language-models-2025-update-682206d8ed0728be05dbf901">Models, datasets and more mentioned in this blog</a></li>
+  <li>Multimodal Safety: <a href="https://huggingface.co/blog/llama-guard-4">Llama Guard 4 Blog</a></li>
+  <li>DPO in VLMs: <a href="https://huggingface.co/blog/dpo_vlm">Preference Optimization for Vision Language Models with TRL</a></li>
+  <li>Smolagents with VLM support: <a href="https://huggingface.co/blog/smolagents-can-see">We just gave sight to smolagents</a></li>
+  <li>Agents Course section for Vision Agents using smolagents: <a href="https://huggingface.co/learn/agents-course/unit2/smolagents/vision_agents">Vision Agents with smolagents</a></li>
+  <li>Gemma 3 Model Release: <a href="https://huggingface.co/blog/gemma3">Welcome Gemma 3: Google’s all new multimodal, multilingual, long context open LLM</a></li>
+  <li>PaliGemma 2 Model Release: <a href="https://huggingface.co/blog/paligemma2">Welcome PaliGemma 2 – New vision language models by Google</a></li>
+  <li><a href="https://huggingface.co/blog/pi0">Pi0 release by Hugging Face</a></li>
+  <li>Multimodal retrieval: <a href="https://huggingface.co/blog/marco/announcing-mcdse-2b-v1">Visually Multilingual: Introducing mcdse-2b</a></li>
+  <li>Multimodal retrieval: <a href="https://huggingface.co/blog/manu/colpali">ColPali: Efficient Document Retrieval with Vision Language Models</a></li>
+  <li>Video Language Modelling: <a href="https://huggingface.co/blog/smolvlm2">SmolVLM2: Bringing Video Understanding to Every Device</a></li>
+  <li>Minimal training of VLM with vanilla PyTorch: <a href="https://github.com/huggingface/nanoVLM">GitHub - huggingface/nanoVLM: The simplest, fastest repository for training/finetuning small-sized VLMs.</a></li>
+</ul>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2025-10-20">20 Oct 2025</time></span>
+                
+            </small>
+        </p>
+
+
+
+        <!-- Prev/Next -->
+        <div class="row PageNavigation mt-4 prevnextlinks d-flex justify-content-between">
+            
+            <div class="col-md-6 rightborder pl-0">
+                <a class="thepostlink" href="/structured-codeagent-ko/">&laquo; CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법</a>
+            </div>
+            
+            
+            <div class="col-md-6 text-right pr-0">
+                <a class="thepostlink" href="/pi0-fast/">π0 & π0-FAST: 범용 로봇 제어를 위한 Vision-Language-Action 모델 &raquo;</a>
+            </div>
+            
+        </div>
+        <!-- End Prev/Next -->
+
+
+        <!-- Author Box -->
+        
+        <div class="row post-top-meta ">
+            <div class="col-md-2 text-left text-md-left">
+                <img class="author-thumb" src="/assets/images/author/youngjun.png" alt="Youngjun">
+            </div>
+            <div class="col-md-10 text-left text-md-left">
+                <a target="_blank" class="link-dark" href="https://github.com/choincnp">Youngjun</a><a target="_blank" href="" class="btn follow">Follow</a>
+                <span class="author-description">안녕하세요! genAI 및 Agent에 관심있는 조영준입니다!</span>						
+            </div>
+        </div>
+        
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <!-- End Post -->
+    <!-- toc -->
+    <div class="col-sm-4">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#들어가며" id="markdown-toc-들어가며">들어가며</a></li>
+  <li><a href="#모델-살펴보기" id="markdown-toc-모델-살펴보기">모델 살펴보기</a>    <ul>
+      <li><a href="#any-to-any-모델" id="markdown-toc-any-to-any-모델">Any-to-any 모델</a></li>
+      <li><a href="#추론-모델" id="markdown-toc-추론-모델">추론 모델</a></li>
+      <li><a href="#작지만-강력한-모델" id="markdown-toc-작지만-강력한-모델">작지만 강력한 모델</a></li>
+      <li><a href="#디코더로서의-전문가-혼합mixture-of-experts-moe" id="markdown-toc-디코더로서의-전문가-혼합mixture-of-experts-moe">디코더로서의 전문가 혼합(Mixture-of-Experts, MoE)</a></li>
+      <li><a href="#vla비전-언어-행동-모델" id="markdown-toc-vla비전-언어-행동-모델">VLA(비전-언어-행동 모델)</a></li>
+    </ul>
+  </li>
+  <li><a href="#특화된-기능들" id="markdown-toc-특화된-기능들">특화된 기능들</a>    <ul>
+      <li><a href="#vlm을-이용한-객체-감지-분할-계수" id="markdown-toc-vlm을-이용한-객체-감지-분할-계수">VLM을 이용한 객체 감지, 분할, 계수</a></li>
+      <li><a href="#멀티모달-안전multimodal-safety-모델" id="markdown-toc-멀티모달-안전multimodal-safety-모델">멀티모달 안전(Multimodal Safety) 모델</a></li>
+      <li><a href="#멀티모달-rag-retrievers-rerankers" id="markdown-toc-멀티모달-rag-retrievers-rerankers">멀티모달 RAG: Retrievers, Rerankers</a></li>
+    </ul>
+  </li>
+  <li><a href="#멀티모달-에이전트" id="markdown-toc-멀티모달-에이전트">멀티모달 에이전트</a></li>
+  <li><a href="#비디오-언어-모델" id="markdown-toc-비디오-언어-모델">비디오 언어 모델</a></li>
+  <li><a href="#vlm을-위한-새로운-정렬alignment-기법" id="markdown-toc-vlm을-위한-새로운-정렬alignment-기법">VLM을 위한 새로운 정렬(alignment) 기법</a></li>
+  <li><a href="#새로운-벤치마크" id="markdown-toc-새로운-벤치마크">새로운 벤치마크</a>    <ul>
+      <li><a href="#mmt-bench" id="markdown-toc-mmt-bench">MMT-Bench</a></li>
+      <li><a href="#mmmu-pro" id="markdown-toc-mmmu-pro">MMMU-Pro</a></li>
+    </ul>
+  </li>
+  <li><a href="#추가--추천-모델" id="markdown-toc-추가--추천-모델">추가 : 추천 모델</a></li>
+  <li><a href="#읽어볼만한-글" id="markdown-toc-읽어볼만한-글">읽어볼만한 글</a></li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+<!-- footer -->
+<div class="row">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== --></main>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer container text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/codecopy.js"></script>
+    <script src="/assets/js/category.js"></script>
+  </body>
+</html>
