@@ -1,1 +1,1 @@
-Sitemap: /hugging-face-krew.github.io/pull/115/sitemap.xml
+Sitemap: /pull/115/sitemap.xml

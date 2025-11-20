@@ -21,7 +21,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="icon" href="/hugging-face-krew.github.io/pull/115/assets/images/favicon.ico" />
+    <link rel="icon" href="/pull/115/assets/images/favicon.ico" />
 
     <title>Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기 | Hugging Face KREW</title>
 
@@ -34,22 +34,22 @@
 <meta name="description" content="안녕하세요🤗 오늘은 Hugging Face에서 개발한 Gradio 라이브러리를 사용하여 머신러닝 모델을 위한 웹 인터페이스를 쉽고 빠르게 만드는 방법을 알아보겠습니다. Gradio를 사용하면 복잡한 웹 개발 지식 없이도 데모나 인터페이스를 빠르게 제작할 수 있습니다." />
 <meta property="og:description" content="안녕하세요🤗 오늘은 Hugging Face에서 개발한 Gradio 라이브러리를 사용하여 머신러닝 모델을 위한 웹 인터페이스를 쉽고 빠르게 만드는 방법을 알아보겠습니다. Gradio를 사용하면 복잡한 웹 개발 지식 없이도 데모나 인터페이스를 빠르게 제작할 수 있습니다." />
 <meta property="og:site_name" content="Hugging Face KREW" />
-<meta property="og:image" content="/hugging-face-krew.github.io/pull/115/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" />
+<meta property="og:image" content="/pull/115/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2024-10-02T00:00:00+09:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="/hugging-face-krew.github.io/pull/115/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" />
+<meta property="twitter:image" content="/pull/115/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" />
 <meta property="twitter:title" content="Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"chaewon"},"dateModified":"2024-10-02T00:00:00+09:00","datePublished":"2024-10-02T00:00:00+09:00","description":"안녕하세요🤗 오늘은 Hugging Face에서 개발한 Gradio 라이브러리를 사용하여 머신러닝 모델을 위한 웹 인터페이스를 쉽고 빠르게 만드는 방법을 알아보겠습니다. Gradio를 사용하면 복잡한 웹 개발 지식 없이도 데모나 인터페이스를 빠르게 제작할 수 있습니다.","headline":"Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기","image":"/hugging-face-krew.github.io/pull/115/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png","mainEntityOfPage":{"@type":"WebPage","@id":"/hugging-face-krew.github.io/pull/115/creating-web-interface/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/hugging-face-krew.github.io/pull/115/assets/images/hfkr_logo.png"},"name":"chaewon"},"url":"/hugging-face-krew.github.io/pull/115/creating-web-interface/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"chaewon"},"dateModified":"2024-10-02T00:00:00+09:00","datePublished":"2024-10-02T00:00:00+09:00","description":"안녕하세요🤗 오늘은 Hugging Face에서 개발한 Gradio 라이브러리를 사용하여 머신러닝 모델을 위한 웹 인터페이스를 쉽고 빠르게 만드는 방법을 알아보겠습니다. Gradio를 사용하면 복잡한 웹 개발 지식 없이도 데모나 인터페이스를 빠르게 제작할 수 있습니다.","headline":"Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기","image":"/pull/115/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pull/115/creating-web-interface/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pull/115/assets/images/hfkr_logo.png"},"name":"chaewon"},"url":"/pull/115/creating-web-interface/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-    <link href="/hugging-face-krew.github.io/pull/115/assets/css/theme.css" rel="stylesheet" />
+    <link href="/pull/115/assets/css/theme.css" rel="stylesheet" />
 
     <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
-    <link href="/hugging-face-krew.github.io/pull/115/assets/css/custom.css" rel="stylesheet" />
-    <link href="/hugging-face-krew.github.io/pull/115/assets/css/syntax.css" rel="stylesheet" />
+    <link href="/pull/115/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pull/115/assets/css/syntax.css" rel="stylesheet" />
     <!-- custom CSS end-->
 
     
@@ -83,10 +83,10 @@
         <div class="container">
           <a
             class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
-            href="/hugging-face-krew.github.io/pull/115/"
+            href="/pull/115/"
           >
             
-            <img class="mr-2" src="/hugging-face-krew.github.io/pull/115/assets/images/hfkr_logo.png" alt="logo" />
+            <img class="mr-2" src="/pull/115/assets/images/hfkr_logo.png" alt="logo" />
             
 
             <span class="font-weight-bold serif-font"
@@ -125,7 +125,7 @@
               <li class="nav-item">
                 <a
                   class="nav-link px-3 "
-                  href="/hugging-face-krew.github.io/pull/115/"
+                  href="/pull/115/"
                   alt="Home"
                   >Home</a
                 >
@@ -134,7 +134,7 @@
               <li class="nav-item">
                 <a
                   class="nav-link px-3 "
-                  href="/hugging-face-krew.github.io/pull/115/about/"
+                  href="/pull/115/about/"
                   alt="About"
                   >About</a
                 >
@@ -143,7 +143,7 @@
               <li class="nav-item">
                 <a
                   class="nav-link px-3 "
-                  href="/hugging-face-krew.github.io/pull/115/activities/"
+                  href="/pull/115/activities/"
                   alt="Activities"
                   >Activities</a
                 >
@@ -177,7 +177,7 @@
         
 		<div class="col-sm-8">
             <!-- Post Featured Image -->
-			<img class="featured-image img-fluid rounded" src="/hugging-face-krew.github.io/pull/115/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" alt="Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기">
+			<img class="featured-image img-fluid rounded" src="/pull/115/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" alt="Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기">
 			<!-- End Featured Image -->
 			<div class="mainheading">             
                 
@@ -187,11 +187,11 @@
                         
                         
                         <li>
-                         <a href="/hugging-face-krew.github.io/pull/115/categories#nlp">NLP</a>
+                         <a href="/pull/115/categories#nlp">NLP</a>
                         </li>
                         
                         <li>
-                         <a href="/hugging-face-krew.github.io/pull/115/categories#web">Web</a>
+                         <a href="/pull/115/categories#web">Web</a>
                         </li>
                         
                     </ul>
@@ -387,12 +387,12 @@
         <div class="row PageNavigation mt-4 prevnextlinks d-flex justify-content-between">
             
             <div class="col-md-6 rightborder pl-0">
-                <a class="thepostlink" href="/hugging-face-krew.github.io/pull/115/creating-gradio-based-NL2SQL-chatbot/">&laquo; Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋</a>
+                <a class="thepostlink" href="/pull/115/creating-gradio-based-NL2SQL-chatbot/">&laquo; Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋</a>
             </div>
             
             
             <div class="col-md-6 text-right pr-0">
-                <a class="thepostlink" href="/hugging-face-krew.github.io/pull/115/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법 &raquo;</a>
+                <a class="thepostlink" href="/pull/115/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법 &raquo;</a>
             </div>
             
         </div>
@@ -403,7 +403,7 @@
         
         <div class="row post-top-meta ">
             <div class="col-md-2 text-left text-md-left">
-                <img class="author-thumb" src="/hugging-face-krew.github.io/pull/115/assets/images/author/chaewon.png" alt="Chaewon">
+                <img class="author-thumb" src="/pull/115/assets/images/author/chaewon.png" alt="Chaewon">
             </div>
             <div class="col-md-10 text-left text-md-left">
                 <a target="_blank" class="link-dark" href="https://github.com/chhaewxn/">Chaewon</a><a target="_blank" href="" class="btn follow">Follow</a>
@@ -472,11 +472,11 @@
 
         <div class="footer-card-container">
             <a href="https://www.contribution.ac/">
-                <img src="/hugging-face-krew.github.io/pull/115/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+                <img src="/pull/115/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
             </a>
             &nbsp;
             <a href="https://www.contribution.ac/">
-                <img src="/hugging-face-krew.github.io/pull/115/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+                <img src="/pull/115/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
             </a>
             <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
             <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
@@ -493,7 +493,7 @@
         
         <li>
           <a
-            href="/hugging-face-krew.github.io/pull/115/"
+            href="/pull/115/"
             alt="Home"
             >Home</a
           >
@@ -501,7 +501,7 @@
         
         <li>
           <a
-            href="/hugging-face-krew.github.io/pull/115/privacy-policy/"
+            href="/pull/115/privacy-policy/"
             alt="Privacy Policy"
             >Privacy Policy</a
           >
@@ -509,7 +509,7 @@
         
         <li>
           <a
-            href="/hugging-face-krew.github.io/pull/115/contact/"
+            href="/pull/115/contact/"
             alt="Contact"
             >Contact</a
           >
@@ -523,10 +523,10 @@
 
     <!-- JavaScript
 ================================================== -->
-    <script src="/hugging-face-krew.github.io/pull/115/assets/js/jquery.min.js"></script>
-    <script src="/hugging-face-krew.github.io/pull/115/assets/js/bootstrap.min.js"></script>
-    <script src="/hugging-face-krew.github.io/pull/115/assets/js/theme.js"></script>
-    <script src="/hugging-face-krew.github.io/pull/115/assets/js/codecopy.js"></script>
-    <script src="/hugging-face-krew.github.io/pull/115/assets/js/category.js"></script>
+    <script src="/pull/115/assets/js/jquery.min.js"></script>
+    <script src="/pull/115/assets/js/bootstrap.min.js"></script>
+    <script src="/pull/115/assets/js/theme.js"></script>
+    <script src="/pull/115/assets/js/codecopy.js"></script>
+    <script src="/pull/115/assets/js/category.js"></script>
   </body>
 </html>
