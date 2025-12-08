@@ -8,7 +8,6 @@ image: assets/images/blog/posts/2025-09-14-Implementing-MCP-Servers-in-Python/th
 * TOC
 {:toc}
 <!--toc-->
-
 _이 글은 Hugging Face 블로그의 [Implementing MCP Servers in Python: An AI Shopping Assistant with Gradio](https://huggingface.co/blog/gradio-vton-mcp)를 한국어로 번역한 글입니다._
 
 ---

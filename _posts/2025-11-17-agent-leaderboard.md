@@ -9,8 +9,7 @@ image: assets/images/blog/posts/2025-11-17-agent-leaderboard/thumbnail.png
 * TOC
 {:toc}
 <!--toc-->
-_이 글은 Hugging Face 블로그의 [Agent 
-Leaderboard: Evaluating AI Agents in Multi-Domain Scenarios](https://huggingface.co/blog/pratikbhavsar/agent-leaderboard)를 한국어로 번역한 글입니다._
+_이 글은 Hugging Face 블로그의 [Agent Leaderboard: Evaluating AI Agents in Multi-Domain Scenarios](https://huggingface.co/blog/pratikbhavsar/agent-leaderboard)를 한국어로 번역한 글입니다._
 
 ---
 

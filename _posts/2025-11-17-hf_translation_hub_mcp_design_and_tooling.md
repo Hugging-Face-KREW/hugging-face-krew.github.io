@@ -8,10 +8,6 @@ image: assets/images/blog/posts/2025-11-17-hf_translation_hub_mcp_design_and_too
 * TOC
 {:toc}
 <!--toc-->
-
-
----
-
 > Hugging Face 번역 MCP 서버 설계 전략 및 개발 도구는 다음과 같은 **프로젝트 목표와 운영 원칙**을 중심으로 결정되었습니다.
 >
 > **(1) 문서 번역 자동화 및 범용성 확보**

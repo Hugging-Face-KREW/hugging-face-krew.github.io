@@ -8,7 +8,7 @@ image: assets/images/blog/posts/2025-09-29-building-hf-mcp/thumbnail-study.png
 * TOC
 {:toc}
 <!--toc-->
-이 글은 Hugging Face 블로그의 [Building the Hugging Face MCP Server](https://huggingface.co/blog/building-hf-mcp)를 읽고 공부한 내용을 바탕으로 정리했습니다. 
+_이 글은 Hugging Face 블로그의 [Building the Hugging Face MCP Server](https://huggingface.co/blog/building-hf-mcp)를 읽고 공부한 내용을 바탕으로 정리했습니다._
 
 ---
 
