@@ -182,6 +182,10 @@ _이 글은 Hugging Face 문서 번역 프로젝트의 MCP server 소개글입�
 
 이 4개의 MCP 서버를 연계하면 **번역 문서 관리 → PR 생성 → 리뷰 제출**까지 완전한 자동화 워크플로우를 구축할 수 있습니다.
 
+![mcp-list](../assets/images/blog/posts/2025-12-28-translation-mcp-project-overview/image2.png)
+
+예를 들어, Hugging Face chat에 mcp server를 연결한 모습입니다.
+
 ---
 
 ## 💭 고민거리
