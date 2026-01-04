@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Hugging Face 번역 MCP 서버 자기소개 시작" 
+title: "Hugging Face 번역 MCP 서버 총정리" 
 author: minju
 categories: [Robotics, AI, Community]
-image: assets/images/blog/posts/2025-11-20-translation-mcp-project-overview/thumbnail.png
+image: assets/images/blog/posts/2025-12-28-translation-mcp-project-overview/thumbnail.png
 ---
 * TOC
 {:toc}
