@@ -40,7 +40,7 @@ jobs:
           source-dir: _site
           preview-branch: gh-pages
           umbrella-dir: pr-preview
-          pages-base-url: https://hugging-face-krew.github.io/
+          pages-base-url: hugging-face-krew.github.io
           action: auto
-          wait-for-pages-deployment: true
+          wait-for-pages-deployment: false
           qr-code: false
