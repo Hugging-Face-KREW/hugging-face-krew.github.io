@@ -42,5 +42,5 @@ jobs:
           umbrella-dir: pr-preview
           pages-base-url: hugging-face-krew.github.io
           action: auto
-          wait-for-pages-deployment: false
+          wait-for-pages-deployment: true
           qr-code: false
