@@ -10,7 +10,9 @@ on:
       - synchronize
       - closed
 
-concurrency: pr-preview-${{ github.ref }}
+concurrency:
+  group: gh-pages-deploy
+  cancel-in-progress: false
 
 permissions:
   contents: write
