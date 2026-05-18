@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-130/assets/images/favicon.ico" />
+
+    <title>MachinaCheck: AMD MI300X에서 다중 에이전트 CNC 제조 가능성 시스템 구축 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>MachinaCheck: AMD MI300X에서 다중 에이전트 CNC 제조 가능성 시스템 구축 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="MachinaCheck: AMD MI300X에서 다중 에이전트 CNC 제조 가능성 시스템 구축" />
+<meta name="author" content="minju" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="Source: https://huggingface.co/blog/lablab-ai-amd-developer-hackathon/machinacheck" />
+<meta name="twitter:description" property="og:description" content="Source: https://huggingface.co/blog/lablab-ai-amd-developer-hackathon/machinacheck" />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-05-11T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-05-11T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="MachinaCheck: AMD MI300X에서 다중 에이전트 CNC 제조 가능성 시스템 구축" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"minju"},"dateModified":"2026-05-11T00:00:00+09:00","datePublished":"2026-05-11T00:00:00+09:00","description":"Source: https://huggingface.co/blog/lablab-ai-amd-developer-hackathon/machinacheck","headline":"MachinaCheck: AMD MI300X에서 다중 에이전트 CNC 제조 가능성 시스템 구축","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-130/machinacheck/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-130/assets/images/hfkr_logo.png"},"name":"minju"},"url":"/pr-preview/pr-130/machinacheck/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-130/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-130/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-130/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-130/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-130/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-130/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-130/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-130/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row" style="margin-top: 1rem;">
+		
+
+		<!-- Post -->        
+        
+        
+		<div class="col-sm-8">
+            <!-- Post Featured Image -->
+			
+			<!-- End Featured Image -->
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-130/categories#huggingface">HuggingFace</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-130/categories#translation">Translation</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">MachinaCheck: AMD MI300X에서 다중 에이전트 CNC 제조 가능성 시스템 구축</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<blockquote>
+  <p>Source: https://huggingface.co/blog/lablab-ai-amd-developer-hackathon/machinacheck</p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#machinacheck-amd-mi300x에서-다중-에이전트-cnc-제조-가능성-시스템-구축" id="markdown-toc-machinacheck-amd-mi300x에서-다중-에이전트-cnc-제조-가능성-시스템-구축">MachinaCheck: AMD MI300X에서 다중 에이전트 CNC 제조 가능성 시스템 구축</a>    <ul>
+      <li><a href="#우리가-해결한-문제" id="markdown-toc-우리가-해결한-문제">우리가 해결한 문제</a></li>
+      <li><a href="#machinacheck가-하는-일" id="markdown-toc-machinacheck가-하는-일">MachinaCheck가 하는 일</a></li>
+      <li><a href="#왜-amd-mi300x에서-이를-구축했는가" id="markdown-toc-왜-amd-mi300x에서-이를-구축했는가">왜 AMD MI300X에서 이를 구축했는가</a></li>
+      <li><a href="#에이전트-아키텍처" id="markdown-toc-에이전트-아키텍처">에이전트 아키텍처</a>        <ul>
+          <li><a href="#구성요소-1--step-파일-파서-pure-python-llm-없음" id="markdown-toc-구성요소-1--step-파일-파서-pure-python-llm-없음">구성요소 1 — STEP 파일 파서 (Pure Python, LLM 없음)</a></li>
+          <li><a href="#에이전트-1--작업-분류기-qwen-25-7b" id="markdown-toc-에이전트-1--작업-분류기-qwen-25-7b">에이전트 1 — 작업 분류기 (Qwen 2.5 7B)</a></li>
+          <li><a href="#에이전트-2--도구-매칭기-pure-python" id="markdown-toc-에이전트-2--도구-매칭기-pure-python">에이전트 2 — 도구 매칭기 (Pure Python)</a></li>
+          <li><a href="#에이전트-3--타당성-결정-에이전트-qwen-25-7b" id="markdown-toc-에이전트-3--타당성-결정-에이전트-qwen-25-7b">에이전트 3 — 타당성 결정 에이전트 (Qwen 2.5 7B)</a></li>
+          <li><a href="#에이전트-4--보고서-생성기-qwen-25-7b" id="markdown-toc-에이전트-4--보고서-생성기-qwen-25-7b">에이전트 4 — 보고서 생성기 (Qwen 2.5 7B)</a></li>
+        </ul>
+      </li>
+      <li><a href="#amd-스택" id="markdown-toc-amd-스택">AMD 스택</a></li>
+      <li><a href="#결과" id="markdown-toc-결과">결과</a></li>
+      <li><a href="#우리가-배운-것" id="markdown-toc-우리가-배운-것">우리가 배운 것</a></li>
+      <li><a href="#사용해-보기" id="markdown-toc-사용해-보기">사용해 보기</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/lablab-ai-amd-developer-hackathon/machinacheck">MachinaCheck: Building a Multi-Agent CNC Manufacturability System on AMD MI300X</a>를 한국어로 번역한 글입니다.</em></p>
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="machinacheck-amd-mi300x에서-다중-에이전트-cnc-제조-가능성-시스템-구축">MachinaCheck: AMD MI300X에서 다중 에이전트 CNC 제조 가능성 시스템 구축</h1>
+
+<p>lablab.ai에서 열린 AMD Developer Hackathon — 2026년 5월</p>
+
+<h2 id="우리가-해결한-문제">우리가 해결한 문제</h2>
+
+<p>작은 CNC 기계 공방에 들어가 매니저에게 고객 작업을 수주할지 어떻게 결정하는지 물어보면 대답은 거의 항상 같다.</p>
+
+<p>대답은 거의 언제나 같다: 도면을 인쇄하고 모든 치수를 손으로 읽고, 공방을 한 바퀴 돌며 어떤 도구가 사용 가능한지 확인하고, 기계가 필요한 공차를 지킬 수 있을지 추정한 뒤, 클립보드에 메모를 남긴다. 전체 과정은 도면당 30~60분이 걸린다. 주당 10~20 RFQ를 받는 바쁜 공방의 경우 피인성 분석에 숙련된 매니저의 시간이 5~20시간에 달한다.</p>
+
+<p>가끔은 잘못 판단하기도 한다. 일을 수주하고 생산에 들어갔는데 도중에 필요한 나사탭이 없거나 밀링기가 핵심 특징의 공차를 지킬 수 없다는 것을 알게 된다. 부품은 버려지고, 고객은 불만하며, 기계 시간도 낭비된다.</p>
+
+<p>우리는 이 문제를 완전히 없애기 위해 MachinaCheck를 만들었다.</p>
+
+<h2 id="machinacheck가-하는-일">MachinaCheck가 하는 일</h2>
+
+<p>MachinaCheck는 다중 에이전트 AI 시스템이다. 고객들이 기계공방에 보내는 표준 CAD 포맷인 STEP 파일과 함께, 세 가지 간단한 입력값인 재료 유형, 필요한 공차, 그리고 나사 규격을 업로드한다. 30초 뒤에 완전한 제조 가능성 리포트를 얻을 수 있다. 이 보고서는 부품을 만들 수 있는지, 어떤 도구가 필요한지, 무엇이 누락되었는지, 생산을 시작하기 전에 어떤 조치를 취해야 하는지를 정확히 알려준다.</p>
+
+<p>수작업으로 도면을 읽는 일도, 공방을 돌아다니는 일도, 추측으로 인해 생기는 위험도도 없다.</p>
+
+<h2 id="왜-amd-mi300x에서-이를-구축했는가">왜 AMD MI300X에서 이를 구축했는가</h2>
+
+<p>아키텍처를 설명하기 전에 이 점은 단지 기술적 선택이 아니라 비즈니스 요구사항이므로 별도로 다룰 가치가 있다.</p>
+
+<p>제조 고객은 NDA를 체결한다. 그들의 STEP 파일은 수년 간의 엔지니어링 작업과 수백만 달러의 R&amp;D를 상징하는 독점 기하를 담고 있다. 의료 기기의 구멍 패턴이나 항공우주 부품의 포켓 기하학은 기밀 지적 재산이다.</p>
+
+<p>그 데이터를 OpenAI, Anthropic 또는 어떤 상용 API 엔드포인트로 보내는 것은 기밀 위반이다. 단호하게.</p>
+
+<p>AMD Instinct MI300X가 이 방정식을 완전히 바꾼다. 192GB의 HBM3 VRAM과 5.3 TB/s의 메모리 대역폭으로, 우리는 Qwen 2.5 7B Instruct를 완전히 온프레미스에서 실행한다. 데이터가 매장의 인프라를 떠나지 않는다. STEP 기하 데이터가 제3자 서버로 전송되지 않는다. 고객의 IP는 자체에 머문다.</p>
+
+<p>이것이 제조 맥락에서의 “privacy by design”이 실제로 의미하는 바다 — 체크박스가 아니라, 실제 엔터프라이즈 고객에게 제품의 실행 가능성을 확보하는 근본적인 아키텍처 결정이다.</p>
+
+<h2 id="에이전트-아키텍처">에이전트 아키텍처</h2>
+
+<p>MachinaCheck는 LangChain으로 구축된 다섯 개 구성 요소의 파이프라인을 FastAPI로 조정한다.</p>
+
+<h3 id="구성요소-1--step-파일-파서-pure-python-llm-없음">구성요소 1 — STEP 파일 파서 (Pure Python, LLM 없음)</h3>
+
+<p>우리는 cadquery, OpenCASCADE를 기반으로 한 Python 라이브러리를 사용해 STEP 파일을 직접 파싱한다. 이를 통해 수학적으로 정확한 피처 추출을 얻는다:</p>
+
+<ul>
+  <li>지름과 깊이가 있는 모든 원기둥 구멍</li>
+  <li>평면 및 면적</li>
+  <li>모따기(Chamfer) 및 필렛(Fillet)</li>
+  <li>경계 박스 치수</li>
+  <li>전체 부피 및 표면적</li>
+</ul>
+
+<p>이 추출은 수학적 기하를 직접 읽기 때문에 100% 정확하다 — 비전 모델도, OCR도, 근사도도 없다. Ø6.0mm 구멍은 출력에서 정확히 Ø6.0mm이다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def
+ 
+extract_features
+(
+step_file_path: 
+str
+) -&gt; 
+dict
+:
+    model = cq.importers.importStep(step_file_path)
+    shape = model.val()
+    bb = shape.BoundingBox()
+    
+    holes = {}
+    
+for
+ face 
+in
+ model.faces().vals():
+        adaptor = BRepAdaptor_Surface(face.wrapped)
+        
+if
+ adaptor.GetType() == GeomAbs_Cylinder:
+            radius = adaptor.Cylinder().Radius()
+            diameter = 
+round
+(radius * 
+2
+, 
+3
+)
+            holes[diameter] = holes.get(diameter, 
+0
+) + 
+1
+
+    
+    
+return
+ {
+        
+"bounding_box_mm"
+: {
+"length"
+: 
+round
+(bb.xlen, 
+3
+), ...},
+        
+"holes"
+: [...],
+        
+"flat_surfaces_count"
+: 
+len
+(flat_surfaces),
+    }
+</code></pre></div></div>
+
+<h3 id="에이전트-1--작업-분류기-qwen-25-7b">에이전트 1 — 작업 분류기 (Qwen 2.5 7B)</h3>
+
+<p>추출된 기하 데이터와 사용자 입력 — 재료, 공차, 나사 규격 — 를 vLLM을 통해 AMD MI300X에서 실행되는 Qwen 2.5 7B로 전달한다.</p>
+
+<p>에이전트는 다음과 같이 대답한다: “이 부품을 제조하기 위해 필요한 CNC 공정 및 도구는 무엇인가?”</p>
+
+<p>제조 도메인 지식을 적용한다: Steel 304는 카바이드 공구가 필요하다. 원통형 구멍은 드릴이 필요하고 엔드밀이 필요하지 않다. ±0.005mm의 공차는 일반 밀링기가 아닌 고정밀 기계가 필요하다.</p>
+
+<h3 id="에이전트-2--도구-매칭기-pure-python">에이전트 2 — 도구 매칭기 (Pure Python)</h3>
+
+<p>이 에이전트는 LLM을 사용하지 않는다. 매장의 도구 재고 데이터베이스를 질의하고 필요한 도구를 사용 가능 여부와 대조한다. 순수 결정론적 로직 — 데이터베이스 조회, 비교, 결과. 데이터베이스 질의에 LLM이 필요하지 않으며, 여기에서 이를 사용하면 불필요한 지연과 환각 위험이 증가한다.</p>
+
+<h3 id="에이전트-3--타당성-결정-에이전트-qwen-25-7b">에이전트 3 — 타당성 결정 에이전트 (Qwen 2.5 7B)</h3>
+
+<p>일치 결과를 다시 Qwen으로 보낸다. 에이전트는 전체 상황을 고려해 구조화된 결정을 산출한다:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+
+  
+"decision"
+:
+ 
+"CONDITIONAL"
+,
+
+  
+"confidence"
+:
+ 
+"HIGH"
+,
+
+  
+"reason"
+:
+ 
+"All tools available except M10x1.5 tap"
+,
+
+  
+"action_items"
+:
+ 
+[
+"Purchase M10x1.5 tap ($15)"
+]
+,
+
+  
+"risk_flags"
+:
+ 
+[
+"Verify spindle speed for Steel 304"
+]
+,
+
+  
+"estimated_setup_hours"
+:
+ 
+2.5
+
+
+}
+</code></pre></div></div>
+
+<h3 id="에이전트-4--보고서-생성기-qwen-25-7b">에이전트 4 — 보고서 생성기 (Qwen 2.5 7B)</h3>
+
+<p>최종 에이전트는 모든 것을 전문적인 제조 가능성 보고서로 종합한다. 총괄 상태, 경영진 요약, 부품 분석, 도구 상태, 기계 상태, 최종 권고안이 포함된다.</p>
+
+<h2 id="amd-스택">AMD 스택</h2>
+
+<p>ROCm과 vLLM를 통해 AMD MI300X에서 Qwen 2.5 7B를 실행하는 것은 간단했다. AMD Developer Cloud의 vLLM Quick Start 이미지에는 모든 것이 미리 구성되어 있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python -m vllm.entrypoints.openai.api_server \
+  --model Qwen/Qwen2.5-7B-Instruct \
+  --host 0.0.0.0 \
+  --port 8000 \
+  --dtype float16 \
+  --gpu-memory-utilization 0.5
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">gpu-memory-utilization 0.5</code>를 적용하면 사용 가능한 192GB 중 약 96GB를 사용하게 되며 여유가 충분하다. 에이전트 호출에 대한 추론 지연은 평균 3초 미만이다.</p>
+
+<p>LangChain은 OpenAI 호환 엔드포인트를 통해 vLLM에 연결한다:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from
+ langchain_community.llms 
+import
+ VLLMOpenAI
+
+llm = VLLMOpenAI(
+    openai_api_base=
+"http://localhost:8000/v1"
+,
+    openai_api_key=
+"EMPTY"
+,
+    model_name=
+"Qwen/Qwen2.5-7B-Instruct"
+,
+    temperature=
+0.1
+,
+    max_tokens=
+1000
+
+)
+</code></pre></div></div>
+
+<h2 id="결과">결과</h2>
+
+<p>GrabCAD의 실제 STEP 파일로 테스트:</p>
+
+<ul>
+  <li>피처 추출: 최대 50 피처인 부품에서 1초 미만</li>
+  <li>전체 파이프라인(4개 에이전트 모두): 엔드투엔드 25~40초</li>
+  <li>결정 정확도: 모든 테스트 부품에 대해 제조 가능성 평가가 정확</li>
+  <li>프라이버시: STEP 기하 데이터가 외부로 전송되지 않음</li>
+</ul>
+
+<h2 id="우리가-배운-것">우리가 배운 것</h2>
+
+<p>사고가 필요한 곳에서만 LLM을 사용하라. 에이전트 2(도구 매칭)는 순수 Python이다. 거기에 LLM을 두면 속도도 느려지고 비용도 커지며 신뢰도도 낮아진다. 데이터베이스 조회에 최적의 도구는 데이터베이스 쿼리이다.</p>
+
+<p>구조화된 출력을 위한 프롬프트 엔지니어링이 중요하다. Qwen이 유효한 JSON을 안정적으로 출력하도록 하려면 프롬프트에 신중한 규칙이 필요했다 — 원통형 구멍은 드릴이 필요하고 엔드밀이 아니라는 점, 직경은 정확히 일치해야 한다는 점, 나사는 스레드가 지정될 때만 등장한다는 점 등을 명시적으로 밝히는 것.</p>
+
+<p>AMD MI300X는 이 사용 사례에 대해 정말 인상적이다. 192GB VRAM은 필요하다면 훨씬 더 큰 모델을 실행할 수 있음을 의미한다. 프로덕션 배치를 위해서는 Qwen 2.5 72B가 충분히 잘 맞고 훨씬 더 나은 추론 품질을 제공한다.</p>
+
+<h2 id="사용해-보기">사용해 보기</h2>
+
+<ul>
+  <li>
+    <p>HF Space: <a href="https://huggingface.co/spaces/lablab-ai-amd-developer-hackathon/MachinaCheck">huggingface.co/spaces/lablab-ai-amd-developer-hackathon/MachinaCheck</a></p>
+  </li>
+  <li>
+    <p>GitHub: <a href="https://github.com/SyedMuhammadSarmad/Manufacturing-Agent">github.com/SyedMuhammadSarmad/Manufacturing-Agent</a></p>
+  </li>
+</ul>
+
+<p>임의의 STEP 파일을 업로드하고 전체 파이프라인이 작동하는 모습을 확인해 보세요.</p>
+
+<p>Syed Muhammad Sarmad와 Sabari Doss R이 AMD Developer Hackathon에서 제작, 2026년 5월.</p>
+
+<p>Stack: Qwen 2.5 7B · AMD Instinct MI300X · ROCm · vLLM · LangChain · cadquery · FastAPI · Next.js · Hugging Face Spaces</p>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-05-11">11 May 2026</time></span>
+                
+            </small>
+        </p>
+
+
+
+        <!-- Prev/Next -->
+        <div class="row PageNavigation mt-4 prevnextlinks d-flex justify-content-between">
+            
+            <div class="col-md-6 rightborder pl-0">
+                <a class="thepostlink" href="/pr-preview/pr-130/hf-translation-mcp-n8n/">&laquo; n8n으로 번역 MCP Server 워크플로우 구축하기: 실전 트러블슈팅과 실행 방식 비교</a>
+            </div>
+            
+            
+        </div>
+        <!-- End Prev/Next -->
+
+
+        <!-- Author Box -->
+        
+        <div class="row post-top-meta ">
+            <div class="col-md-2 text-left text-md-left">
+                <img class="author-thumb" src="/pr-preview/pr-130/assets/images/author/minju.png" alt="minju">
+            </div>
+            <div class="col-md-10 text-left text-md-left">
+                <a target="_blank" class="link-dark" href="https://github.com/Jwaminju/">minju</a><a target="_blank" href="" class="btn follow">Follow</a>
+                <span class="author-description">Hello, I'm minju! 🤗</span>						
+            </div>
+        </div>
+        
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <!-- End Post -->
+    <!-- toc -->
+    <div class="col-sm-4">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <blockquote>
+  <p>Source: https://huggingface.co/blog/lablab-ai-amd-developer-hackathon/machinacheck</p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#machinacheck-amd-mi300x에서-다중-에이전트-cnc-제조-가능성-시스템-구축" id="markdown-toc-machinacheck-amd-mi300x에서-다중-에이전트-cnc-제조-가능성-시스템-구축">MachinaCheck: AMD MI300X에서 다중 에이전트 CNC 제조 가능성 시스템 구축</a>    <ul>
+      <li><a href="#우리가-해결한-문제" id="markdown-toc-우리가-해결한-문제">우리가 해결한 문제</a></li>
+      <li><a href="#machinacheck가-하는-일" id="markdown-toc-machinacheck가-하는-일">MachinaCheck가 하는 일</a></li>
+      <li><a href="#왜-amd-mi300x에서-이를-구축했는가" id="markdown-toc-왜-amd-mi300x에서-이를-구축했는가">왜 AMD MI300X에서 이를 구축했는가</a></li>
+      <li><a href="#에이전트-아키텍처" id="markdown-toc-에이전트-아키텍처">에이전트 아키텍처</a>        <ul>
+          <li><a href="#구성요소-1--step-파일-파서-pure-python-llm-없음" id="markdown-toc-구성요소-1--step-파일-파서-pure-python-llm-없음">구성요소 1 — STEP 파일 파서 (Pure Python, LLM 없음)</a></li>
+          <li><a href="#에이전트-1--작업-분류기-qwen-25-7b" id="markdown-toc-에이전트-1--작업-분류기-qwen-25-7b">에이전트 1 — 작업 분류기 (Qwen 2.5 7B)</a></li>
+          <li><a href="#에이전트-2--도구-매칭기-pure-python" id="markdown-toc-에이전트-2--도구-매칭기-pure-python">에이전트 2 — 도구 매칭기 (Pure Python)</a></li>
+          <li><a href="#에이전트-3--타당성-결정-에이전트-qwen-25-7b" id="markdown-toc-에이전트-3--타당성-결정-에이전트-qwen-25-7b">에이전트 3 — 타당성 결정 에이전트 (Qwen 2.5 7B)</a></li>
+          <li><a href="#에이전트-4--보고서-생성기-qwen-25-7b" id="markdown-toc-에이전트-4--보고서-생성기-qwen-25-7b">에이전트 4 — 보고서 생성기 (Qwen 2.5 7B)</a></li>
+        </ul>
+      </li>
+      <li><a href="#amd-스택" id="markdown-toc-amd-스택">AMD 스택</a></li>
+      <li><a href="#결과" id="markdown-toc-결과">결과</a></li>
+      <li><a href="#우리가-배운-것" id="markdown-toc-우리가-배운-것">우리가 배운 것</a></li>
+      <li><a href="#사용해-보기" id="markdown-toc-사용해-보기">사용해 보기</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+<!-- footer -->
+<div class="row">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-130/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-130/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== --></main>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer container text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-130/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-130/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-130/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-130/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-130/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-130/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-130/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-130/assets/js/category.js"></script>
+  </body>
+</html>
