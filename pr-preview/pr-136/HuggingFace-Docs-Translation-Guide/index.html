@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-136/assets/images/favicon.ico" />
+
+    <title>Hugging Face transformers 기술 문서 번역 가이드 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Hugging Face transformers 기술 문서 번역 가이드 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Hugging Face transformers 기술 문서 번역 가이드" />
+<meta name="author" content="jeong" />
+<meta property="og:locale" content="en_us" />
+<meta name="description" content="HuggingFace First PR 팀에서 제작한 transformers 공식문서 한글화 기여 가이드입니다!🤗" />
+<meta name="twitter:description" property="og:description" content="HuggingFace First PR 팀에서 제작한 transformers 공식문서 한글화 기여 가이드입니다!🤗" />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-136/HuggingFace-Docs-Translation-Guide/assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/transformers.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-06-22T00:00:00+09:00" />
+<meta property="article:modified_time" content="2025-06-22T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-136/HuggingFace-Docs-Translation-Guide/assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/transformers.png" />
+<meta name="twitter:title" content="Hugging Face transformers 기술 문서 번역 가이드" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"jeong"},"dateModified":"2025-06-22T00:00:00+09:00","datePublished":"2025-06-22T00:00:00+09:00","description":"HuggingFace First PR 팀에서 제작한 transformers 공식문서 한글화 기여 가이드입니다!🤗","headline":"Hugging Face transformers 기술 문서 번역 가이드","image":"/pr-preview/pr-136/HuggingFace-Docs-Translation-Guide/assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/transformers.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-136/HuggingFace-Docs-Translation-Guide/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-136/assets/images/hfkr_logo.png"},"name":"jeong"},"url":"/pr-preview/pr-136/HuggingFace-Docs-Translation-Guide/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-136/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-136/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-136/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-136/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-136/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-136/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-136/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-136/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row" style="margin-top: 1rem;">
+		
+
+		<!-- Post -->        
+        
+        
+		<div class="col-sm-8">
+            <!-- Post Featured Image -->
+			<img class="featured-image img-fluid rounded" src="/pr-preview/pr-136/assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/transformers.png" alt="Hugging Face transformers 기술 문서 번역 가이드">
+			<!-- End Featured Image -->
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-136/categories#contribute">contribute</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">Hugging Face transformers 기술 문서 번역 가이드</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#작업-준비" id="markdown-toc-작업-준비">작업 준비</a>    <ul>
+      <li><a href="#1-transformers-레포지토리-포크-하기" id="markdown-toc-1-transformers-레포지토리-포크-하기">1. transformers 레포지토리 포크 하기</a></li>
+      <li><a href="#2-레포지토리-클론-받기" id="markdown-toc-2-레포지토리-클론-받기">2. 레포지토리 클론 받기</a></li>
+      <li><a href="#3-번역-대상-문서-선정" id="markdown-toc-3-번역-대상-문서-선정">3. 번역 대상 문서 선정</a></li>
+      <li><a href="#4-브랜치-만들기" id="markdown-toc-4-브랜치-만들기">4. 브랜치 만들기</a></li>
+    </ul>
+  </li>
+  <li><a href="#본격적인-번역-작업" id="markdown-toc-본격적인-번역-작업">본격적인 번역 작업</a>    <ul>
+      <li><a href="#1-초기-문서-작업" id="markdown-toc-1-초기-문서-작업">1. 초기 문서 작업</a></li>
+      <li><a href="#2-기계-번역" id="markdown-toc-2-기계-번역">2. 기계 번역</a></li>
+      <li><a href="#3-번역-수정" id="markdown-toc-3-번역-수정">3. 번역 수정</a></li>
+    </ul>
+  </li>
+  <li><a href="#prpull-request-올리기" id="markdown-toc-prpull-request-올리기">PR(Pull Request) 올리기</a>    <ul>
+      <li><a href="#1-깃허브에-push-하기" id="markdown-toc-1-깃허브에-push-하기">1. 깃허브에 Push 하기</a></li>
+      <li><a href="#2-드래프트-pr-생성-후-리뷰" id="markdown-toc-2-드래프트-pr-생성-후-리뷰">2. 드래프트 PR 생성 후 리뷰</a></li>
+      <li><a href="#3-리뷰-후-pr-오픈" id="markdown-toc-3-리뷰-후-pr-오픈">3. 리뷰 후 PR 오픈</a></li>
+    </ul>
+  </li>
+  <li><a href="#리뷰-반영하기" id="markdown-toc-리뷰-반영하기">리뷰 반영하기</a></li>
+  <li><a href="#마무리" id="markdown-toc-마무리">마무리</a></li>
+</ul>
+<!--toc-->
+<p>HuggingFace First PR 팀에서 제작한 transformers 공식문서 한글화 기여 가이드입니다!🤗</p>
+
+<h2 id="작업-준비">작업 준비</h2>
+
+<h3 id="1-transformers-레포지토리-포크-하기">1. transformers 레포지토리 포크 하기</h3>
+<p>Hugging Face의 transformers 레포지토리를 포크하여 가져옵니다.</p>
+
+<p><img src="../assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/image0.png" width="800" /></p>
+
+<p><img src="../assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/image 1.png" width="800" /></p>
+
+<h3 id="2-레포지토리-클론-받기">2. 레포지토리 클론 받기</h3>
+
+<p><img src="../assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/image 2.png" width="800" />
+<img src="../assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/image 3.png" width="800" /></p>
+
+<p>포크 한 transformers 레포지토리에서 초록색 <code class="language-plaintext highlighter-rouge">Code</code> 버튼을 클릭 후, 복사 버튼을 클릭하여 주소 복사 받기
+레포지토리를 clone 하여 로컬에 가져옵니다.</p>
+
+<h3 id="3-번역-대상-문서-선정">3. 번역 대상 문서 선정</h3>
+
+<p><img src="../assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/image 4.png" width="800" />
+<img src="../assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/image 5.png" width="800" /></p>
+
+<p>번역 대상 문서는 transformers/docs/source의 en 디렉토리에는 있고, ko 디렉토리에는 없는 문서를 번역 진행하면 됩니다.
+macOS 기준 아래 커맨드로 더 편하게 확인할 수 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">comm</span> <span class="nt">-23</span> <span class="se">\</span>
+    &lt;<span class="o">(</span><span class="nb">cd </span>transformers/docs/source/en <span class="o">&amp;&amp;</span> find <span class="nb">.</span> <span class="nt">-type</span> f | <span class="nb">sort</span><span class="o">)</span> <span class="se">\</span>
+    &lt;<span class="o">(</span><span class="nb">cd </span>transformers/docs/source/ko <span class="o">&amp;&amp;</span> find <span class="nb">.</span> <span class="nt">-type</span> f | <span class="nb">sort</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>종종 다른 사람이 이미 작업을 했지만, 레포지토리에는 반영이 되지 않은 경우가 있습니다.
+중복 작업을 방지하기 위해, 번역을 시작하기 전에 기존 Pull Request에서 <strong>i18n</strong>, <strong>translate</strong> 등의 키워드로 검색해 관련 작업이 진행 중인지 먼저 확인해보시길 권장합니다.</p>
+
+<h3 id="4-브랜치-만들기">4. 브랜치 만들기</h3>
+<p><code class="language-plaintext highlighter-rouge">main</code> 브랜치에서 직접 작업하면 안 되고, 새로운 브랜치를 반드시 생성해야 합니다.
+<em>이유: 원본 코드를 보호하고, 작업 내용을 분리하여 관리하기 위해</em></p>
+
+<p>브랜치 이름은 ko-*.md와 같은 형식으로 합니다.
+번역 대상 문서가 keypoint_detection.md 라면, ko-keypoint_detection.md를 브랜치 이름으로 합니다.
+아래 명령어로 브랜치를 생성할 수 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="nt">-b</span> &lt;branch-name&gt;
+</code></pre></div></div>
+
+<p>브랜치가 정상적으로 생성되었는지 확인하려면 다음 명령어를 사용합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch
+</code></pre></div></div>
+
+<p><img src="../assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/image 6.png" width="800" /></p>
+
+<p>만약 명령어 입력이 어렵다면, Cursor에서 브랜치를 직접 생성할 수도 있습니다.</p>
+
+<p><img src="../assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/image 7.png" width="800" /></p>
+
+<p><img src="../assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/image 8.png" width="800" /></p>
+
+<h2 id="본격적인-번역-작업">본격적인 번역 작업</h2>
+
+<h3 id="1-초기-문서-작업">1. 초기 문서 작업</h3>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">docs/source/en</code> 디렉토리에 있는 번역 대상 원본 문서를 복사해서 <code class="language-plaintext highlighter-rouge">docs/source/ko</code>로 옮깁니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">docs/source/ko</code> 의 _toctree.yml에는 문서의 제목과 위치가 작성되어 있습니다.</li>
+  <li>_toctree.yml의 title을 적절히 한글화 하고, local에는 위치를 작성합니다.</li>
+  <li>아래 명령어를 입력하여 커밋을 합니다.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">git commit -m "커밋 메시지"</code></li>
+      <li>커밋 메시지의 경우, <code class="language-plaintext highlighter-rouge">docs: ko: &lt;file-name&gt;</code> 의 형태로 해주시면 됩니다.</li>
+      <li>ex: <code class="language-plaintext highlighter-rouge">git commit -m "docs: ko: keypoint_detection.md"</code></li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="2-기계-번역">2. 기계 번역</h3>
+<ol>
+  <li>ChatGPT, Claude, DeepL, 파파고 등 다양한 툴을 활용하여 초벌 번역을 진행합니다.</li>
+  <li>아래 명령어를 입력하여 커밋을 합니다.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">git commit -m "커밋 메시지"</code></li>
+      <li>커밋 메시지의 경우, <code class="language-plaintext highlighter-rouge">feat: nmt draft</code> 의 형태로 해주시면 됩니다.</li>
+      <li>ex: <code class="language-plaintext highlighter-rouge">git commit -m "feat: nmt draft"</code>
+        <ul>
+          <li>참고로, nmt는 Neural Machine Translation을 의미합니다!</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="3-번역-수정">3. 번역 수정</h3>
+<p>아래 항목들을 신경 쓰면서 번역을 적절히 수정합니다.</p>
+<ul>
+  <li>영어 원문이 남아 있는지</li>
+  <li>서식이 올바르게 옮겨져쓴지 아닌지 (TOC, code, URL, 특수문자 등)
+    <ul>
+      <li><em>이 부분이 가장 중요합니다.</em></li>
+      <li>특히, <a href="TOC">[]</a>의 경우 웹에서 정상적으로 작동하려면 서식이 변경되면 안됩니다.</li>
+    </ul>
+  </li>
+  <li>오역이나 오탈자가 있는지</li>
+  <li>번역어가 TTA정보통신용어사전과 일치하는지 (혹은 적어도 문서 내에서 일관된 표현을 사용하는지)
+    <ul>
+      <li>원래는 Hugging Face KREW에서 사용하는 공식 용어집(glossary)이 있었지만, 현재는 유실된 상태입니다. 따라서 번역 시에는 우선 기존 번역 사례나 사전을 참고해주세요!</li>
+    </ul>
+  </li>
+  <li>더 자연스러운 한국어 표현이 있는지</li>
+</ul>
+
+<p>위 작업이 완료되었다면, 아래 명령어를 입력하여 커밋을 합니다.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">git commit -m "커밋 메시지"</code></li>
+  <li>커밋 메시지의 경우, <code class="language-plaintext highlighter-rouge">fix: manual edits</code> 의 형태로 해주시면 됩니다.</li>
+  <li>ex: <code class="language-plaintext highlighter-rouge">git commit -m "fix: manual edits"</code></li>
+</ul>
+
+<h2 id="prpull-request-올리기">PR(Pull Request) 올리기</h2>
+
+<h3 id="1-깃허브에-push-하기">1. 깃허브에 Push 하기</h3>
+<p><code class="language-plaintext highlighter-rouge">git status</code> 명령어로 정상적으로 커밋된 것인지 확인한 후, <code class="language-plaintext highlighter-rouge">git push</code> 합니다.</p>
+
+<p><img src="../assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/image 9.png" width="800" /></p>
+
+<p>정상적으로 완료 되었다면, 위 사진과 같이 버튼이 나올 것입니다.
+이제, 위 버튼을 누르고 Draft PR을 만들어봅시다.</p>
+
+<h3 id="2-드래프트-pr-생성-후-리뷰">2. 드래프트 PR 생성 후 리뷰</h3>
+
+<p><img src="../assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/image 10.png" width="800" /></p>
+
+<p><img src="../assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/image 11.png" width="800" /></p>
+
+<p>드래프트 PR 제목과 내용의 경우 아래 작성한 텍스트를 복사하여, 적절히 주석을 노출하여 주시면 됩니다.
+<strong>가장 중요한 것은, 우측의 이미지에서 Create draft pull request를 꼭 선택해주셔야 합니다!!</strong>
+참고로, &lt;!— —&gt; 안에 적힌 부분은 주석으로, PR에 보이지 않습니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- PR의 제목은 "🌐 [i18n-KO] Translated `&lt;your_file&gt;.md` to Korean" 으로 부탁드립니다 --&gt;
+# What does this PR do?
+
+Translated the `&lt;your_file&gt;.md` file of the documentation to Korean.
+Thank you in advance for your review.
+
+Part of https://github.com/huggingface/transformers/issues/20179
+
+## Before reviewing
+- [ ] Check for missing / redundant translations (번역 누락/중복 검사)
+- [ ] Grammar Check (맞춤법 검사)
+- [ ] Review or Add new terms to glossary (용어 확인 및 추가)
+- [ ] Check Inline TOC (e.g. `[[lowercased-header]]`)
+- [ ] Check live-preview for gotchas (live-preview로 정상작동 확인)
+
+## Who can review? (Initial)
+
+&lt;!-- 1. 위 체크가 모두 완료된 뒤에만 KREW 팀원들에게 리뷰를 요청하는 아래 주석을 노출해주세요!--&gt;
+May you please review this PR?
+&lt;!-- @cjfghk5697, @yijun-lee, @jungnerd , @harheem --&gt;
+
+## Before submitting
+- [ ] This PR fixes a typo or improves the docs (you can dismiss the other checks if that's the case).
+- [ ] Did you read the [contributor guideline](https://github.com/huggingface/transformers/blob/main/CONTRIBUTING.md#start-contributing-pull-requests),
+        Pull Request section?
+- [ ] Was this discussed/approved via a Github issue or the [forum](https://discuss.huggingface.co/)? Please add a link
+        to it if that's the case.
+- [ ] Did you make sure to update the documentation with your changes? Here are the
+        [documentation guidelines](https://github.com/huggingface/transformers/tree/main/docs), and
+        [here are tips on formatting docstrings](https://github.com/huggingface/transformers/tree/main/docs#writing-source-documentation).
+- [ ] Did you write any new necessary tests?
+
+## Who can review? (Final)
+
+&lt;!-- 2. KREW 팀원들의 리뷰가 끝난 후에 아래 주석을 노출해주세요! --&gt;
+&lt;!-- @stevhliu May you please review this PR? --&gt;
+</code></pre></div></div>
+
+<h3 id="3-리뷰-후-pr-오픈">3. 리뷰 후 PR 오픈</h3>
+<p>한국인 2인 이상 리뷰를 완료하면 PR 설정에서 공개로 바꿔주시면 됩니다.</p>
+
+<h2 id="리뷰-반영하기">리뷰 반영하기</h2>
+
+<ol>
+  <li>
+    <p>내 PR 페이지의 <strong>Files Changed</strong> 탭으로 이동하기</p>
+  </li>
+  <li>
+    <p>작업물 변경 제안이 맘에 들면 <strong>Add suggestion to batch</strong> 버튼을 눌러 순차적으로 반영하기</p>
+
+    <p>(반영하지 않을 제안에는 메인 작업자로서의 생각을 코멘트로 써 주시면 좋아요! Add suggestion to batch를 하는 이유는 커밋 수가 너무 많아질 수 있기 때문이고, 안하셨다고 해도 문제 없습니다! )</p>
+  </li>
+  <li>
+    <p>반영할 제안을 모두 골랐으면 우상단의 <strong>Commit suggestions</strong>를 클릭
+ → <strong>Commit changes</strong> 클릭으로 반영 커밋 완료하기</p>
+  </li>
+  <li>
+    <p>기타 수정 사항이 있으면 file changed에서 edit file로 수정하거나, vs code에서 수정 가능합니다.</p>
+  </li>
+  <li>
+    <p>커밋 메시지의 경우 <code class="language-plaintext highlighter-rouge">fix: resolve suggestions</code> 정도로 하시면 됩니다.</p>
+  </li>
+</ol>
+
+<h2 id="마무리">마무리</h2>
+
+<p>리뷰가 완료된 번역문서는 메인테이너의 허가를 거쳐 merged가 됩니다.
+<img src="../assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/image 12.png" width="800" /></p>
+
+<p>이렇게 merged된 번역 문서는 HuggingFace 공식 홈페이지의 한국어 탭에 등재되었습니다!🎉
+<img src="../assets/images/blog/posts/2025-06-22-HuggingFace-Docs-Translation-Guide/image 13.png" width="800" /></p>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2025-06-22">22 Jun 2025</time></span>
+                
+            </small>
+        </p>
+
+
+
+        <!-- Prev/Next -->
+        <div class="row PageNavigation mt-4 prevnextlinks d-flex justify-content-between">
+            
+            <div class="col-md-6 rightborder pl-0">
+                <a class="thepostlink" href="/pr-preview/pr-136/text2sql-spider-ko-dataset/">&laquo; 한국어 Text2SQL 프로젝트 - Part 1: 번역한 데이터셋의 품질 개선하기</a>
+            </div>
+            
+            
+            <div class="col-md-6 text-right pr-0">
+                <a class="thepostlink" href="/pr-preview/pr-136/Implementing-MCP-Servers-in-Python/">Python으로 구현하는 MCP 서버: Gradio를 활용한 AI 쇼핑 어시스턴트 &raquo;</a>
+            </div>
+            
+        </div>
+        <!-- End Prev/Next -->
+
+
+        <!-- Author Box -->
+        
+        <div class="row post-top-meta ">
+            <div class="col-md-2 text-left text-md-left">
+                <img class="author-thumb" src="/pr-preview/pr-136/assets/images/author/jeong.JPG" alt="jeong">
+            </div>
+            <div class="col-md-10 text-left text-md-left">
+                <a target="_blank" class="link-dark" href="https://github.com/ahnjj/">jeong</a><a target="_blank" href="" class="btn follow">Follow</a>
+                <span class="author-description">Hello, I'm jeong!🤗</span>						
+            </div>
+        </div>
+        
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <!-- End Post -->
+    <!-- toc -->
+    <div class="col-sm-4">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#작업-준비" id="markdown-toc-작업-준비">작업 준비</a>    <ul>
+      <li><a href="#1-transformers-레포지토리-포크-하기" id="markdown-toc-1-transformers-레포지토리-포크-하기">1. transformers 레포지토리 포크 하기</a></li>
+      <li><a href="#2-레포지토리-클론-받기" id="markdown-toc-2-레포지토리-클론-받기">2. 레포지토리 클론 받기</a></li>
+      <li><a href="#3-번역-대상-문서-선정" id="markdown-toc-3-번역-대상-문서-선정">3. 번역 대상 문서 선정</a></li>
+      <li><a href="#4-브랜치-만들기" id="markdown-toc-4-브랜치-만들기">4. 브랜치 만들기</a></li>
+    </ul>
+  </li>
+  <li><a href="#본격적인-번역-작업" id="markdown-toc-본격적인-번역-작업">본격적인 번역 작업</a>    <ul>
+      <li><a href="#1-초기-문서-작업" id="markdown-toc-1-초기-문서-작업">1. 초기 문서 작업</a></li>
+      <li><a href="#2-기계-번역" id="markdown-toc-2-기계-번역">2. 기계 번역</a></li>
+      <li><a href="#3-번역-수정" id="markdown-toc-3-번역-수정">3. 번역 수정</a></li>
+    </ul>
+  </li>
+  <li><a href="#prpull-request-올리기" id="markdown-toc-prpull-request-올리기">PR(Pull Request) 올리기</a>    <ul>
+      <li><a href="#1-깃허브에-push-하기" id="markdown-toc-1-깃허브에-push-하기">1. 깃허브에 Push 하기</a></li>
+      <li><a href="#2-드래프트-pr-생성-후-리뷰" id="markdown-toc-2-드래프트-pr-생성-후-리뷰">2. 드래프트 PR 생성 후 리뷰</a></li>
+      <li><a href="#3-리뷰-후-pr-오픈" id="markdown-toc-3-리뷰-후-pr-오픈">3. 리뷰 후 PR 오픈</a></li>
+    </ul>
+  </li>
+  <li><a href="#리뷰-반영하기" id="markdown-toc-리뷰-반영하기">리뷰 반영하기</a></li>
+  <li><a href="#마무리" id="markdown-toc-마무리">마무리</a></li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+<!-- footer -->
+<div class="row">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-136/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-136/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== --></main>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer container text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-136/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-136/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-136/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-136/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-136/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-136/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-136/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-136/assets/js/category.js"></script>
+  </body>
+</html>
