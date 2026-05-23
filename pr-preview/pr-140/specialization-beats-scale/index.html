@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-140/assets/images/favicon.ico" />
+
+    <title>전문화가 규모를 이긴다: 대부분의 AI 조달 결정이 간과하는 전략적 변수 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>전문화가 규모를 이긴다: 대부분의 AI 조달 결정이 간과하는 전략적 변수 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="전문화가 규모를 이긴다: 대부분의 AI 조달 결정이 간과하는 전략적 변수" />
+<meta name="author" content="dailybot" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="Source: https://huggingface.co/blog/Dharma-AI/specialization-beats-scale" />
+<meta name="twitter:description" property="og:description" content="Source: https://huggingface.co/blog/Dharma-AI/specialization-beats-scale" />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-05-23T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-05-23T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="전문화가 규모를 이긴다: 대부분의 AI 조달 결정이 간과하는 전략적 변수" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-05-23T00:00:00+09:00","datePublished":"2026-05-23T00:00:00+09:00","description":"Source: https://huggingface.co/blog/Dharma-AI/specialization-beats-scale","headline":"전문화가 규모를 이긴다: 대부분의 AI 조달 결정이 간과하는 전략적 변수","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-140/specialization-beats-scale/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-140/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-140/specialization-beats-scale/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-140/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-140/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-140/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-140/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-140/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-140/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-140/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-140/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row" style="margin-top: 1rem;">
+		
+
+		<!-- Post -->        
+        
+        
+		<div class="col-sm-8">
+            <!-- Post Featured Image -->
+			
+			<!-- End Featured Image -->
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-140/categories#huggingface">HuggingFace</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-140/categories#translation">Translation</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">전문화가 규모를 이긴다: 대부분의 AI 조달 결정이 간과하는 전략적 변수</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<blockquote>
+  <p>Source: https://huggingface.co/blog/Dharma-AI/specialization-beats-scale</p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#전문화가-규모를-이긴다-대부분의-ai-조달-결정이-간과하는-전략적-변수" id="markdown-toc-전문화가-규모를-이긴다-대부분의-ai-조달-결정이-간과하는-전략적-변수">전문화가 규모를 이긴다: 대부분의 AI 조달 결정이 간과하는 전략적 변수</a>    <ul>
+      <li><a href="#모델의-학습-이력이-배치-작업에-충분히-근접하도록-이동되면-매개변수-수가-결정적인-변수가-되지-않는다-30억-매개변수의-전문화-모델은-잘-측정된-기업-도메인에서-테스트된-모든-상용-frontier-api를-능가했고--비용은-약-50배-정도-낮았다" id="markdown-toc-모델의-학습-이력이-배치-작업에-충분히-근접하도록-이동되면-매개변수-수가-결정적인-변수가-되지-않는다-30억-매개변수의-전문화-모델은-잘-측정된-기업-도메인에서-테스트된-모든-상용-frontier-api를-능가했고--비용은-약-50배-정도-낮았다">모델의 학습 이력이 배치 작업에 충분히 근접하도록 이동되면 매개변수 수가 결정적인 변수가 되지 않는다. 30억 매개변수의 전문화 모델은 잘 측정된 기업 도메인에서 테스트된 모든 상용 frontier API를 능가했고 — 비용은 약 50배 정도 낮았다.</a>        <ul>
+          <li><a href="#전략적-기본값" id="markdown-toc-전략적-기본값">전략적 기본값</a></li>
+          <li><a href="#실증-기록이-실제로-보여주는-것" id="markdown-toc-실증-기록이-실제로-보여주는-것">실증 기록이 실제로 보여주는 것</a></li>
+          <li><a href="#중요했던-변수" id="markdown-toc-중요했던-변수">중요했던 변수</a></li>
+          <li><a href="#바뀌는-전략적-질문" id="markdown-toc-바뀌는-전략적-질문">바뀌는 전략적 질문</a></li>
+          <li><a href="#한정된-재구성" id="markdown-toc-한정된-재구성">한정된 재구성</a></li>
+          <li><a href="#출처" id="markdown-toc-출처">출처:</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/Dharma-AI/specialization-beats-scale">Specialization Beats Scale: A Strategic Variable Most AI Procurement Decisions Overlook</a>를 한국어로 번역한 글입니다.</em></p>
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="전문화가-규모를-이긴다-대부분의-ai-조달-결정이-간과하는-전략적-변수">전문화가 규모를 이긴다: 대부분의 AI 조달 결정이 간과하는 전략적 변수</h1>
+
+<h2 id="모델의-학습-이력이-배치-작업에-충분히-근접하도록-이동되면-매개변수-수가-결정적인-변수가-되지-않는다-30억-매개변수의-전문화-모델은-잘-측정된-기업-도메인에서-테스트된-모든-상용-frontier-api를-능가했고--비용은-약-50배-정도-낮았다">모델의 학습 이력이 배치 작업에 충분히 근접하도록 이동되면 매개변수 수가 결정적인 변수가 되지 않는다. 30억 매개변수의 전문화 모델은 잘 측정된 기업 도메인에서 테스트된 모든 상용 frontier API를 능가했고 — 비용은 약 50배 정도 낮았다.</h2>
+
+<p>4월에 DharmaOCR를 발표했다 — 구조화된 OCR를 위한 두 개의 전문화된 소형 언어 모델과 벤치마크, 그리고 동반하는 <a href="https://arxiv.org/abs/2604.14314">논문</a>. 이 모델들과 벤치마크는 <a href="https://huggingface.co/Dharma-AI/Dharma-OCR-LITE">Hugging Face에서 이용 가능</a>하다. 함께 그것들은 Dharma에서 전문화, 정렬, 추론 경제학이 생산 AI 시스템에서 어떻게 상호 작용하는지 연구하려는 더 넓은 노력의 일부를 이룬다.</p>
+
+<p>이 기사는 그 연구 결과들에서 하나의 전략적 시사점을 분리해내고 있다: 전문화, 분포 정렬, 그리고 매개변수 규모 간의 관계. 아래 내용은 논문이 지지하는 경계 내에서 이를 발전시킨 것이다.</p>
+
+<p>지난 3년 동안, 기업 AI 전략은 주로 안정적인 가정 아래 운영되어 왔다: 가장 안전한 선택은 보통 이용 가능한 가장 큰 frontier 모델이었다. 더 작은 모델은 주로 품질의 약간의 저하를 비용 절감과 맞바꿀 수 있을 때만 채택되었다. 그 가정의 논리는 직관적이었다. 능력은 매개변수 수와 함께 스케일링되는 것으로 보였고, 프런티어 공급자들이 주요 벤치마크를 지속적으로 이끌었으며, 잘못된 모델을 선택할 비용은 보통 선두 모델을 선택하는 비용보다 더 크다고 여겨졌다.</p>
+
+<p>주장의 방어 논리는 합리적이다. 그러나 경험적 기록은 이를 쉽게 설명하지 못하는 결과를 포함하고 있다.</p>
+
+<p>올해 초 Dharma는 3억 매개변수 모델이 — 잘 갖춰진 엔터프라이즈가 복제할 수 있는 미세조정 파이프라인을 통해 특화된 모델이 — 테스트된 모든 상용 frontier API를 능가했다는 벤치마크를 발표했다. 작은 차이가 아니라, 구매자들이 무시할 수 없는 지표에서. 비용 격차는 품질 격차와 반대 방향으로 흐렀다: 최고 점수를 얻은 모델이 운영 비용도 가장 저렴했고, 의미 있는 규모의 조달 수치를 바꿀 만큼의 차이를 보였다.</p>
+
+<p>그 결과는 고립된 것이 아니다. Dharma가 다른 도메인에서 관찰한 패턴의 가장 엄격하게 측정된 사례이자, 전문화 연구의 확장된 문헌이 문서화하기 시작한 사례이기도 하다(Subramanian 등, 2025; Pecher 등, 2026). 그러나 명시적으로 물어볼 만한 질문은 제기된다: 가장 큰 모델이 최상의 모델이 아닐 때, 어떤 변수가 작용하는가?</p>
+
+<h3 id="전략적-기본값">전략적 기본값</h3>
+
+<p>조달 기본값은 우연히 생겨난 것이 아니다. 지난 3년 동안의 대다수 기간에 걸쳐 옳았기 때문이다.</p>
+
+<p>GPT-4가 출시되었을 때, 중요한 벤치마크에서 모든 더 작은 모델을 능가했다. Claude 3, Gemini 1.5, 그리고 2025년의 각 세대 frontier 릴리스에서도 이 패턴은 개선되며 반복되었다. 능력은 매개변수 수와 학습 계산량(Kaplan 등, 2020)과 함께 스케일링되었다 — OpenAI의 확장 법칙이 수년 전 형식화한 경험적 관계였다. 교훈은: 이용 가능한 가장 큰 모델을 선택한 구매자는 평균적으로 최상의 도구를 선택하고 있었다. 더 엄격한 신호가 없을 때, 규모에 대한 기본값은 합리적인 선택이었다.</p>
+
+<p>그 가정이 방어될 수 있었던 것은, 그것이 옳았던 비교 중 다수가 사실이었기 때문이다. 바뀐 것은 항상 그 가정이 옳지 않았다기보다는 그 가정이 의존하던 비교 세트가 완전하지 않았을 수 있다는 점이다.</p>
+
+<p>무엇이 달랐는가? 더 작은 frontier 모델이 아니라, 다른 종류의 모델이 필요했다. 더 작은 기본 모델을 도메인에 맞게 배치하기 위해 일련의 미세조정 단계를 거쳐 의도적으로 학습 이력을 배치한 — 즉 배치될 작업에 더 가깝도록 학습 이력을 이동한 — 전문화된 모델이었다. 본문의 서두에 설명된 논문은 비용, 품질, 생산 안정성을 나란히 측정한 최초의 비교들 중 하나로 이 비교를 다룬다.</p>
+
+<h3 id="실증-기록이-실제로-보여주는-것">실증 기록이 실제로 보여주는 것</h3>
+
+<p>논문에 사용된 벤치마크는 도메인 특화 평가였다: 인쇄 문서, 손글씨, 법률 및 행정 기록에 걸친 브라질 포르투갈 OCR. 벤치마크 자체가 이 글의 요점은 아니다. 중요한 것은 측정된 것과 수행된 비교다.</p>
+
+<p>추출 품질에서, 비교에서 가장 높은 점수를 얻은 모델은 전문화된 30억 매개변수 모델이었다. 이 모델은 벤치마크의 합계 점수에서 0.911를 기록했고, 이는 편집 거리 유사성과 n-그램 중첩을 결합한 점수였다. 가장 근접한 frontier 대안인 Claude Opus 4.6은 0.833을 기록했다. 그 아래로 Gemini 3.1 Pro 0.820, GPT-5.4 0.750, Google Vision 0.686, Google Document AI 0.640, GPT-4o 0.635, Amazon Textract 0.618, Mistral OCR 3 0.574였다. 전문화 모델이 1위를 차지했고, Claude Opus 4.6과의 차이는 약 8퍼센트포인트로, 비교에서 인접한 체들 간의 차이 중 가장 넓었다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Results of the models evaluated on DharmaOCR-Benchmark. Parentheses in the first column indicate the specialization techniques used. When a model is not indicated as LoRA, it means that full fine-tuning has been performed. Entries marked with “Quant” indicate AWQ-quantized variant with best performance among the quantized configurations.</code></p>
+
+<p>비용 면에서 격차는 더 컸다. 3B 모델은 Claude Opus 4.6 대비 페이지당 백만 단위당 비용이 약 52배 낮게 런되었다 — 이는 추론 인프라 비용을 공개 API 가격과 비교해 계산한 차이다. Pareto 경계로 나타난 품질–비용 그림에서 전문화 모델은 차트의 좌상단에 위치했고, 상용 API는 아래쪽과 우측에 있었다. (재무 모델링의 깊이는 <a href="https://huggingface.co/blog/Dharma-AI/text-degeneration-a-production-failure-mode-that-m">The Real Economics of Text Degeneration</a>에서 전개된다.)</p>
+
+<p>생산 안정성 측면에서도 같은 모델이 평가된 텍스트 변형 감소율이 가장 낮았다 — 생성이 자기강화 루프로 들어가 사용 가능한 출력을 만들어내지 못하는 비율을 나타낸다. (생산 안정성 케이스는 cluster의 <a href="https://huggingface.co/blog/Dharma-AI/text-degeneration-a-production-failure-mode-that-m">Text Degeneration article</a>에서 전개된다.) 3B 모델은 이 벤치마크에서 0.20%를 기록했고, 그다음으로 가까운 전문화 모델은 0.40%였으며, 더 큰 일반 목적 오픈 소스 벤치마크 모델들은 더 높은 수치를 보였다. 이 지표에 대해 벤치마크를 수행한 것은 상용 API가 아니었다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Text degeneration rate (%) across alignment stages. SFT reduces degeneration relative to vanilla models in most cases, whereas DPO further reduces it, even compared to the SFT-tuned model.</code></p>
+
+<p>이 세 가지 결과 — 품질, 비용, 그리고 안정성 — 모두 같은 3B 전문화 모델이 주도했다. 이들은 단독으로 봤을 때보다 함께 볼 때 더 강력한 실증적 근거를 만든다. 이 논문은 이 결과가 모든 기업 AI 작업 부하에 일반화될 수 있다고 주장하지 않으며, 이 글 역시 그러한 일반화를 주장하지 않는다. 이 실험에서 가장 작은 전문화 모델이 모든 중요한 차원에서 1위였다는 사실을 주장한다.</p>
+
+<p>당연한 질문은 바로 그 질문이다. 비교에서 가장 작은 모델이 품질, 비용, 그리고 안정성 면에서 이겼다. 매개변수 수 자체가 그 결과를 설명하지 못한다. 그 뒤를 이을 자연스러운 추론은 — 어떤 변수가 그 성과를 만들었는지 식별하는 것 — 이제 대화가 어디로 옮겨가야 하는지 보여준다.</p>
+
+<h3 id="중요했던-변수">중요했던 변수</h3>
+
+<p>직관적이기도 하다. 배치 작업에 초점을 맞춘 30억 매개변수 모델은 작업에 닿지 않는 자료들(다른 언어, 다른 말뭉치, 다른 도메인)에서 훨씬 큰 모델보다 자주 더 잘 수행하는 경우가 많다. 논문이 추가로 주장하는 바는 더 나아가 아주 중요한 변수는 매개변수의 분배 방식뿐 아니라, 모델의 학습 이력이 작업으로 향하도록 어떻게 이동되었는지 역시라는 점이다. 실험에서 이 변수는 테스트된 다른 모든 변수보다도 상대 성능을 더 신뢰성 있게 예측했다 — 매개변수 수를 포함해서.</p>
+
+<p>논문은 이를 직접 명시한다. 논문 토의에서 저자들은 “맥락적 전문화가 모델 매개변수 수 만으로 판단되는 것보다 더 결정적일 수 있다”는 주장을 지원한다고 설명한다. 어떤 모델이 가장 잘 수행됐는지는 매개변수 수가 아니라 그것의 학습 경로가 배치 작업에 얼마나 근접하게 이동되었는지에 의해 결정됐다. 더 큰 모델이 더 넓은 분포에서 훈련되어도 더 좁은 분포에서 훈련된 더 작은 모델 아래에 끝났다. 좁은 학습 경로가 승리의 변수였다.</p>
+
+<p>이는 조달 기본값이 제시하는 모델 성능에 대한 다른 관점이다. 기본값 아래에서 매개변수 수가 지배적 변수이고 학습 이력은 보조 수정인 반면, 논문이 제안하는 프레이밍에서는 우선순위가 반전된다. 작업에 대한 분포 정렬이 지배적 변수가 되며, 매개변수 수는 주어진 정렬 단계에서 얻는 이점에 영향을 주는 여러 요인 중 하나가 된다.</p>
+
+<p>전문화는 작다고 보정하기 위한 방법이 아니다. 그것은 정렬되도록 하는 방법이다.</p>
+
+<p>숫자들이 이 프레이밍을 뒷받침한다. 3B Nanonets-OCR2 — 이미 일반 OCR에 대해 전문화된 상태였고 — 타깃 도메인으로 감독형 미세조정과 Direct Preference Optimization로 파인튜닝했고 0.921를 달성했고 0.20%의 감소율을 기록했다. 동일한 아키텍처의 3B 일반 목적 모델인 Qwen2.5-VL-3B도 같은 절차를 거쳐 0.793에 1.41%의 감소율을 기록했다. 같은 아키텍처, 같은 학습이지만 시작 위치가 달랐다. 이 차이가 승리를 만든 변수였다.</p>
+
+<p>논문이 제시하는 프레이밍에서의 분포 정렬은 OCR에 국한된 것이 아니다. 모델과 그가 수행하도록 요청받은 작업 간의 관계의 속성이다. 특정 기업 워크로드에 가장 적합한 모델에 대한 질문은 이 프레이밍에서 대부분의 경우 시작 모델이 배치 작업으로 얼마나 가까운가의 문제이지, 모델의 크기 자체의 문제는 아니다.</p>
+
+<p>분포 정렬이 가장 중요한 변수 중 하나라면, 그 축적 방식은 어떻게 되는지 다음 질문이 된다. 논문의 증거는 그것이 단 한 번의 단계로 도달하는 것이 아니라, 모델을 하나의 단계씩 작업 분포로 이동시킬 수 있는 계층처럼 작동한다는Broader Pattern의 하나의 사례임을 시사한다. 전문화는 축적으로 작동하며, 이미 작업에 더 가까운 방향으로 이동한 모델은 같은 도메인-특정 학습에서 더 큰 범주의 모델보다 더 많은 이점을 얻는다. 이 절차가 무에서 정렬을 만들어내지는 않는다. 이미 존재하는 정렬을 바탕으로 구축된다.</p>
+
+<p>전문화에는 여러 수준이 있으며, 각 수준은 앞선 수준이 암호화한 분포를 기반으로 한다. 다수의 학습 단계를 거치면 모델은 목표 작업 분포에 점차 더 가까워져, 비슷한 아키텍처와 계산 제약 하에서도 서로 다른 하위 결과를 만들어낸다.</p>
+
+<p>그 패턴 — 정렬이 누적되는 양 — 이 글의 증거 중 가장 강한 주장이다. 그 경계는 명확히 구분될 필요가 있다. 이 계층은 하나의 도메인에서, 하나의 벤치마크에서, 두 쌍의 모델 비교에서만 입증되었다. 이 메커니즘이 OCR에 국한될 이유는 없지만, 다른 영역에서의 증거는 아직 축적되지 않았다. 이 경계를 존중하는 주장은 이 작업이 열어가는 더 넓은 연구 방향의 일부이며, Dharma는 앞으로도 다른 기업 도메인에서 더 많은 연구를 진행할 의도가 있다.</p>
+
+<p>그 경계가 표시된 상태에서 전략적 대화는 앞으로 나아간다. 한 잘 측정된 기업 도메인에서 매개변수 수를 지배하는 변수로 입증된 하나의 변수는, 모든 상황에서가 아니라 정렬 테스트를 실행할 수 있는 상황에서 팀이 검토해야 하는 전략 중 하나가 된다.</p>
+
+<h3 id="바뀌는-전략적-질문">바뀌는 전략적 질문</h3>
+
+<p>논문을 읽는 유용한 방법은 enterprises가 다음에 무엇을 해야 하는지에 대한 지시서로 보지 말고, 무엇을 물어봐야 하는지에 대한 촉구로 보는 것이다. 세 가지 질문이 더 선명하게 보인다.</p>
+
+<p>첫 번째: 분포 정렬이 매개변수 수와 함께 진지한 AI 평가의 1급 변수로 격상되어야 하는가. 논문이 제시하는 증거는 이를 매개변수 수보다 위로 올려야 한다고 주장하지 않는다. 더 겸손하게, 정렬은 충분히 큰 변수로서 명시적으로 시험해볼 가치가 있으며 작다고 가정하기엔 충분하지 않다는 점을 주장한다.</p>
+
+<p>두 번째는: 벤치마크 리더십이 자체적으로 기업 조달 결정에 충분한 증거가 되는가? 한 잘 측정된 도메인에서 공개 벤치마크를 이끈 모델이 최상의 결과를 낸 모델이 아니었다. 그 차이가 다른 도메인에서도 나타난다면 — 논문은 반드시 그 사실을 확립하지는 않지만 가능하다고 말한다 — 기업의 평가에는 배치 작업의 워크로드를 대표하는 추가 증거 계층이 필요할 수 있다.</p>
+
+<p>세 번째는 방법보다 아키텍처에 관한 질문이다. 정렬이 누적되는 위치에 있다면, 시작 모델의 선택은 미세조정 절차만큼이나 전략적 결정이 된다. 배포 작업에 이미 더 가까운 시작 모델은 같은 학습 예산 하에서도 더 큰 일반 모델보다 물질적으로 더 나은 결과를 낼 수 있다. 하지만 더 깊은 시사점은 조직적 차원의 문제가 될 수 있다. 전문화가 누적된다면, 기업은 결국 하나의 보편적으로 능력 있는 모델을 찾는 것보다, 자신의 도메인, 워크플로, 운영 제약에 지속적으로 정렬된 모델 생태계를 구축하는 쪽이 이점이 더 커질 수 있다. 그런 아키텍처가 실무에서 유리한지 여부는 각 조직의 환경에서 평가해야 할 문제이다.</p>
+
+<h3 id="한정된-재구성">한정된 재구성</h3>
+
+<p>이 기여는 의도적으로 좁다. frontier 모델이 열등하거나 일회용적이거나 조달 기본값이 역전되어야 한다고 주장하지 않는다. 하나의 논문에 근거해 frontier 모델이 모든 기업 AI 작업 부하에서 최선의 선택이 아닐 수 있다는 점을 주장한다. 실험에서 더 작고 학습 이력이 배치 작업에 더 가깝게 맞춰진 전문화 모델이 더 높은 품질, 더 낮은 비용, 그리고 더 큰 생산 안정성을 달성했다. 이는 frontier 모델이 열등하다는 것을 의미하는 것이 아니다. 오히려 전문화 이력이 기업 AI 시스템에 대해 많은 평가 프레임워크가 현재 가정하는 것보다 더 전략적으로 중요한 변수일 수 있음을 시사한다.</p>
+
+<p>우리는 이 기사를 scale이 더 이상 중요하지 않다고 주장하기 위해 쓰지 않았다. 현재의 기업 AI 대화에서 여전히 과소평가될 수 있는 하나의 변수를 분리해서 보여주려는 것이다. 학습 이력은 관찰되고 평가되며, successive stages of specialization을 통해 배치 작업에 더 가까워지도록 움직일 수 있다. 논문에서 보고된 비교에서 그 관계는 모든 평가된 모델의 순위를 실질적으로 바꿨다. 다른 곳에서도 순위를 바꿔 놓을지 여부는 다음 실험 세트의 문제다.</p>
+
+<h3 id="출처">출처:</h3>
+
+<ul>
+  <li>
+    <p>Cardoso, Gabriel Pimenta de Freitas, et al. “DharmaOCR: Specialized Small Language Models for Structured OCR that outperform Open-Source and Commercial Baselines.” <a href="https://arxiv.org/abs/2604.14314">arXiv preprint arXiv:2604.14314</a> (2026).</p>
+  </li>
+  <li>
+    <p>Subramanian, Karthik, et al. “Small Language Models for Domain-Specific Enterprise AI Workloads.” <a href="https://arxiv.org/abs/2503.11872">arXiv preprint arXiv:2503.11872</a> (2025).</p>
+  </li>
+  <li>
+    <p>Pecher, Branislav, et al. “<a href="https://www.semanticscholar.org/paper/Comparing-Specialised-Small-and-General-Large-on-to-Pecher-Srba/7f42b3a79ad1e176f5c881f1764b0ae87f65c252">Comparing specialised small and general large language models on text classification: 100 labelled samples to achieve break-even performance</a>”, (2026).</p>
+  </li>
+  <li>
+    <p>Kaplan, Jared, et al. “Scaling Laws for Neural Language Models.” <a href="https://arxiv.org/abs/2001.08361">arXiv preprint arXiv:2001.08361</a> (2020).</p>
+  </li>
+</ul>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-05-23">23 May 2026</time></span>
+                
+            </small>
+        </p>
+
+
+
+        <!-- Prev/Next -->
+        <div class="row PageNavigation mt-4 prevnextlinks d-flex justify-content-between">
+            
+            <div class="col-md-6 rightborder pl-0">
+                <a class="thepostlink" href="/pr-preview/pr-140/hf-translation-mcp-n8n/">&laquo; n8n으로 번역 MCP Server 워크플로우 구축하기: 실전 트러블슈팅과 실행 방식 비교</a>
+            </div>
+            
+            
+        </div>
+        <!-- End Prev/Next -->
+
+
+        <!-- Author Box -->
+        
+        <div class="row post-top-meta ">
+            <div class="col-md-2 text-left text-md-left">
+                <img class="author-thumb" src="/pr-preview/pr-140/" alt="">
+            </div>
+            <div class="col-md-10 text-left text-md-left">
+                <a target="_blank" class="link-dark" href=""></a><a target="_blank" href="" class="btn follow">Follow</a>
+                <span class="author-description"></span>						
+            </div>
+        </div>
+        
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <!-- End Post -->
+    <!-- toc -->
+    <div class="col-sm-4">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <blockquote>
+  <p>Source: https://huggingface.co/blog/Dharma-AI/specialization-beats-scale</p>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#전문화가-규모를-이긴다-대부분의-ai-조달-결정이-간과하는-전략적-변수" id="markdown-toc-전문화가-규모를-이긴다-대부분의-ai-조달-결정이-간과하는-전략적-변수">전문화가 규모를 이긴다: 대부분의 AI 조달 결정이 간과하는 전략적 변수</a>    <ul>
+      <li><a href="#모델의-학습-이력이-배치-작업에-충분히-근접하도록-이동되면-매개변수-수가-결정적인-변수가-되지-않는다-30억-매개변수의-전문화-모델은-잘-측정된-기업-도메인에서-테스트된-모든-상용-frontier-api를-능가했고--비용은-약-50배-정도-낮았다" id="markdown-toc-모델의-학습-이력이-배치-작업에-충분히-근접하도록-이동되면-매개변수-수가-결정적인-변수가-되지-않는다-30억-매개변수의-전문화-모델은-잘-측정된-기업-도메인에서-테스트된-모든-상용-frontier-api를-능가했고--비용은-약-50배-정도-낮았다">모델의 학습 이력이 배치 작업에 충분히 근접하도록 이동되면 매개변수 수가 결정적인 변수가 되지 않는다. 30억 매개변수의 전문화 모델은 잘 측정된 기업 도메인에서 테스트된 모든 상용 frontier API를 능가했고 — 비용은 약 50배 정도 낮았다.</a>        <ul>
+          <li><a href="#전략적-기본값" id="markdown-toc-전략적-기본값">전략적 기본값</a></li>
+          <li><a href="#실증-기록이-실제로-보여주는-것" id="markdown-toc-실증-기록이-실제로-보여주는-것">실증 기록이 실제로 보여주는 것</a></li>
+          <li><a href="#중요했던-변수" id="markdown-toc-중요했던-변수">중요했던 변수</a></li>
+          <li><a href="#바뀌는-전략적-질문" id="markdown-toc-바뀌는-전략적-질문">바뀌는 전략적 질문</a></li>
+          <li><a href="#한정된-재구성" id="markdown-toc-한정된-재구성">한정된 재구성</a></li>
+          <li><a href="#출처" id="markdown-toc-출처">출처:</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+<!-- footer -->
+<div class="row">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-140/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-140/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== --></main>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer container text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-140/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-140/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-140/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-140/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-140/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-140/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-140/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-140/assets/js/category.js"></script>
+  </body>
+</html>
