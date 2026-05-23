@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-139/assets/images/favicon.ico" />
+
+    <title>파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기" />
+<meta name="author" content="minju" />
+<meta property="og:locale" content="en_us" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 Tiny Agents in Python: an MCP-powered agent in ~70 lines of code를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Tiny Agents in Python: an MCP-powered agent in ~70 lines of code를 한국어로 번역한 글입니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-139/python-tiny-agents-ko/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-09-14T00:00:00+09:00" />
+<meta property="article:modified_time" content="2025-09-14T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-139/python-tiny-agents-ko/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" />
+<meta name="twitter:title" content="파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"minju"},"dateModified":"2025-09-14T00:00:00+09:00","datePublished":"2025-09-14T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Tiny Agents in Python: an MCP-powered agent in ~70 lines of code를 한국어로 번역한 글입니다.","headline":"파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기","image":"/pr-preview/pr-139/python-tiny-agents-ko/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-139/python-tiny-agents-ko/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-139/assets/images/hfkr_logo.png"},"name":"minju"},"url":"/pr-preview/pr-139/python-tiny-agents-ko/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-139/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-139/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-139/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-139/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-139/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-139/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-139/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-139/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row" style="margin-top: 1rem;">
+		
+
+		<!-- Post -->        
+        
+        
+		<div class="col-sm-8">
+            <!-- Post Featured Image -->
+			<img class="featured-image img-fluid rounded" src="/pr-preview/pr-139/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" alt="파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기">
+			<!-- End Featured Image -->
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-139/categories#agent">Agent</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#파이썬-tiny-agents-약-70줄의-코드로-mcp-기반-에이전트-구현하기" id="markdown-toc-파이썬-tiny-agents-약-70줄의-코드로-mcp-기반-에이전트-구현하기">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</a>    <ul>
+      <li><a href="#데모-실행-방법" id="markdown-toc-데모-실행-방법">데모 실행 방법</a>        <ul>
+          <li><a href="#에이전트-설정" id="markdown-toc-에이전트-설정">에이전트 설정</a></li>
+          <li><a href="#llm은-도구를-사용할-수-있습니다" id="markdown-toc-llm은-도구를-사용할-수-있습니다">LLM은 도구를 사용할 수 있습니다.</a></li>
+        </ul>
+      </li>
+      <li><a href="#파이썬-mcp-클라이언트-구축" id="markdown-toc-파이썬-mcp-클라이언트-구축">파이썬 MCP 클라이언트 구축</a></li>
+      <li><a href="#도구-사용-스트리밍-및-처리" id="markdown-toc-도구-사용-스트리밍-및-처리">도구 사용: 스트리밍 및 처리</a>        <ul>
+          <li><a href="#1-도구-준비-및-llm-호출" id="markdown-toc-1-도구-준비-및-llm-호출">1. 도구 준비 및 LLM 호출</a></li>
+          <li><a href="#2-도구-실행" id="markdown-toc-2-도구-실행">2. 도구 실행</a></li>
+        </ul>
+      </li>
+      <li><a href="#우리의-tiny-python-agent-사실상-루프일-뿐입니다" id="markdown-toc-우리의-tiny-python-agent-사실상-루프일-뿐입니다">우리의 Tiny Python Agent: 사실상 루프일 뿐입니다!</a>        <ul>
+          <li><a href="#1-에이전트-초기화" id="markdown-toc-1-에이전트-초기화">1. 에이전트 초기화</a></li>
+          <li><a href="#2-에이전트의-핵심-루프" id="markdown-toc-2-에이전트의-핵심-루프">2. 에이전트의 핵심: 루프</a></li>
+        </ul>
+      </li>
+      <li><a href="#다음-단계" id="markdown-toc-다음-단계">다음 단계</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/python-tiny-agents">Tiny Agents in Python: an MCP-powered agent in ~70 lines of code</a>를 한국어로 번역한 글입니다.</em></p>
+
+<hr />
+<h1 id="파이썬-tiny-agents-약-70줄의-코드로-mcp-기반-에이전트-구현하기">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</h1>
+
+<blockquote>
+  <p>[!TIP]
+NEW: tiny-agents가 이제 <a href="https://agents.md/">AGENTS.md</a> 표준을 지원합니다. 🥳</p>
+</blockquote>
+
+<p><a href="https://huggingface.co/blog/tiny-agents">Tiny Agents in JS</a>에서 영감을 받아, 이 아이디어를 파이썬 🐍으로 개발하고 <a href="https://github.com/huggingface/huggingface_hub/"><code class="language-plaintext highlighter-rouge">huggingface_hub</code></a> 클라이언트 SDK를 확장하여 MCP 클라이언트로서 MCP 서버에서 도구를 가져와 추론 중에 LLM에 전달할 수 있도록 했습니다.</p>
+
+<p>MCP (<a href="https://modelcontextprotocol.io/">Model Context Protocol</a>)는 대규모 언어 모델(LLM)이 외부 도구 및 API와 상호 작용하는 방식을 표준화하는 개방형 프로토콜입니다. 본질적으로 각 도구에 대한 개별적인 통합을 개발할 필요가 없어졌으며, 이를 통해 LLM에 새로운 기능을 더 쉽게 연결할 수 있습니다.</p>
+
+<p>이 블로그 게시물에서는 강력한 도구 기능을 활용할 수 있도록 MCP 서버에 연결된 파이썬의 Tiny Agent를 시작하는 방법을 보여줍니다. 자신만의 에이전트를 얼마나 쉽게 구축하고 바로 개발을 시작할 수 있는지 직접 확인해 보세요!</p>
+
+<blockquote>
+  <p>[!TIP]
+<em>스포일러</em> : 에이전트는 본질적으로 MCP 클라이언트 위에 구축된 while 루프입니다!</p>
+</blockquote>
+
+<h2 id="데모-실행-방법">데모 실행 방법</h2>
+
+<p>이 섹션에서는 기존 Tiny Agents를 사용하는 방법을 안내합니다. 에이전트를 실행하기 위한 설정 및 명령을 다루겠습니다.</p>
+
+<p>먼저, 필요한 모든 구성 요소를 얻으려면 <code class="language-plaintext highlighter-rouge">mcp</code> 추가 기능과 함께 <code class="language-plaintext highlighter-rouge">huggingface_hub</code>의 최신 버전을 설치해야 합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="s2">"huggingface_hub[mcp]&gt;=0.32.0"</span>
+</code></pre></div></div>
+
+<p>이제 CLI를 사용하여 에이전트를 실행해 봅시다!</p>
+
+<p>가장 멋진 점은 Hugging Face Hub <a href="https://huggingface.co/datasets/tiny-agents/tiny-agents">tiny-agents</a> 데이터셋에서 바로 에이전트를 불러올 수도 있고, 혹은 로컬 에이전트 설정에 경로를 직접 지정할 수 있다는 것입니다!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> tiny-agents run <span class="nt">--help</span>
+                                                                                                                                                                                     
+ Usage: tiny-agents run <span class="o">[</span>OPTIONS] <span class="o">[</span>PATH] COMMAND <span class="o">[</span>ARGS]...                                                                                                                           
+                                                                                                                                                                                     
+ Run the Agent <span class="k">in </span>the CLI                                                                                                                                                            
+                                                                                                                                                                                     
+                                                                                                                                                                                     
+╭─ Arguments ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│   path      <span class="o">[</span>PATH]  Path to a <span class="nb">local </span>folder containing an agent.json file or a built-in agent stored <span class="k">in </span>the <span class="s1">'tiny-agents/tiny-agents'</span> Hugging Face dataset                         │
+│                     <span class="o">(</span>https://huggingface.co/datasets/tiny-agents/tiny-agents<span class="o">)</span>                                                                                                     │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ <span class="nt">--help</span>          Show this message and exit.                                                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+</code></pre></div></div>
+
+<p>특정 에이전트 설정에 경로를 제공하지 않으면, Tiny Agent는 기본적으로 다음 두 MCP 서버에 연결됩니다.</p>
+
+<ul>
+  <li>당신의 데스크톱에 접근 권한을 갖는 “표준” <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem">파일 시스템 서버</a>,</li>
+  <li>샌드박스 환경의 Chromium 브라우저를 사용하는 방법을 아는 <a href="https://github.com/microsoft/playwright-mcp">Playwright MCP</a> 서버.</li>
+</ul>
+
+<p>다음 예시는 Nebius 추론 공급자를 통해 <a href="https://huggingface.co/Qwen/Qwen2.5-72B-Instruct">Qwen/Qwen2.5-72B-Instruct</a> 모델을 사용하도록 구성된 웹 탐색 에이전트를 보여줍니다. 이 에이전트에는 웹 브라우저를 사용할 수 있게 해주는 Playwright MCP 서버가 함께 제공됩니다! 에이전트 설정은 Hugging Face 데이터셋의 <a href="https://huggingface.co/datasets/tiny-agents/tiny-agents/tree/main/celinah/web-browser">tiny-agents/tiny-agents</a>에 있는 경로를 지정하여 불러옵니다.</p>
+
+<video controls="" autoplay="" loop="">
+  <source src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/python-tiny-agents/web_browser_agent.mp4" type="video/mp4" />
+</video>
+
+<p>에이전트를 실행하면, 연결된 MCP 서버에서 발견한 도구 목록을 불러오는 것을 볼 수 있습니다. 이제 여러분의 프롬프트에 응답할 준비가 되었습니다!</p>
+
+<p>이 데모에서 사용된 프롬프트:</p>
+
+<blockquote>
+  <p>Brave Search에서 HF 추론 공급자를 웹 검색하고 첫 번째 결과를 연 다음 Hugging Face에서 지원되는 추론 공급자 목록을 알려주세요.</p>
+</blockquote>
+
+<p>Gradio Spaces를 MCP 서버로 사용할 수도 있습니다! 다음 예시는 Nebius 추론 공급자를 통해 <a href="https://huggingface.co/Qwen/Qwen2.5-72B-Instruct">Qwen/Qwen2.5-72B-Instruct</a> 모델을 사용하고, MCP 서버로 <code class="language-plaintext highlighter-rouge">FLUX.1 [schnell]</code> 이미지 생성 HF Space에 연결합니다. 에이전트는 Hugging Face Hub의 <a href="https://huggingface.co/datasets/tiny-agents/tiny-agents/tree/main/julien-c/flux-schnell-generator">tiny-agents/tiny-agents</a> 데이터셋에 있는 구성에서 로드됩니다.</p>
+
+<video controls="" autoplay="" loop="">
+  <source src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/python-tiny-agents/image-generation.mp4" type="video/mp4" />
+</video>
+
+<p>이 데모에서 사용된 프롬프트:</p>
+
+<blockquote>
+  <p>달 표면에서 알에서 부화하는 작은 우주 비행사의 1024x1024 이미지를 생성하세요.</p>
+</blockquote>
+
+<p>이제 기존 Tiny Agents를 실행하는 방법을 살펴보았으니, 다음 섹션에서는 Tiny Agents가 작동하는 방식과 자신만의 에이전트를 구축하는 방법에 대해 더 자세히 설명합니다.</p>
+
+<h3 id="에이전트-설정">에이전트 설정</h3>
+
+<p>각 에이전트의 동작(기본 모델, 추론 공급자, 연결할 MCP 서버, 초기 시스템 프롬프트)은 <code class="language-plaintext highlighter-rouge">agent.json</code> 파일에 정의됩니다. 더 자세한 시스템 프롬프트를 위해 동일한 디렉토리에 사용자 지정 <code class="language-plaintext highlighter-rouge">PROMPT.md</code>를 제공할 수도 있습니다. 다음은 예시입니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">agent.json</code>
+<code class="language-plaintext highlighter-rouge">model</code> 및 <code class="language-plaintext highlighter-rouge">provider</code> 필드는 에이전트가 사용하는 LLM 및 추론 공급자를 지정합니다.
+<code class="language-plaintext highlighter-rouge">servers</code> 배열은 에이전트가 연결할 MCP 서버를 정의합니다.
+이 예시에서는 “stdio” MCP 서버가 구성되어 있습니다. 이 유형의 서버는 로컬 프로세스로 실행됩니다. 에이전트는 지정된 <code class="language-plaintext highlighter-rouge">command</code> 및 <code class="language-plaintext highlighter-rouge">args</code>를 사용하여 서버를 시작한 다음 stdin/stdout을 통해 통신하여 사용 가능한 도구를 검색하고 실행합니다.</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+	</span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Qwen/Qwen2.5-72B-Instruct"</span><span class="p">,</span><span class="w">
+	</span><span class="nl">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nebius"</span><span class="p">,</span><span class="w">
+	</span><span class="nl">"servers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+		</span><span class="p">{</span><span class="w">
+			</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stdio"</span><span class="p">,</span><span class="w">
+			</span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npx"</span><span class="p">,</span><span class="w">
+			</span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"@playwright/mcp@latest"</span><span class="p">]</span><span class="w">
+		</span><span class="p">}</span><span class="w">
+	</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">PROMPT.md</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You are an agent - please keep going until the user’s query is completely resolved [...]
+
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>[!TIP]
+Hugging Face 추론 공급자에 대한 자세한 내용은 <a href="https://huggingface.co/docs/inference-providers/index">여기</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+
+<h3 id="llm은-도구를-사용할-수-있습니다">LLM은 도구를 사용할 수 있습니다.</h3>
+
+<p>최신 LLM은 함수 호출(또는 도구 사용)을 위해 구축되어 사용자가 특정 사용 사례 및 실제 작업에 맞춰진 애플리케이션을 쉽게 구축할 수 있도록 합니다.</p>
+
+<p>함수는 스키마에 의해 정의되며, 이는 LLM에 함수가 무엇을 하는지, 어떤 입력 인수를 예상하는지 알려줍니다. LLM은 도구를 사용할 시기를 결정하고, 에이전트는 도구 실행을 조율하고 결과를 다시 전달합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tools</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">function</span><span class="sh">"</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">function</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">get_weather</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">description</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Get current temperature for a given location.</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">parameters</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">object</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">properties</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="sh">"</span><span class="s">location</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">string</span><span class="sh">"</span><span class="p">,</span>
+                            <span class="sh">"</span><span class="s">description</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">City and country e.g. Paris, France</span><span class="sh">"</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="sh">"</span><span class="s">required</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">location</span><span class="sh">"</span><span class="p">],</span>
+                <span class="p">},</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">InferenceClient</code>는 <a href="https://platform.openai.com/docs/guides/function-calling?api-mode=chat">OpenAI Chat Completions API</a>와 동일한 도구 호출 인터페이스를 구현하며, 이는 추론 공급자 및 커뮤니티의 확립된 표준입니다.</p>
+
+<h2 id="파이썬-mcp-클라이언트-구축">파이썬 MCP 클라이언트 구축</h2>
+
+<p><code class="language-plaintext highlighter-rouge">MCPClient</code>는 도구 사용 기능의 핵심입니다. 이제 <code class="language-plaintext highlighter-rouge">huggingface_hub</code>의 일부이며 <code class="language-plaintext highlighter-rouge">AsyncInferenceClient</code>를 사용하여 LLM과 통신합니다.</p>
+
+<blockquote>
+  <p>[!TIP]
+전체 <code class="language-plaintext highlighter-rouge">MCPClient</code> 코드는 <a href="https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/inference/_mcp/mcp_client.py">여기</a>에서 찾을 수 있습니다. 실제 코드를 따라가고 싶다면 참고하세요 🤓</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">MCPClient</code>의 주요 역할:</p>
+
+<ul>
+  <li>하나 이상의 MCP 서버에 대한 비동기 연결 관리.</li>
+  <li>이러한 서버에서 도구 검색.</li>
+  <li>LLM을 위한 도구 형식 지정.</li>
+  <li>올바른 MCP 서버를 통해 도구 호출 실행.</li>
+</ul>
+
+<p>MCP 서버에 연결하는 방법은 다음과 같습니다(<code class="language-plaintext highlighter-rouge">add_mcp_server</code> 메서드):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># `MCPClient.add_mcp_server`의 111-219줄
+# https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/inference/_mcp/mcp_client.py#L111:L219
+</span><span class="k">class</span> <span class="nc">MCPClient</span><span class="p">:</span>
+    <span class="bp">...</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">add_mcp_server</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="n">ServerType</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+        <span class="c1"># 'type'은 "stdio", "sse", 또는 "http"일 수 있습니다.
+</span>        <span class="c1"># 'params'는 서버 유형에 따라 다릅니다. 예:
+</span>        <span class="c1"># "stdio"의 경우: {"command": "my_tool_server_cmd", "args": ["--port", "1234"]}
+</span>        <span class="c1"># "http"의 경우: {"url": "http://my.tool.server/mcp"}
+</span>
+        <span class="c1"># 1. 유형(stdio, sse, http)에 따라 연결 설정
+</span>        <span class="c1">#    (mcp.client.stdio_client, sse_client, 또는 streamablehttp_client 사용)
+</span>        <span class="n">read</span><span class="p">,</span> <span class="n">write</span> <span class="o">=</span> <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="n">exit_stack</span><span class="p">.</span><span class="nf">enter_async_context</span><span class="p">(...)</span>
+
+        <span class="c1"># 2. MCP ClientSession 생성
+</span>        <span class="n">session</span> <span class="o">=</span> <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="n">exit_stack</span><span class="p">.</span><span class="nf">enter_async_context</span><span class="p">(</span>
+            <span class="nc">ClientSession</span><span class="p">(</span><span class="n">read_stream</span><span class="o">=</span><span class="n">read</span><span class="p">,</span> <span class="n">write_stream</span><span class="o">=</span><span class="n">write</span><span class="p">,</span> <span class="p">...)</span>
+        <span class="p">)</span>
+        <span class="k">await</span> <span class="n">session</span><span class="p">.</span><span class="nf">initialize</span><span class="p">()</span>
+
+        <span class="c1"># 3. 서버에서 도구 목록 가져오기
+</span>        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="p">.</span><span class="nf">list_tools</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">tool</span> <span class="ow">in</span> <span class="n">response</span><span class="p">.</span><span class="n">tools</span><span class="p">:</span>
+            <span class="c1"># 이 도구에 대한 세션 저장
+</span>            <span class="n">self</span><span class="p">.</span><span class="n">sessions</span><span class="p">[</span><span class="n">tool</span><span class="p">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">session</span> 
+            <span class="c1"># 사용 가능한 도구 목록에 도구 추가 및 LLM을 위한 형식 지정
+</span>            <span class="n">self</span><span class="p">.</span><span class="n">available_tools</span><span class="p">.</span><span class="nf">append</span><span class="p">({</span> 
+                <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">function</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">function</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="n">tool</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">description</span><span class="sh">"</span><span class="p">:</span> <span class="n">tool</span><span class="p">.</span><span class="n">description</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">parameters</span><span class="sh">"</span><span class="p">:</span> <span class="n">tool</span><span class="p">.</span><span class="n">input_schema</span><span class="p">,</span>
+                <span class="p">},</span>
+            <span class="p">})</span>
+
+</code></pre></div></div>
+<p>로컬 도구(예: 파일 시스템 액세스)를 위한 <code class="language-plaintext highlighter-rouge">stdio</code> 서버와 원격 도구를 위한 <code class="language-plaintext highlighter-rouge">http</code> 서버를 지원합니다! 또한 원격 도구의 이전 표준인 <code class="language-plaintext highlighter-rouge">sse</code>와도 호환됩니다.</p>
+
+<h2 id="도구-사용-스트리밍-및-처리">도구 사용: 스트리밍 및 처리</h2>
+
+<p><code class="language-plaintext highlighter-rouge">MCPClient</code>의 <code class="language-plaintext highlighter-rouge">process_single_turn_with_tools</code> 메서드에서는 LLM 상호 작용이 일어납니다. 대화 기록과 사용 가능한 도구를 <code class="language-plaintext highlighter-rouge">AsyncInferenceClient.chat.completions.create(..., stream=True)</code>를 통해 LLM에 보냅니다.</p>
+
+<h3 id="1-도구-준비-및-llm-호출">1. 도구 준비 및 LLM 호출</h3>
+
+<p>먼저, 이 메서드는 현재 차례에 LLM이 알아야 할 모든 도구를 결정합니다. 여기에는 MCP 서버의 도구와 에이전트 제어를 위한 특별한 “루프 종료(loop exit)” 도구가 포함됩니다. 그런 다음 LLM에 스트리밍 호출을 합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># `MCPClient.process_single_turn_with_tools`의 241-251줄
+# https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/inference/_mcp/mcp_client.py#L241:L251
+</span>
+    <span class="c1"># 옵션에 따라 도구 목록 준비
+</span>    <span class="n">tools</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">available_tools</span>
+    <span class="k">if</span> <span class="n">exit_loop_tools</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">tools</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">exit_loop_tools</span><span class="p">,</span> <span class="o">*</span><span class="n">self</span><span class="p">.</span><span class="n">available_tools</span><span class="p">]</span>
+
+    <span class="c1"># LLM에 스트리밍 요청 생성
+</span>    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">chat</span><span class="p">.</span><span class="n">completions</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span>
+        <span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">,</span>
+        <span class="n">tools</span><span class="o">=</span><span class="n">tools</span><span class="p">,</span>
+        <span class="n">tool_choice</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span>  <span class="c1"># LLM이 도구가 필요한지 결정
+</span>        <span class="n">stream</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>  
+    <span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>LLM으로부터 청크가 도착하면, 메서드는 청크 처리를 반복합니다. 각 청크는 즉시 반환되며, 그런 다음 완전한 텍스트 응답과 모든 도구 호출을 재구성합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># `MCPClient.process_single_turn_with_tools`의 258-290줄 
+# https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/inference/_mcp/mcp_client.py#L258:L290
+# 스트림에서 읽기
+</span><span class="k">async</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+      <span class="c1"># 각 청크를 호출자에게 반환
+</span>      <span class="k">yield</span> <span class="n">chunk</span>
+      <span class="c1"># LLM의 텍스트 응답 및 도구 호출 부분 집계
+</span>      <span class="err">…</span>
+</code></pre></div></div>
+
+<h3 id="2-도구-실행">2. 도구 실행</h3>
+
+<p>스트림이 완료되면, LLM이 도구 호출을 요청한 경우(<code class="language-plaintext highlighter-rouge">final_tool_calls</code>에 완전히 재구성됨), 메서드는 각 호출을 처리합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># `MCPClient.process_single_turn_with_tools`의 293-313줄 
+# https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/inference/_mcp/mcp_client.py#L293:L313
+</span><span class="k">for</span> <span class="n">tool_call</span> <span class="ow">in</span> <span class="n">final_tool_calls</span><span class="p">.</span><span class="nf">values</span><span class="p">():</span>
+    <span class="n">function_name</span> <span class="o">=</span> <span class="n">tool_call</span><span class="p">.</span><span class="n">function</span><span class="p">.</span><span class="n">name</span>
+    <span class="n">function_args</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="nf">loads</span><span class="p">(</span><span class="n">tool_call</span><span class="p">.</span><span class="n">function</span><span class="p">.</span><span class="n">arguments</span> <span class="ow">or</span> <span class="sh">"</span><span class="s">{}</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="c1"># 도구 결과를 저장할 메시지 준비
+</span>    <span class="n">tool_message</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">tool</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">tool_call_id</span><span class="sh">"</span><span class="p">:</span> <span class="n">tool_call</span><span class="p">.</span><span class="nb">id</span><span class="p">,</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="sh">""</span><span class="p">,</span> <span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="n">function_name</span><span class="p">}</span>
+
+    <span class="c1"># a. 이것이 특별한 "루프 종료" 도구인가요?
+</span>    <span class="k">if</span> <span class="n">exit_loop_tools</span> <span class="ow">and</span> <span class="n">function_name</span> <span class="ow">in</span> <span class="p">[</span><span class="n">t</span><span class="p">.</span><span class="n">function</span><span class="p">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">exit_loop_tools</span><span class="p">]:</span>
+        <span class="c1"># 그렇다면 메시지를 반환하고 이 턴의 처리를 종료합니다.
+</span>        <span class="n">messages</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">ChatCompletionInputMessage</span><span class="p">.</span><span class="nf">parse_obj_as_instance</span><span class="p">(</span><span class="n">tool_message</span><span class="p">))</span>
+        <span class="k">yield</span> <span class="n">ChatCompletionInputMessage</span><span class="p">.</span><span class="nf">parse_obj_as_instance</span><span class="p">(</span><span class="n">tool_message</span><span class="p">)</span>
+        <span class="k">return</span> <span class="c1"># 에이전트의 메인 루프가 이 신호를 처리합니다.
+</span>
+    <span class="c1"># b. 일반 도구입니다: MCP 세션을 찾아 실행합니다.
+</span>    <span class="n">session</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">sessions</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">function_name</span><span class="p">)</span> <span class="c1"># self.sessions는 도구 이름을 MCP 연결에 매핑합니다.
+</span>    <span class="k">if</span> <span class="n">session</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="p">.</span><span class="nf">call_tool</span><span class="p">(</span><span class="n">function_name</span><span class="p">,</span> <span class="n">function_args</span><span class="p">)</span>
+        <span class="n">tool_message</span><span class="p">[</span><span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="nf">format_result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="c1"># format_result는 도구 출력을 처리합니다.
+</span>    <span class="k">else</span><span class="p">:</span>
+        <span class="n">tool_message</span><span class="p">[</span><span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Error: No session found for tool: </span><span class="si">{</span><span class="n">function_name</span><span class="si">}</span><span class="sh">"</span>
+        <span class="n">tool_message</span><span class="p">[</span><span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">error_msg</span>
+
+    <span class="c1"># 도구 결과를 기록에 추가하고 반환합니다.
+</span>    <span class="bp">...</span>
+
+</code></pre></div></div>
+
+<p>먼저 호출된 도구가 루프를 종료하는지(<code class="language-plaintext highlighter-rouge">exit_loop_tool</code>) 확인합니다. 그렇지 않으면 해당 도구에 대한 올바른 MCP 세션을 찾아 <code class="language-plaintext highlighter-rouge">session.call_tool()</code>을 호출합니다. 결과(또는 오류 응답)는 형식화되어 대화 기록에 추가되며, 에이전트가 도구의 출력을 인식할 수 있도록 반환됩니다.</p>
+
+<h2 id="우리의-tiny-python-agent-사실상-루프일-뿐입니다">우리의 Tiny Python Agent: 사실상 루프일 뿐입니다!</h2>
+
+<p><code class="language-plaintext highlighter-rouge">MCPClient</code>가 도구 상호 작용에 대한 모든 작업을 수행하므로 <code class="language-plaintext highlighter-rouge">Agent</code> 클래스는 놀랍도록 간단해집니다. <code class="language-plaintext highlighter-rouge">MCPClient</code>를 상속하고 대화 관리 로직을 추가합니다.</p>
+
+<blockquote>
+  <p>[!TIP]
+Agent 클래스는 작고 대화 루프에 중점을 둡니다. 코드는 <a href="https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/inference/_mcp/agent.py">여기</a>에서 찾을 수 있습니다.</p>
+</blockquote>
+
+<h3 id="1-에이전트-초기화">1. 에이전트 초기화</h3>
+
+<p>에이전트가 생성될 때, 구성 정보(모델, 공급자, 사용할 MCP 서버, 시스템 프롬프트)를 불러와 시스템 프롬프트로 대화 기록을 초기화합니다. <code class="language-plaintext highlighter-rouge">load_tools()</code> 메서드는  <code class="language-plaintext highlighter-rouge">agent.json</code>에 정의된 서버 구성을 반복하고 각 구성에 부모 클래스인 <code class="language-plaintext highlighter-rouge">MCPClient</code>의 <code class="language-plaintext highlighter-rouge">add_mcp_server</code>를 호출해 에이전트의 도구 상자를 채웁니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># `Agent`의 12-54줄 
+# https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/inference/_mcp/agent.py#L12:L54
+</span><span class="k">class</span> <span class="nc">Agent</span><span class="p">(</span><span class="n">MCPClient</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="n">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">servers</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Dict</span><span class="p">],</span> <span class="c1"># MCP 서버 구성
+</span>        <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PROVIDER_OR_POLICY_T</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="n">api_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="c1"># 시스템 프롬프트
+</span>    <span class="p">):</span>
+        <span class="c1"># 모델, 공급자 등으로 기본 MCPClient 초기화
+</span>        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="n">provider</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+        <span class="c1"># 로드할 서버 구성 저장
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">_servers_cfg</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">servers</span><span class="p">)</span>
+        <span class="c1"># 시스템 메시지로 대화 시작
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">messages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="n">ChatCompletionInputMessage</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">system</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="n">prompt</span> <span class="ow">or</span> <span class="n">DEFAULT_SYSTEM_PROMPT</span><span class="p">}</span>
+        <span class="p">]</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">load_tools</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># 구성된 모든 MCP 서버에 연결하고 도구 등록
+</span>        <span class="k">for</span> <span class="n">cfg</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">_servers_cfg</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="nf">add_mcp_server</span><span class="p">(</span><span class="o">**</span><span class="n">cfg</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="2-에이전트의-핵심-루프">2. 에이전트의 핵심: 루프</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Agent.run()</code> 메서드는 단일 사용자 입력을 처리하는 비동기 제너레이터입니다. 에이전트의 현재 작업이 완료될 시기를 결정하면서 대화 턴을 관리합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># `Agent.run()`의 56-99줄
+# https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/inference/_mcp/agent.py#L56:L99
+</span><span class="k">async</span> <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">user_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">abort_event</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">asyncio</span><span class="p">.</span><span class="n">Event</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="p">...)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[...]:</span>
+    <span class="bp">...</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span> <span class="c1"># user_input 처리를 위한 메인 루프
+</span>        <span class="bp">...</span>
+
+        <span class="c1"># LLM 및 도구와 한 단계 상호 작용하기 위해 MCPClient에 위임합니다.
+</span>        <span class="c1"># 이는 LLM 텍스트, 도구 호출 정보 및 도구 결과를 스트리밍합니다.
+</span>        <span class="k">async</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="nf">process_single_turn_with_tools</span><span class="p">(</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">messages</span><span class="p">,</span>
+            <span class="bp">...</span>
+        <span class="p">):</span>
+            <span class="k">yield</span> <span class="n">item</span> 
+
+        <span class="p">...</span> 
+        
+        <span class="c1"># 종료 조건
+</span>        <span class="c1"># 1. "exit" 도구가 호출되었습니까?
+</span>        <span class="k">if</span> <span class="n">last</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">)</span> <span class="o">==</span> <span class="sh">"</span><span class="s">tool</span><span class="sh">"</span> <span class="ow">and</span> <span class="n">last</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">)</span> <span class="ow">in</span> <span class="p">{</span><span class="n">t</span><span class="p">.</span><span class="n">function</span><span class="p">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">EXIT_LOOP_TOOLS</span><span class="p">}:</span>
+                <span class="k">return</span>
+
+        <span class="c1"># 2. 최대 턴에 도달했거나 LLM이 최종 텍스트 답변을 제공했습니까?
+</span>        <span class="k">if</span> <span class="n">last</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">)</span> <span class="o">!=</span> <span class="sh">"</span><span class="s">tool</span><span class="sh">"</span> <span class="ow">and</span> <span class="n">num_turns</span> <span class="o">&gt;</span> <span class="n">MAX_NUM_TURNS</span><span class="p">:</span>
+                <span class="k">return</span>
+        <span class="k">if</span> <span class="n">last</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">)</span> <span class="o">!=</span> <span class="sh">"</span><span class="s">tool</span><span class="sh">"</span> <span class="ow">and</span> <span class="n">next_turn_should_call_tools</span><span class="p">:</span>
+            <span class="k">return</span>
+        
+        <span class="n">next_turn_should_call_tools</span> <span class="o">=</span> <span class="p">(</span><span class="n">last_message</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">)</span> <span class="o">!=</span> <span class="sh">"</span><span class="s">tool</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">run()</code> 루프 내부:</p>
+<ul>
+  <li>먼저 사용자 프롬프트를 대화에 추가합니다.</li>
+  <li>그런 다음 <code class="language-plaintext highlighter-rouge">MCPClient.process_single_turn_with_tools(...)</code>를 호출하여 LLM의 응답을 얻고 추론의 한 단계에 대한 도구 실행을 처리합니다.</li>
+  <li>각 항목은 즉시 반환되어 호출자에게 실시간 스트리밍을 가능하게 합니다.</li>
+  <li>각 단계 후에 종료 조건을 확인합니다. 특별한 “루프 종료” 도구가 사용되었는지, 최대 턴 제한에 도달했는지, 또는 LLM이 현재 요청에 대한 최종 텍스트 응답을 제공하는지 여부입니다.</li>
+</ul>
+
+<h2 id="다음-단계">다음 단계</h2>
+
+<p>MCP 클라이언트와 Tiny Agent를 탐색하고 확장할 수 있는 멋진 방법이 많이 있습니다 🔥
+시작하는 데 도움이 되는 몇 가지 아이디어는 다음과 같습니다.</p>
+
+<ul>
+  <li>다양한 LLM 모델 및 추론 공급자가 에이전트 성능에 미치는 영향을 벤치마킹합니다. 각 공급자가 다르게 최적화할 수 있으므로 도구 호출 성능이 다를 수 있습니다. 지원되는 공급자 목록은 <a href="https://huggingface.co/docs/inference-providers/index#partners">여기</a>에서 찾을 수 있습니다.</li>
+  <li><a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a> 또는 <a href="https://lmstudio.ai/">LM Studio</a>와 같은 로컬 LLM 추론 서버로 Tiny Agent를 실행합니다.</li>
+  <li>.. 물론 기여하세요! Hugging Face Hub의 <a href="https://huggingface.co/datasets/tiny-agents/tiny-agents">tiny-agents/tiny-agents</a> 데이터셋에 자신만의 고유한 Tiny Agent를 공유하고 PR을 엽니다.</li>
+</ul>
+
+<p>풀 리퀘스트 및 기여를 환영합니다! 다시 한 번 말하지만 여기 있는 모든 것은 <a href="https://github.com/huggingface/huggingface_hub">오픈 소스</a>입니다! 💎❤️</p>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2025-09-14">14 Sep 2025</time></span>
+                
+            </small>
+        </p>
+
+
+
+        <!-- Prev/Next -->
+        <div class="row PageNavigation mt-4 prevnextlinks d-flex justify-content-between">
+            
+            <div class="col-md-6 rightborder pl-0">
+                <a class="thepostlink" href="/pr-preview/pr-139/Implementing-MCP-Servers-in-Python/">&laquo; Python으로 구현하는 MCP 서버: Gradio를 활용한 AI 쇼핑 어시스턴트</a>
+            </div>
+            
+            
+            <div class="col-md-6 text-right pr-0">
+                <a class="thepostlink" href="/pr-preview/pr-139/python-tiny-agents-study/">파이썬 Tiny Agents 스터디 &raquo;</a>
+            </div>
+            
+        </div>
+        <!-- End Prev/Next -->
+
+
+        <!-- Author Box -->
+        
+        <div class="row post-top-meta ">
+            <div class="col-md-2 text-left text-md-left">
+                <img class="author-thumb" src="/pr-preview/pr-139/assets/images/author/minju.png" alt="minju">
+            </div>
+            <div class="col-md-10 text-left text-md-left">
+                <a target="_blank" class="link-dark" href="https://github.com/Jwaminju/">minju</a><a target="_blank" href="" class="btn follow">Follow</a>
+                <span class="author-description">Hello, I'm minju! 🤗</span>						
+            </div>
+        </div>
+        
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <!-- End Post -->
+    <!-- toc -->
+    <div class="col-sm-4">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#파이썬-tiny-agents-약-70줄의-코드로-mcp-기반-에이전트-구현하기" id="markdown-toc-파이썬-tiny-agents-약-70줄의-코드로-mcp-기반-에이전트-구현하기">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</a>    <ul>
+      <li><a href="#데모-실행-방법" id="markdown-toc-데모-실행-방법">데모 실행 방법</a>        <ul>
+          <li><a href="#에이전트-설정" id="markdown-toc-에이전트-설정">에이전트 설정</a></li>
+          <li><a href="#llm은-도구를-사용할-수-있습니다" id="markdown-toc-llm은-도구를-사용할-수-있습니다">LLM은 도구를 사용할 수 있습니다.</a></li>
+        </ul>
+      </li>
+      <li><a href="#파이썬-mcp-클라이언트-구축" id="markdown-toc-파이썬-mcp-클라이언트-구축">파이썬 MCP 클라이언트 구축</a></li>
+      <li><a href="#도구-사용-스트리밍-및-처리" id="markdown-toc-도구-사용-스트리밍-및-처리">도구 사용: 스트리밍 및 처리</a>        <ul>
+          <li><a href="#1-도구-준비-및-llm-호출" id="markdown-toc-1-도구-준비-및-llm-호출">1. 도구 준비 및 LLM 호출</a></li>
+          <li><a href="#2-도구-실행" id="markdown-toc-2-도구-실행">2. 도구 실행</a></li>
+        </ul>
+      </li>
+      <li><a href="#우리의-tiny-python-agent-사실상-루프일-뿐입니다" id="markdown-toc-우리의-tiny-python-agent-사실상-루프일-뿐입니다">우리의 Tiny Python Agent: 사실상 루프일 뿐입니다!</a>        <ul>
+          <li><a href="#1-에이전트-초기화" id="markdown-toc-1-에이전트-초기화">1. 에이전트 초기화</a></li>
+          <li><a href="#2-에이전트의-핵심-루프" id="markdown-toc-2-에이전트의-핵심-루프">2. 에이전트의 핵심: 루프</a></li>
+        </ul>
+      </li>
+      <li><a href="#다음-단계" id="markdown-toc-다음-단계">다음 단계</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+<!-- footer -->
+<div class="row">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-139/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-139/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== --></main>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer container text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-139/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-139/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-139/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-139/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-139/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-139/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-139/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-139/assets/js/category.js"></script>
+  </body>
+</html>
