@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-142/assets/images/favicon.ico" />
+
+    <title>AI Agents의 도래: 그래서, 이제는? | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>AI Agents의 도래: 그래서, 이제는? | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="AI Agents의 도래: 그래서, 이제는?" />
+<meta name="author" content="jeong" />
+<meta property="og:locale" content="en_us" />
+<meta name="description" content="서론 이 글은 2025년 1월에 업로드된 Hugging Face 블로그의 AI Agents Are Here. What Now?를 한국어로 번역한 글입니다. — 서론" />
+<meta name="twitter:description" property="og:description" content="서론 이 글은 2025년 1월에 업로드된 Hugging Face 블로그의 AI Agents Are Here. What Now?를 한국어로 번역한 글입니다. — 서론" />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-142/ai-agents-are-here/assets/images/blog/posts/2025-12-15-ai-agents-are-here/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-12-15T00:00:00+09:00" />
+<meta property="article:modified_time" content="2025-12-15T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-142/ai-agents-are-here/assets/images/blog/posts/2025-12-15-ai-agents-are-here/thumbnail.png" />
+<meta name="twitter:title" content="AI Agents의 도래: 그래서, 이제는?" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"jeong"},"dateModified":"2025-12-15T00:00:00+09:00","datePublished":"2025-12-15T00:00:00+09:00","description":"서론 이 글은 2025년 1월에 업로드된 Hugging Face 블로그의 AI Agents Are Here. What Now?를 한국어로 번역한 글입니다. — 서론","headline":"AI Agents의 도래: 그래서, 이제는?","image":"/pr-preview/pr-142/ai-agents-are-here/assets/images/blog/posts/2025-12-15-ai-agents-are-here/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-142/ai-agents-are-here/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-142/assets/images/hfkr_logo.png"},"name":"jeong"},"url":"/pr-preview/pr-142/ai-agents-are-here/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-142/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-142/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-142/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-142/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-142/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-142/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-142/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-142/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row" style="margin-top: 1rem;">
+		
+
+		<!-- Post -->        
+        
+        
+		<div class="col-sm-8">
+            <!-- Post Featured Image -->
+			<img class="featured-image img-fluid rounded" src="/pr-preview/pr-142/assets/images/blog/posts/2025-12-15-ai-agents-are-here/thumbnail.png" alt="AI Agents의 도래: 그래서, 이제는?">
+			<!-- End Featured Image -->
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-142/categories#agents">Agents</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-142/categories#ethic">Ethic</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">AI Agents의 도래: 그래서, 이제는?</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#서론" id="markdown-toc-서론"><strong>서론</strong></a></li>
+  <li><a href="#ai-에이전트란-무엇인가" id="markdown-toc-ai-에이전트란-무엇인가">AI 에이전트란 무엇인가?</a>    <ul>
+      <li><a href="#개요" id="markdown-toc-개요">개요</a></li>
+    </ul>
+  </li>
+  <li><a href="#-ai-에이전트의-스펙트럼" id="markdown-toc--ai-에이전트의-스펙트럼">📘 <strong>AI 에이전트의 스펙트럼</strong></a>    <ul>
+      <li><a href="#1-자율성autonomy" id="markdown-toc-1-자율성autonomy"><strong>1. 자율성(Autonomy)</strong></a></li>
+      <li><a href="#2-능동성proactivity" id="markdown-toc-2-능동성proactivity"><strong>2. 능동성(Proactivity)</strong></a></li>
+      <li><a href="#3-인격화personification" id="markdown-toc-3-인격화personification"><strong>3. 인격화(Personification)</strong></a></li>
+      <li><a href="#4-개인화personalization" id="markdown-toc-4-개인화personalization"><strong>4. 개인화(Personalization)</strong></a></li>
+      <li><a href="#5-도구-접근성tooling" id="markdown-toc-5-도구-접근성tooling"><strong>5. 도구 접근성(Tooling)</strong></a></li>
+      <li><a href="#6-다재다능성versatility" id="markdown-toc-6-다재다능성versatility"><strong>6. 다재다능성(Versatility)</strong></a></li>
+      <li><a href="#a-도메인-특화domain-specificity" id="markdown-toc-a-도메인-특화domain-specificity"><strong>a. 도메인 특화(Domain specificity)</strong></a></li>
+      <li><a href="#b-작업task-특화task-specificity" id="markdown-toc-b-작업task-특화task-specificity"><strong>b. 작업(Task) 특화(Task specificity)</strong></a></li>
+      <li><a href="#c-모달리티-특화modality-specificity" id="markdown-toc-c-모달리티-특화modality-specificity"><strong>c. 모달리티 특화(Modality specificity)</strong></a></li>
+      <li><a href="#d-소프트웨어-특화software-specificity" id="markdown-toc-d-소프트웨어-특화software-specificity"><strong>d. 소프트웨어 특화(Software specificity)</strong></a></li>
+      <li><a href="#7-적응성adaptability" id="markdown-toc-7-적응성adaptability"><strong>7. 적응성(Adaptability)</strong></a></li>
+      <li><a href="#8-행동-표면action-surfaces" id="markdown-toc-8-행동-표면action-surfaces"><strong>8. 행동 표면(Action surfaces)</strong></a></li>
+      <li><a href="#9-요청-형식request-formats" id="markdown-toc-9-요청-형식request-formats"><strong>9. 요청 형식(Request formats)</strong></a></li>
+      <li><a href="#10-반응-속도reactivity" id="markdown-toc-10-반응-속도reactivity"><strong>10. 반응 속도(Reactivity)</strong></a></li>
+      <li><a href="#11-에이전트-수number" id="markdown-toc-11-에이전트-수number"><strong>11. 에이전트 수(Number)</strong></a></li>
+    </ul>
+  </li>
+  <li><a href="#위험-이점-활용-가치-기반-분석" id="markdown-toc-위험-이점-활용-가치-기반-분석"><strong>위험, 이점, 활용: 가치 기반 분석</strong></a>    <ul>
+      <li><a href="#가치-정확성-accuracy" id="markdown-toc-가치-정확성-accuracy">가치: 정확성 (Accuracy)</a></li>
+      <li><a href="#가치-보조성--지원성-assistiveness" id="markdown-toc-가치-보조성--지원성-assistiveness">가치: 보조성 / 지원성 (Assistiveness)</a></li>
+      <li><a href="#가치-일관성-consistency" id="markdown-toc-가치-일관성-consistency">가치: 일관성 (Consistency)</a></li>
+      <li><a href="#가치-효율성-efficiency" id="markdown-toc-가치-효율성-efficiency">가치: 효율성 (Efficiency)</a></li>
+      <li><a href="#가치-형평성-equity" id="markdown-toc-가치-형평성-equity">가치: 형평성 (Equity)</a></li>
+      <li><a href="#가치-인간유사성-humanlikeness" id="markdown-toc-가치-인간유사성-humanlikeness">가치: 인간유사성 (Humanlikeness)</a></li>
+      <li><a href="#가치-상호운용성-interoperability" id="markdown-toc-가치-상호운용성-interoperability">가치: 상호운용성 (Interoperability)</a></li>
+      <li><a href="#가치-privacy" id="markdown-toc-가치-privacy">가치: Privacy</a></li>
+      <li><a href="#가치-관련성-relevance" id="markdown-toc-가치-관련성-relevance">가치: 관련성 (Relevance)</a></li>
+      <li><a href="#가치-안전-safety" id="markdown-toc-가치-안전-safety">가치: 안전 (Safety)</a></li>
+      <li><a href="#가치-과학적-진보-scientific-progress" id="markdown-toc-가치-과학적-진보-scientific-progress">가치: 과학적 진보 (Scientific Progress)</a></li>
+      <li><a href="#가치-보안-security" id="markdown-toc-가치-보안-security">가치: 보안 (Security)</a></li>
+      <li><a href="#가치-speed" id="markdown-toc-가치-speed">가치: Speed</a></li>
+      <li><a href="#가치-지속가능성-sustainability" id="markdown-toc-가치-지속가능성-sustainability">가치: 지속가능성 (Sustainability)</a></li>
+      <li><a href="#가치-신뢰-trust" id="markdown-toc-가치-신뢰-trust">가치: 신뢰 (Trust)</a></li>
+      <li><a href="#가치-진실성-truthfulness" id="markdown-toc-가치-진실성-truthfulness">가치: 진실성 (Truthfulness)</a></li>
+    </ul>
+  </li>
+  <li><a href="#hugging-face의-ai-에이전트" id="markdown-toc-hugging-face의-ai-에이전트">Hugging Face의 AI 에이전트</a></li>
+  <li><a href="#권고-사항-및-향후-방향" id="markdown-toc-권고-사항-및-향후-방향">권고 사항 및 향후 방향</a></li>
+</ul>
+<!--toc-->
+<p><em>이 글은 2025년 1월에 업로드된 Hugging Face 블로그의 <a href="https://huggingface.co/blog/ethics-soc-7">AI Agents Are Here. What Now?</a>를 한국어로 번역한 글입니다.</em>
+—</p>
+<h1 id="서론"><strong>서론</strong></h1>
+
+<p>최근 대규모 언어 모델(LLM)이 유창하게 문장을 생성하고, 각종 벤치마크에서 매우 높은 성능을 기록하는 등 능력이 급격히 발전하면서, AI 개발자와 기업들은 다음 단계가 무엇인지, 곧 등장할 혁신적인 기술이 무엇인지 주목하기 시작했다. 그중 최근 빠르게 부상한 기술이 바로 <strong>“AI 에이전트(AI agents)”</strong>이다. 이 개념은, 사용자의 목표에 맞춰 행동을 수행하는 시스템으로, 오늘날 대부분의 AI 에이전트는 하나의 기능만 수행하는 것이 아니라, 여러 기능을 수행할 수 있도록 LLM을 통합하여 만들어진다. 이 새로운 기술 흐름의 핵심적인 아이디어는 컴퓨터 프로그램이 더 이상 인간이 직접 조작하는 특수 목적 도구에 머무르지 않고, <strong>인간의 개입 없이 여러 작업을 수행</strong>한다는 점이다.</p>
+
+<p>이 변화는 비결정적인 환경에서 <strong>스스로 계획을 짤 수 있는 시스템</strong>으로의 근본적인 전환을 의미한다. 많은 현대 AI 에이전트는 단순히 사전에 정의된 행동만 수행하는 것이 아니라, <strong>새로운 상황을 분석하고, 관련 목표를 설정하며, 기존에 정의되지 않았던 행동까지 수행할 수 있도록 설계</strong>되어 있다.</p>
+
+<p>이 글에서는 AI 에이전트가 무엇인지 간략히 소개하고, 그 속에 존재하는 <strong>윤리적 가치와 트레이드오프(이익과 위험의 균형)</strong>를 설명한다. 그 후 AI 에이전트가 사회에 최대한 이롭게 작동할 수 있는 미래를 만들기 위한 방향을 제시한다. 기술적 관점에서의 에이전트 소개는 <a href="https://huggingface.co/blog/smolagents">최근 작성된 개발자 블로그 포스트</a>를 참고할 수 있다. 현대 생성형 AI 이전에 작성되었지만, 여전히 유효한 에이전트 개념의 기초는 <a href="https://core.ac.uk/download/pdf/1498750.pdf">Wooldridge and Jennings, 1995</a>를 참고하길 바란다.</p>
+
+<p>AI 에이전트에 대한 분석의 결과, <strong>시스템의 자율성이 높아질수록 인간에게 가해질 위험도 증가</strong>한다는 점을 발견했다. 즉, <strong>사용자가 시스템에 넘기는 통제력이 커질수록 위험도 함께 증가</strong>한다. 특히 문제되는 지점은, 개발자가 시스템의 모든 행동을 예측할 필요가 없게 되는 것과 같이, <strong>AI 에이전트 개발을 촉진하는 이점들이, 동시에 안전을 위협하는 위험을 만들어낸다는 점</strong>이다. 안전 관련 피해는 사생활 침해와 보안 문제 등 다른 유형의 피해로 이어질 수 있으며, 안전하지 않은 시스템에 대한 부적절한 신뢰는 이러한 피해를 눈덩이처럼 확대시킬 수 있다.</p>
+
+<p>따라서 저자는 <strong>완전 자율형 AI 에이전트는 개발해서는 안 된다</strong>고 권고한다. 예를 들어, 개발자가 통제하는 제한된 코드 실행 범위를 넘어, <strong>에이전트가 스스로 코드를 생성하고 실행</strong>할 수 있게 되면 인간의 모든 통제를 무력화할 수 있는 능력을 갖추게 된다. 반면, <strong>반(半)자율형 AI 에이전트</strong>는 자율성의 정도, 수행 가능한 작업의 성격, 그리고 사용자가 행사할 수 있는 통제력에 따라 위험보다 이익이 더 클 수도 있다. 이제 이러한 주제를 심도 있게 살펴본다.</p>
+
+<h1 id="ai-에이전트란-무엇인가">AI 에이전트란 무엇인가?</h1>
+<h2 id="개요">개요</h2>
+
+<p>“AI 에이전트”가 무엇인지에 대해서는 아직 명확한 합의가 없지만, 최근 등장한 AI 에이전트들에 공통적으로 나타나는 특징은 <strong>‘에이전트적(agentic)’</strong>이라는 것, 즉 일정 수준의 <strong>자율성</strong>을 가지고 행동한다는 것이다. 목표가 주어지면, 이를 여러 하위 과제로 분해하고 각 과제를 인간의 직접적인 개입 없이 수행할 수 있다.</p>
+
+<p>예를 들어, 이상적인 AI 에이전트는 “내 블로그 글을 더 잘 쓰도록 도와줘”와 같은 고수준의 요청을 받았을 때, 이전에 작성한 블로그 주제와 유사한 글을 웹에서 찾아보고 새로운 블로그 글을 위한 개요(outline)를 담은 문서를 생성하며 각 글에 대한 초안 문장을 제공하는 일까지 스스로 과제를 나누어 수행할 수 있다.</p>
+
+<p>최근 AI 에이전트에 관한 연구는 과거보다 훨씬 넓은 기능 범위와 높은 활용 유연성을 가진 소프트웨어를 가능하게 했다. 실제로 최근 시스템들은 회의 일정 조율(<a href="https://www.lindy.ai/template-categories/meetings">예시1</a>, <a href="https://zapier.com/agents/templates/meeting-prep-assistant">예시2</a>, <a href="https://www.ninjatech.ai/product/ai-scheduling-agent">예시3</a>, <a href="https://attri.ai/ai-agents/scheduling-agent">예시4</a>)부터, 개인화된 소셜미디어 게시글 생성(<a href="https://www.hubspot.com/products/marketing/social-media-ai-agent">예시</a>)에 이르기까지 다양한 용도로 배포되고 있으며, 이 과정에서 “어떻게 하라”는 구체적인 절차 지시 없이도 작업을 수행한다.</p>
+
+<p>우리가 이 뉴스레터를 위해 살펴본 최근의 AI 에이전트들은 모두 머신러닝 모델을 기반으로 하고 있으며, 특히 대부분은 <strong>대규모 언어 모델(LLM)</strong>을 사용해 행동을 결정한다. 이는 컴퓨터 소프트웨어에서 비교적 새롭고 혁신적인 접근 방식이다. 머신러닝을 기반으로 한다는 점 외에도, 오늘날의 AI 에이전트들은 과거의 에이전트 개념과 여러 면에서 유사하며, 경우에 따라서는 <a href="https://core.ac.uk/download/pdf/1498750.pdf">에이전트가 어떠해야 하는지에 대해 이전에 이론적으로 제시되었던 아이디어들</a>을 실제로 구현하고 있다. 즉, 자율적으로 행동하고 사회적 능력을 보이며, 반응적 행동과 주도적 행동을 적절히 조화한 특징을 가진다.</p>
+
+<p>이러한 특성들은 연속적인 정도 차이를 가진다. AI 에이전트마다 역량 수준은 서로 다르며, 단독으로 작동할 수도 있고 여러 에이전트가 협력하여 하나의 목표를 달성할 수도 있다. 따라서 AI 에이전트는 더 많거나 적은 수준의 자율성(혹은 에이전트성)을 가진다고 말할 수 있으며, 무엇이 에이전트인가에 대한 판단 역시 바이너리한(0/1) 개념이 아닌, <strong>연속적인 스펙트럼</strong> 위에 놓여 있다고 볼 수 있다.</p>
+
+<p>이처럼 유동적인 AI 에이전트 개념은 <em>AI 에이전트가 무엇인지</em>에 대한 혼란과 오해를 낳기도 했다. 이 글에서는 이러한 혼란을 조금이나마 정리하고자, AI 에이전트의 ‘에이전트적(Agentic)’ 단계를 정리했다.</p>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th>에이전트적 단계 (Agentic Level)</th>
+      <th>설명</th>
+      <th>누가 제어하는가</th>
+      <th>명칭</th>
+      <th>예시 코드</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>☆☆☆☆</td>
+      <td>모델이 프로그램 흐름에 전혀 영향을 주지 않음</td>
+      <td>👤 개발자가 시스템이 수행할 수 있는 모든 기능과 실행 시점을 전적으로 제어함</td>
+      <td>단순 처리기 (Simple processor)</td>
+      <td><code class="language-plaintext highlighter-rouge">print_llm_output(llm_response)</code></td>
+    </tr>
+    <tr>
+      <td>★☆☆☆</td>
+      <td>모델이 기본적인 제어 흐름을 결정함</td>
+      <td>👤 개발자가 시스템이 수행할 수 있는 모든 기능을 제어하고, 시스템은 각 기능을 언제 실행할지 결정함</td>
+      <td>라우터 (Router)</td>
+      <td><code class="language-plaintext highlighter-rouge">if llm_decision(): path_a() else: path_b()</code></td>
+    </tr>
+    <tr>
+      <td>★★☆☆</td>
+      <td>모델이 함수가 <strong>어떻게 실행될지</strong>를 결정함</td>
+      <td>👤💻 개발자가 시스템이 수행할 수 있는 모든 기능과 실행 시점을 정의하고, 시스템은 실행 방식(방법)을 제어함</td>
+      <td>도구 호출 (Tool call)</td>
+      <td><code class="language-plaintext highlighter-rouge">run_function(llm_chosen_tool, llm_chosen_args)</code></td>
+    </tr>
+    <tr>
+      <td>★★★☆</td>
+      <td>모델이 반복(iteration)과 프로그램 지속 여부를 제어함</td>
+      <td>💻👤 개발자가 시스템이 수행할 수 있는 고수준 기능을 정의하고, 시스템은 무엇을 할지, 언제 할지, 어떻게 할지를 제어함</td>
+      <td>다단계 에이전트 (Multi-step agent)</td>
+      <td><code class="language-plaintext highlighter-rouge">while llm_should_continue(): execute_next_step()</code></td>
+    </tr>
+    <tr>
+      <td>★★★★</td>
+      <td>모델이 새로운 코드를 작성하고 실행함</td>
+      <td>💻 개발자가 시스템이 수행할 수 있는 고수준 기능만 정의하고, 시스템이 가능한 모든 기능과 실행 시점을 전적으로 제어함</td>
+      <td>완전 자율 에이전트 (Fully autonomous agent)</td>
+      <td><code class="language-plaintext highlighter-rouge">create_and_run_code(user_request)</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+<p>표 1. 대규모 언어 모델(LLM)과 같은 머신러닝 모델을 사용하는 시스템이 <strong>얼마나 에이전트적인지(agentic)</strong>에 따라 달라질 수 있음을 보여주는 하나의 예시이다. 이러한 시스템들은 또한 “다중 에이전트 시스템(multiagent systems)”으로 결합될 수 있는데, 한 에이전트의 워크플로가 다른 에이전트를 트리거하거나, 여러 에이전트가 공동으로 하나의 목표를 향해 협력할 수도 있다.
+본 표는 <a href="https://huggingface.co/blog/smolagents">smolagent 블로그 게시글</a>을 바탕으로 하되, 이 글의 맥락에 맞게 일부 수정하여 구성되었다.
+윤리적 관점에서 보면, 자율성의 연속체를 사람으로부터 기계로 통제가 얼마나 이전되는가라는 관점에서 이해하는 것도 중요하다. 시스템이 더 자율적일수록, 우리는 그만큼 더 많은 인간의 통제권을 기계에 넘기게 된다.
+이 글 전반에 걸쳐 AI 에이전트를 설명하는 데 널리 사용되고 있는 표현 방식에 맞추어, 다소 의인화된 용어를 사용한다. 그러나 <a href="https://core.ac.uk/download/pdf/1498750.pdf">과거의 연구에서도 지적되었듯이</a>, 지식·신념·의도와 같이 원래 인간에게 적용되는 정신 상태적 언어(mentalistic language)로 AI 에이전트를 설명하는 것은, 사용자가 시스템의 실제 능력을 올바르게 이해하는 데 문제를 줄 수 있다. 좋든 나쁘든, 이러한 언어는 기술의 보다 정확한 세부 사항을 간략화하여 덮어주는 추상화 도구로 기능한다.
+이 점을 이해하는 것은 이러한 시스템이 무엇인지, 사람들의 삶 속에서 어떤 역할을 하게 될지를 고민할 때 매우 중요하다. AI 에이전트를 정신 상태적 언어로 설명한다고 해서, 이 시스템이 ‘마음(mind)’을 가지고 있다는 의미는 아니다.</p>
+
+<h1 id="-ai-에이전트의-스펙트럼">📘 <strong>AI 에이전트의 스펙트럼</strong></h1>
+
+<p>AI 에이전트는 여러 상호 연관된 차원에서 다양하게 구분된다.</p>
+
+<hr />
+
+<h3 id="1-자율성autonomy"><strong>1. 자율성(Autonomy)</strong></h3>
+
+<p>최근의 “에이전트”는 사용자 입력 없이 최소 한 단계 이상의 행동을 수행할 수 있다. 현재 <em>에이전트</em>라는 용어는 단일 단계의 프롬프트-응답 시스템부터(<a href="https://blogs.microsoft.com/blog/2024/10/21/new-autonomous-agents-scale-your-team-like-never-before/">인용</a>) 다단계 고객지원 시스템(<a href="https://www.lindy.ai/solutions/customer-support">예시</a>)까지 매우 넓게 사용되고 있다.</p>
+
+<hr />
+
+<h3 id="2-능동성proactivity"><strong>2. 능동성(Proactivity)</strong></h3>
+
+<p>자율성과 관련된 개념으로, 사용자가 직접 목표를 지정하지 않아도 <strong>시스템이 목표 지향적 행동을 얼마나 수행할 수 있는지</strong>를 의미한다(<a href="https://core.ac.uk/download/pdf/1498750.pdf">인용</a>).</p>
+
+<p>예를 들어, 냉장고를 모니터링하여 어떤 식품이 부족한지 판단하고, 사용자가 모르는 사이에 필요한 물건을 구매해주는 시스템은 매우 능동적인 AI 에이전트이다.</p>
+
+<p>또한 <a href="https://en.wikipedia.org/wiki/Smart_thermostat">스마트 온도조절기(smart thermostats)</a>￼는 사람들의 가정에서 점점 더 널리 채택되고 있는 능동적 AI 에이전트로, 환경 변화와 사용자의 행동 패턴을 학습해 자동으로 온도를 조절한다(<a href="https://www.ecobee.com/en-us/smart-thermostats/">예시</a>).</p>
+
+<hr />
+
+<h3 id="3-인격화personification"><strong>3. 인격화(Personification)</strong></h3>
+
+<p>AI 에이전트는 특정 개인이나 집단처럼 행동하도록 설계될 수 있다.</p>
+
+<p>최근 연구(<a href="https://arxiv.org/abs/2411.10109">예시1</a>, <a href="https://www.researchgate.net/publication/387362519_Multi-Agent_System_for_Emulating_Personality_Traits_Using_Deep_Reinforcement_Learning">예시2</a>, <a href="https://medium.com/@damsa.andrei/ai-with-personality-prompting-chatgpt-using-big-five-values-def7f050462a">예시3</a>)는 <strong>빅 파이브(Big Five)</strong> 성격 모델(개방성, 성실성, 외향성, 친화성, 신경성)에 기반하여 AI를 설계하는 데 초점을 맞추고 있다(<a href="https://smythos.com/artificial-intelligence/conversational-agents/conversational-agent-frameworks/#:~:text=The%20OCEAN%20Model%3A%20A%20Framework%20for%20Digital%20Personality&amp;text=OCEAN%20stands%20for%20Openness%2C%20Conscientiousness,feel%20more%20authentic%20and%20relatable.">인용</a>).</p>
+
+<p>이 스펙트럼의 끝에는 “digital twins”이 있다(<a href="https://www.tavus.io/">비-에이전트형 digital twins</a>). 현재는 우리가 아는 범위 내에서 <strong>에이전트형 디지털 트윈은 존재하지 않는다</strong>.</p>
+
+<p><a href="https://www.salesforce.com/blog/ai-agent-design/">Salesforce 윤리팀</a>을 포함한 여러 단체는 왜 에이전트형 디지털 트윈이 특히 문제가 되는지 논의해 왔다(<a href="https://www.technologyreview.com/2024/11/26/1107309/we-need-to-start-wrestling-with-the-ethics-of-ai-agents/">예시</a>).</p>
+
+<hr />
+
+<h3 id="4-개인화personalization"><strong>4. 개인화(Personalization)</strong></h3>
+
+<p>AI 에이전트는 사용자의 요구에 맞추어 언어나 행동을 조정할 수 있다.</p>
+
+<p>예를 들어, <a href="https://www.zendesk.com/blog/ai-agents/">사용자의 투자 이력과 시장 패턴을 기반으로 맞춤형 투자 조언을 제공하는 시스템</a>이 있다.</p>
+
+<hr />
+
+<h3 id="5-도구-접근성tooling"><strong>5. 도구 접근성(Tooling)</strong></h3>
+
+<p>AI 에이전트가 접근할 수 있는 <strong>추가 도구나 리소스의 양</strong>도 다르다.</p>
+
+<p>초기의 에이전트는 검색 엔진에 접근해 답을 찾는 정도였으나, 이후 문서·스프레드시트 등 다양한 기술 제품을 조작할 수 있는 기능이 추가되었다(<a href="https://gemini.google.com">예시1</a>, <a href="https://copilot.microsoft.com/">예시2</a>).</p>
+
+<hr />
+
+<h3 id="6-다재다능성versatility"><strong>6. 다재다능성(Versatility)</strong></h3>
+
+<p>에이전트가 수행할 수 있는 행동의 다양성과 관련된다. 이는 다음 요소로 결정된다.</p>
+
+<h3 id="a-도메인-특화domain-specificity"><strong>a. 도메인 특화(Domain specificity)</strong></h3>
+
+<p>에이전트가 운영할 수 있는 영역의 수</p>
+
+<p>– 예: 이메일만 처리하는 경우 vs 이메일·캘린더·문서까지 모두 다루는 경우</p>
+
+<h3 id="b-작업task-특화task-specificity"><strong>b. 작업(Task) 특화(Task specificity)</strong></h3>
+
+<p>수행 가능한 작업 유형의 수</p>
+
+<p>– 예: 캘린더 초대만 생성하는 기능(example)</p>
+
+<p>→ 여기에 더해 리마인더 이메일 전송, 회의 종료 후 요약 제공까지 수행하는 경우(<a href="https://attri.ai/ai-agents/scheduling-agent">예시</a>)</p>
+
+<h3 id="c-모달리티-특화modality-specificity"><strong>c. 모달리티 특화(Modality specificity)</strong></h3>
+
+<p>사용 가능한 입력/출력 형태</p>
+
+<p>– 텍스트, 음성, 비디오, 이미지, 폼, 코드 등</p>
+
+<p>가장 최근의 에이전트들은 고도로 <strong>멀티모달</strong>로 개발되고 있으며(<a href="https://deepmind.google/technologies/project-mariner/">예시</a>), 이러한 방향은 계속 증가할 것으로 예상된다.</p>
+
+<h3 id="d-소프트웨어-특화software-specificity"><strong>d. 소프트웨어 특화(Software specificity)</strong></h3>
+
+<p>에이전트가 상호작용할 수 있는 소프트웨어의 종류와 그 깊이</p>
+
+<hr />
+
+<h3 id="7-적응성adaptability"><strong>7. 적응성(Adaptability)</strong></h3>
+
+<p>다재다능성과 유사하며, 변화한 맥락이나 새로운 정보에 따라 <strong>행동 순서를 업데이트할 수 있는 능력</strong>을 의미한다.</p>
+
+<p>이는 “동적(dynamic)” 혹은 “상황 인식(context-aware)”이라고도 한다.</p>
+
+<hr />
+
+<h3 id="8-행동-표면action-surfaces"><strong>8. 행동 표면(Action surfaces)</strong></h3>
+
+<p>에이전트가 <strong>실제로 행동을 실행할 수 있는 공간</strong>을 의미한다.</p>
+
+<ul>
+  <li>전통적인 챗봇은 채팅 인터페이스에 제한된다.</li>
+  <li>챗 기반 에이전트는 웹 검색, 스프레드시트/문서 접근까지 할 수 있다(<a href="https://copilot.microsoft.com/">예시</a>).</li>
+  <li>일부는 컴퓨터의 그래픽 인터페이스(GUI)를 조작하며 마우스를 움직여 작업하기도 한다(<a href="https://huggingface.co/blog/DigiRL">예시1</a>, <a href="https://github.com/MinorJerry/WebVoyager">예시2</a>, <a href="https://www.anthropic.com/news/3-5-models-and-computer-use">예시3</a>).</li>
+  <li>로봇에 구현된 물리적 에이전트 사례도 존재한다(<a href="https://deepmind.google/discover/blog/shaping-the-future-of-advanced-robotics/">예시</a>).</li>
+</ul>
+
+<hr />
+
+<h3 id="9-요청-형식request-formats"><strong>9. 요청 형식(Request formats)</strong></h3>
+
+<p>AI 에이전트의 공통된 특징은 <strong>사용자가 세부적인 절차를 일일이 지정하지 않아도 요청을 전달할 수 있다는 점</strong>이다.</p>
+
+<ul>
+  <li><a href="https://huggingface.co/blog/smolagents">로우코드 방식</a></li>
+  <li>텍스트 기반 자연어</li>
+  <li><a href="https://play.ai/">음성 기반 자연어</a></li>
+</ul>
+
+<p>자연스럽게 LLM 챗봇의 자연스러운 다음 단계는 자연어로 요청을 받을 수 있는 에이전트로, 챗봇과 달리 <strong>챗 인터페이스 밖에서 실제 작업을 수행</strong>할 수 있다.</p>
+
+<hr />
+
+<h3 id="10-반응-속도reactivity"><strong>10. 반응 속도(Reactivity)</strong></h3>
+
+<p>에이전트가 행동 시퀀스를 완료하는 데 걸리는 시간
+예: ChatGPT는 밀리초 단위로 응답하지만, Qwen QwQ는 “Reasoning” 단계들을 거치며 몇 분이 걸리기도 한다.</p>
+
+<hr />
+
+<h3 id="11-에이전트-수number"><strong>11. 에이전트 수(Number)</strong></h3>
+
+<p>시스템은 <strong>단일 에이전트</strong>일 수도, <strong>다중 에이전트</strong>가 협력·순차·병렬로 작동하는 형태일 수도 있다.</p>
+
+<h1 id="위험-이점-활용-가치-기반-분석"><strong>위험, 이점, 활용: 가치 기반 분석</strong></h1>
+
+<p>AI 에이전트를 윤리적 관점에서 살펴보기 위해, 최근 AI 에이전트 연구와 마케팅에서 강조되는 다양한 <strong>가치(values)</strong>를 기준으로 그 위험과 이점을 구분하여 분석했다. 새로운 내용은 아니며, <a href="https://dl.acm.org/doi/10.1145/3442188.3445922">LLM</a>과 같이 AI 에이전트의 기반이 되는 기술에 대해 이미 문서화된 위험, 피해, 이점에 추가된 내용이다. 본 섹션은 AI 에이전트를 어떻게 개발해야 하는지에 대한 이해를 돕고, 서로 다른 개발 우선순위에 따라 나타나는 이점과 위험에 대한 정보를 제공하는 것을 목표로 한다. 이러한 가치들은 <strong>red-teaming</strong>과 같은 평가 프로토콜을 설계하는 데에도 참고가 될 수 있다.</p>
+
+<hr />
+<h3 id="가치-정확성-accuracy">가치: 정확성 (Accuracy)</h3>
+
+<p>🙂 잠재적 이점
+신뢰성 있는 데이터에 기반할 경우, 에이전트는 순수한 모델 출력에만 의존할 때보다 더 정확할 수 있다. 규칙 기반 접근이나 RAG와 같은 머신러닝 기법을 통해 달성될 수 있으며, 정확성을 보장하기 위한 새로운 연구 기여가 이루어지기 적절한 시점이다.</p>
+
+<p>😟 위험
+현대 AI 에이전트의 핵심은 생성형 AI인데, 이는 현실과 비현실, 사실과 허구를 구분하지 못한다. 예를 들어, LLM은 유창해 보이는 텍스트를 생성하도록 설계되어 있어, 그럴듯하게 들리지만 사실은 매우 잘못된 내용을 만들어내는 경우가 많다. 이러한 LLM 출력이 AI 에이전트에 적용될 경우, 잘못된 소셜미디어 게시물, 투자 판단, 회의 요약 등으로 이어질 수 있다.</p>
+
+<h3 id="가치-보조성--지원성-assistiveness">가치: 보조성 / 지원성 (Assistiveness)</h3>
+
+<p>🙂 잠재적 이점
+에이전트는 사람을 대체하기보다는 <strong>보조(supplement)</strong>하는 존재로서, 사용자의 요구를 돕는 데 이상적이다. 이를 통해 사용자가 과제를 더 빠르게 완료하고, 여러 작업을 동시에 보다 효율적으로 수행하도록 도울 수 있다. 또한 보조적 에이전트는 부정적 결과를 최소화하기 위해 인간의 역량을 확장할 수도 있다. 예를 들어, 시각장애 사용자가 혼잡한 계단을 안전하게 이동하도록 돕는 AI 에이전트가 이에 해당한다. 잘 설계된 보조형 AI 에이전트는 사용자에게 더 많은 자유와 기회를 제공하고, 조직 내에서 긍정적인 영향력을 확대하거나, 공공 플랫폼에서 사용자의 도달 범위를 넓히는 데 기여할 수 있다.</p>
+
+<p>😟 위험
+AI 에이전트가 사람을 대체하는 경우(예: 직장에서 사람이 하던 일을 대신하는 경우), 일자리 감소와 경제적 영향을 초래할 수 있으며, 이는 기술을 만드는 사람들과 그 기술을 가능하게 한 데이터 제공자들(종종 동의 없이 데이터가 사용된 사람들) 사이의 격차를 더욱 심화시킬 수 있다. 또한 설계가 미흡한 보조성은 과도한 의존이나 부적절한 신뢰로 인한 피해를 초래할 수 있다.</p>
+
+<h3 id="가치-일관성-consistency">가치: 일관성 (Consistency)</h3>
+
+<p>AI 에이전트가 사람보다 주변 환경의 영향을 덜 받기 때문에 일관성을 제공할 수 있다는 주장이 있다. 이는 장점일 수도, 단점일 수도 있다. 현재까지 AI 에이전트의 일관성 자체를 엄밀하게 분석한 연구는 많지 않지만, 관련 연구에서는 많은 AI 에이전트의 기반이 되는 LLM이 매우 비일관적일 수 있음이 보고된 바 있다(<a href="https://www.medrxiv.org/content/10.1101/2023.08.03.23293401v2">인용1</a>, <a href="https://arxiv.org/abs/2405.01724">인용2</a>). 특히 민감한 영역에서는 AI 에이전트의 일관성을 측정하기 위한 새로운 평가 프로토콜이 필요하다.</p>
+
+<p>🙂 잠재적 이점
+AI 에이전트는 인간처럼 기분, 배고픔, 수면 상태, 타인에 대한 인식 편향 등에 의해 영향을 받지 않는다(물론 학습 데이터에 포함된 인간의 편향을 그대로 재생산할 수는 있다). 여러 기업들은 일관성을 AI 에이전트의 핵심 장점으로 강조하고 있다(<a href="https://www.salesforce.com/agentforce/ai-agents/">예시1</a>, <a href="https://www.oracle.com/artificial-intelligence/ai-agents/">예시2</a>).</p>
+
+<p>😟 위험
+많은 AI 에이전트에 포함된 생성적 요소는, 유사한 상황에서도 결과가 달라지는 내재적 변동성을 가져온다. 이는 사람들이 에이전트의 부적절한 비일관성을 찾아내고 수정해야 하므로 속도와 효율성을 저하시킬 수 있다. 발견되지 않은 비일관성은 안전 문제로 이어질 수도 있다. 또한 일관성은 항상 바람직한 가치가 아니며, <strong>형평성(equity)</strong>과 긴장 관계에 놓일 수 있다. 서로 다른 배포 환경과 행동 체인 전반에서 일관성을 유지하려면, AI 에이전트가 자신의 다양한 상호작용을 기록하고 비교해야 할 가능성이 크며, 이는 감시와 프라이버시 위험을 동반한다.</p>
+
+<h3 id="가치-효율성-efficiency">가치: 효율성 (Efficiency)</h3>
+
+<p>🙂 잠재적 이점
+AI 에이전트의 주요 장점 중 하나는 사람들의 효율성을 높여준다는 점이다. 예를 들어, 문서를 자동으로 정리해 주어 사용자가 가족과 더 많은 시간을 보내거나, 의미 있다고 느끼는 일에 집중할 수 있도록 도울 수 있다.</p>
+
+<p>😟 위험
+반대로, 에이전트가 만들어낸 오류를 식별하고 수정하는 데 오히려 더 많은 시간이 소요될 수도 있다. 특히 에이전트가 여러 단계를 연속적으로 수행하면서 발생하는 문제들은 복잡하게 얽혀 있어, 이를 바로잡는 과정이 시간 소모적이고 어렵고 스트레스를 유발할 수 있다.</p>
+
+<h3 id="가치-형평성-equity">가치: 형평성 (Equity)</h3>
+
+<p>AI 에이전트는 상황이 얼마나 공정하고, 공평하며, 포용적인지에 영향을 미칠 수 있다.</p>
+
+<p>🙂 잠재적 이점
+AI 에이전트는 잠재적으로 ‘기회의 장을 평평하게 만드는(level the playing field)’ 역할을 할 수 있다. 예를 들어, 회의 보조 에이전트가 각 사람이 발언한 시간을 표시해 준다면, 이를 통해 보다 평등한 참여를 유도하거나 성별·지역에 따른 불균형을 드러낼 수 있다(<a href="https://equaltime.io/">예시</a>).</p>
+
+<p>😟 위험
+현대 AI 에이전트의 기반이 되는 머신러닝 모델은 인간이 만든 데이터로 학습되는데, 이 데이터 자체는 불공정하고, 불평등하며, 배제적일 수 있다. 데이터 수집 과정에서의 표본 편향(예: 특정 국가가 과도하게 대표되는 경우)으로 인해 불공정한 시스템 결과가 나타날 수도 있다.</p>
+
+<h3 id="가치-인간유사성-humanlikeness">가치: 인간유사성 (Humanlikeness)</h3>
+
+<p>🙂 잠재적 이점
+인간과 유사한 행동을 할 수 있는 시스템은, 서로 다른 하위 집단이 특정 자극에 어떻게 반응할지를 시뮬레이션할 수 있는 기회를 제공한다. 이는 직접적인 인간 실험이 해를 초래할 수 있는 상황이나, 많은 수의 시뮬레이션이 실험적 질문을 더 잘 해결하는 데 도움이 되는 경우에 특히 유용하다. 예를 들어, 인간 행동을 합성함으로써 커플 매칭을 예측하거나, 경제 변화와 정치적 변동을 전망하는 데 활용할 수 있다. 또한 현재 연구되고 있는 또 다른 잠재적 이점으로는, 인간유사성이 의사소통의 용이성은 물론 동반자적 관계(companionship)에까지 도움이 될 수 있다는 점이 있다(<a href="https://dl.acm.org/doi/abs/10.1145/3213050">예시</a>).</p>
+
+<p>😟 위험
+이러한 이점은 양날의 검이 될 수 있다. 인간유사성은 사용자가 시스템을 의인화하도록 만들 수 있으며, 이는 과도한 의존(<a href="https://www.vox.com/future-perfect/367188/love-addicted-ai-voice-human-gpt4-emotion">인용</a>), 부적절한 신뢰, 의존성, 정서적 얽힘으로 이어져 반사회적 행동이나 자해(self-harm)로까지 발전할 수 있는 부정적 심리 효과를 낳을 수 있다(<a href="https://www.npr.org/2024/12/10/nx-s1-5222574/kids-character-ai-lawsuit">예시</a>). AI 에이전트와의 사회적 상호작용이 외로움을 심화시킬 수 있다는 우려도 있지만, 소셜미디어 사용을 통해 드러나는 미묘한 양상을 보여주는 연구들도 존재한다(<a href="https://www.sciencedirect.com/science/article/abs/pii/S0747563203000402">인용1</a>, <a href="https://www.sciencedirect.com/science/article/pii/S245195882100018X">인용2</a>). 여기에 더해, 불쾌한 골짜기(uncanny valley) 현상은 또 다른 복잡성을 더한다. 에이전트가 점점 더 인간과 비슷해지지만 완전한 인간 모사에는 이르지 못할 경우, 사용자에게 불안감, 혐오감, 혹은 인지적 부조화를 유발할 수 있다.</p>
+
+<h3 id="가치-상호운용성-interoperability">가치: 상호운용성 (Interoperability)</h3>
+
+<p>🙂 잠재적 이점
+다른 시스템들과 함께 작동할 수 있는 시스템은, AI 에이전트가 수행할 수 있는 작업의 범위와 선택지를 넓혀 더 큰 유연성을 제공한다.</p>
+
+<p>😟 위험
+그러나 이는 안전성과 보안을 훼손할 수 있다. 에이전트가 제한된 테스트 환경을 넘어 외부 시스템에 영향을 주고 또 영향을 받을 수 있을수록, 악성 코드나 의도치 않은 문제적 행동의 위험이 커진다. 예를 들어, 사용자를 대신해 물건을 쉽게 구매할 수 있도록 은행 계좌와 연결된 에이전트는, 계좌의 자금을 고갈시킬 수 있는 위치에 놓이게 된다. 이러한 우려 때문에, 기술 기업들은 자율적으로 구매를 수행할 수 있는 AI 에이전트의 공개를 자제해 왔다(<a href="https://www.wired.com/story/amazon-ai-agents-shopping-guides-rufus/">인용</a>).</p>
+
+<h3 id="가치-privacy">가치: Privacy</h3>
+
+<p>🙂 잠재적 이점
+AI 에이전트는, 적어도 AI 에이전트 제공자가 모니터링할 수 있는 범위를 제외하면, 거래와 작업을 전적으로 비공개로 유지함으로써 일정 수준의 프라이버시를 제공할 수 있다.</p>
+
+<p>😟 위험
+에이전트가 사용자의 기대에 맞게 작동하려면, 사용자는 자신이 어디로 가는지, 누구를 만나는지, 무엇을 하고 있는지와 같은 상세한 개인 정보를 제공해야 할 수 있다. 또한 에이전트가 더 개인화된(personalized) 방식으로 행동하려면, 연락처 목록, 캘린더 등과 같이 추가적인 사적 정보를 추출할 수 있는 애플리케이션과 정보원에 접근할 수도 있다. 사용자는 효율성을 위해(그리고 에이전트를 신뢰할수록 더 쉽게) 자신의 데이터뿐 아니라 타인의 사적인 정보에 대한 통제권까지도 쉽게 내려놓을 수 있다. 프라이버시 침해가 발생할 경우, AI 에이전트가 가져오는 다양한 콘텐츠의 상호연결성 때문에 피해는 더욱 커질 수 있다. 예를 들어, 전화 통화와 소셜미디어 게시에 접근할 수 있는 AI 에이전트는 매우 사적인 정보를 공개해 버릴 수도 있다.</p>
+
+<h3 id="가치-관련성-relevance">가치: 관련성 (Relevance)</h3>
+
+<p>🙂 잠재적 이점
+개별 사용자에게 개인화된 시스템을 만드는 한 가지 동기는, 그 출력이 사용자에게 특히 관련성 있고 일관되게 느껴지도록 하기 위함이다.</p>
+
+<p>😟 위험
+이러한 개인화는 편향을 증폭시키거나 새로운 편향을 만들어낼 수 있다. 시스템이 개별 사용자에 맞게 적응할수록, 기존의 선입견을 강화하고 심화시키며, 선택적 정보 탐색을 통해 확증 편향을 만들고, 문제적인 관점을 재생산하는 반향실 효과(Echo chamber)를 형성할 위험이 있다. 사용자의 선호를 학습하고 이에 적응하는 능력이라는, 에이전트를 사용자에게 더 관련성 있게 만드는 바로 그 메커니즘이, 의도치 않게 사회적 편향을 지속·강화시킬 수 있으며, 이로 인해 개인화와 책임 있는 AI 개발 사이의 균형을 맞추는 일은 특히 어려운 과제가 된다.</p>
+
+<h3 id="가치-안전-safety">가치: 안전 (Safety)</h3>
+
+<p>🙂 잠재적 이점
+로봇 기반 AI 에이전트는 폭탄 해체, 독성 물질 제거, 또는 인간에게 위험한 제조·산업 환경에서의 작업 수행 등과 같이, 사람을 신체적 위험으로부터 보호하는 데 도움을 줄 수 있다.</p>
+
+<p>😟 위험
+에이전트 행동의 예측 불가능성 때문에, 개별적으로는 안전해 보이는 작업들이 결합되어 잠재적으로 해로운 결과를 낳을 수 있으며, 이는 사전에 방지하기가 어렵다(이는 <a href="https://en.wikipedia.org/w/index.php?title=Instrumental_convergence&amp;section=3#Paperclip_maximizer">도구적 수렴(instrumental convergence)과 페이퍼클립 극대화(paperclip maximizer) 문제</a>￼와 유사하다). 또한 AI 에이전트가 기존의 가드레일을 우회하는 과정을 스스로 설계할 가능성이 있는지, 혹은 가드레일의 규정 방식 자체가 오히려 새로운 문제를 만들어내는지는 불분명하다. 따라서 더 넓은 시스템 접근 권한, 더 정교한 행동 체인, 감소된 인간 감독을 통해 에이전트를 더욱 유능하고 효율적으로 만들려는 방향은, 안전 고려사항과 충돌하게 된다.</p>
+
+<p>더 나아가, GUI와 같은 광범위한 인터페이스 접근(앞서 논의한 “Action Surfaces” 참고)과 인간유사한 행동은, 에이전트가 인간 사용자와 동일한 수준의 통제력을 가지고도 경고 시스템을 작동시키지 않은 채 파일을 조작하거나 삭제하고, 소셜미디어에서 사용자를 사칭하거나, 저장된 신용카드 정보를 이용해 광고에 뜨는 물건을 구매하는 등의 행동을 가능하게 한다. 또한 AI 에이전트가 여러 시스템과 상호작용할 수 있고, 각 행동마다 인간의 감독이 없는 구조 자체로 인해, 추가적인 안전 위험이 발생한다. 여러 AI 에이전트가 집합적으로 안전하지 않은 결과를 만들어낼 가능성도 있다.</p>
+
+<h3 id="가치-과학적-진보-scientific-progress">가치: 과학적 진보 (Scientific Progress)</h3>
+
+<p>현재 AI 에이전트가 AI 발전에 있어 근본적인 도약인지, 아니면 수년간 사용되어 온 딥러닝, 휴리스틱, 파이프라인 시스템을 <strong>재포장(rebranding)</strong>한 것에 불과한지를 두고 논쟁이 있다. 최소한의 사용자 입력만으로 작업을 수행한다는 공통된 특성을 지닌 현대 AI 시스템을 포괄적으로 지칭하는 용어로서 “에이전트(agent)”라는 개념을 다시 도입한 것은, 최근의 AI 응용을 간결하게 설명하는 데 유용하다. 그러나 이 용어는 <strong>자유와 행위성(agency)</strong>을 연상시키는 뉘앙스를 함께 지니고 있어, AI 기술에 더 근본적인 변화가 일어났다는 인상을 주기도 한다.</p>
+
+<p>이 섹션에서 다룬 모든 가치들은 과학적 진보와 관련이 있으며, 그 대부분은 잠재적 이점뿐 아니라 위험에 대해서도 함께 설명되어 있다.</p>
+
+<h3 id="가치-보안-security">가치: 보안 (Security)</h3>
+
+<p>🙂 잠재적 이점
+잠재적 이점은 프라이버시에서 언급한 이점들과 유사하다.</p>
+
+<p>😟 위험
+AI 에이전트는 종종 민감한 데이터(고객 및 사용자 정보)를 다루고, 여러 시스템과 상호작용할 수 있으며, 각 행동에 대해 인간의 감독이 설계상 부족하다는 점에서 심각한 보안 문제를 제기한다. 사용자가 선의로 목표를 설정했더라도, 에이전트가 기밀 정보를 공유해 버릴 수 있다. 또한 악의적인 행위자가 에이전트를 탈취하거나 조작하여, 연결된 시스템에 대한 무단 접근을 얻고 민감한 정보를 탈취하거나 대규모 자동화 공격을 수행할 가능성도 있다. 예를 들어, 이메일 시스템에 접근 권한이 있는 에이전트는 기밀 데이터를 유출하는 데 악용될 수 있고, 가정 자동화 시스템과 통합된 에이전트는 물리적 보안을 침해하는 데 이용될 수 있다.</p>
+
+<h3 id="가치-speed">가치: Speed</h3>
+
+<p>사용자 관점의 속도
+🙂 잠재적 이점
+AI 에이전트는 수행해야 할 작업을 돕는 또 하나의 손처럼 작동하여, 사용자가 더 많은 일을 더 빠르게 처리하도록 도울 수 있다.</p>
+
+<p>😟 위험
+그러나 에이전트의 행동에서 발생하는 문제로 인해 오히려 더 많은 일이 생길 수도 있다(효율성 항목 참조).</p>
+
+<p>시스템 관점의 속도
+대부분의 시스템과 마찬가지로, 빠르게 결과를 얻는 것은 정확성, 품질, 비용 절감과 같은 다른 바람직한 특성을 희생하는 대가일 수 있다. 과거의 경험이 시사하는 바가 있다면, 미래에는 더 느린 시스템이 전반적으로 더 나은 결과를 제공하는 경우도 나타날 수 있다.</p>
+
+<h3 id="가치-지속가능성-sustainability">가치: 지속가능성 (Sustainability)</h3>
+
+<p>🙂 잠재적 이점
+AI 에이전트는 이론적으로 기후 변화와 관련된 문제를 해결하는 데 도움을 줄 수 있다. 예를 들어, 산불 확산이나 도시 지역의 홍수를 예측하고, 교통 패턴 분석과 결합해 실시간으로 최적의 이동 경로와 교통수단을 제안할 수 있다. 미래의 자율주행 AI 에이전트는 이러한 경로 결정을 직접 수행하고, 관련 업데이트를 위해 다른 시스템들과 조율할 수도 있을 것이다.</p>
+
+<p>😟 위험
+현재 AI 에이전트의 기반이 되는 머신러닝 모델은 탄소 배출(<a href="https://dl.acm.org/doi/pdf/10.1145/3630106.3658542">인용</a>￼)이나 식수 사용(<a href="https://www.theatlantic.com/technology/archive/2024/03/ai-water-climate-microsoft/677602/">인용</a>￼)과 같은 부정적인 환경 영향을 수반한다. 규모가 클수록 항상 더 좋은 것은 아니며(<a href="https://huggingface.co/blog/smollm">예시</a>), 효율적인 하드웨어와 저탄소 데이터 센터는 이러한 영향을 줄이는 데 도움이 될 수 있다.</p>
+
+<h3 id="가치-신뢰-trust">가치: 신뢰 (Trust)</h3>
+
+<p>🙂 잠재적 이점
+AI 에이전트와 관련해 신뢰 측면에서의 직접적인 이점은 현재로서는 알려져 있지 않다. 시스템은 안전하고, 보안이 확보되며, 신뢰할 수 있도록 설계되어야 하며, 그 자체로 신뢰받을 자격이 있어야 한다.</p>
+
+<p>😟 위험
+부적절한 신뢰는 사람들을 조종당하게 만들며, 효율성(Efficiency), 인간유사성(Humanlikeness), 진실성(Truthfulness)에서 설명한 다른 위험들과도 연결된다. 또한 LLM이 거짓 정보를 생성하는 경향(환각 또는 허구적 조합(confabulations)) 때문에 추가적인 위험이 발생한다. 대체로는 옳은 답을 내는 시스템일수록, 틀렸을 때 오히려 과도하게 신뢰받을 가능성이 크다.</p>
+
+<h3 id="가치-진실성-truthfulness">가치: 진실성 (Truthfulness)</h3>
+
+<p>🙂 잠재적 이점
+AI 에이전트와 관련하여 진실성 측면에서의 이점은 현재로서는 알려져 있지 않다.</p>
+
+<p>😟 위험
+AI 에이전트의 기반이 되는 딥러닝 기술은, 딥페이크와 같은 허위 정보의 근원이 될 수 있음이 잘 알려져 있다(<a href="https://www.sciencedirect.com/science/article/abs/pii/S1364661324002213">인용</a>). AI 에이전트는 최신 정보를 수집해 여러 플랫폼에 게시하는 방식으로, 이러한 거짓 정보를 더욱 공고히 하는 데 사용될 수 있다. 이는 무엇이 사실이고 무엇이 거짓인지에 대한 잘못된 인식을 제공하고, 사람들의 신념을 조작하며, 동의 없는 친밀한 콘텐츠의 확산 범위를 넓힐 수 있음을 의미한다. 또한 특정 개인에게 맞춤화된 허위 정보는, 그들을 대상으로 한 사기에 활용될 수도 있다.</p>
+
+<hr />
+<h1 id="hugging-face의-ai-에이전트">Hugging Face의 AI 에이전트</h1>
+
+<p>Hugging Face에서는 앞서 논의한 가치들에 기반하여, 사람들이 다양한 방식으로 AI 에이전트를 구축하고 활용할 수 있도록 하는 기능들을 도입하기 시작했다. 여기에는 다음이 포함된다.</p>
+
+<ul>
+  <li>최근 공개한 <a href="https://huggingface.co/docs/smolagents/index">smolagents</a>: 도구, 튜토리얼, 가이드 투어, 개념적 안내서를 제공</li>
+  <li><a href="https://huggingface.co/learn/cookbook/index">AI Cookbook</a>: 다양한 종류의 에이전트를 위한 “레시피” 모음
+    <ul>
+      <li><a href="https://huggingface.co/learn/cookbook/agents">Transformers Agents를 활용해 도구 호출 능력을 갖춘 에이전트 구축 🦸</a></li>
+      <li><a href="https://huggingface.co/learn/cookbook/agent_rag">Agentic RAG: 쿼리 재구성과 self-query로 RAG 성능 극대화 🚀</a></li>
+      <li><a href="https://huggingface.co/learn/cookbook/agent_change_llm">어떤 LLM 추론 제공자에서도 Transformers Agent 생성</a></li>
+      <li><a href="https://huggingface.co/learn/cookbook/agent_text_to_sql">자동 오류 수정 기능을 갖춘 텍스트-투-SQL 에이전트</a></li>
+      <li><a href="https://huggingface.co/learn/cookbook/agent_data_analyst">데이터 분석 에이전트: 데이터를 순식간에 인사이트로 전환 ✨</a></li>
+      <li><a href="https://huggingface.co/learn/cookbook/multiagent_web_assistant">다중 에이전트 계층 구조에서 여러 에이전트가 협업하도록 하기</a></li>
+      <li><a href="https://huggingface.co/spaces/data-agents/jupyter-agent">다중 에이전트 RAG 시스템 🤖🤝🤖</a></li>
+      <li><a href="https://huggingface.co/learn/cookbook/ko/vector_search_agent">🤖 벡터 검색 에이전트: 허깅페이스 허브를 백엔드로 하는 지능형 검색 엔진</a></li>
+    </ul>
+  </li>
+  <li>직접 만든 에이전트의 프런트엔드를 제공하는 <a href="https://www.gradio.app/main/guides/agents-and-tool-usage">Gradio 에이전트 사용자 인터페이스</a></li>
+  <li>실시간 코딩 플레이그라운드에서 코드 아이디어를 실험할 수 있는 <a href="https://www.gradio.app/playground">Gradio 코드 작성 에이전트</a></li>
+  <li>Jupyter Agent: <a href="https://huggingface.co/spaces/data-agents/jupyter-agent">Jupyter 노트북 안에서 코드를 작성하고 실행하는 에이전트</a></li>
+</ul>
+
+<h1 id="권고-사항-및-향후-방향">권고 사항 및 향후 방향</h1>
+<p>현재 AI “에이전트”의 최첨단 연구 동향은 몇 가지 분명한 방향을 가리키고 있다.</p>
+
+<ol>
+  <li>
+    <p>엄격한 평가 프로토콜 설계의 필요성
+에이전트를 위한 자동화된 벤치마크는 앞서 제시된 AI 에이전트의 다양한 차원에 근거해 설계될 수 있다. 또한 사회기술적(sociotechnical) 평가는 가치(value)를 기준으로 이루어질 수 있다.</p>
+  </li>
+  <li>
+    <p>AI 에이전트의 영향에 대한 이해 심화
+개인적·조직적·경제적·환경적 영향이 체계적으로 추적되고 분석되어야 하며, 이를 통해 에이전트를 추가로 개발해야 할지 여부를 판단할 수 있다. 여기에는 웰빙, 사회적 결속, 일자리 기회, 자원 접근성, 기후 변화에 대한 기여도에 미치는 영향 분석이 포함되어야 한다.</p>
+  </li>
+  <li>
+    <p>연쇄 효과(ripple effects)에 대한 이해 필요
+한 사용자가 배포한 에이전트가 다른 사용자의 에이전트와 상호작용하고, 서로의 출력을 바탕으로 행동할 때, 이러한 상호작용이 사용자의 목표 달성 능력에 어떤 영향을 미치는지는 아직 명확하지 않다.</p>
+  </li>
+  <li>
+    <p>투명성과 고지(disclosure)의 개선
+앞서 나열된 가치들의 긍정적 효과를 달성하고 부정적 영향을 최소화하려면, 사람들이 지금 대화하고 있는 대상이 에이전트인지, 그리고 얼마나 자율적인지를 명확히 인식할 수 있어야 한다. 이는 단순한 알림을 넘어서, 기술적·디자인적·심리적 요소를 결합한 접근을 요구한다. 사용자가 AI 에이전트와 상호작용하고 있다는 사실을 명확히 알고 있더라도, 여전히 의인화나 부당한 신뢰가 형성될 수 있다. 따라서 상호작용 전반에 걸쳐 지속되는 시각적·인터페이스 신호, 에이전트의 인공적 성격을 반복적으로 상기시키는 대화 패턴, 그리고 에이전트의 역량과 한계를 맥락 속에서 솔직하게 드러내는 다층적 투명성 메커니즘이 필요하다.</p>
+  </li>
+  <li>
+    <p>오픈소스의 긍정적 역할
+오픈소스 운동은 소수의 강력한 조직에 AI 에이전트 개발이 집중되는 현상에 대한 <strong>균형추(counterbalance)</strong>가 될 수 있다. 에이전트 아키텍처와 평가 프로토콜에 대한 접근을 민주화함으로써, 오픈 이니셔티브는 더 많은 사람들이 이러한 시스템의 개발과 배포 방식에 참여하도록 만들 수 있다. 이러한 협업적 접근은 집단적 개선을 통해 과학적 진보를 가속화할 뿐 아니라, 안전과 신뢰에 대한 커뮤니티 주도 표준을 확립하는 데에도 기여한다. 에이전트 개발이 공개적으로 이루어질수록, 단일 주체가 상업적 이익을 위해 프라이버시나 진실성과 같은 중요한 가치를 훼손하기는 더 어려워진다. 오픈 개발에 내재된 투명성은 공동체가 에이전트의 행동을 검증하고, 개발이 공공의 이익에 부합하도록 유지하게 만드는 자연스러운 책임성을 제공한다. 에이전트가 점점 더 정교해지고 사회적 영향력이 커질수록, 이러한 개방성은 더욱 중요해진다.</p>
+  </li>
+  <li>
+    <p>더 에이전트적인 “기반 모델(base models)”의 등장 가능성
+이는 윤리적 권고라기보다는, 현재의 연구 동향과 패턴에 비추어볼 때 충분히 예견 가능한 흐름이다. 현재의 에이전트 기술은 최신 및 기존 컴퓨터 과학 기법들의 집합을 활용하고 있으며, 가까운 미래의 연구는 에이전트 모델을 하나의 <strong>단일한 범용 모델(monolithic general model)</strong>로 학습시키려는 시도를 할 가능성이 크다. 이는 텍스트·이미지 등 다양한 모달리티를 모델링하는 동시에, 행동 수행까지 함께 학습하는 일종의 <strong>멀티모달 모델++</strong>로 볼 수 있다.</p>
+  </li>
+</ol>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2025-12-15">15 Dec 2025</time></span>
+                
+            </small>
+        </p>
+
+
+
+        <!-- Prev/Next -->
+        <div class="row PageNavigation mt-4 prevnextlinks d-flex justify-content-between">
+            
+            <div class="col-md-6 rightborder pl-0">
+                <a class="thepostlink" href="/pr-preview/pr-142/hugging_face_blog_fetch_automation/">&laquo; n8n을 이용해 블로그 수동적으로 탐험하기</a>
+            </div>
+            
+            
+            <div class="col-md-6 text-right pr-0">
+                <a class="thepostlink" href="/pr-preview/pr-142/hf-translation-hub-mcp-server-usage-guide/">HuggingFace 번역 MCP 서버 사용법 &raquo;</a>
+            </div>
+            
+        </div>
+        <!-- End Prev/Next -->
+
+
+        <!-- Author Box -->
+        
+        <div class="row post-top-meta ">
+            <div class="col-md-2 text-left text-md-left">
+                <img class="author-thumb" src="/pr-preview/pr-142/assets/images/author/jeong.JPG" alt="jeong">
+            </div>
+            <div class="col-md-10 text-left text-md-left">
+                <a target="_blank" class="link-dark" href="https://github.com/ahnjj/">jeong</a><a target="_blank" href="" class="btn follow">Follow</a>
+                <span class="author-description">Hello, I'm jeong!🤗</span>						
+            </div>
+        </div>
+        
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <!-- End Post -->
+    <!-- toc -->
+    <div class="col-sm-4">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#서론" id="markdown-toc-서론"><strong>서론</strong></a></li>
+  <li><a href="#ai-에이전트란-무엇인가" id="markdown-toc-ai-에이전트란-무엇인가">AI 에이전트란 무엇인가?</a>    <ul>
+      <li><a href="#개요" id="markdown-toc-개요">개요</a></li>
+    </ul>
+  </li>
+  <li><a href="#-ai-에이전트의-스펙트럼" id="markdown-toc--ai-에이전트의-스펙트럼">📘 <strong>AI 에이전트의 스펙트럼</strong></a>    <ul>
+      <li><a href="#1-자율성autonomy" id="markdown-toc-1-자율성autonomy"><strong>1. 자율성(Autonomy)</strong></a></li>
+      <li><a href="#2-능동성proactivity" id="markdown-toc-2-능동성proactivity"><strong>2. 능동성(Proactivity)</strong></a></li>
+      <li><a href="#3-인격화personification" id="markdown-toc-3-인격화personification"><strong>3. 인격화(Personification)</strong></a></li>
+      <li><a href="#4-개인화personalization" id="markdown-toc-4-개인화personalization"><strong>4. 개인화(Personalization)</strong></a></li>
+      <li><a href="#5-도구-접근성tooling" id="markdown-toc-5-도구-접근성tooling"><strong>5. 도구 접근성(Tooling)</strong></a></li>
+      <li><a href="#6-다재다능성versatility" id="markdown-toc-6-다재다능성versatility"><strong>6. 다재다능성(Versatility)</strong></a></li>
+      <li><a href="#a-도메인-특화domain-specificity" id="markdown-toc-a-도메인-특화domain-specificity"><strong>a. 도메인 특화(Domain specificity)</strong></a></li>
+      <li><a href="#b-작업task-특화task-specificity" id="markdown-toc-b-작업task-특화task-specificity"><strong>b. 작업(Task) 특화(Task specificity)</strong></a></li>
+      <li><a href="#c-모달리티-특화modality-specificity" id="markdown-toc-c-모달리티-특화modality-specificity"><strong>c. 모달리티 특화(Modality specificity)</strong></a></li>
+      <li><a href="#d-소프트웨어-특화software-specificity" id="markdown-toc-d-소프트웨어-특화software-specificity"><strong>d. 소프트웨어 특화(Software specificity)</strong></a></li>
+      <li><a href="#7-적응성adaptability" id="markdown-toc-7-적응성adaptability"><strong>7. 적응성(Adaptability)</strong></a></li>
+      <li><a href="#8-행동-표면action-surfaces" id="markdown-toc-8-행동-표면action-surfaces"><strong>8. 행동 표면(Action surfaces)</strong></a></li>
+      <li><a href="#9-요청-형식request-formats" id="markdown-toc-9-요청-형식request-formats"><strong>9. 요청 형식(Request formats)</strong></a></li>
+      <li><a href="#10-반응-속도reactivity" id="markdown-toc-10-반응-속도reactivity"><strong>10. 반응 속도(Reactivity)</strong></a></li>
+      <li><a href="#11-에이전트-수number" id="markdown-toc-11-에이전트-수number"><strong>11. 에이전트 수(Number)</strong></a></li>
+    </ul>
+  </li>
+  <li><a href="#위험-이점-활용-가치-기반-분석" id="markdown-toc-위험-이점-활용-가치-기반-분석"><strong>위험, 이점, 활용: 가치 기반 분석</strong></a>    <ul>
+      <li><a href="#가치-정확성-accuracy" id="markdown-toc-가치-정확성-accuracy">가치: 정확성 (Accuracy)</a></li>
+      <li><a href="#가치-보조성--지원성-assistiveness" id="markdown-toc-가치-보조성--지원성-assistiveness">가치: 보조성 / 지원성 (Assistiveness)</a></li>
+      <li><a href="#가치-일관성-consistency" id="markdown-toc-가치-일관성-consistency">가치: 일관성 (Consistency)</a></li>
+      <li><a href="#가치-효율성-efficiency" id="markdown-toc-가치-효율성-efficiency">가치: 효율성 (Efficiency)</a></li>
+      <li><a href="#가치-형평성-equity" id="markdown-toc-가치-형평성-equity">가치: 형평성 (Equity)</a></li>
+      <li><a href="#가치-인간유사성-humanlikeness" id="markdown-toc-가치-인간유사성-humanlikeness">가치: 인간유사성 (Humanlikeness)</a></li>
+      <li><a href="#가치-상호운용성-interoperability" id="markdown-toc-가치-상호운용성-interoperability">가치: 상호운용성 (Interoperability)</a></li>
+      <li><a href="#가치-privacy" id="markdown-toc-가치-privacy">가치: Privacy</a></li>
+      <li><a href="#가치-관련성-relevance" id="markdown-toc-가치-관련성-relevance">가치: 관련성 (Relevance)</a></li>
+      <li><a href="#가치-안전-safety" id="markdown-toc-가치-안전-safety">가치: 안전 (Safety)</a></li>
+      <li><a href="#가치-과학적-진보-scientific-progress" id="markdown-toc-가치-과학적-진보-scientific-progress">가치: 과학적 진보 (Scientific Progress)</a></li>
+      <li><a href="#가치-보안-security" id="markdown-toc-가치-보안-security">가치: 보안 (Security)</a></li>
+      <li><a href="#가치-speed" id="markdown-toc-가치-speed">가치: Speed</a></li>
+      <li><a href="#가치-지속가능성-sustainability" id="markdown-toc-가치-지속가능성-sustainability">가치: 지속가능성 (Sustainability)</a></li>
+      <li><a href="#가치-신뢰-trust" id="markdown-toc-가치-신뢰-trust">가치: 신뢰 (Trust)</a></li>
+      <li><a href="#가치-진실성-truthfulness" id="markdown-toc-가치-진실성-truthfulness">가치: 진실성 (Truthfulness)</a></li>
+    </ul>
+  </li>
+  <li><a href="#hugging-face의-ai-에이전트" id="markdown-toc-hugging-face의-ai-에이전트">Hugging Face의 AI 에이전트</a></li>
+  <li><a href="#권고-사항-및-향후-방향" id="markdown-toc-권고-사항-및-향후-방향">권고 사항 및 향후 방향</a></li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+<!-- footer -->
+<div class="row">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-142/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-142/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== --></main>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer container text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-142/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-142/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-142/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-142/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-142/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-142/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-142/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-142/assets/js/category.js"></script>
+  </body>
+</html>
