@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-153/assets/images/favicon.ico" />
+
+    <title>Math-Verify로 Open LLM 리더보드 바로잡기 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Math-Verify로 Open LLM 리더보드 바로잡기 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Math-Verify로 Open LLM 리더보드 바로잡기" />
+<meta name="author" content="Jimin" />
+<meta property="og:locale" content="en_us" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 Fixing Open LLM Leaderboard with Math-Verify를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Fixing Open LLM Leaderboard with Math-Verify를 한국어로 번역한 글입니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-153/math-verify-leaderboard/assets/images/blog/posts/2025-12-01-math-verify-leaderboard/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-12-01T00:00:00+09:00" />
+<meta property="article:modified_time" content="2025-12-01T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-153/math-verify-leaderboard/assets/images/blog/posts/2025-12-01-math-verify-leaderboard/thumbnail.png" />
+<meta name="twitter:title" content="Math-Verify로 Open LLM 리더보드 바로잡기" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Jimin"},"dateModified":"2025-12-01T00:00:00+09:00","datePublished":"2025-12-01T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Fixing Open LLM Leaderboard with Math-Verify를 한국어로 번역한 글입니다.","headline":"Math-Verify로 Open LLM 리더보드 바로잡기","image":"/pr-preview/pr-153/math-verify-leaderboard/assets/images/blog/posts/2025-12-01-math-verify-leaderboard/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-153/math-verify-leaderboard/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-153/assets/images/hfkr_logo.png"},"name":"Jimin"},"url":"/pr-preview/pr-153/math-verify-leaderboard/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-153/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-153/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-153/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-153/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-153/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-153/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-153/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-153/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row" style="margin-top: 1rem;">
+		
+
+		<!-- Post -->        
+        
+        
+		<div class="col-sm-8">
+            <!-- Post Featured Image -->
+			<img class="featured-image img-fluid rounded" src="/pr-preview/pr-153/assets/images/blog/posts/2025-12-01-math-verify-leaderboard/thumbnail.png" alt="Math-Verify로 Open LLM 리더보드 바로잡기">
+			<!-- End Featured Image -->
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-153/categories#llm">LLM</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-153/categories#leaderboard">leaderboard</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">Math-Verify로 Open LLM 리더보드 바로잡기</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#math-verify로-open-llm-리더보드-바로잡기" id="markdown-toc-math-verify로-open-llm-리더보드-바로잡기">Math-Verify로 Open LLM 리더보드 바로잡기</a>    <ul>
+      <li><a href="#왜-open-llm-leaderboard의-수학-평가는-제대로-작동하지-않았을까" id="markdown-toc-왜-open-llm-leaderboard의-수학-평가는-제대로-작동하지-않았을까">왜 Open LLM Leaderboard의 수학 평가는 제대로 작동하지 않았을까?</a></li>
+      <li><a href="#어느-모델이-수학을-가장-잘할까-공정한-평가를-통해-완전히-뒤바뀐-결과" id="markdown-toc-어느-모델이-수학을-가장-잘할까-공정한-평가를-통해-완전히-뒤바뀐-결과">어느 모델이 수학을 가장 잘할까? 공정한 평가를 통해 완전히 뒤바뀐 결과</a>        <ul>
+          <li><a href="#변화의-영향" id="markdown-toc-변화의-영향">변화의 영향</a></li>
+          <li><a href="#모델-패밀리별-변화" id="markdown-toc-모델-패밀리별-변화">모델 패밀리별 변화</a></li>
+          <li><a href="#math-hard-리더보드-변화" id="markdown-toc-math-hard-리더보드-변화">MATH-Hard 리더보드 변화</a></li>
+          <li><a href="#전체-리더보드-변화" id="markdown-toc-전체-리더보드-변화">전체 리더보드 변화</a></li>
+        </ul>
+      </li>
+      <li><a href="#마무리" id="markdown-toc-마무리">마무리</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/math_verify_leaderboard">Fixing Open LLM Leaderboard with Math-Verify</a>를 한국어로 번역한 글입니다.</em></p>
+
+<hr />
+
+<h1 id="math-verify로-open-llm-리더보드-바로잡기">Math-Verify로 Open LLM 리더보드 바로잡기</h1>
+
+<p>3주 전, 우리는 LLM이 수학 문제를 제대로 풀었는지 정확하게 평가하는 일이 얼마나 어려운지를 보여주었고, 이를 해결할 더 나은 방법으로 <a href="https://github.com/huggingface/Math-Verify">Math-Verify</a>를 소개했습니다 (자세한 내용은 <a href="https://x.com/HKydlicek/status/1881734376696041659">공지</a>에서 확인할 수 있어요)!</p>
+
+<p>그리고 오늘, Math-Verify를 활용해 지금까지 Open LLM Leaderboard에 제출된 <strong>총 3,751개 모델을 전부 다시 평가</strong>했고, 그 결과 이전보다 훨씬 더 <strong>공정하고 신뢰할 수 있는 모델 비교가 가능해졌습니다!</strong></p>
+
+<h2 id="왜-open-llm-leaderboard의-수학-평가는-제대로-작동하지-않았을까">왜 Open LLM Leaderboard의 수학 평가는 제대로 작동하지 않았을까?</h2>
+
+<p>Open LLM Leaderboard는 Hugging Face Hub에서 가장 많이 활용되는 리더보드로, 다양한 태스크에서 오픈 LLM(대규모 언어 모델)의 성능을 비교합니다. 이 중 MATH-Hard는 수학 문제에 특화된 평가로, LLM이 고등학교 및 대학 수준의 수학 문제를 얼마나 정확하게 풀 수 있는지 측정합니다. 이 수학 문제들은 <a href="https://github.com/hendrycks/math">Hendrycks MATH</a> 데이터셋의 최고 난이도(Level 5) 문제 중 1,324개를 뽑아, 선행 미적분(Precalculus), 기초 대수(Prealgebra), 대수(Algebra), 중급 대수(Intermediate Algebra), 조합·확률(Counting/Probability), 정수론(Number Theory) 등 7개의 주제로 구성되어 있습니다. 문제는 5-shot 방식으로 진행되며, 모델은 문제를 풀기 전에 예시 5개를 참고해 답변 형식을 학습합니다.</p>
+
+<p>일반적인 문제 예시는 다음과 같습니다:</p>
+
+<blockquote>
+  <p>모든 실수 r,s에 대해 연산 # 를 다음 두 조건으로 정의한다:</p>
+
+  <p>$r\ ≠ 0 = r, r\ ≠ s = s\ ≠ r$ and $(r + 1)\ ≠ s = (r\ ≠ s) + s + 1$</p>
+
+  <p>이때 $11\ ≠ 5$의 값은?</p>
+</blockquote>
+
+<p>이에 대한 정답(ground truth)은 다음과 같습니다.</p>
+<blockquote>
+  <p>71</p>
+</blockquote>
+
+<p>기존 리더보드에서는 모델이 다음과 같이 고정된 문자열로 답변을 마무리해야 합니다 (<a href="https://arxiv.org/abs/2206.14858">Minerva-Math 논문</a>):</p>
+
+<blockquote>
+  <p>“Final answer is [ANSWER]. I hope it is correct.”</p>
+</blockquote>
+
+<p>이후 리더보드에서는 <a href="https://docs.sympy.org/latest/index.html">SymPy</a>를 사용하여 <code class="language-plaintext highlighter-rouge">[ANSWER]</code>를 기호 표현으로 변환하고(필요한 경우 값을 단순화), 정답과 비교합니다.</p>
+
+<p>하지만 이러한 기존 방식에는 여러 문제가 있다는 사용자들의 보고가 있었습니다.</p>
+
+<p>가장 반복적으로 나타난 문제는 일부 모델이 예시에서 제시된 답변 형식을 제대로 따르지 못한다는 점입니다. 대신 답변을 소개하는 문장을 함께 출력하는 경우가 있었고, 이 때문에 실제로는 정답임에도 정해진 형식을 지키지 않았다는 이유만으로 오답 처리되는 경우가 발생했습니다.
+(이는 “모델이 수학 문제를 얼마나 잘 푸는지”를 정확히 평가하고 싶을 때 큰 문제가 됩니다.)</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>📄 예시</th>
+      <th>❗️문제 유형</th>
+      <th>✅ Math-Verify 변환값</th>
+      <th>🛑 기존 리더보드 결과</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Therefore, the perimeter of one of these triangles is $14 + 7\sqrt{2}$ inches, expressed in simplest radical form.</td>
+      <td>추출 실패</td>
+      <td><code class="language-plaintext highlighter-rouge">7*sqrt(2) + 14</code></td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Therefore, the sum of the infinite geometric series is (\frac{7}{9}).</td>
+      <td>추출 실패</td>
+      <td><code class="language-plaintext highlighter-rouge">7/9</code></td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>( p(n) ) and ( p(n+1) ) share a common factor greater than 1 is (\boxed{41}).</td>
+      <td>추출 실패</td>
+      <td><code class="language-plaintext highlighter-rouge">4</code></td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>So it’s \frac{1}{9}</td>
+      <td>추출 실패</td>
+      <td><code class="language-plaintext highlighter-rouge">1/9</code></td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Concluding he has \boxed{5} cars</td>
+      <td>추출 실패</td>
+      <td><code class="language-plaintext highlighter-rouge">5</code></td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>다음 단계인 <code class="language-plaintext highlighter-rouge">[ANSWER]</code>를 기호 표현으로 변환하는 과정에서도 SymPy 파싱과 관련된 다양한 문제가 있었습니다:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>📄 예시</th>
+      <th>❗️문제 유형</th>
+      <th>✅ Math-Verify 변환값</th>
+      <th>🛑 기존 리더보드</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>The final answer is $2x + 4y + z - 19 = 0$. I hope it is correct.</td>
+      <td>매개변수 방정식 부분 파싱 실패</td>
+      <td>Eq(2<em>x + 4</em>y + z - 19, 0)</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>(23)</td>
+      <td>LaTeX 경계 문자로 추출 실패</td>
+      <td><code class="language-plaintext highlighter-rouge">23</code></td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>((- \infty, -14) \cup (-3, \infty)).</td>
+      <td>구간 표현 추출 실패</td>
+      <td>Union(Interval.open(-oo, -14), Interval.open(-3, oo))</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>100%</td>
+      <td>잘못된 기호로 인한 추출 실패</td>
+      <td><code class="language-plaintext highlighter-rouge">1</code></td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>\begin{pmatrix}\frac{1}{50}&amp;\frac{7}{50}\frac{7}{50}&amp;\frac{49}{50}\end{pmatrix}</td>
+      <td>행렬 추출 실패</td>
+      <td>Matrix([[1/50, 7/50], [7/50, 49/50]])</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>마지막으로, 추출된 답과 정답 표현을 비교하는 과정에서도 여러 문제가 발생했습니다:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>📄 예시</th>
+      <th>❗️문제 유형</th>
+      <th>✅ Math-Verify</th>
+      <th>🛑 기존 리더보드</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1/3 == 0.333333</td>
+      <td>반올림 비교 미지원</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>sqrt(1/2)<em>7 == sqrt(0.5)</em>7</td>
+      <td>수치 평가 비교 미지원</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>k = 1 == 1</td>
+      <td>변수 할당 비교 미지원</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>Matrix.ones == Matrix.ones</td>
+      <td>행렬 동등성 비교 미지원</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>{1} \union {1,4} == {1,4}</td>
+      <td>집합 비교 미지원</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>새로운 Math-Verify 파서로 이 모든 문제를 해결 할 수 있습니다!</strong></p>
+
+<h2 id="어느-모델이-수학을-가장-잘할까-공정한-평가를-통해-완전히-뒤바뀐-결과">어느 모델이 수학을 가장 잘할까? 공정한 평가를 통해 완전히 뒤바뀐 결과</h2>
+
+<p>이러한 문제들이 누적되면서, 일부 모델은 심각한 과소평가를 받았으며 실제보다 훨씬 낮은 성능으로 평가되었습니다. 그래서 우리는 기존 평가기를 제거하고 Math-Verify를 도입했으며, 이 작업은 단 3줄의 코드만 수정하면 될 정도로 간단했습니다! (여러분도 수학 평가에 쉽게 적용할 수 있습니다.)</p>
+
+<p>그 결과, 6월 이후 제출된 모든 모델을 다시 평가하게 되었고, 이 과정에서 MATH 영역 상위 20위 모델들의 순위가 완전히 뒤바뀌었습니다.</p>
+
+<h3 id="변화의-영향">변화의 영향</h3>
+
+<p>평균적으로 모델들은 기존보다 <strong>61문제</strong>를 더 맞혔고, 이에 따라 총점 기준으로 <strong>4.66점</strong> 상승이라는 큰 변화를 기록했습니다!</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/math_verify_leaderboard/score-change.png" alt="" /></p>
+
+<p>가장 큰 개선을 보여준 두 개의 서브셋은 모두 대수 관련 영역(Algebra와 Prealgebra)으로, 각각 <strong>8.27점</strong>과 <strong>6.93점</strong>의 상승이 있었습니다. 극단적인 경우 일부 모델은 이 영역에서 거의 <strong>90점</strong> 가까이 향상되기도 했습니다. 우리는 이러한 서브셋이 여러 해답이 존재하는 문제(집합 형태)나 행렬 형식으로 답을 표현하는 문제가 많기 때문에 개선 폭이 컸다고 보고 있습니다. Math-Verify는 이러한 형식의 답변 처리 능력을 크게 향상시켰고, 그 결과 높은 점수 상승으로 이어졌습니다.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/math_verify_leaderboard/subset-change.png" alt="" /></p>
+
+<h3 id="모델-패밀리별-변화">모델 패밀리별 변화</h3>
+
+<p>우리는 처음에 Qwen 모델을 점검하는 과정에서 수학 평가 방식의 문제를 발견했습니다. 기존 리더보드에서 Qwen 모델은 공식 성능(자체 보고 점수)보다 비정상적으로 낮은 점수를 받고 있었기 때문입니다. Math-Verify 적용 이후, Qwen 모델의 점수는 두 배 이상 증가하며 이전 평가가 얼마나 과소평가되었는지를 보여주었습니다.</p>
+
+<p>하지만, 영향받은 것은 Qwen 모델만이 아닙니다. DeepSeek 모델들도 크게 개선되었습니다. Math-Verify 적용 후 DeepSeek 모델의 점수는 거의 세 배 가까이 상승했습니다! 이는 DeepSeek 모델이 정답을 일반적으로 <code class="language-plaintext highlighter-rouge">(\boxed{})</code> 표기 안에 넣어 출력하는데, 기존 평가 방식은 이 정답 형식을 제대로 추출하지 못해 실제로는 맞은 답을 오답으로 처리했기 때문입니다.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/math_verify_leaderboard/model-family-change.png" alt="" /></p>
+
+<h3 id="math-hard-리더보드-변화">MATH-Hard 리더보드 변화</h3>
+
+<p>앞서 언급했듯, 상위 20개 모델 순위는 크게 변동되었으며, <strong>Nvidia의 AceMath</strong> 모델들이 이제 MATH-Hard 리더보드를 장악하고 있습니다. 특히 <strong>Qwen</strong> 파생 모델들은 거의 AceMath 바로 아래 대부분의 순위를 차지하고 있습니다. 아래는 기존 및 새로운 상위 20개 모델 리더보드 전체 비교 테이블입니다:</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/math_verify_leaderboard/math-hard-change.png" alt="" /></p>
+
+<h3 id="전체-리더보드-변화">전체 리더보드 변화</h3>
+
+<p>마지막으로 전체 리더보드 결과가 어떻게 변했는지 살펴보았습니다. 상위 4위까지는 순위가 그대로 유지되었지만, 그 이후 순위는 상당히 큰 변동이 있었습니다. 특히 MATH 서브셋에서 Qwen 파생 모델들이 다수 상승하면서, 전체 리더보드 상위권에서도 파생 모델의 비중이 크게 늘어났습니다.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/math_verify_leaderboard/overal-change.png" alt="" /></p>
+
+<p>또한 순위가 200위 이상 상승한 모델들도 다수 존재합니다! 더 자세한 결과는 Open LLM Leaderboard에서 확인할 수 있습니다.</p>
+
+<h2 id="마무리">마무리</h2>
+
+<p>Math-Verify의 도입으로 Open LLM Leaderboard의 평가 정확성과 공정성이 크게 향상되었습니다. 덕분에 리더보드가 재편되었고, 많은 모델들이 이전보다 훨씬 정확한 성능을 보여주게 되었습니다.</p>
+
+<p>저희는 모든 개발자와 연구자들에게 자신의 수학 평가에도 Math-Verify를 적용해 볼 것을 적극 권장합니다. 이를 통해 훨씬 신뢰할 수 있는 평가 결과를 얻을 수 있습니다.
+또한, 업데이트된 리더보드를 확인해 관심 있는 모델이 어떻게 달라졌는지 직접 살펴보시길 바랍니다.</p>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2025-12-01">01 Dec 2025</time></span>
+                
+            </small>
+        </p>
+
+
+
+        <!-- Prev/Next -->
+        <div class="row PageNavigation mt-4 prevnextlinks d-flex justify-content-between">
+            
+            <div class="col-md-6 rightborder pl-0">
+                <a class="thepostlink" href="/pr-preview/pr-153/hf_translation_hub_mcp_design_and_tooling/">&laquo; MCP 서버 설계 전략 및 개발 도구 선정</a>
+            </div>
+            
+            
+            <div class="col-md-6 text-right pr-0">
+                <a class="thepostlink" href="/pr-preview/pr-153/rteb/">RTEB: 검색 평가의 새로운 표준 &raquo;</a>
+            </div>
+            
+        </div>
+        <!-- End Prev/Next -->
+
+
+        <!-- Author Box -->
+        
+        <div class="row post-top-meta ">
+            <div class="col-md-2 text-left text-md-left">
+                <img class="author-thumb" src="/pr-preview/pr-153/assets/images/author/Jimin.png" alt="Jimin">
+            </div>
+            <div class="col-md-10 text-left text-md-left">
+                <a target="_blank" class="link-dark" href="https://github.com/jiminAn">Jimin</a><a target="_blank" href="" class="btn follow">Follow</a>
+                <span class="author-description">Hello, I’m Jimin! I’m a NLP researcher in 🇰🇷</span>						
+            </div>
+        </div>
+        
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <!-- End Post -->
+    <!-- toc -->
+    <div class="col-sm-4">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#math-verify로-open-llm-리더보드-바로잡기" id="markdown-toc-math-verify로-open-llm-리더보드-바로잡기">Math-Verify로 Open LLM 리더보드 바로잡기</a>    <ul>
+      <li><a href="#왜-open-llm-leaderboard의-수학-평가는-제대로-작동하지-않았을까" id="markdown-toc-왜-open-llm-leaderboard의-수학-평가는-제대로-작동하지-않았을까">왜 Open LLM Leaderboard의 수학 평가는 제대로 작동하지 않았을까?</a></li>
+      <li><a href="#어느-모델이-수학을-가장-잘할까-공정한-평가를-통해-완전히-뒤바뀐-결과" id="markdown-toc-어느-모델이-수학을-가장-잘할까-공정한-평가를-통해-완전히-뒤바뀐-결과">어느 모델이 수학을 가장 잘할까? 공정한 평가를 통해 완전히 뒤바뀐 결과</a>        <ul>
+          <li><a href="#변화의-영향" id="markdown-toc-변화의-영향">변화의 영향</a></li>
+          <li><a href="#모델-패밀리별-변화" id="markdown-toc-모델-패밀리별-변화">모델 패밀리별 변화</a></li>
+          <li><a href="#math-hard-리더보드-변화" id="markdown-toc-math-hard-리더보드-변화">MATH-Hard 리더보드 변화</a></li>
+          <li><a href="#전체-리더보드-변화" id="markdown-toc-전체-리더보드-변화">전체 리더보드 변화</a></li>
+        </ul>
+      </li>
+      <li><a href="#마무리" id="markdown-toc-마무리">마무리</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+<!-- footer -->
+<div class="row">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-153/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-153/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== --></main>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer container text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-153/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-153/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-153/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-153/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-153/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-153/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-153/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-153/assets/js/category.js"></script>
+  </body>
+</html>
