@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-152/assets/images/favicon.ico" />
+
+    <title>RTEB: 검색 평가의 새로운 표준 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>RTEB: 검색 평가의 새로운 표준 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="RTEB: 검색 평가의 새로운 표준" />
+<meta name="author" content="sohyun" />
+<meta property="og:locale" content="en_us" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 Introducing RTEB: A New Standard for Retrieval Evaluation를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Introducing RTEB: A New Standard for Retrieval Evaluation를 한국어로 번역한 글입니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-152/rteb/assets/images/blog/posts/2025-12-01-rteb/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-12-01T00:00:00+09:00" />
+<meta property="article:modified_time" content="2025-12-01T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-152/rteb/assets/images/blog/posts/2025-12-01-rteb/thumbnail.png" />
+<meta name="twitter:title" content="RTEB: 검색 평가의 새로운 표준" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"sohyun"},"dateModified":"2025-12-01T00:00:00+09:00","datePublished":"2025-12-01T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Introducing RTEB: A New Standard for Retrieval Evaluation를 한국어로 번역한 글입니다.","headline":"RTEB: 검색 평가의 새로운 표준","image":"/pr-preview/pr-152/rteb/assets/images/blog/posts/2025-12-01-rteb/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-152/rteb/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-152/assets/images/hfkr_logo.png"},"name":"sohyun"},"url":"/pr-preview/pr-152/rteb/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-152/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-152/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-152/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-152/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-152/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-152/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-152/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-152/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-152/assets/images/blog/posts/2025-12-01-rteb/thumbnail.png" alt="RTEB: 검색 평가의 새로운 표준">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-152/assets/images/blog/posts/2025-12-01-rteb/thumbnail.png" alt="RTEB: 검색 평가의 새로운 표준">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-152/categories#benchmark">Benchmark</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-152/categories#embedding">Embedding</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-152/categories#retrieval">Retrieval</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">RTEB: 검색 평가의 새로운 표준</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#rteb-검색-평가의-새로운-표준" id="markdown-toc-rteb-검색-평가의-새로운-표준">RTEB: 검색 평가의 새로운 표준</a>    <ul>
+      <li><a href="#기존-벤치마크가-부족한-이유" id="markdown-toc-기존-벤치마크가-부족한-이유">기존 벤치마크가 부족한 이유</a></li>
+      <li><a href="#rteb-소개" id="markdown-toc-rteb-소개">RTEB 소개</a>        <ul>
+          <li><a href="#진정한-일반화를-위한-하이브리드-전략" id="markdown-toc-진정한-일반화를-위한-하이브리드-전략">진정한 일반화를 위한 하이브리드 전략</a></li>
+          <li><a href="#실제-도메인을-위해-설계됨" id="markdown-toc-실제-도메인을-위해-설계됨">실제 도메인을 위해 설계됨</a></li>
+        </ul>
+      </li>
+      <li><a href="#rteb-출시-커뮤니티의-노력" id="markdown-toc-rteb-출시-커뮤니티의-노력">RTEB 출시: 커뮤니티의 노력</a></li>
+      <li><a href="#한계점과-향후-계획" id="markdown-toc-한계점과-향후-계획">한계점과 향후 계획</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/rteb">Introducing RTEB: A New Standard for Retrieval Evaluation</a>를 한국어로 번역한 글입니다.</em></p>
+
+<hr />
+<h1 id="rteb-검색-평가의-새로운-표준">RTEB: 검색 평가의 새로운 표준</h1>
+
+<p><strong>요약 –</strong> 여러분께 새로운 벤치마크, <a href="https://huggingface.co/spaces/mteb/leaderboard?benchmark_name=RTEB%28beta%29">RTEB(Retrieval Embedding Benchmark, 검색 임베딩 벤치마크)</a>의 베타 버전을 소개합니다. RTEB는 실제 환경에 사용할 임베딩 모델의 검색 정확도를 신뢰성 있게 평가하도록 설계되었습니다. 기존 벤치마크는 진정한 일반화 능력을 측정하기 어려웠으나, RTEB는 공개 및 비공개 데이터셋을 결합한 하이브리드 전략으로 이 문제를 해결합니다. 목표는 간단합니다. 모델이 이전에 접하지 않은 데이터에서 어떻게 수행하는지 측정하기 위한, 공정하고 투명하며 응용 중심의 표준을 만드는 것입니다.</p>
+
+<p>RAG, 에이전트부터 추천 시스템에 이르기까지 많은 AI 애플리케이션의 성능은 근본적으로 검색 및 검색 품질에 의해 제한됩니다. 따라서 임베딩 모델의 검색 품질을 정확히 측정하는 것은 개발자들에게 공통적인 고민거리입니다. 모델이 실제 환경에서 얼마나 잘 작동할지 어떻게 <em>정확히</em> 검증할 수 있을까요?</p>
+
+<p>여기서 문제가 복잡해집니다. 현재 평가 기준은 공개 벤치마크에서의 모델 ‘제로샷’ 성능에 의존하는 경우가 많습니다. 그러나 이는 기껏해야 모델의 진정한 일반화 능력을 가늠한 것에 불과합니다. 동일한 공개 데이터셋으로 모델을 반복 평가할 때, 보고된 점수와 새로운 미검증 데이터에서의 실제 성능 사이에 차이가 발생합니다.</p>
+
+<figure class="image text-center" id="figure1">
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/rteb/rteb-public-vs-closed.png" />
+  <figcaption>공개 데이터셋과 비공개 데이터셋 간 성능 차이</figcaption>
+</figure>
+
+<p>이러한 문제를 해결하기 위해, 검색 모델 평가에 신뢰할 수 있는 기준을 제공하기 위해 설계된 벤치마크인 RTEB를 개발했습니다.</p>
+
+<h2 id="기존-벤치마크가-부족한-이유">기존 벤치마크가 부족한 이유</h2>
+
+<p>기본 평가 방법론과 지표(예: NDCG@10)는 잘 알려져 있고 견고하지만, 기존 벤치마크의 신뢰성은 종종 다음과 같은 문제로 인해 저하됩니다.</p>
+
+<p><strong>일반화 격차</strong>. 현재 벤치마크 생태계는 의도치 않게 “시험에 맞춘 교육”을 조장합니다. 훈련 데이터 소스와 평가 데이터셋이 중복될 경우 모델 점수가 부풀려져 벤치마크의 신뢰성을 훼손할 수 있습니다. 이러한 관행은 의도적이든 아니든 여러 모델의 훈련 데이터셋에서 명백히 관찰됩니다. 이는 모델이 견고하고 일반화 가능한 능력을 개발하기보다 테스트 데이터를 암기하는 데 보상을 받는 피드백 루프를 생성합니다.</p>
+
+<p>이러한 이유로, 제로샷 점수가 낮은 모델<a href="#footnote-1">[1]</a>이 새로운 문제에 대한 일반화 능력 없이도 벤치마크에서 매우 우수한 성능을 보일 수 있습니다. 따라서 벤치마크 성능은 다소 낮지만 제로샷 점수가 높은 모델이 권장되고는 합니다.</p>
+
+<figure class="image text-center" id="figure2">
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/rteb/mteb-zero-shot-models.png" />
+  <figcaption>출처: <a href="https://arxiv.org/abs/2506.21182">Chung et al. (2025)</a></figcaption>
+</figure>
+
+<p><strong>현재 AI 애플리케이션과의 부적합성</strong>. 많은 벤치마크는 개발자들이 현재 구축 중인 기업용 사용 사례에 부적합합니다. 이들은 종종 학술 데이터셋이나 QA 데이터셋에서 파생된 검색 작업에 의존하는데, 이는 그 자체로 유용하지만 검색 평가를 위해 설계된 것이 아니며 실제 검색 시나리오에서 발생하는 분포적 편향과 복잡성을 포착하지 못할 수 있습니다. 이러한 문제가 없는 벤치마크는 코드 검색과 같은 단일 도메인에 집중하는 등 범위가 너무 좁아 범용 모델 평가에 부적합한 경우가 많습니다.</p>
+
+<h2 id="rteb-소개">RTEB 소개</h2>
+
+<p><strong>검색 임베딩 벤치마크(RTEB)</strong>를 여러분께 소개합니다. 이 벤치마크의 목표는 임베딩 모델의 진정한 검색 정확도를 측정하는 새롭고 신뢰할 수 있는 고품질 벤치마크를 만드는 것입니다.</p>
+
+<h3 id="진정한-일반화를-위한-하이브리드-전략">진정한 일반화를 위한 하이브리드 전략</h3>
+
+<p>벤치마크 과적합 문제를 해결하기 위해 RTEB는 공개 데이터셋과 비공개 데이터셋을 모두 활용하는 하이브리드 전략을 사용했습니다.</p>
+
+<ul>
+  <li><strong>공개 데이터셋:</strong> 코퍼스, 쿼리, 관련성 라벨이 완전히 공개됩니다. 이는 투명성을 보장하며 모든 사용자가 결과를 재현할 수 있게 합니다.</li>
+  <li><strong>비공개 데이터셋:</strong> 이 데이터셋들은 비공개로 유지되며, 평가 과정은 공정성을 보장하기 위해 MTEB 관리자들이 수행합니다. 이러한 구성은 모델이 미지 데이터에 대한 일반화 능력을 명확하고 편향 없이 측정할 수 있게 합니다. 투명성을 위해 각 비공개 데이터셋에 대해 기술 통계, 데이터셋 설명, 그리고 <code class="language-plaintext highlighter-rouge">(쿼리, 문서, 관련성)</code> 예시 샘플을 제공합니다.</li>
+</ul>
+
+<p>이러한 하이브리드 접근 방식은 광범위하고 견고한 일반화 능력을 갖춘 모델 개발을 장려합니다. 공개 데이터셋과 비공개 데이터셋 간 성능 차이가 현저한 모델은 과적합을 시사하며, 이는 커뮤니티에 명확한 신호를 제공합니다. 일부 모델은 이미 RTEB의 비공개 데이터셋에서 성능이 현저히 저하되는 모습을 보이고 있습니다.</p>
+
+<h3 id="실제-도메인을-위해-설계됨">실제 도메인을 위해 설계됨</h3>
+
+<p>RTEB는 기업 사용 사례에 특히 중점을 두고 설계되었습니다. 복잡한 계층 구조 대신 명확성을 위해 단순한 그룹을 사용합니다. 단일 데이터셋은 여러 그룹에 속할 수 있습니다(예: 독일 법률 데이터셋은 “법률” 그룹과 “독일어” 그룹 모두에 존재).</p>
+
+<ul>
+  <li><strong>다국어 지원:</strong> 벤치마크 데이터셋은 영어, 일본어와 같은 일반적인 언어부터 벵골어, 핀란드어와 같은 희귀 언어까지 총 20개 언어를 포괄합니다.</li>
+  <li><strong>도메인 특화:</strong> 벤치마크에는 법률, 의료, 코드, 금융과 같은 핵심 기업 도메인의 데이터셋이 포함됩니다.</li>
+  <li><strong>효율적인 데이터셋 규모:</strong> 데이터셋은 의미 있는 규모(최소 1,000개 문서 및 50개 쿼리)이면서도 평가에 지나치게 많은 시간과 비용이 소요되지 않도록 설계되었습니다.</li>
+  <li><strong>검색 결과 우선 평가 지표:</strong> 기본 리더보드 지표는 순위 지정 검색 결과 품질의 표준 측정값인 <strong>NDCG@10</strong>입니다.</li>
+</ul>
+
+<p>전체 데이터셋 목록은 아래에서 확인할 수 있습니다. 공개 및 비공개 부분 모두 다양한 범주의 데이터셋으로 지속적으로 업데이트할 계획이며, 커뮤니티의 적극적인 참여를 권장합니다. 다른 데이터셋을 제안하고 싶으시면 <a href="https://github.com/embeddings-benchmark/mteb/issues">GitHub의 MTEB 저장소</a>에 이슈를 생성해 주십시오.</p>
+
+<details>
+  <summary>RTEB 데이터셋</summary>
+
+#### Open
+
+| 데이터셋 | 데이터셋 그룹 | 공개/비공개 | 데이터셋 URL | QA 재활용 여부 | 포함 사유 및 설명 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| AILACasedocs | 영어, 법률 | 공개 | https://huggingface.co/datasets/mteb/AILA_casedocs | X | 이 데이터셋은 인도 대법원 사건 문서 약 3,000건으로 구성되며, 주어진 법적 상황에 대한 관련 선례 검색을 평가하기 위해 설계되었습니다. 각기 특정 시나리오를 설명하는 50개의 쿼리가 포함되어 있습니다. 문서가 상당히 까다롭고, 합성되지 않은 쿼리와 고품질 레이블을 갖추었기 때문에 이 데이터셋을 벤치마크에 포함합니다. |
+| AILAStatutes | 영어, 법률 | 공개 | https://huggingface.co/datasets/mteb/AILA_statutes | X | 이 데이터셋은 인도 대법원 법률 197건에 대한 설명으로 구성되어 있으며, 주어진 법적 상황에 대한 관련 선례 법률 검색을 용이하게 하기 위해 설계되었습니다. 각기 특정 시나리오를 설명하는 50개의 쿼리를 포함합니다. 문서가 상당히 까다롭고, 합성되지 않은 쿼리와 고품질 레이블을 갖추었기 때문에 이 데이터셋을 벤치마크에 포함합니다. |
+| LegalSummarization | 영어, 법률 | 공개 | https://huggingface.co/datasets/mteb/legal_summarization | X | 이 데이터셋은 법률 문서 해설을 전문으로 하는 신뢰할 수 있는 웹사이트에서 수집한 법률 텍스트 발췌문과 해당 평이한 영어 요약문 446쌍으로 구성됩니다. 요약문은 품질을 위해 수동으로 검토되어 데이터가 깨끗하고 법률 검색 평가에 적합함을 보장합니다. |
+| LegalQuAD | 독일어, 법률 | 공개 | https://huggingface.co/datasets/mteb/LegalQuAD | X | 이 코퍼스는 200개의 실제 법률 문서로 구성되며, 쿼리 세트는 법률 문서와 관련된 200개의 질문으로 이루어져 있습니다. |
+| FinanceBench | 영어, 금융 | 공개 | https://huggingface.co/datasets/virattt/financebench | O | FinanceBench 데이터셋은 PatronusAI/financebench-test 데이터셋에서 파생되었으며, 금융 분야 질문응답 작업을 위해 정제된 형식으로 처리된 PASS 예제만 포함합니다. FinanceBench-rtl은 검색 작업에 재활용되었습니다. |
+| HC3Finance | 영어, 금융 | 공개 | https://huggingface.co/datasets/Hello-SimpleAI/HC3 | X | HC3 데이터셋은 오픈 도메인, 금융, 의료, 법률, 심리학 등 다양한 분야의 인간 전문가와 ChatGPT의 비교 응답 수만 건으로 구성됩니다. 데이터 수집 과정에는 공개된 질문응답 데이터셋과 위키 텍스트를 활용했으며, 인간 답변이 전문가 제공 또는 고품질 사용자 응답임을 확인하여 오분류를 최소화하고 데이터셋 신뢰성을 높였습니다. |
+| FinQA | 영어, 금융 | 공개 | https://huggingface.co/datasets/ibm/finqa | O | FinQA는 구조화 및 비구조화 증거를 활용한 수치 추론 연구를 위한 8천 개의 질문-답변 쌍과 2,800개의 재무 보고서로 구성된 대규모 데이터셋입니다. |
+| HumanEval | 코드 | 공개 | https://huggingface.co/datasets/openai/openai_humaneval | O | OpenAI에서 공개한 HumanEval 데이터셋은 각 문제마다 손으로 작성된 함수 시그니처, 문서 문자열, 본체 및 여러 유닛 테스트를 포함한 164개의 프로그래밍 문제를 포함합니다. 이 데이터셋은 OpenAI의 엔지니어와 연구원들이 수작업으로 제작했습니다. |
+| MBPP | 코드 | 공개 | https://huggingface.co/datasets/google-research-datasets/mbpp | O | MBPP 데이터셋은 초급 프로그래머가 해결할 수 있도록 설계된 약 1,000개의 크라우드소싱 파이썬 프로그래밍 문제로 구성되어 있으며, 프로그래밍 기초, 표준 라이브러리 기능 등을 다룹니다. 각 문제는 작업 설명, 코드 솔루션 및 3개의 자동화된 테스트 케이스로 구성됩니다. 논문에서 설명한 바와 같이, 데이터 품질 보장을 위해 데이터셋 작성자가 데이터의 일부를 수동으로 검증했습니다. |
+| MIRACLHardNegatives | | 공개 | https://huggingface.co/datasets/mteb/miracl-hard-negatives | X | MIRACL(Multilingual Information Retrieval Across a Continuum of Languages)은 18개 언어를 아우르는 검색에 초점을 맞춘 다국어 검색 데이터셋입니다. 하드 네거티브 버전은 BM25, e5-multilingual-large 및 e5-mistral-instruct에서 쿼리당 상위 250개 문서를 모아 생성되었습니다. |
+| APPS | 코드, 영어 | 공개 | https://huggingface.co/datasets/codeparrot/apps | O | APPS는 10,000개의 문제를 포함한 코드 생성 벤치마크입니다. 이 벤치마크는 자연어 사양으로부터 코드를 생성하는 언어 모델의 능력을 평가하는 데 사용될 수 있습니다. 저자들은 Codewars, AtCoder, Kattis, Codeforces 등 프로그래머들이 서로 문제를 공유하는 오픈 액세스 사이트에서 문제를 수동으로 선별하여 데이터셋을 생성했습니다. |
+| DS1000 | 코드, 영어 | 공개 | https://huggingface.co/datasets/xlangai/DS-1000 | O | DS-1000은 NumPy, Pandas 등 7개 Python 라이브러리를 아우르는 1,000개의 데이터 사이언스 문제로 구성된 코드 생성 벤치마크입니다. 기능적 정확성과 표면형 제약 조건을 포함한 다중 기준 평가 지표를 활용하여, Codex-002 예측 중 오답률이 1.8%에 불과한 고품질 데이터셋을 생성합니다. |
+| WikiSQL | 코드, 영어 | 공개 | https://huggingface.co/datasets/Salesforce/wikisql | O | WikiSQL은 위키백과의 24,241개 테이블에 걸쳐 수작업으로 주석 처리된 80,654개의 자연어 질문과 해당 SQL 쿼리로 구성된 데이터셋입니다. |
+| ChatDoctor_HealthCareMagic | 영어, 의료 | 공개 | https://huggingface.co/datasets/lavita/ChatDoctor-HealthCareMagic-100k | X | ChatDoctor-HealthCareMagic-100k 데이터셋은 112,000개의 실제 의료 질문-답변 쌍으로 구성되어 있으며, 방대하고 다양한 실제 의료 대화 모음을 제공합니다. 많은 질문과 답변에 문법적 불일치가 존재하여 이 데이터셋에는 약간의 위험이 있지만, 이는 잠재적으로 강력한 의료 검색 모델과 취약한 모델을 구분하는 데 도움이 될 수 있습니다. |
+| HC3 Medicine | 영어, 의료 | 공개 | https://huggingface.co/datasets/Hello-SimpleAI/HC3 | X | HC3 데이터셋은 오픈 도메인, 금융, 의료, 법률, 심리학 등 다양한 분야의 인간 전문가와 ChatGPT의 비교 응답 수만 건으로 구성됩니다. 데이터 수집 과정에는 공개된 질문-답변 데이터셋과 위키 텍스트를 활용했으며, 인간 답변이 전문가 제공 또는 고품질 사용자 응답임을 보장하여 오분류를 최소화하고 데이터셋의 신뢰성을 높였습니다. |
+| HC3 French OOD | 프랑스어, 의료 | 공개 | https://huggingface.co/datasets/almanach/hc3_french_ood | X | HC3 데이터셋은 오픈 도메인, 금융, 의료, 법률, 심리학 등 다양한 분야에서 인간 전문가와 ChatGPT의 비교 응답 수만 건으로 구성됩니다. 데이터 수집 과정에는 공개된 질문-답변 데이터셋과 위키 텍스트를 활용하는 것이 포함되었으며, 인간 답변이 전문가 제공 또는 고품질 사용자 응답임을 보장함으로써 오표기를 최소화하고 데이터셋의 신뢰성을 높였습니다. |
+| JaQuAD | 일본어 | 공개 | https://huggingface.co/datasets/SkelterLabsInc/JaQuAD | O | JaQuAD 데이터셋은 일본어 위키백과 문서를 기반으로 인간이 주석 처리한 39,696개의 질문-답변 쌍으로 구성되며, 문맥의 88.7%는 선별된 고품질 문서에서 추출되었습니다. |
+| Cure | 영어, 의료 | 공개 | https://huggingface.co/datasets/clinia/CUREv1 | X | |
+| TripClick | 영어, 의료 | 공개 | https://huggingface.co/datasets/irds/tripclick | X | |
+| FreshStack | 영어 | 공개 | https://huggingface.co/papers/2504.13128 | X | |
+
+#### 비공개
+
+| 데이터셋 | 데이터셋 그룹 | 공개/비공개 | 데이터셋 URL | 코멘트 | QA 재활용 여부 | 포함 사유 및 설명 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| _GermanLegal1 | 독일어, 법률 | 비공개 | | O | | 본 데이터셋은 실제 사법 판결에서 추출되었으며, 법적 인용문 일치와 BM25 유사도 측정을 병행합니다. BM25 기준선은 인용문 일치 외 영역에서 데이터 편향을 유발할 수 있어 약간의 위험이 존재합니다. 정확성과 품질 보장을 위해 데이터셋의 일부를 수동으로 검증했습니다. |
+| _JapaneseLegal1 | 일본어, 법률 | 비공개 | | X | | 본 데이터셋은 일본 정부 공식 웹사이트 e-Gov에서 추출한 중복 제거된 법률 기록 8,750건으로 구성되어 권위적이고 정확한 내용을 보장합니다. 기록 제목은 쿼리로, 기록 본문은 문서로 사용됩니다. |
+| _FrenchLegal1 | 프랑스어, 법률 | 비공개 | | X | | 이 데이터셋은 프랑스 법원 \“Conseil d'Etat\”의 판례로 구성되며, OPENDATA/JADE 저장소에서 체계적으로 추출되었으며, 세금 관련 사건에 중점을 둡니다. 쿼리는 각 문서의 제목으로, 레이블이 깨끗함을 보장합니다. |
+| _EnglishFinance1 | 영어, 금융 | 비공개 | | O | | 본 검색 데이터셋은 표 형식 및 텍스트 콘텐츠를 활용한 대규모 QA 데이터셋인 TAT-QA에서 검색을 위해 재구성되었습니다. |
+| _EnglishFinance4 | 영어, 금융 | 비공개 | | X | | 본 데이터셋은 스탠퍼드 대학의 Alpaca와 FiQA를 GPT3.5로 생성한 1,300개의 커스텀 데이터 쌍과 결합한 후, 데이터 품질을 보장하기 위해 추가 정제 과정을 거쳤습니다. |
+| _EnglishFinance2 | 영어, 금융 | 비공개 | | O | | 본 데이터셋은 시뮬레이션된 대화 흐름을 기반으로 각 대화 턴별 질문으로 구성된 금융 분야 데이터셋입니다. 전문 어노테이터에 의한 큐레이션으로 상당히 높은 데이터 품질을 보장합니다. 질문은 검색어(쿼리)로, 대화 블록은 검색용 문서로 재활용됩니다. |
+| _EnglishFinance3 | 영어, 금융 | 비공개 | | O | | 본 데이터셋은 개인 금융의 다양한 측면을 다루기 위해 선별된 질문-답변 쌍 모음입니다. |
+| _Code1 | 코드 | 비공개 | | 아니오 | | GitHub 저장소에서 함수를 추출했습니다. 구문 분석을 통해 함수에서 문서 문자열(docstring)과 함수 시그니처를 얻었습니다. 문서 문자열이 있는 함수만 유지됩니다. 문서 문자열은 쿼리로 사용되며, 작업 난이도를 높이기 위해 함수 시그니처(함수명 및 인수명 포함)는 제거됩니다. 각 언어는 별도의 코퍼스를 가진 하위 집합입니다. |
+| _JapaneseCode1 | 코드, 일본어 | 비공개 | | X | | CoNaLa 챌린지의 일본어 질문 하위 집합입니다. |
+| _EnglishHealthcare1 | 영어, 의료 | 비공개 | | O | | 본 데이터셋은 생의학 분야에서 최소 석사 학위를 보유한 15명의 전문가가 주석을 달은 2,019개의 질문-답변 쌍으로 구성됩니다. 의사가 주관을 맡은 주석 팀이 각 질문-답변 쌍을 검증하여 데이터 품질을 보장했습니다. |
+| _GermanHealthcare1 | 독일어, 의료 | 비공개 | | X | | 이 데이터셋은 환자와 의료 보조원 간의 독일어 의료 대화 465건으로 구성되며, 각 항목에는 상세한 환자 설명과 이에 대응하는 전문가 답변이 포함됩니다. 데이터 정확성과 품질 보증을 위해 데이터셋의 일부를 수동으로 검증했습니다. |
+| _German1 | 독일어 | 비공개 | | X | | 본 데이터셋은 여러 공개 코퍼스를 통합된 형식으로 정리 및 전처리하여 생성된 대화 요약 데이터셋입니다. 각 대화는 주석 담당자가 수동으로 요약하고 주제별로 라벨링하여 고품질의 깨끗한 데이터를 보장합니다. 대화 요약본은 쿼리로, 전체 대화는 문서로 사용됩니다. |
+| _French1 | 프랑스어 | 비공개 | | O | | 본 데이터셋은 4118개 이상의 프랑스어 퀴즈 질문-답변 쌍으로 구성되며, 각 항목에는 관련 위키백과 컨텍스트가 포함됩니다. 데이터 정확성과 품질을 위해 데이터셋의 일부를 수동으로 검증했습니다. |
+
+</details>
+
+<h2 id="rteb-출시-커뮤니티의-노력">RTEB 출시: 커뮤니티의 노력</h2>
+
+<p>RTEB가 오늘 베타 버전으로 출시됩니다. 우리는 커뮤니티의 노력으로 견고한 벤치마크를 구축할 수 있다고 믿고, 개발자와 연구자 모두의 피드백을 바탕으로 RTEB를 발전시켜 나갈 계획입니다. 여러분의 의견을 공유하고, 새로운 데이터셋을 제안하며, 기존 데이터셋의 문제를 발견함으로써, 모두가 더 신뢰할 수 있는 표준을 구축하는 데 도움을 주시길 권합니다. <a href="https://github.com/embeddings-benchmark/mteb">Github의 MTEB 저장소</a>에서 토론에 참여하거나 이슈를 생성하여 참여하실 수 있습니다.</p>
+
+<h2 id="한계점과-향후-계획">한계점과 향후 계획</h2>
+
+<p>개선이 필요한 부분을 명확히 하기 위해 RTEB의 현재 한계점과 향후 계획을 투명하게 공개합니다.</p>
+
+<ul>
+  <li><strong>벤치마크 범위:</strong> RTEB는 현실적이고 검색 중심의 사용 사례에 초점을 맞춥니다. 매우 까다로운 합성 데이터셋은 현재 목표는 아니지만 향후 추가될 수 있습니다.</li>
+  <li><strong>모달리티:</strong> 벤치마크는 현재 텍스트 전용 검색을 평가합니다. 향후 릴리스에서는 텍스트-이미지 및 기타 다중 모달 검색 작업을 포함할 계획입니다.</li>
+  <li><strong>언어 지원 범위:</strong> 중국어, 아랍어와 같은 주요 언어는 물론, 저자원 언어(low-resource language, 희소 언어를 의미)까지 지원 범위를 넓히기 위해 적극적으로 추진 중입니다. 해당 기준에 부합하는 고품질 데이터셋을 알고 계시다면 알려주시기 바랍니다.</li>
+  <li><strong>질의응답(QA) 데이터셋 재활용:</strong> 현재 검색 데이터셋의 약 50%는 QA 데이터셋을 재활용한 것으로, 질문과 문맥 간 어휘 중복이 심해 키워드 매칭에 의존하는 모델이 진정한 의미 이해를 하는 모델보다 유리해지는 등의 문제가 발생할 수 있습니다.</li>
+  <li><strong>비공개 데이터셋:</strong> 일반화 능력 테스트를 위해 MTEB 관리자만 접근 가능한 비공개 데이터셋을 활용합니다. 공정성 유지를 위해 모든 관리자는 해당 데이터셋으로 훈련된 모델을 공개하지 않으며, 공개 채널을 통한 테스트만 수행하기로 약속하여 특정 기업이나 개인이 부당한 이점을 얻지 않도록 합니다.</li>
+</ul>
+
+<p>우리의 목표는 RTEB가 검색 평가 분야의 커뮤니티 신뢰 기준이 되는 것입니다.</p>
+
+<p>RTEB 리더보드는 오늘 <a href="https://huggingface.co/spaces/mteb/leaderboard?benchmark_name=RTEB%28beta%29">Hugging Face</a>에서 MTEB 리더보드의 새로운 검색(Retrieval) 섹션의 일부로 이용 가능합니다. 리더보드에서 여러분의 모델을 평가해보세요. 그리고 AI 커뮤니티 전체를 위한 더 나은 신뢰할 수 있는 벤치마크 구축에 함께해 주시길 바랍니다.</p>
+
+<hr />
+
+<p><span id="footnote-1">[1] 제로샷 점수는 모델 제공자가 명시적으로 훈련에 사용했다고 밝힌 평가 세트의 비율을 의미합니다. 이는 일반적으로 훈련 분량만 포함합니다.</span></p>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2025-12-01">01 Dec 2025</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#rteb-검색-평가의-새로운-표준" id="markdown-toc-rteb-검색-평가의-새로운-표준">RTEB: 검색 평가의 새로운 표준</a>    <ul>
+      <li><a href="#기존-벤치마크가-부족한-이유" id="markdown-toc-기존-벤치마크가-부족한-이유">기존 벤치마크가 부족한 이유</a></li>
+      <li><a href="#rteb-소개" id="markdown-toc-rteb-소개">RTEB 소개</a>        <ul>
+          <li><a href="#진정한-일반화를-위한-하이브리드-전략" id="markdown-toc-진정한-일반화를-위한-하이브리드-전략">진정한 일반화를 위한 하이브리드 전략</a></li>
+          <li><a href="#실제-도메인을-위해-설계됨" id="markdown-toc-실제-도메인을-위해-설계됨">실제 도메인을 위해 설계됨</a></li>
+        </ul>
+      </li>
+      <li><a href="#rteb-출시-커뮤니티의-노력" id="markdown-toc-rteb-출시-커뮤니티의-노력">RTEB 출시: 커뮤니티의 노력</a></li>
+      <li><a href="#한계점과-향후-계획" id="markdown-toc-한계점과-향후-계획">한계점과 향후 계획</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-152/assets/images/author/sohyun.png" alt="sohyun">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href="https://github.com/sim-so/">sohyun</a>
+        <span class="author-description">Hello, I'm sohyun, a data analyst who explores the world of data with curiosity and passion. 🤗</span>                        
+    </div>
+</div>
+
+
+<!-- footer -->
+<div class="row post-footer">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-152/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-152/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      
+      <button class="filter-btn active" data-category="retrieval">
+        Retrieval
+        <span class="count">1</span>
+      </button>
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="retrieval embedding benchmark ">
+        <!-- begin post -->
+
+<div class="card">
+    <a href="/pr-preview/pr-152/rteb/">
+         <img class="rounded mb-4" src="/pr-preview/pr-152/assets/images/blog/posts/2025-12-01-rteb/thumbnail.png" alt="RTEB: 검색 평가의 새로운 표준"> 
+    </a>
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-152/rteb/">RTEB: 검색 평가의 새로운 표준</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing RTEB: A New Standard for Retrieval Evaluation를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> sohyun, </span>             
+                on <span class="post-date">01 Dec 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section></main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-152/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-152/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-152/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-152/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-152/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-152/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-152/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-152/assets/js/category.js"></script>
+  </body>
+</html>
