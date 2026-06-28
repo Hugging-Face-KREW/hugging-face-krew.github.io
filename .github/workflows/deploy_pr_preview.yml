@@ -62,6 +62,7 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
 
       - name: Deploy PR preview
+        id: preview
         uses: rossjrw/pr-preview-action@v1
         with:
           source-dir: _site
@@ -77,12 +78,22 @@ jobs:
       - name: Comment PR with preview URL
         uses: actions/github-script@v8
         env:
+          ACTION_START_TIME: ${{ steps.preview.outputs['action-start-time'] }}
+          ACTION_VERSION: ${{ steps.preview.outputs['action-version'] }}
           PR_NUMBER: ${{ steps.pr.outputs.number }}
-          PREVIEW_URL: https://hugging-face-krew.github.io/pr-preview/pr-${{ steps.pr.outputs.number }}/
+          PREVIEW_URL: ${{ steps.preview.outputs['preview-url'] }}
+          REPOSITORY: ${{ github.repository }}
+          SERVER_URL: ${{ github.server_url }}
         with:
           script: |
             const marker = '<!-- pr-preview -->';
-            const body = `${marker}\n🚀 PR Preview: ${process.env.PREVIEW_URL}`;
+            const body = [
+              marker,
+              `[PR Preview Action](https://github.com/rossjrw/pr-preview-action) ${process.env.ACTION_VERSION}`,
+              ':---:',
+              `| <p></p> :rocket: View preview at <br> ${process.env.PREVIEW_URL} <br><br>`,
+              `| <h6>Built to branch [\`gh-pages\`](${process.env.SERVER_URL}/${process.env.REPOSITORY}/tree/gh-pages) at ${process.env.ACTION_START_TIME}. <br> Preview will be ready when the [GitHub Pages deployment](${process.env.SERVER_URL}/${process.env.REPOSITORY}/deployments) is complete. <br><br> </h6>`
+            ].join('\n');
             const issue_number = Number(process.env.PR_NUMBER);
             const comments = await github.paginate(
               github.rest.issues.listComments,
