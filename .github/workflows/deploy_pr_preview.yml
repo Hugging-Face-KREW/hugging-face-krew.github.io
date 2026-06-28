@@ -8,8 +8,8 @@ on:
       - completed
 
 concurrency:
-  group: gh-pages-deployment
-  cancel-in-progress: false
+  group: pr-preview-${{ github.event.workflow_run.head_repository.id }}-${{ github.event.workflow_run.head_branch }}
+  cancel-in-progress: true
 
 permissions:
   actions: read
@@ -71,7 +71,7 @@ jobs:
           pr-number: ${{ steps.pr.outputs.number }}
           action: deploy
           comment: false
-          wait-for-pages-deployment: true
+          wait-for-pages-deployment: false
           qr-code: false
 
       - name: Comment PR with preview URL

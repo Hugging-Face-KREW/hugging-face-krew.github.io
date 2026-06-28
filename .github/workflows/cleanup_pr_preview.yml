@@ -8,8 +8,8 @@ on:
       - closed
 
 concurrency:
-  group: gh-pages-deployment
-  cancel-in-progress: false
+  group: pr-preview-${{ github.event.pull_request.head.repo.id }}-${{ github.event.pull_request.head.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -32,5 +32,5 @@ jobs:
           pages-base-url: hugging-face-krew.github.io
           pr-number: ${{ github.event.pull_request.number }}
           action: remove
-          wait-for-pages-deployment: true
+          wait-for-pages-deployment: false
           qr-code: false
