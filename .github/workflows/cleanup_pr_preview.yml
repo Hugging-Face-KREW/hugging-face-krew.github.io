@@ -1,0 +1,32 @@
+name: PR Preview Cleanup
+
+on:
+  pull_request_target:
+    branches:
+      - main
+    types:
+      - closed
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  cleanup-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout trusted base branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Remove PR preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          pages-base-url: hugging-face-krew.github.io
+          pr-number: ${{ github.event.pull_request.number }}
+          action: remove
+          wait-for-pages-deployment: true
+          qr-code: false

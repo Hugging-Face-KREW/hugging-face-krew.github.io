@@ -1,0 +1,85 @@
+name: PR Preview Deploy
+
+on:
+  workflow_run:
+    workflows:
+      - PR Preview Build
+    types:
+      - completed
+
+permissions:
+  actions: read
+  contents: write
+  pull-requests: write
+
+jobs:
+  deploy-preview:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.pull_requests[0] != null
+    concurrency:
+      group: pr-preview-deploy-${{ github.event.workflow_run.pull_requests[0].number }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout trusted base branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Download preview artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: pr-preview-site
+          path: _site
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Deploy PR preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: _site
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          pages-base-url: hugging-face-krew.github.io
+          pr-number: ${{ github.event.workflow_run.pull_requests[0].number }}
+          action: deploy
+          comment: false
+          wait-for-pages-deployment: true
+          qr-code: false
+
+      - name: Comment PR with preview URL
+        uses: actions/github-script@v8
+        env:
+          PR_NUMBER: ${{ github.event.workflow_run.pull_requests[0].number }}
+          PREVIEW_URL: https://hugging-face-krew.github.io/pr-preview/pr-${{ github.event.workflow_run.pull_requests[0].number }}/
+        with:
+          script: |
+            const marker = '<!-- pr-preview -->';
+            const body = `${marker}\n🚀 PR Preview: ${process.env.PREVIEW_URL}`;
+            const issue_number = Number(process.env.PR_NUMBER);
+            const comments = await github.paginate(
+              github.rest.issues.listComments,
+              { owner: context.repo.owner, repo: context.repo.repo, issue_number }
+            );
+            const existing = comments.find(
+              (comment) => comment.user.type === 'Bot' && comment.body.includes(marker)
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number,
+                body
+              });
+            }
