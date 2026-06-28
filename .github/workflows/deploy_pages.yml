@@ -6,7 +6,9 @@ on:
       - main
   workflow_dispatch:
 
-concurrency: pages-${{ github.ref }}
+concurrency:
+  group: gh-pages-deployment
+  cancel-in-progress: false
 
 permissions:
   contents: write
