@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-157/assets/images/favicon.ico" />
+
+    <title>Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋" />
+<meta name="author" content="chaewon" />
+<meta property="og:locale" content="en_us" />
+<meta name="description" content="안녕하세요🤗 첫 포스트는 NL2SQL 챗봇 개발 시리즈의 첫 번째 파트로, 이론적 배경과 데이터셋에 대해 다뤄보려합니다. NL2SQL의 기본 개념, 필요성, 그리고 데이터셋에 대해 자세히 알아보겠습니다." />
+<meta name="twitter:description" property="og:description" content="안녕하세요🤗 첫 포스트는 NL2SQL 챗봇 개발 시리즈의 첫 번째 파트로, 이론적 배경과 데이터셋에 대해 다뤄보려합니다. NL2SQL의 기본 개념, 필요성, 그리고 데이터셋에 대해 자세히 알아보겠습니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-157/creating-gradio-based-NL2SQL-chatbot/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-09-19T00:00:00+09:00" />
+<meta property="article:modified_time" content="2024-09-19T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-157/creating-gradio-based-NL2SQL-chatbot/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" />
+<meta name="twitter:title" content="Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"chaewon"},"dateModified":"2024-09-19T00:00:00+09:00","datePublished":"2024-09-19T00:00:00+09:00","description":"안녕하세요🤗 첫 포스트는 NL2SQL 챗봇 개발 시리즈의 첫 번째 파트로, 이론적 배경과 데이터셋에 대해 다뤄보려합니다. NL2SQL의 기본 개념, 필요성, 그리고 데이터셋에 대해 자세히 알아보겠습니다.","headline":"Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋","image":"/pr-preview/pr-157/creating-gradio-based-NL2SQL-chatbot/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-157/creating-gradio-based-NL2SQL-chatbot/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-157/assets/images/hfkr_logo.png"},"name":"chaewon"},"url":"/pr-preview/pr-157/creating-gradio-based-NL2SQL-chatbot/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-157/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-157/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-157/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-157/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-157/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-157/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-157/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-157/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row" style="margin-top: 1rem;">
+		
+
+		<!-- Post -->        
+        
+        
+		<div class="col-sm-8">
+            <!-- Post Featured Image -->
+			<img class="featured-image img-fluid rounded" src="/pr-preview/pr-157/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" alt="Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋">
+			<!-- End Featured Image -->
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-157/categories#nlp">NLP</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-157/categories#sql">SQL</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-157/categories#chatbot">chatbot</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#1-nl2sql이란" id="markdown-toc-1-nl2sql이란"><a href="#nl2sql">1. NL2SQL이란?</a><a id="nl2sql"></a></a>    <ul>
+      <li><a href="#11-sql의-중요성" id="markdown-toc-11-sql의-중요성">1.1 SQL의 중요성</a></li>
+      <li><a href="#12-nl2sql의-필요성" id="markdown-toc-12-nl2sql의-필요성">1.2 NL2SQL의 필요성</a></li>
+    </ul>
+  </li>
+  <li><a href="#2-nl2sql-데이터셋" id="markdown-toc-2-nl2sql-데이터셋"><a href="#dataset">2. NL2SQL 데이터셋</a><a id="dataset"></a></a>    <ul>
+      <li><a href="#21-대표적인-nl2sql-데이터셋" id="markdown-toc-21-대표적인-nl2sql-데이터셋">2.1 대표적인 NL2SQL 데이터셋</a>        <ul>
+          <li><a href="#wikisql" id="markdown-toc-wikisql">WikiSQL</a></li>
+          <li><a href="#spider" id="markdown-toc-spider">Spider</a></li>
+        </ul>
+      </li>
+      <li><a href="#22-합성-데이터-활용" id="markdown-toc-22-합성-데이터-활용">2.2 합성 데이터 활용</a>        <ul>
+          <li><a href="#데이터셋-구조" id="markdown-toc-데이터셋-구조">데이터셋 구조</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#3-nl2sql-모델-성능-평가" id="markdown-toc-3-nl2sql-모델-성능-평가"><a href="#evaluation">3. NL2SQL 모델 성능 평가</a><a id="evaluation"></a></a>    <ul>
+      <li><a href="#31-일반적인-평가-방식" id="markdown-toc-31-일반적인-평가-방식">3.1 일반적인 평가 방식</a></li>
+      <li><a href="#32-gpt-4를-활용한-평가-방식" id="markdown-toc-32-gpt-4를-활용한-평가-방식">3.2 GPT-4를 활용한 평가 방식</a>        <ul>
+          <li><a href="#평가-프로세스" id="markdown-toc-평가-프로세스">평가 프로세스</a></li>
+          <li><a href="#프롬프트-예시" id="markdown-toc-프롬프트-예시">프롬프트 예시</a></li>
+          <li><a href="#gpt-4-평가-요청-준비" id="markdown-toc-gpt-4-평가-요청-준비">GPT-4 평가 요청 준비</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#결론" id="markdown-toc-결론"><a href="#result">결론</a><a id="result"></a></a></li>
+  <li><a href="#참고-자료" id="markdown-toc-참고-자료"><a href="#references">참고 자료</a><a id="references"></a></a></li>
+</ul>
+<!--toc-->
+<p>안녕하세요🤗 첫 포스트는 NL2SQL 챗봇 개발 시리즈의 첫 번째 파트로, 이론적 배경과 데이터셋에 대해 다뤄보려합니다. NL2SQL의 기본 개념, 필요성, 그리고 데이터셋에 대해 자세히 알아보겠습니다.</p>
+
+<p>이번 포스트는 도서 ‘LLM을 활용한 실전 AI 애플리케이션 개발 (저자: 허정준)’을 참고하여 작성하였습니다.</p>
+
+<h2 id="1-nl2sql이란"><a href="#nl2sql">1. NL2SQL이란?</a><a id="nl2sql"></a></h2>
+
+<p>NL2SQL(Natural Language to SQL)은 사용자의 자연어 질문을 SQL(Structured Query Language) 쿼리로 변환하는 기술입니다. 이 기술은 데이터베이스에서 정보를 추출하는 과정을 크게 단순화할 수 있습니다.</p>
+
+<h3 id="11-sql의-중요성">1.1 SQL의 중요성</h3>
+
+<p>SQL은 관계형 데이터베이스에서 데이터를 생성, 조회, 업데이트, 삭제하기 위해 사용되는 표준 언어입니다. 데이터 분석과 관리에 필수적인 도구이지만, 비전문가에게는 학습 곡선이 높을 수 있습니다.</p>
+
+<h3 id="12-nl2sql의-필요성">1.2 NL2SQL의 필요성</h3>
+
+<p>NL2SQL 기술은 다음과 같은 이점을 제공합니다:</p>
+
+<ol>
+  <li><strong>생산성 향상</strong>: 데이터 전문가들의 SQL 작성 시간을 줄여줍니다.</li>
+  <li><strong>접근성 개선</strong>: SQL을 모르는 비즈니스 사용자들도 데이터베이스에 쉽게 접근할 수 있게 합니다.</li>
+  <li><strong>오류 감소</strong>: 복잡한 쿼리 작성 시 발생할 수 있는 인적 오류를 줄입니다.</li>
+  <li><strong>실시간 데이터 분석</strong>: 신속한 의사결정을 위한 즉각적인 데이터 접근을 가능케 합니다.</li>
+</ol>
+
+<h2 id="2-nl2sql-데이터셋"><a href="#dataset">2. NL2SQL 데이터셋</a><a id="dataset"></a></h2>
+
+<p>NL2SQL 모델을 훈련시키기 위해서는 적절한 데이터셋이 필요합니다. 여기서는 대표적인 데이터셋과 실습에 사용할 합성 데이터셋에 대해 알아보겠습니다.</p>
+
+<h3 id="21-대표적인-nl2sql-데이터셋">2.1 대표적인 NL2SQL 데이터셋</h3>
+
+<h4 id="wikisql">WikiSQL</h4>
+
+<p>WikiSQL은 단일 테이블에 대한 간단한 쿼리를 생성하는 데 중점을 둔 데이터셋입니다.</p>
+
+<p>특징:</p>
+
+<ul>
+  <li>하나의 테이블만 사용</li>
+  <li>SELECT 문에 단일 칼럼 사용</li>
+  <li>조건절에 최대 3개의 조건만 사용</li>
+</ul>
+
+<p>예시:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"How would you answer a second test question?"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sql"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"agg"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"conds"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"column_index"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Some Entity"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"operator_index"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"human_readable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELECT Header1 FROM table WHERE Another Header = Some Entity"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sel"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"table"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{</span><span class="se">\"</span><span class="s2">caption</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">L</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">header</span><span class="se">\"</span><span class="s2">: [</span><span class="se">\"</span><span class="s2">Header1</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">Header 2</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">Another Header</span><span class="se">\"</span><span class="s2">], </span><span class="se">\"</span><span class="s2">id</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">1-10015132-9</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">table_10015132_11</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">page_i...}"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h4 id="spider">Spider</h4>
+
+<p>Spider는 WikiSQL보다 더 복잡하고 현실적인 시나리오를 다룹니다.</p>
+
+<p>특징:</p>
+
+<ul>
+  <li>다중 테이블 지원</li>
+  <li>복잡한 SQL 구문 포함 (ORDER BY, GROUP BY, HAVING, JOIN 등)</li>
+  <li>다양한 도메인의 데이터베이스 스키마 포함</li>
+</ul>
+
+<h3 id="22-합성-데이터-활용">2.2 합성 데이터 활용</h3>
+
+<p>실제 프로젝트에서는 특정 도메인이나 언어에 맞는 데이터셋이 필요할 수 있습니다. 이번 실습에서는 GPT 모델을 활용해 생성한 한국어 NL2SQL 데이터셋을 사용합니다.</p>
+
+<p>데이터셋 출처: <a href="https://huggingface.co/datasets/shangrilar/ko_text2sql">https://huggingface.co/datasets/shangrilar/ko_text2sql</a></p>
+
+<h4 id="데이터셋-구조">데이터셋 구조</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>컬럼</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>db_id</td>
+      <td>테이블이 포함된 데이터베이스의 ID</td>
+    </tr>
+    <tr>
+      <td>context</td>
+      <td>SQL 생성에 사용할 테이블 정보</td>
+    </tr>
+    <tr>
+      <td>question</td>
+      <td>데이터 요청사항</td>
+    </tr>
+    <tr>
+      <td>answer</td>
+      <td>요청에 대한 SQL 정답</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="https://velog.velcdn.com/images/chhaewxn/post/b3e0d065-6971-48d4-bfb0-bc17f43c8c47/image.png" alt="데이터셋 예시" /></p>
+
+<h2 id="3-nl2sql-모델-성능-평가"><a href="#evaluation">3. NL2SQL 모델 성능 평가</a><a id="evaluation"></a></h2>
+
+<p>NL2SQL 모델의 성능을 평가하는 것은 매우 중요하지만, 동시에 복잡한 과제입니다. 여기서는 일반적인 평가 방식과 이번 프로젝트에서 사용할 GPT-4 기반 평가 방식에 대해 알아보겠습니다.</p>
+
+<h3 id="31-일반적인-평가-방식">3.1 일반적인 평가 방식</h3>
+
+<ol>
+  <li>
+    <p><strong>Exact Match (EM)</strong>: 생성된 SQL 쿼리와 정답 쿼리의 문자열이 정확히 일치하는지 확인합니다.</p>
+
+    <ul>
+      <li>장점: 구현이 간단함</li>
+      <li>단점: 의미상으로 동일하지만 구문이 다른 쿼리를 틀렸다고 판단할 수 있음</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Execution Accuracy (EX)</strong>: 생성된 SQL 쿼리를 실제 데이터베이스에서 실행하여 결과가 정답과 일치하는지 확인합니다.</p>
+    <ul>
+      <li>장점: 실제 결과를 기반으로 평가하므로 더 정확함</li>
+      <li>단점: 평가용 데이터베이스 구축이 필요하며, 구현이 복잡함</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="32-gpt-4를-활용한-평가-방식">3.2 GPT-4를 활용한 평가 방식</h3>
+
+<p>최근에는 LLM을 활용해 LLM의 생성 결과를 평가하는 방식이 연구되고 있습니다. 이 프로젝트에서는 GPT-4를 사용하여 생성된 SQL과 정답 SQL을 비교 평가합니다.</p>
+
+<h4 id="평가-프로세스">평가 프로세스</h4>
+
+<ol>
+  <li>평가 데이터셋 구축</li>
+  <li>SQL 생성을 위한 프롬프트 준비</li>
+  <li>GPT-4 평가를 위한 프롬프트와 API 요청 코드 작성</li>
+</ol>
+
+<h4 id="프롬프트-예시">프롬프트 예시</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">make_prompt</span><span class="p">(</span><span class="n">ddl</span><span class="p">,</span> <span class="n">question</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="sh">''</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"""</span><span class="s">당신은 SQL을 생성하는 SQL 봇입니다. DDL의 테이블을 활용한 Question을 해결할 수 있는 SQL 쿼리를 생성하세요.
+
+### DDL:
+</span><span class="si">{</span><span class="n">ddl</span><span class="si">}</span><span class="s">
+
+### Question:
+</span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="s">
+
+### SQL:
+</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="n">prompt</span>
+</code></pre></div></div>
+
+<h4 id="gpt-4-평가-요청-준비">GPT-4 평가 요청 준비</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">make_requests_for_gpt_evaluation</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="sh">'</span><span class="s">requests</span><span class="sh">'</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nc">Path</span><span class="p">(</span><span class="nb">dir</span><span class="p">).</span><span class="nf">exists</span><span class="p">():</span>
+        <span class="nc">Path</span><span class="p">(</span><span class="nb">dir</span><span class="p">).</span><span class="nf">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">prompts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="p">.</span><span class="nf">iterrows</span><span class="p">():</span>
+        <span class="n">prompts</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">"""</span><span class="s">Based on below DDL and Question, evaluate gen_sql can resolve Question. If gen_sql and gt_sql do equal job, return </span><span class="sh">"</span><span class="s">yes</span><span class="sh">"</span><span class="s"> else return </span><span class="sh">"</span><span class="s">no</span><span class="sh">"</span><span class="s">. Output JSON Format: {</span><span class="sh">"</span><span class="s">resolve_yn</span><span class="sh">"</span><span class="s">: </span><span class="sh">""</span><span class="s">}</span><span class="sh">"""</span> <span class="o">+</span> <span class="sa">f</span><span class="sh">"""</span><span class="s">
+
+DDL: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="sh">'</span><span class="s">context</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">
+Question: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="sh">'</span><span class="s">question</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">
+gt_sql: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="sh">'</span><span class="s">answer</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">
+gen_sql: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="sh">'</span><span class="s">gen_sql</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"""</span>
+    <span class="p">)</span>
+
+    <span class="n">jobs</span> <span class="o">=</span> <span class="p">[{</span><span class="sh">"</span><span class="s">model</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">gpt-4-turbo-preview</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">response_format</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span> <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">json_object</span><span class="sh">"</span> <span class="p">},</span> <span class="sh">"</span><span class="s">messages</span><span class="sh">"</span><span class="p">:</span> <span class="p">[{</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">system</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="n">prompt</span><span class="p">}]}</span> <span class="k">for</span> <span class="n">prompt</span> <span class="ow">in</span> <span class="n">prompts</span><span class="p">]</span>
+    <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="nc">Path</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">),</span> <span class="sh">"</span><span class="s">w</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">:</span>
+            <span class="n">json_string</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+            <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">json_string</span> <span class="o">+</span> <span class="sh">"</span><span class="se">\n</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="결론"><a href="#result">결론</a><a id="result"></a></h2>
+
+<p>이번 포스트에서는 NL2SQL의 기본 개념, 주요 데이터셋, 그리고 성능 평가 방식에 대해 알아보았습니다. NL2SQL 기술은 데이터베이스 접근성을 크게 향상시키고, 데이터 기반 의사결정을 더욱 효율적으로 만들 수 있습니다.</p>
+
+<p>다음 포스트에서는 실제 Gradio를 사용하여 NL2SQL 챗봇을 구현하는 방법에 대해 자세히 알아보겠습니다. 궁금한 점이나 의견이 있다면 댓글로 남겨주세요!</p>
+
+<h2 id="참고-자료"><a href="#references">참고 자료</a><a id="references"></a></h2>
+
+<ul>
+  <li>LLM을 활용한 실전 AI 애플리케이션 개발 (저자: 허정준)</li>
+  <li><a href="https://huggingface.co/datasets/Salesforce/wikisql">WikiSQL 데이터셋</a></li>
+  <li><a href="https://yale-lily.github.io/spider">Spider 데이터셋</a></li>
+  <li><a href="https://huggingface.co/datasets/shangrilar/ko_text2sql">한국어 NL2SQL 데이터셋</a></li>
+  <li><a href="https://platform.openai.com/docs/api-reference">OpenAI API Documentation</a></li>
+</ul>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2024-09-19">19 Sep 2024</time></span>
+                
+            </small>
+        </p>
+
+
+
+        <!-- Prev/Next -->
+        <div class="row PageNavigation mt-4 prevnextlinks d-flex justify-content-between">
+            
+            <div class="col-md-6 rightborder pl-0">
+                <a class="thepostlink" href="/pr-preview/pr-157/how-to-contribute/">&laquo; 🤗 어떻게 기여하나요?</a>
+            </div>
+            
+            
+            <div class="col-md-6 text-right pr-0">
+                <a class="thepostlink" href="/pr-preview/pr-157/creating-web-interface/">Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기 &raquo;</a>
+            </div>
+            
+        </div>
+        <!-- End Prev/Next -->
+
+
+        <!-- Author Box -->
+        
+        <div class="row post-top-meta ">
+            <div class="col-md-2 text-left text-md-left">
+                <img class="author-thumb" src="/pr-preview/pr-157/assets/images/author/chaewon.png" alt="Chaewon">
+            </div>
+            <div class="col-md-10 text-left text-md-left">
+                <a target="_blank" class="link-dark" href="https://github.com/chhaewxn/">Chaewon</a><a target="_blank" href="" class="btn follow">Follow</a>
+                <span class="author-description">Hello! I'm Chaewon Song, a developer aspiring to become an Software engineer 🤗</span>						
+            </div>
+        </div>
+        
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <!-- End Post -->
+    <!-- toc -->
+    <div class="col-sm-4">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#1-nl2sql이란" id="markdown-toc-1-nl2sql이란"><a href="#nl2sql">1. NL2SQL이란?</a><a id="nl2sql"></a></a>    <ul>
+      <li><a href="#11-sql의-중요성" id="markdown-toc-11-sql의-중요성">1.1 SQL의 중요성</a></li>
+      <li><a href="#12-nl2sql의-필요성" id="markdown-toc-12-nl2sql의-필요성">1.2 NL2SQL의 필요성</a></li>
+    </ul>
+  </li>
+  <li><a href="#2-nl2sql-데이터셋" id="markdown-toc-2-nl2sql-데이터셋"><a href="#dataset">2. NL2SQL 데이터셋</a><a id="dataset"></a></a>    <ul>
+      <li><a href="#21-대표적인-nl2sql-데이터셋" id="markdown-toc-21-대표적인-nl2sql-데이터셋">2.1 대표적인 NL2SQL 데이터셋</a>        <ul>
+          <li><a href="#wikisql" id="markdown-toc-wikisql">WikiSQL</a></li>
+          <li><a href="#spider" id="markdown-toc-spider">Spider</a></li>
+        </ul>
+      </li>
+      <li><a href="#22-합성-데이터-활용" id="markdown-toc-22-합성-데이터-활용">2.2 합성 데이터 활용</a>        <ul>
+          <li><a href="#데이터셋-구조" id="markdown-toc-데이터셋-구조">데이터셋 구조</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#3-nl2sql-모델-성능-평가" id="markdown-toc-3-nl2sql-모델-성능-평가"><a href="#evaluation">3. NL2SQL 모델 성능 평가</a><a id="evaluation"></a></a>    <ul>
+      <li><a href="#31-일반적인-평가-방식" id="markdown-toc-31-일반적인-평가-방식">3.1 일반적인 평가 방식</a></li>
+      <li><a href="#32-gpt-4를-활용한-평가-방식" id="markdown-toc-32-gpt-4를-활용한-평가-방식">3.2 GPT-4를 활용한 평가 방식</a>        <ul>
+          <li><a href="#평가-프로세스" id="markdown-toc-평가-프로세스">평가 프로세스</a></li>
+          <li><a href="#프롬프트-예시" id="markdown-toc-프롬프트-예시">프롬프트 예시</a></li>
+          <li><a href="#gpt-4-평가-요청-준비" id="markdown-toc-gpt-4-평가-요청-준비">GPT-4 평가 요청 준비</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#결론" id="markdown-toc-결론"><a href="#result">결론</a><a id="result"></a></a></li>
+  <li><a href="#참고-자료" id="markdown-toc-참고-자료"><a href="#references">참고 자료</a><a id="references"></a></a></li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+<!-- footer -->
+<div class="row">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-157/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-157/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== --></main>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer container text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-157/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-157/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-157/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-157/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-157/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-157/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-157/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-157/assets/js/category.js"></script>
+  </body>
+</html>
