@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-60/assets/images/favicon.ico" />
+
+    <title>Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기" />
+<meta name="author" content="chaewon" />
+<meta property="og:locale" content="en_us" />
+<meta name="description" content="안녕하세요🤗 오늘은 Hugging Face에서 개발한 Gradio 라이브러리를 사용하여 머신러닝 모델을 위한 웹 인터페이스를 쉽고 빠르게 만드는 방법을 알아보겠습니다. Gradio를 사용하면 복잡한 웹 개발 지식 없이도 데모나 인터페이스를 빠르게 제작할 수 있습니다." />
+<meta name="twitter:description" property="og:description" content="안녕하세요🤗 오늘은 Hugging Face에서 개발한 Gradio 라이브러리를 사용하여 머신러닝 모델을 위한 웹 인터페이스를 쉽고 빠르게 만드는 방법을 알아보겠습니다. Gradio를 사용하면 복잡한 웹 개발 지식 없이도 데모나 인터페이스를 빠르게 제작할 수 있습니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-60/creating-web-interface/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-10-02T00:00:00+09:00" />
+<meta property="article:modified_time" content="2024-10-02T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-60/creating-web-interface/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" />
+<meta name="twitter:title" content="Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"chaewon"},"dateModified":"2024-10-02T00:00:00+09:00","datePublished":"2024-10-02T00:00:00+09:00","description":"안녕하세요🤗 오늘은 Hugging Face에서 개발한 Gradio 라이브러리를 사용하여 머신러닝 모델을 위한 웹 인터페이스를 쉽고 빠르게 만드는 방법을 알아보겠습니다. Gradio를 사용하면 복잡한 웹 개발 지식 없이도 데모나 인터페이스를 빠르게 제작할 수 있습니다.","headline":"Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기","image":"/pr-preview/pr-60/creating-web-interface/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-60/creating-web-interface/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-60/assets/images/hfkr_logo.png"},"name":"chaewon"},"url":"/pr-preview/pr-60/creating-web-interface/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-60/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-60/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-60/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-60/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-60/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-60/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-60/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-60/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-60/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" alt="Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-60/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" alt="Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-60/categories#nlp">NLP</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-60/categories#web">Web</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#1-gradio-소개" id="markdown-toc-1-gradio-소개"><a href="#introduction">1. Gradio 소개</a><a id="introduction"></a></a></li>
+  <li><a href="#2-기본-사용법-hello-world-예제" id="markdown-toc-2-기본-사용법-hello-world-예제"><a href="#basic-usage">2. 기본 사용법: Hello World 예제</a><a id="basic-usage"></a></a></li>
+  <li><a href="#3-gradio-interface-클래스-상세-설명" id="markdown-toc-3-gradio-interface-클래스-상세-설명"><a href="#interface-class">3. Gradio Interface 클래스 상세 설명</a><a id="interface-class"></a></a>    <ul>
+      <li><a href="#주요-매개변수" id="markdown-toc-주요-매개변수">주요 매개변수</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-고급-예제-이미지-분류기" id="markdown-toc-4-고급-예제-이미지-분류기"><a href="#advanced-example">4. 고급 예제: 이미지 분류기</a><a id="advanced-example"></a></a></li>
+  <li><a href="#5-인터페이스-실행하기" id="markdown-toc-5-인터페이스-실행하기"><a href="#launching">5. 인터페이스 실행하기</a><a id="launching"></a></a></li>
+  <li><a href="#6-큐-시스템-활용하기" id="markdown-toc-6-큐-시스템-활용하기"><a href="#queue-system">6. 큐 시스템 활용하기</a><a id="queue-system"></a></a></li>
+  <li><a href="#결론" id="markdown-toc-결론"><a href="#conclusion">결론</a><a id="conclusion"></a></a></li>
+  <li><a href="#참고-자료" id="markdown-toc-참고-자료"><a href="#references">참고 자료</a><a id="references"></a></a></li>
+</ul>
+<!--toc-->
+<p>안녕하세요🤗 오늘은 Hugging Face에서 개발한 Gradio 라이브러리를 사용하여 머신러닝 모델을 위한 웹 인터페이스를 쉽고 빠르게 만드는 방법을 알아보겠습니다. Gradio를 사용하면 복잡한 웹 개발 지식 없이도 데모나 인터페이스를 빠르게 제작할 수 있습니다.</p>
+
+<h2 id="1-gradio-소개"><a href="#introduction">1. Gradio 소개</a><a id="introduction"></a></h2>
+
+<p>Gradio는 머신러닝 모델이나 Python 함수를 위한 웹 기반 GUI를 몇 줄의 코드로 만들 수 있게 해주는 강력한 도구입니다. 주요 특징은 다음과 같아요.</p>
+
+<ul>
+  <li>다양한 입력/출력 컴포넌트 지원 (텍스트, 이미지, 오디오 등)</li>
+  <li>간단한 Python API</li>
+  <li>로컬 호스팅 및 클라우드 배포 옵션</li>
+  <li>다양한 머신러닝 프레임워크와의 호환성</li>
+</ul>
+
+<h2 id="2-기본-사용법-hello-world-예제"><a href="#basic-usage">2. 기본 사용법: Hello World 예제</a><a id="basic-usage"></a></h2>
+
+<p>먼저, 가장 기본적인 Gradio 애플리케이션을 만들어 보겠습니다. 이 예제에서는 사용자의 이름을 입력받아 인사말을 반환하는 간단한 함수를 만들고, 이를 웹 인터페이스로 구현해볼 것입니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">gradio</span> <span class="k">as</span> <span class="n">gr</span>
+
+<span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sh">"</span><span class="s">Hello </span><span class="sh">"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="sh">"</span><span class="s">!</span><span class="sh">"</span>
+
+<span class="n">demo</span> <span class="o">=</span> <span class="n">gr</span><span class="p">.</span><span class="nc">Interface</span><span class="p">(</span><span class="n">fn</span><span class="o">=</span><span class="n">greet</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="sh">"</span><span class="s">textbox</span><span class="sh">"</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="sh">"</span><span class="s">textbox</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
+    <span class="n">demo</span><span class="p">.</span><span class="nf">launch</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>이 코드를 실행하면, 로컬 서버가 시작되고 웹 브라우저에서 인터페이스를 볼 수 있습니다. 텍스트 상자에 이름을 입력하고 ‘Submit’ 버튼을 클릭하면, 인사말이 출력됩니다.</p>
+
+<h2 id="3-gradio-interface-클래스-상세-설명"><a href="#interface-class">3. Gradio Interface 클래스 상세 설명</a><a id="interface-class"></a></h2>
+
+<p>Gradio의 핵심은 <code class="language-plaintext highlighter-rouge">Interface</code> 클래스입니다. 이 클래스를 사용하여 함수와 입력/출력 컴포넌트를 연결하고 웹 인터페이스를 생성합니다.</p>
+
+<h3 id="주요-매개변수">주요 매개변수</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">fn</code>: 인터페이스로 감싸고자 하는 함수</li>
+  <li><code class="language-plaintext highlighter-rouge">inputs</code>: 입력 컴포넌트 (예: “textbox”, “image” 등)</li>
+  <li><code class="language-plaintext highlighter-rouge">outputs</code>: 출력 컴포넌트</li>
+  <li><code class="language-plaintext highlighter-rouge">examples</code>: 예제 입력값 리스트</li>
+  <li><code class="language-plaintext highlighter-rouge">title</code>: 인터페이스 제목</li>
+  <li><code class="language-plaintext highlighter-rouge">description</code>: 인터페이스 설명</li>
+</ul>
+
+<h2 id="4-고급-예제-이미지-분류기"><a href="#advanced-example">4. 고급 예제: 이미지 분류기</a><a id="advanced-example"></a></h2>
+
+<p>이번에는 조금 더 복잡한 예제로, 이미지 분류기를 위한 인터페이스를 만들어 보겠습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">gradio</span> <span class="k">as</span> <span class="n">gr</span>
+<span class="kn">import</span> <span class="n">torch</span>
+<span class="kn">from</span> <span class="n">torchvision</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">transforms</span>
+<span class="kn">from</span> <span class="n">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="c1"># 사전 훈련된 ResNet50 모델 로드
+</span><span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="nf">resnet50</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">model</span><span class="p">.</span><span class="nf">eval</span><span class="p">()</span>
+
+<span class="c1"># 이미지 전처리를 위한 변환 정의
+</span><span class="n">preprocess</span> <span class="o">=</span> <span class="n">transforms</span><span class="p">.</span><span class="nc">Compose</span><span class="p">([</span>
+    <span class="n">transforms</span><span class="p">.</span><span class="nc">Resize</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span>
+    <span class="n">transforms</span><span class="p">.</span><span class="nc">CenterCrop</span><span class="p">(</span><span class="mi">224</span><span class="p">),</span>
+    <span class="n">transforms</span><span class="p">.</span><span class="nc">ToTensor</span><span class="p">(),</span>
+    <span class="n">transforms</span><span class="p">.</span><span class="nc">Normalize</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mf">0.485</span><span class="p">,</span> <span class="mf">0.456</span><span class="p">,</span> <span class="mf">0.406</span><span class="p">],</span> <span class="n">std</span><span class="o">=</span><span class="p">[</span><span class="mf">0.229</span><span class="p">,</span> <span class="mf">0.224</span><span class="p">,</span> <span class="mf">0.225</span><span class="p">]),</span>
+<span class="p">])</span>
+
+<span class="c1"># ImageNet 클래스 레이블 로드
+</span><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">imagenet_classes.txt</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">.</span><span class="nf">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">.</span><span class="nf">readlines</span><span class="p">()]</span>
+
+<span class="k">def</span> <span class="nf">image_classifier</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+    <span class="c1"># 이미지 전처리
+</span>    <span class="n">input_tensor</span> <span class="o">=</span> <span class="nf">preprocess</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="n">input_batch</span> <span class="o">=</span> <span class="n">input_tensor</span><span class="p">.</span><span class="nf">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># 추론
+</span>    <span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="nf">no_grad</span><span class="p">():</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="nf">model</span><span class="p">(</span><span class="n">input_batch</span><span class="p">)</span>
+
+    <span class="c1"># 결과 처리
+</span>    <span class="n">probabilities</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">functional</span><span class="p">.</span><span class="nf">softmax</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">top5_prob</span><span class="p">,</span> <span class="n">top5_catid</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">topk</span><span class="p">(</span><span class="n">probabilities</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+    <span class="c1"># 결과를 사전 형식으로 변환
+</span>    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">top5_prob</span><span class="p">.</span><span class="nf">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)):</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">top5_catid</span><span class="p">[</span><span class="n">i</span><span class="p">]]]</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="n">top5_prob</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+
+<span class="n">demo</span> <span class="o">=</span> <span class="n">gr</span><span class="p">.</span><span class="nc">Interface</span><span class="p">(</span>
+    <span class="n">fn</span><span class="o">=</span><span class="n">image_classifier</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="n">gr</span><span class="p">.</span><span class="nc">Image</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="sh">"</span><span class="s">pil</span><span class="sh">"</span><span class="p">),</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="n">gr</span><span class="p">.</span><span class="nc">Label</span><span class="p">(</span><span class="n">num_top_classes</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span>
+    <span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">이미지 분류기</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">이미지를 업로드하면 상위 5개의 예측 클래스와 확률을 보여줍니다.</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
+    <span class="n">demo</span><span class="p">.</span><span class="nf">launch</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>이 예제에서는 이미지를 입력으로 받아 상위 5개의 예측 클래스와 확률 출력하는 인터페이스를 만들었습니다.</p>
+
+<h2 id="5-인터페이스-실행하기"><a href="#launching">5. 인터페이스 실행하기</a><a id="launching"></a></h2>
+
+<p><code class="language-plaintext highlighter-rouge">launch()</code> 메서드를 사용하여 인터페이스를 실행할 수 있습니다. 다양한 옵션을 제공하여 실행 방식을 커스터마이즈할 수 있습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">demo</span><span class="p">.</span><span class="nf">launch</span><span class="p">(</span>
+    <span class="n">share</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>  <span class="c1"># 공유 가능한 링크 생성
+</span>    <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="sh">"</span><span class="s">username</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">password</span><span class="sh">"</span><span class="p">),</span>  <span class="c1"># 기본 인증 설정
+</span>    <span class="n">server_port</span><span class="o">=</span><span class="mi">7860</span>  <span class="c1"># 서버 포트 지정
+</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="6-큐-시스템-활용하기"><a href="#queue-system">6. 큐 시스템 활용하기</a><a id="queue-system"></a></h2>
+
+<p>Gradio는 큐 시스템을 제공하여 동시 요청을 관리하고 사용자 경험을 향상시킬 수 있습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">demo</span> <span class="o">=</span> <span class="n">gr</span><span class="p">.</span><span class="nc">Interface</span><span class="p">(</span><span class="n">image_classifier</span><span class="p">,</span> <span class="n">gr</span><span class="p">.</span><span class="nc">Image</span><span class="p">(),</span> <span class="n">gr</span><span class="p">.</span><span class="nc">Label</span><span class="p">())</span>
+<span class="n">demo</span><span class="p">.</span><span class="nf">queue</span><span class="p">(</span><span class="n">max_size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>  <span class="c1"># 최대 50개의 요청을 큐에 저장
+</span><span class="n">demo</span><span class="p">.</span><span class="nf">launch</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>이렇게 하면 동시에 들어오는 요청을 효과적으로 관리하고, 사용자에게 대기 시간을 알려줄 수 있습니다.</p>
+
+<h2 id="결론"><a href="#conclusion">결론</a><a id="conclusion"></a></h2>
+
+<p>Gradio를 사용하면 복잡한 머신러닝 모델도 쉽게 웹 인터페이스로 만들 수 있습니다. 이 튜토리얼에서는 기본적인 사용법부터 고급 기능까지 살펴보았습니다. Gradio의 다양한 컴포넌트와 옵션을 활용하여 여러분의 프로젝트에 맞는 인터페이스를 만들어보세요!</p>
+
+<p>다음 포스팅에서는 이러한 Gradio의 기능을 활용하여 Text-to-SQL 챗봇을 구현해볼 예정입니다. 이 챗봇은 다음과 같은 특징을 가질 예정이에요.</p>
+
+<ul>
+  <li>자연어 질문을 SQL 쿼리로 변환하는 NLP 모델 통합</li>
+  <li>데이터베이스 스키마 정보를 컨텍스트로 활용</li>
+  <li>생성된 SQL 쿼리와 실행 결과를 동시에 표시하는 다중 출력 인터페이스</li>
+  <li>대화 기록을 유지하는 채팅 인터페이스 구현</li>
+</ul>
+
+<p>Gradio의 다양한 컴포넌트와 옵션을 활용하면, 이러한 복잡한 기능도 비교적 적은 코드로 구현할 수 있습니다. 여러분의 프로젝트에 맞는 고유한 인터페이스를 만들어보세요!</p>
+
+<h2 id="참고-자료"><a href="#references">참고 자료</a><a id="references"></a></h2>
+
+<ul>
+  <li><a href="https://www.gradio.app/docs/">Gradio 공식 문서</a></li>
+  <li><a href="https://github.com/gradio-app/gradio">Gradio GitHub 저장소</a></li>
+</ul>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2024-10-02">02 Oct 2024</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#1-gradio-소개" id="markdown-toc-1-gradio-소개"><a href="#introduction">1. Gradio 소개</a><a id="introduction"></a></a></li>
+  <li><a href="#2-기본-사용법-hello-world-예제" id="markdown-toc-2-기본-사용법-hello-world-예제"><a href="#basic-usage">2. 기본 사용법: Hello World 예제</a><a id="basic-usage"></a></a></li>
+  <li><a href="#3-gradio-interface-클래스-상세-설명" id="markdown-toc-3-gradio-interface-클래스-상세-설명"><a href="#interface-class">3. Gradio Interface 클래스 상세 설명</a><a id="interface-class"></a></a>    <ul>
+      <li><a href="#주요-매개변수" id="markdown-toc-주요-매개변수">주요 매개변수</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-고급-예제-이미지-분류기" id="markdown-toc-4-고급-예제-이미지-분류기"><a href="#advanced-example">4. 고급 예제: 이미지 분류기</a><a id="advanced-example"></a></a></li>
+  <li><a href="#5-인터페이스-실행하기" id="markdown-toc-5-인터페이스-실행하기"><a href="#launching">5. 인터페이스 실행하기</a><a id="launching"></a></a></li>
+  <li><a href="#6-큐-시스템-활용하기" id="markdown-toc-6-큐-시스템-활용하기"><a href="#queue-system">6. 큐 시스템 활용하기</a><a id="queue-system"></a></a></li>
+  <li><a href="#결론" id="markdown-toc-결론"><a href="#conclusion">결론</a><a id="conclusion"></a></a></li>
+  <li><a href="#참고-자료" id="markdown-toc-참고-자료"><a href="#references">참고 자료</a><a id="references"></a></a></li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-60/assets/images/author/chaewon.png" alt="Chaewon">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href="https://github.com/chhaewxn/">Chaewon</a>
+        <span class="author-description">Hello! I'm Chaewon Song, a developer aspiring to become an Software engineer 🤗</span>                        
+    </div>
+</div>
+
+
+<!-- footer -->
+<div class="row post-footer">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-60/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-60/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">2</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="nlp">
+            NLP
+            <span class="count">2</span>
+          </button>
+        
+      
+        
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="nlp sql ">
+        <!-- begin post -->
+
+<div class="card">
+    <a href="/pr-preview/pr-60/text2sql-spider-ko-dataset/">
+         <img class="rounded mb-4" src="/pr-preview/pr-60/assets/images/blog/posts/2025-06-14-text2sql-spider-ko-dataset/text2sql-thumbnail.png" alt="한국어 Text2SQL 프로젝트 - Part 1: 번역한 데이터셋의 품질 개선하기"> 
+    </a>
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-60/text2sql-spider-ko-dataset/">한국어 Text2SQL 프로젝트 - Part 1: 번역한 데이터셋의 품질 개선하기</a></h2>
+        <p class="card-text text-muted">
+2025년 상반기에 가짜연구소의 Hugging Face Hub Garden 스터디에서는 Text2SQL 한국어 데이터셋 구축 프로젝트가 진행되었습니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> sohyun, </span>             
+                on <span class="post-date">14 Jun 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="nlp sql chatbot ">
+        <!-- begin post -->
+
+<div class="card">
+    <a href="/pr-preview/pr-60/creating-gradio-based-NL2SQL-chatbot/">
+         <img class="rounded mb-4" src="/pr-preview/pr-60/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" alt="Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋"> 
+    </a>
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-60/creating-gradio-based-NL2SQL-chatbot/">Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋</a></h2>
+        <p class="card-text text-muted">안녕하세요🤗 첫 포스트는 NL2SQL 챗봇 개발 시리즈의 첫 번째 파트로, 이론적 배경과 데이터셋에 대해 다뤄보려합니다....</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Chaewon, </span>             
+                on <span class="post-date">19 Sep 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section></main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-60/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-60/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-60/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-60/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-60/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-60/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-60/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-60/assets/js/category.js"></script>
+  </body>
+</html>
