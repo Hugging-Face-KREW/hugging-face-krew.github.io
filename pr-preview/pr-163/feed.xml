@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/pr-preview/pr-163/feed.xml" rel="self" type="application/atom+xml" /><link href="/pr-preview/pr-163/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-07-03T16:35:31+09:00</updated><id>/pr-preview/pr-163/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</title><link href="/pr-preview/pr-163/cerebras-gemma4-voice-ai/" rel="alternate" type="text/html" title="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" /><published>2026-07-01T00:00:00+09:00</published><updated>2026-07-01T00:00:00+09:00</updated><id>/pr-preview/pr-163/cerebras-gemma4-voice-ai</id><content type="html" xml:base="/pr-preview/pr-163/cerebras-gemma4-voice-ai/"><![CDATA[<!-- Source: https://huggingface.co/blog/cerebras-gemma4-voice-ai -->
-<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/pr-preview/pr-163/feed.xml" rel="self" type="application/atom+xml" /><link href="/pr-preview/pr-163/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-07-03T16:37:41+09:00</updated><id>/pr-preview/pr-163/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</title><link href="/pr-preview/pr-163/cerebras-gemma4-voice-ai/" rel="alternate" type="text/html" title="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" /><published>2026-07-01T00:00:00+09:00</published><updated>2026-07-01T00:00:00+09:00</updated><id>/pr-preview/pr-163/cerebras-gemma4-voice-ai</id><content type="html" xml:base="/pr-preview/pr-163/cerebras-gemma4-voice-ai/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#hugging-face와-cerebras가-gemma-4를-실시간-음성-ai로-선보입니다" id="markdown-toc-hugging-face와-cerebras가-gemma-4를-실시간-음성-ai로-선보입니다">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">아키텍처: 개방형 계층형 음성-음성 스택</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">Cerebras와 Hugging Face 파트너십</a></li>
@@ -10,6 +9,8 @@
 <!--toc-->
 
 <p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/cerebras-gemma4-voice-ai">Hugging Face and Cerebras bring Gemma 4 to real-time voice AI</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/cerebras-gemma4-voice-ai -->
 
 <hr />
 
