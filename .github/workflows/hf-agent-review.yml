@@ -32,7 +32,8 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           repository: Hugging-Face-KREW/hf-workflow
-          ref: 0d20d3c63617feca6ba293419657636ed34f3bc1
+          ref: f4966d52459246f05ef5644a57a4ce1b50dba0ee
+          token: ${{ secrets.KREW_BOT_TOKEN }}
           path: workflow
 
       - name: Capture trusted PR snapshot
@@ -61,14 +62,14 @@ jobs:
       contents: read
       pull-requests: write
       statuses: write
-    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-review.yml@0d20d3c63617feca6ba293419657636ed34f3bc1
+    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-review.yml@f4966d52459246f05ef5644a57a4ce1b50dba0ee
     with:
       target_repo: ${{ github.repository }}
       pr_number: ${{ needs.context.outputs.pr_number }}
       head_sha: ${{ needs.context.outputs.head_sha }}
       file_path: ${{ needs.context.outputs.file_path }}
       branch: ${{ needs.context.outputs.branch }}
-      workflow_ref: 0d20d3c63617feca6ba293419657636ed34f3bc1
+      workflow_ref: f4966d52459246f05ef5644a57a4ce1b50dba0ee
       feedback_revision: ${{ needs.context.outputs.feedback_revision }}
     secrets:
       DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
