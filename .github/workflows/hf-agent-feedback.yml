@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           repository: Hugging-Face-KREW/hf-workflow
-          ref: 5a662e8a9ea252afa76ca2686a81970610a6eca6
+          ref: 9228de6abce71a0d29a229b2cadd19c5ee83ad63
           path: workflow
 
       - name: Authorize and snapshot feedback
@@ -66,7 +66,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-mutate.yml@5a662e8a9ea252afa76ca2686a81970610a6eca6
+    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-mutate.yml@9228de6abce71a0d29a229b2cadd19c5ee83ad63
     with:
       target_repo: ${{ github.repository }}
       pr_number: ${{ needs.authorize.outputs.pr_number }}
@@ -74,7 +74,7 @@ jobs:
       expected_head_sha: ${{ needs.authorize.outputs.head_sha }}
       file_path: ${{ needs.authorize.outputs.file_path }}
       feedback: ${{ fromJSON(needs.authorize.outputs.feedback_json) }}
-      workflow_ref: 5a662e8a9ea252afa76ca2686a81970610a6eca6
+      workflow_ref: 9228de6abce71a0d29a229b2cadd19c5ee83ad63
     secrets:
       KREW_BOT_TOKEN: ${{ secrets.KREW_BOT_TOKEN }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
