@@ -2,7 +2,7 @@ name: HF Agent PR Review
 
 on:
   pull_request:
-    types: [opened, reopened, ready_for_review, synchronize]
+    types: [opened, reopened, ready_for_review, synchronize, labeled]
   workflow_dispatch:
     inputs:
       pr_number:
