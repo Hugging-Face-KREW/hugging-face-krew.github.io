@@ -5,10 +5,12 @@ Just customize your theme here.
 
 body {}
 
+main.container{margin-bottom:50px;}
+.container{padding: 0 30px;}
+
 /* Category Filter Styles */
 .category-filter-section {
-  border-bottom: 1px solid #e1e5e9;
-  padding-bottom: 1rem;
+  margin-top:1rem;
 }
 
 .filter-tabs {

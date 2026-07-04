@@ -170,16 +170,22 @@
     <main class="container"><!-- Begin Article
 ================================================== -->
 
-	<div class="row" style="margin-top: 1rem;">
-		
+	<div class="row">
 
 		<!-- Post -->        
         
+
+        <!-- Post Featured Image -->
+            
         
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-145/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" alt="Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-145/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" alt="Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기">    
+            </div>
+        
+        <!-- End Featured Image -->
+
 		<div class="col-sm-8">
-            <!-- Post Featured Image -->
-			<img class="featured-image img-fluid rounded" src="/pr-preview/pr-145/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" alt="Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기">
-			<!-- End Featured Image -->
 			<div class="mainheading">             
                 
                 <!-- Post Categories -->
@@ -383,37 +389,6 @@
         </p>
 
 
-
-        <!-- Prev/Next -->
-        <div class="row PageNavigation mt-4 prevnextlinks d-flex justify-content-between">
-            
-            <div class="col-md-6 rightborder pl-0">
-                <a class="thepostlink" href="/pr-preview/pr-145/creating-gradio-based-NL2SQL-chatbot/">&laquo; Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋</a>
-            </div>
-            
-            
-            <div class="col-md-6 text-right pr-0">
-                <a class="thepostlink" href="/pr-preview/pr-145/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법 &raquo;</a>
-            </div>
-            
-        </div>
-        <!-- End Prev/Next -->
-
-
-        <!-- Author Box -->
-        
-        <div class="row post-top-meta ">
-            <div class="col-md-2 text-left text-md-left">
-                <img class="author-thumb" src="/pr-preview/pr-145/assets/images/author/chaewon.png" alt="Chaewon">
-            </div>
-            <div class="col-md-10 text-left text-md-left">
-                <a target="_blank" class="link-dark" href="https://github.com/chhaewxn/">Chaewon</a><a target="_blank" href="" class="btn follow">Follow</a>
-                <span class="author-description">Hello! I'm Chaewon Song, a developer aspiring to become an Software engineer 🤗</span>						
-            </div>
-        </div>
-        
-
-
         <!-- Begin Comments
             ================================================== -->
         <section>
@@ -443,9 +418,12 @@
 
 
     </div>
-    <!-- End Post -->
-    <!-- toc -->
-    <div class="col-sm-4">
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
         <div class="sidebar sticky-top">
     <div class="toc-content">
         <ul id="markdown-toc">
@@ -466,8 +444,23 @@
 </div>
     </div>
 </div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-145/assets/images/author/chaewon.png" alt="Chaewon">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href="https://github.com/chhaewxn/">Chaewon</a>
+        <span class="author-description">Hello! I'm Chaewon Song, a developer aspiring to become an Software engineer 🤗</span>                        
+    </div>
+</div>
+
+
 <!-- footer -->
-<div class="row">
+<div class="row post-footer">
     <div class="footer">
     <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
 
@@ -485,11 +478,119 @@
 </div>
 </div>
     <!-- End Article
-================================================== --></main>
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">2</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="nlp">
+            NLP
+            <span class="count">2</span>
+          </button>
+        
+      
+        
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="nlp sql ">
+        <!-- begin post -->
+
+<div class="card">
+    <a href="/pr-preview/pr-145/text2sql-spider-ko-dataset/">
+         <img class="rounded mb-4" src="/pr-preview/pr-145/assets/images/blog/posts/2025-06-14-text2sql-spider-ko-dataset/text2sql-thumbnail.png" alt="한국어 Text2SQL 프로젝트 - Part 1: 번역한 데이터셋의 품질 개선하기"> 
+    </a>
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-145/text2sql-spider-ko-dataset/">한국어 Text2SQL 프로젝트 - Part 1: 번역한 데이터셋의 품질 개선하기</a></h2>
+        <p class="card-text text-muted">
+2025년 상반기에 가짜연구소의 Hugging Face Hub Garden 스터디에서는 Text2SQL 한국어 데이터셋 구축 프로젝트가 진행되었습니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> sohyun, </span>             
+                on <span class="post-date">14 Jun 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="nlp sql chatbot ">
+        <!-- begin post -->
+
+<div class="card">
+    <a href="/pr-preview/pr-145/creating-gradio-based-NL2SQL-chatbot/">
+         <img class="rounded mb-4" src="/pr-preview/pr-145/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" alt="Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋"> 
+    </a>
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-145/creating-gradio-based-NL2SQL-chatbot/">Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋</a></h2>
+        <p class="card-text text-muted">안녕하세요🤗 첫 포스트는 NL2SQL 챗봇 개발 시리즈의 첫 번째 파트로, 이론적 배경과 데이터셋에 대해 다뤄보려합니다....</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Chaewon, </span>             
+                on <span class="post-date">19 Sep 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section></main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
 
     <!-- Footer
 ================================================== -->
-    <footer class="footer container text-center">
+    <footer class="footer text-center">
       <ul class="p-0 mb-1 small">
         
         <li>
