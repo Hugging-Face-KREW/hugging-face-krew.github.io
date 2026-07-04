@@ -21,6 +21,7 @@ jobs:
       pull-requests: read
     runs-on: ubuntu-latest
     outputs:
+      branch: ${{ steps.snapshot.outputs.branch }}
       feedback_revision: ${{ steps.snapshot.outputs.feedback_revision }}
       file_path: ${{ steps.snapshot.outputs.file_path }}
       head_sha: ${{ steps.snapshot.outputs.head_sha }}
@@ -31,7 +32,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           repository: Hugging-Face-KREW/hf-workflow
-          ref: 9228de6abce71a0d29a229b2cadd19c5ee83ad63
+          ref: 54bf9d30f7946796fd4c4d88d5651c9f105a3c4f
           path: workflow
 
       - name: Capture trusted PR snapshot
@@ -45,6 +46,7 @@ jobs:
             --repository "${{ github.repository }}" \
             --pr-number "$PR_NUMBER" \
             --result-json "${{ runner.temp }}/snapshot.json"
+          echo "branch=$(jq -r .branch "${{ runner.temp }}/snapshot.json")" >> "$GITHUB_OUTPUT"
           echo "feedback_revision=$(jq -r .feedback_revision "${{ runner.temp }}/snapshot.json")" >> "$GITHUB_OUTPUT"
           echo "file_path=$(jq -r .file_path "${{ runner.temp }}/snapshot.json")" >> "$GITHUB_OUTPUT"
           echo "head_sha=$(jq -r .head_sha "${{ runner.temp }}/snapshot.json")" >> "$GITHUB_OUTPUT"
@@ -59,11 +61,16 @@ jobs:
       contents: read
       pull-requests: write
       statuses: write
-    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-review.yml@9228de6abce71a0d29a229b2cadd19c5ee83ad63
+    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-review.yml@54bf9d30f7946796fd4c4d88d5651c9f105a3c4f
     with:
       target_repo: ${{ github.repository }}
       pr_number: ${{ needs.context.outputs.pr_number }}
       head_sha: ${{ needs.context.outputs.head_sha }}
       file_path: ${{ needs.context.outputs.file_path }}
-      workflow_ref: 9228de6abce71a0d29a229b2cadd19c5ee83ad63
+      branch: ${{ needs.context.outputs.branch }}
+      workflow_ref: 54bf9d30f7946796fd4c4d88d5651c9f105a3c4f
       feedback_revision: ${{ needs.context.outputs.feedback_revision }}
+    secrets:
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      KREW_BOT_TOKEN: ${{ secrets.KREW_BOT_TOKEN }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}

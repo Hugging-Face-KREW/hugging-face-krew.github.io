@@ -26,12 +26,13 @@ jobs:
       file_path: ${{ steps.route.outputs.file_path }}
       head_sha: ${{ steps.route.outputs.head_sha }}
       pr_number: ${{ steps.route.outputs.pr_number }}
+      review_comment_id: ${{ steps.route.outputs.review_comment_id }}
     steps:
       - name: Checkout workflow tools
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           repository: Hugging-Face-KREW/hf-workflow
-          ref: 9228de6abce71a0d29a229b2cadd19c5ee83ad63
+          ref: 54bf9d30f7946796fd4c4d88d5651c9f105a3c4f
           path: workflow
 
       - name: Authorize and snapshot feedback
@@ -59,6 +60,11 @@ jobs:
           echo "file_path=$(jq -r .file_path "${{ runner.temp }}/snapshot.json")" >> "$GITHUB_OUTPUT"
           echo "head_sha=$(jq -r .head_sha "${{ runner.temp }}/snapshot.json")" >> "$GITHUB_OUTPUT"
           echo "pr_number=$pr_number" >> "$GITHUB_OUTPUT"
+          if [ "$GITHUB_EVENT_NAME" = "pull_request_review_comment" ]; then
+            echo "review_comment_id=$(jq -r .comment_id "${{ runner.temp }}/route.json")" >> "$GITHUB_OUTPUT"
+          else
+            echo "review_comment_id=" >> "$GITHUB_OUTPUT"
+          fi
 
   mutate:
     needs: authorize
@@ -66,7 +72,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-mutate.yml@9228de6abce71a0d29a229b2cadd19c5ee83ad63
+    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-mutate.yml@54bf9d30f7946796fd4c4d88d5651c9f105a3c4f
     with:
       target_repo: ${{ github.repository }}
       pr_number: ${{ needs.authorize.outputs.pr_number }}
@@ -74,7 +80,8 @@ jobs:
       expected_head_sha: ${{ needs.authorize.outputs.head_sha }}
       file_path: ${{ needs.authorize.outputs.file_path }}
       feedback: ${{ fromJSON(needs.authorize.outputs.feedback_json) }}
-      workflow_ref: 9228de6abce71a0d29a229b2cadd19c5ee83ad63
+      workflow_ref: 54bf9d30f7946796fd4c4d88d5651c9f105a3c4f
+      review_comment_id: ${{ needs.authorize.outputs.review_comment_id }}
     secrets:
       KREW_BOT_TOKEN: ${{ secrets.KREW_BOT_TOKEN }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
