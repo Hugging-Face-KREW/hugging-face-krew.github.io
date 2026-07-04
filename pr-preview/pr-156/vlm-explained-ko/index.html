@@ -170,16 +170,22 @@
     <main class="container"><!-- Begin Article
 ================================================== -->
 
-	<div class="row" style="margin-top: 1rem;">
-		
+	<div class="row">
 
 		<!-- Post -->        
         
+
+        <!-- Post Featured Image -->
+            
         
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-156/assets/images/blog/posts/2025-10-12-vlm-explained-ko/thumbnail.png" alt="비전 언어 모델 쉽게 이해하기">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-156/assets/images/blog/posts/2025-10-12-vlm-explained-ko/thumbnail.png" alt="비전 언어 모델 쉽게 이해하기">    
+            </div>
+        
+        <!-- End Featured Image -->
+
 		<div class="col-sm-8">
-            <!-- Post Featured Image -->
-			<img class="featured-image img-fluid rounded" src="/pr-preview/pr-156/assets/images/blog/posts/2025-10-12-vlm-explained-ko/thumbnail.png" alt="비전 언어 모델 쉽게 이해하기">
-			<!-- End Featured Image -->
 			<div class="mainheading">             
                 
                 <!-- Post Categories -->
@@ -548,37 +554,6 @@
         </p>
 
 
-
-        <!-- Prev/Next -->
-        <div class="row PageNavigation mt-4 prevnextlinks d-flex justify-content-between">
-            
-            <div class="col-md-6 rightborder pl-0">
-                <a class="thepostlink" href="/pr-preview/pr-156/mcp-for-research/">&laquo; MCP for Research: AI와 연구 도구 연결하기</a>
-            </div>
-            
-            
-            <div class="col-md-6 text-right pr-0">
-                <a class="thepostlink" href="/pr-preview/pr-156/structured-codeagent-ko/">CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법 &raquo;</a>
-            </div>
-            
-        </div>
-        <!-- End Prev/Next -->
-
-
-        <!-- Author Box -->
-        
-        <div class="row post-top-meta ">
-            <div class="col-md-2 text-left text-md-left">
-                <img class="author-thumb" src="/pr-preview/pr-156/assets/images/author/woojun.png" alt="정우준">
-            </div>
-            <div class="col-md-10 text-left text-md-left">
-                <a target="_blank" class="link-dark" href="https://github.com/jungnerd">정우준</a><a target="_blank" href="" class="btn follow">Follow</a>
-                <span class="author-description">🤗</span>						
-            </div>
-        </div>
-        
-
-
         <!-- Begin Comments
             ================================================== -->
         <section>
@@ -608,9 +583,12 @@
 
 
     </div>
-    <!-- End Post -->
-    <!-- toc -->
-    <div class="col-sm-4">
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
         <div class="sidebar sticky-top">
     <div class="toc-content">
         <ul id="markdown-toc">
@@ -633,8 +611,23 @@
 </div>
     </div>
 </div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-156/assets/images/author/woojun.png" alt="정우준">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href="https://github.com/jungnerd">정우준</a>
+        <span class="author-description">🤗</span>                        
+    </div>
+</div>
+
+
 <!-- footer -->
-<div class="row">
+<div class="row post-footer">
     <div class="footer">
     <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
 
@@ -652,11 +645,53 @@
 </div>
 </div>
     <!-- End Article
-================================================== --></main>
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">0</span>
+      </button>
+
+      
+        
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+    </div>
+  </div>
+</section></main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
 
     <!-- Footer
 ================================================== -->
-    <footer class="footer container text-center">
+    <footer class="footer text-center">
       <ul class="p-0 mb-1 small">
         
         <li>
