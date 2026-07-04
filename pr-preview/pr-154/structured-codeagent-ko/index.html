@@ -170,16 +170,22 @@
     <main class="container"><!-- Begin Article
 ================================================== -->
 
-	<div class="row" style="margin-top: 1rem;">
-		
+	<div class="row">
 
 		<!-- Post -->        
         
+
+        <!-- Post Featured Image -->
+            
         
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-154/assets/images/blog/posts/2025-10-13-structured-codeagent/thumbnail.png" alt="CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-154/assets/images/blog/posts/2025-10-13-structured-codeagent/thumbnail.png" alt="CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법">    
+            </div>
+        
+        <!-- End Featured Image -->
+
 		<div class="col-sm-8">
-            <!-- Post Featured Image -->
-			<img class="featured-image img-fluid rounded" src="/pr-preview/pr-154/assets/images/blog/posts/2025-10-13-structured-codeagent/thumbnail.png" alt="CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법">
-			<!-- End Featured Image -->
 			<div class="mainheading">             
                 
                 <!-- Post Categories -->
@@ -466,37 +472,6 @@
         </p>
 
 
-
-        <!-- Prev/Next -->
-        <div class="row PageNavigation mt-4 prevnextlinks d-flex justify-content-between">
-            
-            <div class="col-md-6 rightborder pl-0">
-                <a class="thepostlink" href="/pr-preview/pr-154/vlm-explained-ko/">&laquo; 비전 언어 모델 쉽게 이해하기</a>
-            </div>
-            
-            
-            <div class="col-md-6 text-right pr-0">
-                <a class="thepostlink" href="/pr-preview/pr-154/2025-VLM/">2025년의 VLM : 더 좋아지고, 더 빠르고, 더 강해진 비전 언어 모델 &raquo;</a>
-            </div>
-            
-        </div>
-        <!-- End Prev/Next -->
-
-
-        <!-- Author Box -->
-        
-        <div class="row post-top-meta ">
-            <div class="col-md-2 text-left text-md-left">
-                <img class="author-thumb" src="/pr-preview/pr-154/assets/images/author/Jimin.png" alt="Jimin">
-            </div>
-            <div class="col-md-10 text-left text-md-left">
-                <a target="_blank" class="link-dark" href="https://github.com/jiminAn">Jimin</a><a target="_blank" href="" class="btn follow">Follow</a>
-                <span class="author-description">Hello, I’m Jimin! I’m a NLP researcher in 🇰🇷</span>						
-            </div>
-        </div>
-        
-
-
         <!-- Begin Comments
             ================================================== -->
         <section>
@@ -526,9 +501,12 @@
 
 
     </div>
-    <!-- End Post -->
-    <!-- toc -->
-    <div class="col-sm-4">
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
         <div class="sidebar sticky-top">
     <div class="toc-content">
         <ul id="markdown-toc">
@@ -567,8 +545,23 @@
 </div>
     </div>
 </div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-154/assets/images/author/Jimin.png" alt="Jimin">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href="https://github.com/jiminAn">Jimin</a>
+        <span class="author-description">Hello, I’m Jimin! I’m a NLP researcher in 🇰🇷</span>                        
+    </div>
+</div>
+
+
 <!-- footer -->
-<div class="row">
+<div class="row post-footer">
     <div class="footer">
     <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
 
@@ -586,11 +579,170 @@
 </div>
 </div>
     <!-- End Article
-================================================== --></main>
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">4</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="agent">
+            Agent
+            <span class="count">4</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    <a href="/pr-preview/pr-154/agent-leaderboard/">
+         <img class="rounded mb-4" src="/pr-preview/pr-154/assets/images/blog/posts/2025-11-17-agent-leaderboard/thumbnail.png" alt="에이전트 리더보드: 다중 도메인 시나리오에서의 AI 에이전트 평가"> 
+    </a>
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-154/agent-leaderboard/">에이전트 리더보드: 다중 도메인 시나리오에서의 AI 에이전트 평가</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Agent Leaderboard: Evaluating AI Agents in Multi-Domain Scenarios를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Jimin, </span>             
+                on <span class="post-date">17 Nov 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="benchmark agent ">
+        <!-- begin post -->
+
+<div class="card">
+    <a href="/pr-preview/pr-154/DABStep/">
+         <img class="rounded mb-4" src="/pr-preview/pr-154/assets/images/thumbnail_default.png" alt="DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크"> 
+    </a>
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-154/DABStep/">DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 DABStep: Data Agent Benchmark for Multi-step Reasoning를 한국어로 번역한 글입니다....</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> sohyun, </span>             
+                on <span class="post-date">02 Nov 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    <a href="/pr-preview/pr-154/Introducing-smolagents/">
+         <img class="rounded mb-4" src="/pr-preview/pr-154/assets/images/blog/posts/2025-09-26-Introducing-smolagents/thumbnail.png" alt="쉽게 에이전트를 만들 수 있는 라이브러리, smolagents를 소개합니다."> 
+    </a>
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-154/Introducing-smolagents/">쉽게 에이전트를 만들 수 있는 라이브러리, smolagents를 소개합니다.</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing smolagents, a simple library to build agents를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> jeong, </span>             
+                on <span class="post-date">26 Sep 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    <a href="/pr-preview/pr-154/python-tiny-agents-ko/">
+         <img class="rounded mb-4" src="/pr-preview/pr-154/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" alt="파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기"> 
+    </a>
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-154/python-tiny-agents-ko/">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Tiny Agents in Python: an MCP-powered agent in ~70 lines...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">14 Sep 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section></main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
 
     <!-- Footer
 ================================================== -->
-    <footer class="footer container text-center">
+    <footer class="footer text-center">
       <ul class="p-0 mb-1 small">
         
         <li>
