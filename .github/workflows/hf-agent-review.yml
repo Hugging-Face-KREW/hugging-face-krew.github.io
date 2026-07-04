@@ -29,10 +29,10 @@ jobs:
       pr_number: ${{ steps.snapshot.outputs.pr_number }}
     steps:
       - name: Checkout workflow tools
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
         with:
           repository: Hugging-Face-KREW/hf-workflow
-          ref: f4966d52459246f05ef5644a57a4ce1b50dba0ee
+          ref: 4281fc77e83bdfd85dc8b35a3a6c125467faffda
           token: ${{ secrets.KREW_BOT_TOKEN }}
           path: workflow
 
@@ -62,14 +62,14 @@ jobs:
       contents: read
       pull-requests: write
       statuses: write
-    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-review.yml@f4966d52459246f05ef5644a57a4ce1b50dba0ee
+    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-review.yml@4281fc77e83bdfd85dc8b35a3a6c125467faffda
     with:
       target_repo: ${{ github.repository }}
       pr_number: ${{ needs.context.outputs.pr_number }}
       head_sha: ${{ needs.context.outputs.head_sha }}
       file_path: ${{ needs.context.outputs.file_path }}
       branch: ${{ needs.context.outputs.branch }}
-      workflow_ref: f4966d52459246f05ef5644a57a4ce1b50dba0ee
+      workflow_ref: 4281fc77e83bdfd85dc8b35a3a6c125467faffda
       feedback_revision: ${{ needs.context.outputs.feedback_revision }}
     secrets:
       DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
