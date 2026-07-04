@@ -8,16 +8,22 @@ post_class: post-template
 <!-- Begin Article
 ================================================== -->
 
-	<div class="row" style="margin-top: 1rem;">
-		
+	<div class="row">
 
 		<!-- Post -->        
         {% assign author = site.authors[page.author] %}
-        
+
+        <!-- Post Featured Image -->
+            
+        {% if page.image %}
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="{{ site.baseurl }}/{{ page.image }}" alt="{{ page.title }}">    
+                <img class="featured-image img-fluid rounded" src="{{ site.baseurl }}/{{ page.image }}" alt="{{ page.title }}">    
+            </div>
+        {% endif %}
+        <!-- End Featured Image -->
+
 		<div class="col-sm-8">
-            <!-- Post Featured Image -->
-			{% if page.image %}<img class="featured-image img-fluid rounded" src="{{ site.baseurl }}/{{ page.image }}" alt="{{ page.title }}">{% endif %}
-			<!-- End Featured Image -->
 			<div class="mainheading">             
                 
                 <!-- Post Categories -->
@@ -60,37 +66,6 @@ post_class: post-template
         </p>
 
 
-
-        <!-- Prev/Next -->
-        <div class="row PageNavigation mt-4 prevnextlinks d-flex justify-content-between">
-            {% if page.previous.url %}
-            <div class="col-md-6 rightborder pl-0">
-                <a class="thepostlink" href="{{page.previous.url | absolute_url}}">&laquo; {{page.previous.title}}</a>
-            </div>
-            {% endif %}
-            {% if page.next.url %}
-            <div class="col-md-6 text-right pr-0">
-                <a class="thepostlink" href="{{page.next.url | absolute_url}}">{{page.next.title}} &raquo;</a>
-            </div>
-            {% endif %}
-        </div>
-        <!-- End Prev/Next -->
-
-
-        <!-- Author Box -->
-        {% if page.author %}
-        <div class="row post-top-meta ">
-            <div class="col-md-2 text-left text-md-left">
-                <img class="author-thumb" src="{{site.baseurl}}/{{author.avatar}}" alt="{{ author.display_name }}">
-            </div>
-            <div class="col-md-10 text-left text-md-left">
-                <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a><a target="_blank" href="{{ author.twitter }}" class="btn follow">Follow</a>
-                <span class="author-description">{{ author.description }}</span>						
-            </div>
-        </div>
-        {% endif %}
-
-
         <!-- Begin Comments
             ================================================== -->
         <section>
@@ -104,15 +79,97 @@ post_class: post-template
 
 
     </div>
-    <!-- End Post -->
-    <!-- toc -->
-    <div class="col-sm-4">
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
         {% include toc.html %}
     </div>
 </div>
+
+
+<!-- Author Box -->
+{% if page.author %}
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="{{site.baseurl}}/{{author.avatar}}" alt="{{ author.display_name }}">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a>
+        <span class="author-description">{{ author.description }}</span>                        
+    </div>
+</div>
+{% endif %}
+
 <!-- footer -->
-<div class="row">
+<div class="row post-footer">
     {% include footer.html %}
 </div>
     <!-- End Article
 ================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+{% assign target_posts = "" | split: "" %}
+
+{% for category in page.categories %}
+  {% assign target_posts = target_posts | concat: site.categories[category] %}
+{% endfor %}
+
+{% assign target_posts = target_posts | uniq | where_exp: "post", "post.url != page.url" %}
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">{{ target_posts.size }}</span>
+      </button>
+
+      {% for category in page.categories %}
+        {% assign category_posts = site.categories[category] | where_exp: "post", "post.url != page.url" %}
+        {% if category_posts.size > 0 %}
+          <button class="filter-btn" data-category="{{ category | slugify }}">
+            {{ category }}
+            <span class="count">{{ category_posts.size }}</span>
+          </button>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  {% for post in target_posts %}
+      {% if post.featured == true %}
+          <div class="col-md-4 mb-5 post-item" data-categories="{% for cat in post.categories %}{{ cat | slugify }} {% endfor %}">
+          {% include postbox.html %}
+          </div>
+      {% endif %}
+  {% endfor %}
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      {% assign banners = target_posts | where_exp: "post", "post.categories contains 'banner'" %}
+          {% for post in banners %}
+            {% unless post.featured == true %}
+              <div class="col-md-4 mb-5 post-item" data-categories="{% for cat in post.categories %}{{ cat | slugify }} {% endfor %}">
+                {% include postbox.html %}
+              </div>
+            {% endunless %}
+          {% endfor %}
+      {% for post in target_posts %}
+      {% unless post.featured == true or post.categories contains 'banner' %}
+      <div class="col-md-4 mb-5 post-item" data-categories="{% for cat in post.categories %}{{ cat | slugify }} {% endfor %}">
+        {% include postbox.html %}
+      </div>
+      {% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
