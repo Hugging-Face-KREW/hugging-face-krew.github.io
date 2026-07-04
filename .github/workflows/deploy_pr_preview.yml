@@ -1,0 +1,120 @@
+name: PR Preview Deploy
+
+on:
+  workflow_run:
+    workflows:
+      - PR Preview Build
+    types:
+      - completed
+
+concurrency:
+  group: pr-preview-${{ github.event.workflow_run.head_repository.id }}-${{ github.event.workflow_run.head_branch }}
+  cancel-in-progress: true
+
+permissions:
+  actions: read
+  contents: write
+  pull-requests: write
+
+jobs:
+  deploy-preview:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve pull request
+        id: pr
+        uses: actions/github-script@v8
+        env:
+          HEAD_OWNER: ${{ github.event.workflow_run.head_repository.owner.login }}
+          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+        with:
+          script: |
+            const head = `${process.env.HEAD_OWNER}:${process.env.HEAD_BRANCH}`;
+            const { data: pullRequests } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              base: 'main',
+              head
+            });
+
+            if (pullRequests.length !== 1) {
+              core.setFailed(`Expected one open pull request for ${head}, found ${pullRequests.length}`);
+              return;
+            }
+
+            core.setOutput('number', String(pullRequests[0].number));
+
+      - name: Checkout trusted base branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Download preview artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: pr-preview-site
+          path: _site
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Deploy PR preview
+        id: preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: _site
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          pages-base-url: hugging-face-krew.github.io
+          pr-number: ${{ steps.pr.outputs.number }}
+          action: deploy
+          comment: false
+          wait-for-pages-deployment: false
+          qr-code: false
+
+      - name: Comment PR with preview URL
+        uses: actions/github-script@v8
+        env:
+          ACTION_START_TIME: ${{ steps.preview.outputs['action-start-time'] }}
+          ACTION_VERSION: ${{ steps.preview.outputs['action-version'] }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+          PREVIEW_URL: ${{ steps.preview.outputs['preview-url'] }}
+          REPOSITORY: ${{ github.repository }}
+          SERVER_URL: ${{ github.server_url }}
+        with:
+          script: |
+            const marker = '<!-- pr-preview -->';
+            const body = [
+              marker,
+              `[PR Preview Action](https://github.com/rossjrw/pr-preview-action) ${process.env.ACTION_VERSION}`,
+              ':---:',
+              `| <p></p> :rocket: View preview at <br> ${process.env.PREVIEW_URL} <br><br>`,
+              `| <h6>Built to branch [\`gh-pages\`](${process.env.SERVER_URL}/${process.env.REPOSITORY}/tree/gh-pages) at ${process.env.ACTION_START_TIME}. <br> Preview will be ready when the [GitHub Pages deployment](${process.env.SERVER_URL}/${process.env.REPOSITORY}/deployments) is complete. <br><br> </h6>`
+            ].join('\n');
+            const issue_number = Number(process.env.PR_NUMBER);
+            const comments = await github.paginate(
+              github.rest.issues.listComments,
+              { owner: context.repo.owner, repo: context.repo.repo, issue_number }
+            );
+            const existing = comments.find(
+              (comment) => comment.user.type === 'Bot' && comment.body.includes(marker)
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number,
+                body
+              });
+            }
