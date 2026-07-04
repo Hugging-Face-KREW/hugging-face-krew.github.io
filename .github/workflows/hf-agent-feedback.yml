@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           repository: Hugging-Face-KREW/hf-workflow
-          ref: 54bf9d30f7946796fd4c4d88d5651c9f105a3c4f
+          ref: 0d20d3c63617feca6ba293419657636ed34f3bc1
           path: workflow
 
       - name: Authorize and snapshot feedback
@@ -72,7 +72,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-mutate.yml@54bf9d30f7946796fd4c4d88d5651c9f105a3c4f
+    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-mutate.yml@0d20d3c63617feca6ba293419657636ed34f3bc1
     with:
       target_repo: ${{ github.repository }}
       pr_number: ${{ needs.authorize.outputs.pr_number }}
@@ -80,7 +80,7 @@ jobs:
       expected_head_sha: ${{ needs.authorize.outputs.head_sha }}
       file_path: ${{ needs.authorize.outputs.file_path }}
       feedback: ${{ fromJSON(needs.authorize.outputs.feedback_json) }}
-      workflow_ref: 54bf9d30f7946796fd4c4d88d5651c9f105a3c4f
+      workflow_ref: 0d20d3c63617feca6ba293419657636ed34f3bc1
       review_comment_id: ${{ needs.authorize.outputs.review_comment_id }}
     secrets:
       KREW_BOT_TOKEN: ${{ secrets.KREW_BOT_TOKEN }}
