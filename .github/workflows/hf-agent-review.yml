@@ -1,0 +1,69 @@
+name: HF Agent PR Review
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review, synchronize]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: Pull request number
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  context:
+    name: HF Agent / Capture Context
+    permissions:
+      contents: read
+      pull-requests: read
+    runs-on: ubuntu-latest
+    outputs:
+      feedback_revision: ${{ steps.snapshot.outputs.feedback_revision }}
+      file_path: ${{ steps.snapshot.outputs.file_path }}
+      head_sha: ${{ steps.snapshot.outputs.head_sha }}
+      managed: ${{ steps.snapshot.outputs.managed }}
+      pr_number: ${{ steps.snapshot.outputs.pr_number }}
+    steps:
+      - name: Checkout workflow tools
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: Hugging-Face-KREW/hf-workflow
+          ref: 5a662e8a9ea252afa76ca2686a81970610a6eca6
+          path: workflow
+
+      - name: Capture trusted PR snapshot
+        id: snapshot
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr_number }}
+          PYTHONPATH: workflow/scripts
+        run: |
+          python -m hf_agent.snapshot_pr \
+            --repository "${{ github.repository }}" \
+            --pr-number "$PR_NUMBER" \
+            --result-json "${{ runner.temp }}/snapshot.json"
+          echo "feedback_revision=$(jq -r .feedback_revision "${{ runner.temp }}/snapshot.json")" >> "$GITHUB_OUTPUT"
+          echo "file_path=$(jq -r .file_path "${{ runner.temp }}/snapshot.json")" >> "$GITHUB_OUTPUT"
+          echo "head_sha=$(jq -r .head_sha "${{ runner.temp }}/snapshot.json")" >> "$GITHUB_OUTPUT"
+          echo "managed=$(jq -r .managed "${{ runner.temp }}/snapshot.json")" >> "$GITHUB_OUTPUT"
+          echo "pr_number=$(jq -r .pr_number "${{ runner.temp }}/snapshot.json")" >> "$GITHUB_OUTPUT"
+
+  review:
+    needs: context
+    if: ${{ needs.context.outputs.managed == 'true' }}
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: write
+      statuses: write
+    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-review.yml@5a662e8a9ea252afa76ca2686a81970610a6eca6
+    with:
+      target_repo: ${{ github.repository }}
+      pr_number: ${{ needs.context.outputs.pr_number }}
+      head_sha: ${{ needs.context.outputs.head_sha }}
+      file_path: ${{ needs.context.outputs.file_path }}
+      workflow_ref: 5a662e8a9ea252afa76ca2686a81970610a6eca6
+      feedback_revision: ${{ needs.context.outputs.feedback_revision }}
