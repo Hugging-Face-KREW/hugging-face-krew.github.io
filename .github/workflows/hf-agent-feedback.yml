@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
         with:
           repository: Hugging-Face-KREW/hf-workflow
-          ref: 4281fc77e83bdfd85dc8b35a3a6c125467faffda
+          ref: c4b355e96f397764ef180f049e97aa2155944829
           token: ${{ secrets.KREW_BOT_TOKEN }}
           path: workflow
 
@@ -73,7 +73,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-mutate.yml@4281fc77e83bdfd85dc8b35a3a6c125467faffda
+    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-mutate.yml@c4b355e96f397764ef180f049e97aa2155944829
     with:
       target_repo: ${{ github.repository }}
       pr_number: ${{ needs.authorize.outputs.pr_number }}
@@ -81,7 +81,7 @@ jobs:
       expected_head_sha: ${{ needs.authorize.outputs.head_sha }}
       file_path: ${{ needs.authorize.outputs.file_path }}
       feedback: ${{ fromJSON(needs.authorize.outputs.feedback_json) }}
-      workflow_ref: 4281fc77e83bdfd85dc8b35a3a6c125467faffda
+      workflow_ref: c4b355e96f397764ef180f049e97aa2155944829
       review_comment_id: ${{ needs.authorize.outputs.review_comment_id }}
     secrets:
       KREW_BOT_TOKEN: ${{ secrets.KREW_BOT_TOKEN }}
