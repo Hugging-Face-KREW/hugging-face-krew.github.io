@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-170/assets/images/favicon.ico" />
+
+    <title>효율적이고 안정적인 SEO 모듈 만들기: LLM은 필요한 곳에만 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>효율적이고 안정적인 SEO 모듈 만들기: LLM은 필요한 곳에만 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="효율적이고 안정적인 SEO 모듈 만들기: LLM은 필요한 곳에만" />
+<meta name="author" content="sohyun" />
+<meta property="og:locale" content="en_us" />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-07-13T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-07-13T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="효율적이고 안정적인 SEO 모듈 만들기: LLM은 필요한 곳에만" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"sohyun"},"dateModified":"2026-07-13T00:00:00+09:00","datePublished":"2026-07-13T00:00:00+09:00","headline":"효율적이고 안정적인 SEO 모듈 만들기: LLM은 필요한 곳에만","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-170/efficient-stable-seo-module/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-170/assets/images/hfkr_logo.png"},"name":"sohyun"},"url":"/pr-preview/pr-170/efficient-stable-seo-module/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-170/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-170/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-170/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-170/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-170/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-170/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-170/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-170/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-170/categories#agent">Agent</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-170/categories#seo">SEO</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-170/categories#workflow">Workflow</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">효율적이고 안정적인 SEO 모듈 만들기: LLM은 필요한 곳에만</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#효율적이고-안정적인-seo-모듈-만들기-llm은-필요한-곳에만" id="markdown-toc-효율적이고-안정적인-seo-모듈-만들기-llm은-필요한-곳에만">효율적이고 안정적인 SEO 모듈 만들기: LLM은 필요한 곳에만</a>    <ul>
+      <li><a href="#전체-그림-매일-도는-번역-파이프라인-속-seo" id="markdown-toc-전체-그림-매일-도는-번역-파이프라인-속-seo">전체 그림: 매일 도는 번역 파이프라인 속 SEO</a></li>
+      <li><a href="#llm에게-모든-것을-맡기지-않는-이유-효율성과-안정성" id="markdown-toc-llm에게-모든-것을-맡기지-않는-이유-효율성과-안정성">LLM에게 모든 것을 맡기지 않는 이유: 효율성과 안정성</a>        <ul>
+          <li><a href="#효율성--결정적-판정은-공짜이고-llm은-그렇지-않다" id="markdown-toc-효율성--결정적-판정은-공짜이고-llm은-그렇지-않다">효율성 — 결정적 판정은 공짜이고, LLM은 그렇지 않다</a></li>
+          <li><a href="#안정성--유연함이-리스크가-되는-자리" id="markdown-toc-안정성--유연함이-리스크가-되는-자리">안정성 — 유연함이 리스크가 되는 자리</a></li>
+        </ul>
+      </li>
+      <li><a href="#seo-모듈의-구조-module-1게이트과-module-2메타데이터" id="markdown-toc-seo-모듈의-구조-module-1게이트과-module-2메타데이터">SEO 모듈의 구조: Module 1(게이트)과 Module 2(메타데이터)</a>        <ul>
+          <li><a href="#module-1--게이트-layer-123" id="markdown-toc-module-1--게이트-layer-123">Module 1 — 게이트 (Layer 1·2·3)</a>            <ul>
+              <li><a href="#layer-1--하드-블로커-규칙" id="markdown-toc-layer-1--하드-블로커-규칙">Layer 1 — 하드 블로커 (규칙)</a></li>
+              <li><a href="#layer-2--결정적-체크--증거-신호-규칙" id="markdown-toc-layer-2--결정적-체크--증거-신호-규칙">Layer 2 — 결정적 체크 + 증거 신호 (규칙)</a></li>
+              <li><a href="#layer-3--시맨틱-저지-llm" id="markdown-toc-layer-3--시맨틱-저지-llm">Layer 3 — 시맨틱 저지 (LLM)</a></li>
+              <li><a href="#판정-결과-pass--needs_changes--fail--blocked" id="markdown-toc-판정-결과-pass--needs_changes--fail--blocked">판정 결과: PASS · NEEDS_CHANGES · FAIL · BLOCKED</a></li>
+            </ul>
+          </li>
+          <li><a href="#module-2--메타데이터-작성" id="markdown-toc-module-2--메타데이터-작성">Module 2 — 메타데이터 작성</a></li>
+        </ul>
+      </li>
+      <li><a href="#실행-흐름-llm-호출-지도와-실패-처리" id="markdown-toc-실행-흐름-llm-호출-지도와-실패-처리">실행 흐름: LLM 호출 지도와 실패 처리</a>        <ul>
+          <li><a href="#llm-호출-지도--10단계-중-3단계" id="markdown-toc-llm-호출-지도--10단계-중-3단계">LLM 호출 지도 — 10단계 중 3단계</a></li>
+          <li><a href="#게이트가-실패하면" id="markdown-toc-게이트가-실패하면">게이트가 실패하면</a></li>
+        </ul>
+      </li>
+      <li><a href="#어떻게-여기까지-왔나" id="markdown-toc-어떻게-여기까지-왔나">어떻게 여기까지 왔나</a></li>
+      <li><a href="#정리" id="markdown-toc-정리">정리</a></li>
+      <li><a href="#참고-자료" id="markdown-toc-참고-자료">참고 자료</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+
+<h1 id="효율적이고-안정적인-seo-모듈-만들기-llm은-필요한-곳에만">효율적이고 안정적인 SEO 모듈 만들기: LLM은 필요한 곳에만</h1>
+
+<p>Hugging Face KREW는 Hugging Face 블로그의 좋은 글을 매일 한국어로 옮기는 번역 워크플로우를 운영하고 있습니다. 이 워크플로우에는 번역만 있는 것이 아니라, 옮긴 글이 검색과 생성형 응답(GEO)에서 잘 발견되도록 돕는 <strong>SEO 모듈</strong>이 함께 들어갑니다.</p>
+
+<p>SEO 모듈을 만들면서 계속 던진 질문은 하나였습니다. <strong>“이 판단에 정말 LLM이 필요한가?”</strong> 번역이라는 작업 자체는 언어 이해와 생성이 핵심이라 LLM이 중심에 설 수밖에 없습니다. 하지만 “이 글이 발행해도 안전한가”, “제목과 본문이 같은 주제를 말하는가”, “이미지에 대체 텍스트가 있는가” 같은 SEO 판정은 성격이 제각각입니다. 어떤 것은 규칙으로 정확히 확정되고, 어떤 것은 의미를 읽어야 합니다.</p>
+
+<p>이 글은 그 경계를 어떻게 나눴는지에 대한 기록입니다. 글을 관통하는 생각은 이 한 문장입니다.</p>
+
+<blockquote>
+  <p>단순하게 풀 수 있는 문제는 단순하게 풀 수 있도록, 안정성이 중요할 땐 LLM의 유연함이 장점이 아닌 비결정성이라는 리스크임을 신경 써서 설계하는 건 어떨까?</p>
+</blockquote>
+
+<p>되는 것은 결정적으로(규칙으로) 처리하고, LLM은 의미 판단이 꼭 필요한 곳에만 두었습니다. 그렇게 한 이유 — 효율성과 안정성 — 을 먼저 이야기하고, 그다음에 실제 모듈 구조를 살펴보겠습니다.</p>
+
+<h2 id="전체-그림-매일-도는-번역-파이프라인-속-seo">전체 그림: 매일 도는 번역 파이프라인 속 SEO</h2>
+
+<p>SEO 모듈은 홀로 동작하지 않습니다. 매일 실행되는 번역 파이프라인(<code class="language-plaintext highlighter-rouge">daily-translation.yml</code>)의 한 단계로 들어갑니다.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RSS 수집 ──► EN→KO 번역(LLM) ──► PR + manifest 생성 ──► Discord 알림
+   │
+   └─► [ SEO 리뷰 · 품질 리뷰 ] ──► reports 커밋 ──► 아티팩트 업로드
+</code></pre></div></div>
+
+<p>몇 가지 짚어둘 점이 있습니다.</p>
+
+<ul>
+  <li>파이프라인에서 LLM 호출은 제한적입니다. <strong>번역</strong>은 작업 성격상 항상 LLM을 부릅니다. <strong>SEO 모듈</strong>은 CI 기본 설정(<code class="language-plaintext highlighter-rouge">SEO_OPENAI_REQUIRED=1</code>)에서 의미 판정에 LLM을 호출하지만, 설정을 끄면 결정적 경로로 대체됩니다. 반면 파이프라인에 배선된 <strong>품질 리포트(<code class="language-plaintext highlighter-rouge">simple_quality_report.py</code>)는 한국어 비율·코드블록 균형·TODO·출처 표기 같은 규칙 검사만 수행해 LLM을 호출하지 않습니다.</strong> 나머지 수집·PR 생성·리포트·커밋도 모두 정해진 코드 경로로 움직입니다.</li>
+  <li>SEO 리뷰와 품질 리뷰는 별도의 병렬 작업이 아니라 <strong>한 단계 안에서 순차(동기)로</strong> 실행되고, 둘 다 끝난 뒤 리포트를 <strong>한 번</strong> 커밋합니다.</li>
+  <li>Discord 알림은 리뷰 결과가 아니라 <strong>“번역 PR이 생성되었다”</strong>는 알림으로, 리뷰보다 앞서 발송됩니다.</li>
+  <li>각 파트가 공유하는 계약은 <code class="language-plaintext highlighter-rouge">manifest.yaml</code> 하나입니다. SEO 모듈은 이 manifest(또는 파일 경로)를 입력으로 받아 동작합니다.</li>
+</ul>
+
+<p>즉 SEO 모듈은 자율적으로 판단하고 행동하는 에이전트라기보다, 파이프라인이 정해진 순서로 호출하는 <strong>하나의 리뷰 단계</strong>입니다. 이 위치 설정이 이후 설계의 출발점이 됩니다.</p>
+
+<h2 id="llm에게-모든-것을-맡기지-않는-이유-효율성과-안정성">LLM에게 모든 것을 맡기지 않는 이유: 효율성과 안정성</h2>
+
+<p>SEO 모듈은 판단을 통째로 모델에 넘기지 않습니다. 대신 어떤 판단이 규칙으로 확정되고 어떤 판단이 의미를 읽어야 하는지를 먼저 나눴습니다. 그 경계를 어디에 그을지 정한 기준은 효율성과 안정성 두 가지였습니다.</p>
+
+<h3 id="효율성--결정적-판정은-공짜이고-llm은-그렇지-않다">효율성 — 결정적 판정은 공짜이고, LLM은 그렇지 않다</h3>
+
+<p>LLM 호출은 토큰 비용, 지연 시간, 그리고 비결정성을 함께 데려옵니다. 매일 도는 워크플로우에서 글 한 편마다 판정 항목이 십수 개인데, 그 모두를 모델에게 물어보면 비용과 시간이 선형으로 쌓입니다. 반면 “제목이 있는가”, “이미지 파일이 실제로 존재하는가”, “내부 링크가 깨지지 않았는가” 같은 판정은 <strong>규칙으로 즉시, 무료로, 정확하게</strong> 끝납니다. 여기에 모델을 부르는 것은 낭비일 뿐 아니라 부정확해질 위험까지 더합니다.</p>
+
+<p>이 감각은 우리만의 것이 아닙니다. Anthropic은 에이전트를 다룬 글에서 이렇게 권합니다.</p>
+
+<blockquote>
+  <p>“We recommend finding the simplest solution possible, and only increasing complexity when needed.”</p>
+
+  <p>— Anthropic, <a href="https://www.anthropic.com/engineering/building-effective-agents">Building Effective Agents</a></p>
+</blockquote>
+
+<p>가장 단순한 해법에서 시작하고, 필요할 때만 복잡도를 올리라는 것입니다. SEO 판정의 대부분은 규칙으로 충분히 정의되므로, 굳이 LLM이라는 복잡도를 얹지 않았습니다.</p>
+
+<p>OpenAI도 에이전트 구축 가이드에서 비슷한 선을 긋습니다. 에이전트가 필요한 조건(복잡한 판단, 비정형 데이터, 규칙 기반 접근이 무너지는 영역)을 먼저 확인하고,</p>
+
+<blockquote>
+  <p>“Before committing to building an agent, validate that your use case can meet these criteria clearly. Otherwise, a deterministic solution may suffice.”</p>
+
+  <p>— OpenAI, <a href="https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf">A Practical Guide to Building Agents</a></p>
+</blockquote>
+
+<p>라고 말합니다. <strong>“그렇지 않다면 결정적 해법으로 충분하다.”</strong> SEO 게이트의 상당 부분이 바로 이 “결정적 해법으로 충분한” 영역입니다.</p>
+
+<p>정리하면, 결정론 우선 원칙은 “LLM을 쓰지 말자”가 아닙니다. 한정된 LLM 예산을 <strong>규칙으로는 잡을 수 없는 의미 판단에 집중</strong>시키자는 것입니다.</p>
+
+<h3 id="안정성--유연함이-리스크가-되는-자리">안정성 — 유연함이 리스크가 되는 자리</h3>
+
+<p>리뷰 게이트의 생명은 재현성입니다. 같은 글을 두 번 검사하면 같은 결과가 나와야 하고, CI에서 실패하면 그 실패가 진짜여야 합니다.</p>
+
+<p>여기서 관점을 한 번 뒤집을 필요가 있습니다. LLM의 가장 큰 장점은 유연함입니다. 그런데 <strong>게이트처럼 안정성이 핵심인 자리에서는, 그 유연함이 곧 비결정성이라는 리스크</strong>가 됩니다. 같은 입력에 다른 출력이 나올 수 있다는 성질은 새로운 문제를 풀 때는 강점이지만, 같은 판정을 매일 반복해야 할 때는 약점입니다. 판정을 통째로 모델에 맡기면 게이트가 흔들리고, 게이트가 흔들리면 신뢰가 무너집니다.</p>
+
+<p>Anthropic이 workflow와 agent를 가르는 기준도 정확히 이 축입니다.</p>
+
+<blockquote>
+  <p>“Workflows offer predictability and consistency for well-defined tasks, whereas agents are the better option when flexibility and model-driven decision-making are needed at scale.”</p>
+
+  <p>— Anthropic, <a href="https://www.anthropic.com/engineering/building-effective-agents">Building Effective Agents</a></p>
+</blockquote>
+
+<p>잘 정의된 작업에는 <strong>예측 가능성과 일관성</strong>이, 유연한 판단이 필요한 작업에는 <strong>모델 주도의 결정</strong>이 어울린다는 것입니다. SEO 게이트는 명백히 전자에 속합니다. 그래서 안정성을 위해 세 가지를 지켰습니다.</p>
+
+<p>첫째, <strong>사실 판정은 규칙에 맡깁니다.</strong> <code class="language-plaintext highlighter-rouge">robots: noindex</code>가 걸렸는지, 내부 링크나 로컬 이미지가 깨졌는지는 의견이 아니라 사실입니다. 이런 게시 안정성 항목은 LLM의 판단 없이 규칙으로 확정하고, 실패 시 곧장 <code class="language-plaintext highlighter-rouge">BLOCKED</code>로 막습니다.</p>
+
+<p>둘째, <strong>의미 판정은 좁은 범위로 격리하고, 스키마로 제한합니다.</strong> 규칙으로 못 잡는 것 — 이를테면 “제목·설명·본문이 같은 주제를 말하는가” — 만 LLM에게 넘기되, 응답을 JSON 스키마로 강제해 환각과 파싱 실패를 줄입니다. 이는 OpenAI가 권하는 <strong>계층형 가드레일</strong>과 같은 구조입니다.</p>
+
+<blockquote>
+  <p>“Think of guardrails as a layered defense mechanism. […] Simple deterministic measures (blocklists, input length limits, regex filters) […]”</p>
+
+  <p>— OpenAI, A Practical Guide to Building Agents</p>
+</blockquote>
+
+<p>규칙 기반 가드레일과 LLM 기반 가드레일을 겹겹이 쌓되 서로 섞지 않는 것 — 이것이 우리 모듈의 Layer 1·2(규칙)와 Layer 3(LLM)의 분리로 이어집니다.</p>
+
+<p>셋째, <strong>LLM 없이도 로직을 검증할 수 있게 만듭니다.</strong> 시맨틱 판정을 담당하는 저지(judge) 함수는 <strong>주입식(injectable)</strong>입니다. 프로덕션에서는 OpenAI를 주입하고, 테스트에서는 스텁을 주입합니다. 저지를 주입하지 않으면 모듈은 결정적 경로만으로 동작합니다. 덕분에 네트워크·API 키 없이 도는 오프라인 테스트(현재 92개)와 golden 스냅샷 회귀가 성립합니다. 결정적 층이 넓을수록 테스트로 고정할 수 있는 표면도 넓어집니다.</p>
+
+<p>마지막으로 한 가지 원칙을 덧붙였습니다. <strong>“조용한 통과”를 허용하지 않는다.</strong> CI에서 OpenAI는 필수 경로로 설정되어 있어, 저지가 어떤 이유로든 실행되지 못하면 게이트를 통과시키지 않고 명시적으로 실패시킵니다(“OpenAI rubric required but not run”). LLM을 아끼되, LLM이 담당하기로 한 판정을 슬그머니 건너뛰지는 않도록 한 것입니다.</p>
+
+<h2 id="seo-모듈의-구조-module-1게이트과-module-2메타데이터">SEO 모듈의 구조: Module 1(게이트)과 Module 2(메타데이터)</h2>
+
+<p>이제 구조를 봅시다. 엔트리는 <code class="language-plaintext highlighter-rouge">seo_eval.py</code>이고, <strong>본문(body)만</strong> 평가합니다. frontmatter(제목·설명 등 메타데이터)는 게이트에서 제외합니다. 메타데이터는 게이트를 통과한 뒤 Module 2가 <em>생성</em>하는 대상이라, 게이트에 넣으면 “메타가 없어서 실패 → 실패해서 메타를 못 만듦”이라는 교착이 생기기 때문입니다.</p>
+
+<p>SEO 모듈은 두 개의 모듈로 구성됩니다.</p>
+
+<ul>
+  <li><strong>Module 1 — Eval(게이트):</strong> Layer 1·2·3으로 이루어진 본문 평가. 상태를 판정합니다.</li>
+  <li><strong>Module 2 — 메타데이터 작성:</strong> Module 1의 게이트를 통과(PASS)해야 동작합니다.</li>
+</ul>
+
+<h3 id="module-1--게이트-layer-123">Module 1 — 게이트 (Layer 1·2·3)</h3>
+
+<p>Module 1 안의 세 층은 다음과 같습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>층</th>
+      <th>역할</th>
+      <th>LLM</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Layer 1 — 하드 블로커</strong></td>
+      <td>게시 자체를 막아야 하는 조건. 하나라도 실패하면 즉시 <code class="language-plaintext highlighter-rouge">BLOCKED</code></td>
+      <td>✗ 규칙</td>
+    </tr>
+    <tr>
+      <td><strong>Layer 2 — 결정적 체크 + 증거</strong></td>
+      <td>구조·키워드·이미지 규칙 체크 + pass/fail을 정하지 않는 관찰 신호(evidence signals)</td>
+      <td>✗ 규칙</td>
+    </tr>
+    <tr>
+      <td><strong>Layer 3 — 시맨틱 저지</strong></td>
+      <td>규칙으로 못 잡는 의미 정합만. JSON 스키마 출력, 주입식</td>
+      <td>◆ LLM</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="layer-1--하드-블로커-규칙">Layer 1 — 하드 블로커 (규칙)</h4>
+
+<p>품질과 무관하게 게시를 막아야 하는 조건만 담습니다. <code class="language-plaintext highlighter-rouge">--target-root</code>로 실제 파일과 링크를 해석합니다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">body_not_empty</code> — 본문이 비어 있지 않은가</li>
+  <li><code class="language-plaintext highlighter-rouge">robots_indexable</code> — frontmatter에 <code class="language-plaintext highlighter-rouge">robots: noindex</code>가 걸려 있지 않은가</li>
+  <li><code class="language-plaintext highlighter-rouge">internal_links_resolve</code> — 내부 링크가 저장소 안에서 실제로 해석되는가(깨진 링크 아님)</li>
+  <li><code class="language-plaintext highlighter-rouge">local_images_resolve</code> — 참조한 로컬 이미지 파일이 실제로 존재하는가</li>
+</ul>
+
+<p>이들은 전부 사실 판정이라 규칙으로 확정합니다.</p>
+
+<h4 id="layer-2--결정적-체크--증거-신호-규칙">Layer 2 — 결정적 체크 + 증거 신호 (규칙)</h4>
+
+<p>구조·키워드·이미지에 대한 규칙 체크입니다. 각 항목의 심각도(severity)는 코드가 아니라 정책 파일(<code class="language-plaintext highlighter-rouge">default-policy.yml</code>)이 매핑하므로, 팀 정책에 따라 조정할 수 있습니다. 현재 <strong>게이트를 막는 required 항목</strong>은 다음과 같습니다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">heading_hierarchy</code> — heading 레벨을 건너뛰지 않는가(<code class="language-plaintext highlighter-rouge">##</code> 다음 바로 <code class="language-plaintext highlighter-rouge">####</code> 금지)</li>
+  <li><code class="language-plaintext highlighter-rouge">primary_keyword</code> — 주요 키워드가 H1과 도입부에 등장하는가(키워드 미지정 시 건너뜀)</li>
+  <li><code class="language-plaintext highlighter-rouge">alt_text_coverage</code> — 모든 이미지에 대체 텍스트가 있는가</li>
+  <li><code class="language-plaintext highlighter-rouge">descriptive_alt_text</code> — 대체 텍스트가 파일명형(<code class="language-plaintext highlighter-rouge">image1.png</code>)이 아니라 서술적인가</li>
+  <li><code class="language-plaintext highlighter-rouge">image_files_exist</code> — 참조 이미지 파일이 실제로 존재하는가</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">opening_summary</code>, <code class="language-plaintext highlighter-rouge">h1_count</code>, <code class="language-plaintext highlighter-rouge">citations</code>는 <code class="language-plaintext highlighter-rouge">review</code>(리포트에 남기되 게이트는 막지 않음)로, 내부 링크·secondary 키워드·webp·lazy 로딩 등은 권고(recommended/optional)로 둡니다. Jekyll 레이아웃이 frontmatter의 제목을 페이지 H1로 렌더링하기 때문에, 본문 구조에 대한 판단은 하드 게이트에서 빼고 리포트로만 남기는 쪽을 택했습니다.</p>
+
+<p>Layer 2에는 규칙 체크와 별개로 <strong>증거 신호(evidence signals)</strong>도 있습니다. 이것은 그 자체로 pass/fail을 정하지 않는 <strong>순수 관찰값</strong>입니다. 예를 들면 이런 것들입니다.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>frontmatter: title_chars=42, description_present=true, canonical_present=false
+opening:     first_real_paragraph_chars=180
+headings:    markdown_h1_count=0, rendered_effective_h1=["RTEB: ..."]
+images:      total=5, empty_alt_count=1, filename_like_alt_count=0
+links:       internal=3, external=8, citation_signal_count=4
+</code></pre></div></div>
+
+<p>이 신호들은 판단을 내리지 않고, <strong>Layer 3의 저지와 사람 리뷰어에게 판단 근거</strong>를 넘깁니다. “제목은 있는데 도입부와 주제가 다르다” 같은 판단을 LLM이 내릴 수 있게 하는 입력이 바로 이 신호들입니다. 규칙이 근거를 만들고, 의미는 다음 층이 봅니다.</p>
+
+<h4 id="layer-3--시맨틱-저지-llm">Layer 3 — 시맨틱 저지 (LLM)</h4>
+
+<p>규칙으로는 잡을 수 없는 <strong>의미 정합</strong>만 여기서 판정합니다. 좁은 seam 두 개뿐입니다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">semantic_metadata</code> — 제목·설명·렌더된 H1·도입부가 서로 다른 주제를 약속하고 있지 않은가(게이트를 막는 <code class="language-plaintext highlighter-rouge">required</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">alt_semantics</code> — 비어 있지는 않지만 무의미한 대체 텍스트(<code class="language-plaintext highlighter-rouge">그림</code>, <code class="language-plaintext highlighter-rouge">image</code>)를 쓰고 있지 않은가(리뷰용, 게이트를 막지는 않음)</li>
+</ul>
+
+<p>이 저지는 <code class="language-plaintext highlighter-rouge">gpt-5-nano</code>로 호출하며, 앞서 말했듯 주입식이라 미주입 시에는 결정적 경로만으로 게이트가 판정됩니다.</p>
+
+<h4 id="판정-결과-pass--needs_changes--fail--blocked">판정 결과: PASS · NEEDS_CHANGES · FAIL · BLOCKED</h4>
+
+<p>Module 1은 이진 통과/실패가 아니라 네 가지 상태를 냅니다. 그리고 <strong>판정 단위는 레이어가 아니라 개별 <code class="language-plaintext highlighter-rouge">required</code> 항목</strong>입니다.</p>
+
+<ul>
+  <li><strong>PASS</strong> — 통과. Module 2(메타데이터)로 진행</li>
+  <li><strong>NEEDS_CHANGES</strong> — required 항목 <strong>1개</strong> 실패. 좁은 피드백만 반환</li>
+  <li><strong>FAIL</strong> — required 항목 <strong>2개 이상</strong> 실패. 본문 개선 피드백 반환</li>
+  <li><strong>BLOCKED</strong> — Layer 1 블로커 실패(예: <code class="language-plaintext highlighter-rouge">noindex</code>, 깨진 내부 링크)</li>
+</ul>
+
+<h3 id="module-2--메타데이터-작성">Module 2 — 메타데이터 작성</h3>
+
+<p>게이트를 통과하면 Module 2가 제목·설명 후보를 만듭니다. 후보는 증거에서 결정적으로 뽑거나 OpenAI로 생성할 수 있습니다. 다만 <strong>canonical·hreflang은 절대 추측하지 않습니다.</strong> 번역본과 원문의 URL 정책이 입력으로 주어지지 않으면 상태를 <code class="language-plaintext highlighter-rouge">PARTIAL</code>로 남깁니다. 정책 없이 canonical을 잘못 박으면 원문과 번역본이 검색에서 서로를 잠식할 수 있기 때문입니다.</p>
+
+<p>또 하나 중요한 점은, 파이프라인 안에서 Module 2는 <strong>읽기 전용</strong>이라는 것입니다. 후보(<code class="language-plaintext highlighter-rouge">metadata-suggestion.json</code>)를 만들 뿐, 실제 포스트 frontmatter에 적용(write-back)하는 단계는 자동화에 포함되어 있지 않습니다. 적용은 사람의 승인(<code class="language-plaintext highlighter-rouge">requires_human</code>)을 거치도록 되어 있습니다. 자동 생성한 메타데이터를 사람 확인 없이 곧장 반영하는 것은 아직 위험하다고 보았기 때문입니다.</p>
+
+<h2 id="실행-흐름-llm-호출-지도와-실패-처리">실행 흐름: LLM 호출 지도와 실패 처리</h2>
+
+<h3 id="llm-호출-지도--10단계-중-3단계">LLM 호출 지도 — 10단계 중 3단계</h3>
+
+<p>SEO 모듈 내부의 작업 순서를 펼쳐 보면, LLM을 부르는 지점이 어디인지 한눈에 들어옵니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>단계</th>
+      <th>종류</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>입력 해석(manifest/파일 → 본문·frontmatter 분리)</td>
+      <td>규칙</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Layer 1 블로커 체크</td>
+      <td>규칙</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Layer 2 결정적 D-체크</td>
+      <td>규칙</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>증거 신호 수집(<code class="language-plaintext highlighter-rouge">collect_signals</code>)</td>
+      <td>규칙</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>정책 severity 매핑(<code class="language-plaintext highlighter-rouge">apply_policy</code>)</td>
+      <td>규칙</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><strong>Layer 3 <code class="language-plaintext highlighter-rouge">semantic_metadata</code> 저지</strong></td>
+      <td><strong>◆ LLM</strong></td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><strong>Layer 3 <code class="language-plaintext highlighter-rouge">alt_semantics</code> 저지</strong></td>
+      <td><strong>◆ LLM</strong></td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>게이트·상태 분류(<code class="language-plaintext highlighter-rouge">classify_status</code>)</td>
+      <td>규칙</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td><strong>(PASS 시) 메타데이터 후보 생성</strong></td>
+      <td><strong>◆ LLM / 결정적 fallback</strong></td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>리포트·JSON 출력</td>
+      <td>규칙</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>열 단계 중 LLM 호출은 <strong>6·7·9 세 곳뿐</strong>입니다. 나머지 일곱 단계는 API 키와 네트워크 없이 재현할 수 있습니다. 그리고 이 세 단계조차 CI 설정(<code class="language-plaintext highlighter-rouge">SEO_OPENAI_REQUIRED=1</code>)이 없으면 결정적 경로로 대체됩니다.</p>
+
+<h3 id="게이트가-실패하면">게이트가 실패하면</h3>
+
+<p>PR 이벤트 기반 리뷰 경로에서는, 실패 리포트를 근거로 본문을 <strong>최소 수정 → 재검증 → 푸시</strong>하는 자동 복구가 최대 3회까지 시도됩니다. 안전하게 고칠 수 없으면 <code class="language-plaintext highlighter-rouge">hf-agent:needs-human</code> 라벨을 달고 멈춰 사람에게 넘깁니다. 매일 도는 데일리 경로에서는 리포트만 남기고, 본문을 고치면 다음 실행에서 다시 검사합니다.</p>
+
+<h2 id="어떻게-여기까지-왔나">어떻게 여기까지 왔나</h2>
+
+<p>이 구조는 처음부터 있던 것이 아닙니다. 단일한 통과/실패 게이트에서 출발해 지금의 3층 구조로 나뉘어 왔습니다.</p>
+
+<ul>
+  <li><strong>1단계 — 단일 이진 게이트.</strong> 결정적 required 체크만으로 PASS/FAIL을 냈습니다. 오프라인 테스트 하네스와 body-only 게이트라는 기본 계약을 이때 확립했습니다. 이후 리뷰를 거치며, Jekyll이 제목을 H1로 렌더링하는 점 때문에 본문 구조 체크(H1·계층·도입부·인용)를 게이트에서 빼고 리포트로만 남기도록 조정했습니다.</li>
+  <li><strong>2단계 — 측정 기반 마련.</strong> 런타임 로직은 그대로 두고, 평가를 측정할 데이터셋(curated·mutated·실제 글 픽스처)만 확장했습니다. “테스트가 통과한다”와 “정책이 SEO 관점에서 충분하다”를 구분하기 위한 토대입니다.</li>
+  <li><strong>3단계 — 층의 분화(현재).</strong> 게시 안정성 블로커(Layer 1), 결정적 증거(Layer 2), 스키마 기반 LLM 저지(Layer 3)를 분리하고, 상태를 네 가지로 나누었습니다. 정책 설정 파일, 정책 인지 메타데이터, OpenAI 배선이 이때 들어왔고 테스트는 92개로 늘었습니다.</li>
+</ul>
+
+<p>핵심 변화는 두 가지입니다. <strong>결정적 층이 하나에서 세 겹으로 분화</strong>되었고, 규칙으로 못 잡는 의미 판정을 위해 <strong>LLM 호출 지점이 좁고 명확하게 신설</strong>되었습니다.</p>
+
+<h2 id="정리">정리</h2>
+
+<p>SEO 모듈을 만들며 지킨 원칙은 네 가지로 요약됩니다.</p>
+
+<ol>
+  <li><strong>층을 섞지 않는다.</strong> 게시 안정성(하드 블로커)·결정적 증거·의미 판정을 분리한다. 렌더링 방식이나 문서 종류에 따라 뜻이 달라지는 항목은 하드 게이트에서 뺀다.</li>
+  <li><strong>LLM은 스키마로만, 최소로.</strong> 시맨틱 저지는 좁은 seam과 JSON 스키마로 제한하고 주입식으로 만들어 오프라인에서 결정적으로 재현한다.</li>
+  <li><strong>메타는 정책 없이 적용하지 않는다.</strong> canonical·hreflang은 추측하지 않고 <code class="language-plaintext highlighter-rouge">PARTIAL</code>로 남기며, 적용은 사람 승인을 거친다.</li>
+  <li><strong>조용한 통과를 허용하지 않는다.</strong> LLM이 담당하기로 한 판정이 실행되지 못하면 게이트를 통과시키지 않는다.</li>
+</ol>
+
+<p>멀티 에이전트 시스템에서 모든 모듈이 똑같이 LLM을 많이 써야 하는 것은 아닙니다. 번역처럼 언어 생성이 핵심인 모듈은 LLM 농도가 높고, SEO나 품질처럼 대부분이 사실·규칙 판정인 모듈은 낮은 것이 오히려 자연스럽습니다. SEO 모듈은 자율적으로 판단하는 에이전트가 아니라 <strong>예측 가능하고, 무료로 재현되며, 오프라인에서 검증되는 결정적 workflow 노드</strong>로 설계했습니다. 그리고 그 위에 꼭 필요한 의미 판정에만 LLM을 얹었습니다.</p>
+
+<p>결국 하고 싶은 말은 처음의 그 문장으로 돌아갑니다. <strong>단순하게 풀 수 있는 문제는 단순하게 풀고, 안정성이 중요한 자리에서는 LLM의 유연함이 장점이 아니라 비결정성이라는 리스크가 된다는 점을 설계에 반영하는 것.</strong> 효율성과 안정성은 바로 여기에서 나옵니다.</p>
+
+<h2 id="참고-자료">참고 자료</h2>
+
+<ul>
+  <li>Anthropic, <a href="https://www.anthropic.com/engineering/building-effective-agents">Building Effective Agents</a></li>
+  <li>OpenAI, <a href="https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf">A Practical Guide to Building Agents</a></li>
+</ul>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-07-13">13 Jul 2026</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#효율적이고-안정적인-seo-모듈-만들기-llm은-필요한-곳에만" id="markdown-toc-효율적이고-안정적인-seo-모듈-만들기-llm은-필요한-곳에만">효율적이고 안정적인 SEO 모듈 만들기: LLM은 필요한 곳에만</a>    <ul>
+      <li><a href="#전체-그림-매일-도는-번역-파이프라인-속-seo" id="markdown-toc-전체-그림-매일-도는-번역-파이프라인-속-seo">전체 그림: 매일 도는 번역 파이프라인 속 SEO</a></li>
+      <li><a href="#llm에게-모든-것을-맡기지-않는-이유-효율성과-안정성" id="markdown-toc-llm에게-모든-것을-맡기지-않는-이유-효율성과-안정성">LLM에게 모든 것을 맡기지 않는 이유: 효율성과 안정성</a>        <ul>
+          <li><a href="#효율성--결정적-판정은-공짜이고-llm은-그렇지-않다" id="markdown-toc-효율성--결정적-판정은-공짜이고-llm은-그렇지-않다">효율성 — 결정적 판정은 공짜이고, LLM은 그렇지 않다</a></li>
+          <li><a href="#안정성--유연함이-리스크가-되는-자리" id="markdown-toc-안정성--유연함이-리스크가-되는-자리">안정성 — 유연함이 리스크가 되는 자리</a></li>
+        </ul>
+      </li>
+      <li><a href="#seo-모듈의-구조-module-1게이트과-module-2메타데이터" id="markdown-toc-seo-모듈의-구조-module-1게이트과-module-2메타데이터">SEO 모듈의 구조: Module 1(게이트)과 Module 2(메타데이터)</a>        <ul>
+          <li><a href="#module-1--게이트-layer-123" id="markdown-toc-module-1--게이트-layer-123">Module 1 — 게이트 (Layer 1·2·3)</a>            <ul>
+              <li><a href="#layer-1--하드-블로커-규칙" id="markdown-toc-layer-1--하드-블로커-규칙">Layer 1 — 하드 블로커 (규칙)</a></li>
+              <li><a href="#layer-2--결정적-체크--증거-신호-규칙" id="markdown-toc-layer-2--결정적-체크--증거-신호-규칙">Layer 2 — 결정적 체크 + 증거 신호 (규칙)</a></li>
+              <li><a href="#layer-3--시맨틱-저지-llm" id="markdown-toc-layer-3--시맨틱-저지-llm">Layer 3 — 시맨틱 저지 (LLM)</a></li>
+              <li><a href="#판정-결과-pass--needs_changes--fail--blocked" id="markdown-toc-판정-결과-pass--needs_changes--fail--blocked">판정 결과: PASS · NEEDS_CHANGES · FAIL · BLOCKED</a></li>
+            </ul>
+          </li>
+          <li><a href="#module-2--메타데이터-작성" id="markdown-toc-module-2--메타데이터-작성">Module 2 — 메타데이터 작성</a></li>
+        </ul>
+      </li>
+      <li><a href="#실행-흐름-llm-호출-지도와-실패-처리" id="markdown-toc-실행-흐름-llm-호출-지도와-실패-처리">실행 흐름: LLM 호출 지도와 실패 처리</a>        <ul>
+          <li><a href="#llm-호출-지도--10단계-중-3단계" id="markdown-toc-llm-호출-지도--10단계-중-3단계">LLM 호출 지도 — 10단계 중 3단계</a></li>
+          <li><a href="#게이트가-실패하면" id="markdown-toc-게이트가-실패하면">게이트가 실패하면</a></li>
+        </ul>
+      </li>
+      <li><a href="#어떻게-여기까지-왔나" id="markdown-toc-어떻게-여기까지-왔나">어떻게 여기까지 왔나</a></li>
+      <li><a href="#정리" id="markdown-toc-정리">정리</a></li>
+      <li><a href="#참고-자료" id="markdown-toc-참고-자료">참고 자료</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-170/assets/images/author/sohyun.png" alt="sohyun">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href="https://github.com/sim-so/">sohyun</a>
+        <span class="author-description">Hello, I'm sohyun, a data analyst who explores the world of data with curiosity and passion. 🤗</span>                        
+    </div>
+</div>
+
+
+<!-- footer -->
+<div class="row post-footer">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-170/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-170/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">5</span>
+      </button>
+
+      
+        
+        
+      
+        
+        
+          <button class="filter-btn" data-category="agent">
+            Agent
+            <span class="count">5</span>
+          </button>
+        
+      
+        
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-170/agent-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-170/assets/images/blog/posts/2025-11-17-agent-leaderboard/thumbnail.png" alt="에이전트 리더보드: 다중 도메인 시나리오에서의 AI 에이전트 평가" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-170/agent-leaderboard/">에이전트 리더보드: 다중 도메인 시나리오에서의 AI 에이전트 평가</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Agent Leaderboard: Evaluating AI Agents in Multi-Domain Scenarios를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Jimin, </span>             
+                on <span class="post-date">17 Nov 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="benchmark agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-170/DABStep/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-170/assets/images/thumbnail_default.png" alt="DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-170/DABStep/">DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 DABStep: Data Agent Benchmark for Multi-step Reasoning를 한국어로 번역한 글입니다....</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> sohyun, </span>             
+                on <span class="post-date">02 Nov 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-170/structured-codeagent-ko/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-170/assets/images/blog/posts/2025-10-13-structured-codeagent/thumbnail.png" alt="CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-170/structured-codeagent-ko/">CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 CodeAgents + Structure: A Better Way to Execute Actions를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Jimin, </span>             
+                on <span class="post-date">13 Oct 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-170/Introducing-smolagents/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-170/assets/images/blog/posts/2025-09-26-Introducing-smolagents/thumbnail.png" alt="쉽게 에이전트를 만들 수 있는 라이브러리, smolagents를 소개합니다." width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-170/Introducing-smolagents/">쉽게 에이전트를 만들 수 있는 라이브러리, smolagents를 소개합니다.</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing smolagents, a simple library to build agents를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> jeong, </span>             
+                on <span class="post-date">26 Sep 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-170/python-tiny-agents-ko/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-170/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" alt="파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-170/python-tiny-agents-ko/">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Tiny Agents in Python: an MCP-powered agent in ~70 lines...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">14 Sep 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section></main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-170/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-170/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-170/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-170/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-170/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-170/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-170/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-170/assets/js/category.js"></script>
+  </body>
+</html>
