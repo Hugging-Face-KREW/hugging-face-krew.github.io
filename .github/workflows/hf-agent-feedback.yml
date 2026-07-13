@@ -33,7 +33,6 @@ jobs:
         with:
           repository: Hugging-Face-KREW/hf-workflow
           ref: 22ffbec9efb5a9eb7dc20f73bf789ae66427c147
-          token: ${{ secrets.KREW_BOT_TOKEN }}
           path: workflow
 
       - name: Authorize and snapshot feedback

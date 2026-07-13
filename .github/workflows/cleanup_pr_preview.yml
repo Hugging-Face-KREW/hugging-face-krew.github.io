@@ -17,6 +17,9 @@ permissions:
 
 jobs:
   cleanup-preview:
+    # This workflow intentionally uses pull_request_target only for trusted
+    # preview cleanup. Do not checkout or execute pull request head code here.
+    if: github.event.pull_request.base.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - name: Checkout trusted base branch
