@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-172/assets/images/favicon.ico" />
+
+    <title>비전 언어 모델 쉽게 이해하기 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>비전 언어 모델 쉽게 이해하기 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="비전 언어 모델 쉽게 이해하기" />
+<meta name="author" content="woojun" />
+<meta property="og:locale" content="en_us" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 Vision Language Models Explained를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Vision Language Models Explained를 한국어로 번역한 글입니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-172/vlm-explained-ko/assets/images/blog/posts/2025-10-12-vlm-explained-ko/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-10-12T00:00:00+09:00" />
+<meta property="article:modified_time" content="2025-10-12T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-172/vlm-explained-ko/assets/images/blog/posts/2025-10-12-vlm-explained-ko/thumbnail.png" />
+<meta name="twitter:title" content="비전 언어 모델 쉽게 이해하기" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"woojun"},"dateModified":"2025-10-12T00:00:00+09:00","datePublished":"2025-10-12T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Vision Language Models Explained를 한국어로 번역한 글입니다.","headline":"비전 언어 모델 쉽게 이해하기","image":"/pr-preview/pr-172/vlm-explained-ko/assets/images/blog/posts/2025-10-12-vlm-explained-ko/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-172/vlm-explained-ko/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-172/assets/images/hfkr_logo.png"},"name":"woojun"},"url":"/pr-preview/pr-172/vlm-explained-ko/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-172/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-172/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-172/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-172/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-172/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-172/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-172/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-172/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-172/assets/images/blog/posts/2025-10-12-vlm-explained-ko/thumbnail.png" alt="비전 언어 모델 쉽게 이해하기">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-172/assets/images/blog/posts/2025-10-12-vlm-explained-ko/thumbnail.png" alt="비전 언어 모델 쉽게 이해하기">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-172/categories#multimodal">Multimodal</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">비전 언어 모델 쉽게 이해하기</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#비전-언어-모델-쉽게-이해하기" id="markdown-toc-비전-언어-모델-쉽게-이해하기">비전 언어 모델 쉽게 이해하기</a>    <ul>
+      <li><a href="#비전-언어-모델vision-language-model이란" id="markdown-toc-비전-언어-모델vision-language-model이란">비전 언어 모델(Vision Language Model)이란?</a></li>
+      <li><a href="#오픈소스-비전-언어-모델-살펴보기" id="markdown-toc-오픈소스-비전-언어-모델-살펴보기">오픈소스 비전 언어 모델 살펴보기</a></li>
+      <li><a href="#적합한-비전-언어-모델-찾기" id="markdown-toc-적합한-비전-언어-모델-찾기">적합한 비전 언어 모델 찾기</a>        <ul>
+          <li><a href="#mmmu" id="markdown-toc-mmmu">MMMU</a></li>
+          <li><a href="#mmbench" id="markdown-toc-mmbench">MMBench</a></li>
+        </ul>
+      </li>
+      <li><a href="#기술적-세부사항" id="markdown-toc-기술적-세부사항">기술적 세부사항</a></li>
+      <li><a href="#transformers를-통해-비전-언어-모델-사용하기" id="markdown-toc-transformers를-통해-비전-언어-모델-사용하기">transformers를 통해 비전 언어 모델 사용하기</a></li>
+      <li><a href="#trl을-활용해-비전-언어-모델-파인튜닝하기" id="markdown-toc-trl을-활용해-비전-언어-모델-파인튜닝하기">TRL을 활용해 비전 언어 모델 파인튜닝하기</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/vlms">Vision Language Models Explained</a>를 한국어로 번역한 글입니다.</em></p>
+
+<hr />
+
+<h1 id="비전-언어-모델-쉽게-이해하기">비전 언어 모델 쉽게 이해하기</h1>
+
+<blockquote>
+  <p>[!TIP]
+이 블로그 포스트는 2024년 4월에 작성되었으며, 비전 언어 모델의 내부 구조에 대한 훌륭한 소개, 기존 비전 언어 모델들의 개요, 그리고 이를 파인튜닝하는 방법을 제공합니다. 더 많은 기능과 모델을 다루는 <a href="https://huggingface.co/blog/vlms-2025">2025년 4월 업데이트</a>를 작성했으니, 이 글도 꼭 확인해보세요!</p>
+</blockquote>
+
+<p>비전 언어 모델은 이미지와 텍스트로부터 동시에 학습하여 시각적 질의응답(VQA)부터 이미지 캡셔닝까지 다양한 작업을 수행할 수 있는 모델입니다. 이 포스트에서는 비전 언어 모델의 주요 구성 요소들을 살펴보고, 전체적인 개요를 파악하며, 작동 원리를 이해하고, 적합한 모델을 찾는 방법, 추론에 사용하는 방법, 그리고 <a href="https://github.com/huggingface/trl">trl</a>의 새 버전을 사용해 쉽게 파인튜닝하는 방법을 다룹니다!</p>
+
+<h2 id="비전-언어-모델vision-language-model이란">비전 언어 모델(Vision Language Model)이란?</h2>
+
+<p>비전 언어 모델은 이미지와 텍스트로부터 학습할 수 있는 멀티모달(Multimodal) 모델로 폭넓게 정의됩니다. 이들은 이미지와 텍스트를 입력으로 받아 텍스트를 생성하는 생성형(generative) 모델의 일종입니다. 거대 비전 언어 모델은 우수한 제로샷(zero-shot) 능력을 가지고 있으며, 일반화 성능이 뛰어나고, 문서나 웹 페이지 등 다양한 유형의 이미지에 대해서도 사용할 수 있습니다. 활용 사례로는 이미지에 대해 대화하기, 명령 기반 이미지 인식, 시각적 질의응답(VQA), 문서 이해, 이미지 캡셔닝 등이 있습니다. 일부 비전 언어 모델은 이미지의 공간적 특성 또한 포착할 수 있습니다. 이러한 모델들은 특정 대상을 탐지하거나 분할하라는 프롬프트에 따라 바운딩 박스(bounding box) 또는 세그멘테이션 마스크(segmentation mask)를 출력할 수 있으며, 서로 다른 객체의 상대적 또는 절대적 위치를 파악하거나 그에 대한 질문에 답변할 수도 있습니다. 현재 존재하는 거대 비전 언어 모델들은 학습에 사용된 데이터, 이미지 인코딩 방식, 그리고 그로 인한 모델의 능력 측면에서 매우 다양합니다.</p>
+
+<p align="center">
+ <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/vlm/visual.jpg" alt="VLM Capabilities" style="width: 90%; height: auto;" /><br />
+</p>
+
+<h2 id="오픈소스-비전-언어-모델-살펴보기">오픈소스 비전 언어 모델 살펴보기</h2>
+
+<p>Hugging Face Hub에는 많은 오픈소스 비전 언어 모델이 있습니다. 몇몇 주요한 모델들은 아래 표에 나와 있습니다.</p>
+
+<ul>
+  <li>Base 모델과 대화 모드에서 사용할 수 있도록 채팅용으로 파인튜닝된 모델이 있습니다.</li>
+  <li>이러한 모델들 중 일부는 모델 환각(hallucination)을 줄이는 “그라운딩(grounding)” 기능을 가지고 있습니다.</li>
+  <li>별도로 명시되지 않는 한, 모든 모델은 영어로 학습되었습니다.</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>모델</th>
+      <th>허용 라이선스</th>
+      <th>모델 크기</th>
+      <th>이미지 해상도</th>
+      <th>추가적인 기능</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://huggingface.co/llava-hf/llava-v1.6-34b-hf">LLaVA 1.6 (Hermes 34B)</a></td>
+      <td>✅</td>
+      <td>34B</td>
+      <td>672x672</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="https://huggingface.co/deepseek-ai/deepseek-vl-7b-base">deepseek-vl-7b-base</a></td>
+      <td>✅</td>
+      <td>7B</td>
+      <td>384x384</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="https://huggingface.co/deepseek-ai/deepseek-vl-7b-chat">DeepSeek-VL-Chat</a></td>
+      <td>✅</td>
+      <td>7B</td>
+      <td>384x384</td>
+      <td>대화</td>
+    </tr>
+    <tr>
+      <td><a href="https://huggingface.co/vikhyatk/moondream2">moondream2</a></td>
+      <td>✅</td>
+      <td>~2B</td>
+      <td>378x378</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="https://huggingface.co/THUDM/cogvlm-base-490-hf">CogVLM-base</a></td>
+      <td>✅</td>
+      <td>17B</td>
+      <td>490x490</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="https://huggingface.co/THUDM/cogvlm-chat-hf">CogVLM-Chat</a></td>
+      <td>✅</td>
+      <td>17B</td>
+      <td>490x490</td>
+      <td>그라운딩, 대화</td>
+    </tr>
+    <tr>
+      <td><a href="https://huggingface.co/adept/fuyu-8b">Fuyu-8B</a></td>
+      <td>❌</td>
+      <td>8B</td>
+      <td>300x300</td>
+      <td>이미지 내 텍스트 탐지</td>
+    </tr>
+    <tr>
+      <td><a href="https://huggingface.co/microsoft/kosmos-2-patch14-224">KOSMOS-2</a></td>
+      <td>✅</td>
+      <td>~2B</td>
+      <td>224x224</td>
+      <td>그라운딩, 제로샷 객체 탐지</td>
+    </tr>
+    <tr>
+      <td><a href="https://huggingface.co/Qwen/Qwen-VL">Qwen-VL</a></td>
+      <td>✅</td>
+      <td>4B</td>
+      <td>448x448</td>
+      <td>제로샷 객체 탐지</td>
+    </tr>
+    <tr>
+      <td><a href="https://huggingface.co/Qwen/Qwen-VL-Chat">Qwen-VL-Chat</a></td>
+      <td>✅</td>
+      <td>4B</td>
+      <td>448x448</td>
+      <td>대화</td>
+    </tr>
+    <tr>
+      <td><a href="https://huggingface.co/01-ai/Yi-VL-34B">Yi-VL-34B</a></td>
+      <td>✅</td>
+      <td>34B</td>
+      <td>448x448</td>
+      <td>2개 국어 (영어, 중국어)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="적합한-비전-언어-모델-찾기">적합한 비전 언어 모델 찾기</h2>
+
+<p>자신의 사용 사례에 가장 적합한 모델을 선택하는 방법은 여러 가지가 있습니다.</p>
+
+<p><a href="https://huggingface.co/spaces/WildVision/vision-arena">Vision Arena</a>는 모델 출력에 대한 익명 투표만을 기반으로 하는 리더보드로, 지속적으로 업데이트됩니다. 이 아레나에서 사용자는 이미지와 프롬프트를 입력하면, 두 개의 서로 다른 모델의 출력이 무작위로 익명 제공되며, 사용자는 선호하는 출력을 선택할 수 있습니다. 이러한 과정을 통해 리더보드는 전적으로 인간의 선호도에 기반하여 구성됩니다.</p>
+
+<p align="center">
+ <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/vlm/arena.png" alt="Vision Arena" style="width: 90%; height: auto;" /><br />
+<em>Vision Arena</em>
+</p>
+
+<p><a href="https://huggingface.co/spaces/opencompass/open_vlm_leaderboard">Open VLM 리더보드</a>는 비전 언어 모델들이 다양한 평가 지표와 평균 점수에 따라 순위가 매겨지는 또 다른 리더보드입니다. 모델 크기, 오픈소스 여부에 따라 모델을 필터링하고, 다양한 평가 지표에 대한 순위를 확인할 수도 있습니다.</p>
+
+<p align="center">
+ <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/vlm/leaderboard.png" alt="VLM Capabilities" style="width: 90%; height: auto;" /><br />
+<em>Open VLM 리더보드</em>
+</p>
+
+<p><a href="https://github.com/open-compass/VLMEvalKit">VLMEvalKit</a>은 비전 언어 모델에서 Open VLM 리더보드의 벤치마크를 실행하기 위한 툴킷입니다.
+또 다른 평가 도구는 <a href="https://github.com/EvolvingLMMs-Lab/lmms-eval">LMMS-Eval</a>로, Hugging Face Hub에 호스팅된 데이터셋을 사용하여 선택한 Hugging Face 모델을 평가할 수 있는 표준 커맨드 라인 인터페이스(CLI)를 제공합니다. 아래와 같이 사용할 수 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>accelerate launch <span class="nt">--num_processes</span><span class="o">=</span>8 <span class="nt">-m</span> lmms_eval <span class="nt">--model</span> llava <span class="nt">--model_args</span> <span class="nv">pretrained</span><span class="o">=</span><span class="s2">"liuhaotian/llava-v1.5-7b"</span> <span class="nt">--tasks</span> mme,mmbench_en <span class="nt">--batch_size</span> 1 <span class="nt">--log_samples</span> <span class="nt">--log_samples_suffix</span> llava_v1.5_mme_mmbenchen <span class="nt">--output_path</span> ./logs/ 
+</code></pre></div></div>
+
+<p>Vision Arena와 Open VLM 리더보드는 제출된 모델만 확인할 수 있으며, 새로운 모델을 추가하려면 업데이트가 필요합니다. 추가 모델을 찾고 싶다면, Hub에서 <code class="language-plaintext highlighter-rouge">image-text-to-text</code> 태스크로 <a href="https://huggingface.co/models?pipeline_tag=image-text-to-text&amp;sort=trending">모델</a>을 탐색할 수 있습니다.</p>
+
+<p>리더보드에는 비전 언어 모델을 평가하기 위한 다양한 벤치마크가 있습니다. 그 중 몇 가지를 살펴보겠습니다.</p>
+
+<h3 id="mmmu">MMMU</h3>
+
+<p><a href="https://huggingface.co/datasets/MMMU/MMMU">MMMU(A Massive Multi-discipline Multimodal Understanding and Reasoning Benchmark for Expert AGI)</a>는 비전 언어 모델을 평가하기 위한 가장 종합적인 벤치마크입니다. 예술, 공학 등 다양한 분야에서 대학 수준의 지식과 추론 능력을 요구하는 11,500개의 멀티모달 문제가 포함되어 있습니다.</p>
+
+<h3 id="mmbench">MMBench</h3>
+
+<p><a href="https://huggingface.co/datasets/lmms-lab/MMBench">MMBench</a>는 OCR, 객체 위치 추정 등 20가지 다양한 능력을 평가하기 위한 3,000개의 객관식 문제로 구성된 평가 벤치마크입니다. 해당 논문에서는 CircularEval이라는 평가 전략도 함께 제안하는데, 이는 질문의 선택지를 여러 조합으로 섞은 뒤, 모델이 매번 올바른 답을 일관되게 선택할 수 있는지를 평가하는 방식입니다. 이외에도 다양한 도메인별로 특화된 벤치마크들이 존재합니다. 예를 들어, MathVista(시각적 수학 추론), AI2D(도표 이해), ScienceQA(과학 질의 응답), OCRBench(문서 이해) 등이 있습니다.</p>
+
+<h2 id="기술적-세부사항">기술적 세부사항</h2>
+
+<p>비전 언어 모델을 사전학습하는 방법은 여러 가지가 있습니다. 핵심 아이디어는 이미지와 텍스트 표현을 통합하고, 이를 텍스트 디코더에 입력해 생성 작업을 하도록 하는 것입니다. 가장 일반적이고 대표적인 모델들은 이미지 인코더(image encoder), 이미지와 텍스트 표현을 정렬하기 위한 임베딩 프로젝터(embedding projector, 보통 밀집 신경망), 그리고 텍스트 디코더(text decoder)로 구성되며, 이 순서로 쌓여 있습니다. 학습 방식은 모델마다 조금씩 다르게 설계됩니다.</p>
+
+<p>예를 들어, LLaVA는 CLIP 이미지 인코더, 멀티모달 프로젝터, 그리고 Vicuna 텍스트 디코더로 구성됩니다. LLaVA의 저자들은 이미지와 캡션으로 구성된 데이터셋을 GPT-4에 입력하여, 캡션과 이미지에 관련된 질문을 자동으로 생성했습니다. 그 후, 이미지 인코더와 텍스트 디코더는 고정(freeze)하고, 멀티모달 프로젝터만 학습시켰습니다. 이때 모델에 이미지와 GPT-4가 생성한 질문을 입력하고, 모델의 출력이 정답 캡션과 일치하도록 학습했습니다. 프로젝터의 사전학습이 끝난 뒤에는 이미지 인코더를 계속 고정한 채, 텍스트 디코더와 프로젝터를 함께 학습시켰습니다. 이런 단계적 사전학습과 파인튜닝 방식은 현재 비전 언어 모델을 학습하는 가장 일반적이고 효과적인 접근법으로 사용되고 있습니다.</p>
+
+<p align="center">
+ <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/vlm/vlm-structure.png" alt="VLM Structure" style="width: 90%; height: auto;" /><br />
+ <em>일반적인 비전 언어 모델의 구조</em>
+</p>
+<p align="center">
+ <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/vlm/proj.jpg" alt="VLM Structure" style="width: 90%; height: auto;" /><br />
+ <em>프로젝션과 텍스트 임베딩은 위와 같이 연결됩니다</em>
+</p>
+
+<p>또 다른 예로 KOSMOS-2가 있습니다. 이 모델의 저자들은 LLaVA와 같은 사전학습 방식과 달리, 모델 전체를 엔드투엔드(end-to-end)로 완전히 학습시키는 방식을 선택했습니다. 이는 계산 비용 측면에서 훨씬 더 비싸고 부담이 큽니다. 이후 저자들은 모델 정렬을 위해 언어로만 인스트럭션 파인튜닝을 수행했습니다. 또 다른 예로 Fuyu-8B는 아예 이미지 인코더를 사용하지 않습니다. 대신, 이미지 패치를 직접 프로젝션 레이어에 입력하고, 그 결과로 나온 시퀀스를 자가회귀(auto-regressive) 디코더를 통해 처리합니다.</p>
+
+<p>대부분의 경우, 비전 언어 모델을 처음부터 사전학습할 필요는 없습니다. 이미 공개된 모델을 활용하거나, 자신의 사용 사례에 맞게 파인튜닝하는 것으로 충분합니다.
+이후 섹션에서는 이러한 모델들을 Transformers 라이브러리를 사용해 다루는 방법과, SFTTrainer를 이용해 파인튜닝하는 방법을 살펴보겠습니다.</p>
+
+<h2 id="transformers를-통해-비전-언어-모델-사용하기">transformers를 통해 비전 언어 모델 사용하기</h2>
+
+<p>아래와 같이 <code class="language-plaintext highlighter-rouge">LlavaNext</code> 모델을 사용해 Llava로 추론할 수 있습니다.</p>
+
+<p>먼저, 모델과 프로세서를 초기화해봅시다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">LlavaNextProcessor</span><span class="p">,</span> <span class="n">LlavaNextForConditionalGeneration</span>
+<span class="kn">import</span> <span class="n">torch</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">device</span><span class="p">(</span><span class="sh">'</span><span class="s">cuda</span><span class="sh">'</span> <span class="k">if</span> <span class="n">torch</span><span class="p">.</span><span class="n">cuda</span><span class="p">.</span><span class="nf">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="sh">'</span><span class="s">cpu</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">processor</span> <span class="o">=</span> <span class="n">LlavaNextProcessor</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="sh">"</span><span class="s">llava-hf/llava-v1.6-mistral-7b-hf</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LlavaNextForConditionalGeneration</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">llava-hf/llava-v1.6-mistral-7b-hf</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">torch_dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">float16</span><span class="p">,</span>
+    <span class="n">low_cpu_mem_usage</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+<span class="n">model</span><span class="p">.</span><span class="nf">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>이제 이미지와 텍스트 프롬프트를 프로세서에 전달한 뒤, 처리된 입력값을 <code class="language-plaintext highlighter-rouge">generate</code>에 전달합니다. 각 모델은 고유한 프롬프트 템플릿을 사용하므로, 성능 저하를 피하기 위해 반드시 올바른 템플릿을 사용해야 합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="n">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="sh">"</span><span class="s">https://github.com/haotian-liu/LLaVA/blob/1a91fc274d7c35a9b50b3cb29c4247ae5837ce39/images/llava_v1_5_radar.jpg?raw=true</span><span class="sh">"</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="bp">True</span><span class="p">).</span><span class="n">raw</span><span class="p">)</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="sh">"</span><span class="s">[INST] &lt;image&gt;</span><span class="se">\n</span><span class="s">What is shown in this image? [/INST]</span><span class="sh">"</span>
+
+<span class="n">inputs</span> <span class="o">=</span> <span class="nf">processor</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">).</span><span class="nf">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">decode</code>를 호출해 출력 토큰을 디코딩합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">processor</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="trl을-활용해-비전-언어-모델-파인튜닝하기">TRL을 활용해 비전 언어 모델 파인튜닝하기</h2>
+
+<p><a href="https://github.com/huggingface/trl">TRL</a>의 <code class="language-plaintext highlighter-rouge">SFTTrainer</code>가 이제 비전 언어 모델을 실험적으로 지원하기 시작했습니다! 여기서는 <a href="https://huggingface.co/datasets/HuggingFaceH4/llava-instruct-mix-vsft">llava-instruct</a> 데이터셋을 사용해 <a href="https://huggingface.co/llava-hf/llava-1.5-7b-hf">Llava 1.5 VLM</a> 모델에 대해 SFT를 수행하는 예시를 제공합니다. 이 데이터셋은 26만 개의 이미지-대화 쌍으로 구성되어 있습니다.
+데이터셋은 사용자와 어시스턴트 간의 상호작용을 메시지 시퀀스 형태로 구성합니다. 예를 들어, 각 대화는 사용자가 질문하는 이미지와 짝지어져 있습니다.</p>
+
+<p>이 실험적인 지원을 VLM 학습에 적용해보기 위해서는 <code class="language-plaintext highlighter-rouge">pip install -U trl</code>로 TRL의 최신 버전을 설치해야 합니다.
+전체 예시 스크립트는 <a href="https://github.com/huggingface/trl/blob/main/examples/scripts/vsft_llava.py">여기</a>서 확인할 수 있습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">trl.commands.cli_utils</span> <span class="kn">import</span> <span class="n">SftScriptArguments</span><span class="p">,</span> <span class="n">TrlParser</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="nc">TrlParser</span><span class="p">((</span><span class="n">SftScriptArguments</span><span class="p">,</span> <span class="n">TrainingArguments</span><span class="p">))</span>
+<span class="n">args</span><span class="p">,</span> <span class="n">training_args</span> <span class="o">=</span> <span class="n">parser</span><span class="p">.</span><span class="nf">parse_args_and_config</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>인스트럭션 파인튜닝을 위해 대화 템플릿을 초기화합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LLAVA_CHAT_TEMPLATE <span class="o">=</span> <span class="s2">"""A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. {% for message in messages %}{% if message['role'] == 'user' %}USER: {% else %}ASSISTANT: {% endif %}{% for item in message['content'] %}{% if item['type'] == 'text' %}{{ item['text'] }}{% elif item['type'] == 'image' %}&lt;image&gt;{% endif %}{% endfor %}{% if message['role'] == 'user' %} {% else %}{{eos_token}}{% endif %}{% endfor %}"""</span>
+</code></pre></div></div>
+
+<p>이제 모델과 토크나이저를 초기화합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoProcessor</span><span class="p">,</span> <span class="n">TrainingArguments</span><span class="p">,</span> <span class="n">LlavaForConditionalGeneration</span>
+<span class="kn">import</span> <span class="n">torch</span>
+
+<span class="n">model_id</span> <span class="o">=</span> <span class="sh">"</span><span class="s">llava-hf/llava-1.5-7b-hf</span><span class="sh">"</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">model_id</span><span class="p">)</span>
+<span class="n">tokenizer</span><span class="p">.</span><span class="n">chat_template</span> <span class="o">=</span> <span class="n">LLAVA_CHAT_TEMPLATE</span>
+<span class="n">processor</span> <span class="o">=</span> <span class="n">AutoProcessor</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">model_id</span><span class="p">)</span>
+<span class="n">processor</span><span class="p">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">tokenizer</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">LlavaForConditionalGeneration</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">model_id</span><span class="p">,</span> <span class="n">torch_dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">float16</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>텍스트와 이미지 쌍을 묶어주기 위해 데이터 콜레이터를 생성합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">LLavaDataCollator</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">processor</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">processor</span> <span class="o">=</span> <span class="n">processor</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">examples</span><span class="p">):</span>
+        <span class="n">texts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">example</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+            <span class="n">messages</span> <span class="o">=</span> <span class="n">example</span><span class="p">[</span><span class="sh">"</span><span class="s">messages</span><span class="sh">"</span><span class="p">]</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">processor</span><span class="p">.</span><span class="n">tokenizer</span><span class="p">.</span><span class="nf">apply_chat_template</span><span class="p">(</span>
+                <span class="n">messages</span><span class="p">,</span> <span class="n">tokenize</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">add_generation_prompt</span><span class="o">=</span><span class="bp">False</span>
+            <span class="p">)</span>
+            <span class="n">texts</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <span class="n">images</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">example</span><span class="p">[</span><span class="sh">"</span><span class="s">images</span><span class="sh">"</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="n">batch</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">processor</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">images</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="sh">"</span><span class="s">input_ids</span><span class="sh">"</span><span class="p">].</span><span class="nf">clone</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">processor</span><span class="p">.</span><span class="n">tokenizer</span><span class="p">.</span><span class="n">pad_token_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">labels</span><span class="p">[</span><span class="n">labels</span> <span class="o">==</span> <span class="n">self</span><span class="p">.</span><span class="n">processor</span><span class="p">.</span><span class="n">tokenizer</span><span class="p">.</span><span class="n">pad_token_id</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span>
+        <span class="n">batch</span><span class="p">[</span><span class="sh">"</span><span class="s">labels</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">labels</span>
+
+        <span class="k">return</span> <span class="n">batch</span>
+
+<span class="n">data_collator</span> <span class="o">=</span> <span class="nc">LLavaDataCollator</span><span class="p">(</span><span class="n">processor</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>데이터셋을 불러옵니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+
+<span class="n">raw_datasets</span> <span class="o">=</span> <span class="nf">load_dataset</span><span class="p">(</span><span class="sh">"</span><span class="s">HuggingFaceH4/llava-instruct-mix-vsft</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">raw_datasets</span><span class="p">[</span><span class="sh">"</span><span class="s">train</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">eval_dataset</span> <span class="o">=</span> <span class="n">raw_datasets</span><span class="p">[</span><span class="sh">"</span><span class="s">test</span><span class="sh">"</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>모델, 데이터셋 분할, PEFT 설정, 그리고 데이터 콜레이터를 전달해 SFTTrainer를 초기화한 뒤 <code class="language-plaintext highlighter-rouge">train()</code>을 호출합니다. 최종 체크포인트를 Hugging Face Hub에 업로드하려면 <code class="language-plaintext highlighter-rouge">push_to_hub()</code>를 호출합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">trl</span> <span class="kn">import</span> <span class="n">SFTTrainer</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="nc">SFTTrainer</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">args</span><span class="o">=</span><span class="n">training_args</span><span class="p">,</span>
+    <span class="n">train_dataset</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span>
+    <span class="n">eval_dataset</span><span class="o">=</span><span class="n">eval_dataset</span><span class="p">,</span>
+    <span class="n">dataset_text_field</span><span class="o">=</span><span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">,</span>  <span class="c1"># 더미 필드 필요
+</span>    <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
+    <span class="n">data_collator</span><span class="o">=</span><span class="n">data_collator</span><span class="p">,</span>
+    <span class="n">dataset_kwargs</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">skip_prepare_dataset</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span><span class="p">},</span>
+<span class="p">)</span>
+
+<span class="n">trainer</span><span class="p">.</span><span class="nf">train</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>모델을 저장한 뒤 Hugging Face Hub에 업로드합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">trainer</span><span class="p">.</span><span class="nf">save_model</span><span class="p">(</span><span class="n">training_args</span><span class="p">.</span><span class="n">output_dir</span><span class="p">)</span>
+<span class="n">trainer</span><span class="p">.</span><span class="nf">push_to_hub</span><span class="p">()</span>
+</code></pre></div></div>
+<p>학습된 모델은 <a href="https://huggingface.co/HuggingFaceH4/vsft-llava-1.5-7b-hf-trl">여기</a>에서 확인할 수 있습니다.</p>
+
+<p><strong>감사의 글</strong></p>
+
+<p>이 블로그 게시물에 대한 리뷰와 제안을 해주신 Pedro Cuenca, Lewis Tunstall, Kashif Rasul, 그리고 Omar Sanseviero께 감사드립니다.</p>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2025-10-12">12 Oct 2025</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#비전-언어-모델-쉽게-이해하기" id="markdown-toc-비전-언어-모델-쉽게-이해하기">비전 언어 모델 쉽게 이해하기</a>    <ul>
+      <li><a href="#비전-언어-모델vision-language-model이란" id="markdown-toc-비전-언어-모델vision-language-model이란">비전 언어 모델(Vision Language Model)이란?</a></li>
+      <li><a href="#오픈소스-비전-언어-모델-살펴보기" id="markdown-toc-오픈소스-비전-언어-모델-살펴보기">오픈소스 비전 언어 모델 살펴보기</a></li>
+      <li><a href="#적합한-비전-언어-모델-찾기" id="markdown-toc-적합한-비전-언어-모델-찾기">적합한 비전 언어 모델 찾기</a>        <ul>
+          <li><a href="#mmmu" id="markdown-toc-mmmu">MMMU</a></li>
+          <li><a href="#mmbench" id="markdown-toc-mmbench">MMBench</a></li>
+        </ul>
+      </li>
+      <li><a href="#기술적-세부사항" id="markdown-toc-기술적-세부사항">기술적 세부사항</a></li>
+      <li><a href="#transformers를-통해-비전-언어-모델-사용하기" id="markdown-toc-transformers를-통해-비전-언어-모델-사용하기">transformers를 통해 비전 언어 모델 사용하기</a></li>
+      <li><a href="#trl을-활용해-비전-언어-모델-파인튜닝하기" id="markdown-toc-trl을-활용해-비전-언어-모델-파인튜닝하기">TRL을 활용해 비전 언어 모델 파인튜닝하기</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-172/assets/images/author/woojun.png" alt="정우준">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href="https://github.com/jungnerd">정우준</a>
+        <span class="author-description">🤗</span>                        
+    </div>
+</div>
+
+
+<!-- footer -->
+<div class="row post-footer">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-172/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-172/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">0</span>
+      </button>
+
+      
+        
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+    </div>
+  </div>
+</section></main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-172/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-172/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-172/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-172/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-172/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-172/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-172/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-172/assets/js/category.js"></script>
+  </body>
+</html>
