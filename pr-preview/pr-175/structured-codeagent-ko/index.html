@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-175/assets/images/favicon.ico" />
+
+    <title>CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법" />
+<meta name="author" content="Jimin" />
+<meta property="og:locale" content="en_us" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 CodeAgents + Structure: A Better Way to Execute Actions를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 CodeAgents + Structure: A Better Way to Execute Actions를 한국어로 번역한 글입니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-175/structured-codeagent-ko/assets/images/blog/posts/2025-10-13-structured-codeagent/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-10-13T00:00:00+09:00" />
+<meta property="article:modified_time" content="2025-10-13T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-175/structured-codeagent-ko/assets/images/blog/posts/2025-10-13-structured-codeagent/thumbnail.png" />
+<meta name="twitter:title" content="CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Jimin"},"dateModified":"2025-10-13T00:00:00+09:00","datePublished":"2025-10-13T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 CodeAgents + Structure: A Better Way to Execute Actions를 한국어로 번역한 글입니다.","headline":"CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법","image":"/pr-preview/pr-175/structured-codeagent-ko/assets/images/blog/posts/2025-10-13-structured-codeagent/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-175/structured-codeagent-ko/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-175/assets/images/hfkr_logo.png"},"name":"Jimin"},"url":"/pr-preview/pr-175/structured-codeagent-ko/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-175/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-175/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-175/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-175/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-175/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-175/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-175/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-175/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-175/assets/images/blog/posts/2025-10-13-structured-codeagent/thumbnail.png" alt="CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-175/assets/images/blog/posts/2025-10-13-structured-codeagent/thumbnail.png" alt="CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-175/categories#agent">Agent</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#codeagents--structure-액션-실행을-위한-더-좋은-방법" id="markdown-toc-codeagents--structure-액션-실행을-위한-더-좋은-방법">CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법</a>    <ul>
+      <li><a href="#-에이전트-액션의-진화" id="markdown-toc--에이전트-액션의-진화">🤔 에이전트 액션의 진화</a>        <ul>
+          <li><a href="#기존의-json-agent-toolcallingagent-구조화된-json을-생성해-도구를-호출하는-에이전트" id="markdown-toc-기존의-json-agent-toolcallingagent-구조화된-json을-생성해-도구를-호출하는-에이전트"><strong>기존의 JSON Agent (ToolCallingAgent)</strong>: 구조화된 JSON을 생성해 도구를 호출하는 에이전트</a></li>
+          <li><a href="#code-agents-고유한-코딩-능력을-활용해-실행-가능한-python-코드를-직접-작성하는-에이전트" id="markdown-toc-code-agents-고유한-코딩-능력을-활용해-실행-가능한-python-코드를-직접-작성하는-에이전트"><strong>Code Agents</strong>: 고유한 코딩 능력을 활용해 실행 가능한 Python 코드를 직접 작성하는 에이전트</a></li>
+        </ul>
+      </li>
+      <li><a href="#️-code-agent에-구조화된-출력-추가하기" id="markdown-toc-️-code-agent에-구조화된-출력-추가하기">➡️ Code Agent에 구조화된 출력 추가하기</a></li>
+      <li><a href="#-벤치마크-결과" id="markdown-toc--벤치마크-결과">🧪 벤치마크 결과</a></li>
+      <li><a href="#-구조화가-일반적으로-도움이-되는-이유" id="markdown-toc--구조화가-일반적으로-도움이-되는-이유">💡 구조화가 (일반적으로) 도움이 되는 이유</a>        <ul>
+          <li><a href="#파싱-문제는-실제로-존재한다" id="markdown-toc-파싱-문제는-실제로-존재한다">파싱 문제는 실제로 존재한다</a>            <ul>
+              <li><a href="#추기-강제된-추론-과정" id="markdown-toc-추기-강제된-추론-과정">추기: 강제된 추론 과정</a></li>
+            </ul>
+          </li>
+          <li><a href="#structure-tax-구조화-비용" id="markdown-toc-structure-tax-구조화-비용">Structure Tax: 구조화 비용</a>            <ul>
+              <li><a href="#구조화가-실패하는-경우-실제-예시" id="markdown-toc-구조화가-실패하는-경우-실제-예시">구조화가 실패하는 경우: 실제 예시</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#-structured-codeagents는-언제-사용해야-될까" id="markdown-toc--structured-codeagents는-언제-사용해야-될까">🚀 Structured CodeAgents는 언제 사용해야 될까?</a>        <ul>
+          <li><a href="#-structured-codeagents를-사용하면-좋은-경우" id="markdown-toc--structured-codeagents를-사용하면-좋은-경우">✅ Structured CodeAgents를 사용하면 좋은 경우:</a></li>
+          <li><a href="#️-다음과-같은-경우에는-다른-접근법을-고려" id="markdown-toc-️-다음과-같은-경우에는-다른-접근법을-고려">⚠️ 다음과 같은 경우에는 다른 접근법을 고려:</a></li>
+          <li><a href="#smolagents에서-사용-방법" id="markdown-toc-smolagents에서-사용-방법">smolagents에서 사용 방법:</a></li>
+          <li><a href="#구현-팁" id="markdown-toc-구현-팁">구현 팁</a></li>
+          <li><a href="#더-큰-그림---다음-단계는" id="markdown-toc-더-큰-그림---다음-단계는">더 큰 그림 - 다음 단계는?</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/structured-codeagent">CodeAgents + Structure: A Better Way to Execute Actions</a>를 한국어로 번역한 글입니다.</em></p>
+
+<hr />
+
+<h1 id="codeagents--structure-액션-실행을-위한-더-좋은-방법">CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법</h1>
+
+<p>오늘 우리는 AI 에이전트 설계에서 두 가지 강력한 패러다임을 연결하는 연구를 소개합니다. 하나는 코드 기반 액션의 표현력이고, 다른 하나는 구조화된 생성의 신뢰성입니다. 연구 결과, <strong>CodeAgents</strong>에게 사고(thoughts)와 코드를 모두 구조화된 JSON 형식으로 생성하도록 하면, 여러 벤치마크에서 기존 방식보다 성능이 크게 향상됨을 확인할 수 있습니다.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/structured-codeagent/accuracy.png" alt="" />
+그림 1: 세 가지 접근 방식의 정확도 비교 — Structured CodeAgent(파란색), CodeAgent(주황색), ToolCallingAgent(회색) — <ins><a href="https://huggingface.co/datasets/akseljoonas/smolbench"><strong>SmolBench (GAIA, MATH, SimpleQA, and Frames</strong></a></ins>)에서 오차 막대는 95% 신뢰구간을 나타냄</p>
+
+<h2 id="-에이전트-액션의-진화">🤔 에이전트 액션의 진화</h2>
+
+<p>AI 에이전트는 API 호출, 데이터 처리, 복잡한 문제 해결과 같은 실제 세계 액션을 취할 수 있어야 합니다. 에이전트가 이러한 액션을 표현하는 방식은 여러 패러다임을 거쳐 발전했습니다.</p>
+
+<h3 id="기존의-json-agent-toolcallingagent-구조화된-json을-생성해-도구를-호출하는-에이전트"><strong>기존의 JSON Agent (ToolCallingAgent)</strong>: 구조화된 JSON을 생성해 도구를 호출하는 에이전트</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"tool"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_weather"</span><span class="p">,</span><span class="w"> </span><span class="nl">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">}}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>이 에이전트들은 미리 정의된 도구 목록에서 필요한 도구를 선택하고, JSON 형식으로 호출을 생성하는 방식으로 동작합니다. 이러한 도구 호출 방식은 OpenAI의 <ins><a href="https://openai.com/index/function-calling-and-other-api-updates/"><strong>function calling API</strong></a></ins>를 통해 널리 알려졌으며, 이후 가장 일반적으로 사용하는 도구 호출 방식이 되었습니다.</p>
+
+<p>이 방식은 신뢰할 수 있지만, 다음과 같은 한계가 있습니다:</p>
+
+<ul>
+  <li><strong>제한된 액션 범위</strong>: 에이전트가 수행할 수 있는 액션은 미리 정의된 도구에만 한정되어 있어 기능이 제한됨</li>
+  <li><strong>부족한 조합성</strong>: 여러 출처의 정보를 조합해야 하는 작업의 경우, JSON 기반 에이전트는 각 도구 호출 사이에 중간 상태를 유지할 수 없어 어려움을 겪음. 일부 모델은 병렬 도구 호출을 지원하나, 복잡한 시나리오(이전 결과에 따른 이후 액션 결정, 여러 결과를 비교/처리해야 하는 경우)는 다루기 어려움</li>
+  <li><strong>경직된 구조</strong>: 제공된 도구가 실제 필요한 작업과 정확히 일치하지 않는 경우, 유연하게 대응하기 어려움</li>
+</ul>
+
+<h3 id="code-agents-고유한-코딩-능력을-활용해-실행-가능한-python-코드를-직접-작성하는-에이전트"><strong>Code Agents</strong>: 고유한 코딩 능력을 활용해 실행 가능한 Python 코드를 직접 작성하는 에이전트</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 한 번의 모델 호출만으로, 3개 도시의 평균 기온을 구할 수 있음.
+</span><span class="n">temperature_sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="p">[</span><span class="sh">"</span><span class="s">Paris</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Tokyo</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">New York</span><span class="sh">"</span><span class="p">]:</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="nf">get_weather</span><span class="p">(</span><span class="n">city</span><span class="p">)</span>
+    <span class="n">temperature_sum</span> <span class="o">+=</span> <span class="n">temp</span>
+    
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Average temperature: </span><span class="si">{</span><span class="n">temperature_sum</span> <span class="o">/</span> <span class="mi">3</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">°C</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>이러한 변화는 처음에 <ins><a href="https://arxiv.org/abs/2402.01030">“<strong>Executable Code Actions Elicit Better LLM Agents</strong>”</a></ins> 논문에서 CodeAct라는 이름으로 제안되었으며, 기존의 단순 도구 호출 방식에 더해 임의의 실행 가능한 Python 코드를 작성할 수 있는 유연성을 AI 에이전트에 부여했습니다.</p>
+
+<p>여기서 핵심 아이디어는, <strong>도구 호출이 코드 내부에서 직접 이루어진다는 점</strong>입니다. 이를 통해 변수와 상태 관리가 훨씬 더 안정적이고 신뢰할 수 있게 됩니다. 에이전트는 루프, 함수, 조건문 안에서 도구를 호출할 수 있으며, 이는 본질적으로 각 액션마다 동적으로 변화하는 도구 실행 그래프를 생성할 수 있습니다!</p>
+
+<p><ins><a href="https://github.com/huggingface/smolagents/blob/6a12ebdf210207eec22d5940157f522463fc1c59/src/smolagents/agents.py#L1344"><strong>CodeAgent</strong></a></ins> 사용의 장점:</p>
+
+<ul>
+  <li><strong>똑똑한 도구 사용</strong>: 상황에 따라 어떤 도구를 사용할지 스스로 결정할 수 있음</li>
+  <li><strong>제한없는 유연성</strong>: 목표 달성을 위해 Python의 모든 기능을 활용할 수 있음</li>
+  <li><strong>사고 검증 가능</strong>: 에이전트가 가설을 세우고 검증(test) 할 수 있어 액션에 더 큰 유연성을 확보 가능</li>
+</ul>
+
+<p>하지만 마크다운에서 코드를 파싱하는 과정은 오류가 발생하기 쉽습니다. 그렇다면 한 가지 제안을 해볼 수 있습니다: 코드 액션을 생성할 때 구조화된 생성을 활용해보는 것은 어떨까요?</p>
+
+<h2 id="️-code-agent에-구조화된-출력-추가하기">➡️ Code Agent에 구조화된 출력 추가하기</h2>
+
+<p>구조화된 출력을 사용하면, LLM이 사고 과정과 코드를 명확하게 JSON 형식으로 생성하도록 유도할 수 있습니다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="s2">"code"</span><span class="w"> </span><span class="err">블록은</span><span class="w"> </span><span class="err">실행</span><span class="w"> </span><span class="err">가능한</span><span class="w"> </span><span class="err">Python으로</span><span class="w"> </span><span class="err">파싱됨.</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"thoughts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I want to find the average temperature across 3 cities."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"temperature_sum = 0</span><span class="se">\n</span><span class="s2">for city in [</span><span class="se">\"</span><span class="s2">Paris</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">Tokyo</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">New York</span><span class="se">\"</span><span class="s2">]:</span><span class="se">\n</span><span class="s2">    temp = get_weather(city)</span><span class="se">\n</span><span class="s2">    temperature_sum += temp</span><span class="se">\n\n</span><span class="s2">print(f</span><span class="se">\"</span><span class="s2">Average temperature: {temperature_sum / 3:.1f}°C</span><span class="se">\"</span><span class="s2">)"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>기존 방식과의 주요 차이점은 출력 형식이 강제된다는 점입니다. 기존에는 단순히 프롬프트를 통해 사고 과정과 코드 순서로 출력을 유도했다면, <ins><a href="https://huggingface.co/docs/text-generation-inference/en/conceptual/guidance"><strong>structured outputs</strong></a></ins>을 사용해 정해진 구조를 반드시 따르도록 강제할 수 있습니다.</p>
+
+<p>이러한 접근 방식은 코드 실행의 유연성과 구조화된 생성의 신뢰성을 동시에 활용할 수 있어, 두 방식의 장점을 모두 얻을 수 있습니다.</p>
+
+<ul>
+  <li><strong>명시적 추론</strong>: <code class="language-plaintext highlighter-rouge">thoughts</code> 필드는 에이전트가 액션을 수행하기 전에 반드시 추론하도록 유도</li>
+  <li><strong>신뢰할 수 있는 파싱</strong>: JSON 구조를 사용하여 마크다운 파싱 오류를 제거</li>
+  <li><strong>완전한 코드 표현력</strong>: <code class="language-plaintext highlighter-rouge">code</code> 필드를 통해 CodeAgent가 가진 모든 코드 유연성을 그대로 활용 가능</li>
+  <li><strong>명확한 분리</strong>: 계획(planning)과 실행(execution)을 명확하게 구분</li>
+</ul>
+
+<h2 id="-벤치마크-결과">🧪 벤치마크 결과</h2>
+
+<p>우리는 GAIA, MATH, SimpleQA, Frames등 여러 벤치마크를 대상으로 세 가지 패러다임을 비교했습니다. 결과는 명확합니다. <strong><code class="language-plaintext highlighter-rouge">코드 액션 + 구조화된 생성</code>의 조합은 성능이 우수한 모델에서 일관되게 성능을 향상시킵니다.</strong></p>
+
+<p>대부분의 고성능 모델에서 구조화된 접근법은 기존의 CodeAgent 방식보다 평균 2~7%p 더 높은 성능을 보입니다.</p>
+
+<ul>
+  <li><strong>OpenAI 모델</strong>: 구조화된 접근법 적용 시, 가장 큰 성능 향상을 보였으며, 특히 추론이 중요한 작업에서 큰 향상이 나타남</li>
+  <li><strong>Claude 모델</strong>: 전반적으로 구조화의 이점을 보였으며, 특히 Claude 3.7 Sonnet에서 큰 성능 향상이 나타남</li>
+  <li><strong>Qwen 모델</strong>: 구조화를 통해 전반적으로 성능이 향상되었으나, 작은 모델(Qwen3-4B)에서는 “structure tax (다음 세션에서 설명)”가 발생</li>
+</ul>
+
+<h2 id="-구조화가-일반적으로-도움이-되는-이유">💡 구조화가 (일반적으로) 도움이 되는 이유</h2>
+
+<h3 id="파싱-문제는-실제로-존재한다">파싱 문제는 실제로 존재한다</h3>
+
+<p><ins><a href="https://github.com/huggingface/smolagents/blob/6a12ebdf210207eec22d5940157f522463fc1c59/src/smolagents/agents.py#L1344"><strong>smolagents의 CodeAgent 구현</strong></a></ins>은 LLM 출력에서 Python 코드를 추출하는데, 다음과 같은 상황에서 실패할 수 있습니다:</p>
+
+<ul>
+  <li>마크다운 코드 블록이 불완전하거나 잘못된 형식으로 작성된 경우</li>
+  <li>하나의 응답에 여러 코드 블록이 포함된 경우</li>
+</ul>
+
+<p>구조화된 생성은 안정적인 JSON 파싱으로 이러한 문제를 제거합니다.</p>
+
+<p>구조화된 생성의 효과를 검증하기 위해, 우리는 벤치마크 전반에서 15,724개의 에이전트 실행 로그(agent trace)를 분석했습니다. 그 결과는 매우 인상적이었습니다:</p>
+
+<ul>
+  <li>첫 번째 호출에서 파싱 오류가 발생한 경우: <strong>2.4%</strong></li>
+  <li>첫 호출에 <strong>파싱 오류가 있는</strong> 경우 성공률: <strong>42.3%</strong></li>
+  <li>첫 호출에 <strong>파싱 오류가 없는</strong> 경우 성공률: <strong>51.3%</strong></li>
+</ul>
+
+<p><strong>첫 호출에서 파싱 오류가 없는 에이전트는, 오류가 있는 경우보다 성공률이 21.3% 더 높았습니다</strong></p>
+
+<p>이는 단순한 편의성의 문제가 아닙니다. 파싱 오류는 연쇄적으로 실패를 일으켜 전체 에이전트 성능에 큰 영향을 줍니다. 첫 번째 액션을 제대로 실행하지 못하면, 에이전트가 이후 회복하기 어려워 최적의 문제 해결 경로를 벗어나게 됩니다.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/structured-codeagent/parsing_error.png" alt="" />
+그림 2: 첫 호출 응답에서 파싱 오류가 발생하면 성공률이 21.3% 감소하고, 평균 스텝 수는 3.18에서 4.63으로 증가합니다.</p>
+
+<h4 id="추기-강제된-추론-과정">추기: 강제된 추론 과정</h4>
+
+<p>구조화된 생성과 명시적으로 <code class="language-plaintext highlighter-rouge">thoughts</code> 필드를 사용하면, 에이전트가 액션을 수행하기 전에 반드시 추론하도록 강제할 수 있습니다. 이는 다음과 같은 효과를 가져옵니다:</p>
+
+<ul>
+  <li><strong>더 나은 계획 수립</strong>: 에이전트가 문제 해결을 더 체계적으로 사고</li>
+  <li><strong>신뢰성 향상</strong>: 명시적인 추론 과정을 통해 논리적 오류를 조기에 발견</li>
+</ul>
+
+<h3 id="structure-tax-구조화-비용">Structure Tax: 구조화 비용</h3>
+
+<p>실험 결과, 구조화된 생성을 활용할 때는 명확한 성능 임계점이 존재합니다. 모델은 지시문에 대한 충분한 이해와, JSON 형식에 대한 사전 학습 경험을 갖추고 있어야 구조화 접근법의 이점을 얻을 수 있습니다. 구조화된 접근법은 다음과 같은 모델에 가장 효과적입니다:</p>
+
+<ul>
+  <li>충분히 크고, 잘 학습된 모델</li>
+  <li>지시문 따르기(instruction-following)가 뛰어난 모델</li>
+  <li>구조화된 생성에 특화되어 파인튜닝된 모델</li>
+</ul>
+
+<h4 id="구조화가-실패하는-경우-실제-예시">구조화가 실패하는 경우: 실제 예시</h4>
+
+<p>작은 모델(<code class="language-plaintext highlighter-rouge">mistralai/Mistral-7B-Instruct-v0.3</code>)이 구조화된 코드를 생성하려 할 때, 인지 부하가 커집니다:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"thought"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I need to find the height..."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web_search(query=</span><span class="se">\"</span><span class="s2">Eiffel Tower height</span><span class="se">\"</span><span class="s2">)</span><span class="se">\"</span><span class="s2">, "</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>모델이 생성한 Python 코드는 <code class="language-plaintext highlighter-rouge">web_search(query="Eiffel Tower height")",</code>와 같이 문법적으로 잘못되어 SyntaxError와 코드 실행 실패로 이어집니다.</p>
+
+<p>이것이 “structure tax”의 예입니다. 작은 모델은 JSON 형식, Python 문법, 실제 문제 해결 로직을 동시에 처리하지 못해 단순한 마크다운 기반 코드 생성보다 성능이 떨어질 수 있습니다.</p>
+
+<h2 id="-structured-codeagents는-언제-사용해야-될까">🚀 Structured CodeAgents는 언제 사용해야 될까?</h2>
+
+<h4 id="-structured-codeagents를-사용하면-좋은-경우">✅ Structured CodeAgents를 사용하면 좋은 경우:</h4>
+
+<ul>
+  <li>강력한 모델(32B+ 파라미터 또는 프런티어 모델)을 사용할 때</li>
+  <li>복잡한 추론과 코드 실행이 필요한 작업일 때</li>
+  <li>에이전트 출력에 대해 신뢰할 수 있는 파싱이 필요할 때</li>
+</ul>
+
+<h4 id="️-다음과-같은-경우에는-다른-접근법을-고려">⚠️ 다음과 같은 경우에는 다른 접근법을 고려:</h4>
+
+<ul>
+  <li>구조화된 생성에 어려움을 겪는 작은 모델을 사용할 때</li>
+  <li>단순하고 미리 정의된 워크플로우로 충분할 때</li>
+</ul>
+
+<h3 id="smolagents에서-사용-방법">smolagents에서 사용 방법:</h3>
+
+<p>매우 간단합니다! <code class="language-plaintext highlighter-rouge">use_structured_outputs_internally:</code> 옵션만 활성화하면 됩니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">smolagents</span> <span class="kn">import</span> <span class="n">CodeAgent</span><span class="p">,</span> <span class="n">InferenceClientModel</span><span class="p">,</span> <span class="n">GoogleSearchTool</span>
+
+<span class="n">Configure</span> <span class="n">agent</span> <span class="k">for</span> <span class="n">structured</span> <span class="n">generation</span>
+<span class="n">agent</span> <span class="o">=</span> <span class="nc">CodeAgent</span><span class="p">(</span>
+    <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="nc">GoogleSearchTool</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="sh">"</span><span class="s">serper</span><span class="sh">"</span><span class="p">)],</span>
+    <span class="n">model</span><span class="o">=</span><span class="nc">InferenceClientModel</span><span class="p">(</span><span class="sh">"</span><span class="s">Qwen/Qwen3-235B-A22B</span><span class="sh">"</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="sh">'</span><span class="s">nebius</span><span class="sh">'</span><span class="p">),</span>
+    <span class="n">use_structured_outputs_internally</span><span class="o">=</span><span class="bp">True</span> <span class="c1"># 구조화된 출력 활성화
+</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">agent</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="sh">"</span><span class="s">Calculate the time for a cheetah to run across the Golden Gate Bridge</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>이에 대해, LLM은 다음과 같이 답변을 생성할 수 있습니다:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"thoughts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I need to find the length of the Golden Gate Bridge and the top speed of a cheetah, then calculate the time."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bridge_info = web_search('Golden Gate Bridge length meters')</span><span class="se">\n</span><span class="s2">cheetah_speed = web_search('Cheetah top speed') ..."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>그 후 “code” 부분은 기존 CodeAgent와 동일하게 실행됩니다. 단, 이제 파싱 신뢰도는 100%입니다!</p>
+
+<h3 id="구현-팁">구현 팁</h3>
+
+<ol>
+  <li><strong>명확한 프롬프트 작성</strong>: 원하는 JSON 구조를 프롬프트에 명확히 명시</li>
+  <li><strong>모델 선택</strong>: 구조화된 생성 능력이 강한 모델을 선택</li>
+  <li><strong>적절한 provider 선택</strong>: OpenAI나 Anthropic 같은 일부 API provider는 구조화된 생성을 기본적으로 지원함. Hugging Face Inference Provider를 사용하는 경우, 구조화된 생성 지원 여부는 provider마다 다름. 구조화된 생성을 지원하는 목록은 다음을 참고: <ins><a href="https://www.notion.so/huggingface2/Structured-generation-support-for-Models-in-smolagents-1f51384ebcac8074a051e6dd03d1fe1d"><strong>Structured generation support for Models in smolagents‣</strong></a></ins></li>
+</ol>
+
+<h3 id="더-큰-그림---다음-단계는">더 큰 그림 - 다음 단계는?</h3>
+
+<p>이 연구는 우리가 에이전트 아키텍처를 더 정교하게 이해하는 방향으로 나아가고 있음을 보여줍니다. 이것은 단순히 “에이전트가 무엇을 할 수 있는가?”가를 넘어, “에이전트가 그것을 어떻게 생각하고 수행해야 하는가?”에 대한 문제입니다.</p>
+
+<p>추론 과정을 더 명시적으로 표현하는 것은 모델이 문제 해결 경로를 더 잘 유지하도록 돕거나, 혹은 단순히 파싱이 쉬워서일 수도 있습니다. 어느 쪽이든 좋습니다.</p>
+
+<p>하지만 이것은 시작에 불과합니다. 앞으로 탐구할 질문은 많습니다:</p>
+
+<ul>
+  <li>또 어떤 구조적 개선이 성능 향상에 도움이 될까?</li>
+  <li>특히 작은 모델에서 이를 더 잘 작동하게 만들 방법은 무엇일까?</li>
+  <li>이것이 AI 추론 본질에 대해 어떤 통찰을 주는가?</li>
+</ul>
+
+<p>지금 smolagents를 사용 중이거나 자체 CodeAgent 시스템을 만들고 있다면, 구조화된 출력을 시도해보는 것을 추천합니다. 파싱 오류가 사라지고, 성능이 눈에 띄게 개선될 수도 있습니다!</p>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2025-10-13">13 Oct 2025</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#codeagents--structure-액션-실행을-위한-더-좋은-방법" id="markdown-toc-codeagents--structure-액션-실행을-위한-더-좋은-방법">CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법</a>    <ul>
+      <li><a href="#-에이전트-액션의-진화" id="markdown-toc--에이전트-액션의-진화">🤔 에이전트 액션의 진화</a>        <ul>
+          <li><a href="#기존의-json-agent-toolcallingagent-구조화된-json을-생성해-도구를-호출하는-에이전트" id="markdown-toc-기존의-json-agent-toolcallingagent-구조화된-json을-생성해-도구를-호출하는-에이전트"><strong>기존의 JSON Agent (ToolCallingAgent)</strong>: 구조화된 JSON을 생성해 도구를 호출하는 에이전트</a></li>
+          <li><a href="#code-agents-고유한-코딩-능력을-활용해-실행-가능한-python-코드를-직접-작성하는-에이전트" id="markdown-toc-code-agents-고유한-코딩-능력을-활용해-실행-가능한-python-코드를-직접-작성하는-에이전트"><strong>Code Agents</strong>: 고유한 코딩 능력을 활용해 실행 가능한 Python 코드를 직접 작성하는 에이전트</a></li>
+        </ul>
+      </li>
+      <li><a href="#️-code-agent에-구조화된-출력-추가하기" id="markdown-toc-️-code-agent에-구조화된-출력-추가하기">➡️ Code Agent에 구조화된 출력 추가하기</a></li>
+      <li><a href="#-벤치마크-결과" id="markdown-toc--벤치마크-결과">🧪 벤치마크 결과</a></li>
+      <li><a href="#-구조화가-일반적으로-도움이-되는-이유" id="markdown-toc--구조화가-일반적으로-도움이-되는-이유">💡 구조화가 (일반적으로) 도움이 되는 이유</a>        <ul>
+          <li><a href="#파싱-문제는-실제로-존재한다" id="markdown-toc-파싱-문제는-실제로-존재한다">파싱 문제는 실제로 존재한다</a>            <ul>
+              <li><a href="#추기-강제된-추론-과정" id="markdown-toc-추기-강제된-추론-과정">추기: 강제된 추론 과정</a></li>
+            </ul>
+          </li>
+          <li><a href="#structure-tax-구조화-비용" id="markdown-toc-structure-tax-구조화-비용">Structure Tax: 구조화 비용</a>            <ul>
+              <li><a href="#구조화가-실패하는-경우-실제-예시" id="markdown-toc-구조화가-실패하는-경우-실제-예시">구조화가 실패하는 경우: 실제 예시</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#-structured-codeagents는-언제-사용해야-될까" id="markdown-toc--structured-codeagents는-언제-사용해야-될까">🚀 Structured CodeAgents는 언제 사용해야 될까?</a>        <ul>
+          <li><a href="#-structured-codeagents를-사용하면-좋은-경우" id="markdown-toc--structured-codeagents를-사용하면-좋은-경우">✅ Structured CodeAgents를 사용하면 좋은 경우:</a></li>
+          <li><a href="#️-다음과-같은-경우에는-다른-접근법을-고려" id="markdown-toc-️-다음과-같은-경우에는-다른-접근법을-고려">⚠️ 다음과 같은 경우에는 다른 접근법을 고려:</a></li>
+          <li><a href="#smolagents에서-사용-방법" id="markdown-toc-smolagents에서-사용-방법">smolagents에서 사용 방법:</a></li>
+          <li><a href="#구현-팁" id="markdown-toc-구현-팁">구현 팁</a></li>
+          <li><a href="#더-큰-그림---다음-단계는" id="markdown-toc-더-큰-그림---다음-단계는">더 큰 그림 - 다음 단계는?</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-175/assets/images/author/Jimin.png" alt="Jimin">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href="https://github.com/jiminAn">Jimin</a>
+        <span class="author-description">Hello, I’m Jimin! I’m a NLP researcher in 🇰🇷</span>                        
+    </div>
+</div>
+
+
+<!-- footer -->
+<div class="row post-footer">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-175/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-175/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">4</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="agent">
+            Agent
+            <span class="count">4</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-175/agent-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-175/assets/images/blog/posts/2025-11-17-agent-leaderboard/thumbnail.png" alt="에이전트 리더보드: 다중 도메인 시나리오에서의 AI 에이전트 평가" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-175/agent-leaderboard/">에이전트 리더보드: 다중 도메인 시나리오에서의 AI 에이전트 평가</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Agent Leaderboard: Evaluating AI Agents in Multi-Domain Scenarios를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Jimin, </span>             
+                on <span class="post-date">17 Nov 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="benchmark agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-175/DABStep/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-175/assets/images/thumbnail_default.png" alt="DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-175/DABStep/">DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 DABStep: Data Agent Benchmark for Multi-step Reasoning를 한국어로 번역한 글입니다....</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> sohyun, </span>             
+                on <span class="post-date">02 Nov 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-175/Introducing-smolagents/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-175/assets/images/blog/posts/2025-09-26-Introducing-smolagents/thumbnail.png" alt="쉽게 에이전트를 만들 수 있는 라이브러리, smolagents를 소개합니다." width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-175/Introducing-smolagents/">쉽게 에이전트를 만들 수 있는 라이브러리, smolagents를 소개합니다.</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing smolagents, a simple library to build agents를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> jeong, </span>             
+                on <span class="post-date">26 Sep 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-175/python-tiny-agents-ko/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-175/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" alt="파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-175/python-tiny-agents-ko/">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Tiny Agents in Python: an MCP-powered agent in ~70 lines...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">14 Sep 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section></main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-175/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-175/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-175/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-175/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-175/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-175/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-175/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-175/assets/js/category.js"></script>
+  </body>
+</html>
