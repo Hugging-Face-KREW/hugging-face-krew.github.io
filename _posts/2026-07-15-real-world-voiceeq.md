@@ -1,21 +1,26 @@
 ---
 layout: post
-title: "Real World VoiceEQ 소개: 음성 AI의 인간 품질 측정"
+title: 'Real World VoiceEQ 소개: 음성 AI의 인간 품질 측정'
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 image: assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png
 authors:
-  - user: dayllon
-slug: "real-world-voiceeq"
-source_url: "https://huggingface.co/blog/real-world-voiceeq"
-source_published_date: "2026-07-15"
-source_published_at: "2026-07-15T00:00:00+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
-description: "Real World VoiceEQ 소개: 음성 AI의 인간 품질 측정에 대한 한국어 번역 글."
+- user: dayllon
+slug: real-world-voiceeq
+source_url: https://huggingface.co/blog/real-world-voiceeq
+source_published_date: '2026-07-15'
+source_published_at: '2026-07-15T00:00:00+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: 'Real World VoiceEQ 소개: 음성 AI의 인간 품질 측정에 대한 한국어 번역 글.'
+canonical: https://hugging-face-krew.github.io/real-world-voiceeq/
+hreflang:
+  ko: https://hugging-face-krew.github.io/real-world-voiceeq/
+  en: https://huggingface.co/blog/real-world-voiceeq
 ---
-
 * TOC
 {:toc}
 <!--toc-->
