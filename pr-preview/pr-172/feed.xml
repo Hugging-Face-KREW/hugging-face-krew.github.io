@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/pr-preview/pr-172/feed.xml" rel="self" type="application/atom+xml" /><link href="/pr-preview/pr-172/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-07-24T21:37:34+09:00</updated><id>/pr-preview/pr-172/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*</title><link href="/pr-preview/pr-172/grabette/" rel="alternate" type="text/html" title="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*" /><published>2026-07-21T00:00:00+09:00</published><updated>2026-07-21T00:00:00+09:00</updated><id>/pr-preview/pr-172/grabette</id><content type="html" xml:base="/pr-preview/pr-172/grabette/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/pr-preview/pr-172/feed.xml" rel="self" type="application/atom+xml" /><link href="/pr-preview/pr-172/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-07-24T23:45:03+09:00</updated><id>/pr-preview/pr-172/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*</title><link href="/pr-preview/pr-172/grabette/" rel="alternate" type="text/html" title="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*" /><published>2026-07-21T00:00:00+09:00</published><updated>2026-07-21T00:00:00+09:00</updated><id>/pr-preview/pr-172/grabette</id><content type="html" xml:base="/pr-preview/pr-172/grabette/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#grabette-로봇-조작-데이터를-기록하기-위한-오픈-시스템--함께-공유-데이터셋을-구축합니다" id="markdown-toc-grabette-로봇-조작-데이터를-기록하기-위한-오픈-시스템--함께-공유-데이터셋을-구축합니다">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br /> <em>함께 공유 데이터셋을 구축합니다.</em></a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">The bottleneck isn’t the model. It’s the data.</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">UMI의 어깨 위에 서다</a></li>
@@ -206,7 +206,7 @@ Review instructions:
 
 <h1 id="real-world-voiceeq-소개-음성-ai의-인간-품질-측정">Real World VoiceEQ 소개: 음성 AI의 인간 품질 측정</h1>
 
-<p><em>기존의 벤치마크는 음성 AI가 인간 수준의 성능에 근접했다고 시사하지만 현실 세계의 대화는 다른 이야기를 들려준다</em></p>
+<p><em>기존의 벤치마크는 음성 AI가 인간 수준의 성능에 근접했다고 시사하지만 현실 세계의 대화는 다른 이야기를 들려준다.</em></p>
 
 <p>음성은 AI의 주요 인터페이스로 빠르게 자리잡고 있습니다. 고객 지원과 의료에서 교육, 엔터테인먼트, 개인 비서에 이르기까지 음성은 점점 더 텍스트를 대체하며 AI와 상호작용하는 방식이 되고 있습니다.</p>
 
@@ -216,55 +216,795 @@ Review instructions:
 
 <h2 id="section-1">음성 AI를 위한 더 포괄적인 벤치마크</h2>
 
-<p>그 품질을 측정하기 위해 우리는 <a href="https://www.hume.ai/rw-voice-eq">Real World VoiceEQ</a>를 구축했다—음성 상호작용의 인간 품질을 평가하도록 설계된 벤치마크다. 이는 음성 시스템이 어조와 감정은 물론 화자 정체성과 배경 맥락까지 전사본에 남겨지지 않은 음향 정보를 인식하고 생성하며 응답할 수 있는지 평가한다</p>
+<p>그 품질을 측정하기 위해 우리는 <a href="https://www.hume.ai/rw-voice-eq">Real World VoiceEQ</a>를 구축했다—음성 상호작용의 인간 품질을 평가하도록 설계된 벤치마크다. 이는 음성 시스템이 어조와 감정은 물론 화자 정체성과 배경 맥락까지 전사본에 남겨지지 않은 음향 정보를 인식하고 생성하며 응답할 수 있는지 평가한다.</p>
 
-<p>Real World VoiceEQ는 <strong>40개 이상의 선도적인 독점 및 오픈 소스 음성 모델</strong>을 대상으로 <strong>15개 이상 핵심 평가 차원</strong>과 <strong>60개가 넘는 지표</strong>에 걸쳐 자동 음성 인식(ASR), 텍스트 음성 변환(TTS), 음성-음성(S2S), 및 음성 이해를 포괄합니다</p>
+<p>Real World VoiceEQ는 <strong>40개 이상의 선도적인 독점 및 오픈 소스 음성 모델</strong>을 대상으로 <strong>15개 이상 핵심 평가 차원</strong>과 <strong>60개가 넘는 지표</strong>에 걸쳐 자동 음성 인식(ASR), 텍스트 음성 변환(TTS), 음성-음성(S2S), 및 음성 이해를 포괄합니다.</p>
 
 <p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/real-world-voiceeq/benchmark-overview.png" alt="The four components of Real World VoiceEQ — Text-to-Speech, Speech-to-Speech, Speech Understanding, and ASR Robustness — each with its evaluation dimensions." /></p>
 
-<p>Real World VoiceEQ는 다양한 인구 통계, 말하기 스타일, 및 음향 환경에 걸친 백만 건이 넘는 개별 인간 평가에서 개발되었습니다. 현재 벤치마크에는 78만 5천 건의 TTS 평가와 4만 8천 건의 STS 평가가 포함되어 있어 지금까지 수행된 가장 큰 규모의 음성 AI 인간 평가 중 하나입니다</p>
+<p>Real World VoiceEQ는 다양한 인구 통계, 말하기 스타일, 및 음향 환경에 걸친 백만 건이 넘는 개별 인간 평가에서 개발되었습니다. 현재 벤치마크에는 78만 5천 건의 TTS 평가와 4만 8천 건의 STS 평가가 포함되어 있어 지금까지 수행된 가장 큰 규모의 음성 AI 인간 평가 중 하나입니다.</p>
 
-<p>모든 평가는 <strong><a href="https://www.hume.ai/kairos">Kairos</a></strong>를 사용해 수행되었으며, 이는 유연한 음성-네이티브 평가 플랫폼이다. 동일한 인프라는 프런티어 AI 연구소와 기업이 특정 사용 사례에 맞춘 맞춤 평가를 실행하고, 생산 음성 시스템의 미세한 실패 모드를 식별하며, 인간 선호도 데이터를 생성하고, 강화학습과 인간 피드백을 통해 모델을 지속적으로 개선할 수 있게 한다</p>
+<p>모든 평가는 <strong><a href="https://www.hume.ai/kairos">Kairos</a></strong>를 사용해 수행되었으며, 이는 유연한 음성-네이티브 평가 플랫폼이다. 동일한 인프라는 프런티어 AI 연구소와 기업이 특정 사용 사례에 맞춘 맞춤 평가를 실행하고, 생산 음성 시스템의 미세한 실패 모드를 식별하며, 인간 선호도 데이터를 생성하고, 강화학습과 인간 피드백을 통해 모델을 지속적으로 개선할 수 있게 한다.</p>
 
 <h2 id="section-2">Real World VoiceEQ의 주요 발견</h2>
 
 <h3 id="음성-ai의-진보가-점점-더-전문화되고-있다">음성 AI의 진보가 점점 더 전문화되고 있다</h3>
 
-<p>단일 "최고의" 음성 모델을 향한 경쟁은 전문화된 다양한 역량의 모음으로 전환되고 있다</p>
+<p>단일 “최고의” 음성 모델을 향한 경쟁은 전문화된 다양한 역량의 모음으로 전환되고 있다.</p>
 
-<p>오늘의 선도 시스템은 기술적 정확성, 감정 이해, 대화 지능, 표현력, 견고성 등 서로 다른 강점에 최적화되어 있다. 예약 번호, 은행 계좌 정보, 복잡한 의약품 이름을 반복하는 데에 뛰어난 한 모델은 감정적으로 표현력이 풍부한 음성을 만들어내는 데 어려움을 겪을 수 있다. 또 다른 모델은 매우 자연스럽게 들릴 수 있지만 정확성 중심의 작업에서는 신뢰도가 낮을 수 있다</p>
+<p>오늘의 선도 시스템은 기술적 정확성, 감정 이해, 대화 지능, 표현력, 견고성 등 서로 다른 강점에 최적화되어 있다. 예약 번호, 은행 계좌 정보, 복잡한 의약품 이름을 반복하는 데에 뛰어난 한 모델은 감정적으로 표현력이 풍부한 음성을 만들어내는 데 어려움을 겪을 수 있다. 또 다른 모델은 매우 자연스럽게 들릴 수 있지만 정확성 중심의 작업에서는 신뢰도가 낮을 수 있다.</p>
 
-<p>음성 AI가 성숙해짐에 따라 진전을 측정하려면 이들 능력을 독립적으로 평가하고 단일 전체 점수로 합치는 것이 점점 더 어렵다. 우리의 TTS 평가에서, 8개 능력 그룹 모두에서 상위 다섯 위에 들은 시스템 구성은 하나도 없었다—이는 왜 단일한 "최고의" 음성 모델이 존재하지 않는지 보여준다</p>
+<p>음성 AI가 성숙해짐에 따라 진전을 측정하려면 이들 능력을 독립적으로 평가하고 단일 전체 점수로 합치는 것이 점점 더 어렵다. 우리의 TTS 평가에서, 8개 능력 그룹 모두에서 상위 다섯 위에 들은 시스템 구성은 하나도 없었다—이는 왜 단일한 “최고의” 음성 모델이 존재하지 않는지 보여준다.</p>
 
 <h3 id="음성-모델은-실제로-듣는-것보다-말하는-데-더-능숙해졌다">음성 모델은 <em>실제로</em> 듣는 것보다 말하는 데 더 능숙해졌다</h3>
 
-<p>음성-음성(S2S) 모델은 우리가 평가한 모든 범주 중 가장 큰 변동성을 보였다. 어떤 시스템은 감정을 매우 잘 인식했지만 자연스럽게 응답하는 데에는 어려움을 겪었다. 오디오에 접근한다고 해서 에이전트가 그 안에 담긴 파라언어 정보를 사용한다는 보장은 없다는 점을 확인했다. 일부 시스템은 여전히 대본 중심으로 남아, 말해지는 단어에 의존하면서 어조, 속도, 망설임, 강조, 음량 등의 신호를 간과했다</p>
+<p>음성-음성(S2S) 모델은 우리가 평가한 모든 범주 중 가장 큰 변동성을 보였다. 어떤 시스템은 감정을 매우 잘 인식했지만 자연스럽게 응답하는 데에는 어려움을 겪었다. 오디오에 접근한다고 해서 에이전트가 그 안에 담긴 파라언어 정보를 사용한다는 보장은 없다는 점을 확인했다. 일부 시스템은 여전히 대본 중심으로 남아, 말해지는 단어에 의존하면서 어조, 속도, 망설임, 강조, 음량 등의 신호를 간과했다.</p>
 
-<p>사람들은 이러한 신호를 자연스럽게 활용해 자신감, 불확실성, 좌절, 풍자, 공감을 추론한다. 오늘날의 모델은 종종 이를 놓친다</p>
+<p>사람들은 이러한 신호를 자연스럽게 활용해 자신감, 불확실성, 좌절, 풍자, 공감을 추론한다. 오늘날의 모델은 종종 이를 놓친다.</p>
 
-<p>가능한 은행 거래를 인식하는지 묻는 은행 상담원을 상상해 보자. 확신 있는 ‘네’와 주저하는 ‘…네…‘는 전사가 동일하더라도 전혀 다른 의미를 가질 수 있다. 사람은 그 차이를 즉시 인식한다. 오늘날의 많은 음성 모델은 그렇지 않다</p>
+<p>가능한 은행 거래를 인식하는지 묻는 은행 상담원을 상상해 보자. 확신 있는 ‘네’와 주저하는 ‘…네…‘는 전사가 동일하더라도 전혀 다른 의미를 가질 수 있다. 사람은 그 차이를 즉시 인식한다. 오늘날의 많은 음성 모델은 그렇지 않다.</p>
 
 <h3 id="전통적-벤치마크는-현실-세계의-성능을-점점-더-과대-평가하는-경향">전통적 벤치마크는 현실 세계의 성능을 점점 더 과대 평가하는 경향</h3>
 
-<p>다수의 기존 벤치마크는 한계에 다다르고 있으며 현실 세계의 조건을 반영하지 않는다. 모델은 여전히 악센트가 있는 음성, 중첩되는 화자, 감정, 배경 소음, 그리고 더 긴 대화에서 어려움을 겪는다. 우리의 평가에서, 성능은 선도적인 오픈 소스 및 독점 모델 간에 전통적 벤치마크가 시사하는 것보다 훨씬 더 큰 차이를 보였다. 예를 들어 노이즈가 섞인 음성에서의 전사 단어 오류율은 음악이 배경인 음성에 비해 대략 4배 가까이 높았으며, 하나의 배경 오디오 점수가 실제 실패 모드를 가릴 수 있음을 보여준다</p>
+<p>다수의 기존 벤치마크는 한계에 다다르고 있으며 현실 세계의 조건을 반영하지 않는다. 모델은 여전히 악센트가 있는 음성, 중첩되는 화자, 감정, 배경 소음, 그리고 더 긴 대화에서 어려움을 겪는다. 우리의 평가에서, 성능은 선도적인 오픈 소스 및 독점 모델 간에 전통적 벤치마크가 시사하는 것보다 훨씬 더 큰 차이를 보였다. 예를 들어 노이즈가 섞인 음성에서의 전사 단어 오류율은 음악이 배경인 음성에 비해 대략 4배 가까이 높았으며, 하나의 배경 오디오 점수가 실제 실패 모드를 가릴 수 있음을 보여준다.</p>
 
 <h3 id="인간-평가의-중요성은-여전히-필수적이다">인간 평가의 중요성은 여전히 필수적이다</h3>
 
-<p>예비 연구에서 일부 모델이 공개 벤치마크에 최적화되었을 수 있다는 징후를 발견했다. 몇몇 모델은 참조 전사에서 이미 알려진 오류를 재현하고, 임의의 철자 규칙을 따르며, 음성에 없던 가려진 단어를 재구성하기도 했다</p>
+<p>예비 연구에서 일부 모델이 공개 벤치마크에 최적화되었을 수 있다는 징후를 발견했다. 몇몇 모델은 참조 전사에서 이미 알려진 오류를 재현하고, 임의의 철자 규칙을 따르며, 음성에 없던 가려진 단어를 재구성하기도 했다.</p>
 
-<p>대형 언어 모델(LLMs)은 이제 텍스트 기반 모델을 평가하는 데 널리 사용되지만, 우리의 연구 결과는 음성 평가에는 음성-언어 모델(SLM)을 더 신중하게 사용해야 한다고 시사한다. TTS 평가에서 선도적인 SLM과 훈련된 인간 평가자의 비교에서, 발음 정확도와 같이 명확하고 검증 가능한 답이 있는 작업에서의 일치도가 가장 높았다</p>
+<p>대형 언어 모델(LLMs)은 이제 텍스트 기반 모델을 평가하는 데 널리 사용되지만, 우리의 연구 결과는 음성 평가에는 음성-언어 모델(SLM)을 더 신중하게 사용해야 한다고 시사한다. TTS 평가에서 선도적인 SLM과 훈련된 인간 평가자의 비교에서, 발음 정확도와 같이 명확하고 검증 가능한 답이 있는 작업에서의 일치도가 가장 높았다.</p>
 
-<p>주관적인 평가가 늘어나면 일치도가 떨어졌다. SLM은 때때로 텍스트 기반 맥락 신호에서 감정을 추론하는 것으로 보였고, 연기 역할에 맞는지 또는 동일한 정체성을 유지하는지와 같은 개방형 판단의 경우 일치도가 가장 낮았다. 자동 평가자는 잘 정의된 작업에 유용할 수 있지만, 판단이 음향-맥락, 지각 및 사회적 해석에 의존할 때 인간 청자들을 대체하기에는 아직 이르다</p>
+<p>주관적인 평가가 늘어나면 일치도가 떨어졌다. SLM은 때때로 텍스트 기반 맥락 신호에서 감정을 추론하는 것으로 보였고, 연기 역할에 맞는지 또는 동일한 정체성을 유지하는지와 같은 개방형 판단의 경우 일치도가 가장 낮았다. 자동 평가자는 잘 정의된 작업에 유용할 수 있지만, 판단이 음향-맥락, 지각 및 사회적 해석에 의존할 때 인간 청자들을 대체하기에는 아직 이르다.</p>
 
 <h2 id="section-3">음성 AI가 새 측정 계층이 필요한 이유</h2>
 
-<p>음성이 AI의 정의적 인터페이스 중 하나가 됨에 따라 속도와 기술적 정확성만으로 성공하는 시스템이 결정되지는 않을 것이다. 사람들이 궁극적으로 선택하는 모델은 이상적인 벤치마크 조건에서뿐만 아니라 현실 세계 대화의 복잡성 전반에 걸쳐 인간처럼 이해하고, 표현하고, 응답할 수 있는 모델일 것이다</p>
+<p>음성이 AI의 정의적 인터페이스 중 하나가 됨에 따라 속도와 기술적 정확성만으로 성공하는 시스템이 결정되지는 않을 것이다. 사람들이 궁극적으로 선택하는 모델은 이상적인 벤치마크 조건에서뿐만 아니라 현실 세계 대화의 복잡성 전반에 걸쳐 인간처럼 이해하고, 표현하고, 응답할 수 있는 모델일 것이다.</p>
 
-<p>수십 년에 걸쳐 음성 AI는 표준화된 벤치마크에 대한 정량적 지표를 최적화하는 방식으로 발전해 왔으며, 전사 정확도(WER)에서 음성 품질의 객관적 지각 지표인 PESQ 및 DNSMOS에 이르기까지 다양한 지표를 활용해 왔다. Real World VoiceEQ가 합성 음성 상호작용의 구성 요소를 평가하는 인간 기반의 지표를 제공함으로써 이러한 패러다임을 확장하기를 바란다</p>
+<p>수십 년에 걸쳐 음성 AI는 표준화된 벤치마크에 대한 정량적 지표를 최적화하는 방식으로 발전해 왔으며, 전사 정확도(WER)에서 음성 품질의 객관적 지각 지표인 PESQ 및 DNSMOS에 이르기까지 다양한 지표를 활용해 왔다. Real World VoiceEQ가 합성 음성 상호작용의 구성 요소를 평가하는 인간 기반의 지표를 제공함으로써 이러한 패러다임을 확장하기를 바란다.</p>
 
-<p>**<a href="https://cdn.sanity.io/files/xqnc2for/production/84e7925ad3694bcbd12cbf2d107bd9bf2da4f3d8.pdf">full technical report</a>를 읽고 <a href="https://huggingface.co/spaces/HumeAI/rw-voice-eq">public leaderboards</a>를 살펴보거나 <a href="https://www.hume.ai/sales-form">get in touch</a>를 통해 Hume가 Real World VoiceEQ를 사용하여 귀하의 음성 모델이나 에이전트를 평가하는 방법을 배우거나, 특정 사용 사례에 맞춘 맞춤 평가를 설계하십시오.</p>
+<p><strong><a href="https://cdn.sanity.io/files/xqnc2for/production/84e7925ad3694bcbd12cbf2d107bd9bf2da4f3d8.pdf">full technical report</a>를 읽고 <a href="https://huggingface.co/spaces/HumeAI/rw-voice-eq">public leaderboards</a>를 살펴보거나 <a href="https://www.hume.ai/sales-form">get in touch</a>를 통해 Hume가 Real World VoiceEQ를 사용하여 귀하의 음성 모델이나 에이전트를 평가하는 방법을 배우거나, 특정 사용 사례에 맞춘 맞춤 평가를 설계하십시오.</strong></p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[Real World VoiceEQ 소개: 음성 AI의 인간 품질 측정에 대한 한국어 번역 글.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">파이토치의 프로파일링(3부): 어텐션이 전부다</title><link href="/pr-preview/pr-172/torch-attention-profile/" rel="alternate" type="text/html" title="파이토치의 프로파일링(3부): 어텐션이 전부다" /><published>2026-07-10T00:00:00+09:00</published><updated>2026-07-10T00:00:00+09:00</updated><id>/pr-preview/pr-172/torch-attention-profile</id><content type="html" xml:base="/pr-preview/pr-172/torch-attention-profile/"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#파이토치의-프로파일링3부-어텐션이-전부다" id="markdown-toc-파이토치의-프로파일링3부-어텐션이-전부다">파이토치의 프로파일링(3부): 어텐션이 전부다</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">나이브 어텐션</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">인플레이스 인과 마스크가 적용된 나이브 어텐션</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">스케일드 닷 프로덕트 어텐션</a>        <ul>
+          <li><a href="#수학-백엔드" id="markdown-toc-수학-백엔드">수학 백엔드</a>            <ul>
+              <li><a href="#텐서-코어가-남아-있습니다" id="markdown-toc-텐서-코어가-남아-있습니다">텐서 코어가 남아 있습니다</a></li>
+              <li><a href="#인과-마스크가-생성됩니다" id="markdown-toc-인과-마스크가-생성됩니다">인과 마스크가 생성됩니다</a></li>
+              <li><a href="#안전한-소프트맥스" id="markdown-toc-안전한-소프트맥스">안전한 소프트맥스</a></li>
+              <li><a href="#그래서-수학-백엔드는-무엇을-위한가" id="markdown-toc-그래서-수학-백엔드는-무엇을-위한가">그래서 수학 백엔드는 무엇을 위한가?</a></li>
+            </ul>
+          </li>
+          <li><a href="#효율적인-백엔드" id="markdown-toc-효율적인-백엔드">효율적인 백엔드</a></li>
+          <li><a href="#flash-백엔드" id="markdown-toc-flash-백엔드">Flash 백엔드</a>            <ul>
+              <li><a href="#왜-flash-어텐션이-존재하는가" id="markdown-toc-왜-flash-어텐션이-존재하는가">왜 flash 어텐션이 존재하는가?</a></li>
+              <li><a href="#왜-프로파일러에서-플래시가-잘못-보이는가" id="markdown-toc-왜-프로파일러에서-플래시가-잘못-보이는가">왜 프로파일러에서 플래시가 “잘못 보이는”가?</a></li>
+            </ul>
+          </li>
+          <li><a href="#cudnn-백엔드" id="markdown-toc-cudnn-백엔드">cuDNN 백엔드</a>            <ul>
+              <li><a href="#cudnn-커널은-어떻게-다른가" id="markdown-toc-cudnn-커널은-어떻게-다른가">cuDNN 커널은 어떻게 다른가</a></li>
+              <li><a href="#비용이-cpu로-이동했습니다" id="markdown-toc-비용이-cpu로-이동했습니다">비용이 CPU로 이동했습니다</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#section-4" id="markdown-toc-section-4">Everything we covered, at a glance</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">Concluding the series</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/torch-attention-profile">Profiling in PyTorch (Part 3): Attention is all you profile</a>를 한국어로 번역한 글입니다.</em></p>
 
-<hr />]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[Real World VoiceEQ 소개: 음성 AI의 인간 품질 측정에 대한 한국어 번역 글.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">네이티브-스피드 vLLM transformers 모델링 백엔드</title><link href="/pr-preview/pr-172/native-speed-vllm-transformers-backend/" rel="alternate" type="text/html" title="네이티브-스피드 vLLM transformers 모델링 백엔드" /><published>2026-07-08T00:00:00+09:00</published><updated>2026-07-08T00:00:00+09:00</updated><id>/pr-preview/pr-172/native-speed-vllm-transformers-backend</id><content type="html" xml:base="/pr-preview/pr-172/native-speed-vllm-transformers-backend/"><![CDATA[<ul id="markdown-toc">
+<!-- Source: https://huggingface.co/blog/torch-attention-profile -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="파이토치의-프로파일링3부-어텐션이-전부다">파이토치의 프로파일링(3부): 어텐션이 전부다</h1>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/profile-3-thumbnail.png" alt="Thumbnail of the blog post" /></p>
+
+<div style="
+  border: 1px solid #1f5c48;
+  border-radius: 6px;
+  padding: 1.5rem 2rem;
+  background: #17211f;
+  color: #ddd;
+  font-size: 1.1rem;
+  line-height: 1.7;
+">
+
+  <p>
+    This is the third post of <bold>Profiling in PyTorch</bold>, a series where we slowly build the skill of reading profiler traces and use it to drive optimization:
+  </p>
+
+  <ol>
+    <li>
+      <a href="https://huggingface.co/blog/torch-profiler" style="color: #10b981;">
+        Profiling in PyTorch (Part 1): A Beginner's Guide to torch.profiler
+      </a>
+    </li>
+    <li>
+      <a href="https://huggingface.co/blog/torch-mlp-fusion" style="color: #10b981;">
+        Profiling in PyTorch (Part 2): From nn.Linear to a Fused MLP
+      </a>
+    </li>
+    <li>
+      <a href="https://huggingface.co/blog/torch-attention-profile" style="color: #10b981;">
+        Profiling in PyTorch (Part 3): Attention is all you profile
+      </a>
+      <em style="color: #aaa;">(current)</em>
+    </li>
+  </ol>
+
+</div>
+
+<p>시리즈 “Profiling in PyTorch”는 프로파일러 트레이스와 표를 읽는 데 익숙해지게 만드는 것을 목표로 합니다. <a href="https://huggingface.co/blog/torch-profiler">Part 1</a>에서는 덧셈과 곱셈 같은 기본 수학 연산을 프로파일링했습니다. 프로파일러 표가 핫스팟을 드러내는 방식과 프로파일러 트레이스가 알고리즘이 시간에 따라 실행되는 순서를 어떻게 보여주는지 보았습니다.</p>
+
+<p><a href="https://huggingface.co/blog/torch-mlp-fusion">Part 2</a> 안에서 위의 덧셈과 곱셈을 torch 선형 계층으로 포장했고, 그 위에 여러 개의 선형 계층을 차례로 쌓아(다층 퍼셉트론) 그것을 프로파일링했습니다. 그 과정에서 융합된 커널과 수작업으로 튜닝된 커널도 함께 프로파일링했습니다.</p>
+
+<p>트랜스포머 아키텍처의 관점에서, 프로파일링의 다음 논리적 단계는 또 다른 기본 알고리즘인 어텐션입니다. 어텐션은 이차 시간 복잡도로 악명 높지만, 이를 완화하고 빠르게 만드는 똑똑한 트릭이 많이 존재합니다. 여기서의 목표는 모든 트릭을 자세히 다루는 것이 아닙니다. 대신 각 트릭이 프로파일러 아래에서 어떻게 다르게 보이는지 보는 것입니다.</p>
+
+<blockquote>
+  <p>[!NOTE]
+이 블로그 포스트의 스크립트는 여기에서 실행됩니다: <a href="https://huggingface.co/datasets/ariG23498/profiling-pytorch/blob/main/04_a_naive_attention.py"><code class="language-plaintext highlighter-rouge">04_a_naive_attention.py</code></a>, <a href="https://huggingface.co/datasets/ariG23498/profiling-pytorch/blob/main/04_b_inplace_ops_attention.py"><code class="language-plaintext highlighter-rouge">04_b_inplace_ops_attention.py</code></a>, <a href="https://huggingface.co/datasets/ariG23498/profiling-pytorch/blob/main/04_c_sdpa_attention.py"><code class="language-plaintext highlighter-rouge">04_c_sdpa_attention.py</code></a>, 그리고 <a href="https://huggingface.co/datasets/ariG23498/profiling-pytorch/blob/main/04_d_kernels_attention.py"><code class="language-plaintext highlighter-rouge">04_d_kernels_attention.py</code></a>. 이전과 마찬가지로 읽으면서 코드를 따라가려면 별도의 탭에서 여는 것이 도움이 됩니다. 이 스크립트를 실행하기 위해 <code class="language-plaintext highlighter-rouge">NVIDIA A100-SXM4-80GB</code> GPU를 사용합니다. 허깅페이스 인프라에서 GPU를 설정하고 <a href="https://huggingface.co/docs/hub/spaces-dev-mode">Dev Mode with Spaces</a>를 사용해 스크립트를 실험하는 것은 정말 쉽습니다. 또한 <a href="https://huggingface.co/docs/huggingface_hub/en/guides/jobs">Hugging Face Jobs pipeline</a>로도 스크립트를 실행할 수 있습니다.</p>
+</blockquote>
+
+<h2 id="section-1">나이브 어텐션</h2>
+
+<p>어텐션은 쿼리(<code class="language-plaintext highlighter-rouge">q</code>), 키(<code class="language-plaintext highlighter-rouge">k</code>), 값(<code class="language-plaintext highlighter-rouge">v</code>)으로 작동합니다. 이들 간의 상호 작용은 간단한 일련의 단계로 작성할 수 있습니다:</p>
+
+<ol>
+  <li>어텐션 스코어를 만듭니다 <code class="language-plaintext highlighter-rouge">scores</code>: <code class="language-plaintext highlighter-rouge">matmul(q, k.T)</code></li>
+  <li>스코어를 스케일합니다: <code class="language-plaintext highlighter-rouge">scores * scale</code></li>
+  <li>스코어에 인과 마스크를 적용합니다: <code class="language-plaintext highlighter-rouge">scores.masked_fill(mask, "-inf")</code></li>
+  <li>소프트맥스(softmax)로 스코어를 정규화하여 어텐션 가중치를 얻습니다 <code class="language-plaintext highlighter-rouge">attn</code>: <code class="language-plaintext highlighter-rouge">softmax(scores)</code></li>
+  <li>그 가중치로 값을 재가중합니다: <code class="language-plaintext highlighter-rouge">matmul(attn, v)</code></li>
+</ol>
+
+<p>그래서 어텐션은 실질적으로 원시 연산들의 모음입니다. 그 중 일부는 이미 알고 있는(matmul) 연산이고, 나머지는 쉽게 발견할 수 있습니다. PyTorch로 네이브 어텐션 모듈을 작성하고 이를 프로파일링해 봅시다.</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">NaiveCausalAttention</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">head_dim</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">scale</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">head_dim</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">matmul</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">.</span><span class="nf">transpose</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">scores</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">scale</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">scores</span><span class="p">.</span><span class="nf">masked_fill</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="nf">float</span><span class="p">(</span><span class="sh">"</span><span class="s">-inf</span><span class="sh">"</span><span class="p">))</span>
+        <span class="n">attn</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">softmax</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">matmul</span><span class="p">(</span><span class="n">attn</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+</code></pre></div></div>
+
+<p>트레이스를 열기 전, 보통의 연습대로 우리가 볼 수 있을 것을 추측해 봅시다. 이 모듈의 <code class="language-plaintext highlighter-rouge">forward</code>를 트레이스하면, 우리는 다음을 기대합니다:</p>
+
+<ul>
+  <li>매트멀 커널( <code class="language-plaintext highlighter-rouge">q . k.T</code> )</li>
+  <li>곱 커널(스케일링)</li>
+  <li>마스킹 연산</li>
+  <li>소프트맥스 커널</li>
+  <li>매트멀 커널( <code class="language-plaintext highlighter-rouge">atten . v</code> )</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run 04_a_naive_attention.py
+uvx trace-util <span class="nt">-f</span> traces/ <span class="nt">-b</span> &lt;hf_uname&gt;/traces
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/cpu-profile-naive.png" alt="CPU lane of the naive attention profiler trace, with the `attn_fwd` block expanded to show its matmul, mul, masked_fill and softmax operations" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 1: 네이브 어텐션의 프로파일 트레이스의 CPU 레인에 표시된 이산 연산들을 강조</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>그림 1은 프로파일의 CPU 레인( GPU 레인은 우리를 압도하지 않도록 접어 두었습니다)을 보여줍니다. 내부 <code class="language-plaintext highlighter-rouge">attn_fwd</code>(주석이 달린 순전파 호출)에서 우리가 추정한 정확한 연산들을 볼 수 있습니다. 매트멀은 이제 친숙한 친구이고, 새로 등장한 연산들은 쉽게 포착됩니다:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mul</code>: 스케일링</li>
+  <li><code class="language-plaintext highlighter-rouge">masked_fill</code>: 인과 마스킹</li>
+  <li><code class="language-plaintext highlighter-rouge">softmax</code>: 소프트맥스 커널</li>
+</ul>
+
+<p>이제 GPU 레인을 펼쳐 실제로 어떤 커널이 실행되었는지 확인해 봅시다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/gpu-profile-naive.png" alt="Profiler trace of naive attention showing the CPU lane above the GPU lane, with each `attn_fwd` step mapping to a cluster of GPU kernels" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 2: 네이브 어텐션의 프로파일 트레이스의 GPU 레인과 CPU 레인을 함께 보여주며, 하나의 프로파일러 스텝에 해당하는 커널들을 강조</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>그림 2는 GPU 레인 옆에 있는 CPU 레인을 보여줍니다. GPU 레인에서 하나의 <code class="language-plaintext highlighter-rouge">attn_fwd</code> 블록을 확대하여 커널을 하나씩 살펴봅시다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/each-kernels-naive.png" alt="Zoomed-in GPU lane of naive attention showing the individual kernels for one step: two matmuls, a mul, a memory copy, a masking kernel and a softmax" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 3: 네이브 어텐션 구현의 프로파일 트레이스의 확대된 GPU 레인</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>그림 3은 한 프로파일러 스텝의 개별 커널을 읽어보게 해 줍니다:</p>
+
+<ol>
+  <li>matmul (쿼리와 키)</li>
+  <li>mul (스케일링)</li>
+  <li>메모리 복사 🤔</li>
+  <li>인과 마스킹</li>
+  <li>softmax (어텐션 가중치를 산출)</li>
+  <li>matmul (어텐션 가중치와 값)</li>
+</ol>
+
+<p>다섯 가지가 예상됩니다. 메모리 복사는 이상한 하나인데, 이게 어디서 나온 걸까요? 힌트는 PyTorch에 in-place 연산이 있습니다는 점입니다. 텐서에 일반적인(out-of-place) 방식으로 연산하면, PyTorch는 종종 복사를 만들고 요청된 연산을 그 복사에 적용한 뒤 복사본을 반환합니다. 연산 순서를 보면 여기의 범인은 <a href="https://docs.pytorch.org/docs/2.13/generated/torch.Tensor.masked_fill.html"><code class="language-plaintext highlighter-rouge">masked_fill</code></a>입니다.</p>
+
+<p>이것을 in-place 연산으로 바꾼다면 어떨까요?</p>
+
+<h2 id="section-2">인플레이스 인과 마스크가 적용된 나이브 어텐션</h2>
+
+<p>변경하는 것은 <code class="language-plaintext highlighter-rouge">masked_fill</code>에서 <code class="language-plaintext highlighter-rouge">masked_fill_</code>로의 교환뿐입니다(뒤의 밑줄은 PyTorch의 in-place 연산 표기법에 주의). 같은 스크립트를 실행합니다.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">def forward(self, q, k, v, mask):
+</span>    # q, k, v: [batch, heads, seq, head_dim]
+    scores = torch.matmul(q, k.transpose(-2, -1))  # [batch, heads, seq, seq]
+    scores = torch.mul(scores, self.scale)
+<span class="gd">-    scores = scores.masked_fill(mask, float("-inf"))
+</span><span class="gi">+    scores.masked_fill_(mask, float("-inf"))
+</span>    attn = torch.softmax(scores, dim=-1)
+    out = torch.matmul(attn, v)  # [batch, heads, seq, head_dim]
+    return out
+</code></pre></div></div>
+
+<p>트레이스를 살펴보고 무언가 바뀌었는지 봅시다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run 04_b_inplace_ops_attention.py
+uvx trace-util <span class="nt">-f</span> traces/ <span class="nt">-b</span> &lt;hf_uname&gt;/traces
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Type</th>
+      <th style="text-align: center">CPU 스트림</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 4: 나이브 마스킹</td>
+      <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/cpu-profile-naive.png" alt="CPU lane of naive attention with out-of-place `masked_fill`, showing several dispatch ops for the masking step" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">그림 5: 인플레이스 마스킹</td>
+      <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/cpu-profile-inplace.png" alt="CPU lane of naive attention with in-place `masked_fill_`, showing fewer dispatch ops for the masking step" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>인플레이스 버전(Figure 5)은 마스킹 단계 안에 CPU 연산을 훨씬 적게 포장합니다. 이는 고무적인 신호다. GPU 레인을 펼쳐 무슨 일이 일어났는지 확인해 봅시다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Type</th>
+      <th style="text-align: center">GPU 스트림</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 6: 나이브 마스킹</td>
+      <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/each-kernels-naive.png" alt="GPU kernels for naive attention including a separate Memcpy kernel before the masking" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">그림 7: 인플레이스 마스킹</td>
+      <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/each-kernels-inpace.png" alt="GPU kernels for naive attention with in-place masking, with the Memcpy kernel gone" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>GPU 레인에서 <code class="language-plaintext highlighter-rouge">Memcpy</code> 커널은 완전히 사라졌다(그림 6, 7). 한 줄의 변경으로 순전파마다 커널 하나를 제거했습니다. 이것만으로는 큰 차이처럼 보이지 않을 수 있지만, 이건 단일 어텐션 연산에 불과합니다. 트랜스포머 기반의 대형 모델(LLMs, 확산 모델 등) 맥락에서 이는 레이어당 한 번 반복되며 레이어가 많으므로 절약 효과가 빠르게 누적됩니다(그리고 그것이 당신의 월급 인상에 기여합니다면, 우리와 최소 10%를 나누는 것이 공정합니다고 느낍니다).</p>
+
+<blockquote>
+  <p>[!NOTE]
+Out-of-place는 PyTorch의 기본 설정입니다. 그래디언트를 계산하려면 autograd가 순전파에서 본 텐서 값을 기억해야 하며, 많은 역전파 공식이 그 값을 재사용하기 때문입니다. in-place 연산은 메모리의 그 값을 덮어써서 역전파가 잘못된 수치를 읽게 됩니다. <code class="language-plaintext highlighter-rouge">forward</code>를 <code class="language-plaintext highlighter-rouge">torch.no_grad</code> 아래에서 실행하기 때문에 우리에게는 in-place가 안전하며, 역전파가 없고 손상될 여지도 없다. 또한 in-place 연산은 시간 절약뿐 아니라(추가 복사 없이) 메모리 절약도 가능하므로 로짓처럼 큰 텐서에 특히 좋습니다.</p>
+</blockquote>
+
+<h2 id="section-3">스케일드 닷 프로덕트 어텐션</h2>
+
+<p>우리는 막 원시 연산(primitives)으로 어텐션을 구성했고, 심지어 <code class="language-plaintext highlighter-rouge">Memcpy</code>까지 제거했습니다. 다행히 PyTorch 팀이 이 모든 것을 우리를 위해 처리했고, 파이프라인 전체를 단 한 줄의 함수로 패키지했습니다:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
+
+<span class="n">F</span><span class="p">.</span><span class="nf">scaled_dot_product_attention</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">is_causal</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>이 한 줄이 우리의 직접 작성한 모듈을 대체하고, <code class="language-plaintext highlighter-rouge">is_causal=True</code>는 수동으로 마스크를 빌드하는 수고도 덜어줍니다. 이 한 호출이 얼마나 많은 것을 숨기는지 음미할 가치가 있습니다. 그리고 그것은 코드 줄 이상으로도 숨긴다. 스케일드 닷 프로덕트 어텐션(SDPA)은 단일 구현을 가지지 않습니다. 그 이면에서 여러 백엔드 중 하나로 _디스패치_되어 입력들(dtype, head dimension, mask, 하드웨어 등)을 지원하는 가장 빠른 백엔드를 선택합니다.</p>
+
+<p><a href="https://docs.pytorch.org/tutorials/intermediate/scaled_dot_product_attention_tutorial.html">official SDPA tutorial</a>가 이 선택 과정을 안내하고, 백엔드 목록 자체는 <code class="language-plaintext highlighter-rouge">torch.nn.attention.SDPBackend</code> 열거형에 나열되어 있습니다:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">torch.nn.attention</span> <span class="kn">import</span> <span class="n">SDPBackend</span>
+
+<span class="n">BACKENDS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">"</span><span class="s">math</span><span class="sh">"</span><span class="p">:</span> <span class="n">SDPBackend</span><span class="p">.</span><span class="n">MATH</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">flash</span><span class="sh">"</span><span class="p">:</span> <span class="n">SDPBackend</span><span class="p">.</span><span class="n">FLASH_ATTENTION</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">efficient</span><span class="sh">"</span><span class="p">:</span> <span class="n">SDPBackend</span><span class="p">.</span><span class="n">EFFICIENT_ATTENTION</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">cudnn</span><span class="sh">"</span><span class="p">:</span> <span class="n">SDPBackend</span><span class="p">.</span><span class="n">CUDNN_ATTENTION</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>일반적으로 SDPA는 우리를 위해 선택하지만, <code class="language-plaintext highlighter-rouge">torch.nn.attention.sdpa_kernel</code> 컨텍스트 매니저로 특정 백엔드를 고정할 수 있습니다. 이것이 우리 스크립트에서 하는 일입니다. 이를 통해 각 백엔드를 독립적으로 프로파일하고, 트레이스에서 어떻게 다르게 나타나는지 읽어볼 수 있습니다. 하나씩 살펴봅시다.</p>
+
+<h3 id="수학-백엔드">수학 백엔드</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run 04_c_sdpa_attention.py <span class="nt">--backend</span> math
+uvx trace-util <span class="nt">-f</span> traces/ <span class="nt">-b</span> &lt;hf_uname&gt;/traces
+</code></pre></div></div>
+
+<p>아무 것도 열기 전에 추측해 봅시다. 이 모듈의 수작업 어텐션(matmul, mul, mask, softmax, matmul)을 한 줄로 대체했으니 트레이스가 <em>간단하고 빨라질 것입니다</em>. 커널 수가 적고, CPU 디스패치가 줄어들며, 어쩌면 융합 커널이 나올 수도 있습니다. 우선 프로파일러 표를 확인해봅시다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Metric</th>
+      <th style="text-align: center">Where to look?</th>
+      <th style="text-align: center">Naive in-place</th>
+      <th style="text-align: center">SDPA math</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">*_fwd</code> CUDA time avg</td>
+      <td style="text-align: center">The “CUDA time avg” column for the <code class="language-plaintext highlighter-rouge">*_fwd</code> op</td>
+      <td style="text-align: center">1.955 ms</td>
+      <td style="text-align: center">7.239 ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Self CUDA time total</td>
+      <td style="text-align: center">At the bottom of the profiler table</td>
+      <td style="text-align: center">7.194 ms</td>
+      <td style="text-align: center">27.279 ms</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>이것이 우리의 첫 번째 놀라움입니다. 한 줄이 <code class="language-plaintext highlighter-rouge">3.7x</code> 느리다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">Profiler Trace</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 8: 나이브 인플레이스 어텐션의 프로파일러 트레이스가 하나의 순전파에 대해 다섯 개의 GPU 커널 런치를 보여줌</td>
+      <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/inplace-kernel-launches.png" alt="GPU lane of naive in-place attention with five kernel launches for one forward pass" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">그림 9: SDPA 수학 백엔드의 프로파일러 트레이스가 단일 어텐션 순전파에 대해 20개의 GPU 커널 런치를 보여줌</td>
+      <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/math-kernel-launches.png" alt="GPU lane of the SDPA math backend with twenty kernel launches for a single attention forward pass" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>트레이스를 열어보면(그림 9) 경보가 울리는 이유를 보여줍니다. 수학 백엔드가 순전파당 <code class="language-plaintext highlighter-rouge">20</code>개의 GPU 커널을 실행하는 반면, 네이브 어텐션 구현(Figure 8)에서 실행된 <code class="language-plaintext highlighter-rouge">5</code>은 아닙니다. 이는 우리가 예상한 것의 정반대다. 왜 이런 일이 일어나는지 알아봅시다.</p>
+
+<h4 id="텐서-코어가-남아-있습니다">텐서 코어가 남아 있습니다</h4>
+
+<p>다음과 같은 습관을 사용해 커널 이름을 읽는 방법을 배웠습니다. 이 습관을 이 자리에 적용해 봅시다:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Run</th>
+      <th style="text-align: center">matmul kernel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 10: 네이브 어텐션</td>
+      <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/cuda-core-kernels.png" alt="Matmul kernel name for naive attention in Perfetto, carrying the s16816 bfloat16 Tensor-core GEMM signature" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">그림 11: 수학 백엔드를 사용한 SDPA</td>
+      <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/tensor-core-kernels.png" alt="Matmul kernel name for the SDPA math backend, carrying the sgemm FP32 CUDA-core signature" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>우리가 이 트레이스를 포착하는 데 사용한 A100은 <a href="https://www.nvidia.com/en-us/data-center/tensor-cores/">Tensor Cores</a>와 함께 제공되며, 행렬 곱셈을 가속하기 위한 특화된 하드웨어로 일반 CUDA 코어보다 훨씬 빠른 것으로 알려져 있습니다. 이것이 여기서 왜 중요한지 보려면 GPU 내부에 무엇이 있는지 알아야 합니다. 스트리밍 멀티프로세서(SM)는 GPU의 계산 유닛이고, 각 SM은 두 종류의 산술 유닛(CUDA 코어와 텐서 코어)을 가진다. CUDA 코어는 범용적이고 한 번에 소수의 원소를 처리하며, 텐서 코어는 작은 행렬 타일을 한 명령으로 곱하고 누적합니다. 따라서 질문은 간단합니다. 각 백엔드가 실제로 빠른 경로를 사용하고 있는가?</p>
+
+<p>커널 이름이 그것에 답합니다. 네이브 커널(Figure 10)의 <code class="language-plaintext highlighter-rouge">s16816</code>은 <code class="language-plaintext highlighter-rouge">bfloat16</code> 텐서 코어 매트멀의 시그니처이며( <code class="language-plaintext highlighter-rouge">16x8x16</code> 텐서 코어 명령), 따라서 네이브 버전은 빠른 경로에 있습니다. <code class="language-plaintext highlighter-rouge">sgemm</code>(Figure 11)는 일반 CUDA 코어에서 실행되는 단정도 싱글 프리시전(<code class="language-plaintext highlighter-rouge">FP32</code>) 매트멀입니다. 다시 말해, 수학 백엔드는 텐서 코어를 전혀 건드리지 않습니다: 속도와 수치 정확도 사이의 trade-off를 위해 텐서를 <code class="language-plaintext highlighter-rouge">FP32</code>로 업캐스트하고(입력이 <code class="language-plaintext highlighter-rouge">bf16</code>인 경우에도 데이터 이동을 두 배로 늘림) 느린 CUDA 코어로 되돌아간다.</p>
+
+<h4 id="인과-마스크가-생성됩니다">인과 마스크가 생성됩니다</h4>
+
+<p>네이브 버전에서는 인과 마스크를 한 번 만들고 재사용했습니다. 이 버전에서는 <code class="language-plaintext highlighter-rouge">is_causal=True</code>를 넘겨 주었고, 수학 백엔드가 매 호출마다 하나를 생성해 주었다. CPU 레인에서 그것이 어떻게 일어나는지 지켜볼 수 있습니다:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/mask-math.png" alt="CPU lane of the SDPA math backend showing the ops that rebuild the causal mask: aten::ones, aten::tril, aten::scalar_tensor, aten::fill_ and aten::where" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 12: 마스킹 연산에 대한 CPU 레인 표시</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>다음은 그림 12에서 보이는 모습입니다</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aten::ones -&gt; aten::tril            build a <span class="o">[</span><span class="nb">seq</span>, <span class="nb">seq</span><span class="o">]</span> lower-triangular matrix
+aten::scalar_tensor -&gt; aten::fill_  make the <span class="nt">-inf</span> fill value
+aten::where                         turn it into an additive bias <span class="o">(</span>0 or <span class="nt">-inf</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>GPU에서는 이것이 <code class="language-plaintext highlighter-rouge">triu_tril_kernel</code> 하나, 여러 개의 <code class="language-plaintext highlighter-rouge">where</code> 커널, 그리고 하나의 <code class="language-plaintext highlighter-rouge">add_</code>로 나타난다. 마스크를 생각하는 것을 중단하게 해 주는 편의 플래그는 작업 자체를 제거한 것이 아니라 한 층 아래로 옮겼으며, 순전파마다 마스크가 처음부터 새로 빌드됩니다.</p>
+
+<h4 id="안전한-소프트맥스">안전한 소프트맥스</h4>
+
+<p>직접 작성한 버전은 일반 <code class="language-plaintext highlighter-rouge">aten::softmax</code>이라고 불렀다. 수학 백엔드는 <code class="language-plaintext highlighter-rouge">aten::_safe_softmax</code>을 호출하고, 차이가 또 다른 커널들로 나타난다(그림 13):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/safe-softmax-extra-kernels.png" alt="GPU lane of the SDPA math backend showing the extra kernels that aten::_safe_softmax launches compared to a plain softmax" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 13: 일반 소프트맥스에 비해 추가 커널을 강조하는 Safe softmax</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>전체가 마스킹된 행(모든 항목이 <code class="language-plaintext highlighter-rouge">-inf</code>인 행)은 일반 소프트맥스가 <code class="language-plaintext highlighter-rouge">exp(-inf)/sum(exp(-inf)) = 0/0 = NaN</code>를 계산하게 만들 것입니다. <code class="language-plaintext highlighter-rouge">_safe_softmax</code>는 바로 그것을 방지합니다. 우리의 네이브 커널은 그 경우를 전혀 처리하지 않았고, 그 귀퉁이 케이스에서 조용히 <code class="language-plaintext highlighter-rouge">NaN</code>를 만들어 냈을 것입니다.</p>
+
+<h4 id="그래서-수학-백엔드는-무엇을-위한가">그래서 수학 백엔드는 무엇을 위한가?</h4>
+
+<p>종합하면, 수학 백엔드는 참조 구현입니다. 이는 원시 ATen 연산으로 어텐션을 dtype 안전하고 NaN 안전하게 분해하는 직관적 구현입니다. 본질적으로 우리가 손으로 작성한 네이브 어텐션과 같지만 더 조심스럽다. 그 신중함이 바로 그것을 매우 느리게 만듭니다.</p>
+
+<p>그 임무는 빠르게 작동하는 것이 아니라 항상 작동하는 것입니다. 이것이 완벽한 베이스라인이 됩니다. 우리가 다음에 프로파일링하는 모든 백엔드(Flash, Efficient, cuDNN)는 <code class="language-plaintext highlighter-rouge">20</code> GPU 커널들을 본질적으로 하나의 융합 커널로 압축해서 bf16으로 유지하고 중간 행렬을 전혀 만들어 내지 않도록 하려 합니다.</p>
+
+<h3 id="효율적인-백엔드">효율적인 백엔드</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run 04_c_sdpa_attention.py <span class="nt">--backend</span> efficient
+uvx trace-util <span class="nt">-f</span> traces <span class="nt">-b</span> &lt;hf_uname&gt;/traces
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/efficient-backend.png" alt="Profiler trace of the SDPA efficient backend showing a single fused fmha_cutlassF attention kernel per forward" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 14: sdpa의 효율적 백엔드에 대한 프로파일러 트레이스</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>수학 백엔드가 한 프로파일러 스텝에 20개의 커널을 실행했습니다면, 효율적 백엔드는 단 하나의 <code class="language-plaintext highlighter-rouge">fmha_cutlassF_bf16_aligned_64x64_rf_sm80</code>만 실행합니다(그림 14에서 볼 수 있습니다).</p>
+
+<p>커널의 이름의 의미를 해석해 봅시다:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">fmha</code> (퓨즈드 멀티헤드 어텐션): 어텐션의 모든 원시 연산이 하나의 연산으로 융합되어 있습니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">cutlassF</code>: CUTLASS를 기반으로 한 텐서-코어 GEMM용 템플릿, forward에 대해 <code class="language-plaintext highlighter-rouge">F</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">bf16_aligned</code>: bf16으로 실행( FP32 업캐스트 없음, 수학과 다름).</li>
+  <li><code class="language-plaintext highlighter-rouge">64x64</code>: 타일 크기.</li>
+  <li><code class="language-plaintext highlighter-rouge">rf</code> (레지스터 파일): 작동 집합이 레지스터에 보관되어 칩에서 가장 빠른 메모리입니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">sm80</code>: Ampere에 맞춰 컴파일(A100의 컴퓨트 수준 8.0).</li>
+</ul>
+
+<p>메타(Meta)의 <a href="https://github.com/facebookresearch/xformers">xformers</a> 라이브러리에서 나온 메모리 효율적인 어텐션 커널이며 PyTorch로 업스트림되었습니다. 사람들이 “xformers 백엔드”라고 말할 때 이 <code class="language-plaintext highlighter-rouge">fmha_cutlassF</code> 커널이 바로 그것입니다.</p>
+
+<h3 id="flash-백엔드">Flash 백엔드</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run 04_c_sdpa_attention.py <span class="nt">--backend</span> flash
+uvx trace-util <span class="nt">-f</span> traces <span class="nt">-b</span> &lt;hf_uname&gt;/traces
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/flash-backend.png" alt="Profiler trace of the SDPA flash backend" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 15: flash 백엔드 트레이스, forward당 하나의 융합 <code class="language-plaintext highlighter-rouge">pytorch_flash</code> 커널</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">void pytorch_flash</code> 커널(Figure 15)은 <a href="https://arxiv.org/abs/2307.08691">FlashAttention-2</a>(Tri Dao의 구현)이며 PyTorch에 벤더링되어 있습니다.</p>
+
+<p>이제 트레이스를 더 읽기 전에, 지금까지 당신이 물어야 할 질문에 답하는 것이 가치 있습니다: <em>왜 “flash”라는 백엔드가 존재하고, 그것이 왜 이렇게 중요한가?</em></p>
+
+<h4 id="왜-flash-어텐션이-존재하는가">왜 flash 어텐션이 존재하는가?</h4>
+
+<p>잠시 수학 백엔드으로 돌아가 봅시다. 실제 문제는 20개의 커널 수가 아니라, 그 커널들이 서로에게 넘겨주는 데이터였습니다.</p>
+
+<p>1단계는 전체 스코어 행렬 <code class="language-plaintext highlighter-rouge">attn = q . k.T</code>을 빌드하는데, 이는 head당 <code class="language-plaintext highlighter-rouge">[seq, seq]</code>입니다. 시퀀스 길이가 4096인 경우 단일 head에 대해 <code class="language-plaintext highlighter-rouge">4096 x 4096 ≈ 16 million</code>개의 숫자입니다. 그 행렬은 HBM(그래픽 카드의 주 메모리)로 기록되며 공간이 충분하면 기록합니다. 그런 다음 다시 읽어 시그널링을 위해 스케일하고, 마스크를 위해 다시 쓰고, 다시 소프트맥스를 위해 읽는 식으로 계속됩니다. 어텐션의 비용은 이 HBM으로의 왕복 트래픽에 의해 좌우되며, 매트멀 그 자체보다는 이 트래픽에서 더 많은 부분을 차지합니다.</p>
+
+<p>FlashAttention은 정확히 이것을 겨냥합니다. 전체 <code class="language-plaintext highlighter-rouge">s</code> 행렬을 먼저 계산한 뒤 감소시키는 대신, <strong>타일 단위로</strong> <code class="language-plaintext highlighter-rouge">k</code>와 <code class="language-plaintext highlighter-rouge">v</code>를 따라가며 진행하고, 진행 방향에서 소프트맥스를 유지하는(“온라인 소프트맥스” 트릭) 방식으로 출력도 타일 하나씩 누적합니다. 전체 <code class="language-plaintext highlighter-rouge">[seq, seq]</code> 스코어 행렬은 <strong>HBM에 한 번도 기록되지 않고</strong>, 칩 안에만 존재합니다. 이것이 전체 어텐션 파이프라인을 bf16으로 유지되는 하나의 융합 커널로 단번에 축소시키는 유일한 아이디어입니다.</p>
+
+<h4 id="왜-프로파일러에서-플래시가-잘못-보이는가">왜 프로파일러에서 플래시가 “잘못 보이는”가?</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/flash-occupancy.png" alt="Perfetto footprint of the flash kernel reporting an estimated achieved occupancy of 13%" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 16: 플래시 커널의 점유율 추정치가 13%로 보이는 모습</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>여기서 플래시가 프로파일러의 발자국을 읽는 사람들을 놀라게 합니다. 플래시는 가장 빠른 백엔드인데도 프로파일러가 매우 낮은 점유율로 보고합니다(그림 16에 표시). 왜 그것이 괜찮은지 보려면 세 가지 빠른 정의가 필요합니다.</p>
+
+<p>GPU 커널은 본질적으로 다수의 작은 실행 유닛(스레드)에 의해 실행되는 일련의 명령입니다. 이 개별 실행 유닛들은 변수 로딩, 더하기, 저장 등을 처리합니다. 각 커널마다 많은 스레드를 실행하고, 이를 추적하기 위해 블록으로 묶는다.</p>
+
+<p>블록은 스트리밍 멀티프로세서(SM)에 스케줄됩니다. 두고 온 블록은 한 SM에 완전히 남아 있으며, SM이 충분한 자원을 갖고 있으면 여러 블록을 한 번에 수용할 수 있습니다. 이러한 자원에는 레지스터, 공유 메모리, 최대 상주 스레드 수, 최대 상주 워프 수가 포함됩니다. 따라서 커널이 낮은 점유율(occupancy)을 가진다고 할 때, 이는 각 SM이 이론상 지원할 수 있는 것보다 더 적은 워프를 갖고 있음을 의미합니다.</p>
+
+<blockquote>
+  <p>[!TIP]
+스레드, 블록, 그리드 등에 대해 더 알고 싶다면 여기 <a href="https://huggingface.co/blog/mi300kernels#a-quick-introduction-to-the-mi300x">great resource</a>가 있습니다.</p>
+</blockquote>
+
+<p>트레이스에서 플래시 커널을 클릭하면 그 발자국이 이야기를 들려줍니다(그림 17).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/flash-reg-count.png" alt="Resource footprint of the pytorch_flash kernel in Perfetto, showing a high per-thread register count and large shared memory usage per block" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 17: 커널 발자국, 블록당 레지스터와 공유 메모리가 많은 편</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>플래시는 블록당 많은 스레드와 상당량의 공유 메모리를 필요로 합니다. 예를 들어 블록이 128개의 스레드이고 각 스레드가 255개의 레지스터를 사용하면 그 블록은 <code class="language-plaintext highlighter-rouge">128 × 255 = 32,640</code> 레지스터가 필요합니다. 65,536 레지스터를 가진 Ampere SM에서 그런 두 블록만 한 번에 맞물린다. 각 128-스레드 블록은 <code class="language-plaintext highlighter-rouge">128 / 32 = 4</code> 워프를 가지므로 두 블록은 상주 워프가 겨우 8개다. 최대 64 상주 워프에 비하면 대략 13%의 점유율입니다. 플래시는 최적화가 부족해서가 아니라, 각 블록이 온칩 자원을 의도적으로 매우 “무겁게” 사용하기 때문입니다.</p>
+
+<p>그리고 그것이 핵심입니다. 높은 점유율은 많은 워프를 실행 대기 중으로 유지해 지연을 숨기는 데 도움이 되지만, 작업 자체를 더 효율적으로 만들진 않습니다. 플래시는 어태션 타일을 온칩에 유지하고 데이터를 적극적으로 재사용하며, 전역 메모리에 전체 어텐션 매트릭스를 한 번에 구체화시키지 않기 위해 의도적으로 그 레지스터와 공유 메모리를 사용합니다.</p>
+
+<h3 id="cudnn-백엔드">cuDNN 백엔드</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run 04_c_sdpa_attention.py <span class="nt">--backend</span> cudnn
+uvx trace-util <span class="nt">-f</span> traces <span class="nt">-b</span> &lt;hf_uname&gt;/traces
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/cudnn-backend.png" alt="Profiler trace of the SDPA cuDNN backend showing a single cudnn_generated attention kernel per forward" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 18: cuDNN 백엔드 트레이스, 순전파당 하나의 생성된 어텐션 커널</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>이 시점의 패턴은 익숙합니다. 플래시와 효율처럼 cuDNN은 순전파당 하나의 융합된, 플래시 스타일의 커널을 제공합니다(그림 18). 그래서 자연스러운 질문은: <strong>플래시가 이미 어텐션을 융합하는데, 왜 파이토치는 또 다른 플래시 백엔드를 제공하는가?</strong> 그 답은 _커널을 누가 쓰고 어떻게 빌드했는가_의 차이에 있으며, 그 차이가 트레이스를 다르게 보이게 만듭니다.</p>
+
+<h4 id="cudnn-커널은-어떻게-다른가">cuDNN 커널은 어떻게 다른가</h4>
+
+<p>Flash와 Efficient는 PyTorch에 벤더링된 <strong>고정된, 미리 컴파일된 커널</strong>입니다. 매번 같은 바이너리를 받는다. cuDNN은 NVIDIA의 자체 딥러닝 라이브러리이며, 그 주의 커널은 <strong>주어진 문제에 맞춰 생성되고 튜닝됩니다</strong>. 이는 고정된 cuBLAS 바이너리보다 더 코드 제너레이션에 가깝다. 그 매우 긴 커널 이름에서 그것을 바로 확인할 수 있습니다:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cudnn_generated_fort_native_sdpa_sm80_flash_fprop_wmma_f16_knob_6_128x64x64_4x1x1_cga1x1x1_kernel0_0
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">cudnn_generated</code>: 미리 배송되는 바이너리가 아니며 cuDNN에 의해 생성되었습니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">flash_fprop</code>: 플래시 어텐션 스타일의 순전파다. 따라서 알고리즘은 플래시 백엔드의 계열과 같습니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">wmma_f16</code>: 16비트 부동 소수 파이프라인에서 WMMA API를 사용하고, 텐서 코어 경로를 따릅니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">knob_6</code>: cuDNN은 미리 조정된 구성(“knobs”) 세트에서 선택합니다. 다양한 형태가 서로 다른 knob을 선택하게 합니다. 이는 cuBLAS가 타일 변형을 선택하는 방식과 유사합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">128x64x64</code>: 그가 선택한 타일 차원.</li>
+</ul>
+
+<p>그 하나의 사실, 문제당 생성된 것, 이 트레이스에서 보이는 다른 이상한 점들을 설명합니다.</p>
+
+<ol>
+  <li>
+    <p>No transposes: CPU 레인은 <code class="language-plaintext highlighter-rouge">_cudnn_attention_forward</code>에서 바로 곧바로 몇 개의 <code class="language-plaintext highlighter-rouge">aten::empty</code> 할당으로 이어진 다음 커널로 가며, <code class="language-plaintext highlighter-rouge">aten::transpose</code>는 전혀 없다(Figures 19, 20 및 21). Flash와 Efficient는 텐서를 재구성하기 위해 메타데이터 전치를 네 번 삽입하는 반면, cuDNN은 생성기가 그 레이아웃에 맞는 커널을 생성하기 때문에 네이티브 <code class="language-plaintext highlighter-rouge">[B, H, S, D]</code> 레이아웃을 직접 사용합니다.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: center">Variant</th>
+          <th style="text-align: center">Trace</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center">Figure 19: Flash</td>
+          <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/flash-transpose.png" alt="CPU lane of the flash backend showing four aten::transpose ops before the fused attention kernel" /></td>
+        </tr>
+        <tr>
+          <td style="text-align: center">Figure 20: Efficient</td>
+          <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/efficient-trasnpose.png" alt="CPU lane of the efficient backend showing four aten::transpose ops before the fused attention kernel" /></td>
+        </tr>
+        <tr>
+          <td style="text-align: center">Figure 21: cuDNN</td>
+          <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/cudnn-backend.png" alt="CPU lane of the cuDNN backend going straight to aten::empty allocations and the kernel, with no transpose ops" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>It launches through <code class="language-plaintext highlighter-rouge">cuLaunchKernelEx</code>, not <code class="language-plaintext highlighter-rouge">cudaLaunchKernel</code>: Every other kernel in this whole series went through the runtime API <code class="language-plaintext highlighter-rouge">cudaLaunchKernel</code>. cuDNN uses the driver-level <em>extended</em> launch, which carries launch attributes (Figure 22).</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/cudnn-launch.png" alt="CPU lane of the cuDNN backend showing the cuLaunchKernelEx driver-level launch instead of cudaLaunchKernel" /></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center">Figure 22: CPU lane of the cuDNN backend showing the cuLaunchKernelEx driver-level launch instead of cudaLaunchKernel</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>The profiler reports 0% achieved occupancy: Do not take that at face value, it is a measurement gap, not a stalled GPU. CUPTI (the profiling backend) cannot attribute occupancy to a driver-API (<code class="language-plaintext highlighter-rouge">cuLaunchKernelEx</code>) launch the way it does for <code class="language-plaintext highlighter-rouge">cudaLaunchKernel</code>, so the field reads 0. The footprint fills in the truth (Figure 23): <code class="language-plaintext highlighter-rouge">240 registers × 256 threads = 61,440</code> registers per block against the SM’s 65,536, so only <strong>one block</strong> fits per SM (8 warps ≈ 12.5%), right in line with flash.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/cudnn-footprint.png" alt="Perfetto footprint of the cuDNN kernel reporting 0% achieved occupancy, with 240 registers per thread and 256 threads per block" /></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center">Figure 23: cuDNN 커널이 0% 달성 점유율을 보고하고, 스레드당 240 레지스터, 블록당 256 스레드</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ol>
+
+<h4 id="비용이-cpu로-이동했습니다">비용이 CPU로 이동했습니다</h4>
+
+<p>“전치 없음(no transposes)” 이야기는 CPU에서 cuDNN이 가장 ‘가볍다’는 백엔드일 것이라고 기대하게 만듭니다. 그러나 실제로는 정반대입니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">backend</th>
+      <th style="text-align: center">CUDA 평균 시간</th>
+      <th style="text-align: center">CPU 평균 시간</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">efficient</td>
+      <td style="text-align: center">277.9 µs</td>
+      <td style="text-align: center">117 µs</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">flash</td>
+      <td style="text-align: center">146.8 µs</td>
+      <td style="text-align: center">138 µs</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">cudnn</td>
+      <td style="text-align: center">186.3 µs</td>
+      <td style="text-align: center"><strong>214 µs</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>심지어 전치 연산이 하나도 없더라도 cuDNN은 CPU에서 순전파당 약 <strong>214 µs</strong>를 소비합니다. 이는 플래시(138)나 효율(117)보다 많습니다. 거의 전부가 <code class="language-plaintext highlighter-rouge">aten::scaled_dot_product_attention</code> 자체 시간(전체 실행의 26%)과 <code class="language-plaintext highlighter-rouge">_cudnn_attention_forward</code>에 있습니다. 이것은 cuDNN의 런타임 엔진이 매 호출마다 계획을 선택하고 준비하는(“knob” 탐색) 과정입니다.</p>
+
+<p>더 적은 ATen 연산이 보이는 것이 CPU 작업이 적다는 뜻이 아닙니다. 그 작업은 라이브러리로 이동했고, 프로파일러는 이를 하나의 크고 불투명한 막대 하나로만 보여줄 뿐입니다. 트레이스가 갑자기 더 깨끗해지면, 작업이 사라진 것이 아니라 프로파일러가 분해할 수 없는 곳으로 이동한 것일 수 있습니다.</p>
+
+<p>GPU에서 cuDNN(186.3 µs)은 효율성과 플래시 사이에 위치합니다. 이 아주 플래시 친화적인 형태에서 수작업 FlashAttention-2가 그 위를 약간 앞선다. cuDNN은 더 큰 head 차원이나 다른 시퀀스 길이의 <em>다른</em> 형태에서 자주 이긴다. 다만 그 재조정은 당신이 CPU에서 지불한 비용이기도 합니다.</p>
+
+<h2 id="section-4">Everything we covered, at a glance</h2>
+
+<p>마무리하기 전에, 우리가 프로파일링한 모든 어텐션 변형과 각 트레이스가 가르쳐 준 하나의 교훈을 정리한 하나의 표가 있습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Variant</th>
+      <th style="text-align: left">What we changed</th>
+      <th style="text-align: center">Kernels / forward</th>
+      <th style="text-align: left">What the trace revealed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Naive attention</td>
+      <td style="text-align: left">원시 연산으로 직접 구성된 어텐션(matmul, mul, mask, softmax, matmul)</td>
+      <td style="text-align: center">6</td>
+      <td style="text-align: left">외부의 <code class="language-plaintext highlighter-rouge">masked_fill</code>에서 온 숨겨진 <code class="language-plaintext highlighter-rouge">Memcpy</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Naive in-place</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">masked_fill</code> → <code class="language-plaintext highlighter-rouge">masked_fill_</code></td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: left">한 줄로 <code class="language-plaintext highlighter-rouge">Memcpy</code> 커널을 완전히 제거합니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SDPA math</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">F.scaled_dot_product_attention</code> 수학 백엔드에 고정</td>
+      <td style="text-align: center">20</td>
+      <td style="text-align: left">참조 구현: CUDA 코어의 FP32, 매 호출마다 마스크 재구성, <code class="language-plaintext highlighter-rouge">_safe_softmax</code>. 정확하지만 약 3.7배 느림.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SDPA efficient</td>
+      <td style="text-align: left">Efficient(xformers) 백엔드</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">하나의 융합 <code class="language-plaintext highlighter-rouge">fmha_cutlassF</code> 커널, 텐서 코어에서 bf16 유지.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SDPA flash</td>
+      <td style="text-align: left">Flash 백엔드</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">하나의 융합 <code class="language-plaintext highlighter-rouge">pytorch_flash</code> 커널(FlashAttention-2). 가장 빠르지만 13% 점유율은 “잘못 보이는” 경우.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SDPA cuDNN</td>
+      <td style="text-align: left">cuDNN 백엔드</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">문제별로 생성된 커널: 전치 없음, <code class="language-plaintext highlighter-rouge">cuLaunchKernelEx</code>지만 비용이 무거운 CPU 바로 이동.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-5">Concluding the series</h2>
+
+<p>이 시리즈에서 한 가지만 takeaway를 뽑자면, 모든 트레이스 전에 반복했던 습관인 <strong>먼저 추측하고, 그다음 보자</strong>가 되길 바란다.</p>
+
+<p>트레이스에 무엇이 들어 있을지 소리 내어 예측하고, 트레이스를 열어 보며, 일치하지 않는 부분을 화면에서 가장 흥미로운 것으로 여기자. 이 세 편의 포스트에서 얻은 모든 실제 통찰은 숨겨진 <code class="language-plaintext highlighter-rouge">Memcpy</code>, <code class="language-plaintext highlighter-rouge">addmm</code> 에필로그, 20 커널 수학 백엔드, 플래시의 “잘못 보이는” 점유율, cuDNN의 두툼한 CPU 바에서 비롯된 것이며, 이는 트레이스와 일치하지 않는 추측에서 비롯됩니다.</p>
+
+<p>프로파일링은 GPU 전문가를 위한 별도의, 위협적인 기술이 아닙니다. 그것은 단지 아주 면밀히 보고 “저게 왜 그런가?”를 묻고 대답이 떠오를 때까지 파고드는 훈련일 뿐입니다. 이제 당신은 자신이 다루는 모델에서 이를 스스로 할 수 있는 어휘와 반사적 반응을 갖추었다. 트레이스를 열고, 추측을 세우고, 불일치를 찾아보세요.</p>
+
+<p><strong>Profiling in PyTorch</strong> 시리즈를 읽어 주셔서 감사합니다. 이제 뭔가를 프로파일링해 봅시다. 🤗</p>
+
+<p>초기 초안에 대한 리뷰를 남겨 주신 <a href="https://huggingface.co/NoeFlandre">Noe Flandre</a>께 감사드립니다!</p>
+
+<blockquote>
+  <p>[!NOTE]
+이 블로그 포스트는 LLM을 이용해 다듬었습니다. 이것이 배경에서 에이전트가 포스트를 생성하도록 합니다는 뜻은 결코 아닙니다. 팀의 일부는 영어를 모국어로 하지 않으며, LLM(대부분 영어로 학습된 모델)이 어리석은 문법 실수를 바로잡거나 더 덜 위협적으로 들리고 깔끔하게 들리는 문장을 재구성할 수 있습니다고 생각합니다. 이 점이 “왜 읽어야 하나, 이것이 LLM으로 생성되었기 때문인가”라는 아이디어에 도움이 되길 바랍니다. 🤗</p>
+</blockquote>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">네이티브-스피드 vLLM transformers 모델링 백엔드</title><link href="/pr-preview/pr-172/native-speed-vllm-transformers-backend/" rel="alternate" type="text/html" title="네이티브-스피드 vLLM transformers 모델링 백엔드" /><published>2026-07-08T00:00:00+09:00</published><updated>2026-07-08T00:00:00+09:00</updated><id>/pr-preview/pr-172/native-speed-vllm-transformers-backend</id><content type="html" xml:base="/pr-preview/pr-172/native-speed-vllm-transformers-backend/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#네이티브-스피드-vllm-transformers-모델링-백엔드" id="markdown-toc-네이티브-스피드-vllm-transformers-모델링-백엔드">네이티브-스피드 vLLM transformers 모델링 백엔드</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">쇼케이스</a>        <ul>
           <li><a href="#어떻게-측정했나" id="markdown-toc-어떻게-측정했나">어떻게 측정했나</a></li>
@@ -415,7 +1155,308 @@ vllm serve Qwen/Qwen3-235B-A22B-FP8 <span class="nt">--model-impl</span> transfo
   <li><a href="https://vllm.ai/blog/2025-12-17-large-scale-serving">Large scale serving</a></li>
   <li><a href="https://docs.pytorch.org/docs/2.12/fx.html">Torch FX</a></li>
   <li><a href="https://docs.python.org/3/library/ast.html">Abstract syntax tree</a></li>
-</ul>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</title><link href="/pr-preview/pr-172/cerebras-gemma4-voice-ai/" rel="alternate" type="text/html" title="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" /><published>2026-07-01T00:00:00+09:00</published><updated>2026-07-01T00:00:00+09:00</updated><id>/pr-preview/pr-172/cerebras-gemma4-voice-ai</id><content type="html" xml:base="/pr-preview/pr-172/cerebras-gemma4-voice-ai/"><![CDATA[<ul id="markdown-toc">
+</ul>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</title><link href="/pr-preview/pr-172/lerobot-release-v060/" rel="alternate" type="text/html" title="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" /><published>2026-07-07T00:00:00+09:00</published><updated>2026-07-07T00:00:00+09:00</updated><id>/pr-preview/pr-172/lerobot-release-v060</id><content type="html" xml:base="/pr-preview/pr-172/lerobot-release-v060/"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#lerobot-v060-상상하고-평가하고-개선하기" id="markdown-toc-lerobot-v060-상상하고-평가하고-개선하기">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">한줄 요약</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">목차</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">월드 모델: 미래를 상상하는 정책들</a>        <ul>
+          <li><a href="#vla-jepa" id="markdown-toc-vla-jepa">VLA-JEPA</a></li>
+          <li><a href="#lingbot-va" id="markdown-toc-lingbot-va">LingBot-VA</a></li>
+          <li><a href="#fastwam" id="markdown-toc-fastwam">FastWAM</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-4" id="markdown-toc-section-4">VLAs: 모델 모음이 계속 확장됩니다</a>        <ul>
+          <li><a href="#gr00t-n17" id="markdown-toc-gr00t-n17">GR00T N1.7</a></li>
+          <li><a href="#molmoact2" id="markdown-toc-molmoact2">MolmoAct2</a></li>
+          <li><a href="#eo-1" id="markdown-toc-eo-1">EO-1</a></li>
+          <li><a href="#multitask-dit" id="markdown-toc-multitask-dit">Multitask DiT</a></li>
+          <li><a href="#evo1" id="markdown-toc-evo1">EVO1</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-5" id="markdown-toc-section-5">보상 모델: 로봇이 성공했는지 아는 방법</a>        <ul>
+          <li><a href="#robometer" id="markdown-toc-robometer">Robometer</a></li>
+          <li><a href="#topreward" id="markdown-toc-topreward">TOPReward</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-6" id="markdown-toc-section-6">데이터셋: 더 빠른 로딩, 더 풍부한 데이터</a>        <ul>
+          <li><a href="#당신의-코덱-당신의-규칙" id="markdown-toc-당신의-코덱-당신의-규칙">당신의 코덱, 당신의 규칙</a></li>
+          <li><a href="#깊이-지원-엔드-투-엔드" id="markdown-toc-깊이-지원-엔드-투-엔드">깊이 지원, 엔드 투 엔드</a></li>
+          <li><a href="#대규모-언어-주석" id="markdown-toc-대규모-언어-주석">대규모 언어 주석</a></li>
+          <li><a href="#데이터-로딩-최대-2배-빠르게" id="markdown-toc-데이터-로딩-최대-2배-빠르게">데이터 로딩 최대 2배 빠르게</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-7" id="markdown-toc-section-7">벤치마크: 모든 것을 평가하는 하나의 CLI</a></li>
+      <li><a href="#section-8" id="markdown-toc-section-8">훈련 및 추론</a>        <ul>
+          <li><a href="#lerobot-rollout-배포-전용-cli를-제공합니다" id="markdown-toc-lerobot-rollout-배포-전용-cli를-제공합니다"><code class="language-plaintext highlighter-rouge">lerobot-rollout</code>: 배포 전용 CLI를 제공합니다</a></li>
+          <li><a href="#fsdp-gpu보다-큰-모델-학습" id="markdown-toc-fsdp-gpu보다-큰-모델-학습">FSDP: GPU보다 큰 모델 학습</a></li>
+          <li><a href="#hf-jobs로-클라우드-학습" id="markdown-toc-hf-jobs로-클라우드-학습">HF Jobs로 클라우드 학습</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-9" id="markdown-toc-section-9">코드베이스: 더 간결하고 깔끔하게</a></li>
+      <li><a href="#section-10" id="markdown-toc-section-10">커뮤니티 &amp; 생태계</a></li>
+      <li><a href="#section-11" id="markdown-toc-section-11">Final thoughts</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/lerobot-release-v060">LeRobot v0.6.0: Imagine, Evaluate, Improve</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/lerobot-release-v060 -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="lerobot-v060-상상하고-평가하고-개선하기">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</h1>
+
+<p>이 새 릴리스의 핵심은 로봇 학습 루프를 닫는 것입니다: 행동하기 전에 미래를 상상하는 정책, 로봇이 성공했는지 알려주는 보상 모델, 실패를 학습 데이터로 바꿔주는 배포 CLI, 그리고 이를 모두 측정하기 위한 여섯 개의 새로운 시뮬레이션 벤치마크. 또한 깊이 센싱, VLM 기반 데이터셋 주석, 맞춤 비디오 인코딩, HF Jobs에서의 클라우드 학습, 그리고 더 간소해진 설치를 제공합니다.</p>
+
+<h2 id="section-1">한줄 요약</h2>
+
+<p>LeRobot v0.6.0은 미래를 상상하는 월드 모델 정책(VLA-JEPA, FastWAM, LingBot-VA)을 도입하고, 미래를 상상하는 VLAs의 물결(GR00T N1.7, MolmoAct2, EO-1, EVO1, Multitask DiT), 그리고 새로운 보상 모델 API(Robometer, TOPReward)를 포함합니다. 또한 <code class="language-plaintext highlighter-rouge">lerobot-eval</code> 아래에 여섯 개의 새로운 시뮬레이션 벤치마크를 포함하고, DAgger 스타일의 휴먼-인-더 루프 보정을 갖춘 <code class="language-plaintext highlighter-rouge">lerobot-rollout</code> CLI, FSDP 학습, HF Jobs에서의 클라우드 학습이 함께 제공됩니다. 데이터셋은 깊이 지원, 자동 언어 주석 파이프라인, 맞춤 비디오 인코딩, 그리고 최대 2배 빠른 데이터 로딩을 제공하며, 더 간소화된 설치 위에 구축됩니다.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/lerobot-blog/release-v0.6.0/lerobot%20v0.6.0.png" alt="LeRobot 0.6.0" /></p>
+
+<h2 id="section-2">목차</h2>
+
+<ul>
+  <li><a href="#section-3">월드 모델: 미래를 상상하는 정책들</a></li>
+  <li><a href="#section-4">VLAs: 모델 모음이 계속 확장됩니다</a></li>
+  <li><a href="#section-5">보상 모델: 로봇이 성공했는지 아는 방법</a></li>
+  <li><a href="#section-6">데이터셋: 더 빠른 로딩, 더 풍부한 데이터</a></li>
+  <li><a href="#section-7">벤치마크: 모든 것을 평가하는 하나의 CLI</a></li>
+  <li><a href="#section-8">훈련 및 추론</a></li>
+  <li><a href="#section-9">코드베이스: 더 간결하고 깔끔하게</a></li>
+  <li><a href="#section-10">커뮤니티 &amp; 생태계</a></li>
+  <li><a href="#section-11">Final thoughts</a></li>
+</ul>
+
+<h2 id="section-3">월드 모델: 미래를 상상하는 정책들</h2>
+
+<p>로봇 공학 세계는 큰 질문에 직면해 있다: 월드 모델이 실제로 로봇 정책에 도움이 되는가? v0.6.0은 이 질문에 답하기 위해 LeRobot에 세 가지 정책을 도입합니다. 각 정책은 학습의 일부로 미래를 상상하는 법을 배우고, 각각은 그 상상을 합리적으로 유지하기 위해 서로 다른 경로를 택합니다.</p>
+
+<h3 id="vla-jepa">VLA-JEPA</h3>
+
+<p>VLA-JEPA는 잠재 공간에서 미래를 예측하도록 컴팩트한 VLA(Qwen3-VL-2B 기반)를 학습하는 동안, 행동하는 방법을 배우게 합니다: 학습 중에 JEPA 월드 모델은 모델의 자체 행동으로 다가오는 프레임을 예측해야 합니다는 점입니다. 비밀은 추론 시 월드 모델이 사라져 추가 추론 비용 없이 월드-모델 감독을 얻을 수 있다는 것입니다. 허브에 준비된 세 가지 바로 사용 가능한 체크포인트가 있으며, 미세 조정을 위한 DROID 사전학습 기본 모델도 포함되어 있다:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lerobot-train <span class="se">\</span>
+  <span class="nt">--policy</span>.path<span class="o">=</span>lerobot/VLA-JEPA-Pretrain <span class="se">\</span>
+  <span class="nt">--dataset</span>.repo_id<span class="o">=</span><span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/my_dataset <span class="se">\</span>
+  <span class="nt">--policy</span>.repo_id<span class="o">=</span><span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/my_finetuned_policy
+</code></pre></div></div>
+
+<p>자세한 내용은 <a href="https://huggingface.co/docs/lerobot/v0.6.0/vla_jepa">VLA-JEPA documentation</a>와 <a href="https://arxiv.org/abs/2602.10098">paper</a>를 확인하십시오.</p>
+
+<h3 id="lingbot-va">LingBot-VA</h3>
+
+<p>LingBot-VA는 한 걸음 더 나아가: 미래의 비디오와 행동을 함께 예측하는 자기회귀 비디오-액션 모델로, 청크 단위로 처리하고 실제 관측값을 다시 피드백해 상상을 구체화합니다. 로봇이 상상한 것을 저장하고 (<code class="language-plaintext highlighter-rouge">--policy.save_predicted_video=true</code>) 실제로 일어난 일과 비교할 수 있다. 추론은 한 개의 24–32 GB GPU에서 실행됩니다. 기술적 세부 내용은 <a href="https://huggingface.co/docs/lerobot/v0.6.0/lingbot_va">documentation</a>와 <a href="https://arxiv.org/pdf/2601.21998">paper</a>를 참고하세요.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/lerobot-blog/release-v0.6.0/gifs/lingbot_va_viz_1.gif" alt="LingBot-VA imagined rollout vs real rollout" /></p>
+
+<h3 id="fastwam">FastWAM</h3>
+
+<p>FastWAM은 논문 제목에서 질문을 던진다: 테스트 시점의 미래 상상이 필요할까? 약 50억 파라미터 규모의 비디오 생성 전문가와 하나의 네트워크에 연결된 컴팩트한 행동 전문가를 매치한 구조로, 모델이 실제로 자신의 롤아웃을 꿈꾸도록 학습합니다. 추론 시에는 꿈꾸는 단계 자체를 건너뛰고 직접 액션 청크를 노이즈 제거합니다. <a href="https://huggingface.co/lerobot/fastwam_base">lerobot/fastwam_base</a>에서 미세조정하고, 자세한 내용은 <a href="https://huggingface.co/docs/lerobot/v0.6.0/fastwam">documentation</a>를 참조하세요.</p>
+
+<h2 id="section-4">VLAs: 모델 모음이 계속 확장됩니다</h2>
+
+<h3 id="gr00t-n17">GR00T N1.7</h3>
+
+<p>NVIDIA의 교차 구현 기반 파운데이션 모델의 최신 공개 세대인 GR00T N1.7으로 NVIDIA GR00T 연동을 업데이트했다. N1.7은 이전 VLM을 Cosmos-Reason2-2B(Qwen3-VL 기반)로 교체하고, 흐름 매칭 액션 헤드를 공급합니다. 우리의 통합은 NVIDIA의 원래 Isaac-GR00T 구현과 동등하게 테스트되었으며, 입력은 동일하고 출력도 같다. Flash-attention은 이제 선택 가능하며, <code class="language-plaintext highlighter-rouge">pip install 'lerobot[groot]'</code>는 그대로 작동하고 <a href="https://huggingface.co/nvidia/GR00T-N1.7-3B">NVIDIA’s published checkpoints</a>를 바로 로드할 수 있다.</p>
+
+<blockquote>
+  <p>[!NOTE]
+GR00T N1.7은 LeRobot에서 N1.5를 대체합니다. N1.5가 필요하면 <code class="language-plaintext highlighter-rouge">lerobot==0.5.1</code>를 고정(pin)하십시오.</p>
+</blockquote>
+
+<h3 id="molmoact2">MolmoAct2</h3>
+
+<p>Allen Institute for AI의 비전-언어-액션 모델 MolmoAct2가 LeRobot에 포팅되었으며, 전체 수명주기를 다룹니다: 미세 조정(전체 또는 LoRA), 평가, 그리고 실제 로봇 배포까지. 보정이 내장된 미리 제작된 체크포인트를 사용하면 SO-100/101에서 제로샷으로 실행할 수 있다:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lerobot-rollout <span class="se">\</span>
+  <span class="nt">--policy</span>.path<span class="o">=</span>lerobot/MolmoAct2-SO100_101-LeRobot <span class="se">\</span>
+  <span class="nt">--robot</span>.type<span class="o">=</span>so100_follower <span class="se">\</span>
+  <span class="nt">--robot</span>.port<span class="o">=</span>/dev/ttyACM0 <span class="se">\</span>
+  <span class="nt">--robot</span>.cameras<span class="o">=</span><span class="s1">'{cam0: {type: opencv, index_or_path: 0, width: 640, height: 480, fps: 30}, cam1: {type: opencv, index_or_path: 2, width: 640, height: 480, fps: 30}}'</span> <span class="se">\</span>
+  <span class="nt">--task</span><span class="o">=</span><span class="s2">"pick up the red cube"</span> <span class="nt">--duration</span><span class="o">=</span>30
+</code></pre></div></div>
+
+<p>추론은 bf16에서 약 12 GB로 가능하고, LoRA 미세 조정은 단일 24 GB GPU에서 가능하다. 전체 배포 가이드는 <a href="https://huggingface.co/docs/lerobot/v0.6.0/molmoact2">MolmoAct2 documentation</a>를 참조하세요.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/lerobot-blog/release-v0.6.0/gifs/molmoact2_4.gif" alt="MolmoAct2 Zero-Shot in LeRobot" /></p>
+
+<h3 id="eo-1">EO-1</h3>
+
+<p>EO-1은 간섭된 비전-텍스트-액션 데이터로 사전학습된 VLA를 LeRobot에 합류시켰다: Qwen2.5-VL-3B 백본과 흐름 매칭 액션 헤드를 포함하며, 논문 저자 중 한 명이 기여했다. 표준 <code class="language-plaintext highlighter-rouge">lerobot-train</code> 워크플로우를 사용하여 <code class="language-plaintext highlighter-rouge">--policy.type=eo1</code>로 학습합니다. 세부 내용은 <a href="https://huggingface.co/docs/lerobot/v0.6.0/eo1">documentation</a>와 <a href="https://arxiv.org/abs/2508.21112">paper</a>에 있다.</p>
+
+<h3 id="multitask-dit">Multitask DiT</h3>
+
+<p>다중 작업 확산 트랜스포머 정책은 TRI Large Behavior Models 레시피를 LeRobot으로 가져온다: CLIP 비전 및 언어 임베딩으로 조건화된 약 4.5억 파라미터의 확산 트랜스포머로, 자연어로 선택된 여러 작업을 하나의 모델이 학습합니다. 확산 및 흐름 매칭 목표를 모두 지원하며, 직접 학습하기에 충분할 정도로 작습니다. 자세한 내용은 <a href="https://huggingface.co/docs/lerobot/v0.6.0/multi_task_dit">documentation</a>를 참고하세요.</p>
+
+<h3 id="evo1">EVO1</h3>
+
+<p>VLAs가 반드시 거대할 필요는 없다. EVO1은 0.77B 파라미터의 정책을 InternVL3-1B 백본과 함께, 흐름 매칭 액션 헤드를 탑재하고 담아 두어, 보유한 modest GPUs에서도 미세 조정 및 실시간 실행이 가능하다. 두 단계의 미세 조정과 실시간 청킹 지원이 기본으로 제공됩니다. <a href="https://huggingface.co/docs/lerobot/v0.6.0/evo1">EVO1 documentation</a>와 <a href="https://arxiv.org/abs/2511.04555">paper</a>를 참고하세요.</p>
+
+<h2 id="section-5">보상 모델: 로봇이 성공했는지 아는 방법</h2>
+
+<p>성공 탐지와 진행 추정은 로봇 학습 루프에서 빠진 조각이며, v0.6.0이 이를 지원합니다. LeRobot은 이제 정책 API를 모방하는 단일 인터페이스 뒤에 네 가지 보상 모델을 제공하는 통합 보상 모델 API(<code class="language-plaintext highlighter-rouge">lerobot.rewards</code>)를 갖추었다. 여기에 HIL-SERL 보상 분류기, SARM, 그리고 두 가지 새로운 추가 항목이 포함됩니다:</p>
+
+<h3 id="robometer">Robometer</h3>
+
+<p>Robometer는 사전학습된 범용 보상 모델입니다: 어떤 LeRobot 데이터셋이든 <a href="https://huggingface.co/lerobot/Robometer-4B">lerobot/Robometer-4B</a>를 지시점으로 삼아 원시 비디오와 언어 지시를 바탕으로 작업 진행도와 성공 여부를 점수화하며, 특정 작업에 대한 학습이 필요 없다. Qwen3-VL-4B 위에 구축되었고, 백만 개가 넘는 로봇 궤적 데이터셋(<a href="https://arxiv.org/abs/2603.02115">RSS 2026 paper</a>)에 걸친 궤적 비교를 통해 학습되었다.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/lerobot-blog/release-v0.6.0/gifs/rm_robometer.gif" alt="LeRobot Robometer" /></p>
+
+<h3 id="topreward">TOPReward</h3>
+
+<p>TOPReward은 완전히 제로샷으로 동작합니다: 보상 가중치가 전혀 없다. 일반 상용 VLM(Qwen3-VL)을 래핑하고, 궤적 비디오와 작업 지시에 주어진 토큰 “True”의 로그-확률을 읽는다. 능력 있는 어떤 VLM도 보상 함수가 됩니다.</p>
+
+<p>두 모델 모두 각 프레임의 진행 곡선을 데이터셋에 쓰는 라벨링 스크립트를 함께 제공하므로 보상 인식 행동 복제(RA-BC), 데이터셋 품질 검사, 진행 오버레이 동영상에 대비됩니다. <a href="https://huggingface.co/docs/lerobot/v0.6.0/robometer">Robometer</a>와 <a href="https://huggingface.co/docs/lerobot/v0.6.0/topreward">TOPReward</a> 문서를 확인하세요.</p>
+
+<h2 id="section-6">데이터셋: 더 빠른 로딩, 더 풍부한 데이터</h2>
+
+<h3 id="당신의-코덱-당신의-규칙">당신의 코덱, 당신의 규칙</h3>
+
+<p>녹음은 더 이상 하나의 하드코드된 코덱에 갇히지 않습니다. 새로운 <code class="language-plaintext highlighter-rouge">--dataset.rgb_encoder.*</code> 옵션은 전체 인코딩 표면(codec, 품질, 픽셀 형식, GOP, 프리셋)을 노출하고, <code class="language-plaintext highlighter-rouge">vcodec=auto</code>은 NVENC, VideoToolbox, VAAPI, QSV와 같은 하드웨어 인코더를 먼저 탐지한 후 기본 소프트웨어 AV1 인코더로 전환합니다. 기존 데이터셋에 대해서는 한 번의 명령으로 모든 것을 재인코딩합니다:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lerobot-edit-dataset <span class="se">\</span>
+    <span class="nt">--repo_id</span> <span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/my_dataset <span class="se">\</span>
+    <span class="nt">--operation</span>.type reencode_videos <span class="se">\</span>
+    <span class="nt">--operation</span>.rgb_encoder.vcodec h264 <span class="se">\</span>
+    <span class="nt">--operation</span>.rgb_encoder.crf 23
+</code></pre></div></div>
+
+<p>전체 세부 정보는 <a href="https://huggingface.co/docs/lerobot/v0.6.0/video_encoding_parameters">video encoding documentation</a>에 있습니다.</p>
+
+<h3 id="깊이-지원-엔드-투-엔드">깊이 지원, 엔드 투 엔드</h3>
+
+<p>Intel RealSense를 연결하고 <code class="language-plaintext highlighter-rouge">use_depth: true</code>를 설정하면 LeRobot은 깊이 맵을 엔드 투 엔드로 기록합니다: 밀리미터 단위로 캡처되며, RGB 카메라 옆에 12비트 깊이 비디오 스트림으로 압축되고 학습 시 물리적 단위로 다시 디코딩됩니다. 깊이는 녹화 중 실시간으로 렌더링되며 <code class="language-plaintext highlighter-rouge">lerobot-dataset-viz</code>에서도 확인 가능하고, SO-100/101, Koch, OpenArm, reBot, Unitree G1 등에서도 작동합니다.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/lerobot-blog/release-v0.6.0/gifs/depth2.gif" alt="LeRobot Depth Camera" /></p>
+
+<h3 id="대규모-언어-주석">대규모 언어 주석</h3>
+
+<p>데이터셋은 더 이상 에피소드당 하나의 작업 문자열이 아니다. LeRobot 데이터셋은 이제 풍부한 언어 주석(타임스탬프가 달린 하위 작업, 계획, 메모리, 수정, 음성, 및 카메라별 VQA 페어)을 네이티브로 저장하며, 새로운 <code class="language-plaintext highlighter-rouge">lerobot-annotate</code> CLI가 에피소드를 관찰하는 VLM을 사용해 이를 자동으로 채운다:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lerobot-annotate <span class="se">\</span>
+    <span class="nt">--repo_id</span><span class="o">=</span><span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/my_dataset <span class="se">\</span>
+    <span class="nt">--new_repo_id</span><span class="o">=</span><span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/my_dataset_annotated <span class="se">\</span>
+    <span class="nt">--vlm</span>.model_id<span class="o">=</span>Qwen/Qwen2.5-VL-7B-Instruct <span class="se">\</span>
+    <span class="nt">--push_to_hub</span><span class="o">=</span><span class="nb">true</span>
+</code></pre></div></div>
+
+<p>그 다음 YAML 레시피 레이어가 이 주석들을 샘플 시점의 채팅 스타일 학습 메시지로 렌더링합니다: 내일의 장기적 계획과 대화를 나누는 로봇 정책이 학습할 정확한 데이터다. HF Jobs로 확장하고 더 자세한 내용은 <a href="https://huggingface.co/docs/lerobot/v0.6.0/annotation_pipeline">annotation pipeline docs</a>를 읽어보라.</p>
+
+<h3 id="데이터-로딩-최대-2배-빠르게">데이터 로딩 최대 2배 빠르게</h3>
+
+<p>비디오 데이터셋으로의 학습은 이제 기본적으로 약 2배 빠르다: 다중 카메라 프레임은 병렬로 디코딩되고, 데이터로더 워커는 컴팩트한 uint8 프레임을 전송하며(프로세스 간 메모리 4배 감소), 지속형 워커가 에포크 간에 디코더 캐시를 유지합니다. 대형 데이터셋의 하위 집합(<code class="language-plaintext highlighter-rouge">episodes=[...]</code>) 로딩은 벤치마크에서 275초에서 0.06초로 감소했다. 샘플링은 이제 결정적이고 재개 가능하므로 중단된 학습도 샘플-정확하게 재개됩니다.</p>
+
+<h2 id="section-7">벤치마크: 모든 것을 평가하는 하나의 CLI</h2>
+
+<!-- TODO: gif idea: grid of rollouts across the six new benchmarks, hosted at documentation-images/lerobot-blog/release-v0.6.0/ -->
+
+<p>v0.5.0은 LeRobot을 VLAs 평가 허브로 확립했고, v0.6.0은 여섯 개의 새로운 시뮬레이션 벤치마크를 추가하여 실제 기능으로 만들었다. 모두 동일한 <code class="language-plaintext highlighter-rouge">lerobot-eval</code> CLI를 통해 실행 가능하고, 각 벤치마크에는 문서 페이지, Docker 이미지, CI에서 스모크 테스트된 SmolVLA 기준 체크포인트가 있다:</p>
+
+<ul>
+  <li><a href="https://huggingface.co/docs/lerobot/v0.6.0/libero_plus">LIBERO-plus</a>는 VLAs에 약 10,000개의 변형 버전의 LIBERO를 7개 축에 걸쳐 스트레스 테스트하며, 조명과 카메라 시점에서부터 재작성된 지시문에 이르기까지 포괄합니다. 정책이 실패하는 시점을 알려줍니다.</li>
+  <li><a href="https://huggingface.co/docs/lerobot/v0.6.0/robotwin">RoboTwin 2.0</a>은 SAPIEN에서 50개의 양손 조작 작업을 다루고, 도메인 무작위화를 크게 적용하며, Hub의 <a href="https://huggingface.co/datasets/lerobot/robotwin_unified">more than 100k ready-to-train trajectories</a>를 포함합니다.</li>
+  <li><a href="https://huggingface.co/docs/lerobot/v0.6.0/robocasa">RoboCasa365</a>은 모바일 매니퓰레이터의 2,500개 절차적으로 생성된 주방 작업 365개를 포괄하는 가장 큰 작업 면적을 다룹니다.</li>
+  <li><a href="https://huggingface.co/docs/lerobot/v0.6.0/robocerebra">RoboCerebra</a>는 언어 기반의 중간 지시하에 3~6개의 하위 목표를 연결한 에피소드로 장기 행동을 평가하고, 6,660-에피소드 데이터셋을 제공합니다.</li>
+  <li><a href="https://huggingface.co/docs/lerobot/v0.6.0/robomme">RoboMME</a>는 기억력 시험입니다: 정책이 반복 수를 셀 수 있는가, 숨겨진 물체를 추적하는가, 시연된 절차를 모방하는가? 4개의 기억 구간에서 16개의 작업.</li>
+  <li><a href="https://huggingface.co/docs/lerobot/v0.6.0/vlabench">VLABench</a>은 조작에서의 지식과 추론을 테스트합니다. 물리 문제에서 커피 양조와 같은 복합 작업까지 다룹니다.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lerobot-eval <span class="se">\</span>
+  <span class="nt">--policy</span>.path<span class="o">=</span>lerobot/smolvla_robotwin <span class="se">\</span>
+  <span class="nt">--env</span>.type<span class="o">=</span>robotwin <span class="se">\</span>
+  <span class="nt">--env</span>.task<span class="o">=</span>beat_block_hammer <span class="se">\</span>
+  <span class="nt">--eval</span>.n_episodes<span class="o">=</span>100 <span class="nt">--eval</span>.batch_size<span class="o">=</span>1
+</code></pre></div></div>
+
+<p>시뮬레이터 백엔드는 고유 설치 단계가 필요한 특정 시스템 의존성을 요구합니다. 각 문서 페이지에는 정확한 레시피가 있고, 설정을 건너뛰고 싶다면 각 벤치마크에는 미리 만든 Docker 이미지가 함께 제공합니다.</p>
+
+<p>LIBERO, Meta-World, NVIDIA IsaacLab-Arena와 함께 한 지붕 아래 9개 벤치마크 계열이 구성되며, 새 <a href="https://huggingface.co/docs/lerobot/v0.6.0/adding_benchmarks">Adding a New Benchmark guide</a>은 자신만의 벤치를 연결하는 방법을 정확히 문서화합니다. 평가도 빨라졌는데, 병렬 평가가 이제 비동기 벡터화 환경으로 기본값으로 설정되어 최대 2배 빠름으로 벤치마크됩니다.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/lerobot-blog/release-v0.6.0/gifs/benchmarks2.gif" alt="LeRobot benchmarks" /></p>
+
+<h2 id="section-8">훈련 및 추론</h2>
+
+<h3 id="lerobot-rollout-배포-전용-cli를-제공합니다"><code class="language-plaintext highlighter-rouge">lerobot-rollout</code>: 배포 전용 CLI를 제공합니다</h3>
+
+<p>정책 배포는 예전에 <code class="language-plaintext highlighter-rouge">lerobot-record</code> 위에 얹은 해킹에 가까웠습니다. 새로운 <code class="language-plaintext highlighter-rouge">lerobot-rollout</code> CLI는 배포를 독립적인 워크플로우로 만들고, 플러그 가능한 전략과 추론 백엔드를 제공합니다(느린 호환 VLAs에 대해 실시간 청킹 포함). <code class="language-plaintext highlighter-rouge">base</code> 전략은 단순히 정책을 실행합니다. <code class="language-plaintext highlighter-rouge">sentry</code>는 연속적으로 기록하며 에피소드를 순환하고 진행 중 허브에 업로드합니다. <code class="language-plaintext highlighter-rouge">highlight</code>는 링 버퍼를 유지하고 키를 누르면 마지막 N초를 저장해 흥미로운 순간을 놓치지 않게 합니다. <code class="language-plaintext highlighter-rouge">episodic</code>는 전형적인 에피소드/리셋 기록 워크플로를 반영합니다. 그리고 <code class="language-plaintext highlighter-rouge">dagger</code>은 배포를 데이터 수집으로 바꿉니다.</p>
+
+<p>DAgger 전략을 사용하면 정책이 작동하는 모습을 지켜보다, 잘못되었을 때 순간에 키를 누르고(USB 풋 페달도 가능) 리더 팔로 제어를 넘겨 보정을 기록한 뒤 다시 제어를 넘겨줍니다. 작동하는 리더는 제어를 넘길 때까지 팔로워의 포즈로 이동해 핸드오버를 매끄럽게 만듭니다. 모든 보정 프레임은 <code class="language-plaintext highlighter-rouge">intervention</code> 플래그가 달려 있으며, 결과 데이터세트는 다음 미세 조정을 위해 준비됩니다:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lerobot-rollout <span class="se">\</span>
+    <span class="nt">--strategy</span>.type<span class="o">=</span>dagger <span class="se">\</span>
+    <span class="nt">--policy</span>.path<span class="o">=</span><span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/my_policy <span class="se">\</span>
+    <span class="nt">--robot</span>.type<span class="o">=</span>so100_follower <span class="se">\</span>
+    <span class="nt">--robot</span>.port<span class="o">=</span>/dev/ttyACM0 <span class="se">\</span>
+    <span class="nt">--teleop</span>.type<span class="o">=</span>so101_leader <span class="se">\</span>
+    <span class="nt">--teleop</span>.port<span class="o">=</span>/dev/ttyACM1 <span class="se">\</span>
+    <span class="nt">--dataset</span>.repo_id<span class="o">=</span><span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/dagger_corrections <span class="se">\</span>
+    <span class="nt">--dataset</span>.single_task<span class="o">=</span><span class="s2">"Grasp the block"</span>
+</code></pre></div></div>
+
+<p>배포하고, 보정을 수집하고, 미세 조정하고, 반복하세요: 로봇 학습 플라이휠은 이제 CLI 플래그입니다. <a href="https://huggingface.co/docs/lerobot/v0.6.0/inference">deployment docs</a>를 읽어보라.</p>
+
+<!-- TODO: gif idea: DAgger takeover moment (policy fails, human grabs leader arm, correction recorded), hosted at documentation-images/lerobot-blog/release-v0.6.0/ -->
+
+<h3 id="fsdp-gpu보다-큰-모델-학습">FSDP: GPU보다 큰 모델 학습</h3>
+
+<p>로봇 파운데이션 모델은 단일 GPU를 넘어 커지고 있다. LeRobot 학습은 이제 Accelerate를 통해 FSDP(완전 분할 데이터 병렬) 학습을 지원합니다: 파라미터, 그래디언트, 옵티마이저 상태가 GPU 간에 샤딩되고, 체크포인트는 다른 정책처럼 로드되는 단일 파일 <code class="language-plaintext highlighter-rouge">model.safetensors</code>로 다시 모아진다. 다른 GPU 수에서 FSDP 실행을 재개할 수도 있다. <a href="https://huggingface.co/docs/lerobot/v0.6.0/multi_gpu_training">multi-GPU training docs</a>를 참조하세요.</p>
+
+<h3 id="hf-jobs로-클라우드-학습">HF Jobs로 클라우드 학습</h3>
+
+<p>GPU가 없나요? 문제 없습니다. 동일한 <code class="language-plaintext highlighter-rouge">lerobot-train</code> 명령에 하나의 플래그를 더하면 이제 클라우드에서도 실행됩니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lerobot-train <span class="se">\</span>
+  <span class="nt">--dataset</span>.repo_id<span class="o">=</span><span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/so101_test <span class="se">\</span>
+  <span class="nt">--policy</span>.type<span class="o">=</span>act <span class="se">\</span>
+  <span class="nt">--policy</span>.repo_id<span class="o">=</span><span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/my_policy <span class="se">\</span>
+  <span class="nt">--job</span>.target<span class="o">=</span>a10g-small
+</code></pre></div></div>
+
+<p>LeRobot은 필요하다면 로컬 데이터셋을 개인 Hub 리포지토리로 푸시하고, 작업을 제출하며, 로그를 터미널로 스트리밍하고, 학습된 정책을 끝에 Hub로 푸시합니다. T4에서 8x H200까지의 리소스를 <code class="language-plaintext highlighter-rouge">--job.target</code>으로 선택할 수 있으며(계산은 사용량에 따라 청구됩니다). <a href="https://huggingface.co/docs/lerobot/v0.6.0/hardware_guide#hugging-face-jobs">Check out the documentation</a></p>
+
+<h2 id="section-9">코드베이스: 더 간결하고 깔끔하게</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">pip install lerobot</code>은 이제 본질적으로 가볍고, 기본 의존성이 약 40% 정도 줄었다. 기능 범위의 확장 추가(<code class="language-plaintext highlighter-rouge">[training]</code>, <code class="language-plaintext highlighter-rouge">[core_scripts]</code>, <code class="language-plaintext highlighter-rouge">[evaluation]</code>, …)가 나머지를 커버하며, 누락된 의존성 오류는 어떤 확장을 추가해야 하는지 정확히 알려줍니다. LeRobot 데이터셋만 사용합니다면 더 이상 하드웨어 관련 의존성을 설치할 필요가 없다 ;)</li>
+  <li>지원되는 PyTorch 버전은 2.7–2.11로 옮겨졌으며, CUDA 12.8 휠은 Linux <code class="language-plaintext highlighter-rouge">uv</code> 설치를 위해 기본으로 고정되어 있다. <code class="language-plaintext highlighter-rouge">--policy.dtype=bfloat16</code>은 이제 Accelerate를 통해 실제 혼합-정밀도 학습을 구동합니다.</li>
+  <li>약속된 <code class="language-plaintext highlighter-rouge">uv.lock</code>은 CI, Docker, 개발에 대한 권위 있는 의존성 명세이며, 문서에는 모든 단계에 대한 <code class="language-plaintext highlighter-rouge">uv</code> 설치 경로가 포함되어 있으며, CUDA 휠을 단일 플래그로 선택하는 방법까지 자세히 설명합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">--display_mode=foxglove</code>은 원격 조작, 녹화, 롤아웃을 <a href="https://foxglove.dev">Foxglove</a>로 스트리밍하며, 이 시각화 도구는 로봇 공학 세계의 많은 사람들에 의해 이미 사용됩니다. 원격 설정에서도 작동하며, <code class="language-plaintext highlighter-rouge">lerobot-dataset-viz</code>은 정리 가능한 데이터셋 재생을 제공합니다.</li>
+  <li>Pip로 설치 가능한 <code class="language-plaintext highlighter-rouge">lerobot_env_*</code> 패키지들은 이제 환경 сам 등록을 수행합니다. 플러그인 시스템은 로봇, 카메라, 원격 조작기, 정책, 엔벌(Environment) 등 다섯 가지 구성 요소 유형을 다룹니다.</li>
+  <li>녹화 중 키보드 컨트롤은 이제 Wayland에서, SSH를 통해, 헤드리스 설정에서, macOS에서도 접근성 권한 없이 작동합니다.</li>
+</ul>
+
+<blockquote>
+  <p>[!WARNING]
+전체 목록과 breaking changes에 대한 마이그레이션 포인터는 <a href="https://github.com/huggingface/lerobot/releases">release notes</a>를 확인하십시오.</p>
+</blockquote>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/lerobot-blog/release-v0.6.0/gifs/LeLab.gif" alt="LeLab a graphical user interface for LeRobot" /></p>
+
+<h2 id="section-10">커뮤니티 &amp; 생태계</h2>
+
+<ul>
+  <li>LeLab은 전체 LeRobot 워크플로우(보정, 원격 조작, 녹화, 로컬 혹은 HF Jobs에서의 학습, 배포)를 브라우저 UI에 담아 CLI가 필요 없다. 현재 SO-ARM101을 지원합니다. <a href="https://github.com/huggingface/leLab">Try it out!</a></li>
+  <li>Isaac Teleop은 NVIDIA 팀과의 협업으로 CloudXR/OpenXR를 통해 VR 컨트롤러로 SO-101를 원격 조작할 수 있다. 결과는 <a href="https://github.com/NVIDIA/IsaacTeleop">NVIDIA’s Isaac Teleop stack</a>이며, 더 자세한 내용은 <a href="https://huggingface.co/docs/lerobot/v0.6.0/isaac_teleop">documentation</a>를 참조하세요.</li>
+  <li>새롭게 추가된 <a href="https://huggingface.co/docs/lerobot/v0.6.0/hardware_guide">compute hardware guide</a>은 모든 신규 사용자가 묻는 두 가지 질문에 답합니다: 어떤 GPU가 필요한가, 학습 시간이 얼마나 걸리는가? 정책 계열별로 측정된 VRAM 엔벨로프와 RTX 4090에서 4x H100까지의 참조 학습 시간을 제공합니다.</li>
+  <li>재작성된 <a href="https://huggingface.co/docs/lerobot/v0.6.0/bring_your_own_policies">Adding a Policy guide</a>은 PR 없이도 자체 정책을 택배하는 방법을 보여줍니다.</li>
+</ul>
+
+<h2 id="section-11">Final thoughts</h2>
+
+<p>이들 핵심 기능 외에도 v0.6.0은 코드베이스 전반에 걸친 수백 가지 버그 수정, 문서 개선, 그리고 더 나은 기본값에서 더 신뢰할 수 있는 CI까지 다양한 품질 개선을 포함합니다.</p>
+
+<p>커뮤니티 모든 분들께 거대한 감사의 마음을 전합니다. 이번 릴리스에는 학계, 산업계, 취미 팀이 LeRobot을 그들의 모델과 벤치마크의 보금자리로 선택한 작업이 포함되어 있다. 모든 PR과 버그 리포트가 오픈 소스 로보틱스를 앞으로 나아가게 합니다.</p>
+
+<p>더 많은 소식이 곧 다가옵니다 🤗 시작하려면 <a href="https://github.com/huggingface/lerobot">here</a>를 확인하세요!
+– The LeRobot 팀 ❤️</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</title><link href="/pr-preview/pr-172/cerebras-gemma4-voice-ai/" rel="alternate" type="text/html" title="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" /><published>2026-07-01T00:00:00+09:00</published><updated>2026-07-01T00:00:00+09:00</updated><id>/pr-preview/pr-172/cerebras-gemma4-voice-ai</id><content type="html" xml:base="/pr-preview/pr-172/cerebras-gemma4-voice-ai/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#hugging-face와-cerebras가-gemma-4를-실시간-음성-ai로-선보입니다" id="markdown-toc-hugging-face와-cerebras가-gemma-4를-실시간-음성-ai로-선보입니다">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">아키텍처: 개방형 계층형 음성-음성 스택</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">Cerebras와 Hugging Face 파트너십</a></li>
@@ -485,7 +1526,121 @@ Review instructions:
 
 <p>데모: <a href="https://huggingface.co/spaces/smolagents/hf-realtime-voice">Hugging Face Space</a></p>
 
-<p>저장소: <a href="https://github.com/huggingface/speech-to-speech">huggingface/speech-to-speech</a></p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice AI를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</title><link href="/pr-preview/pr-172/vllm-jobs/" rel="alternate" type="text/html" title="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" /><published>2026-06-26T00:00:00+09:00</published><updated>2026-06-26T00:00:00+09:00</updated><id>/pr-preview/pr-172/vllm-jobs</id><content type="html" xml:base="/pr-preview/pr-172/vllm-jobs/"><![CDATA[<ul id="markdown-toc">
+<p>저장소: <a href="https://github.com/huggingface/speech-to-speech">huggingface/speech-to-speech</a></p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice AI를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</title><link href="/pr-preview/pr-172/eee-community-evals/" rel="alternate" type="text/html" title="Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기" /><published>2026-06-30T00:00:00+09:00</published><updated>2026-06-30T00:00:00+09:00</updated><id>/pr-preview/pr-172/eee-community-evals</id><content type="html" xml:base="/pr-preview/pr-172/eee-community-evals/"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#hugging-face-모델-페이지에서-every-eval-ever-결과-보기" id="markdown-toc-hugging-face-모델-페이지에서-every-eval-ever-결과-보기">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">Hugging Face 커뮤니티 Evals가 EvalEval와 함께 작동하는 방법</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">작동 원리</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">시작하기</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/eee-community-evals">Featuring Every Eval Ever Results on Hugging Face Model Pages</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/eee-community-evals -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="hugging-face-모델-페이지에서-every-eval-ever-결과-보기">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</h1>
+
+<p>Every Eval Ever (EEE)와 Hugging Face 커뮤니티 Evals는 이제 상호 호환됩니다. 교차 게시 및 평가 결과 해석을 가능하게 하며, 오픈 모델, 리더보드, 그리고 통합 표준 메타데이터 저장소에 연결합니다.</p>
+
+<p>EEE <a href="https://evalevalai.com/infrastructure/2026/02/17/everyevalever-launch/">launched</a>는 2026년 2월 <a href="https://evalevalai.com/">EvalEval Coalition</a>의 프로젝트로, 제1자 및 제3자 평가자가 평가 결과를 보고하는 방식을 개선하기 위한 최초의 교차기관 간 노력입니다. Hugging Face는 2026년 2월에 <a href="https://huggingface.co/blog/community-evals">Community Evals</a>를 출시하여 허브에서 벤치마크 점수의 보고 방식을 탈중앙화했습니다. 이를 합치면 사용자가 연구자, 정책 입안자들이 평가와 모델을 신뢰하고 이해하며 선택하는 데 생기는 간극을 줄여줍니다.</p>
+
+<p>평가 결과는 모델의 역량을 측정하고 서로 다른 모델을 비교하며 안전성과 거버넌스를 판단하는 데 사용되지만, 결과는 흩어져 있어 비교하기 어렵습니다. 논문, 리더보드, 블로그 포스트, 하니스 로그 등 다양한 형식으로 각각 다른 형식으로 존재합니다. 같은 벤치마크의 같은 모델이라도 누가 실행했는지와 실행 방식에 따라 서로 다른 점수를 받는 경우가 많습니다; 예를 들어 LLaMA 65B의 경우 <a href="https://huggingface.co/blog/open-llm-leaderboard-mmlu">MMLU</a>에서 63.7과 48.8로 보고된 바 있습니다. 이러한 격차는 <a href="https://huggingface.co/papers/2606.14516">evaluation settings that we found are commonly unreported</a>에서 발생할 수 있습니다.</p>
+
+<p>EEE는 보고 측면의 해결책입니다. 평가 결과를 기록하는 하나의 JSON 스키마이며, 아래를 기록합니다:</p>
+
+<ul>
+  <li>누가 실행했는지</li>
+  <li>어떤 모델인지</li>
+  <li>어떻게 접근했는지</li>
+  <li>생성 설정</li>
+  <li>지표가 실제로 의미하는 바</li>
+  <li>[권장] 샘플별 출력을 위한 동반 JSONL 파일.</li>
+</ul>
+
+<p>이 스키마는 연구자 및 정책 연구자의 피드백으로 구축되었으며, 어떤 출처의 결과도 받아들일 수 있도록 설계되어 하니스 로그, 리더보드 스크랩, 논문 수치가 모두 같은 형식으로 모이게 됩니다. <a href="https://github.com/evaleval/every_eval_ever">GitHub repository</a>에는 변환기(converters), 예제, 그리고 기여자 가이드가 포함되어 있습니다. 출시 이후 <a href="https://huggingface.co/datasets/evaleval/EEE_datastore">datastore</a>는 Hugging Face에서 약 229,000개의 평가 결과를 22,000개가 넘는 모델과 2,200개 벤치마크에 걸쳐, 31개의 서로 다른 보고 형식에서 끌어모았습니다. 이러한 실행들을 처음부터 재현하려면 수십만 달러의 비용이 들 수 있는데, 이는 누군가 데이터를 생성하기로 비용을 지불한 뒤 데이터를 흩뜨리지 않도록 하는 타당한 주장이 됩니다.</p>
+
+<p>스키마와 기여 방법에 대해 자세히 알아보기 <a href="https://evalevalai.com/infrastructure/2026/02/17/everyevalever-launch/">here</a>.</p>
+
+<p>이제 더 나은 통합과 출처 표기를 제공합니다. 기여자들은 이제 EEE 결과를 Hugging Face 커뮤니티 Evals로 보낼 수 있습니다. 우리는 EEE 기록을 받아 Hugging Face가 기대하는 작은 YAML 파일을 작성하는 변환기를 만들었으므로, 두 형식으로 동일한 결과를 수동으로 유지할 필요가 없습니다.</p>
+
+<p><img src="https://cdn-uploads.huggingface.co/production/uploads/6413251362e6057cbb6259bd/czIJDDShvtMBs2M2T7B45.gif" alt="Verified Evaluators on Eval Cards" /></p>
+
+<p>이것은 평가를 보고하거나 읽는 모든 사람에게 새로운 기능이며, 기존 EEE 기여자들만의 것이 아닙니다. 자사 모델을 보고하는 평가자와 타인의 모델을 보고하는 제3자 평가자 모두 커뮤니티 Evals와 EEE에 제출할 수 있으며, 허브를 둘러보는 누구나 전체 기록으로 연결되는 결과를 얻습니다. 조직의 공식 Hugging Face 계정을 통해 데이터를 제출하면, EvalEval에 <a href="https://evalcards.evalevalai.com/help/get-verified">verified</a> 확인 표시가 표시되어 독자들에게 숫자가 출처에서 직접 왔음을 알리는 신호가 됩니다. 이 글의 나머지 부분은 Hugging Face 커뮤니티 Evals가 무엇인지와 변환기가 하는 일에 대해 설명합니다.</p>
+
+<h2 id="section-1">Hugging Face 커뮤니티 Evals가 EvalEval와 함께 작동하는 방법</h2>
+
+<p>Hugging Face 커뮤니티 Evals에는 두 가지 측면이 있습니다.</p>
+
+<p>벤치마크는 <code class="language-plaintext highlighter-rouge">eval.yaml</code>를 추가하여 스스로를 등록하는 데이터셋 저장소에 존재합니다. 등록되면 해당 데이터셋 페이지는 허브 전역에서 보고된 모든 점수의 리더보드를 수집하고 표시합니다. <a href="https://huggingface.co/datasets?benchmark=benchmark:official&amp;sort=trending">official benchmarks</a>의 목록은 시간이 지남에 따라 증가합니다.</p>
+
+<p>모델의 점수는 모델 저장소 안의 <code class="language-plaintext highlighter-rouge">.eval_results/*.yaml</code>에 저장됩니다. 모델 카드에 표시되며 해당 벤치마크 리더보드에 반영됩니다. 모델 저자의 결과와 누구든지 PR을 통해 제출한 결과가 모두 집계되며, 각 점수에는 저자 제출 여부, 커뮤니티 제출 여부, 또는 독립적으로 검증되었다는 배지가 따라붙습니다. 누구나 적절한 YAML 파일로 PR을 열어 점수를 추가할 수 있으며, 모델 저자는 자신의 저장소에서 PR을 닫거나 결과를 숨길 수 있습니다.</p>
+
+<p>다음은 이러한 리더보드 중 하나가 어떻게 보이는지:</p>
+
+<iframe src="https://huggingface.co/datasets/cais/hle/embed/leaderboard" frameborder="0" width="100%" height="560px"></iframe>
+
+<p><em>Hugging Face 커뮤니티 Evals 리더보드 <a href="https://huggingface.co/datasets/cais/hle">Humanity’s Last Exam</a> 허브에서</em></p>
+
+<p>여기가 EEE와 커뮤니티 Evals가 함께 작동하는 지점입니다. 두 곳 모두에 결과를 보내면 먼저, 귀하의 점수는 Hugging Face 모델 페이지에 표시되고 벤치마크의 리더보드로 끌려 갑니다. 둘째로, 생성 설정, 하니스 버전, 재현성 노트, 인스턴스 수준 데이터를 포함한 전체 EEE 기록으로의 원천 링크를 가지는 소스 배지가 따라갑니다.</p>
+
+<iframe src="https://evaleval-general-eval-card.hf.space/embed/eval/frontier/mmlu-pro/mmlu-pro" width="100%" height="420" frameborder="0" style="border:1px solid #e5e5e5;border-radius:4px;" loading="lazy" title="Score distribution — Frontier"></iframe>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/eee_commevals/smollm2.png" alt="EvalEval as source on SmolLM2 Model Page" /></p>
+
+<p><em>EEE Datastore의 평가(MMLU-Pro) 중 하나가 파일 수준에서 Hugging Face 모델 카드에 교차 연결되어 있습니다(a). 소스 EvalEval 배지는 전체 JSON 기록으로 연결됩니다(b).</em></p>
+
+<p><strong>두 목적지는 같은 목표를 향해 서로 다른 역할을 수행합니다. Hugging Face는 사람들이 모델을 보는 위치에 결과를 놓고 출처로의 링크를 제공합니다. EEE는 결과를 해석 가능하게 만드는 전체 구조화된 기록을 유지하고, 그 위에 <a href="https://evalevalai.com/projects/eval-cards/">Eval Cards</a>를 담아냅니다.</strong> 데이터를 두 곳 모두에 제출하면 같은 평가가 한꺼번에 보이고 읽기 쉽도록 표시되며, 이것이 하나의 평가를 보고하는 이유이기도 합니다.</p>
+
+<p>아래에서 그 교차 호환성을 확인할 수 있습니다. 위 모델 카드에 표시된 동일한 GPQA 점수는 Eval Cards에서도 렌더링되며, 이는 EEE 실행 데이터를 벤치마크 및 모델 메타데이터와 결합하여 하나의 해석 가능한 기록으로 만듭니다. 같은 평가이지만 표면이 다릅니다:</p>
+
+<iframe src="https://evaleval-general-eval-card.hf.space/embed/eval/leaderboard/openeval/gpqa" frameborder="0" width="100%" height="560px">
+</iframe>
+
+<h2 id="section-2">작동 원리</h2>
+
+<p>Hugging Face는 평가 점수를 <code class="language-plaintext highlighter-rouge">.eval_results/</code> 아래의 YAML로 모델 저장소에 저장합니다. 필수 필드는 벤치마크 데이터셋, 작업, 값뿐입니다. 소스 블록은 EEE로의 백링크를 생성하는 부분입니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- dataset:
+    id: openai/gsm8k
+    task_id: gsm8k
+  value: 96.8
+  date: '2024-07-16'
+  notes: '8-shot CoT'
+  source:
+    url: https://huggingface.co/datasets/evaleval/EEE_datastore/blob/main/flat/objects/&lt;xx&gt;/&lt;yy&gt;/&lt;uuid&gt;.json
+    name: EvalEval
+</code></pre></div></div>
+
+<p><strong>변환기가 기존 기록에서 이를 채웁니다.</strong> 이는 <code class="language-plaintext highlighter-rouge">source_data.hf_repo</code>를 <code class="language-plaintext highlighter-rouge">dataset.id</code>로, <code class="language-plaintext highlighter-rouge">evaluation_name</code>를 <code class="language-plaintext highlighter-rouge">task_id</code>로, <code class="language-plaintext highlighter-rouge">score_details.score</code>를 <code class="language-plaintext highlighter-rouge">value</code>로, 그리고 <code class="language-plaintext highlighter-rouge">evaluation_timestamp</code>를 <code class="language-plaintext highlighter-rouge">date</code>로 매핑한 다음, 데이터스토어 객체 URL을 per-record EEE JSON의 소스 링크로 삽입합니다. 현재 네 가지 공식 벤치마크를 다룹니다: MMLU-Pro, GPQA, HLE, GSM8K.</p>
+
+<p><strong>변환기는 필드를 재구성하는 것 그 이상을 합니다.</strong> 하나의 EEE 데이터스토어 컬렉션을 가리키고 그 컬렉션과 참조되는 기록을 함께 다운로드합니다, 객체 해시를 확인하고 지원되는 벤치마크에 매핑되는 점수를 찾아냅니다. 라이브로 쓰기 전에 이미 존재하는 것을 감사합니다: 모델의 메인 브랜치와 열린 PR들에 있는 모든 <code class="language-plaintext highlighter-rouge">.eval_results</code> YAML을 읽고, 데이터셋과 작업으로 비교합니다. 점수가 이미 거기에 있으면 <code class="language-plaintext highlighter-rouge">already_present</code>로 표시하고, 다른 점수가 거기에 있으면 <code class="language-plaintext highlighter-rouge">score_conflict</code>로 표시하며, 모델 저장소가 허브에서 해결되지 않으면 <code class="language-plaintext highlighter-rouge">missing_hf_model</code>로 표시합니다. 그 밖의 모든 것은 <code class="language-plaintext highlighter-rouge">ready</code>로 표시됩니다.</p>
+
+<p><strong>아무 것도 당신의 서명 없이는 푸시되지 않습니다.</strong> 도구는 로컬 YAML 프리뷰와 검토 파일을 작성하여 확인할 수 있게 하고, 준비된 것과 주의가 필요한 것을 보여주는 보고서를 출력합니다. 커밋 메시지를 입력하고 <code class="language-plaintext highlighter-rouge">OPEN PRS</code>를 입력한 후에만 PR을 엽니다. 컬렉션에 대해 캐시된 결과를 재실행하면 <code class="language-plaintext highlighter-rouge">--force</code>를 넘겨주지 않는 한 재사용됩니다.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/eee_commevals/terminal%20shot.png" alt="TUI of the Converter" /></p>
+
+<p><em>변환기의 검토 단계. 제외된 엔트리(여기서는 허브 저장소와 매칭되는 모델이 없는 경우)는 EEE 원본 URL과 함께 나열되며, 준비된 PR은 명시적 OPEN PRS 확인을 기다립니다.</em></p>
+
+<h2 id="section-3">시작하기</h2>
+
+<p>전체 기록을 <a href="https://huggingface.co/datasets/evaleval/EEE_datastore">the EEE datastore</a>에 제출하세요.</p>
+
+<p>EEE를 활용하려면 한 가지 추가 단계가 필요하며, 이 단계는 변환기가 대부분 자동으로 처리합니다. <a href="https://github.com/evaleval/every_eval_ever/tree/main/tools/hf-community-evals">community eval converter tool</a>는 GitHub 저장소에서 찾을 수 있습니다. 컬렉션을 처리하려면 다음을 실행하세요:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run tools/hf-community-evals/community_evals_converter.py MMLU-Pro <span class="se">\</span>
+  <span class="nt">--datastore</span> evaleval/EEE_datastore@main
+</code></pre></div></div>
+
+<p>미리보기와 생성된 보고서를 검토한 후 제출 준비가 되면 <code class="language-plaintext highlighter-rouge">OPEN PRS</code>를 입력하세요. 스키마, CLI, 변환기에 대한 전체 문서는 <a href="https://evalevalai.com/every_eval_ever/hf-community-evals/">evalevalai.com/every_eval_ever/hf-community-evals</a>에 있습니다.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Featuring Every Eval Ever Results on Hugging Face Model Pages를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</title><link href="/pr-preview/pr-172/vllm-jobs/" rel="alternate" type="text/html" title="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" /><published>2026-06-26T00:00:00+09:00</published><updated>2026-06-26T00:00:00+09:00</updated><id>/pr-preview/pr-172/vllm-jobs</id><content type="html" xml:base="/pr-preview/pr-172/vllm-jobs/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#hf-jobs에서-vllm-서버를-한-명령으로-실행하기" id="markdown-toc-hf-jobs에서-vllm-서버를-한-명령으로-실행하기">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">전제 조건</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">서버 시작하기</a></li>
@@ -1087,899 +2242,4 @@ https://cdn.jsdelivr.net/npm/onnxruntime-web@1.26.0-dev.20260416-b7804b056c/dist
 
 <p>Transformers.js는 COS를 실험하는 데 있어 독립적이지 않습니다. <a href="https://webllm.mlc.ai/">WebLLM</a>(옵트인, 자세한 내용은 <a href="https://webllm.mlc.ai/docs/user/advanced_usage.html#using-cross-origin-storage-cache">documentation</a> 참조)과 <a href="https://github.com/ngxson/wllama">wllama</a>(자동, 자세한 내용은 <a href="https://github.com/ngxson/wllama/pull/248">PR</a> 참조) 역시 이 제안된 API에 대해 기대를 가지고 있습니다.</p>
 
-<p>크롬 팀은 브라우저에서 이를 네이티브로 구현하기 위해 노력하고 있습니다 <a href="https://chromestatus.com/feature/5163371507875840">considering implementing the COS API</a>. 초기 단계의 제안으로, API와 제안의 형태에 대한 피드백을 환영합니다. 이슈를 제기하려면 <a href="https://github.com/WICG/cross-origin-storage">Cross-Origin Storage repository</a>를 이용하고, <a href="https://github.com/WICG/cross-origin-storage/labels/expression%20of%20support">express support</a>를 확인하거나 PR을 여세요.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</title><link href="/pr-preview/pr-172/peft-beyond-lora/" rel="alternate" type="text/html" title="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" /><published>2026-06-18T00:00:00+09:00</published><updated>2026-06-18T00:00:00+09:00</updated><id>/pr-preview/pr-172/peft-beyond-lora</id><content type="html" xml:base="/pr-preview/pr-172/peft-beyond-lora/"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#beyond-lora-가장-인기-있는-미세조정-기법을-이길-수-있을까" id="markdown-toc-beyond-lora-가장-인기-있는-미세조정-기법을-이길-수-있을까">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></li>
-  <li><a href="#파라미터-효율적으로-모델을-미세조정하려고-계획할-때는-lora를-넘어서-생각해-보세요" id="markdown-toc-파라미터-효율적으로-모델을-미세조정하려고-계획할-때는-lora를-넘어서-생각해-보세요">파라미터 효율적으로 모델을 미세조정하려고 계획할 때는 LoRA를 넘어서 생각해 보세요</a></li>
-  <li><a href="#what-is-peft-and-when-do-you-need-it" id="markdown-toc-what-is-peft-and-when-do-you-need-it">What is PEFT and when do you need it</a></li>
-  <li><a href="#lora-미세조정-기술의-여왕-" id="markdown-toc-lora-미세조정-기술의-여왕-">LoRA: 미세조정 기술의 여왕 👑</a></li>
-  <li><a href="#논문-결과를-바탕으로-올바른-peft-기법을-선택하는-것은-문제점이-있다" id="markdown-toc-논문-결과를-바탕으로-올바른-peft-기법을-선택하는-것은-문제점이-있다">논문 결과를 바탕으로 올바른 PEFT 기법을 선택하는 것은 문제점이 있다</a></li>
-  <li><a href="#peft에서-벤치마킹에-어떻게-접근합니다" id="markdown-toc-peft에서-벤치마킹에-어떻게-접근합니다">PEFT에서 벤치마킹에 어떻게 접근합니다</a></li>
-  <li><a href="#our-findings-lora-works-well-but-is-not-necessarily-the-best-choice" id="markdown-toc-our-findings-lora-works-well-but-is-not-necessarily-the-best-choice">Our findings: LoRA works well but is not necessarily the best choice</a></li>
-  <li><a href="#제한점" id="markdown-toc-제한점">제한점</a></li>
-  <li><a href="#conclusion-and-what-you-can-do" id="markdown-toc-conclusion-and-what-you-can-do">Conclusion and what <em>you</em> can do</a></li>
-</ul>
-<!--toc-->
-<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/peft-beyond-lora">Beyond LoRA: Can you beat the most popular fine-tuning technique?</a>를 한국어로 번역한 글입니다.</em></p>
-
-<!-- Source: https://huggingface.co/blog/peft-beyond-lora -->
-
-<hr />
-
-<!--
-Review instructions:
-- Verify the Korean translation against the source post.
-- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
--->
-
-<h1 id="beyond-lora-가장-인기-있는-미세조정-기법을-이길-수-있을까">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</h1>
-
-<p align="center">
-    <img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/lora-celebration.png" alt="Is LoRA the best PEFT technique?" width="600" />
-</p>
-
-<h1 id="파라미터-효율적으로-모델을-미세조정하려고-계획할-때는-lora를-넘어서-생각해-보세요">파라미터 효율적으로 모델을 미세조정하려고 계획할 때는 LoRA를 넘어서 생각해 보세요</h1>
-
-<p>오픈 모델을 자신의 데이터로 미세조정하고자 한다면, 아마도 소위 매개변수 효율적 미세조정, 간단히 <em>PEFT</em>에 관심이 있을 것입니다. 이 용어는 모델을 미세조정하는 데 필요한 메모리 요구량을 크게 줄여주는 기술들을 설명합니다. 이러한 기법은 수십 가지가 있지만, 거의 모두 “LoRA”라는 것을 선택합니다. 이 블로그 글에서 LoRA가 정말 최선의 선택인지, 정보에 기반한 의사결정을 내리기 위해 어떤 도구들이 있는지, 그리고 LoRA를 넘어 시야를 넓힘으로써 어떻게 이익을 얻을 수 있는지 살펴봅니다.</p>
-
-<h1 id="what-is-peft-and-when-do-you-need-it">What is PEFT and when do you need it</h1>
-
-<p>수많은 오픈 모델이 있지만, 그것들이 자주 당신의 사용 사례에 충분하지는 않습니다. 프롬프트 엔지니어링이 도움이 될 수는 있지만 보통은 충분하지 않습니다. 처음부터 새 모델을 학습시키기보다는 기존 모델을 미세조정하는 것을 고려해야 합니다.</p>
-
-<p>하지만 미세조정은 메모리를 많이 요구합니다: 일반적으로 전체 모델을 여러 번 적합시키려면 충분한 메모리가 필요합니다. 양자화는 모델의 메모리 footprint를 줄여주지만 양자화된 모델은 직접 미세조정할 수 없습니다. 그래서 미세조정에 필요한 메모리를 줄이기 위해 여러 기법이 등장했고 이를 “매개변수 효율적 미세조정”(PEFT)이라고 부릅니다.</p>
-
-<p>PEFT를 사용하면 메모리의 일부만으로도 모델을 미세조정하고 심지어 양자화된 모델도 미세조정할 수 있습니다. 또한 아주 작은 체크포인트 크기, 재앙적 망각에 대한 더 큰 저항성, 같은 기본 모델에서 여러 개의 미세조정을 제공할 수 있는 등의 이점이 있습니다.</p>
-
-<p>허깅페이스에서 우리는 <a href="https://github.com/huggingface/peft"><code class="language-plaintext highlighter-rouge">PEFT</code> library</a>를 개발합니다. 이 라이브러리는 하나의 통합 API 아래에서 많은 PEFT 기법을 구현하고 생태계와 잘 통합되며, 예로 <a href="https://huggingface.co/docs/transformers/main/en/peft"><code class="language-plaintext highlighter-rouge">Transformers</code></a>와 <a href="https://huggingface.co/docs/diffusers/main/en/api/loaders/peft"><code class="language-plaintext highlighter-rouge">Diffusers</code></a>가 있습니다. 또한 <a href="https://huggingface.co/docs/peft/developer_guides/quantization">multiple quantization methods</a>도 지원하여 매개변수 효율적 미세조정에 대한 접근성을 높입니다. <code class="language-plaintext highlighter-rouge">PEFT</code>는 자체 데이터로 미세조정하든 새로운 PEFT 방법을 연구하든 좋은 시작점을 제공합니다.</p>
-
-<h1 id="lora-미세조정-기술의-여왕-">LoRA: 미세조정 기술의 여왕 👑</h1>
-
-<p>초기에 등장해 꽤 효과적임이 입증된 하나의 매개변수 효율적 미세조정 기법은 “Low Rank Adaptation”, 줄여서 <a href="https://huggingface.co/papers/2106.09685">“LoRA”</a>라고 불립니다. 이는 기본 모델의 가중치를 고정하고 상위에 몇 개의 매개변수를 추가한 뒤, 그 소수의 매개변수들만 학습시키는 방식으로 작동합니다.</p>
-
-<p>모든 PEFT 기법 중 LoRA가 단연 가장 대중적입니다. 아래는 몇 가지 추정치입니다:</p>
-
-<ul>
-  <li>정확히 하나의 PEFT 기법을 언급한 20,834 <a href="https://huggingface.co/datasets/librarian-bots/model_cards_with_metadata">model cards on Hugging Face Hub</a> 표본 중 20,509가 LoRA를 언급했습니다(98.4%).</li>
-  <li>외부 사이트에서도 이미지 생성에 인기 있는 PEFT 기법들을 확인했습니다. 10,000개의 체크포인트 샘플을 사용한 결과, 그 중 7,111이 LoRA였습니다. 나머지로 확인된 PEFT 기법은 LoCon(363)와 DoRA(11)로, 이는 LoRA의 변형으로 간주됩니다. 이는 PEFT 체크포인트의 95.0%가 LoRA임을 뜻합니다.</li>
-  <li>GitHub에서 코드 스니펫 <code class="language-plaintext highlighter-rouge">from peft import &lt;PEFT CONFIG&gt;</code>를 검색한 결과(<a href="https://github.com/search?q=%22from+peft+import+LoraConfig%22&amp;type=code">example GH query</a>), 결과의 71.3%가 LoRA에 해당합니다. 그다음으로 상위권은 LoHa(3.7%)와 AdaLoRA(3.5%)입니다.</li>
-</ul>
-
-<p>이 추정치들이 완벽하지는 않지만, LoRA가 단연 가장 일반적으로 사용되는 PEFT 기법이라는 결론은 여전히 타당합니다.</p>
-
-<p>이것은 단지 LoRA가 모두에게 가장 잘 작동한다는 것을 의미할 수 있으며, 이 사실이 사용 통계에 반영됩니다. 그러나 또 다른 가능성도 있습니다: LoRA는 초기의 인기 있는 PEFT 기법 중 하나였으므로 그 사용이 자기 강화적으로 확산되었을 수 있습니다. 즉, LoRA가 가장 높은 가시성, 가장 많은 튜토리얼/예제 수, 그리고 다운스트림 패키지에서 가장 잘 지원되는 결과로 인해 LoRA의 인기가 스스로를 강화했다는 이야기입니다.</p>
-
-<p>이 모든 것은 다음과 같은 질문으로 이어집니다: <em>더 나은 기법을 배제함으로써 성능을 놓치고 있는 걸까요?</em> 결국 LoRA를 이겼다고 주장하는 논문들이 무수히 있습니다. 그것이 LoRA를 넘어 새로운 기술로 가야 한다는 충분한 증거가 아닐까요?</p>
-
-<h1 id="논문-결과를-바탕으로-올바른-peft-기법을-선택하는-것은-문제점이-있다">논문 결과를 바탕으로 올바른 PEFT 기법을 선택하는 것은 문제점이 있다</h1>
-
-<p>LoRA 외의 미세조정 기법을 연구하는 논문이 수십 편 있습니다. <code class="language-plaintext highlighter-rouge">PEFT</code> 라이브러리 안에서도 아직 작성 시점에 40개가 넘는 서로 다른 PEFT 기법이 존재합니다(PEFT 기법의 변형을 포함하면 더 많습니다). 거의 모든 기법에 대해, 연구자들이 그들의 벤치마크에 따라 자신의 기법이 LoRA를 능가한다고 주장하는 것을 볼 수 있습니다.</p>
-
-<p>이러한 주장들의 문제점은 연구자들이 기존 벤치마크를 능가하는 결과를 제시하도록 압박을 받고 있다는 점입니다. 의도하지 않더라도, 이는 결과에 편향을 불러일으킬 수 있습니다. 예를 들어 연구자들이 제안한 기법보다 대안 기법의 튜닝에 적은 시간을 할애함으로써 말이죠. 한 연구는 예를 들어 LoRA가 학습률을 조정함으로써 소위 더 나은 PEFT 기법들과 맞먹을 수 있다고 밝혔습니다( <a href="https://arxiv.org/abs/2602.04998">https://arxiv.org/abs/2602.04998</a> ).</p>
-
-<p>또 다른 문제는 각 논문이 비교하는 PEFT 기법의 집합과 실행하는 벤치마크의 집합이 서로 다르다는 점입니다. 같은 기법이 같은 벤치마크에서 비교되더라도 코드가 공개되지 않았거나 실행하기 어려운 경우가 많아 결과 재현이 어렵습니다.</p>
-
-<p>전반적으로, 논문 결과만으로 어떤 PEFT 기법이 당신에게 가장 잘 맞는지 판단하기는 어렵습니다. 따라서 기본값인 LoRA를 그냥 선택하고 싶은 유혹에 빠질 수 있습니다.</p>
-
-<h1 id="peft에서-벤치마킹에-어떻게-접근합니다">PEFT에서 벤치마킹에 어떻게 접근합니다</h1>
-
-<p>허깅페이스에서 사용자가 어떤 PEFT 기법을 사용할지에 대해 정보에 입각한 결정을 내릴 수 있도록 어떻게 도울 수 있을지 고민했습니다. <code class="language-plaintext highlighter-rouge">PEFT</code> 라이브러리를 통해 이미 많은 PEFT 기법을 구현하고 동일한 API로 노출하는 패키지를 제공하고 있습니다. 다음 단계는 논의된 이슈에 대해 더 많은 정보를 제공하는 벤치마크를 제공하는 것입니다.</p>
-
-<p>이미 <a href="https://github.com/huggingface/peft/tree/main/method_comparison/MetaMathQA">checks fine-tuning of LLMs on a math dataset</a>를 한동안 보유하고 있었습니다. 이 벤치마크는 LLM을 가져와 사고 체인 추론(chain-of-thought reasoning)으로 미세조정하여 수학 문제에 대한 결과를 생성하도록 하며, 지시문으로 미세조정되지 않은 기본 모델을 사용합니다. 벤치마크는 따라서 모델이 수학적 추론을 학습하고 생성된 출력을 기대 형식에 맞추어 조정할 수 있는지 여부를 검사합니다.</p>
-
-<p>다른 모달리티에 대한 우리의 발견을 확장하기 위해 또 하나의 <a href="https://github.com/huggingface/peft/tree/main/method_comparison/image-gen">image generation benchmark</a>를 추가했습니다. 이 벤치마크는 모델이 새로운 개념인 <a href="https://huggingface.co/datasets/peft-internal-testing/cat-image-dataset">cat plushy</a>을 학습하도록 미세조정할 수 있는지, 그리고 기존 개념을 잊지 않고 새로운 맥락에서 이를 생성할 수 있는지 테스트합니다.</p>
-
-<table align="center">
-  <tr>
-    <td><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/metamath-question.png" style="width: 400px; border: 1px solid #ccc; padding: 4px;" /></td>
-    <td><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/cat-plushy-train-image.jpg" style="width: 400px; border: 1px solid #ccc; padding: 4px;" /></td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center"><em>Left: Sample question and answer from the MetaMathQA dataset. Right: Sample image from the cat plushy dataset.</em></td>
-  </tr>
-</table>
-
-<p>모든 PEFT 기법은 정확히 같은 조건으로 평가됩니다: 동일한 기본 모델, 동일한 데이터세트, 동일한 학습 및 평가 코드, 동일한 하드웨어. 서로 다른 사용자의 요구가 다르기 때문에, 우리는 테스트 성능뿐만 아니라 더 많은 지표를 추적합니다. VRAM 사용량 외에도 망각/드리프트, 런타임, 체크포인트 크기와 같은 지표를 추적합니다. 결과는 일반 소비자용 하드웨어에서 실행되도록 설계되었으며, 새로운 실험을 추가하려면 새로운 <code class="language-plaintext highlighter-rouge">PEFT</code> 구성을 추가하고 스크립트를 실행하면 됩니다.</p>
-
-<p>모든 PEFT 기법을 동등한 조건에서 비교하고 특정 기법을 편들지 않기 때문에, 이 벤치마크가 서로 다른 PEFT 기법들이 얼마나 잘 작동하는지에 대한 객관적인 그림을 제시한다고 믿습니다. 귀하의 데이터세트가 있다면 비슷한 접근법을 취하고 <code class="language-plaintext highlighter-rouge">PEFT</code> 라이브러리를 활용해 여러 PEFT 기법을 평가해 보시길 권합니다.</p>
-
-<h1 id="our-findings-lora-works-well-but-is-not-necessarily-the-best-choice">Our findings: LoRA works well but is not necessarily the best choice</h1>
-
-<p>벤치마크를 마친 뒤, LoRA가 잘 작동하더라도 다른 PEFT 기법들이 한 가지 혹은 여러 축에서 이를 능가할 수 있으며 따라서 고려되어야 한다는 것을 발견했습니다. 아래 이미지는 LoRA와 다섯 가지 다른 PEFT 기법의 성능을 비교합니다.</p>
-
-<table align="center">
-  <tr>
-    <td align="center"><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/benchmark-highlights.png" width="900" /></td>
-  </tr>
-  <tr>
-    <td align="center"><em>Some results from the benchmark. When it comes to test performance and memory usage, LoRA is not necessarily the best choice. Left: MetaMathQA benchmark; right: image generation benchmark. Consult this <a href="https://huggingface.co/spaces/peft-internal-testing/PEFT-method-comparison">Space</a> for the most up-to-date results.</em></td>
-  </tr>
-</table>
-
-<p>위의 결과를 해석하는 한 가지 방법은 트레이드오프 관점에서 생각하는 것입니다. 예를 들어: 모델이 테스트 데이터에서 얼마나 잘 작동하는지와 이를 학습하는 데 필요한 메모리가 얼마나 되는지 사이의 trade-off는 어떤가요? 어떤 PEFT 기법도 이 두 지표를 동시에 다른 어떤 기법보다 더 잘 이길 수 없다면, 그것은 <em>파레토 프런티어</em>에 속합니다. 다시 말해: 더 나은 테스트 정확도를 원한다면 더 많은 메모리가 필요하고, 메모리 효율성을 더 원한다면 정확도를 포기해야 한다는 뜻입니다.</p>
-
-<p>LLM 수학 데이터셋 벤치마크의 결과를 좀 더 자세히 살펴보겠습니다. 테스트 정확도와 메모리 측면에서 보자면 LoRA는 실제로 파레토 프런티어에 속합니다. 최고점에서 53.2%의 테스트 정확도와 22.6 GB의 VRAM이 필요합니다. 그러나 파레토 프런티어에 속하는 다른 PEFT 기법도 있습니다. 예를 들어, <a href="https://huggingface.co/docs/peft/main/en/package_reference/beft">BEFT</a>은 32.9%의 테스트 정확도를 달성하고 최대 메모리는 20.2 GB에 불과합니다. 반대편 끝에는 <a href="https://huggingface.co/docs/peft/main/en/package_reference/lily">Lily</a>이 있는데, 54.9%의 테스트 정확도를 달성하지만 25.6 GB의 메모리가 필요합니다. 무엇이 더 중요한지에 따라 LoRA가 최적의 트레이드오프를 제시하지 않는다고 결론지을 수도 있습니다.</p>
-
-<table align="center">
-  <tr>
-    <td align="center"><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/metamath-pareto.png" width="900" /></td>
-  </tr>
-  <tr>
-    <td align="center"><em>Test accuracy vs memory usage tradeoff of fine-tuning <code>meta-llama/Llama-3.2-3B</code> and evaluating it on GSM8K. LoRA does well but so do other PEFT techniques.</em></td>
-  </tr>
-</table>
-
-<p>또한 이 작업에서 LoRA가 잘 수행하더라도 이것은 일반 LoRA를 뜻하는 것은 아닙니다. 한쪽은 LoRA가 <a href="https://huggingface.co/papers/2312.03732">rank stabilized initialization</a>와 함께하는 경우로, 이는 LoRA 기여를 기본 초기화와 다르게 스케일링하는 기법으로 매우 높은 테스트 정확도(53.2%)를 제공합니다. 반대편에는 LoRA 가중치의 일부를 고정하고 더 메모리 효율적인 <a href="https://huggingface.co/papers/2308.03303">LoRA-FA</a>을 사용하는 경우가 있습니다(20.2 GB). 일반 LoRA는 22.5 GB 메모리에서 정확도 48.1%에 그쳐 대안들보다 피하는 것이 좋습니다.</p>
-
-<p>다음으로 이미지 생성 벤치마크를 살펴보겠습니다. <a href="https://huggingface.co/spaces/peft-internal-testing/PEFT-method-comparison">Hugging Face Space</a>에서 “Select Task” 드롭다운에서 “image-gen”을 선택하면 결과가 표시됩니다. 이 작업의 목표는 새 개념인 고양이 봉제인형을 학습하고 이를 새로운 프롬프트로 일반화하는 것입니다.</p>
-
-<table align="center">
-  <tr>
-    <td align="center"><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/cat-plushy-lora.png" width="400" /></td>
-  </tr>
-  <tr>
-    <td align="center"><em>Cat plushy image created with LoRA fine-tuned on <code>FLUX.2-klein-base-4B</code>.</em></td>
-  </tr>
-</table>
-
-<p>이 작업의 주요 지표는 ‘디노 유사도’(dino similarity)로, 생성된 이미지가 보류 테스트 데이터셋의 이미지와 얼마나 닮았는지를 측정하며, 값이 높을수록 좋습니다. 항상 그렇듯 메모리 사용량도 주시합니다. 이 두 지표의 파레토 프런티어를 시각화하면 LoRA가 그 프런티어 아래에 위치하는 것을 볼 수 있습니다. 구체적 수치를 보자면: LoRA의 유사도 점수는 0.697이고, <a href="https://huggingface.co/docs/peft/package_reference/oft">OFT</a>는 0.708를 달성합니다; 메모리 측면에서 LoRA는 9.97 GB가 필요하고 OFT는 9.01 GB가 필요합니다. 따라서 이 지표들에 대해 OFT가 LoRA를 엄격하게 능가합니다.</p>
-
-<table align="center">
-  <tr>
-    <td align="center"><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/image-gen-pareto.png" width="900" /></td>
-  </tr>
-  <tr>
-    <td align="center"><em>Test accuracy vs memory usage tradeoff of fine-tuning <code>FLUX.2-klein-base-4B</code> and evaluating it on the test set. Other PEFT techniques like OFT beat LoRA in terms of test score and lower memory usage.</em></td>
-  </tr>
-</table>
-
-<p>물론 파레토 프런티어에 근접한 다른 PEFT 방법들도 확인해야 합니다. 지표는 난수성으로 인해 작은 차이가 있을 수 있습니다. 또한 다른 지표를 탐색해 보아야 합니다: 런타임 성능이 중요한가, 체크포인트의 크기가 중요한가? 드롭다운에서 관련 지표를 선택하면 그림이 크게 달라질 수 있습니다. 이미지 생성 벤치마크의 경우, 미세조정된 모델의 능력을 가늠할 수 있도록 생성 샘플 이미지를 확인해 보십시오.</p>
-
-<h1 id="제한점">제한점</h1>
-
-<blockquote>
-  <p>반대 의견: 그러나 벤치마크가 한 방법을 다른 방법보다 우월하게 만듭니다!</p>
-</blockquote>
-
-<p><code class="language-plaintext highlighter-rouge">PEFT</code> 벤치마크에 대해 제기될 수 있는 한 가지 비판은 하이퍼파라미터의 선택이 한 기술을 다른 기술보다 유리하게 만들 수 있다는 점입니다. 이것은 사실이며, 이만큼 많은 기술에 대해 완전하고 공정한 하이퍼파라미터 스윕을 수행하는 것은 어렵습니다. 다만 모든 사람이 자신의 실험을 <code class="language-plaintext highlighter-rouge">PEFT</code>에 기여하는 것은 매우 쉽습니다: 특정 PEFT 기법이 서로 다른 하이퍼파라미터를 선택함으로써 개선될 수 있다고 믿는다면 PR을 만들어 주세요! <a href="https://github.com/huggingface/peft/tree/main/method_comparison#creating-new-experiments">instructions on how to do that</a>를 추가했습니다. 비슷한 맥락으로, 완전히 새로운 벤치마크를 기여하고 싶다면 아이디어를 논의하기 위해 저희에게 연락해 주세요.</p>
-
-<p>벤치마크의 또 다른 문제는 특정 PEFT 기법의 능력을 완전히 반영하지 못할 수 있다는 점입니다. 우리는 다양한 차원에서 기법들을 비교하고 이러한 트레이드오프에 따라 최상위를 발견할 수 있도록 했습니다. 그러나 이렇게 해서 모든 면모를 포착하는 것은 불가능합니다. 예를 들어, Cartridges (<a href="https://huggingface.co/docs/peft/package_reference/cartridges">https://huggingface.co/docs/peft/package_reference/cartridges</a>)라는 PEFT 기법은 긴 프롬프트를 압축하기 위해 개발되었지만 벤치마크에는 측정되지 않았습니다. 선택에 영향을 줄 수 있는 다른 요인들도 있습니다. 예를 들면:</p>
-
-<ul>
-  <li>PEFT 기법에 따라 수정할 수 있는 특정 레이어 유형만 있습니다.</li>
-  <li>모든 PEFT 기법이 양자화된 기본 모델을 지원하는 것은 아니지만(하지만 <code class="language-plaintext highlighter-rouge">PEFT</code>에서 지원을 활발히 확장하고 있습니다).</li>
-  <li>일부 PEFT 기법은 <a href="https://huggingface.co/docs/peft/main/en/developer_guides/model_merging">merging of the adapter</a>을 통해 런타임 오버헤드를 줄일 수 있지만, 다른 기법은 그렇지 않습니다.</li>
-</ul>
-
-<p>벤치마크가 연구를 완전히 대신해 주지는 못하지만, 합리적인 방향성을 제공합니다.</p>
-
-<table align="center">
-  <tr>
-    <td align="center"><a href="https://huggingface.co/spaces/peft-internal-testing/PEFT-shop"><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/peft-shop.png" width="100%" /></a></td>
-  </tr>
-  <tr>
-    <td align="center"><em>Click on the image to peruse the PEFT shop to find the best PEFT technique for you. It allows you to browse not only by benchmark metrics but also by capabilities, like quantization support.</em></td>
-  </tr>
-</table>
-
-<blockquote>
-  <p>반대 의견: llama.cpp/vLLM/…은 LoRA만 지원합니다</p>
-</blockquote>
-
-<p>LoRA가 아닌 다른 PEFT 기법은 LoRA가 보는 다운스트림 패키지에서의 광범위한 지원을 받지 못하는 한계가 있습니다. 예를 들어 vLLM으로 모델을 서비스하고 싶다면 LoRA 체크포인트만 로드 가능합니다. 다행히도 <code class="language-plaintext highlighter-rouge">PEFT</code>는 이제 <a href="https://huggingface.co/docs/peft/main/en/package_reference/lora_conversion">converting other adapters into LoRA</a>를 지원합니다. 따라서 비-LoRA 체크포인트를 LoRA로 변환하여 vLLM이나 다른 다운스트림 패키지에서 사용할 수 있습니다.</p>
-
-<p>이를 테스트하기 위해 GraLoRA 기법을 사용한 이미지 어댑터를 LoRA 체크포인트로 변환했습니다. 변환 후 테스트 점수는 사실상 동일했습니다(유사도 0.702 → 0.694, 0.260 → 0.269). 아래는 프롬프트 “sks 해변의 고양이”에 대한 테스트 이미지입니다.</p>
-
-<table align="center">
-  <tr>
-    <td><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/lora-image-gen.png" style="width: 400px; border: 1px solid #ccc; padding: 4px;" /></td>
-    <td><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/gralora-image-gen-converted.png" style="width: 400px; border: 1px solid #ccc; padding: 4px;" /></td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center"><em>Left: Image generated by GraLoRA. Right: Image generated by the same GraLoRA checkpoint converted to a LoRA checkpoint. The images quality is comparable.</em></td>
-  </tr>
-</table>
-
-<p>현재 모든 PEFT 기법에 대한 변환을 구현한 것은 아니지만, 수요가 있다면 지원 범위를 확장하겠습니다.</p>
-
-<h1 id="conclusion-and-what-you-can-do">Conclusion and what <em>you</em> can do</h1>
-
-<p><code class="language-plaintext highlighter-rouge">PEFT</code> 패키지 작업을 하는 동안 LoRA가 많은 모멘텀을 갖고 있다는 것을 확인했습니다. 반면 다른 PEFT 기법들이 잠재적으로 더 나을 수 있습니다. 따라서 다양한 지표에서 다양한 PEFT 기법이 얼마나 잘 작동하는지 보다 객관적인 그림을 그릴 수 있도록 PEFT에 벤치마크를 추가하기로 했습니다.</p>
-
-<p>발견한 결과를 바탕으로 LoRA가 나쁜 선택은 아니지만 더 나은 선택이 있을 수 있다고 자신 있게 결론지을 수 있습니다. 특히 이미지 생성 벤치마크를 확인할 때 LoRA는 다른 기법들에 의해 능가됩니다. 지표 외에도 올바른 PEFT 기법을 선택할 때 고려해야 할 다른 요인이 있다고 논의했습니다. 그러나 그럼에도 불구하고 <code class="language-plaintext highlighter-rouge">PEFT</code>를 더 확장하여 LoRA와 다른 기법들 간의 기능적 동등성을 달성하려고 합니다.</p>
-
-<p>저희의 여정은 아직 끝나지 않았습니다. 기존 벤치마크를 확장하고 개선하며 앞으로 더 많은 벤치마크를 추가할 계획도 있습니다. 커뮤니티의 기여를 쉽게 할 수 있도록 보장했으며, 이것에 기여하고 싶다면 <a href="https://github.com/huggingface/peft/issues">issue on the <code class="language-plaintext highlighter-rouge">PEFT</code> repository</a>를 열고 기여 방법을 알려 주세요.</p>
-
-<p>이 글에서 한 가지라도 꼭 기억해야 한다면, LoRA가 귀하의 사용 사례에 맞는 PEFT 기법의 자동 기본값이 되어서는 안 된다는 점입니다. <code class="language-plaintext highlighter-rouge">PEFT</code>가 제공하는 통합 API 덕분에 한 PEFT 기법에서 다른 기법으로 바꾸는 것은 코드의 구성 하나만 바꾸는 것만큼 쉽습니다. 그리고 LoRA를 계속 고수하더라도 <code class="language-plaintext highlighter-rouge">PEFT</code>에서 지원하는 모든 변형들을 확인해 보세요: DoRA, rs-LoRA, LoRA-FA 등. 이 다른 기법들을 시도해 보면 놀라울 정도로 마음에 들 수 있습니다.</p>
-
-<p align="left">
-  <em>Example: Changing from LoRA to OFT using `PEFT`</em>
-</p>
-
-<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">from transformers import AutoModelForCausalLM
-</span><span class="gd">-from peft import LoraConfig, get_peft_model
-</span><span class="gi">+from peft import OFTConfig, get_peft_model
-</span><span class="err">
-</span><span class="p">base_model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-3.2-3B", dtype="bfloat16")
-</span><span class="gd">-config = LoraConfig(target_modules=["q_proj", "v_proj"])
-</span><span class="gi">+config = OFTConfig(target_modules=["q_proj", "v_proj"])
-</span><span class="p">model = get_peft_model(base_model, config)
-</span></code></pre></div></div>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</title><link href="/pr-preview/pr-172/paddleocr-transformers/" rel="alternate" type="text/html" title="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" /><published>2026-05-19T00:00:00+09:00</published><updated>2026-05-19T00:00:00+09:00</updated><id>/pr-preview/pr-172/paddleocr-transformers</id><content type="html" xml:base="/pr-preview/pr-172/paddleocr-transformers/"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#paddleocr-35-transformers-백엔드를-활용한-ocr-및-문서-파싱-작업-실행" id="markdown-toc-paddleocr-35-transformers-백엔드를-활용한-ocr-및-문서-파싱-작업-실행">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a>    <ul>
-      <li><a href="#what-changed" id="markdown-toc-what-changed">What changed?</a></li>
-      <li><a href="#왜-이것이-중요합니까" id="markdown-toc-왜-이것이-중요합니까">왜 이것이 중요합니까</a></li>
-      <li><a href="#quick-start" id="markdown-toc-quick-start">Quick start</a></li>
-      <li><a href="#언제-transformers-백엔드를-사용해야-하나요" id="markdown-toc-언제-transformers-백엔드를-사용해야-하나요">언제 Transformers 백엔드를 사용해야 하나요?</a></li>
-      <li><a href="#지금-바로-사용해-보세요" id="markdown-toc-지금-바로-사용해-보세요">지금 바로 사용해 보세요</a></li>
-      <li><a href="#리소스" id="markdown-toc-리소스">리소스</a></li>
-      <li><a href="#acknowledgements" id="markdown-toc-acknowledgements">Acknowledgements</a></li>
-    </ul>
-  </li>
-</ul>
-<!--toc-->
-<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/PaddlePaddle/paddleocr-transformers">PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a Transformers Backend</a>를 한국어로 번역한 글입니다.</em></p>
-
-<!-- Source: https://huggingface.co/blog/PaddlePaddle/paddleocr-transformers -->
-
-<hr />
-
-<!--
-Review instructions:
-- Verify the Korean translation against the source post.
-- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
--->
-
-<h1 id="paddleocr-35-transformers-백엔드를-활용한-ocr-및-문서-파싱-작업-실행">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</h1>
-
-<p>PaddleOCR 3.5은 OCR 및 문서 파싱 작업을 Hugging Face 생태계에 더 가깝게 가져옵니다. 이 릴리스로, 지원되는 PaddleOCR 모델은 다음과 같이 추론 백엔드로 Hugging Face Transformers를 설정해 실행할 수 있습니다:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>engine=
-"transformers"
-</code></pre></div></div>
-
-<p>PaddleOCR은 PP-OCRv5와 같은 OCR 모델 시리즈와 PaddleOCR-VL 1.5와 같은 문서 파싱 모델 시리즈를 계속 제공하는 한편, Transformers는 이들을 실행하기 위한 지원 백엔드 중 하나가 됩니다.</p>
-
-<p>Hugging Face Spaces에서 라이브 데모를 시도해 보세요:
-<a href="https://huggingface.co/spaces/PaddlePaddle/paddleocr-3.5-transformers-demo">https://huggingface.co/spaces/PaddlePaddle/paddleocr-3.5-transformers-demo</a></p>
-
-<h2 id="what-changed">What changed?</h2>
-
-<p>PaddleOCR 3.5는 더 유연한 추론 엔진 인터페이스를 도입합니다. 개발자는 <code class="language-plaintext highlighter-rouge">engine</code> 파라미터를 통해 백엔드를 선택하고, <code class="language-plaintext highlighter-rouge">engine_config</code>를 통해 백엔드별 옵션을 전달할 수 있습니다.</p>
-
-<p>실제로 이는 다음을 의미합니다:</p>
-
-<ul>
-  <li>
-    <p>이 작업들의 파이프라인은 PaddleOCR가 관리하므로, 개발자가 내부 구성 요소를 일일이 호출할 필요가 없습니다.</p>
-  </li>
-  <li>
-    <p>Transformers가 실행 가능한 추론 백엔드 중 하나가 되어, 지원되는 PaddleOCR 모델을 실행할 수 있습니다.</p>
-  </li>
-  <li>
-    <p>개발자는 <code class="language-plaintext highlighter-rouge">engine_config</code>를 통해 <code class="language-plaintext highlighter-rouge">dtype</code>, 디바이스 배치, 어텐션 구현 등 백엔드 관련 옵션을 구성할 수 있습니다.</p>
-  </li>
-</ul>
-
-<p>스택을 이해하는 간단한 방법:</p>
-
-<p>이 릴리스는 주로 추론 백엔드 계층에 관한 것입니다. PaddleOCR은 OCR 및 문서 파싱 기능을 계속 제공하고, Transformers는 Hugging Face 중심 환경에 자연스럽게 맞는 또 다른 백엔드 옵션을 제공합니다. 더 큰 Document AI 워크플로우는 여전히 개발자와 애플리케이션 빌더의 손에 있습니다.</p>
-
-<h2 id="왜-이것이-중요합니까">왜 이것이 중요합니까</h2>
-
-<p>RAG, Document AI, 및 문서 에이전트 애플리케이션의 경우, 어려운 부분은 종종 LLM 이전에 시작됩니다.</p>
-
-<p>개발자는 먼저 PDF, 스캔 문서, 스크린샷, 표, 차트, 수식, 그리고 복잡한 페이지 레이아웃을 신뢰할 수 있는 구조화 데이터로 변환해야 합니다. 이 수집 단계가 약하면, 다운스트림 LLM 워크플로우가 핵심 정보를 놓치거나 잘못된 컨텍스트를 검색하거나 신뢰할 수 없는 답변을 생성할 수 있습니다.</p>
-
-<p>PaddleOCR은 PP-OCRv5와 같은 OCR 시리즈 모델과 PaddleOCR-VL-1.5와 같은 문서 파싱 시리즈 모델을 제공함으로써 이 문서 수집 문제를 해결하는 데 도움을 줍니다.</p>
-
-<p>PaddleOCR 3.5를 통해 이 기능들은 이제 Transformer 중심의 스택과 더 쉽게 연결될 수 있습니다. 지원되는 PaddleOCR 모델은 Transformers 백엔드로 실행될 수 있고, PaddleOCR은 뒤에서 OCR 또는 문서 파싱 파이프라인을 계속 관리합니다.</p>
-
-<p>개발자에게 이는 통합 마찰이 줄고, 문서에서 다운스트림 RAG, 에이전트, 검색, 분석, 자동화 워크플로우로 이어지는 경로가 더 자연스러워짐을 의미합니다.</p>
-
-<h2 id="quick-start">Quick start</h2>
-
-<p>PaddleOCR 3.5, PaddleX, Transformers 및 하드웨어에 맞는 호환 PyTorch 빌드를 설치합니다.</p>
-
-<p>예를 들어 CUDA 12.6 환경에서:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
-python -m pip install 
-"paddleocr==3.5.0"
- 
-"paddlex==3.5.2"
- 
-"transformers&gt;=5.4.0"
-</code></pre></div></div>
-
-<p>CPU, ROCm, 또는 기타 환경의 경우 대상 하드웨어에 맞는 PyTorch 빌드를 설치합니다.</p>
-
-<p>다음과 같이 명령줄에서 실행합니다:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>paddleocr ocr \
-  -i https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/general_ocr_002.png \
-  --device gpu:0 \
-  --engine transformers
-</code></pre></div></div>
-
-<p>또는 Python API를 사용합니다:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from
- paddleocr 
-import
- PaddleOCR
-
-pipeline = PaddleOCR(
-    device=
-"gpu:0"
-,
-    engine=
-"transformers"
-,
-    use_doc_orientation_classify=
-False
-,
-    use_doc_unwarping=
-False
-,
-    use_textline_orientation=
-False
-,
-    engine_config={
-        
-"dtype"
-: 
-"float32"
-,
-    },
-)
-
-results = pipeline.predict(
-    
-"https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/general_ocr_002.png"
-
-)
-
-
-for
- result 
-in
- results:
-    
-print
-(result)
-</code></pre></div></div>
-
-<p>Hugging Face Space는 broad compatibility를 위해 <code class="language-plaintext highlighter-rouge">float32</code>를 사용합니다. 자체 하드웨어의 경우, 백엔드별 옵션을 <code class="language-plaintext highlighter-rouge">engine_config</code>를 통해 조정할 수 있습니다:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>engine_config = {
-    
-"dtype"
-: 
-"bfloat16"
-,
-    
-"device_type"
-: 
-"gpu"
-,
-    
-"device_id"
-: 
-0
-,
-    
-"attn_implementation"
-: 
-"sdpa"
-,
-}
-</code></pre></div></div>
-
-<p>최적의 구성은 모델, 하드웨어, 배포 환경에 따라 다릅니다.</p>
-
-<h2 id="언제-transformers-백엔드를-사용해야-하나요">언제 Transformers 백엔드를 사용해야 하나요?</h2>
-
-<p>PaddleOCR의 OCR 및 문서 파싱 기능이 Hugging Face 중심 스택에 더 자연스럽게 맞도록 하고 싶을 때 Transformers 백엔드를 사용합니다.</p>
-
-<p>이는 특히 RAG, Document AI, 검색, 분석, 또는 에이전트 애플리케이션을 구축 중이며 모델 로딩, 실험, 배포, 또는 모델 아카이브 관리에 이미 PyTorch / Transformers 인프라를 의존하고 있을 때 유용합니다.</p>
-
-<p>Transformers 백엔드는 다음과 같이 원할 때 적합합니다:</p>
-
-<ul>
-  <li>
-    <p>Transformers를 이미 사용하는 팀에게 더 친숙한 개발 경험,</p>
-  </li>
-  <li>
-    <p>지원되는 PaddleOCR 모델의 Hub 호환 모델 검색 및 배포,</p>
-  </li>
-  <li>
-    <p>기존 PyTorch / Transformers 서비스와의 통합 용이성.</p>
-  </li>
-</ul>
-
-<p>OCR 또는 문서 파싱 처리량을 최대화하는 것이 우선일 때는 PaddleOCR의 기본 <code class="language-plaintext highlighter-rouge">paddle_static</code> 백엔드가 일반적으로 권장되는 선택입니다.</p>
-
-<p>이 릴리스는 한 백엔드를 다른 백엔드로 교체하는 것에 관한 것이 아니라, 개발자에게 더 많은 유연성을 제공하는 데 관한 것입니다: OCR 및 문서 파싱 기능은 PaddleOCR로 제공하고, 인퍼런스 백엔드는 스택에 가장 잘 맞는 것을 선택하면 됩니다.</p>
-
-<h2 id="지금-바로-사용해-보세요">지금 바로 사용해 보세요</h2>
-
-<p>PaddleOCR 3.5 Transformer 데모를 Hugging Face Spaces에서 체험해 보세요:</p>
-
-<p><a href="https://huggingface.co/spaces/PaddlePaddle/paddleocr-3.5-transformers-demo">https://huggingface.co/spaces/PaddlePaddle/paddleocr-3.5-transformers-demo</a></p>
-
-<p>Hub에서 PaddleOCR 모델을 둘러보세요:</p>
-
-<p><a href="https://huggingface.co/PaddlePaddle/models">https://huggingface.co/PaddlePaddle/models</a></p>
-
-<p>PaddleOCR 3.5는 OCR 및 문서 파싱 기능을 Transformers 중심 워크플로우에 더 가까이 가져오면서, 개발자에게 더 큰 Document AI 애플리케이션을 구축할 자유를 제공합니다.</p>
-
-<h2 id="리소스">리소스</h2>
-
-<ul>
-  <li>
-    <p>PaddleOCR 문서: <a href="https://www.paddleocr.ai/">https://www.paddleocr.ai/</a></p>
-  </li>
-  <li>
-    <p>PaddleOCR GitHub: <a href="https://github.com/PaddlePaddle/PaddleOCR">https://github.com/PaddlePaddle/PaddleOCR</a></p>
-  </li>
-  <li>
-    <p>Hugging Face의 PaddlePaddle 조직: <a href="https://huggingface.co/PaddlePaddle">https://huggingface.co/PaddlePaddle</a></p>
-  </li>
-  <li>
-    <p>Spaces의 PaddleOCR 3.5 Transformers 데모: <a href="https://huggingface.co/spaces/PaddlePaddle/paddleocr-3.5-transformers-demo">https://huggingface.co/spaces/PaddlePaddle/paddleocr-3.5-transformers-demo</a></p>
-  </li>
-</ul>
-
-<h2 id="acknowledgements">Acknowledgements</h2>
-
-<p>PaddleOCR 3.5 Transformers 통합을 지원해 주신 Hugging Face 엔지니어들에게 진심으로 감사합니다.</p>
-
-<p>관련 PR의 검토 및 병합을 포함한 끝에서 끝까지의 참여를 해주신 Anton Vlasjuk 에게 특별한 감사를 드립니다.</p>
-
-<p>또한 가치 있는 PR 리뷰와 피드백을 주신 Raushan Turganbay 및 Yoni Gozlan께도 감사드립니다.</p>
-
-<p>그들의 안내가 Hugging Face 커뮤니티의 통합 품질, 문서화, 개발자 경험을 개선하는 데 도움이 되었습니다.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a Transformers Backend를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">n8n으로 번역 MCP Server 워크플로우 구축하기: 실전 트러블슈팅과 실행 방식 비교</title><link href="/pr-preview/pr-172/hf-translation-mcp-n8n/" rel="alternate" type="text/html" title="n8n으로 번역 MCP Server 워크플로우 구축하기: 실전 트러블슈팅과 실행 방식 비교" /><published>2026-01-05T00:00:00+09:00</published><updated>2026-01-05T00:00:00+09:00</updated><id>/pr-preview/pr-172/hf-translation-mcp-n8n</id><content type="html" xml:base="/pr-preview/pr-172/hf-translation-mcp-n8n/"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#들어가며" id="markdown-toc-들어가며">들어가며</a></li>
-  <li><a href="#n8n-번역-mcp-server-워크플로우-소개" id="markdown-toc-n8n-번역-mcp-server-워크플로우-소개">n8n 번역 MCP Server 워크플로우 소개</a></li>
-  <li><a href="#n8n-워크플로우-구축-결과" id="markdown-toc-n8n-워크플로우-구축-결과">n8n 워크플로우 구축 결과</a>    <ul>
-      <li><a href="#번역-워크플로우" id="markdown-toc-번역-워크플로우">번역 워크플로우</a></li>
-      <li><a href="#번역-워크플로우-결과물" id="markdown-toc-번역-워크플로우-결과물">번역 워크플로우 결과물</a></li>
-      <li><a href="#github-pr-워크플로우" id="markdown-toc-github-pr-워크플로우">GitHub PR 워크플로우</a></li>
-      <li><a href="#pr-결과물" id="markdown-toc-pr-결과물">PR 결과물</a></li>
-      <li><a href="#pr-review-워크플로우" id="markdown-toc-pr-review-워크플로우">PR Review 워크플로우</a></li>
-    </ul>
-  </li>
-  <li><a href="#실행-방식-비교-ai-chat-client-vs-n8n" id="markdown-toc-실행-방식-비교-ai-chat-client-vs-n8n">실행 방식 비교: AI Chat Client vs n8n</a>    <ul>
-      <li><a href="#ai-chat-client-직접-실행-hugging-face-chat-claude-desktop-gemini-cli" id="markdown-toc-ai-chat-client-직접-실행-hugging-face-chat-claude-desktop-gemini-cli">AI Chat Client 직접 실행 (Hugging Face Chat, Claude Desktop, Gemini CLI)</a></li>
-      <li><a href="#n8n-워크플로우-실행" id="markdown-toc-n8n-워크플로우-실행">n8n 워크플로우 실행</a></li>
-      <li><a href="#하이브리드-접근법" id="markdown-toc-하이브리드-접근법">하이브리드 접근법</a></li>
-    </ul>
-  </li>
-  <li><a href="#트러블슈팅-실전에서-마주친-문제들" id="markdown-toc-트러블슈팅-실전에서-마주친-문제들">트러블슈팅: 실전에서 마주친 문제들</a>    <ul>
-      <li><a href="#1-gradio-mcp-server는-선택적-노출이-불가능하다" id="markdown-toc-1-gradio-mcp-server는-선택적-노출이-불가능하다">1. Gradio MCP Server는 선택적 노출이 불가능하다</a></li>
-      <li><a href="#2-n8n-tool-call-id로-인한-schema-checking-실패" id="markdown-toc-2-n8n-tool-call-id로-인한-schema-checking-실패">2. n8n Tool Call ID로 인한 Schema Checking 실패</a></li>
-      <li><a href="#3-n8n에서-tool-description-필수-입력" id="markdown-toc-3-n8n에서-tool-description-필수-입력">3. n8n에서 Tool Description 필수 입력</a></li>
-      <li><a href="#4-gradio의-mcp-tools-success-rate-대시보드" id="markdown-toc-4-gradio의-mcp-tools-success-rate-대시보드">4. Gradio의 MCP Tools Success Rate 대시보드</a></li>
-      <li><a href="#5-notion-api-rich-text의-2000자-제한" id="markdown-toc-5-notion-api-rich-text의-2000자-제한">5. Notion API: Rich Text의 2000자 제한</a></li>
-      <li><a href="#6-더-똑똑한-ai-agent의-필요성" id="markdown-toc-6-더-똑똑한-ai-agent의-필요성">6. 더 똑똑한 AI Agent의 필요성</a></li>
-      <li><a href="#7-유연한-재시도-어려움-및-결과물-품질-문제" id="markdown-toc-7-유연한-재시도-어려움-및-결과물-품질-문제">7. 유연한 재시도 어려움 및 결과물 품질 문제</a></li>
-      <li><a href="#8-max-iteration의-함정" id="markdown-toc-8-max-iteration의-함정">8. Max Iteration의 함정</a></li>
-    </ul>
-  </li>
-  <li><a href="#마치며" id="markdown-toc-마치며">마치며</a></li>
-</ul>
-<!--toc-->
-<p><em>이 글은 Hugging Face 문서 번역 프로젝트의 MCP Server를 활용한 n8n 워크플로우 구축 경험을 담은 글입니다.</em></p>
-
-<hr />
-
-<h2 id="들어가며">들어가며</h2>
-
-<p>MCP(Model Context Protocol) Server를 활용한 번역 워크플로우를 구축하면서, Claude Desktop Client로 직접 실행하는 방식과 n8n을 통한 워크플로우 자동화 방식을 모두 경험해보았습니다. 이 글에서는 n8n 워크플로우 구축 과정에서 마주친 실질적인 문제들과 해결 방법, 그리고 두 실행 방식의 장단점을 정리해보겠습니다.</p>
-
-<h2 id="n8n-번역-mcp-server-워크플로우-소개">n8n 번역 MCP Server 워크플로우 소개</h2>
-
-<p>이번에 구축한 워크플로우는 Gradio 기반의 번역 MCP Server를 n8n과 연동하여, 텍스트를 자동으로 번역하고 PR을 등록하는 시스템입니다.</p>
-
-<p><strong>주요 구성 요소:</strong></p>
-<ul>
-  <li><strong>Gradio MCP Server</strong>: 번역 기능을 MCP Tool로 제공</li>
-  <li><strong>n8n Workflow</strong>: AI Agent를 통해 번역 작업을 오케스트레이션</li>
-  <li><strong>GitHub Integration</strong>: 번역 결과를 자동으로 문서화하고 PR 업로드</li>
-</ul>
-
-<p><strong>기본 워크플로우:</strong></p>
-<ol>
-  <li>번역할 텍스트 검색</li>
-  <li>n8n AI Agent가 MCP Server의 번역 Tool 호출</li>
-  <li>번역 결과를 GitHub PR로 자동 저장</li>
-</ol>
-
-<h2 id="n8n-워크플로우-구축-결과">n8n 워크플로우 구축 결과</h2>
-
-<p>초안으로 구축한 n8n 워크플로우를 먼저 보여드리겠습니다.</p>
-
-<h3 id="번역-워크플로우">번역 워크플로우</h3>
-<p>AI Agent와 AWS Bedrock Chat Model을 사용하여 Claude 모델을 연결하였습니다. 이 AI Agent는 번역 문서 검색 MCP Server와 번역 MCP Server가 Tool로 연결되어 있습니다. 따라서 번역할 문서를 검색하고 번역 결과물을 Notion 페이지로 저장하는 워크플로우입니다.</p>
-
-<div align="center">
-    <img src="../assets/images/blog/posts/2026-01-05-hf-translation-mcp-n8n/translate.png" width="500" alt="번역 워크플로우 구조" />
-    <p><em>번역 문서 검색 및 Notion 저장 워크플로우</em></p>
-</div>
-
-<h3 id="번역-워크플로우-결과물">번역 워크플로우 결과물</h3>
-<p>초기에 Notion을 사용했던 이유는, Notion에서 번역 결과물이 저장된 이후, 사람이 편집하기 쉬운 UI를 가지고 있기 때문이었습니다. 이후에 Notion Tool을 사용하지 않게 되었는데, 트러블슈팅 섹션에서 이유를 말씀드리겠습니다.</p>
-
-<div align="center">
-    <img src="../assets/images/blog/posts/2026-01-05-hf-translation-mcp-n8n/translation_result.png" width="500" alt="Notion에 저장된 번역 결과" />
-    <p><em>Notion 페이지에 저장된 번역 결과물</em></p>
-</div>
-
-<h3 id="github-pr-워크플로우">GitHub PR 워크플로우</h3>
-<p>AI Agent와 Notion Tool 및 PR 업로드 MCP Server가 연결되어 있습니다. 앞 단계인 번역 워크플로우가 실행된 이후, Notion 데이터베이스에서 번역 결과물을 받아와서 PR로 업로드를 자동화해줍니다.</p>
-
-<div align="center">
-    <img src="../assets/images/blog/posts/2026-01-05-hf-translation-mcp-n8n/pr_upload.png" width="500" alt="GitHub PR 업로드 워크플로우" />
-    <p><em>번역 결과를 GitHub PR로 업로드하는 워크플로우</em></p>
-</div>
-
-<h3 id="pr-결과물">PR 결과물</h3>
-<p>PR 워크플로우로 생성한 PR 결과물입니다.</p>
-
-<div align="center">
-    <img src="../assets/images/blog/posts/2026-01-05-hf-translation-mcp-n8n/pr_result.png" width="500" alt="생성된 GitHub PR" />
-    <p><em>자동으로 생성된 번역 PR</em></p>
-</div>
-
-<h3 id="pr-review-워크플로우">PR Review 워크플로우</h3>
-<p>PR URL을 AI Agent에게 알려주면, PR Review 코멘트를 남겨주는 MCP Server를 실행합니다.</p>
-
-<div align="center">
-    <img src="../assets/images/blog/posts/2026-01-05-hf-translation-mcp-n8n/review.png" width="500" alt="PR 리뷰 워크플로우" />
-    <p><em>자동 PR 리뷰 워크플로우</em></p>
-</div>
-
-<h2 id="실행-방식-비교-ai-chat-client-vs-n8n">실행 방식 비교: AI Chat Client vs n8n</h2>
-
-<p>워크플로우 구축 과정에서 마주친 여러 문제들을 이야기하기 전에, 먼저 n8n을 사용하게 된 배경을 얘기해보려고 합니다.</p>
-
-<div align="center">
-    <img src="../assets/images/blog/posts/2026-01-05-hf-translation-mcp-n8n/meme.jpg" width="500" alt="AI 자동화에 대한 기대와 현실을 보여주는 밈" />
-    <p><em>AI 자동화에 대한 기대와 현실</em></p>
-</div>
-
-<p>인터넷에서 밈처럼 돌아다니는 이 사진을 본 적이 있으실까요? 저는 MCP Server를 개발하면서 이 사진에 공감하게 되었습니다.</p>
-
-<p>번역 MCP Server를 구현하고 나서, Hugging Face Chat, Claude Desktop, Gemini CLI 등과 같은 AI Chat Client에 직접 MCP Server를 연결하고 테스팅을 해보았습니다. 이 과정에서 사람이 직접 Client와 소통하고 참여해야만 이 MCP Server들이 사용된다고 느껴졌습니다. 사람의 손을 타지 않고 이러한 워크플로우가 돌아간다면 MCP Server의 사용성이 더 높아질 거라 기대되었습니다.</p>
-
-<p>따라서 사람 대신에 워크플로우를 돌릴 수 있게 MCP Server Orchestration Tool을 찾아다니다가, 직접 MCP Client를 개발할 필요가 없는 노코드형 툴인 n8n을 선택하게 되었습니다.</p>
-
-<h3 id="ai-chat-client-직접-실행-hugging-face-chat-claude-desktop-gemini-cli">AI Chat Client 직접 실행 (Hugging Face Chat, Claude Desktop, Gemini CLI)</h3>
-
-<p><strong>장점:</strong></p>
-
-<ol>
-  <li><strong>빠른 프로토타이핑</strong>: MCP Server 설정 파일만 수정하면 즉시 테스트 가능</li>
-  <li><strong>자연스러운 대화형 인터페이스</strong>: 복잡한 요청도 자연어로 표현</li>
-  <li><strong>컨텍스트 유지</strong>: 대화 흐름 속에서 이전 결과를 자연스럽게 참조</li>
-  <li><strong>높은 번역 품질</strong>: Claude의 Full Context를 활용한 일관된 번역</li>
-  <li><strong>디버깅 용이</strong>: 실시간으로 Claude의 사고 과정 확인 가능</li>
-</ol>
-
-<p><strong>단점:</strong></p>
-
-<ol>
-  <li><strong>수동 작업 필요</strong>: 매번 사용자가 명령을 입력해야 함</li>
-  <li><strong>자동화 불가</strong>: 반복 작업이나 스케줄링 불가능</li>
-  <li><strong>확장성 제한</strong>: 대량 처리나 병렬 처리 어려움</li>
-</ol>
-
-<p><strong>적합한 사용 사례:</strong></p>
-<ul>
-  <li>일회성 번역 작업</li>
-  <li>복잡한 맥락이 필요한 번역</li>
-  <li>빠른 실험과 테스트</li>
-  <li>대화형 번역 검토 및 수정</li>
-</ul>
-
-<h3 id="n8n-워크플로우-실행">n8n 워크플로우 실행</h3>
-
-<p><strong>장점:</strong></p>
-
-<ol>
-  <li><strong>완전 자동화</strong>: 트리거만 설정하면 자동 실행</li>
-  <li><strong>확장성</strong>: 대량의 문서를 병렬로 처리 가능</li>
-  <li><strong>통합성</strong>: Notion, Slack, GitHub 등 다양한 서비스와 연동</li>
-  <li><strong>재사용성</strong>: 한 번 구축한 워크플로우를 반복 사용</li>
-  <li><strong>스케줄링</strong>: 정해진 시간에 자동 실행</li>
-</ol>
-
-<p><strong>단점:</strong></p>
-
-<ol>
-  <li><strong>초기 구축 비용</strong>: 워크플로우 설계와 구현에 시간 소요</li>
-  <li><strong>제한된 유연성</strong>: 정해진 로직 외의 요청 처리 어려움</li>
-  <li><strong>복잡한 디버깅</strong>: 문제 발생 시 여러 노드를 확인해야 함</li>
-  <li><strong>Max Iteration 제약</strong>: 복잡한 작업은 분할 필요</li>
-  <li><strong>Agent 지능 한계</strong>: 예상치 못한 상황에 유연하게 대응하도록 사람이 도와줄 수 없음</li>
-</ol>
-
-<p><strong>적합한 사용 사례:</strong></p>
-<ul>
-  <li>정기적인 대량 번역 작업</li>
-  <li>다단계 자동화 프로세스</li>
-  <li>번역 결과의 자동 배포 및 알림</li>
-</ul>
-
-<h3 id="하이브리드-접근법">하이브리드 접근법</h3>
-
-<p>실제로는 두 방식을 상황에 맞게 조합하여 사용하였습니다. 개발 초창기에는 MCP Server의 테스트를 위해 AI Chat Client들을 사용하였고, 이후 n8n으로 자동화를 도입했습니다.</p>
-
-<p><strong>1단계: Desktop Client로 프로토타입</strong></p>
-<ul>
-  <li>새로운 번역 요구사항 테스트</li>
-  <li>최적의 프롬프트와 파라미터 발견</li>
-  <li>번역 품질 확인</li>
-</ul>
-
-<p><strong>2단계: n8n으로 자동화</strong></p>
-<ul>
-  <li>검증된 프로세스를 워크플로우로 구현</li>
-  <li>반복 작업 자동화</li>
-  <li>모니터링 및 개선</li>
-</ul>
-
-<p><strong>3단계: 피드백 루프</strong></p>
-<ul>
-  <li>n8n 실행 결과 분석</li>
-  <li>문제 발생 시 Desktop Client로 재검증</li>
-  <li>워크플로우 개선 및 업데이트</li>
-</ul>
-
-<p>이제 이러한 배경을 이해한 상태에서, Gradio MCP Server를 활용한 n8n 워크플로우 구축 과정에서 실제로 마주친 문제들을 살펴보겠습니다.</p>
-
-<h2 id="트러블슈팅-실전에서-마주친-문제들">트러블슈팅: 실전에서 마주친 문제들</h2>
-
-<h3 id="1-gradio-mcp-server는-선택적-노출이-불가능하다">1. Gradio MCP Server는 선택적 노출이 불가능하다</h3>
-
-<p><strong>문제 상황:</strong>
-필요하지 않은 Tool이 등록되면 Agent에게 혼란을 줄 수 있기 때문에, 처음에는 <code class="language-plaintext highlighter-rouge">app.py</code>에 정의된 여러 함수 중 특정 함수만 MCP Tool로 노출하려고 했습니다. 하지만 Gradio는 그런 방식으로 동작하지 않았습니다.</p>
-
-<p><strong>원인:</strong>
-Gradio 공식 문서를 확인해보니, <code class="language-plaintext highlighter-rouge">demo.launch(mcp_server=True)</code> 옵션을 활성화하면 <strong>앱에 정의된 모든 인터페이스 함수가 자동으로 MCP Tool로 변환</strong>됩니다. 함수 단위로 선택적으로 제외하는 설정은 공식적으로 제공되지 않습니다.</p>
-
-<p><strong>해결 방법:</strong></p>
-<ul>
-  <li>MCP Server로 노출하고 싶은 함수만 별도의 <code class="language-plaintext highlighter-rouge">app.py</code> 파일에 분리</li>
-  <li>또는 노출하고 싶지 않은 함수는 내부 헬퍼 함수로 구조 변경</li>
-  <li>필요한 경우 여러 개의 Gradio 앱을 만들어 각각 다른 포트로 실행</li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 잘못된 접근 (특정 함수만 노출 불가)
-# app.py
-</span><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">text</span><span class="p">):</span> <span class="bp">...</span>
-<span class="k">def</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">text</span><span class="p">):</span> <span class="p">...</span>  <span class="c1"># 이것도 함께 노출됨
-</span>
-<span class="n">demo</span><span class="p">.</span><span class="nf">launch</span><span class="p">(</span><span class="n">mcp_server</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-<span class="c1"># 올바른 접근 (필요한 함수만 별도 파일로 분리)
-# app.py
-</span><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">text</span><span class="p">):</span> <span class="bp">...</span>
-<span class="n">demo</span><span class="p">.</span><span class="nf">launch</span><span class="p">(</span><span class="n">mcp_server</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  <span class="c1"># translate만 노출됨
-</span></code></pre></div></div>
-
-<h3 id="2-n8n-tool-call-id로-인한-schema-checking-실패">2. n8n Tool Call ID로 인한 Schema Checking 실패</h3>
-
-<p><strong>문제 상황:</strong>
-n8n에서 MCP Tool을 호출할 때 스키마 검증 에러가 발생했습니다.</p>
-
-<div align="center">
-    <img src="../assets/images/blog/posts/2026-01-05-hf-translation-mcp-n8n/toolcallid.png" width="500" alt="toolCallId 에러 화면" />
-    <p><em>toolCallId 파라미터로 인한 Schema 검증 실패</em></p>
-</div>
-
-<p><strong>원인:</strong>
-<a href="https://github.com/gradio-app/gradio/blob/main/client/python/README.md">Gradio Python Client</a>는 입력 파라미터의 타입과 구조를 엄격하게 검증합니다. 문제는 n8n에서 AI Agent가 Tool을 호출할 때마다 고유한 <code class="language-plaintext highlighter-rouge">toolCallId</code>가 자동으로 생성되어 파라미터에 주입된다는 것이었습니다. Gradio는 정의되지 않은 이 파라미터를 거부하면서 Schema 검증이 실패했습니다. 이는 현재 n8n의 알려진 이슈(<a href="https://github.com/n8n-io/n8n/issues/21716">n8n-io/n8n#21716</a>)와 동일했습니다.</p>
-
-<p><strong>해결 방법:</strong></p>
-<ul>
-  <li>모든 Tool 정의에 <code class="language-plaintext highlighter-rouge">toolCallId: str = None</code> 파라미터를 추가하여 n8n이 주입하는 값을 수용</li>
-  <li>Gradio 앱 정의 시 명확한 타입 힌트 사용</li>
-  <li>테스트 단계에서 Gradio의 <code class="language-plaintext highlighter-rouge">/gradio_api/mcp/schema</code> 엔드포인트로 정확한 스키마 확인</li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># n8n의 toolCallId를 수용하도록 수정
-</span><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span>
-    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">source_lang</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sh">"</span><span class="s">en</span><span class="sh">"</span><span class="p">,</span>
-    <span class="n">target_lang</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sh">"</span><span class="s">ko</span><span class="sh">"</span><span class="p">,</span>
-    <span class="n">toolCallId</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c1"># n8n에서 주입되는 파라미터
-</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="c1"># toolCallId는 내부적으로 사용하지 않음
-</span>    <span class="bp">...</span>
-</code></pre></div></div>
-
-<h3 id="3-n8n에서-tool-description-필수-입력">3. n8n에서 Tool Description 필수 입력</h3>
-
-<p><strong>문제 상황:</strong>
-MCP Server를 n8n에 연결했을 때, Tool들이 제대로 인식되지 않는 현상이 발생했습니다.</p>
-
-<div align="center">
-    <img src="../assets/images/blog/posts/2026-01-05-hf-translation-mcp-n8n/description.png" width="500" alt="toolCallId 에러 화면" />
-    <p><em>toolCallId 파라미터로 인한 Schema 검증 실패</em></p>
-</div>
-
-<p><strong>원인:</strong>
-n8n의 AI Agent는 각 Tool의 <strong>Description</strong>을 매우 중요하게 취급합니다. Gradio에서 함수만 정의하고 설명을 생략하면, 에러가 나는 경우가 있습니다.</p>
-
-<p><strong>해결 방법:</strong></p>
-<ul>
-  <li>Gradio 인터페이스 생성 시 <code class="language-plaintext highlighter-rouge">description</code> 파라미터를 명확하게 작성</li>
-  <li>각 파라미터에도 설명 추가</li>
-  <li>Tool이 무엇을 하는지, 언제 사용해야 하는지 구체적으로 명시</li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">gradio</span> <span class="k">as</span> <span class="n">gr</span>
-
-<span class="c1"># 설명이 없는 경우 (❌)
-</span><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target_lang</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sh">"</span><span class="s">ko</span><span class="sh">"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="bp">...</span>
-
-<span class="n">demo</span> <span class="o">=</span> <span class="n">gr</span><span class="p">.</span><span class="nc">Interface</span><span class="p">(</span><span class="n">fn</span><span class="o">=</span><span class="n">translate</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">)</span>
-
-<span class="c1"># 설명이 있는 경우 (✅)
-</span><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target_lang</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sh">"</span><span class="s">ko</span><span class="sh">"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sh">"""</span><span class="s">주어진 텍스트를 목표 언어로 번역합니다.
-    
-    Args:
-        text: 번역할 텍스트.
-        target_lang: 어떤 언어로 번역할지.
-    </span><span class="sh">"""</span>
-    <span class="bp">...</span>
-
-<span class="n">demo</span> <span class="o">=</span> <span class="n">gr</span><span class="p">.</span><span class="nc">Interface</span><span class="p">(</span>
-    <span class="n">fn</span><span class="o">=</span><span class="n">translate</span><span class="p">,</span>
-    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span>
-        <span class="n">gr</span><span class="p">.</span><span class="nc">Textbox</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="sh">"</span><span class="s">번역할 텍스트를 입력하세요</span><span class="sh">"</span><span class="p">),</span>
-        <span class="n">gr</span><span class="p">.</span><span class="nc">Textbox</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="sh">"</span><span class="s">target_lang</span><span class="sh">"</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="sh">"</span><span class="s">목표 언어 코드 (예: ko, en, ja)</span><span class="sh">"</span><span class="p">)</span>
-    <span class="p">],</span>
-    <span class="n">outputs</span><span class="o">=</span><span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">,</span>
-    <span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">번역 도구</span><span class="sh">"</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">텍스트를 지정한 언어로 번역하는 Tool입니다. 기술 문서나 일반 텍스트 번역에 사용하세요.</span><span class="sh">"</span>
-<span class="p">)</span>
-</code></pre></div></div>
-
-<p><strong>추가 팁:</strong></p>
-<ul>
-  <li>Description은 AI Agent가 Tool 선택의 기준으로 사용하므로, 구체적일수록 좋습니다.</li>
-  <li>“이 Tool은 ~할 때 사용하세요”와 같이 사용 시나리오를 포함하면 더욱 효과적입니다.</li>
-</ul>
-
-<h3 id="4-gradio의-mcp-tools-success-rate-대시보드">4. Gradio의 MCP Tools Success Rate 대시보드</h3>
-
-<p><strong>발견:</strong>
-Gradio Space에서 MCP Server를 사용하다 보니, 각 Tool의 <strong>성공률(Success Rate)</strong>을 실시간으로 보여주는 대시보드가 있다는 것을 발견했습니다.</p>
-
-<div align="center">
-    <img src="../assets/images/blog/posts/2026-01-05-hf-translation-mcp-n8n/dashboard.png" width="500" alt="Gradio Success Rate 대시보드" />
-    <p><em>각 Tool의 성공률을 보여주는 Gradio 대시보드</em></p>
-</div>
-
-<p><strong>활용 방법:</strong></p>
-<ul>
-  <li>어떤 Tool이 자주 실패하는지 한눈에 파악 가능</li>
-  <li>워크플로우 개선 시 우선순위 결정에 활용</li>
-  <li>프로덕션 환경에서 모니터링 지표로 사용</li>
-</ul>
-
-<p>이 기능 덕분에 번역 Tool의 성공률을 모니터링하고, 에러 패턴을 추적하여 각 MCP Server를 개선할 수 있었습니다.</p>
-
-<h3 id="5-notion-api-rich-text의-2000자-제한">5. Notion API: Rich Text의 2000자 제한</h3>
-
-<p><strong>문제 상황:</strong>
-긴 번역 결과를 Notion 페이지로 저장하려고 할 때 에러가 발생했습니다.</p>
-
-<p><strong>원인:</strong>
-<a href="https://developers.notion.com/reference/request-limits#size-limits">Notion API 문서</a>를 확인해보니, Rich Text 블록은 <strong>최대 2000자까지만 허용</strong>됩니다. 저희 프로젝트의 경우 번역 결과물이 2000자를 넘는 경우가 자주 발생했기 때문에 다른 방식이 필요했습니다.</p>
-
-<p><strong>해결 방법:</strong></p>
-<ul>
-  <li>현서님께서 Notion Tool 대신 GitHub MCP Server로 대체하는 방식을 찾아주셨습니다</li>
-  <li>GitHub로 파일을 바로 저장하고, 번역 결과물 또한 GitHub에서 읽어오도록 변경</li>
-  <li>Notion UI의 편리함을 포기해야 했지만, Notion API의 사이즈 제한 문제로 꼭 필요한 대체였습니다</li>
-</ul>
-
-<div align="center">
-    <img src="../assets/images/blog/posts/2026-01-05-hf-translation-mcp-n8n/github.png" width="500" alt="GitHub 기반으로 변경된 워크플로우" />
-    <p><em>Notion 대신 GitHub를 사용하도록 변경된 워크플로우</em></p>
-</div>
-
-<p><strong>참고사항:</strong>
-만약 Notion을 사용해야 한다면, 2000자가 넘지 않는 콘텐츠 저장을 대상으로 하는지 미리 확인하시기 바랍니다.</p>
-
-<h3 id="6-더-똑똑한-ai-agent의-필요성">6. 더 똑똑한 AI Agent의 필요성</h3>
-
-<p><strong>문제 인식:</strong>
-2000자 제한 문제를 해결하면서 근본적인 의문이 들었습니다. “AI Agent가 Tool 사용 중 제약을 만나면 스스로 대응할 수는 없을까?”</p>
-
-<p><strong>현재 상황:</strong></p>
-<ul>
-  <li>2000자 제한을 넘으면 에러 발생</li>
-  <li>개발자가 미리 분할 로직을 구현해야 함</li>
-  <li>Agent는 단순히 주어진 Tool을 실행만 함</li>
-</ul>
-
-<p><strong>이상적인 시나리오:</strong>
-똑똑한 AI Agent라면 이렇게 동작해야 하지 않을까요?</p>
-<ol>
-  <li>번역 결과가 2000자를 넘는다는 것을 인지</li>
-  <li>자동으로 텍스트를 분할</li>
-  <li>Notion Tool을 여러 번 호출하여 순차적으로 저장</li>
-  <li>전체 작업 완료 후 성공 보고</li>
-</ol>
-
-<p><strong>시사점:</strong>
-현재의 n8n 워크플로우 구조는 정해진 시퀀스를 실행하는 데 최적화되어 있습니다. 하지만 앞으로는 <strong>도구의 제약을 이해하고 동적으로 대응할 수 있는 더 지능적인 Agent</strong>가 필요해 보입니다. 이는 단순한 워크플로우 엔진을 넘어서는 차원의 문제입니다.</p>
-
-<h3 id="7-유연한-재시도-어려움-및-결과물-품질-문제">7. 유연한 재시도 어려움 및 결과물 품질 문제</h3>
-
-<p><strong>문제 상황:</strong>
-n8n으로 워크플로우를 실행하면 AI Chat Client로 직접 실행할 때보다 번역 과정에서 사람의 개입이 제한적입니다. 사람은 MCP를 직접 실행하면서 중간에 개입하여 결과물의 품질을 높이기 위해 고쳐달라고 요청하거나 재시도를 요청할 수 있습니다.</p>
-
-<p>반면에, n8n 워크플로우는 Chat History처럼 중간 결과물이 메모리에 저장되어 있지 않다보니 워크플로우를 중간부터 재시도하지 못하고, 처음부터 다시 실행해야 합니다.</p>
-
-<p><strong>해결 시도:</strong></p>
-<ul>
-  <li>시스템 프롬프트에 “완전한 번역 제공” 명시</li>
-  <li>프롬프트 최적화로 어느 정도 개선</li>
-</ul>
-
-<p>완벽한 해결은 아니지만, 프롬프트를 잘 작성하면 품질을 어느 정도 유지할 수 있습니다.</p>
-
-<h3 id="8-max-iteration의-함정">8. Max Iteration의 함정</h3>
-
-<p><strong>문제 상황:</strong>
-복잡한 번역 작업을 수행할 때 워크플로우가 중간에 멈추는 현상이 발생했습니다.</p>
-
-<div align="center">
-    <img src="../assets/images/blog/posts/2026-01-05-hf-translation-mcp-n8n/iteration.png" width="500" alt="Max Iteration 초과 에러" />
-    <p><em>Max Iteration 초과로 인한 워크플로우 중단</em></p>
-</div>
-
-<p><strong>원인:</strong>
-n8n AI Agent는 무한 루프 방지를 위해 <strong>Max Iteration</strong> 설정이 있습니다. Tool 호출 횟수가 이 값을 초과하면 강제로 종료됩니다.</p>
-
-<p><strong>해결 방법:</strong></p>
-<ul>
-  <li>
-    <p>작업을 적절한 크기로 나누어 각 단계별로 Tool 체인 구성</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Before: 
-  [Input] → [AI Agent: 20 tool calls] → [Output]
-           ❌ Max Iteration 초과
-
-  After:
-  [Input] → [AI Agent: Step 1] → [AI Agent: Step 2] → [Output]
-           ✅ 각 5 tool calls      ✅ 각 5 tool calls
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Max Iteration 값을 작업 복잡도에 맞게 조정</p>
-
-    <div align="center">
-      <img src="../assets/images/blog/posts/2026-01-05-hf-translation-mcp-n8n/max.png" width="500" alt="Max Iteration 설정" />
-      <p><em>n8n AI Agent의 Max Iteration 설정</em></p>
-  </div>
-  </li>
-  <li>
-    <p>긴 작업은 여러 워크플로우로 분리하고 순차 실행</p>
-  </li>
-</ul>
-
-<h2 id="마치며">마치며</h2>
-
-<p>n8n으로 MCP Server 워크플로우를 구축하는 과정은 예상보다 많은 시행착오가 필요했습니다. Gradio의 전체 노출 특성, Schema 검증, Notion의 2000자 제한 등 실제로 부딪혀봐야 알 수 있는 제약들이 많았습니다.</p>
-
-<p>하지만 이러한 과정을 통해 얻은 가장 큰 교훈은 <strong>자동화의 가치와 한계를 동시에 이해하게 되었다</strong>는 것입니다. n8n은 반복 작업을 효율화하는 데 탁월하지만, Claude Desktop Client의 유연성과 품질을 완전히 대체할 수는 없습니다.</p>
-
-<p>앞으로는 단순한 워크플로우 엔진을 넘어, <strong>도구의 제약을 이해하고 동적으로 대응할 수 있는 더 지능적인 Agent</strong>가 등장하기를 기대합니다. 2000자 제한을 만나면 스스로 분할해서 처리하고, Max Iteration에 도달하면 작업을 재구성하는 그런 Agent 말입니다.</p>
-
-<p>지금은 개발자가 모든 예외 상황을 예측하고 처리해야 하지만, 언젠가는 AI가 도구의 특성을 학습하고 최적의 사용법을 스스로 찾아가는 날이 올 것입니다. 그때까지는 Desktop Client와 n8n을 적재적소에 활용하는 지혜가 필요해 보입니다.</p>]]></content><author><name>minju</name></author><category term="Robotics" /><category term="AI" /><category term="Community" /><summary type="html"><![CDATA[이 글은 Hugging Face 문서 번역 프로젝트의 MCP Server를 활용한 n8n 워크플로우 구축 경험을 담은 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-01-05-hf-translation-mcp-n8n/meme.jpg" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-01-05-hf-translation-mcp-n8n/meme.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p>크롬 팀은 브라우저에서 이를 네이티브로 구현하기 위해 노력하고 있습니다 <a href="https://chromestatus.com/feature/5163371507875840">considering implementing the COS API</a>. 초기 단계의 제안으로, API와 제안의 형태에 대한 피드백을 환영합니다. 이슈를 제기하려면 <a href="https://github.com/WICG/cross-origin-storage">Cross-Origin Storage repository</a>를 이용하고, <a href="https://github.com/WICG/cross-origin-storage/labels/expression%20of%20support">express support</a>를 확인하거나 PR을 여세요.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
