@@ -3,6 +3,7 @@ layout: post
 title: "AWS에서 Foundation Model 학습 및 추론을 위한 구성 요소"
 author: dailybot
 categories: [Translation, HuggingFace]
+image: assets/images/blog/posts/2026-05-12-foundation-model-building-blocks/thumbnail.png
 slug: "foundation-model-building-blocks"
 source_url: "https://huggingface.co/blog/amazon/foundation-model-building-blocks"
 source_published_date: "2026-05-11"
@@ -12,13 +13,12 @@ translation_status: "draft"
 translator: "openai"
 ---
 
-> Source: https://huggingface.co/blog/amazon/foundation-model-building-blocks
-
 * TOC
 {:toc}
 <!--toc-->
-
 _이 글은 Hugging Face 블로그의 [Building Blocks for Foundation Model Training and Inference on AWS](https://huggingface.co/blog/amazon/foundation-model-building-blocks)를 한국어로 번역한 글입니다._
+
+<!-- Source: https://huggingface.co/blog/amazon/foundation-model-building-blocks -->
 
 ---
 
