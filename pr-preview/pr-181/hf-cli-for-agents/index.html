@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-181/assets/images/favicon.ico" />
+
+    <title>hf CLI를 에이전트에 최적화된 방식으로 Hugging Face Hub와 함께 작동하도록 설계하기 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>hf CLI를 에이전트에 최적화된 방식으로 Hugging Face Hub와 함께 작동하도록 설계하기 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="hf CLI를 에이전트에 최적화된 방식으로 Hugging Face Hub와 함께 작동하도록 설계하기" />
+<meta name="author" content="dailybot" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 Designing the hf CLI as an agent-optimized way to work with the Hub를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Designing the hf CLI as an agent-optimized way to work with the Hub를 한국어로 번역한 글입니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-181/hf-cli-for-agents/assets/images/blog/posts/2026-06-04-hf-cli-for-agents/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-06-04T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-06-04T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-181/hf-cli-for-agents/assets/images/blog/posts/2026-06-04-hf-cli-for-agents/thumbnail.png" />
+<meta name="twitter:title" content="hf CLI를 에이전트에 최적화된 방식으로 Hugging Face Hub와 함께 작동하도록 설계하기" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-06-04T00:00:00+09:00","datePublished":"2026-06-04T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Designing the hf CLI as an agent-optimized way to work with the Hub를 한국어로 번역한 글입니다.","headline":"hf CLI를 에이전트에 최적화된 방식으로 Hugging Face Hub와 함께 작동하도록 설계하기","image":"/pr-preview/pr-181/hf-cli-for-agents/assets/images/blog/posts/2026-06-04-hf-cli-for-agents/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-181/hf-cli-for-agents/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-181/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-181/hf-cli-for-agents/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-181/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-181/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-181/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-181/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-181/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-181/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-181/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-181/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-181/assets/images/blog/posts/2026-06-04-hf-cli-for-agents/thumbnail.png" alt="hf CLI를 에이전트에 최적화된 방식으로 Hugging Face Hub와 함께 작동하도록 설계하기">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-181/assets/images/blog/posts/2026-06-04-hf-cli-for-agents/thumbnail.png" alt="hf CLI를 에이전트에 최적화된 방식으로 Hugging Face Hub와 함께 작동하도록 설계하기">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-181/categories#huggingface">HuggingFace</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-181/categories#translation">Translation</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">hf CLI를 에이전트에 최적화된 방식으로 Hugging Face Hub와 함께 작동하도록 설계하기</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#hf-cli를-에이전트에-최적화된-방식으로-hugging-face-hub와-함께-작동하도록-설계하기" id="markdown-toc-hf-cli를-에이전트에-최적화된-방식으로-hugging-face-hub와-함께-작동하도록-설계하기">hf CLI를 에이전트에 최적화된 방식으로 Hugging Face Hub와 함께 작동하도록 설계하기</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">Hugging Face Hub의 AI 에이전트 트래픽</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">사람과 에이전트를 위한 설계</a>        <ul>
+          <li><a href="#하나의-명령-다중-렌더링" id="markdown-toc-하나의-명령-다중-렌더링">하나의 명령, 다중 렌더링</a></li>
+          <li><a href="#next-command-hints" id="markdown-toc-next-command-hints">Next-command hints</a></li>
+          <li><a href="#논블로킹-및-재시도-안전성" id="markdown-toc-논블로킹-및-재시도-안전성">논블로킹 및 재시도 안전성</a></li>
+          <li><a href="#검색-가능하고-예측-가능한-명령" id="markdown-toc-검색-가능하고-예측-가능한-명령">검색 가능하고 예측 가능한 명령</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-3" id="markdown-toc-section-3">코딩 에이전트를 위한 hf CLI 벤치마크</a>        <ul>
+          <li><a href="#설정" id="markdown-toc-설정">설정</a></li>
+          <li><a href="#결과" id="markdown-toc-결과">결과</a></li>
+          <li><a href="#핵심-발견" id="markdown-toc-핵심-발견">핵심 발견</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-4" id="markdown-toc-section-4">hf-cli 스킬</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">직접 사용해 보기</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">에이전트 해스 등록</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/hf-cli-for-agents">Designing the hf CLI as an agent-optimized way to work with the Hub</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/hf-cli-for-agents -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="hf-cli를-에이전트에-최적화된-방식으로-hugging-face-hub와-함께-작동하도록-설계하기">hf CLI를 에이전트에 최적화된 방식으로 Hugging Face Hub와 함께 작동하도록 설계하기</h1>
+
+<p><code class="language-plaintext highlighter-rouge">hf</code>은 Hugging Face Hub의 공식 명령줄 진입점입니다. Hub에서 Python SDK로 할 수 있는 모든 작업은 터미널에서도 가능합니다: 모델, 데이터셋, Spaces를 다운로드 및 업로드; 리포지토리, 브랜치, 태그 및 풀 리퀘스트 생성 및 관리; HF 인프라에서 Jobs 실행; Buckets, Collections, webhooks 및 Inference Endpoints 관리.</p>
+
+<p><code class="language-plaintext highlighter-rouge">hf</code> CLI는 수년간 우리의 사용자들을 위해 주로 구축되었습니다. 그러나 이제는 <strong>코딩 에이전트</strong>들: Claude Code, Codex, Cursor 등에게도 점점 더 많이 사용되고 있습니다. 그래서 두 관객 모두를 한꺼번에 활용할 수 있도록 재구축했습니다. 이 블로그 글은 우리가 한 일과 이를 벤치마크한 방법을 요약합니다. 복잡하고 다단계인 작업에서 비-CLI 기준선(에이전트가 <code class="language-plaintext highlighter-rouge">curl</code>를 수동으로 구성하거나 Python SDK)을 사용할 때 <code class="language-plaintext highlighter-rouge">hf</code> CLI에 비해 최대 <strong>6배</strong> 더 많은 토큰을 소모하는 것을 발견했습니다.</p>
+
+<h2 id="section-1">Hugging Face Hub의 AI 에이전트 트래픽</h2>
+
+<p>우리는 2026년 4월에 Hugging Face Hub의 에이전트 사용을 추적하기 시작했습니다. <code class="language-plaintext highlighter-rouge">hf</code> CLI(그리고 그것이 기반하는 <code class="language-plaintext highlighter-rouge">huggingface_hub</code> Python SDK)는 에이전트가 이를 주도하는지 감지하기 위해 에이전트가 설정한 환경 변수를 읽어 감지합니다: Claude Code용 <code class="language-plaintext highlighter-rouge">CLAUDECODE</code>/<code class="language-plaintext highlighter-rouge">CLAUDE_CODE</code>, Codex용 <code class="language-plaintext highlighter-rouge">CODEX_SANDBOX</code>, 더불어 Cursor, Gemini, Pi, 그리고 범용 <code class="language-plaintext highlighter-rouge">AI_AGENT</code>. 이 하나의 신호는 두 가지 역할을 합니다: CLI의 출력 형식을 결정하고(아래에서 더 자세히 다룸) 각 Hub 요청에 <code class="language-plaintext highlighter-rouge">agent/&lt;name&gt;</code> 사용자 에이전트를 태그하여 이를 주도하는 에이전트의 트래픽을 식별할 수 있습니다. 서로 다른 사용자가 가장 많은 두 에이전트는 <strong>Claude Code와 Codex</strong>로, 다른 모든 것들보다 앞서 있으며 이 기사에서 나중에 벤치마크합니다.</p>
+
+<div class="flex justify-center">
+    <img class="block dark:hidden" src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/huggingface_hub/chart-users.png" alt="Distinct users of the Hugging Face Hub by coding agent since April 2026. Claude Code leads with 39.5k users and 48.6M requests, then Codex with 34.8k users and 36.4M requests, followed by antigravity, cursor-cli, openclaw, cursor, gemini and pi." width="100%" />
+    <img class="hidden dark:block" src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/huggingface_hub/chart-users-dark.png" alt="Distinct users of the Hugging Face Hub by coding agent since April 2026. Claude Code leads with 39.5k users and 48.6M requests, then Codex with 34.8k users and 36.4M requests, followed by antigravity, cursor-cli, openclaw, cursor, gemini and pi." width="100%" />
+</div>
+
+<p>막대 그래프는 에이전트별 서로 다른 사용자를 세며, 요청량은 하위 라벨입니다. Claude Code 단독으로 약 4만 명의 사용자와 거의 4900만 건의 요청을 보유하고 있으며, Codex가 그 뒤를 잇습니다. 이는 초기 수치에 불과하지만(에이전트 트래픽의 속성을 본 것은 2026년 4월부터였음), 규모가 이미 상당하며 코딩 에이전트가 Hub와 함께 작업하는 표준 방식으로 자리잡아 가면서 계속 커질 것으로 기대됩니다.</p>
+
+<h2 id="section-2">사람과 에이전트를 위한 설계</h2>
+
+<p>사람과 코딩 에이전트는 같은 <code class="language-plaintext highlighter-rouge">hf</code> 명령에 대해 서로 다른 출력 형식을 기대합니다. 사람은 ANSI 색상, 화면에 맞게 잘려진 표, 성공 시 녹색 ✅, 부울 값 <code class="language-plaintext highlighter-rouge">✔</code>, 진행 표시줄, 서술형 힌트 등을 원합니다. 반면 에이전트는 역으로 원합니다: ANSI 코드 없이, 잘리지 않게 모든 값을 완전하게 표기하며, 에이전트가 인간보다 더 촘촘한 출력을 처리할 수 있도록 간결하고 구조화되어 토큰을 가볍게 유지합니다. 또한 CLI 프롬프트에 답하지 못하고, 시간초과 후에도 기꺼이 명령을 재실행합니다. 이 섹션의 나머지는 <code class="language-plaintext highlighter-rouge">hf</code>가 각 측에 필요한 것을 어떻게 제공하는지에 대한 내용입니다. 에이전트-모드 출력은 <code class="language-plaintext highlighter-rouge">hf</code> v1.9.0에서 도입했고, 이후 릴리스에서 CLI의 나머지 부분을 차례로 그 방향으로 마이그레이션해 왔습니다.</p>
+
+<h3 id="하나의-명령-다중-렌더링">하나의 명령, 다중 렌더링</h3>
+
+<p>위에서 언급한 환경 변수들을 통해 <code class="language-plaintext highlighter-rouge">hf</code>가 에이전트 사용 여부를 자동 인식하면, <strong>동일한 명령</strong>을 서로 다르게 렌더링합니다. 플래그를 전달하지 않고도 사람용 또는 에이전트용 출력 형식을 최적화합니다:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># human (default in a terminal): aligned table, truncated to fit, with a hint
+&gt; hf models ls --author Qwen --sort downloads --limit 3
+ID                       CREATED_AT DOWNLOADS LIBRARY_NAME LIKES PIPELINE_TAG    PRIVATE TAGS
+------------------------ ---------- --------- ------------ ----- --------------- ------- -------------------------
+Qwen/Qwen3-0.6B          2025-04-27  21156913 transformers  1285 text-generation         transformers, safetens...
+Qwen/Qwen2.5-1.5B-Ins... 2024-09-17  15143953 transformers   725 text-generation         transformers, safetens...
+Qwen/Qwen3-4B            2025-04-27  14808352 transformers   625 text-generation         transformers, safetens...
+Hint: Use `--no-truncate` or `--format json` to display full values.
+
+# agent (auto-detected): TSV, full ids + ISO timestamps + every tag, nothing truncated
+$ hf models ls --author Qwen --sort downloads --limit 3
+id      created_at      downloads       library_name    likes   pipeline_tag    private tags
+Qwen/Qwen3-0.6B 2025-04-27T03:40:08+00:00       21156913        transformers    1285    text-generation False   ['transformers', 'safetensors', 'qwen3', 'text-generation', 'conversational', 'arxiv:2505.09388', 'base_model:Qwen/Qwen3-0.6B-Base', 'base_model:finetune:Qwen/Qwen3-0.6B-Base', 'license:apache-2.0', 'text-generation-inference', 'endpoints_compatible', 'deploy:azure', 'region:us']
+Qwen/Qwen2.5-1.5B-Instruct      2024-09-17T14:10:29+00:00       15143953        transformers    725     text-generation False['transformers', 'safetensors', 'qwen2', 'text-generation', 'chat', 'conversational', 'en', 'arxiv:2407.10671', 'base_model:Qwen/Qwen2.5-1.5B', 'base_model:finetune:Qwen/Qwen2.5-1.5B', 'license:apache-2.0', 'text-generation-inference', 'endpoints_compatible', 'deploy:azure', 'region:us']
+Qwen/Qwen3-4B   2025-04-27T03:41:29+00:00       14808352        transformers    625     text-generation False   ['transformers', 'safetensors', 'text-generation', 'arxiv:2309.00071', 'arxiv:2505.09388', 'base_model:Qwen/Qwen3-4B-Base', 'base_model:finetune:Qwen/Qwen3-4B-Base', 'license:apache-2.0', 'endpoints_compatible', 'deploy:azure', 'region:us']
+</code></pre></div></div>
+
+<p>사람은 터미널에 맞춰 정렬된 표와, 화면에 맞게 잘려진 표와 함께 더 보려면 방법에 대한 힌트, 상태를 나타내는 색상 신호(성공 시 초록 <code class="language-plaintext highlighter-rouge">✓</code>, 오류 시 빨간색)가 제공됩니다. 에이전트는 TSV 형식의 전체 기록을 받습니다: 전체 리포지토리 ID, 전체 ISO 타임스탬프, 모든 태그, ANSI 코드 없음, 잘려진 부분 없음, 파싱하기 쉽고 토큰을 가볍게 유지합니다.</p>
+
+<p>실제로는 원시 데이터를 입력으로 받아 형식을 처리하는 <code class="language-plaintext highlighter-rouge">.table(...)</code>, <code class="language-plaintext highlighter-rouge">.result(...)</code>, <code class="language-plaintext highlighter-rouge">.json()</code> 등의 로깅 방식들을 구현했습니다. 사람 모드와 에이전트 모드 외에도 서로 파이프하기 쉽게 만들어 주는 <code class="language-plaintext highlighter-rouge">--json</code>와 <code class="language-plaintext highlighter-rouge">--quiet</code> 옵션을 도입했습니다. 기본 모드는 맥락에 따라 자동으로 선택되지만, 사용자는 언제든지 <code class="language-plaintext highlighter-rouge">--format human | agent | json | quiet</code>로 원하는 형식을 강제할 수 있습니다.</p>
+
+<h3 id="next-command-hints">Next-command hints</h3>
+
+<p>CLI 명령은 드물게 독립적으로 실행됩니다: 한 단계가 보통 다음 단계(<code class="language-plaintext highlighter-rouge">git add</code>가 먼저, 그다음 <code class="language-plaintext highlighter-rouge">git commit</code>)를 시사합니다. 많은 <code class="language-plaintext highlighter-rouge">hf</code> 명령은 이제 끝에 <strong>힌트</strong>를 포함합니다: 방금 사용한 ID로 미리 채워진 정확한 다음 명령으로, 사용자나 에이전트가 처음부터 생각하지 않고도 바로 다음 단계로 연결할 수 있게 합니다. 백그라운드에서 작업을 시작하면 로그로 안내하고, Space를 만들면 부트 상태로 안내합니다:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ hf jobs run --detach python:3.12 python train.py
+✓ Job started
+  id: 6f3a1c2e9b
+  url: https://huggingface.co/jobs/celinah/6f3a1c2e9b
+Hint: Use `hf jobs logs 6f3a1c2e9b` to fetch the logs.
+</code></pre></div></div>
+
+<p>사람에게는 편의성입니다. 에이전트에게는 레일입니다: 다음 동작은 이름이 붙고, 올바른 ID로 매개변수화되어 실행 준비가 되어 있어, 무엇을 해야 할지 파악하는 단계를 줄여줍니다. 오류도 같은 방식으로 처리되어 수정 방법의 이름을 붙입니다:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: Not logged in. Run `hf auth login` first.
+</code></pre></div></div>
+
+<p>힌트, 경고 및 오류는 모두 stderr로 보내고 데이터는 stdout으로 보내므로, 이 안내가 에이전트가 파싱하는 출력에 영향을 주지 않습니다.</p>
+
+<h3 id="논블로킹-및-재시도-안전성">논블로킹 및 재시도 안전성</h3>
+
+<p><code class="language-plaintext highlighter-rouge">hf</code>은 에이전트가 누를 수 없는 키를 기다리며 대화형 프롬프트에 머무르지 않습니다. 파괴적 명령은 여전히 인간의 확인을 요구하지만, 에이전트 모드에서는 메시지에 수정이 포함된 상태로 빠르게 실패합니다(<code class="language-plaintext highlighter-rouge">Use --yes to skip confirmation.</code>), 그리고 <code class="language-plaintext highlighter-rouge">-y</code>/<code class="language-plaintext highlighter-rouge">--yes</code>는 이를 건너뜁니다. 그리고 에이전트는 시간 초과와 맥락 손실에 대해 재시도하므로, 작업은 재실행하기 쉽게 안전하게 설계되어 있습니다: <code class="language-plaintext highlighter-rouge">hf repos create --exist-ok</code>는 저장소가 이미 존재하면 무효(무시)이며, 업로드를 다시 실행하면 깔끔하게 재커밋됩니다. 또한 데이터를 실제로 옮기는 명령은 실행 전에 정확히 무엇을 전송할지 보여주는 <code class="language-plaintext highlighter-rouge">--dry-run</code>를 취합니다. 이는 사람과 에이전트 모두에게 편리합니다. 긴 다운로드나 무작정 동기화를 피할 수 있기 때문입니다:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># agent mode: a destructive command without --yes refuses, with the fix in the message
+$ hf repos delete my-org/old-model
+Error: You are about to permanently delete model 'my-org/old-model'. Proceed? Use --yes to skip confirmation.
+
+# commands that move data take --dry-run to preview the transfer first
+$ hf download deepseek-ai/DeepSeek-V4-Pro config.json --dry-run
+[dry-run] Will download 1 files (out of 1) totalling 1.8K.
+file         size
+config.json  1.8K
+</code></pre></div></div>
+
+<h3 id="검색-가능하고-예측-가능한-명령">검색 가능하고 예측 가능한 명령</h3>
+
+<p><code class="language-plaintext highlighter-rouge">hf</code>는 탐색 가능하게 설계되었습니다: 리소스 그룹을 보려면 <code class="language-plaintext highlighter-rouge">hf</code>를 실행하고, 필요한 항목에서 <code class="language-plaintext highlighter-rouge">--help</code>를 실행하며, 모든 <code class="language-plaintext highlighter-rouge">--help</code>은 실제로 복사-붙여넣기 가능한 예제로 끝납니다(에이전트가 설명을 파싱하는 것보다 훨씬 빠르게 매칭합니다):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ hf models ls --help
+...
+Examples
+  $ hf models ls --sort downloads --limit 10
+  $ hf models ls --search "qwen" --author Qwen
+  $ hf models ls Qwen/Qwen3-4B --tree
+</code></pre></div></div>
+
+<p>명령 트리는 일관되게, <strong>리소스 + 동사</strong> 구조이며, 명확한 별칭들(<code class="language-plaintext highlighter-rouge">hf models ls</code>, <code class="language-plaintext highlighter-rouge">hf repos create</code>, <code class="language-plaintext highlighter-rouge">hf jobs ps</code>, <code class="language-plaintext highlighter-rouge">hf collections delete</code>; <code class="language-plaintext highlighter-rouge">list</code>/<code class="language-plaintext highlighter-rouge">ls</code>, <code class="language-plaintext highlighter-rouge">remove</code>/<code class="language-plaintext highlighter-rouge">rm</code>)으로 구성되어 있어, 에이전트가 한 명령을 배우면 나머지도 추정할 수 있습니다. 그리고 출력은 이렇게 구성됩니다: <code class="language-plaintext highlighter-rouge">-q</code>는 한 줄에 하나의 ID를 출력해 다음 명령으로 파이프에 연결하고, <code class="language-plaintext highlighter-rouge">--json</code>는 <a href="https://jqlang.org/"><code class="language-plaintext highlighter-rouge">jq</code></a>에 넘길 수 있는 무언가를 제공합니다.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ hf models ls --author Qwen -q | head -3
+Qwen/Qwen3-0.6B
+Qwen/Qwen2.5-1.5B-Instruct
+Qwen/Qwen3-4B
+</code></pre></div></div>
+
+<h2 id="section-3">코딩 에이전트를 위한 hf CLI 벤치마크</h2>
+
+<p><code class="language-plaintext highlighter-rouge">hf</code> CLI가 에이전트에 대해 realmente 더 효율적인지 알아보기 위해 이를 측정했습니다. 간단한 평가 허용치를 구축하고 Hub를 구동하는 동일한 작업 집합을 여러 방식으로 반복 실행해 라이브 Hub와 각 실행을 채점했습니다. 방법론에 앞서 간단한 요약: 두 에이전트의 모든 경우에서 <code class="language-plaintext highlighter-rouge">hf</code> CLI가 앞서며, 특히 다단계의 복잡한 작업에서 토큰을 훨씬 적게 사용합니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>agent</th>
+      <th>tool</th>
+      <th>success score</th>
+      <th>token usage</th>
+      <th>self-report error</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Claude Code (Sonnet 4.6)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">hf</code> CLI</td>
+      <td><strong>0.94</strong></td>
+      <td>baseline</td>
+      <td><strong>2 / 163</strong></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>curl / Python SDK</td>
+      <td>0.84</td>
+      <td><strong>1.3-1.6× tokens</strong></td>
+      <td>11 / 163</td>
+    </tr>
+    <tr>
+      <td><strong>Codex (GPT-5.5)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">hf</code> CLI</td>
+      <td><strong>0.93</strong></td>
+      <td>baseline</td>
+      <td><strong>3 / 163</strong></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>curl / Python SDK</td>
+      <td>0.92</td>
+      <td><strong>1.6-1.8× tokens</strong></td>
+      <td>10 / 163</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>(self-report error = 에이전트가 17개의 해결 가능한 작업에서 성공을 보고했으나 Hugging Face Hub가 다르게 말했습니다. <code class="language-plaintext highlighter-rouge">hf</code> CLI 행은 기술이 설치된 CLI이고, 베어 CLI 위의 기술이 추가하는 것(주로 더 적은 도구 호출)이 아래 <a href="#the-hf-cli-skill">the skill section</a>에서 분리되어 있습니다. 대표 대화 기록은 <a href="https://huggingface.co/buckets/celinah/hf-cli-agent-benchmark">in this bucket</a>에 게시됩니다.)</em></p>
+
+<h3 id="설정">설정</h3>
+
+<p>우리는 <strong>18개의 비사소적 Hugging Face Hub 작업</strong>을 정의했습니다. 이것은 단순히 “파일 다운로드” 같은 것이 아니라 실제로 요청받을 만한 작업들입니다: 트렌딩 조직의 모델을 집계하고, 리포지토리의 파일과 용량을 검사하고, 포함/제외 규칙으로 폴더를 업로드하고, 파일을 삭제하고, 리포지토리 간 파일을 복사하고, 라이선스를 추가하는 PR을 열고, 브랜치와 태그가 있는 리포지토리를 만들고, 버킷을 동기화하고 정리하고, 컬렉션을 구성합니다. 각 작업은 Hugging Face Hub에 대해 정확히 하나의 대화 방식으로 대화하는 최신 코딩 에이전트로 전달됩니다:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">hf</code> CLI, 혹은</li>
+  <li><strong>curl / the Python SDK</strong>: <code class="language-plaintext highlighter-rouge">hf</code> CLI가 전혀 없으므로 에이전트는 REST API 대비 <code class="language-plaintext highlighter-rouge">curl</code>를 사용하거나 <code class="language-plaintext highlighter-rouge">huggingface_hub</code> Python 라이브러리에 의존합니다.</li>
+</ul>
+
+<p>우리는 <code class="language-plaintext highlighter-rouge">hf</code> CLI를 두 가지 구성으로 실행합니다: 스킬이 있는 구성과 없는 구성(생성된 명령 참조로 <a href="#the-hf-cli-skill">its own section</a>에서 다시 다룹니다). 그러나 아래의 헤드라인 비교는 단순히 <strong><code class="language-plaintext highlighter-rouge">hf</code> CLI 대 curl / SDK</strong>이며, 스킬의 증가 효과는 충분히 작아서 메인 결과에 포함시키기보다 독립적으로 다룹니다.</p>
+
+<p>구성은 의도적으로 깔끔합니다: 실행당 새 인스턴스, 커스텀 MCP 서버 없음, <code class="language-plaintext highlighter-rouge">CLAUDE.md</code>나 <code class="language-plaintext highlighter-rouge">AGENTS.md</code>도 없음, 맥락에서의 동작을 좌우하는 어떠한 nudges도 없음. 작업과 도구를 하나의 프롬프트에 넣고, 에이전트는 <code class="language-plaintext highlighter-rouge">TASK_COMPLETE</code> 또는 <code class="language-plaintext highlighter-rouge">TASK_FAILED</code> 마커로 종료하지만, 그 마커를 신뢰하지 않으므로 각 실행은 라이브 Hub를 재질의로 재조회하여 실제로 브랜치가 생성되었는지, 파일이 실제로 사라졌는지, 버킷이 존재하는지 등을 독립적으로 평가합니다. 각 작업/도구 조합은 <strong>10회</strong> 실행되며, 코딩 에이전트가 비결정적이므로 약 <strong>520회 실행</strong>(18개 작업 × 3개 도구 × 10회 반복, 하나의 청구 가능한 Jobs 작업에 대한 상한 제외) 정도의 총 평가 실행이 필요합니다. 이를 두 에이전트(가장 인기 있는 두 코딩 에이전트: Claude Code와 OpenAI Codex)에서 각각 수행했습니다.</p>
+
+<h3 id="결과">결과</h3>
+
+<p>아래의 두 차트는 위 표를 해석합니다. 먼저, <strong>Sonnet에서의 작업 성공</strong>은 curl과 SDK가 가장 어려움을 겪는 에이전트입니다:</p>
+
+<div class="flex justify-center">
+    <img class="block dark:hidden" src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/huggingface_hub/chart-success.png" alt="Task success on Claude Code with Sonnet 4.6: hf CLI 94%, curl / Python SDK 84%." width="100%" />
+    <img class="hidden dark:block" src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/huggingface_hub/chart-success-dark.png" alt="Task success on Claude Code with Sonnet 4.6: hf CLI 94%, curl / Python SDK 84%." width="100%" />
+</div>
+
+<p>CLI가 없으면 curl과 SDK는 열 점 차로 뒤처집니다. Sonnet의 경우 작업의 일부를 끝내지 못하기 때문인데, 주로 쓰기 작업이 그렇고, <code class="language-plaintext highlighter-rouge">hf</code> CLI가 이를 해결합니다.</p>
+
+<p>두 번째 이미지는 <strong>GPT-5.5에서의 토큰 영향</strong>을 작업별로 나눈 그림입니다. 각 막대는 동일한 작업에서 curl/SDK의 토큰을 같은 작업의 CLI 토큰으로 나눈 값이므로, <code class="language-plaintext highlighter-rouge">2.4×</code>은 hf 비포함 버전이 같은 작업을 수행하는 데 토큰을 2.4배 더 사용했다는 뜻입니다:</p>
+
+<div class="flex justify-center">
+    <img class="block dark:hidden" src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/huggingface_hub/chart-tokens.png" alt="Per-task token ratio of curl/Python SDK divided by the hf CLI on GPT-5.5, sorted high to low. Multi-step tasks cost curl/Python SDK far more: bucket create+sync+prune 6.0x, rank orgs by trending models 4.1x, repo create+branch+tag / delete files / copy files across repos 2.4x each. Simple one-shot reads sit near parity or cheaper: batch model metadata 0.5x, count dataset rows 0.3x." width="80%" />
+    <img class="hidden dark:block" src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/huggingface_hub/chart-tokens-dark.png" alt="Per-task token ratio of curl/Python SDK divided by the hf CLI on GPT-5.5, sorted high to low. Multi-step tasks cost curl/Python SDK far more: bucket create+sync+prune 6.0x, rank orgs by trending models 4.1x, repo create+branch+tag / delete files / copy files across repos 2.4x each. Simple one-shot reads sit near parity or cheaper: batch model metadata 0.5x, count dataset rows 0.3x." width="80%" />
+</div>
+
+<p>단일 샷 읽기(데이터 세트 행 수 세기, 배치 메타데이터)에서는 curl과 SDK가 무난하고 때로는 더 가볍습니다. 그러나 작업이 더 복잡하고 여러 종속 단계가 포함되면, 에이전트는 REST 호출의 전체 체인을 수동으로 구성해야 하며 비용이 크게 증가합니다: 리포지토리 생성(브랜치와 태그 포함), 파일 삭제, 리포지토리 간 복사, 버킷 동기화에서 CLI의 토큰 사용은 <strong>2.4×에서 6×</strong>에 달합니다. <code class="language-plaintext highlighter-rouge">hf</code> CLI는 에이전트가 복잡한 워크플로를 직접 구성하는 대신, 몇 가지 고수준 명령으로 작업을 표현하게 해 줍니다.</p>
+
+<h3 id="핵심-발견">핵심 발견</h3>
+
+<ul>
+  <li><strong>The <code class="language-plaintext highlighter-rouge">hf</code> CLI는 curl이나 SDK보다 훨씬 간결합니다.</strong> 같은 작업에서 성공이 같거나 더 나은 경우에도 curl과 SDK는 <strong>약 1.3×에서 1.8×</strong>의 토큰을 소모합니다. 쉬운 읽기에는 문제 없지만, 실제 다단계 작업에서는 <strong>2×에서 6×</strong>를 지불합니다: CLI는 REST 호출 체인을 몇 가지 고수준 명령으로 구성하는 반면, curl이나 SDK는 매 실행마다 체인을 손으로 재구성합니다.</li>
+  <li><strong>더 강력한 모델에서 curl과 SDK는 작동하지만 낭비는 여전합니다.</strong> Sonnet에서는 작업의 일부를 끝내지 못하고(주로 쓰기), GPT-5.5에서는 대부분 성공적으로 REST 호출을 수동으로 구성하거나 SDK를 사용하지만 여전히 CLI의 토큰 비용보다 많이 지출합니다.</li>
+</ul>
+
+<h2 id="section-4">hf-cli 스킬</h2>
+
+<p><code class="language-plaintext highlighter-rouge">hf</code>는 <strong>스킬</strong>을 제공합니다: 에이전트가 컨텍스트로 로드하는 전체 명령 표면에 대한 간결한 참조입니다. 이는 라이브 <code class="language-plaintext highlighter-rouge">hf</code> 명령 트리에서 자동 생성되며, 명령당 한 줄의 서명, 한 줄 설명, 그리고 중요한 플래그가 묶여 있으며, 리소스별로 그룹화되고 일반 옵션의 짧은 용어집이 함께 제공됩니다. 스스로 설명하는 플래그는 의도적으로 생략해 맥락을 간결하게 유지하고, 릴리스마다 재생성됩니다. 출력하려면 <code class="language-plaintext highlighter-rouge">hf skills preview</code>를 실행하거나 다음으로 설치하십시오:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># for Codex, Cursor, OpenCode, Pi and other agents that load skills from `.agents/skills`</span>
+hf skills add
+<span class="c"># includes the above + Claude Code</span>
+hf skills add <span class="nt">--claude</span>
+</code></pre></div></div>
+
+<p>스킬은 무엇을 얻을 수 있게 하나요? 주로 에이전트의 추측을 멈추게 합니다. 가장 명확한 단일 뷰는 각 실행이 얼마나 많은 명령을 필요로 하는지이며, 스킬 사용 여부에 따라 다릅니다:</p>
+
+<div class="flex justify-center">
+    <img class="block dark:hidden" src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/huggingface_hub/chart-skill.png" alt="Mean commands (tool calls) per run, with and without the hf-cli skill, on both agents. Claude Code (Sonnet 4.6): 10.4 without the skill, 6.9 with it. Codex (GPT-5.5): 10.1 without, 7.3 with. Fewer is better." width="100%" />
+    <img class="hidden dark:block" src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/huggingface_hub/chart-skill-dark.png" alt="Mean commands (tool calls) per run, with and without the hf-cli skill, on both agents. Claude Code (Sonnet 4.6): 10.4 without the skill, 6.9 with it. Codex (GPT-5.5): 10.1 without, 7.3 with. Fewer is better." width="100%" />
+</div>
+
+<p>두 에이전트 모두 작업당 약 10개의 명령에서 약 7개 정도로 줄어들며, 대략 도구 호출이 30% 정도 감소합니다. 이는 에이전트가 올바른 명령과 인수를 찾기 위해 <code class="language-plaintext highlighter-rouge">--help</code>를 탐색하지 않기 때문입니다. 스킬은 컨텍스트에 고정된 정보를 앞에 붙이므로 토큰 비용을 크게 줄이지는 않지만, 같은 작업에서 토큰은 대체로 비슷하게 유지되거나 약간 상승합니다. 또한 스킬은 CLI의 신뢰성을 높이지는 않지만, 도구의 작동 방식을 알아보는 대신 작업을 실행하는 데 에이전트가 더 많은 시간을 사용하도록 돕습니다. 로컬 모델과 함께 <code class="language-plaintext highlighter-rouge">hf</code>를 사용할 때 특히 유용할 수 있습니다.</p>
+
+<p>각 작업을 새로운 세션에서 실행했으므로 스킬은 매 작업마다 컨텍스트 비용을 부담합니다. 다중 작업 세션에서는 이 비용이 상쇄되므로(에이전트가 한 번만 명령 표면을 학습), 토큰 면에서 상황이 개선될 가능성이 있습니다; 다만 그 경우는 측정하지 않았습니다.</p>
+
+<h2 id="section-5">직접 사용해 보기</h2>
+
+<p>이 모든 것을 벤치마크한 이유는 이것이 중요하다고 생각하기 때문입니다. 에이전트는 Hugging Face Hub의 실제 사용자로 자리잡아 가고 있습니다: 그들은 모델을 훈련하고, 데이터셋을 구성하고 정리하며, Spaces로 데모를 배포합니다. 이는 거의 항상 사람을 대신해 작동합니다. 에이전트에게 잘 작동하는 Hub는 이를 사용하는 사람들에게도 더 잘 작동하는 Hub입니다. 에이전트의 도구가 더 좋아질수록, 에이전트가 당신을 위해 더 많은 일을 할 수 있습니다.</p>
+
+<p>에이전트가 Hugging Face Hub와 상호 작용한다면 <code class="language-plaintext highlighter-rouge">hf</code> CLI를 제공하는 것을 권장합니다:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># macOS / Linux</span>
+curl <span class="nt">-LsSf</span> https://hf.co/cli/install.sh | bash
+
+<span class="c"># Windows (PowerShell)</span>
+powershell <span class="nt">-ExecutionPolicy</span> ByPass <span class="nt">-c</span> <span class="s2">"irm https://hf.co/cli/install.ps1 | iex"</span>
+</code></pre></div></div>
+
+<p>그다음 스킬을 넘겨 주어, 처음 턴부터 전체 명령 표면을 알 수 있게 하세요:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hf skills add            <span class="c"># Codex, Cursor, OpenCode, Pi and other agents that load skills from .agents/skills</span>
+hf skills add <span class="nt">--claude</span>   <span class="c"># the above + Claude Code</span>
+</code></pre></div></div>
+
+<p>그다음 에이전트를 Hugging Face Hub로 향하도록 하고 작동하게 하세요. 로그인되어 있는지 확인하고(<code class="language-plaintext highlighter-rouge">hf auth login</code>), 그런 다음 다음과 같은 프롬프트를 에이전트에게 전달하세요:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Use `hf` to list my Hugging Face Hub models, datasets, and Spaces.
+Take a look at how I am currently using the Hub and suggest a few ways you could help me.
+</code></pre></div></div>
+
+<p>에이전트가 스스로 명령을 찾아 유용한 결과를 들고 돌아올 것입니다.</p>
+
+<p>전체 명령 참조는 <a href="https://huggingface.co/docs/huggingface_hub/guides/cli"><code class="language-plaintext highlighter-rouge">hf</code> CLI guide</a>에 있습니다.</p>
+
+<h2 id="section-6">에이전트 해스 등록</h2>
+
+<p>에이전트 해스를 구축하고 있나요? <strong>등록하십시오!</strong> 이것이 <code class="language-plaintext highlighter-rouge">hf</code>가 이를 감지하는 방식이고, Hub가 트래픽을 당신의 해스에 귀속하는 방법입니다. <code class="language-plaintext highlighter-rouge">hf</code>에 항목을 추가하는 간단한 PR을 열기만 하면 됩니다. 자세한 내용은 <a href="https://huggingface.co/docs/hub/agents-overview#register-your-agent-harness">Register your agent harness</a> 가이드를 참고하십시오.</p>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-06-04">04 Jun 2026</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#hf-cli를-에이전트에-최적화된-방식으로-hugging-face-hub와-함께-작동하도록-설계하기" id="markdown-toc-hf-cli를-에이전트에-최적화된-방식으로-hugging-face-hub와-함께-작동하도록-설계하기">hf CLI를 에이전트에 최적화된 방식으로 Hugging Face Hub와 함께 작동하도록 설계하기</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">Hugging Face Hub의 AI 에이전트 트래픽</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">사람과 에이전트를 위한 설계</a>        <ul>
+          <li><a href="#하나의-명령-다중-렌더링" id="markdown-toc-하나의-명령-다중-렌더링">하나의 명령, 다중 렌더링</a></li>
+          <li><a href="#next-command-hints" id="markdown-toc-next-command-hints">Next-command hints</a></li>
+          <li><a href="#논블로킹-및-재시도-안전성" id="markdown-toc-논블로킹-및-재시도-안전성">논블로킹 및 재시도 안전성</a></li>
+          <li><a href="#검색-가능하고-예측-가능한-명령" id="markdown-toc-검색-가능하고-예측-가능한-명령">검색 가능하고 예측 가능한 명령</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-3" id="markdown-toc-section-3">코딩 에이전트를 위한 hf CLI 벤치마크</a>        <ul>
+          <li><a href="#설정" id="markdown-toc-설정">설정</a></li>
+          <li><a href="#결과" id="markdown-toc-결과">결과</a></li>
+          <li><a href="#핵심-발견" id="markdown-toc-핵심-발견">핵심 발견</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-4" id="markdown-toc-section-4">hf-cli 스킬</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">직접 사용해 보기</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">에이전트 해스 등록</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-181/" alt="">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href=""></a>
+        <span class="author-description"></span>                        
+    </div>
+</div>
+
+
+<!-- footer -->
+<div class="row post-footer">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-181/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-181/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">10</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="translation">
+            Translation
+            <span class="count">10</span>
+          </button>
+        
+      
+        
+        
+          <button class="filter-btn" data-category="huggingface">
+            HuggingFace
+            <span class="count">9</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-181/grabette/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-181/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-181/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">21 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-181/native-speed-vllm-transformers-backend/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-181/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-181/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">08 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-181/cerebras-gemma4-voice-ai/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-181/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-181/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">01 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-181/vllm-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-181/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-181/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">26 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-181/ffasr-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-181/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-181/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">24 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-181/cross-origin-storage/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-181/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-181/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-181/peft-beyond-lora/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-181/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-181/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-181/local-reachy-mini-conversation/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-181/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-181/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">27 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-181/paddleocr-transformers/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-181/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-181/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">19 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="transformers translation ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-181/how-to-use-translator/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-181/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-181/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
+        <p class="card-text text-muted">
+Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">05 Oct 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section></main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-181/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-181/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-181/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-181/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-181/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-181/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-181/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-181/assets/js/category.js"></script>
+  </body>
+</html>
