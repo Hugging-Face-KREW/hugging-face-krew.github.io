@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-185/assets/images/favicon.ico" />
+
+    <title>매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" />
+<meta name="author" content="dailybot" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a human in the loop를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a human in the loop를 한국어로 번역한 글입니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-185/huggingface-hub-release-ci/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-06-23T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-06-23T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-185/huggingface-hub-release-ci/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" />
+<meta name="twitter:title" content="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-06-23T00:00:00+09:00","datePublished":"2026-06-23T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a human in the loop를 한국어로 번역한 글입니다.","headline":"매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포","image":"/pr-preview/pr-185/huggingface-hub-release-ci/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-185/huggingface-hub-release-ci/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-185/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-185/huggingface-hub-release-ci/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-185/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-185/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-185/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-185/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-185/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-185/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-185/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-185/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" alt="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" alt="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-185/categories#huggingface">HuggingFace</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-185/categories#translation">Translation</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#매주-ai-오픈-도구-그리고-휴먼-인-더-루프가-포함된-huggingface_hub-배포" id="markdown-toc-매주-ai-오픈-도구-그리고-휴먼-인-더-루프가-포함된-huggingface_hub-배포">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">시작한 곳</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">두 종류의 작업</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">설계 원칙: 열려 있는 부품, 누구나 재사용 가능</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">파이프라인 둘러보기</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">신뢰하되 검증하라: 사람의 개입 핵심</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">모델이 사실을 왜곡하지 않도록 뿌리내리기</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">사람 체크포인트</a></li>
+      <li><a href="#section-8" id="markdown-toc-section-8">개방적이고 안전한 파이프라인</a></li>
+      <li><a href="#section-9" id="markdown-toc-section-9">그래서 비용은 얼마였나?</a></li>
+      <li><a href="#section-10" id="markdown-toc-section-10">실제로 무엇이 바뀌었나</a></li>
+      <li><a href="#section-11" id="markdown-toc-section-11">나의 것으로 만들기</a></li>
+      <li><a href="#section-12" id="markdown-toc-section-12">다음 단계</a></li>
+      <li><a href="#section-13" id="markdown-toc-section-13">시사점</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/huggingface-hub-release-ci">Shipping huggingface_hub every week with AI, open tools, and a human in the loop</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/huggingface-hub-release-ci -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="매주-ai-오픈-도구-그리고-휴먼-인-더-루프가-포함된-huggingface_hub-배포">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</h1>
+
+<p><code class="language-plaintext highlighter-rouge">huggingface_hub</code>은 허깅페이스 생태계의 기본인 파이썬 클라이언트입니다. <code class="language-plaintext highlighter-rouge">transformers</code>, <code class="language-plaintext highlighter-rouge">datasets</code>, <code class="language-plaintext highlighter-rouge">diffusers</code>, <code class="language-plaintext highlighter-rouge">sentence-transformers</code> 그리고 수십 개의 다른 라이브러리들이 Hub와 소통하기 위해 그것에 의존합니다. 우리가 매주 새로운 릴리스를 배포하지 않는 한 주는 <code class="language-plaintext highlighter-rouge">main</code>에 갇힌 수정사항과 기능의 한 주가 됩니다.</p>
+
+<p>오랜 기간 동안 우리는 4~6주마다 릴리스를 발표했습니다. 이제는 단일 GitHub Actions 워크플로우에서 매주 릴리스를 발표합니다. 오픈 소스 도구와 오픈-가중치 모델을 사용해 이를 구축했고, 판단이 중요한 한 곳에 휴먼 인 더 루프를 두었습니다. 이 글의 어떤 내용도 공급업체 계약, 비공개 모델, 또는 자신이 실행할 수 없는 인프라를 요구하지 않습니다. 이는 시작부터의 설계 목표였으며, 다른 유지 관리자가 가져다 사용하고 조정할 수 있는 워크플로우를 원했기 때문입니다.</p>
+
+<p>본 글이 끝나면 당신이 직접 만들어볼 수 있도록 필요한 모든 것이 제공될 것입니다.</p>
+
+<h2 id="section-1">시작한 곳</h2>
+
+<p>구식 프로세스는 부분적으로 자동화되어 있었고, 주로 수동이었습니다.</p>
+
+<p>이미 CI에 포함되어 있습니다:</p>
+
+<ul>
+  <li>태그가 푸시되면 PyPI에 게시합니다.</li>
+  <li>릴리스 후보가 고정된 상태로 다운스트림 라이브러리의 테스트 브랜치를 열고 테스트합니다.</li>
+</ul>
+
+<p>여전히 매번 수동으로:</p>
+
+<ul>
+  <li>릴리스 브랜치를 만들고, <code class="language-plaintext highlighter-rouge">__init__.py</code>에서 버전을 올리고, 커밋하고, 태그하고, 푸시합니다.</li>
+  <li>다운스트림 CI 실행을 지켜보고 실패를 분류합니다.</li>
+  <li>마지막 릴리스 이후 병합된 모든 PR을 하나씩 읽고, PR의 맥락과 주제별로 정리하여, <code class="language-plaintext highlighter-rouge">git log</code> 덤처럼 들리지 않는 어조로 릴리스 노트를 수기로 작성합니다.</li>
+  <li>RC 기간이 끝난 후 안정 릴리스를 배포합니다.</li>
+  <li>내부 Slack 발표와 소셜 포스트를 초안합니다.</li>
+  <li>릴리스 후 PR을 열어 <code class="language-plaintext highlighter-rouge">main</code>를 다음 <code class="language-plaintext highlighter-rouge">dev0</code>로 올립니다.</li>
+</ul>
+
+<p>새 버전에 대한 좋은 노트를 작성하는 것은 무거운 부분이었고, 서로 다른 주제의 수십 개 PR을 모아놓는 작업이었다. 기술적으로는 어렵지 않지만 몇 시간의 집중이 필요했다. 여기에 발표를 더하면 소형 릴리스도 여러 날에 걸쳐 반나절 정도의 작업으로 끝나곤 했다.</p>
+
+<h2 id="section-2">두 종류의 작업</h2>
+
+<p>그래서 전체 프로세스를 간소화하기로 했습니다. 그 목록을 보면 작업은 두 가지로 나뉩니다.</p>
+
+<p>일부 단계는 순전히 기계적이며 자동화가 가능하다: 버전 증가, 커밋, 태깅, 푸시, 다운스트림 테스트 브랜치 열기, 포스트 릴리스 PR 열기. 이를 누가 생각할 필요가 없다. 항상 올바른 순서대로 일어나도록 해야 하며, 이것이 CI 워크플로우가 잘하는 일이다.</p>
+
+<p>나머지는 다르다. 릴리스 노트 쓰기, 무엇을 하이라이트로 삼을지 결정, 사람 독자 audience를 위한 발표 문구 작성: 이건 두뇌 노동이다. 수년간 릴리스 매뉴얼을 유지해온 판단의 영역이다. 이때 AI가 들어와 빈 페이지를 몇 초 만에 탄탄한 초고로 바꿔준다. 또한 조심해야 할 점은, 자신감 있어 보이지만 은근히 잘못된 초고가 만들어질 수 있다는 것이다.</p>
+
+<h2 id="section-3">설계 원칙: 열려 있는 부품, 누구나 재사용 가능</h2>
+
+<p>이 문제를 해결하기로 결정했을 때, 한 가지 제약을 미리 세웠습니다: 모든 가동 부품은 어떤 유지 관리자가 스스로 실행할 수 있어야 한다. 교환할 수 없는 API 뒤의 비공개 모델, 독점적인 릴리스 플랫폼, 비밀 소스는 허용되지 않습니다.</p>
+
+<p>다음은 전체 스택입니다:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>부분</th>
+      <th>하는 일</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>GitHub Actions</strong></td>
+      <td>전체 릴리스를 조정합니다</td>
+    </tr>
+    <tr>
+      <td><strong><a href="https://opencode.ai/">OpenCode</a></strong></td>
+      <td>모델을 구동하는 에이전트 런타임</td>
+    </tr>
+    <tr>
+      <td><strong>An open-weights model</strong> (현재 <a href="https://huggingface.co/zai-org/GLM-5.2">GLM-5.2</a>에서 온 Z.ai)</td>
+      <td>릴리스 노트와 Slack 발표 초안 작성</td>
+    </tr>
+    <tr>
+      <td><strong><a href="https://huggingface.co/docs/inference-providers/index">HF Inference Providers</a></strong></td>
+      <td>모델의 서비스를 제공합니다</td>
+    </tr>
+    <tr>
+      <td><strong><a href="https://docs.pypi.org/trusted-publishers/">PyPI Trusted Publishing</a></strong></td>
+      <td>패키지를 게시합니다</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>두 번째 원칙: 모델이 초안을 작성하고, 사람은 결정을 내립니다. 언어 모델은 간결한 PR 제목 30개를 읽고 읽기 쉬운 릴리스 노트로 바꾸는 데 능하지만, 맹목적으로 신뢰하기에는 좋지 않습니다. 그래서 이 워크플로우는 사람의 감독 아래 진행됩니다: 모델이 초안을 작성하고, 결정론적 스크립트가 이를 확인하며, 그 후 사람이 검토하고 수정한 뒤에야 어떤 것이든 릴리스됩니다(아래에서 더 자세히 다룹니다).</p>
+
+<h2 id="section-4">파이프라인 둘러보기</h2>
+
+<p>전체 워크플로우는 단일 파일 <a href="https://github.com/huggingface/huggingface_hub/blob/main/.github/workflows/release.yml"><code class="language-plaintext highlighter-rouge">.github/workflows/release.yml</code></a>로, Actions UI에서 수동으로 트리거됩니다. 입력은 정확히 하나입니다:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
+  <span class="na">workflow_dispatch</span><span class="pi">:</span>
+    <span class="na">inputs</span><span class="pi">:</span>
+      <span class="na">release_type</span><span class="pi">:</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">choice</span>
+        <span class="na">options</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">minor-prerelease</span>   <span class="c1"># cut an RC from main</span>
+          <span class="pi">-</span> <span class="s">minor-release</span>      <span class="c1"># promote the RC to final</span>
+          <span class="pi">-</span> <span class="s">patch-release</span>      <span class="c1"># bugfix on an existing release branch</span>
+</code></pre></div></div>
+
+<p>그다음 작업은 대략 아래 순서로 실행됩니다:</p>
+
+<ul>
+  <li><strong>Prepare.</strong> 다음 버전을 계산하고, 릴리스 브랜치를 새로 만들거나 재사용하고, <code class="language-plaintext highlighter-rouge">__version__</code>를 올리고, 커밋하고, 태그하고, 푸시합니다.</li>
+  <li><strong>Publish to PyPI.</strong> <code class="language-plaintext highlighter-rouge">huggingface_hub</code>를 빌드하고 업로드합니다. 동시에는 <code class="language-plaintext highlighter-rouge">hf</code> CLI를 PyPI 패키지로도 빌드하고 업로드합니다.</li>
+  <li><strong>Release notes.</strong> 마지막 태그 이후 커밋 범위를 Diff하고, PR 메타데이터를 GitHub API에서 가져와 모델이 구조화된 변경 로그를 초안하게 합니다 (<a href="https://github.com/huggingface/huggingface_hub/releases/tag/v1.20.0">here’s a recent one</a>). <em>초안</em> GitHub 릴리스로 저장됩니다.</li>
+  <li><strong>Downstream test branches.</strong> RC용으로, <code class="language-plaintext highlighter-rouge">transformers</code>, <code class="language-plaintext highlighter-rouge">datasets</code>, <code class="language-plaintext highlighter-rouge">diffusers</code>, <code class="language-plaintext highlighter-rouge">sentence-transformers</code>에서 RC를 고정하고 브랜치를 열어 그들의 CI가 우리가 망가뜨렸는지 빠르게 알려주게 합니다.</li>
+  <li><strong>Slack announcement.</strong> 노트를 읽고 우리 팀의 목소리로 내부 발표를 작성합니다.</li>
+  <li><strong>Archive notes.</strong> 원시 AI 초안과 사람이 편집한 버전을 나란히 허깅페이스 Bucket에 업로드합니다.</li>
+  <li><strong>Post-release bump.</strong> 안정적인 릴리스 후, <code class="language-plaintext highlighter-rouge">main</code>에서 다음 <code class="language-plaintext highlighter-rouge">dev0</code>로 올리는 PR을 엽니다.</li>
+  <li><strong>Comment on shipped PRs.</strong> 릴리스의 모든 PR에 “이 버전에서 배포되었습니다”라는 코멘트를 남깁니다.</li>
+  <li><strong>Sync CLI docs.</strong> 재생성된 <code class="language-plaintext highlighter-rouge">hf</code> CLI 스킬 문서를 포함하는 PR을 우리의 <a href="https://github.com/huggingface/skills">skills</a> 저장소에 엽니다.</li>
+  <li><strong>Report to Slack.</strong> 각 단계가 상태를 스레드 응답으로 게시하고, 최종 작업이 루트 메시지를 ✅ 또는 ❌로 업데이트합니다.</li>
+</ul>
+
+<p>남은 수동 단계는 초안 릴리스 노트를 검토하고 게시하는 것과 내부 Slack 메시지를 검토하고 게시하는 것입니다. 이 두 단계에는 휴먼 인 더 루프를 유지하려 합니다.</p>
+
+<h2 id="section-5">신뢰하되 검증하라: 사람의 개입 핵심</h2>
+
+<p>다음은 AI가 생성한 릴리스 노트에서 사람들이 걱정하는 실패 모드입니다: 모델이 조용히 PR 하나를 누락시키거나 이 릴리스에 포함되지 않은 PR을 만들어 버립니다. 거의 맞는 변경 로그는 아무도 재확인하지 않기 때문에, 아무 것도 없는 변경 로그보다 더 나쁩니다.</p>
+
+<p>우리는 생성된 릴리스 노트가 첫 시도에 완전하다고 신뢰하지 않고 결정론적으로 검증합니다. 모델이 실행되기 전에 파이썬 스크립트가 이 릴리스에 속한 모든 PR을 가져와 실제 기준 데이터로 저장합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Deterministic: extract PR numbers from squash-merge commits in the range.
+</span><span class="n">PR_NUMBER_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="sa">r</span><span class="sh">"</span><span class="s">\(#(\d+)\)$</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">pr_numbers</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nf">int</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="nf">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">commit</span> <span class="ow">in</span> <span class="n">commits_since_last_tag</span>
+    <span class="nf">if </span><span class="p">(</span><span class="n">m</span> <span class="p">:</span><span class="o">=</span> <span class="n">PR_NUMBER_PATTERN</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="n">commit</span><span class="p">.</span><span class="n">title</span><span class="p">))</span>
+<span class="p">]</span>
+<span class="nf">save_manifest</span><span class="p">(</span><span class="n">pr_numbers</span><span class="p">)</span>  <span class="c1"># the source of truth
+</span></code></pre></div></div>
+
+<p>그런 다음 모델이 그들로부터 노트를 초안합니다. 다 작성되면, 초기 PR 목록과 생성된 출력물을 대조해 확인합니다:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">expected</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="nf">load_manifest</span><span class="p">())</span>          <span class="c1"># what should be there
+</span><span class="n">found</span>    <span class="o">=</span> <span class="nf">extract_pr_refs</span><span class="p">(</span><span class="n">notes_md</span><span class="p">)</span>     <span class="c1"># what the model wrote (#1234 -&gt; 1234)
+</span>
+<span class="n">missing</span> <span class="o">=</span> <span class="n">expected</span> <span class="o">-</span> <span class="n">found</span>               <span class="c1"># silently dropped
+</span><span class="n">extra</span>   <span class="o">=</span> <span class="n">found</span> <span class="o">-</span> <span class="n">expected</span>               <span class="c1"># belongs to a different release
+</span></code></pre></div></div>
+
+<p>무언가 누락되거나 추가되면 실패하지도 않으며 잘못된 파일도 배포하지 않습니다. 불일치를 에이전트에 다시 넘겨 정확히 그 PR들을 수정하도록 요청합니다:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">MAX_ITERATIONS</span><span class="p">):</span>
+    <span class="n">missing</span><span class="p">,</span> <span class="n">extra</span> <span class="o">=</span> <span class="nf">validate</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">missing</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">extra</span><span class="p">:</span>
+        <span class="k">break</span>  <span class="c1"># matches the manifest exactly
+</span>    <span class="nf">run_agent_fix</span><span class="p">(</span><span class="n">missing_prs</span><span class="o">=</span><span class="n">missing</span><span class="p">,</span> <span class="n">extra_prs</span><span class="o">=</span><span class="n">extra</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>이 패턴이 전체를 신뢰할 수 있게 만드는 원칙입니다: 결정론적 가드레일로 감싼 비결정적 모델. 모델은 산문 작성에 능하지만 포괄적으로 하는 것은 신뢰할 수 없습니다. 그래서 모델이 초안을 작성하게 두고 코드가 일관성을 강제합니다.</p>
+
+<h2 id="section-6">모델이 사실을 왜곡하지 않도록 뿌리내리기</h2>
+
+<p>완전성은 한 축이고 정확성은 다른 축이다. 제목만으로 PR을 요약하는 모델은 실제 API와 일치하지 않는 코드 예제를 기꺼이 만들어 냅니다.</p>
+
+<p>이를 방지하기 위해 PR 메타데이터를 가져올 때 PR이 다룬 <code class="language-plaintext highlighter-rouge">docs/</code> 아래의 <code class="language-plaintext highlighter-rouge">.md</code> 파일의 실제 문서 차이(diff)를 함께 가져옵니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fetch_doc_diffs</span><span class="p">(</span><span class="n">pr</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">{</span><span class="sh">"</span><span class="s">filename</span><span class="sh">"</span><span class="p">:</span> <span class="n">f</span><span class="p">.</span><span class="n">filename</span><span class="p">,</span> <span class="sh">"</span><span class="s">status</span><span class="sh">"</span><span class="p">:</span> <span class="n">f</span><span class="p">.</span><span class="n">status</span><span class="p">,</span> <span class="sh">"</span><span class="s">patch</span><span class="sh">"</span><span class="p">:</span> <span class="n">f</span><span class="p">.</span><span class="n">patch</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">pr</span><span class="p">.</span><span class="nf">get_files</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">f</span><span class="p">.</span><span class="n">filename</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">"</span><span class="s">docs/</span><span class="sh">"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">f</span><span class="p">.</span><span class="n">filename</span><span class="p">.</span><span class="nf">endswith</span><span class="p">(</span><span class="sh">"</span><span class="s">.md</span><span class="sh">"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">f</span><span class="p">.</span><span class="n">patch</span>
+    <span class="p">]</span>
+</code></pre></div></div>
+
+<p>그 차이는 모델의 컨텍스트에 들어가므로, ‘다음은 새로운 CLI 명령어입니다’라고 쓸 때 PR 작성자가 문서에 실제로 쓴 예제를 인용하게 됩니다. 이는 이전과 같은 논리입니다: 모델에게 진짜 출처 자료를 주고, 좁은 작업을 부여합니다.</p>
+
+<p>프롬프트 자체는 <a href="https://github.com/huggingface/huggingface_hub/tree/main/.opencode/skills/hf-release-notes">Skills</a>로 남아 있습니다: 저장소에 커밋된 작은 Markdown 파일들(<code class="language-plaintext highlighter-rouge">SKILL.md</code>와 참조 템플릿 포함). 릴리스-노트 스킬은 하이라이트를 고르는 방법, 섹션의 구조, 문서 링크를 추가할 시기 등을 명시합니다. 이것은 온보딩 지침처럼 읽히며, 이는 정확히 올바른 사고 모델입니다.</p>
+
+<h2 id="section-7">사람 체크포인트</h2>
+
+<p>RC가 게시된 후, 초안 GitHub 릴리스는 AI의 첫 번째 초안을 포함한 상태로 남아 있습니다. 여기서 사람이 개입합니다:</p>
+
+<ol>
+  <li>리뷰어가 초안을 읽고 어조와 강조를 다듬고 모델이 과대 또는 과소 평가한 부분을 수정합니다.</li>
+  <li>그때서야 <code class="language-plaintext highlighter-rouge">minor-release</code> 실행을 트리거하여 RC를 최종으로 승격합니다.</li>
+</ol>
+
+<p>리뷰어의 시간은 다듬기에 쓰여, 글쓰기의 반나절 분량의 작업을 15분의 편집 세션으로 바꿉니다.</p>
+
+<p>또한 시간이 지나도 개선할 수 있도록 문서 기록을 남깁니다. RC 시점에 원시 AI 초안과 최종 릴리스가 잘려질 때의 사람이 편집한 버전을 서로 나란히 허깅페이스 Bucket에 보관합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># at RC time: straight from the model, untouched</span>
+hf <span class="nb">cp </span>release_notes_raw.txt    <span class="s2">"hf://buckets/huggingface/releases/huggingface_hub/</span><span class="k">${</span><span class="nv">V</span><span class="k">}</span><span class="s2">/release_notes_raw.txt"</span>
+
+<span class="c"># at release time: after the human review</span>
+hf <span class="nb">cp </span>release_notes_edited.txt <span class="s2">"hf://buckets/huggingface/releases/huggingface_hub/</span><span class="k">${</span><span class="nv">V</span><span class="k">}</span><span class="s2">/release_notes_edited.txt"</span>
+</code></pre></div></div>
+
+<p>매주 두 가지를 모두 수집하면 모델이 작성한 것과 우리가 원하던 것이 어떻게 다른지에 대한 점점 커지는 데이터 세트가 생깁니다. 이 데이터 세트는 에이전트의 기술을 업데이트하는 데 재사용할 수 있습니다.</p>
+
+<h2 id="section-8">개방적이고 안전한 파이프라인</h2>
+
+<p>릴리스 프로세스를 재설계하는 것은 보안을 강화할 좋은 기회였으며, 특히 공급망 공격에 대한 방어에 초점을 맞췄습니다.</p>
+
+<p><strong>PyPI 토큰 없음.</strong> 게시에는 <a href="https://docs.pypi.org/trusted-publishers/">Trusted Publishing</a>를 사용합니다: PyPI는 이 워크플로우에 대해 단기간 발급된 OIDC 토큰을 GitHub가 발급해 검증하고, 산출물마다 <a href="https://peps.python.org/pep-0740/">PEP 740</a> 증명 / Sigstore 원산지를 제공합니다. 장기간 비밀이 누출되거나 회전할 필요가 없습니다.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">permissions</span><span class="pi">:</span>
+  <span class="na">id-token</span><span class="pi">:</span> <span class="s">write</span>       <span class="c1"># mint the OIDC token for PyPI</span>
+  <span class="na">attestations</span><span class="pi">:</span> <span class="s">write</span>   <span class="c1"># generate Sigstore provenance</span>
+<span class="c1"># ...</span>
+<span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">pypa/gh-action-pypi-publish@v1.14.0</span>
+  <span class="na">with</span><span class="pi">:</span>
+    <span class="na">attestations</span><span class="pi">:</span> <span class="kc">true</span>  <span class="c1"># no password, no API token, just OIDC</span>
+</code></pre></div></div>
+
+<p><strong>에이전트 런타임은 고정되고 검증됩니다.</strong> 최신 OpenCode를 맹신하지 않고, 버전을 고정하고 실행하기 전에 SHA256을 확인합니다:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-fsSL</span> https://opencode.ai/install | bash <span class="nt">-s</span> <span class="nt">--</span> <span class="nt">--version</span> <span class="s2">"</span><span class="k">${</span><span class="nv">OPENCODE_VERSION</span><span class="k">}</span><span class="s2">"</span>
+<span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">OPENCODE_SHA256</span><span class="k">}</span><span class="s2">  </span><span class="si">$(</span>which opencode<span class="si">)</span><span class="s2">"</span> | <span class="nb">sha256sum</span> <span class="nt">-c</span> -
+</code></pre></div></div>
+
+<p><strong>오픈 툴링은 부주의한 툴링을 의미하지 않는다.</strong></p>
+
+<h2 id="section-9">그래서 비용은 얼마였나?</h2>
+
+<p>거의 비용이 들지 않았습니다. 전체 릴리스(노트와 Slack 발표, 20~40개 PR과 몇 차례의 프롬프트 반복)를 Inference Providers에서 약 <strong>$0.25</strong>의 비용으로 처리합니다. 오픈 가중치가 종량제로 청구되므로, 매주 실제로 중요한 질문은 ‘배포할 가치가 있는가?’이고, 항상 그런 가치가 있습니다.</p>
+
+<h2 id="section-10">실제로 무엇이 바뀌었나</h2>
+
+<p>주기가 4~6주마다 한 번에서 매주 한 번으로 바뀌었습니다. 2차 효과가 더 흥미로웠습니다:</p>
+
+<ul>
+  <li><strong>노트가 더 나아졌고, 더 나빠지지 않았다.</strong> 최초 초안은 항상 존재하므로 검토 시간은 다듬기에 집중됩니다. 구성은 더 일관적으로 되며 생략되는 것이 더 적습니다.</li>
+  <li><strong>Breakages가 더 일찍 드러난다.</strong> RC 후보 기간 동안 다운스트림 테스트 브랜치가 통합 이슈를 빠르게 포착합니다.</li>
+  <li><strong>기여자 루프가 짧아졌다.</strong> 자동 “이 버전 vX.Y.Z에 배포되었습니다” 코멘트가 기대 이상으로 중요해졌습니다. 누군가가 닫힌 PR에 이슈를 보고하면, 모두가 어떤 릴리스에 수정이 들어갔는지 즉시 볼 수 있습니다. 예전에는 수동으로 태그를 찾느라 애를 먹었습니다.</li>
+</ul>
+
+<h2 id="section-11">나의 것으로 만들기</h2>
+
+<p>이 부분이 우리가 가장 중요하게 여겼던 부분입니다. 워크플로우는 <code class="language-plaintext highlighter-rouge">huggingface_hub</code>를 중심으로 구성되었지만 구조는 일반적입니다.</p>
+
+<p><strong>거의 그대로 재사용 가능:</strong></p>
+
+<ul>
+  <li>트리거 및 버전 증가 로직 (<code class="language-plaintext highlighter-rouge">minor-prerelease</code> → <code class="language-plaintext highlighter-rouge">minor-release</code> → <code class="language-plaintext highlighter-rouge">patch-release</code>).</li>
+  <li>신뢰하되 검증하는 루프: 결정론적 매니페스트, 모델 초안, 검증, 재프롬프트. 이것은 생성하는 어떤 것과도 독립적으로 활용 가능한 아이디어입니다.</li>
+  <li>OIDC 신뢰된 게시, 핀되고 체크섬으로 검증되는 런타임, Slack 스레딩.</li>
+  <li>스킬 기반 프롬프트: 템플릿을 바꿔도 구조를 유지합니다.</li>
+</ul>
+
+<p><strong>당사에 특화된 부분:</strong></p>
+
+<ul>
+  <li>다운스트림 저장소 목록과 그 의존성 핀 포맷.</li>
+  <li>스킬에서의 정확한 섹션 분류 체계와 어조.</li>
+  <li>Slack 및 Bucket 대상지.</li>
+</ul>
+
+<p>적용하려면: <a href="https://github.com/huggingface/huggingface_hub/blob/main/.github/workflows/release.yml">workflow file</a>와 <a href="https://github.com/huggingface/huggingface_hub/tree/main/utils/release_notes">scripts</a>를 포크하고, 당신의 패키지에 맞추어 <a href="https://github.com/huggingface/huggingface_hub/blob/main/.opencode/skills/hf-release-notes/SKILL.md">skill Markdown</a>를 당신 project’s voice에 맞게 재작성하고 두 개의 저장소 변수(모델 ID와 OpenCode 버전)를 설정한 뒤 PyPI에서 Trusted Publishing를 설정하고, 다운스트림이 없다면 다운스트림-테스트 작업을 삭제합니다. 신뢰하되 검증하는 루프는 그대로 재사용할 가치가 있는 부분입니다. 이것이 생성된 산출물을 안전하게 배포하게 만드는 핵심입니다.</p>
+
+<h2 id="section-12">다음 단계</h2>
+
+<ul>
+  <li><strong>다운스트림 실패 자동 분류.</strong> 오늘 워크플로우는 테스트 브랜치를 열고 사람이 CI를 읽습니다. 실패 로그를 확인해 내부 Slack 메시지에 보고하는 것이 명백한 다음 단계입니다.</li>
+  <li><strong>패턴 확장.</strong> 이것의 대부분은 일반적입니다. 생태계의 다른 파이썬 라이브러리에서도 큰 부분을 재사용할 수 있을 것으로 기대합니다.</li>
+</ul>
+
+<h2 id="section-13">시사점</h2>
+
+<p>릴리스의 부분 중 예전에는 반나절의 집중된 인간 작업이 필요했던 것들(노트 작성, 발표 초안 작성, 다운스트림 검사 조정)은 모델이 초안을 작성하기에 적합한 부분입니다. 나머지 모든 것은 기계적이며 YAML 파일에 맞습니다. 비결은 ‘AI에게 맡기기’가 아니라, 모델이 초안을 작성하게 두고, 결정론적 코드가 검증하게 하며, 사람에게 최종 결정을 맡기는 것입니다. 전적으로 오픈 도구와 오픈 가중치로 구성되었기 때문에 비용은 사실상 0에 가까워 누구나 실행할 수 있습니다.</p>
+
+<p>전체 워크플로우 파일은 공개되어 있습니다. 파이썬 라이브러리를 관리한다면 <a href="https://github.com/huggingface/huggingface_hub/blob/main/.github/workflows/release.yml">fork it</a>를 포크해 적용해 보고, 어떻게 진행되는지 알려 주세요!</p>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-06-23">23 Jun 2026</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#매주-ai-오픈-도구-그리고-휴먼-인-더-루프가-포함된-huggingface_hub-배포" id="markdown-toc-매주-ai-오픈-도구-그리고-휴먼-인-더-루프가-포함된-huggingface_hub-배포">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">시작한 곳</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">두 종류의 작업</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">설계 원칙: 열려 있는 부품, 누구나 재사용 가능</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">파이프라인 둘러보기</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">신뢰하되 검증하라: 사람의 개입 핵심</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">모델이 사실을 왜곡하지 않도록 뿌리내리기</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">사람 체크포인트</a></li>
+      <li><a href="#section-8" id="markdown-toc-section-8">개방적이고 안전한 파이프라인</a></li>
+      <li><a href="#section-9" id="markdown-toc-section-9">그래서 비용은 얼마였나?</a></li>
+      <li><a href="#section-10" id="markdown-toc-section-10">실제로 무엇이 바뀌었나</a></li>
+      <li><a href="#section-11" id="markdown-toc-section-11">나의 것으로 만들기</a></li>
+      <li><a href="#section-12" id="markdown-toc-section-12">다음 단계</a></li>
+      <li><a href="#section-13" id="markdown-toc-section-13">시사점</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-185/" alt="">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href=""></a>
+        <span class="author-description"></span>                        
+    </div>
+</div>
+
+
+<!-- footer -->
+<div class="row post-footer">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-185/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-185/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">20</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="translation">
+            Translation
+            <span class="count">20</span>
+          </button>
+        
+      
+        
+        
+          <button class="filter-btn" data-category="huggingface">
+            HuggingFace
+            <span class="count">19</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/grabette/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">21 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/thinkingmachines-inkling/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" alt="Thinking Machines의 Inkling에 오신 것을 환영합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/torch-attention-profile/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" alt="파이토치의 프로파일링(3부): 어텐션이 전부다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">10 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/native-speed-vllm-transformers-backend/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">08 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/lerobot-release-v060/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" alt="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">07 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/cerebras-gemma4-voice-ai/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">01 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/eee-community-evals/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" alt="Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Featuring Every Eval Ever Results on Hugging Face Model Pages를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">30 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/vllm-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">26 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/ffasr-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">24 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/cross-origin-storage/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/peft-beyond-lora/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/is-it-agentic-enough/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" alt="충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/agentic-resource-discovery-launch/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-06-17-agentic-resource-discovery-launch/thumbnail.png" alt="에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Agentic Resource Discovery: Let agents search를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">17 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/github-ci-hf-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-06-09-github-ci-hf-jobs/thumbnail.gif" alt="GitHub CI를 Hugging Face Jobs로 마이그레이션" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Migrating Your GitHub CI to Hugging Face Jobs를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">09 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/openenv-agentic-rl/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-06-08-openenv-agentic-rl/thumbnail.png" alt="오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Open Source Community is backing OpenEnv for Agentic RL를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">08 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/torch-profiler/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-05-29-torch-profiler/thumbnail.png" alt="PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 1): A Beginner’s Guide to torch.profiler를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">29 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/local-reachy-mini-conversation/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">27 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/olmoearth-v1-1/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-05-20-olmoearth-v1-1/thumbnail.png" alt="OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 OlmoEarth v1.1: A more efficient family of models를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">20 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/paddleocr-transformers/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">19 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="transformers translation ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-185/how-to-use-translator/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-185/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-185/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
+        <p class="card-text text-muted">
+Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">05 Oct 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section></main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-185/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-185/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-185/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-185/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-185/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-185/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-185/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-185/assets/js/category.js"></script>
+  </body>
+</html>
