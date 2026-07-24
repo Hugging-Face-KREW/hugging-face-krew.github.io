@@ -11,14 +11,10 @@ $(function () {
   var $endScroll = $('.post-top-meta');
 
   if($endScroll.length == 0){
-    $endScroll = $('.footer-card-container');
+    $endScroll = $('.contribute_link');
 
     if($endScroll.length == 0){
-      $endScroll = $('.contribute_link');
-
-      if($endScroll.length == 0){
-        $endScroll = $('footer.footer');
-      }
+      $endScroll = $('footer.footer');
     }
   }
 
