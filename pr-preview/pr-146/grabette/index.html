@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-146/assets/images/favicon.ico" />
+
+    <title>Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.* | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. 함께 공유 데이터셋을 구축합니다. | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. 함께 공유 데이터셋을 구축합니다." />
+<meta name="author" content="dailybot" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한 글입니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-146/grabette/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-07-21T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-07-21T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-146/grabette/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" />
+<meta name="twitter:title" content="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. 함께 공유 데이터셋을 구축합니다." />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-07-21T00:00:00+09:00","datePublished":"2026-07-21T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한 글입니다.","headline":"Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. 함께 공유 데이터셋을 구축합니다.","image":"/pr-preview/pr-146/grabette/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-146/grabette/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-146/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-146/grabette/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-146/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-146/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-146/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-146/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-146/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-146/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-146/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-146/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-146/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-146/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-146/categories#huggingface">HuggingFace</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-146/categories#translation">Translation</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#grabette-로봇-조작-데이터를-기록하기-위한-오픈-시스템--함께-공유-데이터셋을-구축합니다" id="markdown-toc-grabette-로봇-조작-데이터를-기록하기-위한-오픈-시스템--함께-공유-데이터셋을-구축합니다">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br /> <em>함께 공유 데이터셋을 구축합니다.</em></a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">The bottleneck isn’t the model. It’s the data.</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">UMI의 어깨 위에 서다</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">Grabette를 만나다</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">모두를 위한 시스템</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">손에서 데이터셋으로, 두 단계로</a>        <ul>
+          <li><a href="#1-기록" id="markdown-toc-1-기록">1. 기록</a></li>
+          <li><a href="#2-브라우저에서-직접-처리" id="markdown-toc-2-브라우저에서-직접-처리">2. 브라우저에서 직접 처리</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-6" id="markdown-toc-section-6">데이터로 무엇을 할 수 있나요? 여기 하나의 예시가 있습니다.</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">이제 당신의 차례입니다</a>        <ul>
+          <li><a href="#앞으로의-계획" id="markdown-toc-앞으로의-계획">앞으로의 계획</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/grabette">Grabette: an open system to record robot-manipulation data</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/grabette -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="grabette-로봇-조작-데이터를-기록하기-위한-오픈-시스템--함께-공유-데이터셋을-구축합니다">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br /> <em>함께 공유 데이터셋을 구축합니다.</em></h1>
+
+<p><em>휴대용 그리퍼로 몇 분 안에 자신의 조작 작업을 기록하고, 이를 로봇 학습에 바로 사용할 수 있는 데이터셋으로 자동 변환하며, 로봇 학습을 위한 오픈형 협업 데이터셋 확장에 기여하세요.</em></p>
+
+<h2 id="section-1">The bottleneck isn’t the model. It’s the data.</h2>
+
+<p>로봇 학습에는 공급 문제(수급 문제)가 있습니다. 우리는 강력한 정책 아키텍처(트랜스포머 기반 VLA, 확산 및 흐름 매칭 정책, 그리고 심지어 월드 모델)와 이를 학습시킬 GPU를 보유하고 있습니다. 그러나 우리가 부족한 것은 크고 다양한 실제 세계의 조작 데이터입니다.</p>
+
+<p>로봇을 원격으로 조작해 데이터를 수집하는 일은 비용이 많이 들고 부담이 큽니다: 무엇보다도 <em>로봇이 필요합니다.</em> 또한 원격 조작 방식에 따라 데이터 수집은 수 시간에 걸쳐 사용자에게 지루하고 상당한 하드웨어 및 물류적인 도전을 수반할 수 있습니다. 이러한 이유로 필요한 다양한 작업과 환경에 맞춰 이를 확장하기 어렵습니다.</p>
+
+<p><strong>로봇 데이터를 수집하려면 로봇이 필요하지 않습니다.</strong> 단지 사람의 손, 그리퍼, 카메라, 그리고 손이 수행한 6-DoF 궤적을 복원하는 방법만 있으면 됩니다. 시연을 캡처하면 로봇이 학습할 수 있는 데이터가 생깁니다.</p>
+
+<p>오늘 공개하는 것은 Grabette, 조작 데이터를 기록하기 위한 개방형 저비용 시스템입니다. Grabette를 들고 손으로 작업을 기록하면, 로봇 학습에 바로 사용할 수 있는 깨끗한 데이터셋을 얻습니다. 로봇도, 실험실도, 원격 조작 장비도 필요 없습니다.</p>
+
+<div align="center">
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/grabette/grabette.gif" alt="put_on_grabettes" width="600" />
+</div>
+
+<p>그 목표가 더 큽니다: 시연을 기록하는 것이 동영상을 촬영하는 것만큼 쉽다면 누구나 기여할 수 있습니다. Grabette가 <strong>크고 오픈된, 협력적인 조작 데이터셋</strong>의 씨앗이 되길 원합니다. 한 연구실만으로는 결코 구축할 수 없는 데이터셋입니다.</p>
+
+<div align="center">
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/grabette/cup.gif" alt="open_cabinet" width="600" />
+</div>
+
+<h2 id="section-2">UMI의 어깨 위에 서다</h2>
+
+<p>Grabette는 스탠포드의 <a href="https://umi-gripper.github.io/"><strong>Universal Manipulation Interface</strong> (UMI)</a>에서 직접 영감을 받았습니다: 야생 현장에서 시연을 기록하는 피시아이 카메라가 달린 핸드헬드 그리퍼가 카메라 궤적을 SLAM으로 복원하고, 이를 바탕으로 시각-운동 정책을 학습합니다.</p>
+
+<p>UMI가 이 레시피가 작동한다는 것을 입증했습니다. Agibot의 MEgo 그리퍼, Genrobot의 DAS 그리퍼, Sunday Robotics의 스킬 캡처 글러브와 같은 다른(폐쇄 소스) 기기도 존재합니다. 우리의 목표는 이를 사용하기 쉽게 만들어, ‘작업이 있다’에서 ‘학습된 모델이 있다’로의 진입 장벽을 가능한 한 낮추는 것이었습니다.</p>
+
+<p>Grabette는 현대의 개방 생태계에 통합되어 있습니다: 데이터셋용 LeRobot, 공유를 위한 Hugging Face Hub, 설치가 필요 없는 <strong>브라우저에서</strong> 실행하는 처리 파이프라인. Grabette는 누구나 작업대에서 만들고 현장에서 사용할 수 있으며 데이터를 기여할 수 있습니다.</p>
+
+<h2 id="section-3">Grabette를 만나다</h2>
+
+<p>수개월에 걸쳐 Grabette를 개발해 왔으며, 이제 공유하기에 충분히 활용 가능하다고 느낍니다. 이제 여러분과 공유하게 되어 기쁩니다!</p>
+
+<p>Grabette는 시연을 재구성하는 데 필요한 모든 것이 탑재된 <strong>휴대용 그리퍼</strong> 도구입니다.</p>
+
+<div align="center">
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/grabette/grabette_label_big.png" alt="grabette_label" width="600" />
+</div>
+
+<p>그 안에는 <strong>두 대의 카메라가 있으며, 각각 고유한 역할을 합니다.</strong> 두 역할을 분리한 것은 의도된 것이며, 저렴한 광각 피시아이 카메라는 정책에 필요한 맥락이 풍부한 손목 카메라 스타일의 시점을 제공하고, RGBD 카메라는 강건한 6-DoF 추적의 핵심 작업을 수행합니다.</p>
+
+<p>Grabette가 사용자가 수행하는 작업 중 데이터를 기록하는 동안, 학습 이후에 학습한 움직임을 로봇 팔이 실행하도록 로봇 측의 보조가 필요합니다. 따라서 Grabette의 로봇 팔 엔드-이펙터 트윈인 <strong>Gripette</strong>를 만나보세요.</p>
+
+<p>가족 구성원은 동일한 하드웨어 DNA를 공유합니다:</p>
+
+<ul>
+  <li><strong>Grabette,</strong> 핸드헬드 시연 장치(카메라 + IMU + 그리퍼, BOM 비용 약 490€)</li>
+  <li><strong>Gripette,</strong> 모터식 그리퍼(카메라 + 두 개의 서보 모터, BOM 비용 약 120€)로 실제 로봇 팔 또는 시뮬레이션 로봇 팔의 루프를 닫습니다</li>
+</ul>
+
+<div align="center">
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/grabette/grabette_gripette.png" alt="Grabette and Gripette" width="600" />
+  <p><em>Grabette hand held recording device (left) and Gripette robot gripper (right)</em></p>
+</div>
+
+<h2 id="section-4">모두를 위한 시스템</h2>
+
+<p><strong>모든 것이 오픈 소스입니다</strong></p>
+
+<p><a href="https://github.com/pollen-robotics/grabette">Go check the repository!</a></p>
+
+<ul>
+  <li><strong>하드웨어</strong>: Grabette와 Gripette의 CAD 및 생산 파일</li>
+  <li><strong>캡처 서비스</strong>: 현장 Raspberry Pi 소프트웨어</li>
+  <li><strong>처리 파이프라인</strong>: 로컬에서 실행하거나 우리의 Hugging Face Space를 통해 온라인으로 실행</li>
+  <li><strong>참고 용 다운스트림 스택</strong>: LeRobot 학습 스택 기본 구성 + OpenArm 평가를 참고용으로</li>
+</ul>
+
+<p><strong>구성 요소.</strong> 표준 센서들로 구입 가능하며, 폐쇄된 파이프라인이나 포크 락인 없이. Raspberry Pi, 표준 Pi 카메라, 시판되는 OAK-D 심도 카메라, 자기 엔코더들. 핵심은 누구나 주문 가능한 부품으로 하나를 만들 수 있다는 점입니다.</p>
+
+<p><strong>디자인상 로봇 불가지론적(Robot-agnostic)</strong>. 수집 과정이나 데이터 형식에는 특정 팔이 가정되어 있지 않습니다. 시연은 카메라-로컬 6-DoF 카르테시안 자세와 그리퍼 상태로 저장되며, 출력은 Hugging Face Hub의 표준 LeRobot 데이터셋이므로 같은 데이터가 서로 다른 로봇과 서로 다른 학습 방법을 구동할 수 있습니다. 다만 팔에 맞는 Gripette 그리퍼는 여전히 필요합니다.</p>
+
+<h2 id="section-5">손에서 데이터셋으로, 두 단계로</h2>
+
+<p>이번 릴리스는 누구나 ‘작업을 시演하고 싶다’에서 ‘학습 준비가 된 데이터셋이 있다’로 빠르게, 그리고 사전 지식 없이도 이동할 수 있도록 해줍니다.</p>
+
+<h3 id="1-기록">1. 기록</h3>
+
+<p align="center">
+  <img alt="web_processing" src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/grabette/start_session.gif" align="left" width="48%" />
+  <img alt="record_coffee" src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/grabette/record_coffee_convert_small.gif" align="right" width="50%" />
+</p>
+
+<p><br clear="both" /></p>
+
+<p>버튼을 누르면 관찰 카메라, 추적 카메라(컬러, 깊이, IMU) 및 그리퍼의 엔코더 값이 하나의 공유 시계를 사용해 동시에 기록되며, 올바른 동기화를 보장합니다. 에피소드를 다시 버튼으로 중지하면 데이터가 Raspberry Pi에 로컬로 저장됩니다.</p>
+
+<h3 id="2-브라우저에서-직접-처리">2. 브라우저에서 직접 처리</h3>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/grabette/Browser_postprocess_small2.gif" alt="browser-post-process" /></p>
+
+<p>브라우저에서 Grabette 대시보드를 열고, 데이터셋에 추가할 에피소드를 선택한 뒤 한 번의 클릭으로 후처리가 시작됩니다.</p>
+
+<ul>
+  <li>에피소드는 Hugging Face Hub로 업로드됩니다</li>
+  <li>grabette-slam 공간은 RTAB-MAP 라이브러리를 사용해 SLAM을 수행하고 궤적에 점프나 트래킹 손실이 없음을 확인합니다</li>
+  <li>에피소드는 LeRobot 형식으로 변환됩니다</li>
+  <li>새 데이터셋이 사용자의 공간에 업로드되어 Le Robot visualizer를 사용해 각 에피소드의 데이터를 확인할 수 있습니다</li>
+</ul>
+
+<p>이제 학습을 시작할 준비가 모두 되었습니다!</p>
+
+<h2 id="section-6">데이터로 무엇을 할 수 있나요? 여기 하나의 예시가 있습니다.</h2>
+
+<p>데이터셋은 무엇을 학습시키느냐에 따라 가치가 있습니다. 따라서 루프를 끝에서 끝까지 보여주기 위해 <strong>완전한 예시를 제공합니다.</strong> 다만 이것은 가능해지는 것의 하나의 예시일 뿐이며, 제품이 아니며: 이번 릴리스는 기록 시스템입니다. Grabette 데이터는 LeRobot 데이터셋을 사용하는 어떤 방법과도 작동합니다.</p>
+
+<p>우리 예시는 200개의 기록된 시연을 활용합니다:</p>
+
+<div align="center">
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/grabette/recorded_episode.gif" alt="Grasp a cup episodes" width="40%" />
+  <p><em>Dataset available on this <a href="https://huggingface.co/datasets/chouziel/dataset-cup-0107" target="_blank" rel="noopener noreferrer">HF Dataset</a></em></p>
+</div>
+
+<p>그리고:</p>
+
+<ul>
+  <li><strong>LeRobot</strong> 스택으로 정책을 학습 — 소비자급 GPU 한 대에 맞는 Diffusion 정책(ResNet18 + SpatialSoftmax 인코더, DDIM 스케줄러, 6-DoF 회전 동작)을 사용합니다.</li>
+  <li><strong>그 정책을 평가</strong>하기 위해 Gripette 그리퍼를 장착한 OpenArm 7-DoF 팔에 적용하고, gRPC API를 통해 구동했으며, 다음과 같은 결과가 나왔습니다:</li>
+</ul>
+
+<div align="center">
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/grabette/openarm_model.gif" alt="Grasp a cup on robot" width="40%" />
+  <p><em>Policy available on this <a href="https://huggingface.co/SteveNguyen/pick_cup_0107_smooth-best" target="_blank" rel="noopener noreferrer">HF Model</a></em></p>
+</div>
+
+<h2 id="section-7">이제 당신의 차례입니다</h2>
+
+<p>데이터 병목은 한 연구실의 힘으로 해결되지 않으며, 전 세계 곳곳에서 시연을 기록하는 커뮤니티에 의해 해결됩니다. 이제 Grabette를 만들어 관심 있는 작업을 기록하고 Hub에 공유함으로써 데이터셋 구축에 기여할 수 있습니다. 에피소드 하나하나가 오픈 데이터셋을 더 크고 다양하게 만들고, 모든 기여자는 로봇 학습의 진입 장벽을 조금이라도 낮춥니다.</p>
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 1.5rem 0;">
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/grabette/sugar1.gif" alt="설탕 조각 1" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;" />
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/grabette/sugar2.gif" alt="설탕 조각 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;" />
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/grabette/spoon.gif" alt="숟가락" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;" />
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/grabette/sponge.gif" alt="스폰지" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;" />
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/grabette/screws.gif" alt="나사" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;" />
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/grabette/screwdiver.gif" alt="나사 드라이버" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;" />
+</div>
+
+<h3 id="앞으로의-계획">앞으로의 계획</h3>
+
+<p>이번 릴리스는 프로젝트의 시작에 불과합니다! Grabette는 계속 진화할 것이며, 이미 더 많은 것이 다가오고 있습니다. 예를 들어 Grabette를 보완하는 머리 착용 POV 디바이스인 <strong>Casquette</strong>를 포함해 egocentric 포착을 위한 보완도 준비 중입니다(<em>아직 진행 중</em>). 그러나 가장 중요한 다음 단계는 우리 것뿐만이 아니라 여러분의 것 역시도: 기록을 시작하고 함께 데이터셋을 구축합시다.</p>
+
+<p>👉 <strong><a href="https://github.com/pollen-robotics/grabette">Build a Grabette (GitHub)</a></strong> · <a href="https://huggingface.co/spaces/pollen-robotics/grabette-slam">Process your data (HF Space)</a> · 데이터셋에 기여하기</p>
+
+<p><em>Pollen Robotics가 ❤️로 만들어졌습니다.</em></p>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-07-21">21 Jul 2026</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#grabette-로봇-조작-데이터를-기록하기-위한-오픈-시스템--함께-공유-데이터셋을-구축합니다" id="markdown-toc-grabette-로봇-조작-데이터를-기록하기-위한-오픈-시스템--함께-공유-데이터셋을-구축합니다">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br /> <em>함께 공유 데이터셋을 구축합니다.</em></a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">The bottleneck isn’t the model. It’s the data.</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">UMI의 어깨 위에 서다</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">Grabette를 만나다</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">모두를 위한 시스템</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">손에서 데이터셋으로, 두 단계로</a>        <ul>
+          <li><a href="#1-기록" id="markdown-toc-1-기록">1. 기록</a></li>
+          <li><a href="#2-브라우저에서-직접-처리" id="markdown-toc-2-브라우저에서-직접-처리">2. 브라우저에서 직접 처리</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-6" id="markdown-toc-section-6">데이터로 무엇을 할 수 있나요? 여기 하나의 예시가 있습니다.</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">이제 당신의 차례입니다</a>        <ul>
+          <li><a href="#앞으로의-계획" id="markdown-toc-앞으로의-계획">앞으로의 계획</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-146/" alt="">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href=""></a>
+        <span class="author-description"></span>                        
+    </div>
+</div>
+
+
+<!-- footer -->
+<div class="row post-footer">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-146/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-146/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">10</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="translation">
+            Translation
+            <span class="count">10</span>
+          </button>
+        
+      
+        
+        
+          <button class="filter-btn" data-category="huggingface">
+            HuggingFace
+            <span class="count">9</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-146/native-speed-vllm-transformers-backend/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-146/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-146/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">08 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-146/cerebras-gemma4-voice-ai/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-146/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-146/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">01 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-146/vllm-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-146/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-146/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">26 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-146/ffasr-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-146/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-146/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">24 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-146/cross-origin-storage/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-146/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-146/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-146/peft-beyond-lora/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-146/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-146/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-146/is-it-agentic-enough/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-146/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" alt="충분히 에이전트적인가요? 당신의 도구로 오픈 모델 벤치마킹" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-146/is-it-agentic-enough/">충분히 에이전트적인가요? 당신의 도구로 오픈 모델 벤치마킹</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-146/local-reachy-mini-conversation/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-146/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-146/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">27 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-146/paddleocr-transformers/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-146/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-146/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">19 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="transformers translation ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-146/how-to-use-translator/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-146/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-146/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
+        <p class="card-text text-muted">
+Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">05 Oct 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section></main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-146/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-146/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-146/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-146/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-146/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-146/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-146/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-146/assets/js/category.js"></script>
+  </body>
+</html>
