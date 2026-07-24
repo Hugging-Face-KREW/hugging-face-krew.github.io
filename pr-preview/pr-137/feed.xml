@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/pr-preview/pr-137/feed.xml" rel="self" type="application/atom+xml" /><link href="/pr-preview/pr-137/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-07-04T16:14:47+09:00</updated><id>/pr-preview/pr-137/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</title><link href="/pr-preview/pr-137/paddleocr-transformers/" rel="alternate" type="text/html" title="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" /><published>2026-05-19T00:00:00+09:00</published><updated>2026-05-19T00:00:00+09:00</updated><id>/pr-preview/pr-137/paddleocr-transformers</id><content type="html" xml:base="/pr-preview/pr-137/paddleocr-transformers/"><![CDATA[<blockquote>
-  <p>Source: https://huggingface.co/blog/PaddlePaddle/paddleocr-transformers</p>
-</blockquote>
-
-<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/pr-preview/pr-137/feed.xml" rel="self" type="application/atom+xml" /><link href="/pr-preview/pr-137/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-07-24T21:16:18+09:00</updated><id>/pr-preview/pr-137/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</title><link href="/pr-preview/pr-137/paddleocr-transformers/" rel="alternate" type="text/html" title="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" /><published>2026-05-19T00:00:00+09:00</published><updated>2026-05-19T00:00:00+09:00</updated><id>/pr-preview/pr-137/paddleocr-transformers</id><content type="html" xml:base="/pr-preview/pr-137/paddleocr-transformers/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#paddleocr-35-transformers-백엔드를-활용한-ocr-및-문서-파싱-작업-실행" id="markdown-toc-paddleocr-35-transformers-백엔드를-활용한-ocr-및-문서-파싱-작업-실행">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a>    <ul>
       <li><a href="#what-changed" id="markdown-toc-what-changed">What changed?</a></li>
       <li><a href="#왜-이것이-중요합니까" id="markdown-toc-왜-이것이-중요합니까">왜 이것이 중요합니까</a></li>
@@ -15,8 +11,9 @@
   </li>
 </ul>
 <!--toc-->
-
 <p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/PaddlePaddle/paddleocr-transformers">PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a Transformers Backend</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/PaddlePaddle/paddleocr-transformers -->
 
 <hr />
 
@@ -235,7 +232,7 @@ print
 
 <p>또한 가치 있는 PR 리뷰와 피드백을 주신 Raushan Turganbay 및 Yoni Gozlan께도 감사드립니다.</p>
 
-<p>그들의 안내가 Hugging Face 커뮤니티의 통합 품질, 문서화, 개발자 경험을 개선하는 데 도움이 되었습니다.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[Source: https://huggingface.co/blog/PaddlePaddle/paddleocr-transformers]]></summary></entry><entry><title type="html">n8n으로 번역 MCP Server 워크플로우 구축하기: 실전 트러블슈팅과 실행 방식 비교</title><link href="/pr-preview/pr-137/hf-translation-mcp-n8n/" rel="alternate" type="text/html" title="n8n으로 번역 MCP Server 워크플로우 구축하기: 실전 트러블슈팅과 실행 방식 비교" /><published>2026-01-05T00:00:00+09:00</published><updated>2026-01-05T00:00:00+09:00</updated><id>/pr-preview/pr-137/hf-translation-mcp-n8n</id><content type="html" xml:base="/pr-preview/pr-137/hf-translation-mcp-n8n/"><![CDATA[<ul id="markdown-toc">
+<p>그들의 안내가 Hugging Face 커뮤니티의 통합 품질, 문서화, 개발자 경험을 개선하는 데 도움이 되었습니다.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a Transformers Backend를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-137/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" /><media:content medium="image" url="/pr-preview/pr-137/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">n8n으로 번역 MCP Server 워크플로우 구축하기: 실전 트러블슈팅과 실행 방식 비교</title><link href="/pr-preview/pr-137/hf-translation-mcp-n8n/" rel="alternate" type="text/html" title="n8n으로 번역 MCP Server 워크플로우 구축하기: 실전 트러블슈팅과 실행 방식 비교" /><published>2026-01-05T00:00:00+09:00</published><updated>2026-01-05T00:00:00+09:00</updated><id>/pr-preview/pr-137/hf-translation-mcp-n8n</id><content type="html" xml:base="/pr-preview/pr-137/hf-translation-mcp-n8n/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#들어가며" id="markdown-toc-들어가며">들어가며</a></li>
   <li><a href="#n8n-번역-mcp-server-워크플로우-소개" id="markdown-toc-n8n-번역-mcp-server-워크플로우-소개">n8n 번역 MCP Server 워크플로우 소개</a></li>
   <li><a href="#n8n-워크플로우-구축-결과" id="markdown-toc-n8n-워크플로우-구축-결과">n8n 워크플로우 구축 결과</a>    <ul>
