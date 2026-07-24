@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-07-24T23:48:04+09:00</updated><id>/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*</title><link href="/grabette/" rel="alternate" type="text/html" title="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*" /><published>2026-07-21T00:00:00+09:00</published><updated>2026-07-21T00:00:00+09:00</updated><id>/grabette</id><content type="html" xml:base="/grabette/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-07-24T23:50:05+09:00</updated><id>/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*</title><link href="/grabette/" rel="alternate" type="text/html" title="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*" /><published>2026-07-21T00:00:00+09:00</published><updated>2026-07-21T00:00:00+09:00</updated><id>/grabette</id><content type="html" xml:base="/grabette/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#grabette-로봇-조작-데이터를-기록하기-위한-오픈-시스템--함께-공유-데이터셋을-구축합니다" id="markdown-toc-grabette-로봇-조작-데이터를-기록하기-위한-오픈-시스템--함께-공유-데이터셋을-구축합니다">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br /> <em>함께 공유 데이터셋을 구축합니다.</em></a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">The bottleneck isn’t the model. It’s the data.</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">UMI의 어깨 위에 서다</a></li>
@@ -177,7 +177,1021 @@ Review instructions:
 
 <p>👉 <strong><a href="https://github.com/pollen-robotics/grabette">Build a Grabette (GitHub)</a></strong> · <a href="https://huggingface.co/spaces/pollen-robotics/grabette-slam">Process your data (HF Space)</a> · 데이터셋에 기여하기</p>
 
-<p><em>Pollen Robotics가 ❤️로 만들어졌습니다.</em></p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" /><media:content medium="image" url="/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">파이토치의 프로파일링(3부): 어텐션이 전부다</title><link href="/torch-attention-profile/" rel="alternate" type="text/html" title="파이토치의 프로파일링(3부): 어텐션이 전부다" /><published>2026-07-10T00:00:00+09:00</published><updated>2026-07-10T00:00:00+09:00</updated><id>/torch-attention-profile</id><content type="html" xml:base="/torch-attention-profile/"><![CDATA[<ul id="markdown-toc">
+<p><em>Pollen Robotics가 ❤️로 만들어졌습니다.</em></p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" /><media:content medium="image" url="/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Thinking Machines의 Inkling에 오신 것을 환영합니다</title><link href="/thinkingmachines-inkling/" rel="alternate" type="text/html" title="Thinking Machines의 Inkling에 오신 것을 환영합니다" /><published>2026-07-15T00:00:00+09:00</published><updated>2026-07-15T00:00:00+09:00</updated><id>/thinkingmachines-inkling</id><content type="html" xml:base="/thinkingmachines-inkling/"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#thinking-machines의-inkling에-오신-것을-환영합니다" id="markdown-toc-thinking-machines의-inkling에-오신-것을-환영합니다">Thinking Machines의 Inkling에 오신 것을 환영합니다</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">Inkling이 특별한 이유는 무엇인가?</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">전반적인 기능과 아키텍처</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">추론 지원</a>        <ul>
+          <li><a href="#트랜스포머" id="markdown-toc-트랜스포머">트랜스포머</a></li>
+          <li><a href="#sglang" id="markdown-toc-sglang">SGLang</a></li>
+          <li><a href="#vllm" id="markdown-toc-vllm">vLLM</a></li>
+          <li><a href="#원격-추론-hugging-face-추론-제공자와-함께" id="markdown-toc-원격-추론-hugging-face-추론-제공자와-함께">원격 추론: Hugging Face 추론 제공자와 함께</a></li>
+          <li><a href="#로컬-추론-with-llamacpp와-unsloth" id="markdown-toc-로컬-추론-with-llamacpp와-unsloth">로컬 추론 with llama.cpp와 Unsloth</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-4" id="markdown-toc-section-4">사용 사례</a>        <ul>
+          <li><a href="#pi로-에이전트형-코딩" id="markdown-toc-pi로-에이전트형-코딩">Pi로 에이전트형 코딩</a></li>
+          <li><a href="#다중-토큰-예측-드래프터mtp" id="markdown-toc-다중-토큰-예측-드래프터mtp">다중 토큰 예측 드래프터(MTP)</a></li>
+          <li><a href="#멀티모달-비전" id="markdown-toc-멀티모달-비전">멀티모달 비전</a></li>
+          <li><a href="#멀티모달-오디오" id="markdown-toc-멀티모달-오디오">멀티모달 오디오</a></li>
+          <li><a href="#포스트-트레이닝post-training" id="markdown-toc-포스트-트레이닝post-training">포스트 트레이닝(Post-training)</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-5" id="markdown-toc-section-5">Slurm 스크립트</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">벤치마크 결과</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/thinkingmachines-inkling">Welcome Inkling by Thinking Machines</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/thinkingmachines-inkling -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="thinking-machines의-inkling에-오신-것을-환영합니다">Thinking Machines의 Inkling에 오신 것을 환영합니다</h1>
+
+<p><a href="https://huggingface.co/thinkingmachines/Inkling">Inkling</a>은 대형(1조 매개변수!)의 오픈 모델로 이미지, 텍스트, 오디오 입력을 네이티브로 수용합니다.</p>
+
+<p>요약: Thinking Machines의 Inkling은 허깅페이스에 공개되었습니다. Inkling은 이미지, 오디오, 텍스트를 모두 이해하는 대형 멀티모달 LLM이며, 에이전트형 기능을 가지며, 1M 컨텍스트를 지원합니다. BF16 전체 체크포인트와 잘 보정된 NVFP4 변형으로 제공되며, 추론 속도를 높이기 위한 예측적 MTP 계층을 포함합니다. 트랜스포머, SGLang, 및 llama.cpp에서 데이-제로(day-0) 지원이 있습니다.</p>
+
+<h2 id="section-1">Inkling이 특별한 이유는 무엇인가?</h2>
+
+<p>Inkling은 대략 1조 매개변수에 달하는 대형 오픈 모델로, 이미지, 텍스트, 오디오 입력을 네이티브로 받을 수 있으며, 45조 토큰의 텍스트, 이미지, 오디오 및 비디오로 학습되었습니다. 오디오, 이미지, 텍스트 등의 모달리티 간 추론에 집중하며, 파인튜닝을 통한 도메인 적응을 목표로 합니다. 이 모델을 바탕으로 데모를 몇 가지 만들고 아키텍처를 탐구해 왔으며, 멀티모달 추론 애플리케이션의 새로운 물결을 이끌어내기에 좋다고 생각합니다.</p>
+
+<h2 id="section-2">전반적인 기능과 아키텍처</h2>
+
+<p>Inkling은 전체 975B 매개변수 중 활성 매개변수 41B를 가진 디코더 전용 멀티모달 Mixture-of-Experts 모델이다. 여러 가지가 얽혀 있어 각 부분을 하나씩 살펴보자:</p>
+
+<ul>
+  <li>디코더 전용(Decoder-only): 이는 아키텍처가 대부분의 최첨단 LLM들처럼 인과적 자동회귀 생성을 지원한다는 것을 의미합니다.</li>
+  <li>멀티모달(Multimodal): 모델은 텍스트, 오디오, 이미지를 입력으로 받을 수 있습니다.</li>
+  <li>Mixture of Experts (MoE): 각 층 내부의 피드포워드 네트워크가 희소하게 작동하여 추론이 더 빨라지며, 언제나 41B 매개변수만 활성화됩니다. 모델은 256명의 전문가를 갖고 있습니다. 나중에 자세히 보겠습니다.</li>
+</ul>
+
+<p>다음은 아키텍처의 간략한 개요입니다.</p>
+
+<p><strong>Relative attention:</strong> 트랜스포머 모델에 위치 정보를 주입하는 일반적인 방법인 RoPE 대신 Inkling은 위치 정보를 인코딩하기 위해 상대 주의를 사용합니다. 각 어텐션 레이어는 위치를 어텐션 로짓에서 직접 학습합니다. key-query-values 외에, 토큰별, 헤드별 상대 피처 R을 생성하는 네 번째 투영이 있습니다. 이 투영 텐서는 키 벡터와 쿼리 벡터 사이의 거리 정보(거리 정보)를 보정한 다음 어텐션 모듈로 전파됩니다.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/inkling-blog-assets/resolve/relative_attention.png" alt="Inkling relative attention architecture" /></p>
+
+<p><strong>Hybrid attention:</strong> 디코더 레이어는 전역 어텐션(전체 컨텍스트 길이에 한꺼번에 주의)과 슬라이딩 윈도우 어텐션(고정 컨텍스트 윈도우를 슬라이딩 방식으로 주의)을 번갈아가며 구성됩니다. 아키텍처는 5:1의 슬라이딩 윈도우 대 글로벌 어텐션 레이어 패턴을 가지고 있습니다. 이 하이브리드 어텐션 방식은 계산 효율성을 제공합니다. 마지막 레이어는 글로벌 어텐션을 사용하여 특징이 풍부한 표현을 구축하는 데 도움이 됩니다.</p>
+
+<p><strong>Short convolution:</strong> 모델은 은닉 상태 위에 독특한 짧은 1D 합성곱, 또는 <code class="language-plaintext highlighter-rouge">SConv</code>를 사용합니다. SConv는 현재 토큰과 이전 <code class="language-plaintext highlighter-rouge">W-1</code>개의 은닉 상태를 읽고, <code class="language-plaintext highlighter-rouge">W</code>를 슬라이딩 윈도우 크기로 둡니다. 여기서의 직관은 SConv가 로컬 어텐션을 돕는 한편, 어텐션 및 MoE 모듈을 로컬 표현으로부터 해방하는 것입니다.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/inkling-blog-assets/resolve/sconv.png" alt="Inkling short convolution architecture" /></p>
+
+<p><strong>MoE with shared experts sink:</strong> Inkling에서 라우터는 경로화된 전문가와 공유 전문가 모두의 점수를 매깁니다. 상위-k 선택은 6명의 전문가에 대해 수행되며, 항상 활성화되는 2명의 공유 전문가가 추가로 있습니다.</p>
+
+<p><strong>Vision understanding:</strong> 이 모델은 여러 선형 계층으로 구성된 간단한 계층적 MLP 패처를 포함합니다. 각 계층은 픽셀을 점진적으로 융합하며, 마지막 계층에서 패치당 하나의 임베딩을 생성합니다.</p>
+
+<p><strong>Audio understanding:</strong> 아키텍처는 이산화된 멜 스펙트로그램을 사용합니다. 각 100 ms 길이의 오디오 청크를 멜 스케일로 변환한 뒤, 정확한 멜 스펙트로그램 빈으로 분류합니다.</p>
+
+<p>멀티모달 타워는 비교적 간단한 모듈로, 각 모달리티마다 별도의 인코더를 사용하는 다른 모델들처럼 복잡하지 않습니다. 각 이미지 패치는 이미지 임베딩 타워를 통과하고, 오디오 청크는 오디오 임베딩 타워를 통과하여 두 미디어 임베딩을 얻습니다. 이미지 입력은 비디오 처리를 위한 추가 시간 차원도 포함합니다. 이 기능은 다운스트림 파인튜닝에 유용할 것으로 예상되지만, 즉시 비디오 성능은 평가하지 않았습니다. 타워는 패치 격자를 접고, 인접한 토큰의 작은 로컬 블록을 채널 차원으로 쌓아 hMLP를 통과합니다. 오디오 파형은 멜 스케일로 변환되며, 디스크리트 멜 빈으로 분류됩니다. 이 멜 빈 값들은 오디오 임베딩 타워에 임베딩되고, 이 임베딩들을 합산하여 최종 오디오 입력을 구성합니다.</p>
+
+<h2 id="section-3">추론 지원</h2>
+
+<p>Inkling은 데이-제로(day-0) 트랜스포머 지원을 제공하며, SGLang과 vLLM 같은 주요 추론 엔진에서도 지원됩니다.</p>
+
+<p>이 모델은 거대합니다. bf16 체크포인트는 VRAM 2 TB가 필요하고, nvfp4 버전은 VRAM 600 GB가 필요합니다. Inference Providers와 같은 서버리스 추론 라우터를 통해 모델을 시도해 볼 수 있으며, llama.cpp와 함께 ggml 양자화를 사용해 로컬 배포를 할 수 있습니다.</p>
+
+<h3 id="트랜스포머">트랜스포머</h3>
+
+<p>다이렉트하게 <code class="language-plaintext highlighter-rouge">transformers</code>로 추론하는 가장 쉬운 방법은 <code class="language-plaintext highlighter-rouge">any-to-any</code> 파이프라인을 사용하는 것입니다. Hopper 이후의 GPU에서 16비트 <code class="language-plaintext highlighter-rouge">"thinkingmachines/Inkling"</code>를 사용하거나, Blackwell Nvidia GPU에서 양자화된 NVFP4 체크포인트 <code class="language-plaintext highlighter-rouge">"thinkingmachines/Inkling-NVFP4"</code>를 사용할 수 있습니다. 최신 버전의 트랜스포머(오늘 출시된 5.14.0)를 사용하는지 확인하십시오 (<code class="language-plaintext highlighter-rouge">pip install -U transformers</code>).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="n">model_id</span> <span class="o">=</span> <span class="sh">"</span><span class="s">thinkingmachines/Inkling</span><span class="sh">"</span>
+<span class="c1"># model_id = "thinkingmachines/Inkling-NVFP4"
+</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="nf">pipeline</span><span class="p">(</span><span class="sh">"</span><span class="s">any-to-any</span><span class="sh">"</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model_id</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>파이프라인을 초기화한 후 프롬프트를 다음과 같이 전달할 수 있습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image_url</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="sh">"</span><span class="s">https://huggingface.co/datasets/merve/vl-test-suite/</span><span class="sh">"</span>
+    <span class="sh">"</span><span class="s">resolve/main/pills.jpg</span><span class="sh">"</span>
+<span class="p">)</span>
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">image</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">image</span><span class="sh">"</span><span class="p">:</span> <span class="n">image_url</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Do components in this supplement interact with each other?</span><span class="sh">"</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+<span class="n">output</span> <span class="o">=</span> <span class="nf">pipe</span><span class="p">(</span>
+    <span class="n">messages</span><span class="p">,</span>
+    <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+    <span class="n">return_full_text</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">reasoning_effort</span><span class="o">=</span><span class="sh">"</span><span class="s">medium</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="sh">"</span><span class="s">generated_text</span><span class="sh">"</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>한 단계 아래에서 Auto 클래스도 사용할 수 있습니다. 추론에는 모델용 <code class="language-plaintext highlighter-rouge">AutoModelForMultimodalLM</code> 클래스와 프로세서용 <code class="language-plaintext highlighter-rouge">AutoProcessor</code> 클래스를 사용할 수 있습니다. 서로 다른 추론 작업에는 토크나이저가 <code class="language-plaintext highlighter-rouge">reasoning_effort</code> 인수를 받습니다. 추론 노력의 기존 옵션은 <code class="language-plaintext highlighter-rouge">"none"</code>, <code class="language-plaintext highlighter-rouge">"minimal"</code>, <code class="language-plaintext highlighter-rouge">"low"</code>, <code class="language-plaintext highlighter-rouge">"medium"</code>, <code class="language-plaintext highlighter-rouge">"high"</code>, <code class="language-plaintext highlighter-rouge">"xhigh"</code>, <code class="language-plaintext highlighter-rouge">"max"</code>입니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForMultimodalLM</span><span class="p">,</span> <span class="n">AutoProcessor</span>
+
+<span class="n">model_id</span> <span class="o">=</span> <span class="sh">"</span><span class="s">thinkingmachines/Inkling</span><span class="sh">"</span>
+<span class="n">processor</span> <span class="o">=</span> <span class="n">AutoProcessor</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">model_id</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForMultimodalLM</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="n">model_id</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">system</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">You should only answer with a number.</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">What is 17 * 23?</span><span class="sh">"</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">processor</span><span class="p">.</span><span class="nf">apply_chat_template</span><span class="p">(</span>
+    <span class="n">messages</span><span class="p">,</span>
+    <span class="n">add_generation_prompt</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">tokenize</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_dict</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_tensors</span><span class="o">=</span><span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">reasoning_effort</span><span class="o">=</span><span class="sh">"</span><span class="s">high</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">).</span><span class="nf">to</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">device</span><span class="p">)</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+<span class="n">generated_tokens</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">inputs</span><span class="p">[</span><span class="sh">"</span><span class="s">input_ids</span><span class="sh">"</span><span class="p">].</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">:]</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">processor</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">generated_tokens</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>멀티모달 추론의 경우에도 동일한 클래스를 사용할 수 있습니다. 모델 카드에 각 모달리티에 대한 예제 스니펫을 제공합니다.</p>
+
+<details>
+<summary>Text with image inference</summary>
+
+```python
+from transformers import AutoModelForMultimodalLM, AutoProcessor
+
+model_id = "thinkingmachines/Inkling"
+processor = AutoProcessor.from_pretrained(model_id)
+model = AutoModelForMultimodalLM.from_pretrained(
+    model_id,
+    dtype="auto",
+    device_map="auto",
+)
+
+image_url = (
+    "https://huggingface.co/datasets/merve/vl-test-suite/"
+    "resolve/main/pills.jpg"
+)
+messages = [
+    {
+        "role": "user",
+        "content": [
+            {
+                "type": "image",
+                "image": image_url,
+            },
+            {
+                "type": "text",
+                "text": "Do any of the components in this supplement interact?",
+            },
+        ],
+    },
+]
+
+inputs = processor.apply_chat_template(
+    messages,
+    tokenize=True,
+    add_generation_prompt=True,
+    reasoning_effort="medium",
+    return_dict=True,
+    return_tensors="pt",
+).to(model.device)
+input_len = inputs["input_ids"].shape[-1]
+
+outputs = model.generate(**inputs, max_new_tokens=2000)
+response = processor.decode(outputs[0][input_len:], skip_special_tokens=False)
+
+processor.parse_response(response)
+```
+
+
+</details>
+
+<p>Inkling은 또한 오디오 입력을 받습니다. 아래는 같은 <code class="language-plaintext highlighter-rouge">AutoModelForMultimodalLM</code> 클래스를 사용하는 예제 추론 스니펫입니다.</p>
+
+<details>
+<summary>Text with audio inference</summary>
+
+```python
+from transformers import AutoModelForMultimodalLM, AutoProcessor
+
+model_id = "thinkingmachines/Inkling"
+
+processor = AutoProcessor.from_pretrained(model_id)
+model = AutoModelForMultimodalLM.from_pretrained(
+    model_id,
+    dtype="auto",
+    device_map="auto",
+)
+
+audio_url = (
+    "https://huggingface.co/datasets/merve/vl-test-suite/"
+    "resolve/main/example_audio.mp3"
+)
+messages = [
+    {
+        "role": "user",
+        "content": [
+            {"type": "text", "text": "Transcribe the following speech to text."},
+            {
+                "type": "audio",
+                "audio": audio_url,
+            },
+        ],
+    },
+]
+
+inputs = processor.apply_chat_template(
+    messages,
+    tokenize=True,
+    return_dict=True,
+    return_tensors="pt",
+    add_generation_prompt=True,
+).to(model.device)
+input_len = inputs["input_ids"].shape[-1]
+
+outputs = model.generate(**inputs, max_new_tokens=512)
+response = processor.decode(outputs[0][input_len:], skip_special_tokens=False)
+
+processor.parse_response(response)
+```
+
+
+</details>
+
+<p>여러 노드의 클러스터에서 더 현실적인 병렬 배치를 원하신다면 아래의 <a href="#slurm-scripts">Slurm</a> 섹션을 참조하십시오.</p>
+
+<h3 id="sglang">SGLang</h3>
+
+<p>SGLang은 Inkling의 출시 시점에 가장 빠른 배포 프레임워크 중 하나로, 커스텀 모델 구현을 포함합니다. 아래의 런치 명령은 모델을 8개의 GPU에 걸쳐 샤딩하고 포트 30000에서 OpenAI 호환 API를 제공합니다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>sglang
+
+python3 <span class="nt">-m</span> sglang.launch_server <span class="se">\</span>
+ <span class="nt">--model-path</span> thinkingmachine/Inkling <span class="se">\</span>
+ <span class="nt">--tp-size</span> 8 <span class="se">\</span>
+ <span class="nt">--served-model-name</span> inkling <span class="se">\</span>
+ <span class="nt">--host</span> 0.0.0.0 <span class="se">\</span>
+ <span class="nt">--port</span> 30000
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">--tp-size</code>를 GPU 수에 맞추십시오. KV 캐시를 위한 여유 공간이 더 필요하면 <code class="language-plaintext highlighter-rouge">--mem-fraction-static</code>을 추가하십시오(예: <code class="language-plaintext highlighter-rouge">0.85</code>).</p>
+
+<h3 id="vllm">vLLM</h3>
+
+<p>vLLM은 생산 서비스에 강력합니다. 하나의 <code class="language-plaintext highlighter-rouge">vllm serve</code> 명령으로 허브에서 가중치를 다운로드하고, 텐서 병렬화로 GPU에 모델을 샤딩하며, 포트 8000에서 OpenAI 호환 서버를 시작합니다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>vllm
+
+vllm serve thinkingmachine/Inkling <span class="se">\</span>
+  <span class="nt">--tensor-parallel-size</span> 8 <span class="se">\</span>
+  <span class="nt">--served-model-name</span> inkling
+</code></pre></div></div>
+
+<p>실제로는 여러 노드와 SLURM 같은 분산 도구가 필요합니다(아래 참조). 핵심 매개변수는 노드의 GPU 수에 따라 <code class="language-plaintext highlighter-rouge">--tensor-parallel-size</code>를 설정하고, KV-캐시 메모리 한계에 도달하면 컨텍스트 윈도우를 제한하기 위해 <code class="language-plaintext highlighter-rouge">--max-model-len</code>를 사용합니다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:8000/v1/chat/completions <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "model": "inkling",
+    "messages": [{"role": "user", "content": "Hello!"}]
+  }'</span>
+</code></pre></div></div>
+
+<h3 id="원격-추론-hugging-face-추론-제공자와-함께">원격 추론: Hugging Face 추론 제공자와 함께</h3>
+
+<p>이 모델은 허깅페이스를 통해 여러 추론 제공자를 사용하여 추론할 수 있습니다. <a href="https://huggingface.co/thinkingmachines/inkling?inference_provider=fastest&amp;language=python&amp;client=openai&amp;inference_api=true">here</a>를 사용하는 모든 코드 스니펫을 확인할 수 있습니다. 아래는 OpenAI 클라이언트와 함께 사용하는 방법입니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
+
+<span class="kn">from</span> <span class="n">openai</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="sh">"</span><span class="s">https://router.huggingface.co/v1</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">"</span><span class="s">HF_TOKEN</span><span class="sh">"</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">completion</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">chat</span><span class="p">.</span><span class="n">completions</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">thinkingmachines/Inkling:auto</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span>
+            <span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">What is the capital of France?</span><span class="sh">"</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">completion</span><span class="p">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">message</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>설정에서 선호하는 공급자에 접미사 <code class="language-plaintext highlighter-rouge">“:auto”</code>를 사용합니다. 또한 <code class="language-plaintext highlighter-rouge">“cheapest”</code> 또는 <code class="language-plaintext highlighter-rouge">“:fastest”</code>를 사용할 수도 있습니다. 이번 릴리스에서는 모든 사용자를 위해 2시간의 추론 비용을 커버합니다.</p>
+
+<p>참고: Inference Providers에서의 오디오 지원은 작업 중이며 곧 추가될 예정입니다.</p>
+
+<h3 id="로컬-추론-with-llamacpp와-unsloth">로컬 추론 with llama.cpp와 Unsloth</h3>
+
+<p>제한된 하드웨어에서 양자화된 버전의 모델을 실행하려면 <code class="language-plaintext highlighter-rouge">llama.cpp</code>를 사용할 수 있습니다. Unsloth는 모델을 1비트 정밀도로 양자화하여 원본 모델 대비 VRAM 사용량을 95% 감소시켰습니다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>llama serve <span class="nt">-hf</span> unsloth/inkling-GGUF:UD-IQ1_S
+</code></pre></div></div>
+
+<p>여기에서 <a href="http://localhost:8000"><code class="language-plaintext highlighter-rouge">http://localhost:8000</code></a><code class="language-plaintext highlighter-rouge">/v1</code>에서 실행되는 OpenAI 호환 서버를 시작하고, 선호하는 도구나 클라이언트를 통해 연결합니다. 그곳으로 이동하면 모델과 대화를 시작하고, 좋아하는 MCP로 설정하며, 이미지나 파일을 편리하게 전달하는 등 다양한 작업을 수행할 수 있습니다.</p>
+
+<p>Llama cpp는 도구, MCP 및 에이전트형 워크로드를 지원하는 내장 UI도 함께 제공합니다. llma 앱에서 1비트 정밀도에서 Inkling이 실행되는 것을 확인해 보십시오:</p>
+
+<video controls="" width="100%" autoplay="" loop="" muted="">
+  <source src="https://huggingface.co/buckets/huggingface/inkling-blog-assets/resolve/thinky.mp4" type="video/mp4" />
+</video>
+
+<p>Inkling GGUF도 Unsloth Studio에서 동적 1비트 GGUF로 실행 가능하며, 탑 1% 정확도 대비 약 74.2%를 유지하면서 크기는 86% 작습니다.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/inkling-blog-assets/resolve/unsloth.png" alt="Inkling running in Unsloth Studio" /></p>
+
+<h2 id="section-4">사용 사례</h2>
+
+<h3 id="pi로-에이전트형-코딩">Pi로 에이전트형 코딩</h3>
+
+<p>Pi는 다양한 언어 모델과 함께 사용할 수 있는 최소한의 코딩 에이전트 허브입니다. Pi를 추론 엔진 서버 엔드포인트(예: llama.cpp)로 사용하거나, 설치 후 <code class="language-plaintext highlighter-rouge">~/.pi/agent/models.json</code>에 이를 추가하여 허깅페이스의 추론 제공자와 함께 사용할 수 있습니다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"providers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"inference-providers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://router.huggingface.co/v1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai-completions"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hf_..."</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"thinkingmachines/Inkling"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>그런 다음 프로젝트 디렉토리에서 <code class="language-plaintext highlighter-rouge">pi</code>를 호출하여 Pi를 시작하면 됩니다! 이 데모에서는 모델에 어려운 수학적 추론 문제를 부여하고, Pi의 도구를 이용해 해결합니다.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/inkling-blog-assets/resolve/visual-reasoning.gif" alt="Visual reasoning gif demo" /></p>
+
+<p>Inkling은 광범위한 멀티모달 추론과 낮은 토큰 소모에 집중하므로 문서 처리나 오디오 작업으로 먼저 사용해 보십시오.</p>
+
+<h3 id="다중-토큰-예측-드래프터mtp">다중 토큰 예측 드래프터(MTP)</h3>
+
+<p>MTP는 한 번에 여러 토큰을 예측하는 추가 계층을 모델에 더합니다. 추론 중에는 이 추가 계층이 예측적 디코딩의 ‘드래프터(drafters)’ 역할을 하여 성능을 해치지 않으면서 생성 속도를 높입니다. MTP를 사용하면 드래터를 서비스하는 데 따른 VRAM의 작은 비용에도 불구하고 동일한 생성 결과를 얻을 수 있습니다. Thinking Machines는 이번 릴리스에서 MTP 드래터도 제공합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">torch</span>
+<span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForMultimodalLM</span><span class="p">,</span> <span class="n">AutoProcessor</span>
+
+<span class="n">processor</span> <span class="o">=</span> <span class="n">AutoProcessor</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="sh">"</span><span class="s">thinkingmachines/Inkling</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForMultimodalLM</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">thinkingmachines/Inkling</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">bfloat16</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Preprocess the inputs.
+</span><span class="bp">...</span>
+<span class="n">generated</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span>
+    <span class="o">**</span><span class="n">inputs</span><span class="p">,</span>
+    <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">do_sample</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">use_mtp</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">processor</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">generated</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="멀티모달-비전">멀티모달 비전</h3>
+
+<p>전문가 수준의 소스와 대학 입시 문제를 포함한 소규모 추론 문제 세트를 준비했습니다. 스크린샷에 워터마크를 찍어 모델에 도전했고, 모델은 이 문제들을 모두 높은 수준의 한계에서 해결했고, 최고 수준 및 중간 추론 시도에서 하나를 실패했습니다. 따라서 모델의 해답을 확인하고, 해결에 소요된 토큰 수를 제공하는 모델 답안을 링크합니다. 이 분위기 평가에서는 시스템 프롬트를 제공하지 않으며, 이러한 추론 문제는 보통 좋은 시스템 프롬프트와 함께 실행하는 것이 바람직합니다. 분위기 평가 이미지와 결과는 <a href="https://huggingface.co/buckets/merve/inkling">here</a>에 있습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">범주</th>
+      <th style="text-align: left">질문</th>
+      <th style="text-align: left">추론 노력 중간의 토큰 수</th>
+      <th style="text-align: left">추론 노력 높음의 토큰 수</th>
+      <th style="text-align: left">추론 effort 최대의 토큰 수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">자유 형식 약물 상호작용</td>
+      <td style="text-align: left">여기서 어떤 구성 요소가 상호작용합니까?</td>
+      <td style="text-align: left">1,893 ✅</td>
+      <td style="text-align: left">2,367 ✅</td>
+      <td style="text-align: left">3,688 ✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">물리 문제 (MMMU-Pro)</td>
+      <td style="text-align: left">이미지의 질문에 답하십시오.</td>
+      <td style="text-align: left">1,357 ✅</td>
+      <td style="text-align: left">3,323 ✅</td>
+      <td style="text-align: left">3,314 ✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">다국어 물리 문제</td>
+      <td style="text-align: left">이미지에 주어진 터키어 질문에 답하십시오.</td>
+      <td style="text-align: left">1,435 ✅</td>
+      <td style="text-align: left">2,129 ✅</td>
+      <td style="text-align: left">3,162 ✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">변호사 시험</td>
+      <td style="text-align: left">이미지의 질문에 답하십시오.</td>
+      <td style="text-align: left">1,117 ✅</td>
+      <td style="text-align: left">2,137 ✅</td>
+      <td style="text-align: left">1,676 ✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">인포그래픽 질의 응답(주관식)</td>
+      <td style="text-align: left">제시된 정보를 바탕으로 북극의 여름 기온 상승 기간이 관측된 기간 대비 대략 몇 배 더 긴가요?</td>
+      <td style="text-align: left">1,378 ❌</td>
+      <td style="text-align: left">3,859 ✅</td>
+      <td style="text-align: left">6000 토큰(토큰 예산 초과)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>분위기 평가에 대한 추가 메모:</strong></p>
+
+<ul>
+  <li>인포그래픽의 질문에 직접 답하기보다는 모델이 먼저 이미지의 텍스트를 텍스트로 변환해 근거를 마련합니다.</li>
+  <li>추론에서 토큰을 절약하려면 프롬프트가 매우 중요한데, 예를 들어 약의 뒷면 이미지에 ‘여기서 어떤 구성 요소가 상호작용합니까?’와 같은 모호한 질문을 제시하면 모델은 먼저 ‘상호작용’의 의미를 파악해야 합니다.</li>
+  <li>객관식 문제의 정답은 모델의 자체 추론 구조를 크게 돕지만, 개방형 질문의 경우 MCQ에 비해 성능이 떨어지는 경향이 있어 많은 모델에서 공통적으로 보이는 이슈입니다. 일반적으로 생각의 흐름은 OCR → 특성화 → 각 옵션 평가 → 답변의 순서입니다.</li>
+  <li>0.7 수준의 추론 노력(중간)이 좋은 절충점을 제공하는 것으로 보입니다.</li>
+</ul>
+
+<h3 id="멀티모달-오디오">멀티모달 오디오</h3>
+
+<p>우리는 BigBenchAudio의 일부 오디오 추론 예제와 <a href="https://huggingface.co/datasets/iNLP-Lab/GlobeAudio">GlobeAudio</a>의 몇 가지 다국어 오디오 예제(러시아어 및 중국어 다지선다형 문제의 마지막 단어를 묻는 문제)에 대해 분위기 평가를 수행했습니다. 우리가 테스트한 <a href="https://huggingface.co/datasets/ArtificialAnalysis/big_bench_audio">BigBenchAudio</a> 예제는 논리적 진술과 질문으로 구성되며, 형식적 오류를 묻는 문제(오디오의 맥락에서 논증이 논리적으로 도출될 수 있는지 여부)나 객체 개수 세기(오디오에 나타난 여러 개의 특정 객체의 총 개수를 묻는 문제)일 수 있습니다. 이 벤치마크는 원래 음성-대-음성 추론을 위해 만들어졌지만, 이 모델의 오디오 추론 능력을 확인하고자 합니다. GlobeAudio의 경우 질문이 비교적 간단하여 추론 노력 0.1로 진행했습니다. GlobeAudio의 각 언어의 첫 번째 예제를 실행했습니다. 모든 질문과 노력에서 테스트를 통과했으며, 최소 노력에서 두 번째 형식적 오류 예제만 실패했고, 따라서 각 문제의 토큰 사용량만 추론 노력에 비례하여 제공합니다. 분위기 평가 결과 및 오디오 파일은 <a href="https://huggingface.co/buckets/merve/inkling">here</a>에 있습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">GlobeAudio</th>
+      <th style="text-align: left">질문</th>
+      <th style="text-align: left">최소 추론 노력 시 완료 토큰 수</th>
+      <th style="text-align: left">중간 추론 노력 시 완료 토큰 수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Russian (마지막 단어를 묻는 문제)</td>
+      <td style="text-align: left">오디오 녹음의 마지막 단어는 무엇입니까? 1. Россия 2. Свидетелем 3. Москва 4. Событий 정답 하나의 정확한 텍스트로 답하십시오.</td>
+      <td style="text-align: left">130</td>
+      <td style="text-align: left">179</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Russian (발화자의 직업을 묻는 문제)</td>
+      <td style="text-align: left">화자가 어떤 직업을 가지고 있을 가능성이 있습니까? 1. Репортершей 2. Блоггершей 3. Учительницей истории 4. Ведущей развлекательного шоу 정답 하나의 정확한 텍스트로 답하십시오.</td>
+      <td style="text-align: left">105</td>
+      <td style="text-align: left">136</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Chinese (발화 속도 묻기)</td>
+      <td style="text-align: left">播报员의 말하는 속도에 변화가 있습니까? 1. 갑자기 빨라짐 2. 갑자기 느려짐 3. 변하지 않음 4. 시시각각 변함  정답 하나의 정확한 텍스트로 답하십시오.</td>
+      <td style="text-align: left">111</td>
+      <td style="text-align: left">289</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Big Bench Audio</th>
+      <th style="text-align: left">최저 추론 노력 토큰</th>
+      <th style="text-align: left">중간 추론 노력 토큰</th>
+      <th style="text-align: left">최고 추론 노력 토큰</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Formal Fallacy (10)</td>
+      <td style="text-align: left">285</td>
+      <td style="text-align: left">335</td>
+      <td style="text-align: left">444</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Formal Fallacy (39)</td>
+      <td style="text-align: left">275 (실패)</td>
+      <td style="text-align: left">555</td>
+      <td style="text-align: left">778</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Object Counting (680)</td>
+      <td style="text-align: left">150</td>
+      <td style="text-align: left">233</td>
+      <td style="text-align: left">161</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>분위기에 대한 추가 메모:</strong></p>
+
+<ul>
+  <li>비전과 유사하게, 모델은 먼저 음성을 글로 전사한 뒤 질문에 답합니다.</li>
+  <li>추론에서 토큰 절약은 프롬프트가 큰 차이를 만듭니다. 예를 들어 러시아어 테스트에서 오디오 속의 다른 답들이 나타나더라도 모델은 정답을 선택했습니다.</li>
+  <li>다지선다형 문제의 해답은 모델의 자체 추론 구조를 도와주지만, 개방형 질문의 경우 MCQA에 비해 성능이 떨어지는 경향이 있습니다. 일반적으로 생각의 흐름은 문자 인식(OCR) → 특성화(특징 파악) → 각 옵션 평가 → 답변입니다.</li>
+  <li>0.7 추론 노력(중간)이 좋은 절충점으로 보입니다.</li>
+</ul>
+
+<h3 id="포스트-트레이닝post-training">포스트 트레이닝(Post-training)</h3>
+
+<p>Inkling을 포스트 트레이닝에 사용하고 싶다면 Thinking Machines가 포스트 트레이닝 오픈 가중치 모델 관리 도구인 <code class="language-plaintext highlighter-rouge">tinker</code>를 구축했습니다. 그들의 쿡북에는 파인튜닝, 디스틸레이션(distillation), 강화학습에 대한 예제가 포함되어 있습니다.</p>
+
+<p>Inkling을 tinker와 OpenEnv라는 에이전트형 RL 환경 도구로 포스트 트레이닝했습니다. 환경 없이도 환경을 예측하도록 모델을 학습시키는 ECHO 알고리즘을 사용했고, 환경에서 생성된 토큰에 대해 다음 토큰 교차 엔트로피 손실을 적용하는 한편, 에이전트의 행동에 대한 일반적인 정책 학습을 함께 수행했습니다. 이는 별도의 모델, 교사, 또는 추가 롤아웃 없이 정책에 암시적 세계 모델을 가르칩니다. <a href="https://github.com/huggingface/OpenEnv/blob/main/examples/echo_world_model/backends/tinker_echo_demo.py">example</a>를 확인해 보십시오.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/inkling-blog-assets/resolve/trackio.png" alt="Inkling post-training metrics" /></p>
+
+<details>
+<summary>RL Example with Tinker and OpenEnv</summary>
+
+```
+git clone https://github.com/huggingface/OpenEnv.git
+cd OpenEnv
+
+# Add TINKER_API_KEY=... to .env, then run:
+uv run --env-file .env \
+  examples/echo_world_model/backends/tinker_echo_demo.py
+
+```
+
+
+</details>
+
+<p>**Transformer 강화학습(Transformers Reinforcement Learning)을 다루는 경우, 지식 증류 설정에서 Inkling을 교사 모델로 사용하는 것을 권장합니다. 예를 들어 Inkling의 문서 이해 능력을 활용하여 더 작은(on-device) 모델의 성능을 향상시킬 수 있습니다. <a href="https://github.com/huggingface/trl/blob/main/examples/scripts/gold.py">this example</a>에서는 트랜스포머 강화학습 라이브러리와 GOLD 알고리즘을 사용하여 지식을 증류합니다. GOLD는 서로 다른 토크나이저 간에 토큰 로짓을 매칭하므로 허브의 어떤 모델로도 쉽게 증류할 수 있습니다.</p>
+
+<h2 id="section-5">Slurm 스크립트</h2>
+
+<p>클러스터에 Inkling을 배포하기 위해 트랜스포머 API로 서비스를 제공하는 SLURM 스크립트와 다양한 모달리티로 엔드포인트를 쿼리하는 방법을 제공합니다. 명령을 업데이트하여 이 스크립트를 vLLM이나 SGlang에 맞게 조정할 수 있습니다. 이 스크립트는 <a href="https://huggingface.co/buckets/merve/inkling">here</a>에 있습니다.</p>
+
+<ul>
+  <li><a href="https://huggingface.co/buckets/merve/inkling/tree/slurm/submit_inkling_generate.sbatch">Submit inference job</a></li>
+  <li><a href="https://huggingface.co/buckets/merve/inkling/tree/slurm/generate_inkling.py">Python generation script</a></li>
+</ul>
+
+<h2 id="section-6">벤치마크 결과</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th> </th>
+      <th>Inkling</th>
+      <th>Nemotron 3 Ultra</th>
+      <th>Kimi K2.5</th>
+      <th>Kimi K2.6</th>
+      <th>GLM 5.2</th>
+      <th>DeepSeek V4 Pro</th>
+      <th>Gemini 3.1 Pro (고급)</th>
+      <th>Claude Fable 5 (최대)</th>
+      <th>GPT 5.6 Sol (초고)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>추론</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>HLE(텍스트 전용)</td>
+      <td>29.7%</td>
+      <td>26.6%</td>
+      <td>29.4%</td>
+      <td>35.9%</td>
+      <td>40.1%</td>
+      <td>35.9%</td>
+      <td>44.7%</td>
+      <td>53.3%</td>
+      <td>47.2%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>HLE(도구 포함)</td>
+      <td>46.0%</td>
+      <td>37.4%</td>
+      <td>50.2%</td>
+      <td>54.0%</td>
+      <td>54.7%</td>
+      <td>48.2%</td>
+      <td>51.4%</td>
+      <td>64.5%</td>
+      <td>55.0%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>AIME 2026</td>
+      <td>97.1%</td>
+      <td>94.2%</td>
+      <td>95.8%</td>
+      <td>96.4%</td>
+      <td>99.2%</td>
+      <td>96.7%</td>
+      <td>98.3%</td>
+      <td>–</td>
+      <td>99.9%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>GPQA Diamond</td>
+      <td>87.2%</td>
+      <td>86.7%</td>
+      <td>87.9%</td>
+      <td>91.1%</td>
+      <td>89.5%</td>
+      <td>88.8%</td>
+      <td>94.1%</td>
+      <td>92.6%</td>
+      <td>94.1%</td>
+    </tr>
+    <tr>
+      <td><strong>에이전트형(코딩)</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>SWEBench Verified</td>
+      <td>77.6%</td>
+      <td>70.7%</td>
+      <td>76.8%</td>
+      <td>80.2%</td>
+      <td>–</td>
+      <td>80.6%</td>
+      <td>80.6%</td>
+      <td>95.0%</td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>SWEBench Pro (Public)</td>
+      <td>54.3%</td>
+      <td>46.4%</td>
+      <td>50.7%</td>
+      <td>58.6%</td>
+      <td>62.1%</td>
+      <td>55.4%</td>
+      <td>54.2%</td>
+      <td>80.0%</td>
+      <td>64.6%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Terminal Bench 2.1 (Best Harness)</td>
+      <td>63.8</td>
+      <td>56.4</td>
+      <td>51.3</td>
+      <td>71.3</td>
+      <td>82.7</td>
+      <td>64</td>
+      <td>73.8</td>
+      <td>84.6</td>
+      <td>89.5</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>GDPVal-AA v2</td>
+      <td>1233</td>
+      <td>1164</td>
+      <td>1009</td>
+      <td>1190</td>
+      <td>1514</td>
+      <td>1307</td>
+      <td>962</td>
+      <td>1760</td>
+      <td>1748</td>
+    </tr>
+    <tr>
+      <td><strong>에이전트형(일반)</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>MCP Atlas</td>
+      <td>74.1%</td>
+      <td>44.7%</td>
+      <td>64.0%</td>
+      <td>68.1%</td>
+      <td>77.8%</td>
+      <td>73.2%</td>
+      <td>78.2%</td>
+      <td>83.3%</td>
+      <td>81.8%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Tau 3 Banking</td>
+      <td>23.7%</td>
+      <td>13.8%</td>
+      <td>13.2%</td>
+      <td>20.6%</td>
+      <td>26.8%</td>
+      <td>25.8%</td>
+      <td>16.5%</td>
+      <td>26.8%</td>
+      <td>33.0%</td>
+    </tr>
+    <tr>
+      <td><strong>사실성</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>BrowseComp (w/ Ctx)</td>
+      <td>77.1%</td>
+      <td>–</td>
+      <td>74.9%</td>
+      <td>83.2%</td>
+      <td>–</td>
+      <td>83.4%</td>
+      <td>85.9%</td>
+      <td>88.0%</td>
+      <td>89.4%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>SimpleQA Verified</td>
+      <td>43.9%</td>
+      <td>32.4%</td>
+      <td>36.9%</td>
+      <td>38.7%</td>
+      <td>38.1%</td>
+      <td>57.0%</td>
+      <td>77.3%</td>
+      <td>68.3%</td>
+      <td>71.6%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>AA Omniscience</td>
+      <td>1.0%</td>
+      <td>-1.0%</td>
+      <td>-8.0%</td>
+      <td>6.0%</td>
+      <td>4.0%</td>
+      <td>-10.0%</td>
+      <td>33.0%</td>
+      <td>40.0%</td>
+      <td>22.0%</td>
+    </tr>
+    <tr>
+      <td><strong>챗(Chat)</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>IFBench</td>
+      <td>79.8%</td>
+      <td>81.4%</td>
+      <td>70.2%</td>
+      <td>76.0%</td>
+      <td>73.3%</td>
+      <td>76.5%</td>
+      <td>77.1%</td>
+      <td>63.5%</td>
+      <td>72.7%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Global-MMLU-Lite</td>
+      <td>88.7%</td>
+      <td>85.6%</td>
+      <td>84.0%</td>
+      <td>88.4%</td>
+      <td>89.2%</td>
+      <td>89.3%</td>
+      <td>92.7%</td>
+      <td>93.3%</td>
+      <td>91.8%</td>
+    </tr>
+    <tr>
+      <td><strong>비전</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>MMMU Pro (Standard 10)</td>
+      <td>73.3%</td>
+      <td>–</td>
+      <td>75.0%</td>
+      <td>79.0%</td>
+      <td>–</td>
+      <td>–</td>
+      <td>82.0%</td>
+      <td>84.2%</td>
+      <td>83.0%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Charxiv RQ</td>
+      <td>78.1%</td>
+      <td>–</td>
+      <td>77.5%</td>
+      <td>80.4%</td>
+      <td>–</td>
+      <td>–</td>
+      <td>80.2%</td>
+      <td>86.5%</td>
+      <td>84.7%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Charxiv RQ (with python)</td>
+      <td>82.0%</td>
+      <td>–</td>
+      <td>78.7%</td>
+      <td>86.7%</td>
+      <td>–</td>
+      <td>–</td>
+      <td>89.9%</td>
+      <td>89.4%</td>
+      <td>87.8%</td>
+    </tr>
+    <tr>
+      <td><strong>오디오</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Audio MC</td>
+      <td>56.6%</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>66.8%</td>
+      <td>–</td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>MMAU</td>
+      <td>77.2%</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>82.5%</td>
+      <td>–</td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>VoiceBench</td>
+      <td>91.4%</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>94.3%</td>
+      <td>–</td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td><strong>안전(Safety)</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>FORTRESS (Adversarial)</td>
+      <td>78.0%</td>
+      <td>77.6%</td>
+      <td>54.1%</td>
+      <td>65.6%</td>
+      <td>71.3%</td>
+      <td>36.0%</td>
+      <td>65.2%</td>
+      <td>96.0%</td>
+      <td>82.4%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>FORTRESS (Benign)</td>
+      <td>95.9%</td>
+      <td>90.5%</td>
+      <td>98.3%</td>
+      <td>97.2%</td>
+      <td>90.0%</td>
+      <td>98.5%</td>
+      <td>98.0%</td>
+      <td>55.1%</td>
+      <td>98.1%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>StrongREJECT</td>
+      <td>98.6%</td>
+      <td>98.7%</td>
+      <td>99.5%</td>
+      <td>99.8%</td>
+      <td>98.5%</td>
+      <td>98.6%</td>
+      <td>98.0%</td>
+      <td>98.7%</td>
+      <td>98.5%</td>
+    </tr>
+  </tbody>
+</table>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" /><media:content medium="image" url="/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">파이토치의 프로파일링(3부): 어텐션이 전부다</title><link href="/torch-attention-profile/" rel="alternate" type="text/html" title="파이토치의 프로파일링(3부): 어텐션이 전부다" /><published>2026-07-10T00:00:00+09:00</published><updated>2026-07-10T00:00:00+09:00</updated><id>/torch-attention-profile</id><content type="html" xml:base="/torch-attention-profile/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#파이토치의-프로파일링3부-어텐션이-전부다" id="markdown-toc-파이토치의-프로파일링3부-어텐션이-전부다">파이토치의 프로파일링(3부): 어텐션이 전부다</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">나이브 어텐션</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">인플레이스 인과 마스크가 적용된 나이브 어텐션</a></li>
@@ -2157,294 +3171,4 @@ https://cdn.jsdelivr.net/npm/onnxruntime-web@1.26.0-dev.20260416-b7804b056c/dist
 
 <p>Transformers.js는 COS를 실험하는 데 있어 독립적이지 않습니다. <a href="https://webllm.mlc.ai/">WebLLM</a>(옵트인, 자세한 내용은 <a href="https://webllm.mlc.ai/docs/user/advanced_usage.html#using-cross-origin-storage-cache">documentation</a> 참조)과 <a href="https://github.com/ngxson/wllama">wllama</a>(자동, 자세한 내용은 <a href="https://github.com/ngxson/wllama/pull/248">PR</a> 참조) 역시 이 제안된 API에 대해 기대를 가지고 있습니다.</p>
 
-<p>크롬 팀은 브라우저에서 이를 네이티브로 구현하기 위해 노력하고 있습니다 <a href="https://chromestatus.com/feature/5163371507875840">considering implementing the COS API</a>. 초기 단계의 제안으로, API와 제안의 형태에 대한 피드백을 환영합니다. 이슈를 제기하려면 <a href="https://github.com/WICG/cross-origin-storage">Cross-Origin Storage repository</a>를 이용하고, <a href="https://github.com/WICG/cross-origin-storage/labels/expression%20of%20support">express support</a>를 확인하거나 PR을 여세요.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" /><media:content medium="image" url="/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</title><link href="/huggingface-hub-release-ci/" rel="alternate" type="text/html" title="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" /><published>2026-06-23T00:00:00+09:00</published><updated>2026-06-23T00:00:00+09:00</updated><id>/huggingface-hub-release-ci</id><content type="html" xml:base="/huggingface-hub-release-ci/"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#매주-ai-오픈-도구-그리고-휴먼-인-더-루프가-포함된-huggingface_hub-배포" id="markdown-toc-매주-ai-오픈-도구-그리고-휴먼-인-더-루프가-포함된-huggingface_hub-배포">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a>    <ul>
-      <li><a href="#section-1" id="markdown-toc-section-1">시작한 곳</a></li>
-      <li><a href="#section-2" id="markdown-toc-section-2">두 종류의 작업</a></li>
-      <li><a href="#section-3" id="markdown-toc-section-3">설계 원칙: 열려 있는 부품, 누구나 재사용 가능</a></li>
-      <li><a href="#section-4" id="markdown-toc-section-4">파이프라인 둘러보기</a></li>
-      <li><a href="#section-5" id="markdown-toc-section-5">신뢰하되 검증하라: 사람의 개입 핵심</a></li>
-      <li><a href="#section-6" id="markdown-toc-section-6">모델이 사실을 왜곡하지 않도록 뿌리내리기</a></li>
-      <li><a href="#section-7" id="markdown-toc-section-7">사람 체크포인트</a></li>
-      <li><a href="#section-8" id="markdown-toc-section-8">개방적이고 안전한 파이프라인</a></li>
-      <li><a href="#section-9" id="markdown-toc-section-9">그래서 비용은 얼마였나?</a></li>
-      <li><a href="#section-10" id="markdown-toc-section-10">실제로 무엇이 바뀌었나</a></li>
-      <li><a href="#section-11" id="markdown-toc-section-11">나의 것으로 만들기</a></li>
-      <li><a href="#section-12" id="markdown-toc-section-12">다음 단계</a></li>
-      <li><a href="#section-13" id="markdown-toc-section-13">시사점</a></li>
-    </ul>
-  </li>
-</ul>
-<!--toc-->
-<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/huggingface-hub-release-ci">Shipping huggingface_hub every week with AI, open tools, and a human in the loop</a>를 한국어로 번역한 글입니다.</em></p>
-
-<!-- Source: https://huggingface.co/blog/huggingface-hub-release-ci -->
-
-<hr />
-
-<!--
-Review instructions:
-- Verify the Korean translation against the source post.
-- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
--->
-
-<h1 id="매주-ai-오픈-도구-그리고-휴먼-인-더-루프가-포함된-huggingface_hub-배포">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</h1>
-
-<p><code class="language-plaintext highlighter-rouge">huggingface_hub</code>은 허깅페이스 생태계의 기본인 파이썬 클라이언트입니다. <code class="language-plaintext highlighter-rouge">transformers</code>, <code class="language-plaintext highlighter-rouge">datasets</code>, <code class="language-plaintext highlighter-rouge">diffusers</code>, <code class="language-plaintext highlighter-rouge">sentence-transformers</code> 그리고 수십 개의 다른 라이브러리들이 Hub와 소통하기 위해 그것에 의존합니다. 우리가 매주 새로운 릴리스를 배포하지 않는 한 주는 <code class="language-plaintext highlighter-rouge">main</code>에 갇힌 수정사항과 기능의 한 주가 됩니다.</p>
-
-<p>오랜 기간 동안 우리는 4~6주마다 릴리스를 발표했습니다. 이제는 단일 GitHub Actions 워크플로우에서 매주 릴리스를 발표합니다. 오픈 소스 도구와 오픈-가중치 모델을 사용해 이를 구축했고, 판단이 중요한 한 곳에 휴먼 인 더 루프를 두었습니다. 이 글의 어떤 내용도 공급업체 계약, 비공개 모델, 또는 자신이 실행할 수 없는 인프라를 요구하지 않습니다. 이는 시작부터의 설계 목표였으며, 다른 유지 관리자가 가져다 사용하고 조정할 수 있는 워크플로우를 원했기 때문입니다.</p>
-
-<p>본 글이 끝나면 당신이 직접 만들어볼 수 있도록 필요한 모든 것이 제공될 것입니다.</p>
-
-<h2 id="section-1">시작한 곳</h2>
-
-<p>구식 프로세스는 부분적으로 자동화되어 있었고, 주로 수동이었습니다.</p>
-
-<p>이미 CI에 포함되어 있습니다:</p>
-
-<ul>
-  <li>태그가 푸시되면 PyPI에 게시합니다.</li>
-  <li>릴리스 후보가 고정된 상태로 다운스트림 라이브러리의 테스트 브랜치를 열고 테스트합니다.</li>
-</ul>
-
-<p>여전히 매번 수동으로:</p>
-
-<ul>
-  <li>릴리스 브랜치를 만들고, <code class="language-plaintext highlighter-rouge">__init__.py</code>에서 버전을 올리고, 커밋하고, 태그하고, 푸시합니다.</li>
-  <li>다운스트림 CI 실행을 지켜보고 실패를 분류합니다.</li>
-  <li>마지막 릴리스 이후 병합된 모든 PR을 하나씩 읽고, PR의 맥락과 주제별로 정리하여, <code class="language-plaintext highlighter-rouge">git log</code> 덤처럼 들리지 않는 어조로 릴리스 노트를 수기로 작성합니다.</li>
-  <li>RC 기간이 끝난 후 안정 릴리스를 배포합니다.</li>
-  <li>내부 Slack 발표와 소셜 포스트를 초안합니다.</li>
-  <li>릴리스 후 PR을 열어 <code class="language-plaintext highlighter-rouge">main</code>를 다음 <code class="language-plaintext highlighter-rouge">dev0</code>로 올립니다.</li>
-</ul>
-
-<p>새 버전에 대한 좋은 노트를 작성하는 것은 무거운 부분이었고, 서로 다른 주제의 수십 개 PR을 모아놓는 작업이었다. 기술적으로는 어렵지 않지만 몇 시간의 집중이 필요했다. 여기에 발표를 더하면 소형 릴리스도 여러 날에 걸쳐 반나절 정도의 작업으로 끝나곤 했다.</p>
-
-<h2 id="section-2">두 종류의 작업</h2>
-
-<p>그래서 전체 프로세스를 간소화하기로 했습니다. 그 목록을 보면 작업은 두 가지로 나뉩니다.</p>
-
-<p>일부 단계는 순전히 기계적이며 자동화가 가능하다: 버전 증가, 커밋, 태깅, 푸시, 다운스트림 테스트 브랜치 열기, 포스트 릴리스 PR 열기. 이를 누가 생각할 필요가 없다. 항상 올바른 순서대로 일어나도록 해야 하며, 이것이 CI 워크플로우가 잘하는 일이다.</p>
-
-<p>나머지는 다르다. 릴리스 노트 쓰기, 무엇을 하이라이트로 삼을지 결정, 사람 독자 audience를 위한 발표 문구 작성: 이건 두뇌 노동이다. 수년간 릴리스 매뉴얼을 유지해온 판단의 영역이다. 이때 AI가 들어와 빈 페이지를 몇 초 만에 탄탄한 초고로 바꿔준다. 또한 조심해야 할 점은, 자신감 있어 보이지만 은근히 잘못된 초고가 만들어질 수 있다는 것이다.</p>
-
-<h2 id="section-3">설계 원칙: 열려 있는 부품, 누구나 재사용 가능</h2>
-
-<p>이 문제를 해결하기로 결정했을 때, 한 가지 제약을 미리 세웠습니다: 모든 가동 부품은 어떤 유지 관리자가 스스로 실행할 수 있어야 한다. 교환할 수 없는 API 뒤의 비공개 모델, 독점적인 릴리스 플랫폼, 비밀 소스는 허용되지 않습니다.</p>
-
-<p>다음은 전체 스택입니다:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>부분</th>
-      <th>하는 일</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>GitHub Actions</strong></td>
-      <td>전체 릴리스를 조정합니다</td>
-    </tr>
-    <tr>
-      <td><strong><a href="https://opencode.ai/">OpenCode</a></strong></td>
-      <td>모델을 구동하는 에이전트 런타임</td>
-    </tr>
-    <tr>
-      <td><strong>An open-weights model</strong> (현재 <a href="https://huggingface.co/zai-org/GLM-5.2">GLM-5.2</a>에서 온 Z.ai)</td>
-      <td>릴리스 노트와 Slack 발표 초안 작성</td>
-    </tr>
-    <tr>
-      <td><strong><a href="https://huggingface.co/docs/inference-providers/index">HF Inference Providers</a></strong></td>
-      <td>모델의 서비스를 제공합니다</td>
-    </tr>
-    <tr>
-      <td><strong><a href="https://docs.pypi.org/trusted-publishers/">PyPI Trusted Publishing</a></strong></td>
-      <td>패키지를 게시합니다</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>두 번째 원칙: 모델이 초안을 작성하고, 사람은 결정을 내립니다. 언어 모델은 간결한 PR 제목 30개를 읽고 읽기 쉬운 릴리스 노트로 바꾸는 데 능하지만, 맹목적으로 신뢰하기에는 좋지 않습니다. 그래서 이 워크플로우는 사람의 감독 아래 진행됩니다: 모델이 초안을 작성하고, 결정론적 스크립트가 이를 확인하며, 그 후 사람이 검토하고 수정한 뒤에야 어떤 것이든 릴리스됩니다(아래에서 더 자세히 다룹니다).</p>
-
-<h2 id="section-4">파이프라인 둘러보기</h2>
-
-<p>전체 워크플로우는 단일 파일 <a href="https://github.com/huggingface/huggingface_hub/blob/main/.github/workflows/release.yml"><code class="language-plaintext highlighter-rouge">.github/workflows/release.yml</code></a>로, Actions UI에서 수동으로 트리거됩니다. 입력은 정확히 하나입니다:</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
-  <span class="na">workflow_dispatch</span><span class="pi">:</span>
-    <span class="na">inputs</span><span class="pi">:</span>
-      <span class="na">release_type</span><span class="pi">:</span>
-        <span class="na">type</span><span class="pi">:</span> <span class="s">choice</span>
-        <span class="na">options</span><span class="pi">:</span>
-          <span class="pi">-</span> <span class="s">minor-prerelease</span>   <span class="c1"># cut an RC from main</span>
-          <span class="pi">-</span> <span class="s">minor-release</span>      <span class="c1"># promote the RC to final</span>
-          <span class="pi">-</span> <span class="s">patch-release</span>      <span class="c1"># bugfix on an existing release branch</span>
-</code></pre></div></div>
-
-<p>그다음 작업은 대략 아래 순서로 실행됩니다:</p>
-
-<ul>
-  <li><strong>Prepare.</strong> 다음 버전을 계산하고, 릴리스 브랜치를 새로 만들거나 재사용하고, <code class="language-plaintext highlighter-rouge">__version__</code>를 올리고, 커밋하고, 태그하고, 푸시합니다.</li>
-  <li><strong>Publish to PyPI.</strong> <code class="language-plaintext highlighter-rouge">huggingface_hub</code>를 빌드하고 업로드합니다. 동시에는 <code class="language-plaintext highlighter-rouge">hf</code> CLI를 PyPI 패키지로도 빌드하고 업로드합니다.</li>
-  <li><strong>Release notes.</strong> 마지막 태그 이후 커밋 범위를 Diff하고, PR 메타데이터를 GitHub API에서 가져와 모델이 구조화된 변경 로그를 초안하게 합니다 (<a href="https://github.com/huggingface/huggingface_hub/releases/tag/v1.20.0">here’s a recent one</a>). <em>초안</em> GitHub 릴리스로 저장됩니다.</li>
-  <li><strong>Downstream test branches.</strong> RC용으로, <code class="language-plaintext highlighter-rouge">transformers</code>, <code class="language-plaintext highlighter-rouge">datasets</code>, <code class="language-plaintext highlighter-rouge">diffusers</code>, <code class="language-plaintext highlighter-rouge">sentence-transformers</code>에서 RC를 고정하고 브랜치를 열어 그들의 CI가 우리가 망가뜨렸는지 빠르게 알려주게 합니다.</li>
-  <li><strong>Slack announcement.</strong> 노트를 읽고 우리 팀의 목소리로 내부 발표를 작성합니다.</li>
-  <li><strong>Archive notes.</strong> 원시 AI 초안과 사람이 편집한 버전을 나란히 허깅페이스 Bucket에 업로드합니다.</li>
-  <li><strong>Post-release bump.</strong> 안정적인 릴리스 후, <code class="language-plaintext highlighter-rouge">main</code>에서 다음 <code class="language-plaintext highlighter-rouge">dev0</code>로 올리는 PR을 엽니다.</li>
-  <li><strong>Comment on shipped PRs.</strong> 릴리스의 모든 PR에 “이 버전에서 배포되었습니다”라는 코멘트를 남깁니다.</li>
-  <li><strong>Sync CLI docs.</strong> 재생성된 <code class="language-plaintext highlighter-rouge">hf</code> CLI 스킬 문서를 포함하는 PR을 우리의 <a href="https://github.com/huggingface/skills">skills</a> 저장소에 엽니다.</li>
-  <li><strong>Report to Slack.</strong> 각 단계가 상태를 스레드 응답으로 게시하고, 최종 작업이 루트 메시지를 ✅ 또는 ❌로 업데이트합니다.</li>
-</ul>
-
-<p>남은 수동 단계는 초안 릴리스 노트를 검토하고 게시하는 것과 내부 Slack 메시지를 검토하고 게시하는 것입니다. 이 두 단계에는 휴먼 인 더 루프를 유지하려 합니다.</p>
-
-<h2 id="section-5">신뢰하되 검증하라: 사람의 개입 핵심</h2>
-
-<p>다음은 AI가 생성한 릴리스 노트에서 사람들이 걱정하는 실패 모드입니다: 모델이 조용히 PR 하나를 누락시키거나 이 릴리스에 포함되지 않은 PR을 만들어 버립니다. 거의 맞는 변경 로그는 아무도 재확인하지 않기 때문에, 아무 것도 없는 변경 로그보다 더 나쁩니다.</p>
-
-<p>우리는 생성된 릴리스 노트가 첫 시도에 완전하다고 신뢰하지 않고 결정론적으로 검증합니다. 모델이 실행되기 전에 파이썬 스크립트가 이 릴리스에 속한 모든 PR을 가져와 실제 기준 데이터로 저장합니다.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Deterministic: extract PR numbers from squash-merge commits in the range.
-</span><span class="n">PR_NUMBER_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="sa">r</span><span class="sh">"</span><span class="s">\(#(\d+)\)$</span><span class="sh">"</span><span class="p">)</span>
-
-<span class="n">pr_numbers</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="nf">int</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="nf">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">commit</span> <span class="ow">in</span> <span class="n">commits_since_last_tag</span>
-    <span class="nf">if </span><span class="p">(</span><span class="n">m</span> <span class="p">:</span><span class="o">=</span> <span class="n">PR_NUMBER_PATTERN</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="n">commit</span><span class="p">.</span><span class="n">title</span><span class="p">))</span>
-<span class="p">]</span>
-<span class="nf">save_manifest</span><span class="p">(</span><span class="n">pr_numbers</span><span class="p">)</span>  <span class="c1"># the source of truth
-</span></code></pre></div></div>
-
-<p>그런 다음 모델이 그들로부터 노트를 초안합니다. 다 작성되면, 초기 PR 목록과 생성된 출력물을 대조해 확인합니다:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">expected</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="nf">load_manifest</span><span class="p">())</span>          <span class="c1"># what should be there
-</span><span class="n">found</span>    <span class="o">=</span> <span class="nf">extract_pr_refs</span><span class="p">(</span><span class="n">notes_md</span><span class="p">)</span>     <span class="c1"># what the model wrote (#1234 -&gt; 1234)
-</span>
-<span class="n">missing</span> <span class="o">=</span> <span class="n">expected</span> <span class="o">-</span> <span class="n">found</span>               <span class="c1"># silently dropped
-</span><span class="n">extra</span>   <span class="o">=</span> <span class="n">found</span> <span class="o">-</span> <span class="n">expected</span>               <span class="c1"># belongs to a different release
-</span></code></pre></div></div>
-
-<p>무언가 누락되거나 추가되면 실패하지도 않으며 잘못된 파일도 배포하지 않습니다. 불일치를 에이전트에 다시 넘겨 정확히 그 PR들을 수정하도록 요청합니다:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">MAX_ITERATIONS</span><span class="p">):</span>
-    <span class="n">missing</span><span class="p">,</span> <span class="n">extra</span> <span class="o">=</span> <span class="nf">validate</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">missing</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">extra</span><span class="p">:</span>
-        <span class="k">break</span>  <span class="c1"># matches the manifest exactly
-</span>    <span class="nf">run_agent_fix</span><span class="p">(</span><span class="n">missing_prs</span><span class="o">=</span><span class="n">missing</span><span class="p">,</span> <span class="n">extra_prs</span><span class="o">=</span><span class="n">extra</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>이 패턴이 전체를 신뢰할 수 있게 만드는 원칙입니다: 결정론적 가드레일로 감싼 비결정적 모델. 모델은 산문 작성에 능하지만 포괄적으로 하는 것은 신뢰할 수 없습니다. 그래서 모델이 초안을 작성하게 두고 코드가 일관성을 강제합니다.</p>
-
-<h2 id="section-6">모델이 사실을 왜곡하지 않도록 뿌리내리기</h2>
-
-<p>완전성은 한 축이고 정확성은 다른 축이다. 제목만으로 PR을 요약하는 모델은 실제 API와 일치하지 않는 코드 예제를 기꺼이 만들어 냅니다.</p>
-
-<p>이를 방지하기 위해 PR 메타데이터를 가져올 때 PR이 다룬 <code class="language-plaintext highlighter-rouge">docs/</code> 아래의 <code class="language-plaintext highlighter-rouge">.md</code> 파일의 실제 문서 차이(diff)를 함께 가져옵니다.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fetch_doc_diffs</span><span class="p">(</span><span class="n">pr</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">[</span>
-        <span class="p">{</span><span class="sh">"</span><span class="s">filename</span><span class="sh">"</span><span class="p">:</span> <span class="n">f</span><span class="p">.</span><span class="n">filename</span><span class="p">,</span> <span class="sh">"</span><span class="s">status</span><span class="sh">"</span><span class="p">:</span> <span class="n">f</span><span class="p">.</span><span class="n">status</span><span class="p">,</span> <span class="sh">"</span><span class="s">patch</span><span class="sh">"</span><span class="p">:</span> <span class="n">f</span><span class="p">.</span><span class="n">patch</span><span class="p">}</span>
-        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">pr</span><span class="p">.</span><span class="nf">get_files</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">f</span><span class="p">.</span><span class="n">filename</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">"</span><span class="s">docs/</span><span class="sh">"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">f</span><span class="p">.</span><span class="n">filename</span><span class="p">.</span><span class="nf">endswith</span><span class="p">(</span><span class="sh">"</span><span class="s">.md</span><span class="sh">"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">f</span><span class="p">.</span><span class="n">patch</span>
-    <span class="p">]</span>
-</code></pre></div></div>
-
-<p>그 차이는 모델의 컨텍스트에 들어가므로, ‘다음은 새로운 CLI 명령어입니다’라고 쓸 때 PR 작성자가 문서에 실제로 쓴 예제를 인용하게 됩니다. 이는 이전과 같은 논리입니다: 모델에게 진짜 출처 자료를 주고, 좁은 작업을 부여합니다.</p>
-
-<p>프롬프트 자체는 <a href="https://github.com/huggingface/huggingface_hub/tree/main/.opencode/skills/hf-release-notes">Skills</a>로 남아 있습니다: 저장소에 커밋된 작은 Markdown 파일들(<code class="language-plaintext highlighter-rouge">SKILL.md</code>와 참조 템플릿 포함). 릴리스-노트 스킬은 하이라이트를 고르는 방법, 섹션의 구조, 문서 링크를 추가할 시기 등을 명시합니다. 이것은 온보딩 지침처럼 읽히며, 이는 정확히 올바른 사고 모델입니다.</p>
-
-<h2 id="section-7">사람 체크포인트</h2>
-
-<p>RC가 게시된 후, 초안 GitHub 릴리스는 AI의 첫 번째 초안을 포함한 상태로 남아 있습니다. 여기서 사람이 개입합니다:</p>
-
-<ol>
-  <li>리뷰어가 초안을 읽고 어조와 강조를 다듬고 모델이 과대 또는 과소 평가한 부분을 수정합니다.</li>
-  <li>그때서야 <code class="language-plaintext highlighter-rouge">minor-release</code> 실행을 트리거하여 RC를 최종으로 승격합니다.</li>
-</ol>
-
-<p>리뷰어의 시간은 다듬기에 쓰여, 글쓰기의 반나절 분량의 작업을 15분의 편집 세션으로 바꿉니다.</p>
-
-<p>또한 시간이 지나도 개선할 수 있도록 문서 기록을 남깁니다. RC 시점에 원시 AI 초안과 최종 릴리스가 잘려질 때의 사람이 편집한 버전을 서로 나란히 허깅페이스 Bucket에 보관합니다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># at RC time: straight from the model, untouched</span>
-hf <span class="nb">cp </span>release_notes_raw.txt    <span class="s2">"hf://buckets/huggingface/releases/huggingface_hub/</span><span class="k">${</span><span class="nv">V</span><span class="k">}</span><span class="s2">/release_notes_raw.txt"</span>
-
-<span class="c"># at release time: after the human review</span>
-hf <span class="nb">cp </span>release_notes_edited.txt <span class="s2">"hf://buckets/huggingface/releases/huggingface_hub/</span><span class="k">${</span><span class="nv">V</span><span class="k">}</span><span class="s2">/release_notes_edited.txt"</span>
-</code></pre></div></div>
-
-<p>매주 두 가지를 모두 수집하면 모델이 작성한 것과 우리가 원하던 것이 어떻게 다른지에 대한 점점 커지는 데이터 세트가 생깁니다. 이 데이터 세트는 에이전트의 기술을 업데이트하는 데 재사용할 수 있습니다.</p>
-
-<h2 id="section-8">개방적이고 안전한 파이프라인</h2>
-
-<p>릴리스 프로세스를 재설계하는 것은 보안을 강화할 좋은 기회였으며, 특히 공급망 공격에 대한 방어에 초점을 맞췄습니다.</p>
-
-<p><strong>PyPI 토큰 없음.</strong> 게시에는 <a href="https://docs.pypi.org/trusted-publishers/">Trusted Publishing</a>를 사용합니다: PyPI는 이 워크플로우에 대해 단기간 발급된 OIDC 토큰을 GitHub가 발급해 검증하고, 산출물마다 <a href="https://peps.python.org/pep-0740/">PEP 740</a> 증명 / Sigstore 원산지를 제공합니다. 장기간 비밀이 누출되거나 회전할 필요가 없습니다.</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">permissions</span><span class="pi">:</span>
-  <span class="na">id-token</span><span class="pi">:</span> <span class="s">write</span>       <span class="c1"># mint the OIDC token for PyPI</span>
-  <span class="na">attestations</span><span class="pi">:</span> <span class="s">write</span>   <span class="c1"># generate Sigstore provenance</span>
-<span class="c1"># ...</span>
-<span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">pypa/gh-action-pypi-publish@v1.14.0</span>
-  <span class="na">with</span><span class="pi">:</span>
-    <span class="na">attestations</span><span class="pi">:</span> <span class="kc">true</span>  <span class="c1"># no password, no API token, just OIDC</span>
-</code></pre></div></div>
-
-<p><strong>에이전트 런타임은 고정되고 검증됩니다.</strong> 최신 OpenCode를 맹신하지 않고, 버전을 고정하고 실행하기 전에 SHA256을 확인합니다:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-fsSL</span> https://opencode.ai/install | bash <span class="nt">-s</span> <span class="nt">--</span> <span class="nt">--version</span> <span class="s2">"</span><span class="k">${</span><span class="nv">OPENCODE_VERSION</span><span class="k">}</span><span class="s2">"</span>
-<span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">OPENCODE_SHA256</span><span class="k">}</span><span class="s2">  </span><span class="si">$(</span>which opencode<span class="si">)</span><span class="s2">"</span> | <span class="nb">sha256sum</span> <span class="nt">-c</span> -
-</code></pre></div></div>
-
-<p><strong>오픈 툴링은 부주의한 툴링을 의미하지 않는다.</strong></p>
-
-<h2 id="section-9">그래서 비용은 얼마였나?</h2>
-
-<p>거의 비용이 들지 않았습니다. 전체 릴리스(노트와 Slack 발표, 20~40개 PR과 몇 차례의 프롬프트 반복)를 Inference Providers에서 약 <strong>$0.25</strong>의 비용으로 처리합니다. 오픈 가중치가 종량제로 청구되므로, 매주 실제로 중요한 질문은 ‘배포할 가치가 있는가?’이고, 항상 그런 가치가 있습니다.</p>
-
-<h2 id="section-10">실제로 무엇이 바뀌었나</h2>
-
-<p>주기가 4~6주마다 한 번에서 매주 한 번으로 바뀌었습니다. 2차 효과가 더 흥미로웠습니다:</p>
-
-<ul>
-  <li><strong>노트가 더 나아졌고, 더 나빠지지 않았다.</strong> 최초 초안은 항상 존재하므로 검토 시간은 다듬기에 집중됩니다. 구성은 더 일관적으로 되며 생략되는 것이 더 적습니다.</li>
-  <li><strong>Breakages가 더 일찍 드러난다.</strong> RC 후보 기간 동안 다운스트림 테스트 브랜치가 통합 이슈를 빠르게 포착합니다.</li>
-  <li><strong>기여자 루프가 짧아졌다.</strong> 자동 “이 버전 vX.Y.Z에 배포되었습니다” 코멘트가 기대 이상으로 중요해졌습니다. 누군가가 닫힌 PR에 이슈를 보고하면, 모두가 어떤 릴리스에 수정이 들어갔는지 즉시 볼 수 있습니다. 예전에는 수동으로 태그를 찾느라 애를 먹었습니다.</li>
-</ul>
-
-<h2 id="section-11">나의 것으로 만들기</h2>
-
-<p>이 부분이 우리가 가장 중요하게 여겼던 부분입니다. 워크플로우는 <code class="language-plaintext highlighter-rouge">huggingface_hub</code>를 중심으로 구성되었지만 구조는 일반적입니다.</p>
-
-<p><strong>거의 그대로 재사용 가능:</strong></p>
-
-<ul>
-  <li>트리거 및 버전 증가 로직 (<code class="language-plaintext highlighter-rouge">minor-prerelease</code> → <code class="language-plaintext highlighter-rouge">minor-release</code> → <code class="language-plaintext highlighter-rouge">patch-release</code>).</li>
-  <li>신뢰하되 검증하는 루프: 결정론적 매니페스트, 모델 초안, 검증, 재프롬프트. 이것은 생성하는 어떤 것과도 독립적으로 활용 가능한 아이디어입니다.</li>
-  <li>OIDC 신뢰된 게시, 핀되고 체크섬으로 검증되는 런타임, Slack 스레딩.</li>
-  <li>스킬 기반 프롬프트: 템플릿을 바꿔도 구조를 유지합니다.</li>
-</ul>
-
-<p><strong>당사에 특화된 부분:</strong></p>
-
-<ul>
-  <li>다운스트림 저장소 목록과 그 의존성 핀 포맷.</li>
-  <li>스킬에서의 정확한 섹션 분류 체계와 어조.</li>
-  <li>Slack 및 Bucket 대상지.</li>
-</ul>
-
-<p>적용하려면: <a href="https://github.com/huggingface/huggingface_hub/blob/main/.github/workflows/release.yml">workflow file</a>와 <a href="https://github.com/huggingface/huggingface_hub/tree/main/utils/release_notes">scripts</a>를 포크하고, 당신의 패키지에 맞추어 <a href="https://github.com/huggingface/huggingface_hub/blob/main/.opencode/skills/hf-release-notes/SKILL.md">skill Markdown</a>를 당신 project’s voice에 맞게 재작성하고 두 개의 저장소 변수(모델 ID와 OpenCode 버전)를 설정한 뒤 PyPI에서 Trusted Publishing를 설정하고, 다운스트림이 없다면 다운스트림-테스트 작업을 삭제합니다. 신뢰하되 검증하는 루프는 그대로 재사용할 가치가 있는 부분입니다. 이것이 생성된 산출물을 안전하게 배포하게 만드는 핵심입니다.</p>
-
-<h2 id="section-12">다음 단계</h2>
-
-<ul>
-  <li><strong>다운스트림 실패 자동 분류.</strong> 오늘 워크플로우는 테스트 브랜치를 열고 사람이 CI를 읽습니다. 실패 로그를 확인해 내부 Slack 메시지에 보고하는 것이 명백한 다음 단계입니다.</li>
-  <li><strong>패턴 확장.</strong> 이것의 대부분은 일반적입니다. 생태계의 다른 파이썬 라이브러리에서도 큰 부분을 재사용할 수 있을 것으로 기대합니다.</li>
-</ul>
-
-<h2 id="section-13">시사점</h2>
-
-<p>릴리스의 부분 중 예전에는 반나절의 집중된 인간 작업이 필요했던 것들(노트 작성, 발표 초안 작성, 다운스트림 검사 조정)은 모델이 초안을 작성하기에 적합한 부분입니다. 나머지 모든 것은 기계적이며 YAML 파일에 맞습니다. 비결은 ‘AI에게 맡기기’가 아니라, 모델이 초안을 작성하게 두고, 결정론적 코드가 검증하게 하며, 사람에게 최종 결정을 맡기는 것입니다. 전적으로 오픈 도구와 오픈 가중치로 구성되었기 때문에 비용은 사실상 0에 가까워 누구나 실행할 수 있습니다.</p>
-
-<p>전체 워크플로우 파일은 공개되어 있습니다. 파이썬 라이브러리를 관리한다면 <a href="https://github.com/huggingface/huggingface_hub/blob/main/.github/workflows/release.yml">fork it</a>를 포크해 적용해 보고, 어떻게 진행되는지 알려 주세요!</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a human in the loop를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" /><media:content medium="image" url="/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p>크롬 팀은 브라우저에서 이를 네이티브로 구현하기 위해 노력하고 있습니다 <a href="https://chromestatus.com/feature/5163371507875840">considering implementing the COS API</a>. 초기 단계의 제안으로, API와 제안의 형태에 대한 피드백을 환영합니다. 이슈를 제기하려면 <a href="https://github.com/WICG/cross-origin-storage">Cross-Origin Storage repository</a>를 이용하고, <a href="https://github.com/WICG/cross-origin-storage/labels/expression%20of%20support">express support</a>를 확인하거나 PR을 여세요.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" /><media:content medium="image" url="/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
