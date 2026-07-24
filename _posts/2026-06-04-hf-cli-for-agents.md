@@ -250,6 +250,6 @@ Take a look at how I am currently using the Hub and suggest a few ways you could
 
 전체 명령 참조는 [`hf` CLI guide](https://huggingface.co/docs/huggingface_hub/guides/cli)에 있습니다.
 
-## 에이전트 해스 등록 {#section-6}
+## 에이전트 하네스 등록 {#section-6}
 
-에이전트 해스를 구축하고 있나요? **등록하십시오!** 이것이 `hf`가 이를 감지하는 방식이고, Hub가 트래픽을 당신의 해스에 귀속하는 방법입니다. `hf`에 항목을 추가하는 간단한 PR을 열기만 하면 됩니다. 자세한 내용은 [Register your agent harness](https://huggingface.co/docs/hub/agents-overview#register-your-agent-harness) 가이드를 참고하십시오.
+에이전트 하네스를 구축하고 있나요? **등록하십시오!** 이것이 `hf`가 이를 감지하는 방식이고, Hub가 트래픽을 당신의 하네스에 귀속하는 방법입니다. `hf`에 항목을 추가하는 간단한 PR을 열기만 하면 됩니다. 자세한 내용은 [Register your agent harness](https://huggingface.co/docs/hub/agents-overview#register-your-agent-harness) 가이드를 참고하십시오.
