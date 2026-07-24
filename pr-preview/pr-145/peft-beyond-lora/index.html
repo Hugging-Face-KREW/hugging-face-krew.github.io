@@ -31,16 +31,18 @@
 <meta property="og:title" content="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" />
 <meta name="author" content="dailybot" />
 <meta property="og:locale" content="ko" />
-<meta name="description" content="Source: https://huggingface.co/blog/peft-beyond-lora" />
-<meta name="twitter:description" property="og:description" content="Source: https://huggingface.co/blog/peft-beyond-lora" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를 한국어로 번역한 글입니다." />
 <meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-145/peft-beyond-lora/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2026-06-18T00:00:00+09:00" />
 <meta property="article:modified_time" content="2026-06-18T00:00:00+09:00" />
-<meta name="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-145/peft-beyond-lora/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" />
 <meta name="twitter:title" content="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-06-18T00:00:00+09:00","datePublished":"2026-06-18T00:00:00+09:00","description":"Source: https://huggingface.co/blog/peft-beyond-lora","headline":"Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-145/peft-beyond-lora/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-145/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-145/peft-beyond-lora/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-06-18T00:00:00+09:00","datePublished":"2026-06-18T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를 한국어로 번역한 글입니다.","headline":"Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?","image":"/pr-preview/pr-145/peft-beyond-lora/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-145/peft-beyond-lora/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-145/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-145/peft-beyond-lora/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -176,6 +178,11 @@
         <!-- Post Featured Image -->
             
         
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-145/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-145/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?">    
+            </div>
+        
         <!-- End Featured Image -->
 
 		<div class="col-sm-8">
@@ -207,24 +214,21 @@
 
 			<!-- Post Content -->
 			<div class="article-post serif-font">
-				<blockquote>
-  <p>Source: https://huggingface.co/blog/peft-beyond-lora</p>
-</blockquote>
-
-<ul id="markdown-toc">
+				<ul id="markdown-toc">
   <li><a href="#beyond-lora-가장-인기-있는-미세조정-기법을-이길-수-있을까" id="markdown-toc-beyond-lora-가장-인기-있는-미세조정-기법을-이길-수-있을까">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></li>
   <li><a href="#파라미터-효율적으로-모델을-미세조정하려고-계획할-때는-lora를-넘어서-생각해-보세요" id="markdown-toc-파라미터-효율적으로-모델을-미세조정하려고-계획할-때는-lora를-넘어서-생각해-보세요">파라미터 효율적으로 모델을 미세조정하려고 계획할 때는 LoRA를 넘어서 생각해 보세요</a></li>
   <li><a href="#what-is-peft-and-when-do-you-need-it" id="markdown-toc-what-is-peft-and-when-do-you-need-it">What is PEFT and when do you need it</a></li>
   <li><a href="#lora-미세조정-기술의-여왕-" id="markdown-toc-lora-미세조정-기술의-여왕-">LoRA: 미세조정 기술의 여왕 👑</a></li>
   <li><a href="#논문-결과를-바탕으로-올바른-peft-기법을-선택하는-것은-문제점이-있다" id="markdown-toc-논문-결과를-바탕으로-올바른-peft-기법을-선택하는-것은-문제점이-있다">논문 결과를 바탕으로 올바른 PEFT 기법을 선택하는 것은 문제점이 있다</a></li>
-  <li><a href="#peft에서-벤치마킹에-어떻게-접근합니다" id="markdown-toc-peft에서-벤치마킹에-어떻게-접근합니다"><code class="language-plaintext highlighter-rouge">PEFT</code>에서 벤치마킹에 어떻게 접근합니다</a></li>
+  <li><a href="#peft에서-벤치마킹에-어떻게-접근합니다" id="markdown-toc-peft에서-벤치마킹에-어떻게-접근합니다">PEFT에서 벤치마킹에 어떻게 접근합니다</a></li>
   <li><a href="#our-findings-lora-works-well-but-is-not-necessarily-the-best-choice" id="markdown-toc-our-findings-lora-works-well-but-is-not-necessarily-the-best-choice">Our findings: LoRA works well but is not necessarily the best choice</a></li>
   <li><a href="#제한점" id="markdown-toc-제한점">제한점</a></li>
   <li><a href="#conclusion-and-what-you-can-do" id="markdown-toc-conclusion-and-what-you-can-do">Conclusion and what <em>you</em> can do</a></li>
 </ul>
 <!--toc-->
-
 <p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/peft-beyond-lora">Beyond LoRA: Can you beat the most popular fine-tuning technique?</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/peft-beyond-lora -->
 
 <hr />
 
@@ -282,7 +286,7 @@ Review instructions:
 
 <p>전반적으로, 논문 결과만으로 어떤 PEFT 기법이 당신에게 가장 잘 맞는지 판단하기는 어렵습니다. 따라서 기본값인 LoRA를 그냥 선택하고 싶은 유혹에 빠질 수 있습니다.</p>
 
-<h1 id="peft에서-벤치마킹에-어떻게-접근합니다"><code class="language-plaintext highlighter-rouge">PEFT</code>에서 벤치마킹에 어떻게 접근합니다</h1>
+<h1 id="peft에서-벤치마킹에-어떻게-접근합니다">PEFT에서 벤치마킹에 어떻게 접근합니다</h1>
 
 <p>허깅페이스에서 사용자가 어떤 PEFT 기법을 사용할지에 대해 정보에 입각한 결정을 내릴 수 있도록 어떻게 도울 수 있을지 고민했습니다. <code class="language-plaintext highlighter-rouge">PEFT</code> 라이브러리를 통해 이미 많은 PEFT 기법을 구현하고 동일한 API로 노출하는 패키지를 제공하고 있습니다. 다음 단계는 논의된 이슈에 대해 더 많은 정보를 제공하는 벤치마크를 제공하는 것입니다.</p>
 
@@ -477,17 +481,13 @@ Review instructions:
     <div class="col-sm-4 sidebar-wrapper">
         <div class="sidebar sticky-top">
     <div class="toc-content">
-        <blockquote>
-  <p>Source: https://huggingface.co/blog/peft-beyond-lora</p>
-</blockquote>
-
-<ul id="markdown-toc">
+        <ul id="markdown-toc">
   <li><a href="#beyond-lora-가장-인기-있는-미세조정-기법을-이길-수-있을까" id="markdown-toc-beyond-lora-가장-인기-있는-미세조정-기법을-이길-수-있을까">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></li>
   <li><a href="#파라미터-효율적으로-모델을-미세조정하려고-계획할-때는-lora를-넘어서-생각해-보세요" id="markdown-toc-파라미터-효율적으로-모델을-미세조정하려고-계획할-때는-lora를-넘어서-생각해-보세요">파라미터 효율적으로 모델을 미세조정하려고 계획할 때는 LoRA를 넘어서 생각해 보세요</a></li>
   <li><a href="#what-is-peft-and-when-do-you-need-it" id="markdown-toc-what-is-peft-and-when-do-you-need-it">What is PEFT and when do you need it</a></li>
   <li><a href="#lora-미세조정-기술의-여왕-" id="markdown-toc-lora-미세조정-기술의-여왕-">LoRA: 미세조정 기술의 여왕 👑</a></li>
   <li><a href="#논문-결과를-바탕으로-올바른-peft-기법을-선택하는-것은-문제점이-있다" id="markdown-toc-논문-결과를-바탕으로-올바른-peft-기법을-선택하는-것은-문제점이-있다">논문 결과를 바탕으로 올바른 PEFT 기법을 선택하는 것은 문제점이 있다</a></li>
-  <li><a href="#peft에서-벤치마킹에-어떻게-접근합니다" id="markdown-toc-peft에서-벤치마킹에-어떻게-접근합니다"><code class="language-plaintext highlighter-rouge">PEFT</code>에서 벤치마킹에 어떻게 접근합니다</a></li>
+  <li><a href="#peft에서-벤치마킹에-어떻게-접근합니다" id="markdown-toc-peft에서-벤치마킹에-어떻게-접근합니다">PEFT에서 벤치마킹에 어떻게 접근합니다</a></li>
   <li><a href="#our-findings-lora-works-well-but-is-not-necessarily-the-best-choice" id="markdown-toc-our-findings-lora-works-well-but-is-not-necessarily-the-best-choice">Our findings: LoRA works well but is not necessarily the best choice</a></li>
   <li><a href="#제한점" id="markdown-toc-제한점">제한점</a></li>
   <li><a href="#conclusion-and-what-you-can-do" id="markdown-toc-conclusion-and-what-you-can-do">Conclusion and what <em>you</em> can do</a></li>
@@ -583,9 +583,11 @@ Review instructions:
         <!-- begin post -->
 
 <div class="card">
-    <a href="/pr-preview/pr-145/how-to-use-translator/">
-         <img class="rounded mb-4" src="/pr-preview/pr-145/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법"> 
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-145/how-to-use-translator/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-145/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
     </a>
+    
     <div class="card-block">
         <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-145/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
         <p class="card-text text-muted">

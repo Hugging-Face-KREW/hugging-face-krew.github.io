@@ -1,21 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/pr-preview/pr-145/feed.xml" rel="self" type="application/atom+xml" /><link href="/pr-preview/pr-145/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-07-04T16:15:15+09:00</updated><id>/pr-preview/pr-145/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</title><link href="/pr-preview/pr-145/peft-beyond-lora/" rel="alternate" type="text/html" title="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" /><published>2026-06-18T00:00:00+09:00</published><updated>2026-06-18T00:00:00+09:00</updated><id>/pr-preview/pr-145/peft-beyond-lora</id><content type="html" xml:base="/pr-preview/pr-145/peft-beyond-lora/"><![CDATA[<blockquote>
-  <p>Source: https://huggingface.co/blog/peft-beyond-lora</p>
-</blockquote>
-
-<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/pr-preview/pr-145/feed.xml" rel="self" type="application/atom+xml" /><link href="/pr-preview/pr-145/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-07-24T21:07:43+09:00</updated><id>/pr-preview/pr-145/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</title><link href="/pr-preview/pr-145/peft-beyond-lora/" rel="alternate" type="text/html" title="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" /><published>2026-06-18T00:00:00+09:00</published><updated>2026-06-18T00:00:00+09:00</updated><id>/pr-preview/pr-145/peft-beyond-lora</id><content type="html" xml:base="/pr-preview/pr-145/peft-beyond-lora/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#beyond-lora-가장-인기-있는-미세조정-기법을-이길-수-있을까" id="markdown-toc-beyond-lora-가장-인기-있는-미세조정-기법을-이길-수-있을까">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></li>
   <li><a href="#파라미터-효율적으로-모델을-미세조정하려고-계획할-때는-lora를-넘어서-생각해-보세요" id="markdown-toc-파라미터-효율적으로-모델을-미세조정하려고-계획할-때는-lora를-넘어서-생각해-보세요">파라미터 효율적으로 모델을 미세조정하려고 계획할 때는 LoRA를 넘어서 생각해 보세요</a></li>
   <li><a href="#what-is-peft-and-when-do-you-need-it" id="markdown-toc-what-is-peft-and-when-do-you-need-it">What is PEFT and when do you need it</a></li>
   <li><a href="#lora-미세조정-기술의-여왕-" id="markdown-toc-lora-미세조정-기술의-여왕-">LoRA: 미세조정 기술의 여왕 👑</a></li>
   <li><a href="#논문-결과를-바탕으로-올바른-peft-기법을-선택하는-것은-문제점이-있다" id="markdown-toc-논문-결과를-바탕으로-올바른-peft-기법을-선택하는-것은-문제점이-있다">논문 결과를 바탕으로 올바른 PEFT 기법을 선택하는 것은 문제점이 있다</a></li>
-  <li><a href="#peft에서-벤치마킹에-어떻게-접근합니다" id="markdown-toc-peft에서-벤치마킹에-어떻게-접근합니다"><code class="language-plaintext highlighter-rouge">PEFT</code>에서 벤치마킹에 어떻게 접근합니다</a></li>
+  <li><a href="#peft에서-벤치마킹에-어떻게-접근합니다" id="markdown-toc-peft에서-벤치마킹에-어떻게-접근합니다">PEFT에서 벤치마킹에 어떻게 접근합니다</a></li>
   <li><a href="#our-findings-lora-works-well-but-is-not-necessarily-the-best-choice" id="markdown-toc-our-findings-lora-works-well-but-is-not-necessarily-the-best-choice">Our findings: LoRA works well but is not necessarily the best choice</a></li>
   <li><a href="#제한점" id="markdown-toc-제한점">제한점</a></li>
   <li><a href="#conclusion-and-what-you-can-do" id="markdown-toc-conclusion-and-what-you-can-do">Conclusion and what <em>you</em> can do</a></li>
 </ul>
 <!--toc-->
-
 <p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/peft-beyond-lora">Beyond LoRA: Can you beat the most popular fine-tuning technique?</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/peft-beyond-lora -->
 
 <hr />
 
@@ -73,7 +70,7 @@ Review instructions:
 
 <p>전반적으로, 논문 결과만으로 어떤 PEFT 기법이 당신에게 가장 잘 맞는지 판단하기는 어렵습니다. 따라서 기본값인 LoRA를 그냥 선택하고 싶은 유혹에 빠질 수 있습니다.</p>
 
-<h1 id="peft에서-벤치마킹에-어떻게-접근합니다"><code class="language-plaintext highlighter-rouge">PEFT</code>에서 벤치마킹에 어떻게 접근합니다</h1>
+<h1 id="peft에서-벤치마킹에-어떻게-접근합니다">PEFT에서 벤치마킹에 어떻게 접근합니다</h1>
 
 <p>허깅페이스에서 사용자가 어떤 PEFT 기법을 사용할지에 대해 정보에 입각한 결정을 내릴 수 있도록 어떻게 도울 수 있을지 고민했습니다. <code class="language-plaintext highlighter-rouge">PEFT</code> 라이브러리를 통해 이미 많은 PEFT 기법을 구현하고 동일한 API로 노출하는 패키지를 제공하고 있습니다. 다음 단계는 논의된 이슈에 대해 더 많은 정보를 제공하는 벤치마크를 제공하는 것입니다.</p>
 
@@ -216,7 +213,7 @@ Review instructions:
 </span><span class="gd">-config = LoraConfig(target_modules=["q_proj", "v_proj"])
 </span><span class="gi">+config = OFTConfig(target_modules=["q_proj", "v_proj"])
 </span><span class="p">model = get_peft_model(base_model, config)
-</span></code></pre></div></div>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[Source: https://huggingface.co/blog/peft-beyond-lora]]></summary></entry><entry><title type="html">n8n으로 번역 MCP Server 워크플로우 구축하기: 실전 트러블슈팅과 실행 방식 비교</title><link href="/pr-preview/pr-145/hf-translation-mcp-n8n/" rel="alternate" type="text/html" title="n8n으로 번역 MCP Server 워크플로우 구축하기: 실전 트러블슈팅과 실행 방식 비교" /><published>2026-01-05T00:00:00+09:00</published><updated>2026-01-05T00:00:00+09:00</updated><id>/pr-preview/pr-145/hf-translation-mcp-n8n</id><content type="html" xml:base="/pr-preview/pr-145/hf-translation-mcp-n8n/"><![CDATA[<ul id="markdown-toc">
+</span></code></pre></div></div>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-145/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-145/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">n8n으로 번역 MCP Server 워크플로우 구축하기: 실전 트러블슈팅과 실행 방식 비교</title><link href="/pr-preview/pr-145/hf-translation-mcp-n8n/" rel="alternate" type="text/html" title="n8n으로 번역 MCP Server 워크플로우 구축하기: 실전 트러블슈팅과 실행 방식 비교" /><published>2026-01-05T00:00:00+09:00</published><updated>2026-01-05T00:00:00+09:00</updated><id>/pr-preview/pr-145/hf-translation-mcp-n8n</id><content type="html" xml:base="/pr-preview/pr-145/hf-translation-mcp-n8n/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#들어가며" id="markdown-toc-들어가며">들어가며</a></li>
   <li><a href="#n8n-번역-mcp-server-워크플로우-소개" id="markdown-toc-n8n-번역-mcp-server-워크플로우-소개">n8n 번역 MCP Server 워크플로우 소개</a></li>
   <li><a href="#n8n-워크플로우-구축-결과" id="markdown-toc-n8n-워크플로우-구축-결과">n8n 워크플로우 구축 결과</a>    <ul>
