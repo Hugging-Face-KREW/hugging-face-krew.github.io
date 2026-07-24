@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-07-24T23:28:53+09:00</updated><id>/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*</title><link href="/grabette/" rel="alternate" type="text/html" title="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*" /><published>2026-07-21T00:00:00+09:00</published><updated>2026-07-21T00:00:00+09:00</updated><id>/grabette</id><content type="html" xml:base="/grabette/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-07-24T23:40:58+09:00</updated><id>/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*</title><link href="/grabette/" rel="alternate" type="text/html" title="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*" /><published>2026-07-21T00:00:00+09:00</published><updated>2026-07-21T00:00:00+09:00</updated><id>/grabette</id><content type="html" xml:base="/grabette/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#grabette-로봇-조작-데이터를-기록하기-위한-오픈-시스템--함께-공유-데이터셋을-구축합니다" id="markdown-toc-grabette-로봇-조작-데이터를-기록하기-위한-오픈-시스템--함께-공유-데이터셋을-구축합니다">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br /> <em>함께 공유 데이터셋을 구축합니다.</em></a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">The bottleneck isn’t the model. It’s the data.</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">UMI의 어깨 위에 서다</a></li>
@@ -177,7 +177,749 @@ Review instructions:
 
 <p>👉 <strong><a href="https://github.com/pollen-robotics/grabette">Build a Grabette (GitHub)</a></strong> · <a href="https://huggingface.co/spaces/pollen-robotics/grabette-slam">Process your data (HF Space)</a> · 데이터셋에 기여하기</p>
 
-<p><em>Pollen Robotics가 ❤️로 만들어졌습니다.</em></p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" /><media:content medium="image" url="/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">네이티브-스피드 vLLM transformers 모델링 백엔드</title><link href="/native-speed-vllm-transformers-backend/" rel="alternate" type="text/html" title="네이티브-스피드 vLLM transformers 모델링 백엔드" /><published>2026-07-08T00:00:00+09:00</published><updated>2026-07-08T00:00:00+09:00</updated><id>/native-speed-vllm-transformers-backend</id><content type="html" xml:base="/native-speed-vllm-transformers-backend/"><![CDATA[<ul id="markdown-toc">
+<p><em>Pollen Robotics가 ❤️로 만들어졌습니다.</em></p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" /><media:content medium="image" url="/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">파이토치의 프로파일링(3부): 어텐션이 전부다</title><link href="/torch-attention-profile/" rel="alternate" type="text/html" title="파이토치의 프로파일링(3부): 어텐션이 전부다" /><published>2026-07-10T00:00:00+09:00</published><updated>2026-07-10T00:00:00+09:00</updated><id>/torch-attention-profile</id><content type="html" xml:base="/torch-attention-profile/"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#파이토치의-프로파일링3부-어텐션이-전부다" id="markdown-toc-파이토치의-프로파일링3부-어텐션이-전부다">파이토치의 프로파일링(3부): 어텐션이 전부다</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">나이브 어텐션</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">인플레이스 인과 마스크가 적용된 나이브 어텐션</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">스케일드 닷 프로덕트 어텐션</a>        <ul>
+          <li><a href="#수학-백엔드" id="markdown-toc-수학-백엔드">수학 백엔드</a>            <ul>
+              <li><a href="#텐서-코어가-남아-있습니다" id="markdown-toc-텐서-코어가-남아-있습니다">텐서 코어가 남아 있습니다</a></li>
+              <li><a href="#인과-마스크가-생성됩니다" id="markdown-toc-인과-마스크가-생성됩니다">인과 마스크가 생성됩니다</a></li>
+              <li><a href="#안전한-소프트맥스" id="markdown-toc-안전한-소프트맥스">안전한 소프트맥스</a></li>
+              <li><a href="#그래서-수학-백엔드는-무엇을-위한가" id="markdown-toc-그래서-수학-백엔드는-무엇을-위한가">그래서 수학 백엔드는 무엇을 위한가?</a></li>
+            </ul>
+          </li>
+          <li><a href="#효율적인-백엔드" id="markdown-toc-효율적인-백엔드">효율적인 백엔드</a></li>
+          <li><a href="#flash-백엔드" id="markdown-toc-flash-백엔드">Flash 백엔드</a>            <ul>
+              <li><a href="#왜-flash-어텐션이-존재하는가" id="markdown-toc-왜-flash-어텐션이-존재하는가">왜 flash 어텐션이 존재하는가?</a></li>
+              <li><a href="#왜-프로파일러에서-플래시가-잘못-보이는가" id="markdown-toc-왜-프로파일러에서-플래시가-잘못-보이는가">왜 프로파일러에서 플래시가 “잘못 보이는”가?</a></li>
+            </ul>
+          </li>
+          <li><a href="#cudnn-백엔드" id="markdown-toc-cudnn-백엔드">cuDNN 백엔드</a>            <ul>
+              <li><a href="#cudnn-커널은-어떻게-다른가" id="markdown-toc-cudnn-커널은-어떻게-다른가">cuDNN 커널은 어떻게 다른가</a></li>
+              <li><a href="#비용이-cpu로-이동했습니다" id="markdown-toc-비용이-cpu로-이동했습니다">비용이 CPU로 이동했습니다</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#section-4" id="markdown-toc-section-4">Everything we covered, at a glance</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">Concluding the series</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/torch-attention-profile">Profiling in PyTorch (Part 3): Attention is all you profile</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/torch-attention-profile -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="파이토치의-프로파일링3부-어텐션이-전부다">파이토치의 프로파일링(3부): 어텐션이 전부다</h1>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/profile-3-thumbnail.png" alt="Thumbnail of the blog post" /></p>
+
+<div style="
+  border: 1px solid #1f5c48;
+  border-radius: 6px;
+  padding: 1.5rem 2rem;
+  background: #17211f;
+  color: #ddd;
+  font-size: 1.1rem;
+  line-height: 1.7;
+">
+
+  <p>
+    This is the third post of <bold>Profiling in PyTorch</bold>, a series where we slowly build the skill of reading profiler traces and use it to drive optimization:
+  </p>
+
+  <ol>
+    <li>
+      <a href="https://huggingface.co/blog/torch-profiler" style="color: #10b981;">
+        Profiling in PyTorch (Part 1): A Beginner's Guide to torch.profiler
+      </a>
+    </li>
+    <li>
+      <a href="https://huggingface.co/blog/torch-mlp-fusion" style="color: #10b981;">
+        Profiling in PyTorch (Part 2): From nn.Linear to a Fused MLP
+      </a>
+    </li>
+    <li>
+      <a href="https://huggingface.co/blog/torch-attention-profile" style="color: #10b981;">
+        Profiling in PyTorch (Part 3): Attention is all you profile
+      </a>
+      <em style="color: #aaa;">(current)</em>
+    </li>
+  </ol>
+
+</div>
+
+<p>시리즈 “Profiling in PyTorch”는 프로파일러 트레이스와 표를 읽는 데 익숙해지게 만드는 것을 목표로 합니다. <a href="https://huggingface.co/blog/torch-profiler">Part 1</a>에서는 덧셈과 곱셈 같은 기본 수학 연산을 프로파일링했습니다. 프로파일러 표가 핫스팟을 드러내는 방식과 프로파일러 트레이스가 알고리즘이 시간에 따라 실행되는 순서를 어떻게 보여주는지 보았습니다.</p>
+
+<p><a href="https://huggingface.co/blog/torch-mlp-fusion">Part 2</a> 안에서 위의 덧셈과 곱셈을 torch 선형 계층으로 포장했고, 그 위에 여러 개의 선형 계층을 차례로 쌓아(다층 퍼셉트론) 그것을 프로파일링했습니다. 그 과정에서 융합된 커널과 수작업으로 튜닝된 커널도 함께 프로파일링했습니다.</p>
+
+<p>트랜스포머 아키텍처의 관점에서, 프로파일링의 다음 논리적 단계는 또 다른 기본 알고리즘인 어텐션입니다. 어텐션은 이차 시간 복잡도로 악명 높지만, 이를 완화하고 빠르게 만드는 똑똑한 트릭이 많이 존재합니다. 여기서의 목표는 모든 트릭을 자세히 다루는 것이 아닙니다. 대신 각 트릭이 프로파일러 아래에서 어떻게 다르게 보이는지 보는 것입니다.</p>
+
+<blockquote>
+  <p>[!NOTE]
+이 블로그 포스트의 스크립트는 여기에서 실행됩니다: <a href="https://huggingface.co/datasets/ariG23498/profiling-pytorch/blob/main/04_a_naive_attention.py"><code class="language-plaintext highlighter-rouge">04_a_naive_attention.py</code></a>, <a href="https://huggingface.co/datasets/ariG23498/profiling-pytorch/blob/main/04_b_inplace_ops_attention.py"><code class="language-plaintext highlighter-rouge">04_b_inplace_ops_attention.py</code></a>, <a href="https://huggingface.co/datasets/ariG23498/profiling-pytorch/blob/main/04_c_sdpa_attention.py"><code class="language-plaintext highlighter-rouge">04_c_sdpa_attention.py</code></a>, 그리고 <a href="https://huggingface.co/datasets/ariG23498/profiling-pytorch/blob/main/04_d_kernels_attention.py"><code class="language-plaintext highlighter-rouge">04_d_kernels_attention.py</code></a>. 이전과 마찬가지로 읽으면서 코드를 따라가려면 별도의 탭에서 여는 것이 도움이 됩니다. 이 스크립트를 실행하기 위해 <code class="language-plaintext highlighter-rouge">NVIDIA A100-SXM4-80GB</code> GPU를 사용합니다. 허깅페이스 인프라에서 GPU를 설정하고 <a href="https://huggingface.co/docs/hub/spaces-dev-mode">Dev Mode with Spaces</a>를 사용해 스크립트를 실험하는 것은 정말 쉽습니다. 또한 <a href="https://huggingface.co/docs/huggingface_hub/en/guides/jobs">Hugging Face Jobs pipeline</a>로도 스크립트를 실행할 수 있습니다.</p>
+</blockquote>
+
+<h2 id="section-1">나이브 어텐션</h2>
+
+<p>어텐션은 쿼리(<code class="language-plaintext highlighter-rouge">q</code>), 키(<code class="language-plaintext highlighter-rouge">k</code>), 값(<code class="language-plaintext highlighter-rouge">v</code>)으로 작동합니다. 이들 간의 상호 작용은 간단한 일련의 단계로 작성할 수 있습니다:</p>
+
+<ol>
+  <li>어텐션 스코어를 만듭니다 <code class="language-plaintext highlighter-rouge">scores</code>: <code class="language-plaintext highlighter-rouge">matmul(q, k.T)</code></li>
+  <li>스코어를 스케일합니다: <code class="language-plaintext highlighter-rouge">scores * scale</code></li>
+  <li>스코어에 인과 마스크를 적용합니다: <code class="language-plaintext highlighter-rouge">scores.masked_fill(mask, "-inf")</code></li>
+  <li>소프트맥스(softmax)로 스코어를 정규화하여 어텐션 가중치를 얻습니다 <code class="language-plaintext highlighter-rouge">attn</code>: <code class="language-plaintext highlighter-rouge">softmax(scores)</code></li>
+  <li>그 가중치로 값을 재가중합니다: <code class="language-plaintext highlighter-rouge">matmul(attn, v)</code></li>
+</ol>
+
+<p>그래서 어텐션은 실질적으로 원시 연산들의 모음입니다. 그 중 일부는 이미 알고 있는(matmul) 연산이고, 나머지는 쉽게 발견할 수 있습니다. PyTorch로 네이브 어텐션 모듈을 작성하고 이를 프로파일링해 봅시다.</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">NaiveCausalAttention</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">head_dim</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">scale</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">head_dim</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">matmul</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">.</span><span class="nf">transpose</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">scores</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">scale</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">scores</span><span class="p">.</span><span class="nf">masked_fill</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="nf">float</span><span class="p">(</span><span class="sh">"</span><span class="s">-inf</span><span class="sh">"</span><span class="p">))</span>
+        <span class="n">attn</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">softmax</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">matmul</span><span class="p">(</span><span class="n">attn</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+</code></pre></div></div>
+
+<p>트레이스를 열기 전, 보통의 연습대로 우리가 볼 수 있을 것을 추측해 봅시다. 이 모듈의 <code class="language-plaintext highlighter-rouge">forward</code>를 트레이스하면, 우리는 다음을 기대합니다:</p>
+
+<ul>
+  <li>매트멀 커널( <code class="language-plaintext highlighter-rouge">q . k.T</code> )</li>
+  <li>곱 커널(스케일링)</li>
+  <li>마스킹 연산</li>
+  <li>소프트맥스 커널</li>
+  <li>매트멀 커널( <code class="language-plaintext highlighter-rouge">atten . v</code> )</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run 04_a_naive_attention.py
+uvx trace-util <span class="nt">-f</span> traces/ <span class="nt">-b</span> &lt;hf_uname&gt;/traces
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/cpu-profile-naive.png" alt="CPU lane of the naive attention profiler trace, with the `attn_fwd` block expanded to show its matmul, mul, masked_fill and softmax operations" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 1: 네이브 어텐션의 프로파일 트레이스의 CPU 레인에 표시된 이산 연산들을 강조</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>그림 1은 프로파일의 CPU 레인( GPU 레인은 우리를 압도하지 않도록 접어 두었습니다)을 보여줍니다. 내부 <code class="language-plaintext highlighter-rouge">attn_fwd</code>(주석이 달린 순전파 호출)에서 우리가 추정한 정확한 연산들을 볼 수 있습니다. 매트멀은 이제 친숙한 친구이고, 새로 등장한 연산들은 쉽게 포착됩니다:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mul</code>: 스케일링</li>
+  <li><code class="language-plaintext highlighter-rouge">masked_fill</code>: 인과 마스킹</li>
+  <li><code class="language-plaintext highlighter-rouge">softmax</code>: 소프트맥스 커널</li>
+</ul>
+
+<p>이제 GPU 레인을 펼쳐 실제로 어떤 커널이 실행되었는지 확인해 봅시다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/gpu-profile-naive.png" alt="Profiler trace of naive attention showing the CPU lane above the GPU lane, with each `attn_fwd` step mapping to a cluster of GPU kernels" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 2: 네이브 어텐션의 프로파일 트레이스의 GPU 레인과 CPU 레인을 함께 보여주며, 하나의 프로파일러 스텝에 해당하는 커널들을 강조</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>그림 2는 GPU 레인 옆에 있는 CPU 레인을 보여줍니다. GPU 레인에서 하나의 <code class="language-plaintext highlighter-rouge">attn_fwd</code> 블록을 확대하여 커널을 하나씩 살펴봅시다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/each-kernels-naive.png" alt="Zoomed-in GPU lane of naive attention showing the individual kernels for one step: two matmuls, a mul, a memory copy, a masking kernel and a softmax" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 3: 네이브 어텐션 구현의 프로파일 트레이스의 확대된 GPU 레인</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>그림 3은 한 프로파일러 스텝의 개별 커널을 읽어보게 해 줍니다:</p>
+
+<ol>
+  <li>matmul (쿼리와 키)</li>
+  <li>mul (스케일링)</li>
+  <li>메모리 복사 🤔</li>
+  <li>인과 마스킹</li>
+  <li>softmax (어텐션 가중치를 산출)</li>
+  <li>matmul (어텐션 가중치와 값)</li>
+</ol>
+
+<p>다섯 가지가 예상됩니다. 메모리 복사는 이상한 하나인데, 이게 어디서 나온 걸까요? 힌트는 PyTorch에 in-place 연산이 있습니다는 점입니다. 텐서에 일반적인(out-of-place) 방식으로 연산하면, PyTorch는 종종 복사를 만들고 요청된 연산을 그 복사에 적용한 뒤 복사본을 반환합니다. 연산 순서를 보면 여기의 범인은 <a href="https://docs.pytorch.org/docs/2.13/generated/torch.Tensor.masked_fill.html"><code class="language-plaintext highlighter-rouge">masked_fill</code></a>입니다.</p>
+
+<p>이것을 in-place 연산으로 바꾼다면 어떨까요?</p>
+
+<h2 id="section-2">인플레이스 인과 마스크가 적용된 나이브 어텐션</h2>
+
+<p>변경하는 것은 <code class="language-plaintext highlighter-rouge">masked_fill</code>에서 <code class="language-plaintext highlighter-rouge">masked_fill_</code>로의 교환뿐입니다(뒤의 밑줄은 PyTorch의 in-place 연산 표기법에 주의). 같은 스크립트를 실행합니다.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">def forward(self, q, k, v, mask):
+</span>    # q, k, v: [batch, heads, seq, head_dim]
+    scores = torch.matmul(q, k.transpose(-2, -1))  # [batch, heads, seq, seq]
+    scores = torch.mul(scores, self.scale)
+<span class="gd">-    scores = scores.masked_fill(mask, float("-inf"))
+</span><span class="gi">+    scores.masked_fill_(mask, float("-inf"))
+</span>    attn = torch.softmax(scores, dim=-1)
+    out = torch.matmul(attn, v)  # [batch, heads, seq, head_dim]
+    return out
+</code></pre></div></div>
+
+<p>트레이스를 살펴보고 무언가 바뀌었는지 봅시다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run 04_b_inplace_ops_attention.py
+uvx trace-util <span class="nt">-f</span> traces/ <span class="nt">-b</span> &lt;hf_uname&gt;/traces
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Type</th>
+      <th style="text-align: center">CPU 스트림</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 4: 나이브 마스킹</td>
+      <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/cpu-profile-naive.png" alt="CPU lane of naive attention with out-of-place `masked_fill`, showing several dispatch ops for the masking step" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">그림 5: 인플레이스 마스킹</td>
+      <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/cpu-profile-inplace.png" alt="CPU lane of naive attention with in-place `masked_fill_`, showing fewer dispatch ops for the masking step" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>인플레이스 버전(Figure 5)은 마스킹 단계 안에 CPU 연산을 훨씬 적게 포장합니다. 이는 고무적인 신호다. GPU 레인을 펼쳐 무슨 일이 일어났는지 확인해 봅시다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Type</th>
+      <th style="text-align: center">GPU 스트림</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 6: 나이브 마스킹</td>
+      <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/each-kernels-naive.png" alt="GPU kernels for naive attention including a separate Memcpy kernel before the masking" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">그림 7: 인플레이스 마스킹</td>
+      <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/each-kernels-inpace.png" alt="GPU kernels for naive attention with in-place masking, with the Memcpy kernel gone" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>GPU 레인에서 <code class="language-plaintext highlighter-rouge">Memcpy</code> 커널은 완전히 사라졌다(그림 6, 7). 한 줄의 변경으로 순전파마다 커널 하나를 제거했습니다. 이것만으로는 큰 차이처럼 보이지 않을 수 있지만, 이건 단일 어텐션 연산에 불과합니다. 트랜스포머 기반의 대형 모델(LLMs, 확산 모델 등) 맥락에서 이는 레이어당 한 번 반복되며 레이어가 많으므로 절약 효과가 빠르게 누적됩니다(그리고 그것이 당신의 월급 인상에 기여합니다면, 우리와 최소 10%를 나누는 것이 공정합니다고 느낍니다).</p>
+
+<blockquote>
+  <p>[!NOTE]
+Out-of-place는 PyTorch의 기본 설정입니다. 그래디언트를 계산하려면 autograd가 순전파에서 본 텐서 값을 기억해야 하며, 많은 역전파 공식이 그 값을 재사용하기 때문입니다. in-place 연산은 메모리의 그 값을 덮어써서 역전파가 잘못된 수치를 읽게 됩니다. <code class="language-plaintext highlighter-rouge">forward</code>를 <code class="language-plaintext highlighter-rouge">torch.no_grad</code> 아래에서 실행하기 때문에 우리에게는 in-place가 안전하며, 역전파가 없고 손상될 여지도 없다. 또한 in-place 연산은 시간 절약뿐 아니라(추가 복사 없이) 메모리 절약도 가능하므로 로짓처럼 큰 텐서에 특히 좋습니다.</p>
+</blockquote>
+
+<h2 id="section-3">스케일드 닷 프로덕트 어텐션</h2>
+
+<p>우리는 막 원시 연산(primitives)으로 어텐션을 구성했고, 심지어 <code class="language-plaintext highlighter-rouge">Memcpy</code>까지 제거했습니다. 다행히 PyTorch 팀이 이 모든 것을 우리를 위해 처리했고, 파이프라인 전체를 단 한 줄의 함수로 패키지했습니다:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
+
+<span class="n">F</span><span class="p">.</span><span class="nf">scaled_dot_product_attention</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">is_causal</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>이 한 줄이 우리의 직접 작성한 모듈을 대체하고, <code class="language-plaintext highlighter-rouge">is_causal=True</code>는 수동으로 마스크를 빌드하는 수고도 덜어줍니다. 이 한 호출이 얼마나 많은 것을 숨기는지 음미할 가치가 있습니다. 그리고 그것은 코드 줄 이상으로도 숨긴다. 스케일드 닷 프로덕트 어텐션(SDPA)은 단일 구현을 가지지 않습니다. 그 이면에서 여러 백엔드 중 하나로 _디스패치_되어 입력들(dtype, head dimension, mask, 하드웨어 등)을 지원하는 가장 빠른 백엔드를 선택합니다.</p>
+
+<p><a href="https://docs.pytorch.org/tutorials/intermediate/scaled_dot_product_attention_tutorial.html">official SDPA tutorial</a>가 이 선택 과정을 안내하고, 백엔드 목록 자체는 <code class="language-plaintext highlighter-rouge">torch.nn.attention.SDPBackend</code> 열거형에 나열되어 있습니다:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">torch.nn.attention</span> <span class="kn">import</span> <span class="n">SDPBackend</span>
+
+<span class="n">BACKENDS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">"</span><span class="s">math</span><span class="sh">"</span><span class="p">:</span> <span class="n">SDPBackend</span><span class="p">.</span><span class="n">MATH</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">flash</span><span class="sh">"</span><span class="p">:</span> <span class="n">SDPBackend</span><span class="p">.</span><span class="n">FLASH_ATTENTION</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">efficient</span><span class="sh">"</span><span class="p">:</span> <span class="n">SDPBackend</span><span class="p">.</span><span class="n">EFFICIENT_ATTENTION</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">cudnn</span><span class="sh">"</span><span class="p">:</span> <span class="n">SDPBackend</span><span class="p">.</span><span class="n">CUDNN_ATTENTION</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>일반적으로 SDPA는 우리를 위해 선택하지만, <code class="language-plaintext highlighter-rouge">torch.nn.attention.sdpa_kernel</code> 컨텍스트 매니저로 특정 백엔드를 고정할 수 있습니다. 이것이 우리 스크립트에서 하는 일입니다. 이를 통해 각 백엔드를 독립적으로 프로파일하고, 트레이스에서 어떻게 다르게 나타나는지 읽어볼 수 있습니다. 하나씩 살펴봅시다.</p>
+
+<h3 id="수학-백엔드">수학 백엔드</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run 04_c_sdpa_attention.py <span class="nt">--backend</span> math
+uvx trace-util <span class="nt">-f</span> traces/ <span class="nt">-b</span> &lt;hf_uname&gt;/traces
+</code></pre></div></div>
+
+<p>아무 것도 열기 전에 추측해 봅시다. 이 모듈의 수작업 어텐션(matmul, mul, mask, softmax, matmul)을 한 줄로 대체했으니 트레이스가 <em>간단하고 빨라질 것입니다</em>. 커널 수가 적고, CPU 디스패치가 줄어들며, 어쩌면 융합 커널이 나올 수도 있습니다. 우선 프로파일러 표를 확인해봅시다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Metric</th>
+      <th style="text-align: center">Where to look?</th>
+      <th style="text-align: center">Naive in-place</th>
+      <th style="text-align: center">SDPA math</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">*_fwd</code> CUDA time avg</td>
+      <td style="text-align: center">The “CUDA time avg” column for the <code class="language-plaintext highlighter-rouge">*_fwd</code> op</td>
+      <td style="text-align: center">1.955 ms</td>
+      <td style="text-align: center">7.239 ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Self CUDA time total</td>
+      <td style="text-align: center">At the bottom of the profiler table</td>
+      <td style="text-align: center">7.194 ms</td>
+      <td style="text-align: center">27.279 ms</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>이것이 우리의 첫 번째 놀라움입니다. 한 줄이 <code class="language-plaintext highlighter-rouge">3.7x</code> 느리다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">Profiler Trace</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 8: 나이브 인플레이스 어텐션의 프로파일러 트레이스가 하나의 순전파에 대해 다섯 개의 GPU 커널 런치를 보여줌</td>
+      <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/inplace-kernel-launches.png" alt="GPU lane of naive in-place attention with five kernel launches for one forward pass" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">그림 9: SDPA 수학 백엔드의 프로파일러 트레이스가 단일 어텐션 순전파에 대해 20개의 GPU 커널 런치를 보여줌</td>
+      <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/math-kernel-launches.png" alt="GPU lane of the SDPA math backend with twenty kernel launches for a single attention forward pass" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>트레이스를 열어보면(그림 9) 경보가 울리는 이유를 보여줍니다. 수학 백엔드가 순전파당 <code class="language-plaintext highlighter-rouge">20</code>개의 GPU 커널을 실행하는 반면, 네이브 어텐션 구현(Figure 8)에서 실행된 <code class="language-plaintext highlighter-rouge">5</code>은 아닙니다. 이는 우리가 예상한 것의 정반대다. 왜 이런 일이 일어나는지 알아봅시다.</p>
+
+<h4 id="텐서-코어가-남아-있습니다">텐서 코어가 남아 있습니다</h4>
+
+<p>다음과 같은 습관을 사용해 커널 이름을 읽는 방법을 배웠습니다. 이 습관을 이 자리에 적용해 봅시다:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Run</th>
+      <th style="text-align: center">matmul kernel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 10: 네이브 어텐션</td>
+      <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/cuda-core-kernels.png" alt="Matmul kernel name for naive attention in Perfetto, carrying the s16816 bfloat16 Tensor-core GEMM signature" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">그림 11: 수학 백엔드를 사용한 SDPA</td>
+      <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/tensor-core-kernels.png" alt="Matmul kernel name for the SDPA math backend, carrying the sgemm FP32 CUDA-core signature" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>우리가 이 트레이스를 포착하는 데 사용한 A100은 <a href="https://www.nvidia.com/en-us/data-center/tensor-cores/">Tensor Cores</a>와 함께 제공되며, 행렬 곱셈을 가속하기 위한 특화된 하드웨어로 일반 CUDA 코어보다 훨씬 빠른 것으로 알려져 있습니다. 이것이 여기서 왜 중요한지 보려면 GPU 내부에 무엇이 있는지 알아야 합니다. 스트리밍 멀티프로세서(SM)는 GPU의 계산 유닛이고, 각 SM은 두 종류의 산술 유닛(CUDA 코어와 텐서 코어)을 가진다. CUDA 코어는 범용적이고 한 번에 소수의 원소를 처리하며, 텐서 코어는 작은 행렬 타일을 한 명령으로 곱하고 누적합니다. 따라서 질문은 간단합니다. 각 백엔드가 실제로 빠른 경로를 사용하고 있는가?</p>
+
+<p>커널 이름이 그것에 답합니다. 네이브 커널(Figure 10)의 <code class="language-plaintext highlighter-rouge">s16816</code>은 <code class="language-plaintext highlighter-rouge">bfloat16</code> 텐서 코어 매트멀의 시그니처이며( <code class="language-plaintext highlighter-rouge">16x8x16</code> 텐서 코어 명령), 따라서 네이브 버전은 빠른 경로에 있습니다. <code class="language-plaintext highlighter-rouge">sgemm</code>(Figure 11)는 일반 CUDA 코어에서 실행되는 단정도 싱글 프리시전(<code class="language-plaintext highlighter-rouge">FP32</code>) 매트멀입니다. 다시 말해, 수학 백엔드는 텐서 코어를 전혀 건드리지 않습니다: 속도와 수치 정확도 사이의 trade-off를 위해 텐서를 <code class="language-plaintext highlighter-rouge">FP32</code>로 업캐스트하고(입력이 <code class="language-plaintext highlighter-rouge">bf16</code>인 경우에도 데이터 이동을 두 배로 늘림) 느린 CUDA 코어로 되돌아간다.</p>
+
+<h4 id="인과-마스크가-생성됩니다">인과 마스크가 생성됩니다</h4>
+
+<p>네이브 버전에서는 인과 마스크를 한 번 만들고 재사용했습니다. 이 버전에서는 <code class="language-plaintext highlighter-rouge">is_causal=True</code>를 넘겨 주었고, 수학 백엔드가 매 호출마다 하나를 생성해 주었다. CPU 레인에서 그것이 어떻게 일어나는지 지켜볼 수 있습니다:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/mask-math.png" alt="CPU lane of the SDPA math backend showing the ops that rebuild the causal mask: aten::ones, aten::tril, aten::scalar_tensor, aten::fill_ and aten::where" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 12: 마스킹 연산에 대한 CPU 레인 표시</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>다음은 그림 12에서 보이는 모습입니다</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aten::ones -&gt; aten::tril            build a <span class="o">[</span><span class="nb">seq</span>, <span class="nb">seq</span><span class="o">]</span> lower-triangular matrix
+aten::scalar_tensor -&gt; aten::fill_  make the <span class="nt">-inf</span> fill value
+aten::where                         turn it into an additive bias <span class="o">(</span>0 or <span class="nt">-inf</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>GPU에서는 이것이 <code class="language-plaintext highlighter-rouge">triu_tril_kernel</code> 하나, 여러 개의 <code class="language-plaintext highlighter-rouge">where</code> 커널, 그리고 하나의 <code class="language-plaintext highlighter-rouge">add_</code>로 나타난다. 마스크를 생각하는 것을 중단하게 해 주는 편의 플래그는 작업 자체를 제거한 것이 아니라 한 층 아래로 옮겼으며, 순전파마다 마스크가 처음부터 새로 빌드됩니다.</p>
+
+<h4 id="안전한-소프트맥스">안전한 소프트맥스</h4>
+
+<p>직접 작성한 버전은 일반 <code class="language-plaintext highlighter-rouge">aten::softmax</code>이라고 불렀다. 수학 백엔드는 <code class="language-plaintext highlighter-rouge">aten::_safe_softmax</code>을 호출하고, 차이가 또 다른 커널들로 나타난다(그림 13):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/safe-softmax-extra-kernels.png" alt="GPU lane of the SDPA math backend showing the extra kernels that aten::_safe_softmax launches compared to a plain softmax" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 13: 일반 소프트맥스에 비해 추가 커널을 강조하는 Safe softmax</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>전체가 마스킹된 행(모든 항목이 <code class="language-plaintext highlighter-rouge">-inf</code>인 행)은 일반 소프트맥스가 <code class="language-plaintext highlighter-rouge">exp(-inf)/sum(exp(-inf)) = 0/0 = NaN</code>를 계산하게 만들 것입니다. <code class="language-plaintext highlighter-rouge">_safe_softmax</code>는 바로 그것을 방지합니다. 우리의 네이브 커널은 그 경우를 전혀 처리하지 않았고, 그 귀퉁이 케이스에서 조용히 <code class="language-plaintext highlighter-rouge">NaN</code>를 만들어 냈을 것입니다.</p>
+
+<h4 id="그래서-수학-백엔드는-무엇을-위한가">그래서 수학 백엔드는 무엇을 위한가?</h4>
+
+<p>종합하면, 수학 백엔드는 참조 구현입니다. 이는 원시 ATen 연산으로 어텐션을 dtype 안전하고 NaN 안전하게 분해하는 직관적 구현입니다. 본질적으로 우리가 손으로 작성한 네이브 어텐션과 같지만 더 조심스럽다. 그 신중함이 바로 그것을 매우 느리게 만듭니다.</p>
+
+<p>그 임무는 빠르게 작동하는 것이 아니라 항상 작동하는 것입니다. 이것이 완벽한 베이스라인이 됩니다. 우리가 다음에 프로파일링하는 모든 백엔드(Flash, Efficient, cuDNN)는 <code class="language-plaintext highlighter-rouge">20</code> GPU 커널들을 본질적으로 하나의 융합 커널로 압축해서 bf16으로 유지하고 중간 행렬을 전혀 만들어 내지 않도록 하려 합니다.</p>
+
+<h3 id="효율적인-백엔드">효율적인 백엔드</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run 04_c_sdpa_attention.py <span class="nt">--backend</span> efficient
+uvx trace-util <span class="nt">-f</span> traces <span class="nt">-b</span> &lt;hf_uname&gt;/traces
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/efficient-backend.png" alt="Profiler trace of the SDPA efficient backend showing a single fused fmha_cutlassF attention kernel per forward" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 14: sdpa의 효율적 백엔드에 대한 프로파일러 트레이스</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>수학 백엔드가 한 프로파일러 스텝에 20개의 커널을 실행했습니다면, 효율적 백엔드는 단 하나의 <code class="language-plaintext highlighter-rouge">fmha_cutlassF_bf16_aligned_64x64_rf_sm80</code>만 실행합니다(그림 14에서 볼 수 있습니다).</p>
+
+<p>커널의 이름의 의미를 해석해 봅시다:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">fmha</code> (퓨즈드 멀티헤드 어텐션): 어텐션의 모든 원시 연산이 하나의 연산으로 융합되어 있습니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">cutlassF</code>: CUTLASS를 기반으로 한 텐서-코어 GEMM용 템플릿, forward에 대해 <code class="language-plaintext highlighter-rouge">F</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">bf16_aligned</code>: bf16으로 실행( FP32 업캐스트 없음, 수학과 다름).</li>
+  <li><code class="language-plaintext highlighter-rouge">64x64</code>: 타일 크기.</li>
+  <li><code class="language-plaintext highlighter-rouge">rf</code> (레지스터 파일): 작동 집합이 레지스터에 보관되어 칩에서 가장 빠른 메모리입니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">sm80</code>: Ampere에 맞춰 컴파일(A100의 컴퓨트 수준 8.0).</li>
+</ul>
+
+<p>메타(Meta)의 <a href="https://github.com/facebookresearch/xformers">xformers</a> 라이브러리에서 나온 메모리 효율적인 어텐션 커널이며 PyTorch로 업스트림되었습니다. 사람들이 “xformers 백엔드”라고 말할 때 이 <code class="language-plaintext highlighter-rouge">fmha_cutlassF</code> 커널이 바로 그것입니다.</p>
+
+<h3 id="flash-백엔드">Flash 백엔드</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run 04_c_sdpa_attention.py <span class="nt">--backend</span> flash
+uvx trace-util <span class="nt">-f</span> traces <span class="nt">-b</span> &lt;hf_uname&gt;/traces
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/flash-backend.png" alt="Profiler trace of the SDPA flash backend" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 15: flash 백엔드 트레이스, forward당 하나의 융합 <code class="language-plaintext highlighter-rouge">pytorch_flash</code> 커널</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">void pytorch_flash</code> 커널(Figure 15)은 <a href="https://arxiv.org/abs/2307.08691">FlashAttention-2</a>(Tri Dao의 구현)이며 PyTorch에 벤더링되어 있습니다.</p>
+
+<p>이제 트레이스를 더 읽기 전에, 지금까지 당신이 물어야 할 질문에 답하는 것이 가치 있습니다: <em>왜 “flash”라는 백엔드가 존재하고, 그것이 왜 이렇게 중요한가?</em></p>
+
+<h4 id="왜-flash-어텐션이-존재하는가">왜 flash 어텐션이 존재하는가?</h4>
+
+<p>잠시 수학 백엔드으로 돌아가 봅시다. 실제 문제는 20개의 커널 수가 아니라, 그 커널들이 서로에게 넘겨주는 데이터였습니다.</p>
+
+<p>1단계는 전체 스코어 행렬 <code class="language-plaintext highlighter-rouge">attn = q . k.T</code>을 빌드하는데, 이는 head당 <code class="language-plaintext highlighter-rouge">[seq, seq]</code>입니다. 시퀀스 길이가 4096인 경우 단일 head에 대해 <code class="language-plaintext highlighter-rouge">4096 x 4096 ≈ 16 million</code>개의 숫자입니다. 그 행렬은 HBM(그래픽 카드의 주 메모리)로 기록되며 공간이 충분하면 기록합니다. 그런 다음 다시 읽어 시그널링을 위해 스케일하고, 마스크를 위해 다시 쓰고, 다시 소프트맥스를 위해 읽는 식으로 계속됩니다. 어텐션의 비용은 이 HBM으로의 왕복 트래픽에 의해 좌우되며, 매트멀 그 자체보다는 이 트래픽에서 더 많은 부분을 차지합니다.</p>
+
+<p>FlashAttention은 정확히 이것을 겨냥합니다. 전체 <code class="language-plaintext highlighter-rouge">s</code> 행렬을 먼저 계산한 뒤 감소시키는 대신, <strong>타일 단위로</strong> <code class="language-plaintext highlighter-rouge">k</code>와 <code class="language-plaintext highlighter-rouge">v</code>를 따라가며 진행하고, 진행 방향에서 소프트맥스를 유지하는(“온라인 소프트맥스” 트릭) 방식으로 출력도 타일 하나씩 누적합니다. 전체 <code class="language-plaintext highlighter-rouge">[seq, seq]</code> 스코어 행렬은 <strong>HBM에 한 번도 기록되지 않고</strong>, 칩 안에만 존재합니다. 이것이 전체 어텐션 파이프라인을 bf16으로 유지되는 하나의 융합 커널로 단번에 축소시키는 유일한 아이디어입니다.</p>
+
+<h4 id="왜-프로파일러에서-플래시가-잘못-보이는가">왜 프로파일러에서 플래시가 “잘못 보이는”가?</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/flash-occupancy.png" alt="Perfetto footprint of the flash kernel reporting an estimated achieved occupancy of 13%" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 16: 플래시 커널의 점유율 추정치가 13%로 보이는 모습</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>여기서 플래시가 프로파일러의 발자국을 읽는 사람들을 놀라게 합니다. 플래시는 가장 빠른 백엔드인데도 프로파일러가 매우 낮은 점유율로 보고합니다(그림 16에 표시). 왜 그것이 괜찮은지 보려면 세 가지 빠른 정의가 필요합니다.</p>
+
+<p>GPU 커널은 본질적으로 다수의 작은 실행 유닛(스레드)에 의해 실행되는 일련의 명령입니다. 이 개별 실행 유닛들은 변수 로딩, 더하기, 저장 등을 처리합니다. 각 커널마다 많은 스레드를 실행하고, 이를 추적하기 위해 블록으로 묶는다.</p>
+
+<p>블록은 스트리밍 멀티프로세서(SM)에 스케줄됩니다. 두고 온 블록은 한 SM에 완전히 남아 있으며, SM이 충분한 자원을 갖고 있으면 여러 블록을 한 번에 수용할 수 있습니다. 이러한 자원에는 레지스터, 공유 메모리, 최대 상주 스레드 수, 최대 상주 워프 수가 포함됩니다. 따라서 커널이 낮은 점유율(occupancy)을 가진다고 할 때, 이는 각 SM이 이론상 지원할 수 있는 것보다 더 적은 워프를 갖고 있음을 의미합니다.</p>
+
+<blockquote>
+  <p>[!TIP]
+스레드, 블록, 그리드 등에 대해 더 알고 싶다면 여기 <a href="https://huggingface.co/blog/mi300kernels#a-quick-introduction-to-the-mi300x">great resource</a>가 있습니다.</p>
+</blockquote>
+
+<p>트레이스에서 플래시 커널을 클릭하면 그 발자국이 이야기를 들려줍니다(그림 17).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/flash-reg-count.png" alt="Resource footprint of the pytorch_flash kernel in Perfetto, showing a high per-thread register count and large shared memory usage per block" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 17: 커널 발자국, 블록당 레지스터와 공유 메모리가 많은 편</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>플래시는 블록당 많은 스레드와 상당량의 공유 메모리를 필요로 합니다. 예를 들어 블록이 128개의 스레드이고 각 스레드가 255개의 레지스터를 사용하면 그 블록은 <code class="language-plaintext highlighter-rouge">128 × 255 = 32,640</code> 레지스터가 필요합니다. 65,536 레지스터를 가진 Ampere SM에서 그런 두 블록만 한 번에 맞물린다. 각 128-스레드 블록은 <code class="language-plaintext highlighter-rouge">128 / 32 = 4</code> 워프를 가지므로 두 블록은 상주 워프가 겨우 8개다. 최대 64 상주 워프에 비하면 대략 13%의 점유율입니다. 플래시는 최적화가 부족해서가 아니라, 각 블록이 온칩 자원을 의도적으로 매우 “무겁게” 사용하기 때문입니다.</p>
+
+<p>그리고 그것이 핵심입니다. 높은 점유율은 많은 워프를 실행 대기 중으로 유지해 지연을 숨기는 데 도움이 되지만, 작업 자체를 더 효율적으로 만들진 않습니다. 플래시는 어태션 타일을 온칩에 유지하고 데이터를 적극적으로 재사용하며, 전역 메모리에 전체 어텐션 매트릭스를 한 번에 구체화시키지 않기 위해 의도적으로 그 레지스터와 공유 메모리를 사용합니다.</p>
+
+<h3 id="cudnn-백엔드">cuDNN 백엔드</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run 04_c_sdpa_attention.py <span class="nt">--backend</span> cudnn
+uvx trace-util <span class="nt">-f</span> traces <span class="nt">-b</span> &lt;hf_uname&gt;/traces
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/cudnn-backend.png" alt="Profiler trace of the SDPA cuDNN backend showing a single cudnn_generated attention kernel per forward" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">그림 18: cuDNN 백엔드 트레이스, 순전파당 하나의 생성된 어텐션 커널</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>이 시점의 패턴은 익숙합니다. 플래시와 효율처럼 cuDNN은 순전파당 하나의 융합된, 플래시 스타일의 커널을 제공합니다(그림 18). 그래서 자연스러운 질문은: <strong>플래시가 이미 어텐션을 융합하는데, 왜 파이토치는 또 다른 플래시 백엔드를 제공하는가?</strong> 그 답은 _커널을 누가 쓰고 어떻게 빌드했는가_의 차이에 있으며, 그 차이가 트레이스를 다르게 보이게 만듭니다.</p>
+
+<h4 id="cudnn-커널은-어떻게-다른가">cuDNN 커널은 어떻게 다른가</h4>
+
+<p>Flash와 Efficient는 PyTorch에 벤더링된 <strong>고정된, 미리 컴파일된 커널</strong>입니다. 매번 같은 바이너리를 받는다. cuDNN은 NVIDIA의 자체 딥러닝 라이브러리이며, 그 주의 커널은 <strong>주어진 문제에 맞춰 생성되고 튜닝됩니다</strong>. 이는 고정된 cuBLAS 바이너리보다 더 코드 제너레이션에 가깝다. 그 매우 긴 커널 이름에서 그것을 바로 확인할 수 있습니다:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cudnn_generated_fort_native_sdpa_sm80_flash_fprop_wmma_f16_knob_6_128x64x64_4x1x1_cga1x1x1_kernel0_0
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">cudnn_generated</code>: 미리 배송되는 바이너리가 아니며 cuDNN에 의해 생성되었습니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">flash_fprop</code>: 플래시 어텐션 스타일의 순전파다. 따라서 알고리즘은 플래시 백엔드의 계열과 같습니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">wmma_f16</code>: 16비트 부동 소수 파이프라인에서 WMMA API를 사용하고, 텐서 코어 경로를 따릅니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">knob_6</code>: cuDNN은 미리 조정된 구성(“knobs”) 세트에서 선택합니다. 다양한 형태가 서로 다른 knob을 선택하게 합니다. 이는 cuBLAS가 타일 변형을 선택하는 방식과 유사합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">128x64x64</code>: 그가 선택한 타일 차원.</li>
+</ul>
+
+<p>그 하나의 사실, 문제당 생성된 것, 이 트레이스에서 보이는 다른 이상한 점들을 설명합니다.</p>
+
+<ol>
+  <li>
+    <p>No transposes: CPU 레인은 <code class="language-plaintext highlighter-rouge">_cudnn_attention_forward</code>에서 바로 곧바로 몇 개의 <code class="language-plaintext highlighter-rouge">aten::empty</code> 할당으로 이어진 다음 커널로 가며, <code class="language-plaintext highlighter-rouge">aten::transpose</code>는 전혀 없다(Figures 19, 20 및 21). Flash와 Efficient는 텐서를 재구성하기 위해 메타데이터 전치를 네 번 삽입하는 반면, cuDNN은 생성기가 그 레이아웃에 맞는 커널을 생성하기 때문에 네이티브 <code class="language-plaintext highlighter-rouge">[B, H, S, D]</code> 레이아웃을 직접 사용합니다.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: center">Variant</th>
+          <th style="text-align: center">Trace</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center">Figure 19: Flash</td>
+          <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/flash-transpose.png" alt="CPU lane of the flash backend showing four aten::transpose ops before the fused attention kernel" /></td>
+        </tr>
+        <tr>
+          <td style="text-align: center">Figure 20: Efficient</td>
+          <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/efficient-trasnpose.png" alt="CPU lane of the efficient backend showing four aten::transpose ops before the fused attention kernel" /></td>
+        </tr>
+        <tr>
+          <td style="text-align: center">Figure 21: cuDNN</td>
+          <td style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/cudnn-backend.png" alt="CPU lane of the cuDNN backend going straight to aten::empty allocations and the kernel, with no transpose ops" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>It launches through <code class="language-plaintext highlighter-rouge">cuLaunchKernelEx</code>, not <code class="language-plaintext highlighter-rouge">cudaLaunchKernel</code>: Every other kernel in this whole series went through the runtime API <code class="language-plaintext highlighter-rouge">cudaLaunchKernel</code>. cuDNN uses the driver-level <em>extended</em> launch, which carries launch attributes (Figure 22).</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/cudnn-launch.png" alt="CPU lane of the cuDNN backend showing the cuLaunchKernelEx driver-level launch instead of cudaLaunchKernel" /></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center">Figure 22: CPU lane of the cuDNN backend showing the cuLaunchKernelEx driver-level launch instead of cudaLaunchKernel</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>The profiler reports 0% achieved occupancy: Do not take that at face value, it is a measurement gap, not a stalled GPU. CUPTI (the profiling backend) cannot attribute occupancy to a driver-API (<code class="language-plaintext highlighter-rouge">cuLaunchKernelEx</code>) launch the way it does for <code class="language-plaintext highlighter-rouge">cudaLaunchKernel</code>, so the field reads 0. The footprint fills in the truth (Figure 23): <code class="language-plaintext highlighter-rouge">240 registers × 256 threads = 61,440</code> registers per block against the SM’s 65,536, so only <strong>one block</strong> fits per SM (8 warps ≈ 12.5%), right in line with flash.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: center"><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/torch-attention-profile/cudnn-footprint.png" alt="Perfetto footprint of the cuDNN kernel reporting 0% achieved occupancy, with 240 registers per thread and 256 threads per block" /></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center">Figure 23: cuDNN 커널이 0% 달성 점유율을 보고하고, 스레드당 240 레지스터, 블록당 256 스레드</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ol>
+
+<h4 id="비용이-cpu로-이동했습니다">비용이 CPU로 이동했습니다</h4>
+
+<p>“전치 없음(no transposes)” 이야기는 CPU에서 cuDNN이 가장 ‘가볍다’는 백엔드일 것이라고 기대하게 만듭니다. 그러나 실제로는 정반대입니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">backend</th>
+      <th style="text-align: center">CUDA 평균 시간</th>
+      <th style="text-align: center">CPU 평균 시간</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">efficient</td>
+      <td style="text-align: center">277.9 µs</td>
+      <td style="text-align: center">117 µs</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">flash</td>
+      <td style="text-align: center">146.8 µs</td>
+      <td style="text-align: center">138 µs</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">cudnn</td>
+      <td style="text-align: center">186.3 µs</td>
+      <td style="text-align: center"><strong>214 µs</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>심지어 전치 연산이 하나도 없더라도 cuDNN은 CPU에서 순전파당 약 <strong>214 µs</strong>를 소비합니다. 이는 플래시(138)나 효율(117)보다 많습니다. 거의 전부가 <code class="language-plaintext highlighter-rouge">aten::scaled_dot_product_attention</code> 자체 시간(전체 실행의 26%)과 <code class="language-plaintext highlighter-rouge">_cudnn_attention_forward</code>에 있습니다. 이것은 cuDNN의 런타임 엔진이 매 호출마다 계획을 선택하고 준비하는(“knob” 탐색) 과정입니다.</p>
+
+<p>더 적은 ATen 연산이 보이는 것이 CPU 작업이 적다는 뜻이 아닙니다. 그 작업은 라이브러리로 이동했고, 프로파일러는 이를 하나의 크고 불투명한 막대 하나로만 보여줄 뿐입니다. 트레이스가 갑자기 더 깨끗해지면, 작업이 사라진 것이 아니라 프로파일러가 분해할 수 없는 곳으로 이동한 것일 수 있습니다.</p>
+
+<p>GPU에서 cuDNN(186.3 µs)은 효율성과 플래시 사이에 위치합니다. 이 아주 플래시 친화적인 형태에서 수작업 FlashAttention-2가 그 위를 약간 앞선다. cuDNN은 더 큰 head 차원이나 다른 시퀀스 길이의 <em>다른</em> 형태에서 자주 이긴다. 다만 그 재조정은 당신이 CPU에서 지불한 비용이기도 합니다.</p>
+
+<h2 id="section-4">Everything we covered, at a glance</h2>
+
+<p>마무리하기 전에, 우리가 프로파일링한 모든 어텐션 변형과 각 트레이스가 가르쳐 준 하나의 교훈을 정리한 하나의 표가 있습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Variant</th>
+      <th style="text-align: left">What we changed</th>
+      <th style="text-align: center">Kernels / forward</th>
+      <th style="text-align: left">What the trace revealed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Naive attention</td>
+      <td style="text-align: left">원시 연산으로 직접 구성된 어텐션(matmul, mul, mask, softmax, matmul)</td>
+      <td style="text-align: center">6</td>
+      <td style="text-align: left">외부의 <code class="language-plaintext highlighter-rouge">masked_fill</code>에서 온 숨겨진 <code class="language-plaintext highlighter-rouge">Memcpy</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Naive in-place</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">masked_fill</code> → <code class="language-plaintext highlighter-rouge">masked_fill_</code></td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: left">한 줄로 <code class="language-plaintext highlighter-rouge">Memcpy</code> 커널을 완전히 제거합니다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SDPA math</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">F.scaled_dot_product_attention</code> 수학 백엔드에 고정</td>
+      <td style="text-align: center">20</td>
+      <td style="text-align: left">참조 구현: CUDA 코어의 FP32, 매 호출마다 마스크 재구성, <code class="language-plaintext highlighter-rouge">_safe_softmax</code>. 정확하지만 약 3.7배 느림.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SDPA efficient</td>
+      <td style="text-align: left">Efficient(xformers) 백엔드</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">하나의 융합 <code class="language-plaintext highlighter-rouge">fmha_cutlassF</code> 커널, 텐서 코어에서 bf16 유지.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SDPA flash</td>
+      <td style="text-align: left">Flash 백엔드</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">하나의 융합 <code class="language-plaintext highlighter-rouge">pytorch_flash</code> 커널(FlashAttention-2). 가장 빠르지만 13% 점유율은 “잘못 보이는” 경우.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SDPA cuDNN</td>
+      <td style="text-align: left">cuDNN 백엔드</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">문제별로 생성된 커널: 전치 없음, <code class="language-plaintext highlighter-rouge">cuLaunchKernelEx</code>지만 비용이 무거운 CPU 바로 이동.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-5">Concluding the series</h2>
+
+<p>이 시리즈에서 한 가지만 takeaway를 뽑자면, 모든 트레이스 전에 반복했던 습관인 <strong>먼저 추측하고, 그다음 보자</strong>가 되길 바란다.</p>
+
+<p>트레이스에 무엇이 들어 있을지 소리 내어 예측하고, 트레이스를 열어 보며, 일치하지 않는 부분을 화면에서 가장 흥미로운 것으로 여기자. 이 세 편의 포스트에서 얻은 모든 실제 통찰은 숨겨진 <code class="language-plaintext highlighter-rouge">Memcpy</code>, <code class="language-plaintext highlighter-rouge">addmm</code> 에필로그, 20 커널 수학 백엔드, 플래시의 “잘못 보이는” 점유율, cuDNN의 두툼한 CPU 바에서 비롯된 것이며, 이는 트레이스와 일치하지 않는 추측에서 비롯됩니다.</p>
+
+<p>프로파일링은 GPU 전문가를 위한 별도의, 위협적인 기술이 아닙니다. 그것은 단지 아주 면밀히 보고 “저게 왜 그런가?”를 묻고 대답이 떠오를 때까지 파고드는 훈련일 뿐입니다. 이제 당신은 자신이 다루는 모델에서 이를 스스로 할 수 있는 어휘와 반사적 반응을 갖추었다. 트레이스를 열고, 추측을 세우고, 불일치를 찾아보세요.</p>
+
+<p><strong>Profiling in PyTorch</strong> 시리즈를 읽어 주셔서 감사합니다. 이제 뭔가를 프로파일링해 봅시다. 🤗</p>
+
+<p>초기 초안에 대한 리뷰를 남겨 주신 <a href="https://huggingface.co/NoeFlandre">Noe Flandre</a>께 감사드립니다!</p>
+
+<blockquote>
+  <p>[!NOTE]
+이 블로그 포스트는 LLM을 이용해 다듬었습니다. 이것이 배경에서 에이전트가 포스트를 생성하도록 합니다는 뜻은 결코 아닙니다. 팀의 일부는 영어를 모국어로 하지 않으며, LLM(대부분 영어로 학습된 모델)이 어리석은 문법 실수를 바로잡거나 더 덜 위협적으로 들리고 깔끔하게 들리는 문장을 재구성할 수 있습니다고 생각합니다. 이 점이 “왜 읽어야 하나, 이것이 LLM으로 생성되었기 때문인가”라는 아이디어에 도움이 되길 바랍니다. 🤗</p>
+</blockquote>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" /><media:content medium="image" url="/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">네이티브-스피드 vLLM transformers 모델링 백엔드</title><link href="/native-speed-vllm-transformers-backend/" rel="alternate" type="text/html" title="네이티브-스피드 vLLM transformers 모델링 백엔드" /><published>2026-07-08T00:00:00+09:00</published><updated>2026-07-08T00:00:00+09:00</updated><id>/native-speed-vllm-transformers-backend</id><content type="html" xml:base="/native-speed-vllm-transformers-backend/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#네이티브-스피드-vllm-transformers-모델링-백엔드" id="markdown-toc-네이티브-스피드-vllm-transformers-모델링-백엔드">네이티브-스피드 vLLM transformers 모델링 백엔드</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">쇼케이스</a>        <ul>
           <li><a href="#어떻게-측정했나" id="markdown-toc-어떻게-측정했나">어떻게 측정했나</a></li>
@@ -1745,219 +2487,4 @@ skill    a packaged Skill: the CLI's docs + task examples, loaded in context
 
 <p>이 해처스는 전적으로 <a href="https://www.npmjs.com/package/@mariozechner/pi-coding-agent">pi</a>에 의존합니다. 마리오 제크너의 코딩-에이전트 CLI: 이는 모든 오픈 모델 실행을 구동하며, 모델을 서비스하려면 오직 <code class="language-plaintext highlighter-rouge">HF_TOKEN</code>가 필요할 뿐입니다. 이것이 바로 오픈 모델 스윕을 실제로 가능하게 만든 요인입니다.</p>
 
-<p>우리가 훑어본 모델 뒤에 있는 모델 제작자들과 추론 제공자들에게 감사드립니다. 전반적으로 그들은 <code class="language-plaintext highlighter-rouge">bare</code> 기준선이 제시하는 것보다 훨씬 뛰어난 성능을 보였습니다.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own tooling를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" /><media:content medium="image" url="/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</title><link href="/peft-beyond-lora/" rel="alternate" type="text/html" title="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" /><published>2026-06-18T00:00:00+09:00</published><updated>2026-06-18T00:00:00+09:00</updated><id>/peft-beyond-lora</id><content type="html" xml:base="/peft-beyond-lora/"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#beyond-lora-가장-인기-있는-미세조정-기법을-이길-수-있을까" id="markdown-toc-beyond-lora-가장-인기-있는-미세조정-기법을-이길-수-있을까">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></li>
-  <li><a href="#파라미터-효율적으로-모델을-미세조정하려고-계획할-때는-lora를-넘어서-생각해-보세요" id="markdown-toc-파라미터-효율적으로-모델을-미세조정하려고-계획할-때는-lora를-넘어서-생각해-보세요">파라미터 효율적으로 모델을 미세조정하려고 계획할 때는 LoRA를 넘어서 생각해 보세요</a></li>
-  <li><a href="#what-is-peft-and-when-do-you-need-it" id="markdown-toc-what-is-peft-and-when-do-you-need-it">What is PEFT and when do you need it</a></li>
-  <li><a href="#lora-미세조정-기술의-여왕-" id="markdown-toc-lora-미세조정-기술의-여왕-">LoRA: 미세조정 기술의 여왕 👑</a></li>
-  <li><a href="#논문-결과를-바탕으로-올바른-peft-기법을-선택하는-것은-문제점이-있다" id="markdown-toc-논문-결과를-바탕으로-올바른-peft-기법을-선택하는-것은-문제점이-있다">논문 결과를 바탕으로 올바른 PEFT 기법을 선택하는 것은 문제점이 있다</a></li>
-  <li><a href="#peft에서-벤치마킹에-어떻게-접근합니다" id="markdown-toc-peft에서-벤치마킹에-어떻게-접근합니다">PEFT에서 벤치마킹에 어떻게 접근합니다</a></li>
-  <li><a href="#our-findings-lora-works-well-but-is-not-necessarily-the-best-choice" id="markdown-toc-our-findings-lora-works-well-but-is-not-necessarily-the-best-choice">Our findings: LoRA works well but is not necessarily the best choice</a></li>
-  <li><a href="#제한점" id="markdown-toc-제한점">제한점</a></li>
-  <li><a href="#conclusion-and-what-you-can-do" id="markdown-toc-conclusion-and-what-you-can-do">Conclusion and what <em>you</em> can do</a></li>
-</ul>
-<!--toc-->
-<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/peft-beyond-lora">Beyond LoRA: Can you beat the most popular fine-tuning technique?</a>를 한국어로 번역한 글입니다.</em></p>
-
-<!-- Source: https://huggingface.co/blog/peft-beyond-lora -->
-
-<hr />
-
-<!--
-Review instructions:
-- Verify the Korean translation against the source post.
-- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
--->
-
-<h1 id="beyond-lora-가장-인기-있는-미세조정-기법을-이길-수-있을까">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</h1>
-
-<p align="center">
-    <img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/lora-celebration.png" alt="Is LoRA the best PEFT technique?" width="600" />
-</p>
-
-<h1 id="파라미터-효율적으로-모델을-미세조정하려고-계획할-때는-lora를-넘어서-생각해-보세요">파라미터 효율적으로 모델을 미세조정하려고 계획할 때는 LoRA를 넘어서 생각해 보세요</h1>
-
-<p>오픈 모델을 자신의 데이터로 미세조정하고자 한다면, 아마도 소위 매개변수 효율적 미세조정, 간단히 <em>PEFT</em>에 관심이 있을 것입니다. 이 용어는 모델을 미세조정하는 데 필요한 메모리 요구량을 크게 줄여주는 기술들을 설명합니다. 이러한 기법은 수십 가지가 있지만, 거의 모두 “LoRA”라는 것을 선택합니다. 이 블로그 글에서 LoRA가 정말 최선의 선택인지, 정보에 기반한 의사결정을 내리기 위해 어떤 도구들이 있는지, 그리고 LoRA를 넘어 시야를 넓힘으로써 어떻게 이익을 얻을 수 있는지 살펴봅니다.</p>
-
-<h1 id="what-is-peft-and-when-do-you-need-it">What is PEFT and when do you need it</h1>
-
-<p>수많은 오픈 모델이 있지만, 그것들이 자주 당신의 사용 사례에 충분하지는 않습니다. 프롬프트 엔지니어링이 도움이 될 수는 있지만 보통은 충분하지 않습니다. 처음부터 새 모델을 학습시키기보다는 기존 모델을 미세조정하는 것을 고려해야 합니다.</p>
-
-<p>하지만 미세조정은 메모리를 많이 요구합니다: 일반적으로 전체 모델을 여러 번 적합시키려면 충분한 메모리가 필요합니다. 양자화는 모델의 메모리 footprint를 줄여주지만 양자화된 모델은 직접 미세조정할 수 없습니다. 그래서 미세조정에 필요한 메모리를 줄이기 위해 여러 기법이 등장했고 이를 “매개변수 효율적 미세조정”(PEFT)이라고 부릅니다.</p>
-
-<p>PEFT를 사용하면 메모리의 일부만으로도 모델을 미세조정하고 심지어 양자화된 모델도 미세조정할 수 있습니다. 또한 아주 작은 체크포인트 크기, 재앙적 망각에 대한 더 큰 저항성, 같은 기본 모델에서 여러 개의 미세조정을 제공할 수 있는 등의 이점이 있습니다.</p>
-
-<p>허깅페이스에서 우리는 <a href="https://github.com/huggingface/peft"><code class="language-plaintext highlighter-rouge">PEFT</code> library</a>를 개발합니다. 이 라이브러리는 하나의 통합 API 아래에서 많은 PEFT 기법을 구현하고 생태계와 잘 통합되며, 예로 <a href="https://huggingface.co/docs/transformers/main/en/peft"><code class="language-plaintext highlighter-rouge">Transformers</code></a>와 <a href="https://huggingface.co/docs/diffusers/main/en/api/loaders/peft"><code class="language-plaintext highlighter-rouge">Diffusers</code></a>가 있습니다. 또한 <a href="https://huggingface.co/docs/peft/developer_guides/quantization">multiple quantization methods</a>도 지원하여 매개변수 효율적 미세조정에 대한 접근성을 높입니다. <code class="language-plaintext highlighter-rouge">PEFT</code>는 자체 데이터로 미세조정하든 새로운 PEFT 방법을 연구하든 좋은 시작점을 제공합니다.</p>
-
-<h1 id="lora-미세조정-기술의-여왕-">LoRA: 미세조정 기술의 여왕 👑</h1>
-
-<p>초기에 등장해 꽤 효과적임이 입증된 하나의 매개변수 효율적 미세조정 기법은 “Low Rank Adaptation”, 줄여서 <a href="https://huggingface.co/papers/2106.09685">“LoRA”</a>라고 불립니다. 이는 기본 모델의 가중치를 고정하고 상위에 몇 개의 매개변수를 추가한 뒤, 그 소수의 매개변수들만 학습시키는 방식으로 작동합니다.</p>
-
-<p>모든 PEFT 기법 중 LoRA가 단연 가장 대중적입니다. 아래는 몇 가지 추정치입니다:</p>
-
-<ul>
-  <li>정확히 하나의 PEFT 기법을 언급한 20,834 <a href="https://huggingface.co/datasets/librarian-bots/model_cards_with_metadata">model cards on Hugging Face Hub</a> 표본 중 20,509가 LoRA를 언급했습니다(98.4%).</li>
-  <li>외부 사이트에서도 이미지 생성에 인기 있는 PEFT 기법들을 확인했습니다. 10,000개의 체크포인트 샘플을 사용한 결과, 그 중 7,111이 LoRA였습니다. 나머지로 확인된 PEFT 기법은 LoCon(363)와 DoRA(11)로, 이는 LoRA의 변형으로 간주됩니다. 이는 PEFT 체크포인트의 95.0%가 LoRA임을 뜻합니다.</li>
-  <li>GitHub에서 코드 스니펫 <code class="language-plaintext highlighter-rouge">from peft import &lt;PEFT CONFIG&gt;</code>를 검색한 결과(<a href="https://github.com/search?q=%22from+peft+import+LoraConfig%22&amp;type=code">example GH query</a>), 결과의 71.3%가 LoRA에 해당합니다. 그다음으로 상위권은 LoHa(3.7%)와 AdaLoRA(3.5%)입니다.</li>
-</ul>
-
-<p>이 추정치들이 완벽하지는 않지만, LoRA가 단연 가장 일반적으로 사용되는 PEFT 기법이라는 결론은 여전히 타당합니다.</p>
-
-<p>이것은 단지 LoRA가 모두에게 가장 잘 작동한다는 것을 의미할 수 있으며, 이 사실이 사용 통계에 반영됩니다. 그러나 또 다른 가능성도 있습니다: LoRA는 초기의 인기 있는 PEFT 기법 중 하나였으므로 그 사용이 자기 강화적으로 확산되었을 수 있습니다. 즉, LoRA가 가장 높은 가시성, 가장 많은 튜토리얼/예제 수, 그리고 다운스트림 패키지에서 가장 잘 지원되는 결과로 인해 LoRA의 인기가 스스로를 강화했다는 이야기입니다.</p>
-
-<p>이 모든 것은 다음과 같은 질문으로 이어집니다: <em>더 나은 기법을 배제함으로써 성능을 놓치고 있는 걸까요?</em> 결국 LoRA를 이겼다고 주장하는 논문들이 무수히 있습니다. 그것이 LoRA를 넘어 새로운 기술로 가야 한다는 충분한 증거가 아닐까요?</p>
-
-<h1 id="논문-결과를-바탕으로-올바른-peft-기법을-선택하는-것은-문제점이-있다">논문 결과를 바탕으로 올바른 PEFT 기법을 선택하는 것은 문제점이 있다</h1>
-
-<p>LoRA 외의 미세조정 기법을 연구하는 논문이 수십 편 있습니다. <code class="language-plaintext highlighter-rouge">PEFT</code> 라이브러리 안에서도 아직 작성 시점에 40개가 넘는 서로 다른 PEFT 기법이 존재합니다(PEFT 기법의 변형을 포함하면 더 많습니다). 거의 모든 기법에 대해, 연구자들이 그들의 벤치마크에 따라 자신의 기법이 LoRA를 능가한다고 주장하는 것을 볼 수 있습니다.</p>
-
-<p>이러한 주장들의 문제점은 연구자들이 기존 벤치마크를 능가하는 결과를 제시하도록 압박을 받고 있다는 점입니다. 의도하지 않더라도, 이는 결과에 편향을 불러일으킬 수 있습니다. 예를 들어 연구자들이 제안한 기법보다 대안 기법의 튜닝에 적은 시간을 할애함으로써 말이죠. 한 연구는 예를 들어 LoRA가 학습률을 조정함으로써 소위 더 나은 PEFT 기법들과 맞먹을 수 있다고 밝혔습니다( <a href="https://arxiv.org/abs/2602.04998">https://arxiv.org/abs/2602.04998</a> ).</p>
-
-<p>또 다른 문제는 각 논문이 비교하는 PEFT 기법의 집합과 실행하는 벤치마크의 집합이 서로 다르다는 점입니다. 같은 기법이 같은 벤치마크에서 비교되더라도 코드가 공개되지 않았거나 실행하기 어려운 경우가 많아 결과 재현이 어렵습니다.</p>
-
-<p>전반적으로, 논문 결과만으로 어떤 PEFT 기법이 당신에게 가장 잘 맞는지 판단하기는 어렵습니다. 따라서 기본값인 LoRA를 그냥 선택하고 싶은 유혹에 빠질 수 있습니다.</p>
-
-<h1 id="peft에서-벤치마킹에-어떻게-접근합니다">PEFT에서 벤치마킹에 어떻게 접근합니다</h1>
-
-<p>허깅페이스에서 사용자가 어떤 PEFT 기법을 사용할지에 대해 정보에 입각한 결정을 내릴 수 있도록 어떻게 도울 수 있을지 고민했습니다. <code class="language-plaintext highlighter-rouge">PEFT</code> 라이브러리를 통해 이미 많은 PEFT 기법을 구현하고 동일한 API로 노출하는 패키지를 제공하고 있습니다. 다음 단계는 논의된 이슈에 대해 더 많은 정보를 제공하는 벤치마크를 제공하는 것입니다.</p>
-
-<p>이미 <a href="https://github.com/huggingface/peft/tree/main/method_comparison/MetaMathQA">checks fine-tuning of LLMs on a math dataset</a>를 한동안 보유하고 있었습니다. 이 벤치마크는 LLM을 가져와 사고 체인 추론(chain-of-thought reasoning)으로 미세조정하여 수학 문제에 대한 결과를 생성하도록 하며, 지시문으로 미세조정되지 않은 기본 모델을 사용합니다. 벤치마크는 따라서 모델이 수학적 추론을 학습하고 생성된 출력을 기대 형식에 맞추어 조정할 수 있는지 여부를 검사합니다.</p>
-
-<p>다른 모달리티에 대한 우리의 발견을 확장하기 위해 또 하나의 <a href="https://github.com/huggingface/peft/tree/main/method_comparison/image-gen">image generation benchmark</a>를 추가했습니다. 이 벤치마크는 모델이 새로운 개념인 <a href="https://huggingface.co/datasets/peft-internal-testing/cat-image-dataset">cat plushy</a>을 학습하도록 미세조정할 수 있는지, 그리고 기존 개념을 잊지 않고 새로운 맥락에서 이를 생성할 수 있는지 테스트합니다.</p>
-
-<table align="center">
-  <tr>
-    <td><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/metamath-question.png" style="width: 400px; border: 1px solid #ccc; padding: 4px;" /></td>
-    <td><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/cat-plushy-train-image.jpg" style="width: 400px; border: 1px solid #ccc; padding: 4px;" /></td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center"><em>Left: Sample question and answer from the MetaMathQA dataset. Right: Sample image from the cat plushy dataset.</em></td>
-  </tr>
-</table>
-
-<p>모든 PEFT 기법은 정확히 같은 조건으로 평가됩니다: 동일한 기본 모델, 동일한 데이터세트, 동일한 학습 및 평가 코드, 동일한 하드웨어. 서로 다른 사용자의 요구가 다르기 때문에, 우리는 테스트 성능뿐만 아니라 더 많은 지표를 추적합니다. VRAM 사용량 외에도 망각/드리프트, 런타임, 체크포인트 크기와 같은 지표를 추적합니다. 결과는 일반 소비자용 하드웨어에서 실행되도록 설계되었으며, 새로운 실험을 추가하려면 새로운 <code class="language-plaintext highlighter-rouge">PEFT</code> 구성을 추가하고 스크립트를 실행하면 됩니다.</p>
-
-<p>모든 PEFT 기법을 동등한 조건에서 비교하고 특정 기법을 편들지 않기 때문에, 이 벤치마크가 서로 다른 PEFT 기법들이 얼마나 잘 작동하는지에 대한 객관적인 그림을 제시한다고 믿습니다. 귀하의 데이터세트가 있다면 비슷한 접근법을 취하고 <code class="language-plaintext highlighter-rouge">PEFT</code> 라이브러리를 활용해 여러 PEFT 기법을 평가해 보시길 권합니다.</p>
-
-<h1 id="our-findings-lora-works-well-but-is-not-necessarily-the-best-choice">Our findings: LoRA works well but is not necessarily the best choice</h1>
-
-<p>벤치마크를 마친 뒤, LoRA가 잘 작동하더라도 다른 PEFT 기법들이 한 가지 혹은 여러 축에서 이를 능가할 수 있으며 따라서 고려되어야 한다는 것을 발견했습니다. 아래 이미지는 LoRA와 다섯 가지 다른 PEFT 기법의 성능을 비교합니다.</p>
-
-<table align="center">
-  <tr>
-    <td align="center"><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/benchmark-highlights.png" width="900" /></td>
-  </tr>
-  <tr>
-    <td align="center"><em>Some results from the benchmark. When it comes to test performance and memory usage, LoRA is not necessarily the best choice. Left: MetaMathQA benchmark; right: image generation benchmark. Consult this <a href="https://huggingface.co/spaces/peft-internal-testing/PEFT-method-comparison">Space</a> for the most up-to-date results.</em></td>
-  </tr>
-</table>
-
-<p>위의 결과를 해석하는 한 가지 방법은 트레이드오프 관점에서 생각하는 것입니다. 예를 들어: 모델이 테스트 데이터에서 얼마나 잘 작동하는지와 이를 학습하는 데 필요한 메모리가 얼마나 되는지 사이의 trade-off는 어떤가요? 어떤 PEFT 기법도 이 두 지표를 동시에 다른 어떤 기법보다 더 잘 이길 수 없다면, 그것은 <em>파레토 프런티어</em>에 속합니다. 다시 말해: 더 나은 테스트 정확도를 원한다면 더 많은 메모리가 필요하고, 메모리 효율성을 더 원한다면 정확도를 포기해야 한다는 뜻입니다.</p>
-
-<p>LLM 수학 데이터셋 벤치마크의 결과를 좀 더 자세히 살펴보겠습니다. 테스트 정확도와 메모리 측면에서 보자면 LoRA는 실제로 파레토 프런티어에 속합니다. 최고점에서 53.2%의 테스트 정확도와 22.6 GB의 VRAM이 필요합니다. 그러나 파레토 프런티어에 속하는 다른 PEFT 기법도 있습니다. 예를 들어, <a href="https://huggingface.co/docs/peft/main/en/package_reference/beft">BEFT</a>은 32.9%의 테스트 정확도를 달성하고 최대 메모리는 20.2 GB에 불과합니다. 반대편 끝에는 <a href="https://huggingface.co/docs/peft/main/en/package_reference/lily">Lily</a>이 있는데, 54.9%의 테스트 정확도를 달성하지만 25.6 GB의 메모리가 필요합니다. 무엇이 더 중요한지에 따라 LoRA가 최적의 트레이드오프를 제시하지 않는다고 결론지을 수도 있습니다.</p>
-
-<table align="center">
-  <tr>
-    <td align="center"><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/metamath-pareto.png" width="900" /></td>
-  </tr>
-  <tr>
-    <td align="center"><em>Test accuracy vs memory usage tradeoff of fine-tuning <code>meta-llama/Llama-3.2-3B</code> and evaluating it on GSM8K. LoRA does well but so do other PEFT techniques.</em></td>
-  </tr>
-</table>
-
-<p>또한 이 작업에서 LoRA가 잘 수행하더라도 이것은 일반 LoRA를 뜻하는 것은 아닙니다. 한쪽은 LoRA가 <a href="https://huggingface.co/papers/2312.03732">rank stabilized initialization</a>와 함께하는 경우로, 이는 LoRA 기여를 기본 초기화와 다르게 스케일링하는 기법으로 매우 높은 테스트 정확도(53.2%)를 제공합니다. 반대편에는 LoRA 가중치의 일부를 고정하고 더 메모리 효율적인 <a href="https://huggingface.co/papers/2308.03303">LoRA-FA</a>을 사용하는 경우가 있습니다(20.2 GB). 일반 LoRA는 22.5 GB 메모리에서 정확도 48.1%에 그쳐 대안들보다 피하는 것이 좋습니다.</p>
-
-<p>다음으로 이미지 생성 벤치마크를 살펴보겠습니다. <a href="https://huggingface.co/spaces/peft-internal-testing/PEFT-method-comparison">Hugging Face Space</a>에서 “Select Task” 드롭다운에서 “image-gen”을 선택하면 결과가 표시됩니다. 이 작업의 목표는 새 개념인 고양이 봉제인형을 학습하고 이를 새로운 프롬프트로 일반화하는 것입니다.</p>
-
-<table align="center">
-  <tr>
-    <td align="center"><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/cat-plushy-lora.png" width="400" /></td>
-  </tr>
-  <tr>
-    <td align="center"><em>Cat plushy image created with LoRA fine-tuned on <code>FLUX.2-klein-base-4B</code>.</em></td>
-  </tr>
-</table>
-
-<p>이 작업의 주요 지표는 ‘디노 유사도’(dino similarity)로, 생성된 이미지가 보류 테스트 데이터셋의 이미지와 얼마나 닮았는지를 측정하며, 값이 높을수록 좋습니다. 항상 그렇듯 메모리 사용량도 주시합니다. 이 두 지표의 파레토 프런티어를 시각화하면 LoRA가 그 프런티어 아래에 위치하는 것을 볼 수 있습니다. 구체적 수치를 보자면: LoRA의 유사도 점수는 0.697이고, <a href="https://huggingface.co/docs/peft/package_reference/oft">OFT</a>는 0.708를 달성합니다; 메모리 측면에서 LoRA는 9.97 GB가 필요하고 OFT는 9.01 GB가 필요합니다. 따라서 이 지표들에 대해 OFT가 LoRA를 엄격하게 능가합니다.</p>
-
-<table align="center">
-  <tr>
-    <td align="center"><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/image-gen-pareto.png" width="900" /></td>
-  </tr>
-  <tr>
-    <td align="center"><em>Test accuracy vs memory usage tradeoff of fine-tuning <code>FLUX.2-klein-base-4B</code> and evaluating it on the test set. Other PEFT techniques like OFT beat LoRA in terms of test score and lower memory usage.</em></td>
-  </tr>
-</table>
-
-<p>물론 파레토 프런티어에 근접한 다른 PEFT 방법들도 확인해야 합니다. 지표는 난수성으로 인해 작은 차이가 있을 수 있습니다. 또한 다른 지표를 탐색해 보아야 합니다: 런타임 성능이 중요한가, 체크포인트의 크기가 중요한가? 드롭다운에서 관련 지표를 선택하면 그림이 크게 달라질 수 있습니다. 이미지 생성 벤치마크의 경우, 미세조정된 모델의 능력을 가늠할 수 있도록 생성 샘플 이미지를 확인해 보십시오.</p>
-
-<h1 id="제한점">제한점</h1>
-
-<blockquote>
-  <p>반대 의견: 그러나 벤치마크가 한 방법을 다른 방법보다 우월하게 만듭니다!</p>
-</blockquote>
-
-<p><code class="language-plaintext highlighter-rouge">PEFT</code> 벤치마크에 대해 제기될 수 있는 한 가지 비판은 하이퍼파라미터의 선택이 한 기술을 다른 기술보다 유리하게 만들 수 있다는 점입니다. 이것은 사실이며, 이만큼 많은 기술에 대해 완전하고 공정한 하이퍼파라미터 스윕을 수행하는 것은 어렵습니다. 다만 모든 사람이 자신의 실험을 <code class="language-plaintext highlighter-rouge">PEFT</code>에 기여하는 것은 매우 쉽습니다: 특정 PEFT 기법이 서로 다른 하이퍼파라미터를 선택함으로써 개선될 수 있다고 믿는다면 PR을 만들어 주세요! <a href="https://github.com/huggingface/peft/tree/main/method_comparison#creating-new-experiments">instructions on how to do that</a>를 추가했습니다. 비슷한 맥락으로, 완전히 새로운 벤치마크를 기여하고 싶다면 아이디어를 논의하기 위해 저희에게 연락해 주세요.</p>
-
-<p>벤치마크의 또 다른 문제는 특정 PEFT 기법의 능력을 완전히 반영하지 못할 수 있다는 점입니다. 우리는 다양한 차원에서 기법들을 비교하고 이러한 트레이드오프에 따라 최상위를 발견할 수 있도록 했습니다. 그러나 이렇게 해서 모든 면모를 포착하는 것은 불가능합니다. 예를 들어, Cartridges (<a href="https://huggingface.co/docs/peft/package_reference/cartridges">https://huggingface.co/docs/peft/package_reference/cartridges</a>)라는 PEFT 기법은 긴 프롬프트를 압축하기 위해 개발되었지만 벤치마크에는 측정되지 않았습니다. 선택에 영향을 줄 수 있는 다른 요인들도 있습니다. 예를 들면:</p>
-
-<ul>
-  <li>PEFT 기법에 따라 수정할 수 있는 특정 레이어 유형만 있습니다.</li>
-  <li>모든 PEFT 기법이 양자화된 기본 모델을 지원하는 것은 아니지만(하지만 <code class="language-plaintext highlighter-rouge">PEFT</code>에서 지원을 활발히 확장하고 있습니다).</li>
-  <li>일부 PEFT 기법은 <a href="https://huggingface.co/docs/peft/main/en/developer_guides/model_merging">merging of the adapter</a>을 통해 런타임 오버헤드를 줄일 수 있지만, 다른 기법은 그렇지 않습니다.</li>
-</ul>
-
-<p>벤치마크가 연구를 완전히 대신해 주지는 못하지만, 합리적인 방향성을 제공합니다.</p>
-
-<table align="center">
-  <tr>
-    <td align="center"><a href="https://huggingface.co/spaces/peft-internal-testing/PEFT-shop"><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/peft-shop.png" width="100%" /></a></td>
-  </tr>
-  <tr>
-    <td align="center"><em>Click on the image to peruse the PEFT shop to find the best PEFT technique for you. It allows you to browse not only by benchmark metrics but also by capabilities, like quantization support.</em></td>
-  </tr>
-</table>
-
-<blockquote>
-  <p>반대 의견: llama.cpp/vLLM/…은 LoRA만 지원합니다</p>
-</blockquote>
-
-<p>LoRA가 아닌 다른 PEFT 기법은 LoRA가 보는 다운스트림 패키지에서의 광범위한 지원을 받지 못하는 한계가 있습니다. 예를 들어 vLLM으로 모델을 서비스하고 싶다면 LoRA 체크포인트만 로드 가능합니다. 다행히도 <code class="language-plaintext highlighter-rouge">PEFT</code>는 이제 <a href="https://huggingface.co/docs/peft/main/en/package_reference/lora_conversion">converting other adapters into LoRA</a>를 지원합니다. 따라서 비-LoRA 체크포인트를 LoRA로 변환하여 vLLM이나 다른 다운스트림 패키지에서 사용할 수 있습니다.</p>
-
-<p>이를 테스트하기 위해 GraLoRA 기법을 사용한 이미지 어댑터를 LoRA 체크포인트로 변환했습니다. 변환 후 테스트 점수는 사실상 동일했습니다(유사도 0.702 → 0.694, 0.260 → 0.269). 아래는 프롬프트 “sks 해변의 고양이”에 대한 테스트 이미지입니다.</p>
-
-<table align="center">
-  <tr>
-    <td><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/lora-image-gen.png" style="width: 400px; border: 1px solid #ccc; padding: 4px;" /></td>
-    <td><img src="https://huggingface.co/datasets/peft-internal-testing/peft-blog-assets/resolve/main/peft-beyond-lora/gralora-image-gen-converted.png" style="width: 400px; border: 1px solid #ccc; padding: 4px;" /></td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center"><em>Left: Image generated by GraLoRA. Right: Image generated by the same GraLoRA checkpoint converted to a LoRA checkpoint. The images quality is comparable.</em></td>
-  </tr>
-</table>
-
-<p>현재 모든 PEFT 기법에 대한 변환을 구현한 것은 아니지만, 수요가 있다면 지원 범위를 확장하겠습니다.</p>
-
-<h1 id="conclusion-and-what-you-can-do">Conclusion and what <em>you</em> can do</h1>
-
-<p><code class="language-plaintext highlighter-rouge">PEFT</code> 패키지 작업을 하는 동안 LoRA가 많은 모멘텀을 갖고 있다는 것을 확인했습니다. 반면 다른 PEFT 기법들이 잠재적으로 더 나을 수 있습니다. 따라서 다양한 지표에서 다양한 PEFT 기법이 얼마나 잘 작동하는지 보다 객관적인 그림을 그릴 수 있도록 PEFT에 벤치마크를 추가하기로 했습니다.</p>
-
-<p>발견한 결과를 바탕으로 LoRA가 나쁜 선택은 아니지만 더 나은 선택이 있을 수 있다고 자신 있게 결론지을 수 있습니다. 특히 이미지 생성 벤치마크를 확인할 때 LoRA는 다른 기법들에 의해 능가됩니다. 지표 외에도 올바른 PEFT 기법을 선택할 때 고려해야 할 다른 요인이 있다고 논의했습니다. 그러나 그럼에도 불구하고 <code class="language-plaintext highlighter-rouge">PEFT</code>를 더 확장하여 LoRA와 다른 기법들 간의 기능적 동등성을 달성하려고 합니다.</p>
-
-<p>저희의 여정은 아직 끝나지 않았습니다. 기존 벤치마크를 확장하고 개선하며 앞으로 더 많은 벤치마크를 추가할 계획도 있습니다. 커뮤니티의 기여를 쉽게 할 수 있도록 보장했으며, 이것에 기여하고 싶다면 <a href="https://github.com/huggingface/peft/issues">issue on the <code class="language-plaintext highlighter-rouge">PEFT</code> repository</a>를 열고 기여 방법을 알려 주세요.</p>
-
-<p>이 글에서 한 가지라도 꼭 기억해야 한다면, LoRA가 귀하의 사용 사례에 맞는 PEFT 기법의 자동 기본값이 되어서는 안 된다는 점입니다. <code class="language-plaintext highlighter-rouge">PEFT</code>가 제공하는 통합 API 덕분에 한 PEFT 기법에서 다른 기법으로 바꾸는 것은 코드의 구성 하나만 바꾸는 것만큼 쉽습니다. 그리고 LoRA를 계속 고수하더라도 <code class="language-plaintext highlighter-rouge">PEFT</code>에서 지원하는 모든 변형들을 확인해 보세요: DoRA, rs-LoRA, LoRA-FA 등. 이 다른 기법들을 시도해 보면 놀라울 정도로 마음에 들 수 있습니다.</p>
-
-<p align="left">
-  <em>Example: Changing from LoRA to OFT using `PEFT`</em>
-</p>
-
-<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">from transformers import AutoModelForCausalLM
-</span><span class="gd">-from peft import LoraConfig, get_peft_model
-</span><span class="gi">+from peft import OFTConfig, get_peft_model
-</span><span class="err">
-</span><span class="p">base_model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-3.2-3B", dtype="bfloat16")
-</span><span class="gd">-config = LoraConfig(target_modules=["q_proj", "v_proj"])
-</span><span class="gi">+config = OFTConfig(target_modules=["q_proj", "v_proj"])
-</span><span class="p">model = get_peft_model(base_model, config)
-</span></code></pre></div></div>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" /><media:content medium="image" url="/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p>우리가 훑어본 모델 뒤에 있는 모델 제작자들과 추론 제공자들에게 감사드립니다. 전반적으로 그들은 <code class="language-plaintext highlighter-rouge">bare</code> 기준선이 제시하는 것보다 훨씬 뛰어난 성능을 보였습니다.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own tooling를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" /><media:content medium="image" url="/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
