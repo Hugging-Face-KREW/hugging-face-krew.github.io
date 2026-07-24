@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/pr-preview/pr-172/feed.xml" rel="self" type="application/atom+xml" /><link href="/pr-preview/pr-172/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-07-24T23:45:03+09:00</updated><id>/pr-preview/pr-172/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*</title><link href="/pr-preview/pr-172/grabette/" rel="alternate" type="text/html" title="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*" /><published>2026-07-21T00:00:00+09:00</published><updated>2026-07-21T00:00:00+09:00</updated><id>/pr-preview/pr-172/grabette</id><content type="html" xml:base="/pr-preview/pr-172/grabette/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/pr-preview/pr-172/feed.xml" rel="self" type="application/atom+xml" /><link href="/pr-preview/pr-172/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-07-25T00:05:49+09:00</updated><id>/pr-preview/pr-172/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*</title><link href="/pr-preview/pr-172/grabette/" rel="alternate" type="text/html" title="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*" /><published>2026-07-21T00:00:00+09:00</published><updated>2026-07-21T00:00:00+09:00</updated><id>/pr-preview/pr-172/grabette</id><content type="html" xml:base="/pr-preview/pr-172/grabette/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#grabette-로봇-조작-데이터를-기록하기-위한-오픈-시스템--함께-공유-데이터셋을-구축합니다" id="markdown-toc-grabette-로봇-조작-데이터를-기록하기-위한-오픈-시스템--함께-공유-데이터셋을-구축합니다">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br /> <em>함께 공유 데이터셋을 구축합니다.</em></a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">The bottleneck isn’t the model. It’s the data.</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">UMI의 어깨 위에 서다</a></li>
@@ -177,14 +177,14 @@ Review instructions:
 
 <p>👉 <strong><a href="https://github.com/pollen-robotics/grabette">Build a Grabette (GitHub)</a></strong> · <a href="https://huggingface.co/spaces/pollen-robotics/grabette-slam">Process your data (HF Space)</a> · 데이터셋에 기여하기</p>
 
-<p><em>Pollen Robotics가 ❤️로 만들어졌습니다.</em></p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Real World VoiceEQ 소개: 음성 AI의 인간 품질 측정</title><link href="/pr-preview/pr-172/real-world-voiceeq/" rel="alternate" type="text/html" title="Real World VoiceEQ 소개: 음성 AI의 인간 품질 측정" /><published>2026-07-15T00:00:00+09:00</published><updated>2026-07-15T00:00:00+09:00</updated><id>/pr-preview/pr-172/real-world-voiceeq</id><content type="html" xml:base="/pr-preview/pr-172/real-world-voiceeq/"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#real-world-voiceeq-소개-음성-ai의-인간-품질-측정" id="markdown-toc-real-world-voiceeq-소개-음성-ai의-인간-품질-측정">Real World VoiceEQ 소개: 음성 AI의 인간 품질 측정</a>    <ul>
+<p><em>Pollen Robotics가 ❤️로 만들어졌습니다.</em></p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정</title><link href="/pr-preview/pr-172/real-world-voiceeq/" rel="alternate" type="text/html" title="Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정" /><published>2026-07-15T00:00:00+09:00</published><updated>2026-07-15T00:00:00+09:00</updated><id>/pr-preview/pr-172/real-world-voiceeq</id><content type="html" xml:base="/pr-preview/pr-172/real-world-voiceeq/"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#real-world-voiceeq-소개-음성-ai의-사람다운-품질-측정" id="markdown-toc-real-world-voiceeq-소개-음성-ai의-사람다운-품질-측정">Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">음성 AI를 위한 더 포괄적인 벤치마크</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">Real World VoiceEQ의 주요 발견</a>        <ul>
-          <li><a href="#음성-ai의-진보가-점점-더-전문화되고-있다" id="markdown-toc-음성-ai의-진보가-점점-더-전문화되고-있다">음성 AI의 진보가 점점 더 전문화되고 있다</a></li>
+          <li><a href="#음성-ai의-발전이-점점-더-전문화되고-있습니다" id="markdown-toc-음성-ai의-발전이-점점-더-전문화되고-있습니다">음성 AI의 발전이 점점 더 전문화되고 있습니다</a></li>
           <li><a href="#음성-모델은-실제로-듣는-것보다-말하는-데-더-능숙해졌다" id="markdown-toc-음성-모델은-실제로-듣는-것보다-말하는-데-더-능숙해졌다">음성 모델은 <em>실제로</em> 듣는 것보다 말하는 데 더 능숙해졌다</a></li>
-          <li><a href="#전통적-벤치마크는-현실-세계의-성능을-점점-더-과대-평가하는-경향" id="markdown-toc-전통적-벤치마크는-현실-세계의-성능을-점점-더-과대-평가하는-경향">전통적 벤치마크는 현실 세계의 성능을 점점 더 과대 평가하는 경향</a></li>
-          <li><a href="#인간-평가의-중요성은-여전히-필수적이다" id="markdown-toc-인간-평가의-중요성은-여전히-필수적이다">인간 평가의 중요성은 여전히 필수적이다</a></li>
+          <li><a href="#전통적인-벤치마크는-실제-성능을-점점-더-과대평가합니다" id="markdown-toc-전통적인-벤치마크는-실제-성능을-점점-더-과대평가합니다">전통적인 벤치마크는 실제 성능을 점점 더 과대평가합니다</a></li>
+          <li><a href="#인간-평가는-여전히-필수적입니다" id="markdown-toc-인간-평가는-여전히-필수적입니다">인간 평가는 여전히 필수적입니다</a></li>
         </ul>
       </li>
       <li><a href="#section-3" id="markdown-toc-section-3">음성 AI가 새 측정 계층이 필요한 이유</a></li>
@@ -204,65 +204,1079 @@ Review instructions:
 - Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
 -->
 
-<h1 id="real-world-voiceeq-소개-음성-ai의-인간-품질-측정">Real World VoiceEQ 소개: 음성 AI의 인간 품질 측정</h1>
+<h1 id="real-world-voiceeq-소개-음성-ai의-사람다운-품질-측정">Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정</h1>
 
-<p><em>기존의 벤치마크는 음성 AI가 인간 수준의 성능에 근접했다고 시사하지만 현실 세계의 대화는 다른 이야기를 들려준다.</em></p>
+<p><em>기존의 벤치마크는 음성 AI가 인간 수준의 성능에 근접했다고 시사하지만, 실제 대화에서는 다른 양상이 나타납니다.</em></p>
 
 <p>음성은 AI의 주요 인터페이스로 빠르게 자리잡고 있습니다. 고객 지원과 의료에서 교육, 엔터테인먼트, 개인 비서에 이르기까지 음성은 점점 더 텍스트를 대체하며 AI와 상호작용하는 방식이 되고 있습니다.</p>
 
-<p>지난 몇 년 동안 음성 모델은 극적으로 개선되었다. 음성 인식 오류율은 계속 감소하고, 지연은 대화 속도에 이르렀으며, 많은 기존 벤치마크가 포화에 다다르고 있다. 그럼에도 음성 AI를 자주 사용하는 사람이라면 무언가가 여전히 어색하다고 느낀다.</p>
+<p>지난 몇 년 동안 음성 모델은 크게 발전했습니다. 단어 오류율은 계속 낮아지고, 지연 시간(latency)은 대화형 속도에 도달했으며, 많은 기존 벤치마크가 포화 상태에 가까워지고 있습니다. 그럼에도 음성 AI를 자주 사용하는 사람이라면 여전히 무언가 어색하다고 느낄 것입니다.</p>
 
-<p>음성 모델은 대화 중에 서로 다른 사람처럼 들릴 수 있고, 주저나 불확실성을 놓치며, 억양, 배경 소음 또는 감정적 발화에서 어려움을 겪을 수 있다. 이러한 단점은 지연 시간과 음성 인식 오류율에 초점을 맞춘 벤치마크에서는 쉽게 간과된다. 사람들은 음성 시스템이 실제로 듣고, 적절하게 응답하며, 실제 대화에서 자연스럽고 신뢰할 수 있는지에 관심을 갖는다.</p>
+<p>음성 모델은 대화 중에 서로 다른 사람처럼 들릴 수 있고, 주저나 불확실성을 놓치며, 억양, 배경 소음 또는 감정적 발화에서 어려움을 겪을 수 있습니다. 이러한 단점은 지연 시간과 음성 인식 오류율에 초점을 맞춘 벤치마크에서는 쉽게 간과될 수 있습니다. 사람들은 음성 시스템이 실제로 듣고, 적절하게 응답하며, 실제 대화에서 자연스럽고 신뢰할 수 있는지에 관심을 갖습니다.</p>
 
 <h2 id="section-1">음성 AI를 위한 더 포괄적인 벤치마크</h2>
 
-<p>그 품질을 측정하기 위해 우리는 <a href="https://www.hume.ai/rw-voice-eq">Real World VoiceEQ</a>를 구축했다—음성 상호작용의 인간 품질을 평가하도록 설계된 벤치마크다. 이는 음성 시스템이 어조와 감정은 물론 화자 정체성과 배경 맥락까지 전사본에 남겨지지 않은 음향 정보를 인식하고 생성하며 응답할 수 있는지 평가한다.</p>
+<p>이러한 특성을 측정하기 위해 음성 상호작용의 인간다운 품질을 평가하는 벤치마크 <a href="https://www.hume.ai/rw-voice-eq">Real World VoiceEQ</a>를 구축했습니다. 이는 음성 시스템이 어조와 감정은 물론 화자 정체성과 배경 맥락까지 전사본에는 담기지 않는 음향 정보를 인식하고 생성하며 응답할 수 있는지 평가합니다.</p>
 
-<p>Real World VoiceEQ는 <strong>40개 이상의 선도적인 독점 및 오픈 소스 음성 모델</strong>을 대상으로 <strong>15개 이상 핵심 평가 차원</strong>과 <strong>60개가 넘는 지표</strong>에 걸쳐 자동 음성 인식(ASR), 텍스트 음성 변환(TTS), 음성-음성(S2S), 및 음성 이해를 포괄합니다.</p>
+<p>Real World VoiceEQ는 자동 음성 인식(ASR), 텍스트 음성 변환(TTS), 음성 간 변환(S2S), 음성 이해를 아우르는 <strong>15개 이상의 핵심 평가 차원</strong>과 <strong>60개가 넘는 지표</strong>를 사용해, <strong>40개 이상의 주요 독점 및 오픈 소스 음성 모델</strong>을 평가합니다.</p>
 
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/real-world-voiceeq/benchmark-overview.png" alt="The four components of Real World VoiceEQ — Text-to-Speech, Speech-to-Speech, Speech Understanding, and ASR Robustness — each with its evaluation dimensions." /></p>
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/real-world-voiceeq/benchmark-overview.png" alt="Real World VoiceEQ의 네 가지 구성 요소인 텍스트 음성 변환, 음성 간 변환, 음성 이해, ASR 견고성과 각 평가 차원." /></p>
 
-<p>Real World VoiceEQ는 다양한 인구 통계, 말하기 스타일, 및 음향 환경에 걸친 백만 건이 넘는 개별 인간 평가에서 개발되었습니다. 현재 벤치마크에는 78만 5천 건의 TTS 평가와 4만 8천 건의 STS 평가가 포함되어 있어 지금까지 수행된 가장 큰 규모의 음성 AI 인간 평가 중 하나입니다.</p>
+<p>Real World VoiceEQ는 다양한 인구 집단, 말하기 스타일, 음향 환경에서 수집한 1백만 건 이상의 개별 사용자 평가를 바탕으로 개발되었습니다. 현재 벤치마크에는 TTS 평가 785,000건과 STS 평가 48,000건이 포함되어 있어, 지금까지 수행된 음성 AI에 대한 인간 평가 중 가장 큰 규모의 평가 중 하나입니다.</p>
 
-<p>모든 평가는 <strong><a href="https://www.hume.ai/kairos">Kairos</a></strong>를 사용해 수행되었으며, 이는 유연한 음성-네이티브 평가 플랫폼이다. 동일한 인프라는 프런티어 AI 연구소와 기업이 특정 사용 사례에 맞춘 맞춤 평가를 실행하고, 생산 음성 시스템의 미세한 실패 모드를 식별하며, 인간 선호도 데이터를 생성하고, 강화학습과 인간 피드백을 통해 모델을 지속적으로 개선할 수 있게 한다.</p>
+<p>모든 평가는 유연한 음성 네이티브 평가 플랫폼인 <strong><a href="https://www.hume.ai/kairos">Kairos</a></strong>를 사용해 진행했습니다. 이 인프라를 활용하면 프런티어 AI 연구소와 기업이 특정 사용 사례에 맞춘 맞춤형 평가를 실행하고, 프로덕션 음성 시스템의 세부적인 실패 양상을 파악하며, 사람의 선호도 데이터를 생성하고, 강화 학습과 사람의 피드백을 통해 모델을 지속적으로 개선할 수 있습니다.</p>
 
 <h2 id="section-2">Real World VoiceEQ의 주요 발견</h2>
 
-<h3 id="음성-ai의-진보가-점점-더-전문화되고-있다">음성 AI의 진보가 점점 더 전문화되고 있다</h3>
+<h3 id="음성-ai의-발전이-점점-더-전문화되고-있습니다">음성 AI의 발전이 점점 더 전문화되고 있습니다</h3>
 
-<p>단일 “최고의” 음성 모델을 향한 경쟁은 전문화된 다양한 역량의 모음으로 전환되고 있다.</p>
+<p>단 하나의 “최고” 음성 모델을 찾는 경쟁은 전문화된 여러 역량을 갖춘 모델들의 집합으로 바뀌고 있습니다.</p>
 
-<p>오늘의 선도 시스템은 기술적 정확성, 감정 이해, 대화 지능, 표현력, 견고성 등 서로 다른 강점에 최적화되어 있다. 예약 번호, 은행 계좌 정보, 복잡한 의약품 이름을 반복하는 데에 뛰어난 한 모델은 감정적으로 표현력이 풍부한 음성을 만들어내는 데 어려움을 겪을 수 있다. 또 다른 모델은 매우 자연스럽게 들릴 수 있지만 정확성 중심의 작업에서는 신뢰도가 낮을 수 있다.</p>
+<p>오늘날의 선도 시스템은 기술적 정확성, 감정 이해, 대화 지능, 표현력, 견고성 등 서로 다른 강점에 최적화되어 있습니다. 예약 참조 번호, 은행 계좌 정보 또는 복잡한 의약품 이름을 반복하는 데 뛰어난 한 모델도 감정 표현이 풍부한 음성을 생성하는 데는 어려움을 겪을 수 있습니다. 또 다른 모델은 매우 자연스럽게 들릴 수 있지만 정확성 중심의 작업에서는 신뢰도가 낮을 수 있습니다.</p>
 
-<p>음성 AI가 성숙해짐에 따라 진전을 측정하려면 이들 능력을 독립적으로 평가하고 단일 전체 점수로 합치는 것이 점점 더 어렵다. 우리의 TTS 평가에서, 8개 능력 그룹 모두에서 상위 다섯 위에 들은 시스템 구성은 하나도 없었다—이는 왜 단일한 “최고의” 음성 모델이 존재하지 않는지 보여준다.</p>
+<p>음성 AI가 성숙해짐에 따라 진전을 측정하려면 이러한 능력을 하나의 전체 점수로 통합하기보다 점점 더 독립적으로 평가해야 합니다. 저희 TTS 평가에서는 여덟 개 능력 그룹 모두에서 상위 다섯 위에 든 시스템 구성은 하나도 없었습니다. 이는 “최고의” 음성 모델이 하나로 정해질 수 없는 이유를 잘 보여 줍니다.</p>
 
 <h3 id="음성-모델은-실제로-듣는-것보다-말하는-데-더-능숙해졌다">음성 모델은 <em>실제로</em> 듣는 것보다 말하는 데 더 능숙해졌다</h3>
 
-<p>음성-음성(S2S) 모델은 우리가 평가한 모든 범주 중 가장 큰 변동성을 보였다. 어떤 시스템은 감정을 매우 잘 인식했지만 자연스럽게 응답하는 데에는 어려움을 겪었다. 오디오에 접근한다고 해서 에이전트가 그 안에 담긴 파라언어 정보를 사용한다는 보장은 없다는 점을 확인했다. 일부 시스템은 여전히 대본 중심으로 남아, 말해지는 단어에 의존하면서 어조, 속도, 망설임, 강조, 음량 등의 신호를 간과했다.</p>
+<p>음성-음성(S2S) 모델은 저희가 평가한 모든 범주 중 가장 큰 변동성을 보였습니다. 어떤 시스템은 감정을 매우 잘 인식했지만 자연스럽게 응답하는 데에는 어려움을 겪었습니다. 오디오에 접근할 수 있다고 해서 에이전트가 그 안에 담긴 파라언어 정보를 사용한다는 보장은 없다는 점을 확인했습니다. 일부 시스템은 여전히 대본에 크게 의존해, 실제로 말한 단어만을 바탕으로 판단하면서 어조, 말하는 속도, 망설임, 강조, 음량과 같은 신호를 간과했습니다.</p>
 
-<p>사람들은 이러한 신호를 자연스럽게 활용해 자신감, 불확실성, 좌절, 풍자, 공감을 추론한다. 오늘날의 모델은 종종 이를 놓친다.</p>
+<p>사람들은 이러한 신호를 자연스럽게 활용해 자신감, 불확실성, 좌절, 풍자, 공감을 추론합니다. 오늘날의 모델은 종종 이를 놓칩니다.</p>
 
-<p>가능한 은행 거래를 인식하는지 묻는 은행 상담원을 상상해 보자. 확신 있는 ‘네’와 주저하는 ‘…네…‘는 전사가 동일하더라도 전혀 다른 의미를 가질 수 있다. 사람은 그 차이를 즉시 인식한다. 오늘날의 많은 음성 모델은 그렇지 않다.</p>
+<p>사기일 가능성이 있는 거래를 알아보는지 묻는 은행 상담원을 상상해 보세요. 확신 있는 ‘네’와 주저하는 ‘…네…‘는 전사가 동일하더라도 전혀 다른 의미를 가질 수 있습니다. 사람은 그 차이를 즉시 인식합니다. 오늘날의 많은 음성 모델은 그렇지 않습니다.</p>
 
-<h3 id="전통적-벤치마크는-현실-세계의-성능을-점점-더-과대-평가하는-경향">전통적 벤치마크는 현실 세계의 성능을 점점 더 과대 평가하는 경향</h3>
+<h3 id="전통적인-벤치마크는-실제-성능을-점점-더-과대평가합니다">전통적인 벤치마크는 실제 성능을 점점 더 과대평가합니다</h3>
 
-<p>다수의 기존 벤치마크는 한계에 다다르고 있으며 현실 세계의 조건을 반영하지 않는다. 모델은 여전히 악센트가 있는 음성, 중첩되는 화자, 감정, 배경 소음, 그리고 더 긴 대화에서 어려움을 겪는다. 우리의 평가에서, 성능은 선도적인 오픈 소스 및 독점 모델 간에 전통적 벤치마크가 시사하는 것보다 훨씬 더 큰 차이를 보였다. 예를 들어 노이즈가 섞인 음성에서의 전사 단어 오류율은 음악이 배경인 음성에 비해 대략 4배 가까이 높았으며, 하나의 배경 오디오 점수가 실제 실패 모드를 가릴 수 있음을 보여준다.</p>
+<p>기존의 많은 벤치마크는 한계에 가까워지고 있으며 실제 환경의 조건을 반영하지 못합니다. 모델은 여전히 악센트가 있는 음성, 겹쳐 말하는 화자, 감정, 배경 소음, 더 긴 대화를 처리하는 데 어려움을 겪습니다. 저희 평가에서는 주요 오픈 소스 모델과 독점 모델 사이의 성능 편차가 기존 벤치마크가 시사하는 것보다 훨씬 크게 나타났습니다. 한 예로, 소음이 포함된 음성의 전사 단어 오류율은 음악이 배경에 포함된 음성보다 약 네 배 더 높게 나타났습니다. 이는 단일 배경 오디오 점수만으로는 실제 실패 양상을 가릴 수 있음을 보여줍니다.</p>
 
-<h3 id="인간-평가의-중요성은-여전히-필수적이다">인간 평가의 중요성은 여전히 필수적이다</h3>
+<h3 id="인간-평가는-여전히-필수적입니다">인간 평가는 여전히 필수적입니다</h3>
 
-<p>예비 연구에서 일부 모델이 공개 벤치마크에 최적화되었을 수 있다는 징후를 발견했다. 몇몇 모델은 참조 전사에서 이미 알려진 오류를 재현하고, 임의의 철자 규칙을 따르며, 음성에 없던 가려진 단어를 재구성하기도 했다.</p>
+<p>예비 연구에서 일부 모델이 공개 벤치마크에 최적화되었을 수 있다는 징후를 발견했습니다. 몇몇 모델은 참조 전사에서 이미 알려진 오류를 재현하고, 임의의 철자 규칙을 따르며, 음성에 없던 가려진 단어를 재구성하기도 했습니다.</p>
 
-<p>대형 언어 모델(LLMs)은 이제 텍스트 기반 모델을 평가하는 데 널리 사용되지만, 우리의 연구 결과는 음성 평가에는 음성-언어 모델(SLM)을 더 신중하게 사용해야 한다고 시사한다. TTS 평가에서 선도적인 SLM과 훈련된 인간 평가자의 비교에서, 발음 정확도와 같이 명확하고 검증 가능한 답이 있는 작업에서의 일치도가 가장 높았다.</p>
+<p>대형 언어 모델(LLMs)은 이제 텍스트 기반 모델을 평가하는 데 널리 사용되지만, 저희 연구 결과는 음성 평가에 음성 언어 모델(SLM)을 더 신중하게 사용해야 함을 시사합니다. 텍스트-음성 변환 평가에서 주요 SLM과 훈련된 인간 평가자의 판단을 비교한 결과, 발음 정확도처럼 명확하고 검증 가능한 답이 있는 작업에서 일치도가 가장 높았습니다.</p>
 
-<p>주관적인 평가가 늘어나면 일치도가 떨어졌다. SLM은 때때로 텍스트 기반 맥락 신호에서 감정을 추론하는 것으로 보였고, 연기 역할에 맞는지 또는 동일한 정체성을 유지하는지와 같은 개방형 판단의 경우 일치도가 가장 낮았다. 자동 평가자는 잘 정의된 작업에 유용할 수 있지만, 판단이 음향-맥락, 지각 및 사회적 해석에 의존할 때 인간 청자들을 대체하기에는 아직 이르다.</p>
+<p>평가가 더 주관적일수록 일치도가 떨어졌습니다. SLM은 때때로 텍스트 기반 맥락 신호에서 감정을 추론하는 것으로 보였고, 연기 역할에 맞는지 또는 동일한 정체성을 유지하는지와 같은 개방형 판단의 경우 일치도가 가장 낮았습니다. 자동 평가자는 잘 정의된 작업에 유용할 수 있지만, 판단이 음향적 맥락, 지각 및 사회적 해석에 의존할 때 인간 청자들을 대체하기에는 아직 이릅니다.</p>
 
 <h2 id="section-3">음성 AI가 새 측정 계층이 필요한 이유</h2>
 
-<p>음성이 AI의 정의적 인터페이스 중 하나가 됨에 따라 속도와 기술적 정확성만으로 성공하는 시스템이 결정되지는 않을 것이다. 사람들이 궁극적으로 선택하는 모델은 이상적인 벤치마크 조건에서뿐만 아니라 현실 세계 대화의 복잡성 전반에 걸쳐 인간처럼 이해하고, 표현하고, 응답할 수 있는 모델일 것이다.</p>
+<p>음성이 AI를 대표하는 주요 인터페이스 중 하나가 되면서, 어떤 시스템이 성공할지는 더 이상 속도와 기술적 정확성만으로 결정되지 않을 것입니다. 사람들이 궁극적으로 선택하는 모델은 이상적인 벤치마크 조건에서뿐만 아니라 현실 세계 대화의 복잡성 전반에 걸쳐 인간처럼 이해하고, 표현하고, 응답할 수 있는 모델일 것입니다.</p>
 
-<p>수십 년에 걸쳐 음성 AI는 표준화된 벤치마크에 대한 정량적 지표를 최적화하는 방식으로 발전해 왔으며, 전사 정확도(WER)에서 음성 품질의 객관적 지각 지표인 PESQ 및 DNSMOS에 이르기까지 다양한 지표를 활용해 왔다. Real World VoiceEQ가 합성 음성 상호작용의 구성 요소를 평가하는 인간 기반의 지표를 제공함으로써 이러한 패러다임을 확장하기를 바란다.</p>
+<p>수십 년에 걸쳐 음성 AI는 표준화된 벤치마크에 대한 정량적 지표를 최적화하는 방식으로 발전해 왔으며, 전사 정확도(WER)에서 음성 품질을 평가하는 객관적 지각 기반 지표인 PESQ 및 DNSMOS에 이르기까지 다양한 지표를 활용해 왔습니다. Real World VoiceEQ가 합성 음성 상호작용의 구성 요소를 평가하는 인간 기반의 지표를 제공함으로써 이러한 패러다임을 확장할 수 있기를 바랍니다.</p>
 
-<p><strong><a href="https://cdn.sanity.io/files/xqnc2for/production/84e7925ad3694bcbd12cbf2d107bd9bf2da4f3d8.pdf">full technical report</a>를 읽고 <a href="https://huggingface.co/spaces/HumeAI/rw-voice-eq">public leaderboards</a>를 살펴보거나 <a href="https://www.hume.ai/sales-form">get in touch</a>를 통해 Hume가 Real World VoiceEQ를 사용하여 귀하의 음성 모델이나 에이전트를 평가하는 방법을 배우거나, 특정 사용 사례에 맞춘 맞춤 평가를 설계하십시오.</strong></p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[Real World VoiceEQ 소개: 음성 AI의 인간 품질 측정에 대한 한국어 번역 글.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">파이토치의 프로파일링(3부): 어텐션이 전부다</title><link href="/pr-preview/pr-172/torch-attention-profile/" rel="alternate" type="text/html" title="파이토치의 프로파일링(3부): 어텐션이 전부다" /><published>2026-07-10T00:00:00+09:00</published><updated>2026-07-10T00:00:00+09:00</updated><id>/pr-preview/pr-172/torch-attention-profile</id><content type="html" xml:base="/pr-preview/pr-172/torch-attention-profile/"><![CDATA[<ul id="markdown-toc">
+<p><strong><a href="https://huggingface.co/papers/2607.14846">전체 기술 보고서</a>를 읽고 <a href="https://huggingface.co/spaces/HumeAI/rw-voice-eq">공개 리더보드</a>를 살펴보세요. 또는 <a href="https://www.hume.ai/sales-form">Hume에 문의해</a> Real World VoiceEQ로 음성 모델이나 에이전트를 평가하는 방법을 알아보거나, 특정 사용 사례에 맞춘 맞춤형 평가를 설계해 보세요.</strong></p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정에 대한 한국어 번역 글.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Thinking Machines의 Inkling에 오신 것을 환영합니다</title><link href="/pr-preview/pr-172/thinkingmachines-inkling/" rel="alternate" type="text/html" title="Thinking Machines의 Inkling에 오신 것을 환영합니다" /><published>2026-07-15T00:00:00+09:00</published><updated>2026-07-15T00:00:00+09:00</updated><id>/pr-preview/pr-172/thinkingmachines-inkling</id><content type="html" xml:base="/pr-preview/pr-172/thinkingmachines-inkling/"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#thinking-machines의-inkling에-오신-것을-환영합니다" id="markdown-toc-thinking-machines의-inkling에-오신-것을-환영합니다">Thinking Machines의 Inkling에 오신 것을 환영합니다</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">Inkling이 특별한 이유는 무엇인가?</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">전반적인 기능과 아키텍처</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">추론 지원</a>        <ul>
+          <li><a href="#트랜스포머" id="markdown-toc-트랜스포머">트랜스포머</a></li>
+          <li><a href="#sglang" id="markdown-toc-sglang">SGLang</a></li>
+          <li><a href="#vllm" id="markdown-toc-vllm">vLLM</a></li>
+          <li><a href="#원격-추론-hugging-face-추론-제공자와-함께" id="markdown-toc-원격-추론-hugging-face-추론-제공자와-함께">원격 추론: Hugging Face 추론 제공자와 함께</a></li>
+          <li><a href="#로컬-추론-with-llamacpp와-unsloth" id="markdown-toc-로컬-추론-with-llamacpp와-unsloth">로컬 추론 with llama.cpp와 Unsloth</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-4" id="markdown-toc-section-4">사용 사례</a>        <ul>
+          <li><a href="#pi로-에이전트형-코딩" id="markdown-toc-pi로-에이전트형-코딩">Pi로 에이전트형 코딩</a></li>
+          <li><a href="#다중-토큰-예측-드래프터mtp" id="markdown-toc-다중-토큰-예측-드래프터mtp">다중 토큰 예측 드래프터(MTP)</a></li>
+          <li><a href="#멀티모달-비전" id="markdown-toc-멀티모달-비전">멀티모달 비전</a></li>
+          <li><a href="#멀티모달-오디오" id="markdown-toc-멀티모달-오디오">멀티모달 오디오</a></li>
+          <li><a href="#포스트-트레이닝post-training" id="markdown-toc-포스트-트레이닝post-training">포스트 트레이닝(Post-training)</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-5" id="markdown-toc-section-5">Slurm 스크립트</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">벤치마크 결과</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/thinkingmachines-inkling">Welcome Inkling by Thinking Machines</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/thinkingmachines-inkling -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="thinking-machines의-inkling에-오신-것을-환영합니다">Thinking Machines의 Inkling에 오신 것을 환영합니다</h1>
+
+<p><a href="https://huggingface.co/thinkingmachines/Inkling">Inkling</a>은 대형(1조 매개변수!)의 오픈 모델로 이미지, 텍스트, 오디오 입력을 네이티브로 수용합니다.</p>
+
+<p>요약: Thinking Machines의 Inkling은 허깅페이스에 공개되었습니다. Inkling은 이미지, 오디오, 텍스트를 모두 이해하는 대형 멀티모달 LLM이며, 에이전트형 기능을 가지며, 1M 컨텍스트를 지원합니다. BF16 전체 체크포인트와 잘 보정된 NVFP4 변형으로 제공되며, 추론 속도를 높이기 위한 예측적 MTP 계층을 포함합니다. 트랜스포머, SGLang, 및 llama.cpp에서 데이-제로(day-0) 지원이 있습니다.</p>
+
+<h2 id="section-1">Inkling이 특별한 이유는 무엇인가?</h2>
+
+<p>Inkling은 대략 1조 매개변수에 달하는 대형 오픈 모델로, 이미지, 텍스트, 오디오 입력을 네이티브로 받을 수 있으며, 45조 토큰의 텍스트, 이미지, 오디오 및 비디오로 학습되었습니다. 오디오, 이미지, 텍스트 등의 모달리티 간 추론에 집중하며, 파인튜닝을 통한 도메인 적응을 목표로 합니다. 이 모델을 바탕으로 데모를 몇 가지 만들고 아키텍처를 탐구해 왔으며, 멀티모달 추론 애플리케이션의 새로운 물결을 이끌어내기에 좋다고 생각합니다.</p>
+
+<h2 id="section-2">전반적인 기능과 아키텍처</h2>
+
+<p>Inkling은 전체 975B 매개변수 중 활성 매개변수 41B를 가진 디코더 전용 멀티모달 Mixture-of-Experts 모델이다. 여러 가지가 얽혀 있어 각 부분을 하나씩 살펴보자:</p>
+
+<ul>
+  <li>디코더 전용(Decoder-only): 이는 아키텍처가 대부분의 최첨단 LLM들처럼 인과적 자동회귀 생성을 지원한다는 것을 의미합니다.</li>
+  <li>멀티모달(Multimodal): 모델은 텍스트, 오디오, 이미지를 입력으로 받을 수 있습니다.</li>
+  <li>Mixture of Experts (MoE): 각 층 내부의 피드포워드 네트워크가 희소하게 작동하여 추론이 더 빨라지며, 언제나 41B 매개변수만 활성화됩니다. 모델은 256명의 전문가를 갖고 있습니다. 나중에 자세히 보겠습니다.</li>
+</ul>
+
+<p>다음은 아키텍처의 간략한 개요입니다.</p>
+
+<p><strong>Relative attention:</strong> 트랜스포머 모델에 위치 정보를 주입하는 일반적인 방법인 RoPE 대신 Inkling은 위치 정보를 인코딩하기 위해 상대 주의를 사용합니다. 각 어텐션 레이어는 위치를 어텐션 로짓에서 직접 학습합니다. key-query-values 외에, 토큰별, 헤드별 상대 피처 R을 생성하는 네 번째 투영이 있습니다. 이 투영 텐서는 키 벡터와 쿼리 벡터 사이의 거리 정보(거리 정보)를 보정한 다음 어텐션 모듈로 전파됩니다.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/inkling-blog-assets/resolve/relative_attention.png" alt="Inkling relative attention architecture" /></p>
+
+<p><strong>Hybrid attention:</strong> 디코더 레이어는 전역 어텐션(전체 컨텍스트 길이에 한꺼번에 주의)과 슬라이딩 윈도우 어텐션(고정 컨텍스트 윈도우를 슬라이딩 방식으로 주의)을 번갈아가며 구성됩니다. 아키텍처는 5:1의 슬라이딩 윈도우 대 글로벌 어텐션 레이어 패턴을 가지고 있습니다. 이 하이브리드 어텐션 방식은 계산 효율성을 제공합니다. 마지막 레이어는 글로벌 어텐션을 사용하여 특징이 풍부한 표현을 구축하는 데 도움이 됩니다.</p>
+
+<p><strong>Short convolution:</strong> 모델은 은닉 상태 위에 독특한 짧은 1D 합성곱, 또는 <code class="language-plaintext highlighter-rouge">SConv</code>를 사용합니다. SConv는 현재 토큰과 이전 <code class="language-plaintext highlighter-rouge">W-1</code>개의 은닉 상태를 읽고, <code class="language-plaintext highlighter-rouge">W</code>를 슬라이딩 윈도우 크기로 둡니다. 여기서의 직관은 SConv가 로컬 어텐션을 돕는 한편, 어텐션 및 MoE 모듈을 로컬 표현으로부터 해방하는 것입니다.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/inkling-blog-assets/resolve/sconv.png" alt="Inkling short convolution architecture" /></p>
+
+<p><strong>MoE with shared experts sink:</strong> Inkling에서 라우터는 경로화된 전문가와 공유 전문가 모두의 점수를 매깁니다. 상위-k 선택은 6명의 전문가에 대해 수행되며, 항상 활성화되는 2명의 공유 전문가가 추가로 있습니다.</p>
+
+<p><strong>Vision understanding:</strong> 이 모델은 여러 선형 계층으로 구성된 간단한 계층적 MLP 패처를 포함합니다. 각 계층은 픽셀을 점진적으로 융합하며, 마지막 계층에서 패치당 하나의 임베딩을 생성합니다.</p>
+
+<p><strong>Audio understanding:</strong> 아키텍처는 이산화된 멜 스펙트로그램을 사용합니다. 각 100 ms 길이의 오디오 청크를 멜 스케일로 변환한 뒤, 정확한 멜 스펙트로그램 빈으로 분류합니다.</p>
+
+<p>멀티모달 타워는 비교적 간단한 모듈로, 각 모달리티마다 별도의 인코더를 사용하는 다른 모델들처럼 복잡하지 않습니다. 각 이미지 패치는 이미지 임베딩 타워를 통과하고, 오디오 청크는 오디오 임베딩 타워를 통과하여 두 미디어 임베딩을 얻습니다. 이미지 입력은 비디오 처리를 위한 추가 시간 차원도 포함합니다. 이 기능은 다운스트림 파인튜닝에 유용할 것으로 예상되지만, 즉시 비디오 성능은 평가하지 않았습니다. 타워는 패치 격자를 접고, 인접한 토큰의 작은 로컬 블록을 채널 차원으로 쌓아 hMLP를 통과합니다. 오디오 파형은 멜 스케일로 변환되며, 디스크리트 멜 빈으로 분류됩니다. 이 멜 빈 값들은 오디오 임베딩 타워에 임베딩되고, 이 임베딩들을 합산하여 최종 오디오 입력을 구성합니다.</p>
+
+<h2 id="section-3">추론 지원</h2>
+
+<p>Inkling은 데이-제로(day-0) 트랜스포머 지원을 제공하며, SGLang과 vLLM 같은 주요 추론 엔진에서도 지원됩니다.</p>
+
+<p>이 모델은 거대합니다. bf16 체크포인트는 VRAM 2 TB가 필요하고, nvfp4 버전은 VRAM 600 GB가 필요합니다. Inference Providers와 같은 서버리스 추론 라우터를 통해 모델을 시도해 볼 수 있으며, llama.cpp와 함께 ggml 양자화를 사용해 로컬 배포를 할 수 있습니다.</p>
+
+<h3 id="트랜스포머">트랜스포머</h3>
+
+<p>다이렉트하게 <code class="language-plaintext highlighter-rouge">transformers</code>로 추론하는 가장 쉬운 방법은 <code class="language-plaintext highlighter-rouge">any-to-any</code> 파이프라인을 사용하는 것입니다. Hopper 이후의 GPU에서 16비트 <code class="language-plaintext highlighter-rouge">"thinkingmachines/Inkling"</code>를 사용하거나, Blackwell Nvidia GPU에서 양자화된 NVFP4 체크포인트 <code class="language-plaintext highlighter-rouge">"thinkingmachines/Inkling-NVFP4"</code>를 사용할 수 있습니다. 최신 버전의 트랜스포머(오늘 출시된 5.14.0)를 사용하는지 확인하십시오 (<code class="language-plaintext highlighter-rouge">pip install -U transformers</code>).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="n">model_id</span> <span class="o">=</span> <span class="sh">"</span><span class="s">thinkingmachines/Inkling</span><span class="sh">"</span>
+<span class="c1"># model_id = "thinkingmachines/Inkling-NVFP4"
+</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="nf">pipeline</span><span class="p">(</span><span class="sh">"</span><span class="s">any-to-any</span><span class="sh">"</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model_id</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>파이프라인을 초기화한 후 프롬프트를 다음과 같이 전달할 수 있습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image_url</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="sh">"</span><span class="s">https://huggingface.co/datasets/merve/vl-test-suite/</span><span class="sh">"</span>
+    <span class="sh">"</span><span class="s">resolve/main/pills.jpg</span><span class="sh">"</span>
+<span class="p">)</span>
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">image</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">image</span><span class="sh">"</span><span class="p">:</span> <span class="n">image_url</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Do components in this supplement interact with each other?</span><span class="sh">"</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+<span class="n">output</span> <span class="o">=</span> <span class="nf">pipe</span><span class="p">(</span>
+    <span class="n">messages</span><span class="p">,</span>
+    <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+    <span class="n">return_full_text</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">reasoning_effort</span><span class="o">=</span><span class="sh">"</span><span class="s">medium</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="sh">"</span><span class="s">generated_text</span><span class="sh">"</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>한 단계 아래에서 Auto 클래스도 사용할 수 있습니다. 추론에는 모델용 <code class="language-plaintext highlighter-rouge">AutoModelForMultimodalLM</code> 클래스와 프로세서용 <code class="language-plaintext highlighter-rouge">AutoProcessor</code> 클래스를 사용할 수 있습니다. 서로 다른 추론 작업에는 토크나이저가 <code class="language-plaintext highlighter-rouge">reasoning_effort</code> 인수를 받습니다. 추론 노력의 기존 옵션은 <code class="language-plaintext highlighter-rouge">"none"</code>, <code class="language-plaintext highlighter-rouge">"minimal"</code>, <code class="language-plaintext highlighter-rouge">"low"</code>, <code class="language-plaintext highlighter-rouge">"medium"</code>, <code class="language-plaintext highlighter-rouge">"high"</code>, <code class="language-plaintext highlighter-rouge">"xhigh"</code>, <code class="language-plaintext highlighter-rouge">"max"</code>입니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForMultimodalLM</span><span class="p">,</span> <span class="n">AutoProcessor</span>
+
+<span class="n">model_id</span> <span class="o">=</span> <span class="sh">"</span><span class="s">thinkingmachines/Inkling</span><span class="sh">"</span>
+<span class="n">processor</span> <span class="o">=</span> <span class="n">AutoProcessor</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">model_id</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForMultimodalLM</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="n">model_id</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">system</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">You should only answer with a number.</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">What is 17 * 23?</span><span class="sh">"</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">processor</span><span class="p">.</span><span class="nf">apply_chat_template</span><span class="p">(</span>
+    <span class="n">messages</span><span class="p">,</span>
+    <span class="n">add_generation_prompt</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">tokenize</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_dict</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_tensors</span><span class="o">=</span><span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">reasoning_effort</span><span class="o">=</span><span class="sh">"</span><span class="s">high</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">).</span><span class="nf">to</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">device</span><span class="p">)</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+<span class="n">generated_tokens</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">inputs</span><span class="p">[</span><span class="sh">"</span><span class="s">input_ids</span><span class="sh">"</span><span class="p">].</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">:]</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">processor</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">generated_tokens</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>멀티모달 추론의 경우에도 동일한 클래스를 사용할 수 있습니다. 모델 카드에 각 모달리티에 대한 예제 스니펫을 제공합니다.</p>
+
+<details>
+<summary>Text with image inference</summary>
+
+```python
+from transformers import AutoModelForMultimodalLM, AutoProcessor
+
+model_id = "thinkingmachines/Inkling"
+processor = AutoProcessor.from_pretrained(model_id)
+model = AutoModelForMultimodalLM.from_pretrained(
+    model_id,
+    dtype="auto",
+    device_map="auto",
+)
+
+image_url = (
+    "https://huggingface.co/datasets/merve/vl-test-suite/"
+    "resolve/main/pills.jpg"
+)
+messages = [
+    {
+        "role": "user",
+        "content": [
+            {
+                "type": "image",
+                "image": image_url,
+            },
+            {
+                "type": "text",
+                "text": "Do any of the components in this supplement interact?",
+            },
+        ],
+    },
+]
+
+inputs = processor.apply_chat_template(
+    messages,
+    tokenize=True,
+    add_generation_prompt=True,
+    reasoning_effort="medium",
+    return_dict=True,
+    return_tensors="pt",
+).to(model.device)
+input_len = inputs["input_ids"].shape[-1]
+
+outputs = model.generate(**inputs, max_new_tokens=2000)
+response = processor.decode(outputs[0][input_len:], skip_special_tokens=False)
+
+processor.parse_response(response)
+```
+
+
+</details>
+
+<p>Inkling은 또한 오디오 입력을 받습니다. 아래는 같은 <code class="language-plaintext highlighter-rouge">AutoModelForMultimodalLM</code> 클래스를 사용하는 예제 추론 스니펫입니다.</p>
+
+<details>
+<summary>Text with audio inference</summary>
+
+```python
+from transformers import AutoModelForMultimodalLM, AutoProcessor
+
+model_id = "thinkingmachines/Inkling"
+
+processor = AutoProcessor.from_pretrained(model_id)
+model = AutoModelForMultimodalLM.from_pretrained(
+    model_id,
+    dtype="auto",
+    device_map="auto",
+)
+
+audio_url = (
+    "https://huggingface.co/datasets/merve/vl-test-suite/"
+    "resolve/main/example_audio.mp3"
+)
+messages = [
+    {
+        "role": "user",
+        "content": [
+            {"type": "text", "text": "Transcribe the following speech to text."},
+            {
+                "type": "audio",
+                "audio": audio_url,
+            },
+        ],
+    },
+]
+
+inputs = processor.apply_chat_template(
+    messages,
+    tokenize=True,
+    return_dict=True,
+    return_tensors="pt",
+    add_generation_prompt=True,
+).to(model.device)
+input_len = inputs["input_ids"].shape[-1]
+
+outputs = model.generate(**inputs, max_new_tokens=512)
+response = processor.decode(outputs[0][input_len:], skip_special_tokens=False)
+
+processor.parse_response(response)
+```
+
+
+</details>
+
+<p>여러 노드의 클러스터에서 더 현실적인 병렬 배치를 원하신다면 아래의 <a href="#slurm-scripts">Slurm</a> 섹션을 참조하십시오.</p>
+
+<h3 id="sglang">SGLang</h3>
+
+<p>SGLang은 Inkling의 출시 시점에 가장 빠른 배포 프레임워크 중 하나로, 커스텀 모델 구현을 포함합니다. 아래의 런치 명령은 모델을 8개의 GPU에 걸쳐 샤딩하고 포트 30000에서 OpenAI 호환 API를 제공합니다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>sglang
+
+python3 <span class="nt">-m</span> sglang.launch_server <span class="se">\</span>
+ <span class="nt">--model-path</span> thinkingmachine/Inkling <span class="se">\</span>
+ <span class="nt">--tp-size</span> 8 <span class="se">\</span>
+ <span class="nt">--served-model-name</span> inkling <span class="se">\</span>
+ <span class="nt">--host</span> 0.0.0.0 <span class="se">\</span>
+ <span class="nt">--port</span> 30000
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">--tp-size</code>를 GPU 수에 맞추십시오. KV 캐시를 위한 여유 공간이 더 필요하면 <code class="language-plaintext highlighter-rouge">--mem-fraction-static</code>을 추가하십시오(예: <code class="language-plaintext highlighter-rouge">0.85</code>).</p>
+
+<h3 id="vllm">vLLM</h3>
+
+<p>vLLM은 생산 서비스에 강력합니다. 하나의 <code class="language-plaintext highlighter-rouge">vllm serve</code> 명령으로 허브에서 가중치를 다운로드하고, 텐서 병렬화로 GPU에 모델을 샤딩하며, 포트 8000에서 OpenAI 호환 서버를 시작합니다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>vllm
+
+vllm serve thinkingmachine/Inkling <span class="se">\</span>
+  <span class="nt">--tensor-parallel-size</span> 8 <span class="se">\</span>
+  <span class="nt">--served-model-name</span> inkling
+</code></pre></div></div>
+
+<p>실제로는 여러 노드와 SLURM 같은 분산 도구가 필요합니다(아래 참조). 핵심 매개변수는 노드의 GPU 수에 따라 <code class="language-plaintext highlighter-rouge">--tensor-parallel-size</code>를 설정하고, KV-캐시 메모리 한계에 도달하면 컨텍스트 윈도우를 제한하기 위해 <code class="language-plaintext highlighter-rouge">--max-model-len</code>를 사용합니다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:8000/v1/chat/completions <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "model": "inkling",
+    "messages": [{"role": "user", "content": "Hello!"}]
+  }'</span>
+</code></pre></div></div>
+
+<h3 id="원격-추론-hugging-face-추론-제공자와-함께">원격 추론: Hugging Face 추론 제공자와 함께</h3>
+
+<p>이 모델은 허깅페이스를 통해 여러 추론 제공자를 사용하여 추론할 수 있습니다. <a href="https://huggingface.co/thinkingmachines/inkling?inference_provider=fastest&amp;language=python&amp;client=openai&amp;inference_api=true">here</a>를 사용하는 모든 코드 스니펫을 확인할 수 있습니다. 아래는 OpenAI 클라이언트와 함께 사용하는 방법입니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
+
+<span class="kn">from</span> <span class="n">openai</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="sh">"</span><span class="s">https://router.huggingface.co/v1</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">"</span><span class="s">HF_TOKEN</span><span class="sh">"</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">completion</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">chat</span><span class="p">.</span><span class="n">completions</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">thinkingmachines/Inkling:auto</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span>
+            <span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">What is the capital of France?</span><span class="sh">"</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">completion</span><span class="p">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">message</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>설정에서 선호하는 공급자에 접미사 <code class="language-plaintext highlighter-rouge">“:auto”</code>를 사용합니다. 또한 <code class="language-plaintext highlighter-rouge">“cheapest”</code> 또는 <code class="language-plaintext highlighter-rouge">“:fastest”</code>를 사용할 수도 있습니다. 이번 릴리스에서는 모든 사용자를 위해 2시간의 추론 비용을 커버합니다.</p>
+
+<p>참고: Inference Providers에서의 오디오 지원은 작업 중이며 곧 추가될 예정입니다.</p>
+
+<h3 id="로컬-추론-with-llamacpp와-unsloth">로컬 추론 with llama.cpp와 Unsloth</h3>
+
+<p>제한된 하드웨어에서 양자화된 버전의 모델을 실행하려면 <code class="language-plaintext highlighter-rouge">llama.cpp</code>를 사용할 수 있습니다. Unsloth는 모델을 1비트 정밀도로 양자화하여 원본 모델 대비 VRAM 사용량을 95% 감소시켰습니다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>llama serve <span class="nt">-hf</span> unsloth/inkling-GGUF:UD-IQ1_S
+</code></pre></div></div>
+
+<p>여기에서 <a href="http://localhost:8000"><code class="language-plaintext highlighter-rouge">http://localhost:8000</code></a><code class="language-plaintext highlighter-rouge">/v1</code>에서 실행되는 OpenAI 호환 서버를 시작하고, 선호하는 도구나 클라이언트를 통해 연결합니다. 그곳으로 이동하면 모델과 대화를 시작하고, 좋아하는 MCP로 설정하며, 이미지나 파일을 편리하게 전달하는 등 다양한 작업을 수행할 수 있습니다.</p>
+
+<p>Llama cpp는 도구, MCP 및 에이전트형 워크로드를 지원하는 내장 UI도 함께 제공합니다. llma 앱에서 1비트 정밀도에서 Inkling이 실행되는 것을 확인해 보십시오:</p>
+
+<video controls="" width="100%" autoplay="" loop="" muted="">
+  <source src="https://huggingface.co/buckets/huggingface/inkling-blog-assets/resolve/thinky.mp4" type="video/mp4" />
+</video>
+
+<p>Inkling GGUF도 Unsloth Studio에서 동적 1비트 GGUF로 실행 가능하며, 탑 1% 정확도 대비 약 74.2%를 유지하면서 크기는 86% 작습니다.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/inkling-blog-assets/resolve/unsloth.png" alt="Inkling running in Unsloth Studio" /></p>
+
+<h2 id="section-4">사용 사례</h2>
+
+<h3 id="pi로-에이전트형-코딩">Pi로 에이전트형 코딩</h3>
+
+<p>Pi는 다양한 언어 모델과 함께 사용할 수 있는 최소한의 코딩 에이전트 허브입니다. Pi를 추론 엔진 서버 엔드포인트(예: llama.cpp)로 사용하거나, 설치 후 <code class="language-plaintext highlighter-rouge">~/.pi/agent/models.json</code>에 이를 추가하여 허깅페이스의 추론 제공자와 함께 사용할 수 있습니다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"providers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"inference-providers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"baseUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://router.huggingface.co/v1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai-completions"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hf_..."</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"thinkingmachines/Inkling"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>그런 다음 프로젝트 디렉토리에서 <code class="language-plaintext highlighter-rouge">pi</code>를 호출하여 Pi를 시작하면 됩니다! 이 데모에서는 모델에 어려운 수학적 추론 문제를 부여하고, Pi의 도구를 이용해 해결합니다.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/inkling-blog-assets/resolve/visual-reasoning.gif" alt="Visual reasoning gif demo" /></p>
+
+<p>Inkling은 광범위한 멀티모달 추론과 낮은 토큰 소모에 집중하므로 문서 처리나 오디오 작업으로 먼저 사용해 보십시오.</p>
+
+<h3 id="다중-토큰-예측-드래프터mtp">다중 토큰 예측 드래프터(MTP)</h3>
+
+<p>MTP는 한 번에 여러 토큰을 예측하는 추가 계층을 모델에 더합니다. 추론 중에는 이 추가 계층이 예측적 디코딩의 ‘드래프터(drafters)’ 역할을 하여 성능을 해치지 않으면서 생성 속도를 높입니다. MTP를 사용하면 드래터를 서비스하는 데 따른 VRAM의 작은 비용에도 불구하고 동일한 생성 결과를 얻을 수 있습니다. Thinking Machines는 이번 릴리스에서 MTP 드래터도 제공합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">torch</span>
+<span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForMultimodalLM</span><span class="p">,</span> <span class="n">AutoProcessor</span>
+
+<span class="n">processor</span> <span class="o">=</span> <span class="n">AutoProcessor</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="sh">"</span><span class="s">thinkingmachines/Inkling</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForMultimodalLM</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">thinkingmachines/Inkling</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">bfloat16</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Preprocess the inputs.
+</span><span class="bp">...</span>
+<span class="n">generated</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span>
+    <span class="o">**</span><span class="n">inputs</span><span class="p">,</span>
+    <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">do_sample</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">use_mtp</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">processor</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">generated</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="멀티모달-비전">멀티모달 비전</h3>
+
+<p>전문가 수준의 소스와 대학 입시 문제를 포함한 소규모 추론 문제 세트를 준비했습니다. 스크린샷에 워터마크를 찍어 모델에 도전했고, 모델은 이 문제들을 모두 높은 수준의 한계에서 해결했고, 최고 수준 및 중간 추론 시도에서 하나를 실패했습니다. 따라서 모델의 해답을 확인하고, 해결에 소요된 토큰 수를 제공하는 모델 답안을 링크합니다. 이 분위기 평가에서는 시스템 프롬트를 제공하지 않으며, 이러한 추론 문제는 보통 좋은 시스템 프롬프트와 함께 실행하는 것이 바람직합니다. 분위기 평가 이미지와 결과는 <a href="https://huggingface.co/buckets/merve/inkling">here</a>에 있습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">범주</th>
+      <th style="text-align: left">질문</th>
+      <th style="text-align: left">추론 노력 중간의 토큰 수</th>
+      <th style="text-align: left">추론 노력 높음의 토큰 수</th>
+      <th style="text-align: left">추론 effort 최대의 토큰 수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">자유 형식 약물 상호작용</td>
+      <td style="text-align: left">여기서 어떤 구성 요소가 상호작용합니까?</td>
+      <td style="text-align: left">1,893 ✅</td>
+      <td style="text-align: left">2,367 ✅</td>
+      <td style="text-align: left">3,688 ✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">물리 문제 (MMMU-Pro)</td>
+      <td style="text-align: left">이미지의 질문에 답하십시오.</td>
+      <td style="text-align: left">1,357 ✅</td>
+      <td style="text-align: left">3,323 ✅</td>
+      <td style="text-align: left">3,314 ✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">다국어 물리 문제</td>
+      <td style="text-align: left">이미지에 주어진 터키어 질문에 답하십시오.</td>
+      <td style="text-align: left">1,435 ✅</td>
+      <td style="text-align: left">2,129 ✅</td>
+      <td style="text-align: left">3,162 ✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">변호사 시험</td>
+      <td style="text-align: left">이미지의 질문에 답하십시오.</td>
+      <td style="text-align: left">1,117 ✅</td>
+      <td style="text-align: left">2,137 ✅</td>
+      <td style="text-align: left">1,676 ✅</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">인포그래픽 질의 응답(주관식)</td>
+      <td style="text-align: left">제시된 정보를 바탕으로 북극의 여름 기온 상승 기간이 관측된 기간 대비 대략 몇 배 더 긴가요?</td>
+      <td style="text-align: left">1,378 ❌</td>
+      <td style="text-align: left">3,859 ✅</td>
+      <td style="text-align: left">6000 토큰(토큰 예산 초과)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>분위기 평가에 대한 추가 메모:</strong></p>
+
+<ul>
+  <li>인포그래픽의 질문에 직접 답하기보다는 모델이 먼저 이미지의 텍스트를 텍스트로 변환해 근거를 마련합니다.</li>
+  <li>추론에서 토큰을 절약하려면 프롬프트가 매우 중요한데, 예를 들어 약의 뒷면 이미지에 ‘여기서 어떤 구성 요소가 상호작용합니까?’와 같은 모호한 질문을 제시하면 모델은 먼저 ‘상호작용’의 의미를 파악해야 합니다.</li>
+  <li>객관식 문제의 정답은 모델의 자체 추론 구조를 크게 돕지만, 개방형 질문의 경우 MCQ에 비해 성능이 떨어지는 경향이 있어 많은 모델에서 공통적으로 보이는 이슈입니다. 일반적으로 생각의 흐름은 OCR → 특성화 → 각 옵션 평가 → 답변의 순서입니다.</li>
+  <li>0.7 수준의 추론 노력(중간)이 좋은 절충점을 제공하는 것으로 보입니다.</li>
+</ul>
+
+<h3 id="멀티모달-오디오">멀티모달 오디오</h3>
+
+<p>우리는 BigBenchAudio의 일부 오디오 추론 예제와 <a href="https://huggingface.co/datasets/iNLP-Lab/GlobeAudio">GlobeAudio</a>의 몇 가지 다국어 오디오 예제(러시아어 및 중국어 다지선다형 문제의 마지막 단어를 묻는 문제)에 대해 분위기 평가를 수행했습니다. 우리가 테스트한 <a href="https://huggingface.co/datasets/ArtificialAnalysis/big_bench_audio">BigBenchAudio</a> 예제는 논리적 진술과 질문으로 구성되며, 형식적 오류를 묻는 문제(오디오의 맥락에서 논증이 논리적으로 도출될 수 있는지 여부)나 객체 개수 세기(오디오에 나타난 여러 개의 특정 객체의 총 개수를 묻는 문제)일 수 있습니다. 이 벤치마크는 원래 음성-대-음성 추론을 위해 만들어졌지만, 이 모델의 오디오 추론 능력을 확인하고자 합니다. GlobeAudio의 경우 질문이 비교적 간단하여 추론 노력 0.1로 진행했습니다. GlobeAudio의 각 언어의 첫 번째 예제를 실행했습니다. 모든 질문과 노력에서 테스트를 통과했으며, 최소 노력에서 두 번째 형식적 오류 예제만 실패했고, 따라서 각 문제의 토큰 사용량만 추론 노력에 비례하여 제공합니다. 분위기 평가 결과 및 오디오 파일은 <a href="https://huggingface.co/buckets/merve/inkling">here</a>에 있습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">GlobeAudio</th>
+      <th style="text-align: left">질문</th>
+      <th style="text-align: left">최소 추론 노력 시 완료 토큰 수</th>
+      <th style="text-align: left">중간 추론 노력 시 완료 토큰 수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Russian (마지막 단어를 묻는 문제)</td>
+      <td style="text-align: left">오디오 녹음의 마지막 단어는 무엇입니까? 1. Россия 2. Свидетелем 3. Москва 4. Событий 정답 하나의 정확한 텍스트로 답하십시오.</td>
+      <td style="text-align: left">130</td>
+      <td style="text-align: left">179</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Russian (발화자의 직업을 묻는 문제)</td>
+      <td style="text-align: left">화자가 어떤 직업을 가지고 있을 가능성이 있습니까? 1. Репортершей 2. Блоггершей 3. Учительницей истории 4. Ведущей развлекательного шоу 정답 하나의 정확한 텍스트로 답하십시오.</td>
+      <td style="text-align: left">105</td>
+      <td style="text-align: left">136</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Chinese (발화 속도 묻기)</td>
+      <td style="text-align: left">播报员의 말하는 속도에 변화가 있습니까? 1. 갑자기 빨라짐 2. 갑자기 느려짐 3. 변하지 않음 4. 시시각각 변함  정답 하나의 정확한 텍스트로 답하십시오.</td>
+      <td style="text-align: left">111</td>
+      <td style="text-align: left">289</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Big Bench Audio</th>
+      <th style="text-align: left">최저 추론 노력 토큰</th>
+      <th style="text-align: left">중간 추론 노력 토큰</th>
+      <th style="text-align: left">최고 추론 노력 토큰</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Formal Fallacy (10)</td>
+      <td style="text-align: left">285</td>
+      <td style="text-align: left">335</td>
+      <td style="text-align: left">444</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Formal Fallacy (39)</td>
+      <td style="text-align: left">275 (실패)</td>
+      <td style="text-align: left">555</td>
+      <td style="text-align: left">778</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Object Counting (680)</td>
+      <td style="text-align: left">150</td>
+      <td style="text-align: left">233</td>
+      <td style="text-align: left">161</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>분위기에 대한 추가 메모:</strong></p>
+
+<ul>
+  <li>비전과 유사하게, 모델은 먼저 음성을 글로 전사한 뒤 질문에 답합니다.</li>
+  <li>추론에서 토큰 절약은 프롬프트가 큰 차이를 만듭니다. 예를 들어 러시아어 테스트에서 오디오 속의 다른 답들이 나타나더라도 모델은 정답을 선택했습니다.</li>
+  <li>다지선다형 문제의 해답은 모델의 자체 추론 구조를 도와주지만, 개방형 질문의 경우 MCQA에 비해 성능이 떨어지는 경향이 있습니다. 일반적으로 생각의 흐름은 문자 인식(OCR) → 특성화(특징 파악) → 각 옵션 평가 → 답변입니다.</li>
+  <li>0.7 추론 노력(중간)이 좋은 절충점으로 보입니다.</li>
+</ul>
+
+<h3 id="포스트-트레이닝post-training">포스트 트레이닝(Post-training)</h3>
+
+<p>Inkling을 포스트 트레이닝에 사용하고 싶다면 Thinking Machines가 포스트 트레이닝 오픈 가중치 모델 관리 도구인 <code class="language-plaintext highlighter-rouge">tinker</code>를 구축했습니다. 그들의 쿡북에는 파인튜닝, 디스틸레이션(distillation), 강화학습에 대한 예제가 포함되어 있습니다.</p>
+
+<p>Inkling을 tinker와 OpenEnv라는 에이전트형 RL 환경 도구로 포스트 트레이닝했습니다. 환경 없이도 환경을 예측하도록 모델을 학습시키는 ECHO 알고리즘을 사용했고, 환경에서 생성된 토큰에 대해 다음 토큰 교차 엔트로피 손실을 적용하는 한편, 에이전트의 행동에 대한 일반적인 정책 학습을 함께 수행했습니다. 이는 별도의 모델, 교사, 또는 추가 롤아웃 없이 정책에 암시적 세계 모델을 가르칩니다. <a href="https://github.com/huggingface/OpenEnv/blob/main/examples/echo_world_model/backends/tinker_echo_demo.py">example</a>를 확인해 보십시오.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/inkling-blog-assets/resolve/trackio.png" alt="Inkling post-training metrics" /></p>
+
+<details>
+<summary>RL Example with Tinker and OpenEnv</summary>
+
+```
+git clone https://github.com/huggingface/OpenEnv.git
+cd OpenEnv
+
+# Add TINKER_API_KEY=... to .env, then run:
+uv run --env-file .env \
+  examples/echo_world_model/backends/tinker_echo_demo.py
+
+```
+
+
+</details>
+
+<p>**Transformer 강화학습(Transformers Reinforcement Learning)을 다루는 경우, 지식 증류 설정에서 Inkling을 교사 모델로 사용하는 것을 권장합니다. 예를 들어 Inkling의 문서 이해 능력을 활용하여 더 작은(on-device) 모델의 성능을 향상시킬 수 있습니다. <a href="https://github.com/huggingface/trl/blob/main/examples/scripts/gold.py">this example</a>에서는 트랜스포머 강화학습 라이브러리와 GOLD 알고리즘을 사용하여 지식을 증류합니다. GOLD는 서로 다른 토크나이저 간에 토큰 로짓을 매칭하므로 허브의 어떤 모델로도 쉽게 증류할 수 있습니다.</p>
+
+<h2 id="section-5">Slurm 스크립트</h2>
+
+<p>클러스터에 Inkling을 배포하기 위해 트랜스포머 API로 서비스를 제공하는 SLURM 스크립트와 다양한 모달리티로 엔드포인트를 쿼리하는 방법을 제공합니다. 명령을 업데이트하여 이 스크립트를 vLLM이나 SGlang에 맞게 조정할 수 있습니다. 이 스크립트는 <a href="https://huggingface.co/buckets/merve/inkling">here</a>에 있습니다.</p>
+
+<ul>
+  <li><a href="https://huggingface.co/buckets/merve/inkling/tree/slurm/submit_inkling_generate.sbatch">Submit inference job</a></li>
+  <li><a href="https://huggingface.co/buckets/merve/inkling/tree/slurm/generate_inkling.py">Python generation script</a></li>
+</ul>
+
+<h2 id="section-6">벤치마크 결과</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th> </th>
+      <th>Inkling</th>
+      <th>Nemotron 3 Ultra</th>
+      <th>Kimi K2.5</th>
+      <th>Kimi K2.6</th>
+      <th>GLM 5.2</th>
+      <th>DeepSeek V4 Pro</th>
+      <th>Gemini 3.1 Pro (고급)</th>
+      <th>Claude Fable 5 (최대)</th>
+      <th>GPT 5.6 Sol (초고)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>추론</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>HLE(텍스트 전용)</td>
+      <td>29.7%</td>
+      <td>26.6%</td>
+      <td>29.4%</td>
+      <td>35.9%</td>
+      <td>40.1%</td>
+      <td>35.9%</td>
+      <td>44.7%</td>
+      <td>53.3%</td>
+      <td>47.2%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>HLE(도구 포함)</td>
+      <td>46.0%</td>
+      <td>37.4%</td>
+      <td>50.2%</td>
+      <td>54.0%</td>
+      <td>54.7%</td>
+      <td>48.2%</td>
+      <td>51.4%</td>
+      <td>64.5%</td>
+      <td>55.0%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>AIME 2026</td>
+      <td>97.1%</td>
+      <td>94.2%</td>
+      <td>95.8%</td>
+      <td>96.4%</td>
+      <td>99.2%</td>
+      <td>96.7%</td>
+      <td>98.3%</td>
+      <td>–</td>
+      <td>99.9%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>GPQA Diamond</td>
+      <td>87.2%</td>
+      <td>86.7%</td>
+      <td>87.9%</td>
+      <td>91.1%</td>
+      <td>89.5%</td>
+      <td>88.8%</td>
+      <td>94.1%</td>
+      <td>92.6%</td>
+      <td>94.1%</td>
+    </tr>
+    <tr>
+      <td><strong>에이전트형(코딩)</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>SWEBench Verified</td>
+      <td>77.6%</td>
+      <td>70.7%</td>
+      <td>76.8%</td>
+      <td>80.2%</td>
+      <td>–</td>
+      <td>80.6%</td>
+      <td>80.6%</td>
+      <td>95.0%</td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>SWEBench Pro (Public)</td>
+      <td>54.3%</td>
+      <td>46.4%</td>
+      <td>50.7%</td>
+      <td>58.6%</td>
+      <td>62.1%</td>
+      <td>55.4%</td>
+      <td>54.2%</td>
+      <td>80.0%</td>
+      <td>64.6%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Terminal Bench 2.1 (Best Harness)</td>
+      <td>63.8</td>
+      <td>56.4</td>
+      <td>51.3</td>
+      <td>71.3</td>
+      <td>82.7</td>
+      <td>64</td>
+      <td>73.8</td>
+      <td>84.6</td>
+      <td>89.5</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>GDPVal-AA v2</td>
+      <td>1233</td>
+      <td>1164</td>
+      <td>1009</td>
+      <td>1190</td>
+      <td>1514</td>
+      <td>1307</td>
+      <td>962</td>
+      <td>1760</td>
+      <td>1748</td>
+    </tr>
+    <tr>
+      <td><strong>에이전트형(일반)</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>MCP Atlas</td>
+      <td>74.1%</td>
+      <td>44.7%</td>
+      <td>64.0%</td>
+      <td>68.1%</td>
+      <td>77.8%</td>
+      <td>73.2%</td>
+      <td>78.2%</td>
+      <td>83.3%</td>
+      <td>81.8%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Tau 3 Banking</td>
+      <td>23.7%</td>
+      <td>13.8%</td>
+      <td>13.2%</td>
+      <td>20.6%</td>
+      <td>26.8%</td>
+      <td>25.8%</td>
+      <td>16.5%</td>
+      <td>26.8%</td>
+      <td>33.0%</td>
+    </tr>
+    <tr>
+      <td><strong>사실성</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>BrowseComp (w/ Ctx)</td>
+      <td>77.1%</td>
+      <td>–</td>
+      <td>74.9%</td>
+      <td>83.2%</td>
+      <td>–</td>
+      <td>83.4%</td>
+      <td>85.9%</td>
+      <td>88.0%</td>
+      <td>89.4%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>SimpleQA Verified</td>
+      <td>43.9%</td>
+      <td>32.4%</td>
+      <td>36.9%</td>
+      <td>38.7%</td>
+      <td>38.1%</td>
+      <td>57.0%</td>
+      <td>77.3%</td>
+      <td>68.3%</td>
+      <td>71.6%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>AA Omniscience</td>
+      <td>1.0%</td>
+      <td>-1.0%</td>
+      <td>-8.0%</td>
+      <td>6.0%</td>
+      <td>4.0%</td>
+      <td>-10.0%</td>
+      <td>33.0%</td>
+      <td>40.0%</td>
+      <td>22.0%</td>
+    </tr>
+    <tr>
+      <td><strong>챗(Chat)</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>IFBench</td>
+      <td>79.8%</td>
+      <td>81.4%</td>
+      <td>70.2%</td>
+      <td>76.0%</td>
+      <td>73.3%</td>
+      <td>76.5%</td>
+      <td>77.1%</td>
+      <td>63.5%</td>
+      <td>72.7%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Global-MMLU-Lite</td>
+      <td>88.7%</td>
+      <td>85.6%</td>
+      <td>84.0%</td>
+      <td>88.4%</td>
+      <td>89.2%</td>
+      <td>89.3%</td>
+      <td>92.7%</td>
+      <td>93.3%</td>
+      <td>91.8%</td>
+    </tr>
+    <tr>
+      <td><strong>비전</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>MMMU Pro (Standard 10)</td>
+      <td>73.3%</td>
+      <td>–</td>
+      <td>75.0%</td>
+      <td>79.0%</td>
+      <td>–</td>
+      <td>–</td>
+      <td>82.0%</td>
+      <td>84.2%</td>
+      <td>83.0%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Charxiv RQ</td>
+      <td>78.1%</td>
+      <td>–</td>
+      <td>77.5%</td>
+      <td>80.4%</td>
+      <td>–</td>
+      <td>–</td>
+      <td>80.2%</td>
+      <td>86.5%</td>
+      <td>84.7%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Charxiv RQ (with python)</td>
+      <td>82.0%</td>
+      <td>–</td>
+      <td>78.7%</td>
+      <td>86.7%</td>
+      <td>–</td>
+      <td>–</td>
+      <td>89.9%</td>
+      <td>89.4%</td>
+      <td>87.8%</td>
+    </tr>
+    <tr>
+      <td><strong>오디오</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Audio MC</td>
+      <td>56.6%</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>66.8%</td>
+      <td>–</td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>MMAU</td>
+      <td>77.2%</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>82.5%</td>
+      <td>–</td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>VoiceBench</td>
+      <td>91.4%</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>–</td>
+      <td>94.3%</td>
+      <td>–</td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td><strong>안전(Safety)</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>FORTRESS (Adversarial)</td>
+      <td>78.0%</td>
+      <td>77.6%</td>
+      <td>54.1%</td>
+      <td>65.6%</td>
+      <td>71.3%</td>
+      <td>36.0%</td>
+      <td>65.2%</td>
+      <td>96.0%</td>
+      <td>82.4%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>FORTRESS (Benign)</td>
+      <td>95.9%</td>
+      <td>90.5%</td>
+      <td>98.3%</td>
+      <td>97.2%</td>
+      <td>90.0%</td>
+      <td>98.5%</td>
+      <td>98.0%</td>
+      <td>55.1%</td>
+      <td>98.1%</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>StrongREJECT</td>
+      <td>98.6%</td>
+      <td>98.7%</td>
+      <td>99.5%</td>
+      <td>99.8%</td>
+      <td>98.5%</td>
+      <td>98.6%</td>
+      <td>98.0%</td>
+      <td>98.7%</td>
+      <td>98.5%</td>
+    </tr>
+  </tbody>
+</table>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">파이토치의 프로파일링(3부): 어텐션이 전부다</title><link href="/pr-preview/pr-172/torch-attention-profile/" rel="alternate" type="text/html" title="파이토치의 프로파일링(3부): 어텐션이 전부다" /><published>2026-07-10T00:00:00+09:00</published><updated>2026-07-10T00:00:00+09:00</updated><id>/pr-preview/pr-172/torch-attention-profile</id><content type="html" xml:base="/pr-preview/pr-172/torch-attention-profile/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#파이토치의-프로파일링3부-어텐션이-전부다" id="markdown-toc-파이토치의-프로파일링3부-어텐션이-전부다">파이토치의 프로파일링(3부): 어텐션이 전부다</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">나이브 어텐션</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">인플레이스 인과 마스크가 적용된 나이브 어텐션</a></li>
@@ -1993,253 +3007,4 @@ Review instructions:
 
 <p>다음에 무엇을 구축할지는 커뮤니티가 격차가 가장 큰 지점을 어디에 두는지에 달려 있습니다. 현재 벤치마크에 잘 반영되지 않은 배포 환경이나 사용 사례에 대해 작업하신다면 저희에게 들려 주세요. FFASR Leaderboard는 확장하도록 설계되었고, 그 방향은 실제 필요를 반영해야 합니다.</p>
 
-<p>모델을 제출하고, Analysis 탭을 탐색하며, <a href="https://huggingface.co/spaces/treble-technologies/ffasr/discussions">FFASR forum</a>에 아이디어와 제안을 남겨 주시고, 현장이 다루는 문제에 실제로 유용한 벤치마크를 함께 만들어 갑시다.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</title><link href="/pr-preview/pr-172/cross-origin-storage/" rel="alternate" type="text/html" title="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" /><published>2026-06-23T00:00:00+09:00</published><updated>2026-06-23T00:00:00+09:00</updated><id>/pr-preview/pr-172/cross-origin-storage</id><content type="html" xml:base="/pr-preview/pr-172/cross-origin-storage/"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#transformersjs에서-제안된-cross-origin-storage-api-실험하기" id="markdown-toc-transformersjs에서-제안된-cross-origin-storage-api-실험하기">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a>    <ul>
-      <li><a href="#section-1" id="markdown-toc-section-1">캐시 도전 과제</a>        <ul>
-          <li><a href="#모델-리소스" id="markdown-toc-모델-리소스">모델 리소스</a></li>
-          <li><a href="#wasm-런타임-리소스" id="markdown-toc-wasm-런타임-리소스">Wasm 런타임 리소스</a></li>
-          <li><a href="#캐시-분리" id="markdown-toc-캐시-분리">캐시 분리</a>            <ul>
-              <li><a href="#ai-모델-리소스-제공" id="markdown-toc-ai-모델-리소스-제공">AI 모델 리소스 제공</a></li>
-              <li><a href="#wasm-런타임-리소스-제공" id="markdown-toc-wasm-런타임-리소스-제공">Wasm 런타임 리소스 제공</a></li>
-              <li><a href="#chrome의-구현" id="markdown-toc-chrome의-구현">Chrome의 구현</a></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li><a href="#section-2" id="markdown-toc-section-2">Cross-Origin Storage API 도입</a>        <ul>
-          <li><a href="#누가-무엇을-읽을-수-있는지-제어" id="markdown-toc-누가-무엇을-읽을-수-있는지-제어">누가 무엇을 읽을 수 있는지 제어</a></li>
-          <li><a href="#integrity-by-design" id="markdown-toc-integrity-by-design">Integrity by design</a></li>
-          <li><a href="#프라이버시를-해치지-않는-유용성" id="markdown-toc-프라이버시를-해치지-않는-유용성">프라이버시를 해치지 않는 유용성</a></li>
-          <li><a href="#transformersjs-예제에-대한-시사점" id="markdown-toc-transformersjs-예제에-대한-시사점">Transformers.js 예제에 대한 시사점</a></li>
-          <li><a href="#지금-바로-시도해-보기" id="markdown-toc-지금-바로-시도해-보기">지금 바로 시도해 보기</a></li>
-        </ul>
-      </li>
-      <li><a href="#section-3" id="markdown-toc-section-3">행동 촉구</a></li>
-    </ul>
-  </li>
-</ul>
-<!--toc-->
-<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/cross-origin-storage">Experimenting with the proposed Cross-Origin Storage API in Transformers.js</a>를 한국어로 번역한 글입니다.</em></p>
-
-<!-- Source: https://huggingface.co/blog/cross-origin-storage -->
-
-<hr />
-
-<!--
-Review instructions:
-- Verify the Korean translation against the source post.
-- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
--->
-
-<h1 id="transformersjs에서-제안된-cross-origin-storage-api-실험하기">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</h1>
-
-<p>(구글의 Chrome 팀에서 온 개발자 관계 엔지니어 <a href="https://blog.tomayac.com/">Thomas Steiner</a>의 게스트 포스트입니다.)</p>
-
-<p>Transformers.js는 웹 개발자들에게 웹 앱에서 트랜스포머의 힘을 작업별 파이프라인을 통해 간단히 활용하는 방법을 제공합니다. 브라우저에서 추론을 실행하려면 개발자는 <a href="https://huggingface.co/docs/transformers.js/en/api/pipelines"><code class="language-plaintext highlighter-rouge">pipeline()</code></a>의 인스턴스를 생성하고 파이프라인을 사용할 작업을 지정합니다. 구체적인 예로 아래 스니펫은 자동 음성 인식(ASR) 파이프라인을 설정하는 방법을 보여줍니다.</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">pipeline</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.2.0</span><span class="dl">'</span><span class="p">;</span>
-
-<span class="kd">const</span> <span class="nx">asr</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">pipeline</span><span class="p">(</span>
-  <span class="dl">'</span><span class="s1">automatic-speech-recognition</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Xenova/whisper-tiny.en</span><span class="dl">'</span><span class="p">,</span>
-  <span class="p">{</span> <span class="na">device</span><span class="p">:</span> <span class="dl">'</span><span class="s1">webgpu</span><span class="dl">'</span> <span class="p">},</span>
-<span class="p">);</span>
-<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">asr</span><span class="p">(</span><span class="dl">'</span><span class="s1">jfk.wav</span><span class="dl">'</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/cross-origin-storage/87a91qnbicf.png" alt="A minimalistic example of the automatic speech recognition pipeline." /></p>
-
-<h2 id="section-1">캐시 도전 과제</h2>
-
-<p>소스 코드에서 제가 <a href="https://huggingface.co/Xenova/whisper-tiny.en"><code class="language-plaintext highlighter-rouge">Xenova/whisper-tiny.en</code></a>를 모델로 지정한 것을 보게 될 텐데, 이것은 일반적인 영어 자동 음성 인식 작업에 꽤 적합한 선택입니다. 실제로 이는 Transformers.js의 <a href="https://github.com/huggingface/transformers.js/blob/main/packages/transformers/src/pipelines/index.js">default model resolution</a>에 따라 기본 모델이며, 연결된 <a href="https://github.com/huggingface/transformers.js/blob/bc9cf7400f4f2c8695016699f879e31026ff0313/packages/transformers/src/pipelines/index.js#L151-L158">excerpt</a>에 의해 결정됩니다.</p>
-
-<h3 id="모델-리소스">모델 리소스</h3>
-
-<p>당신이 <a href="https://googlechrome.github.io/samples/transformersjs-automatic-speech-recognition/index.html">run this example in the browser</a>를 사용하면, Transformers.js는 관련 모델 리소스와 Wasm 파일의 다운로드 및 캐싱을 자동으로 처리합니다. 아래 스크린샷은 앱에 방문한 후 Chrome DevTools <a href="https://developer.chrome.com/docs/devtools/storage/cache">Cache storage</a> 섹션을 보여줍니다. 페이지를 다시 로드하면 리소스가 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">Cache API</a>에서 제공되고, 모델은 거의 즉시 결과를 반환합니다.</p>
-
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/cross-origin-storage/otd8tt1gusb.png" alt="The Chrome DevTools Cache storage section showing Whisper AI model resources and Wasm runtime files after visiting the app." /></p>
-
-<p>그러나 <code class="language-plaintext highlighter-rouge">Xenova/whisper-tiny.en</code>은(는) 인기 있는 모델이며(앞에서 언급했듯이 Transformer.js의 기본 ASR 모델이기도 합니다), 이를 사용하는 앱이 여러 개일 수 있음을 쉽게 상상할 수 있습니다. 이 상황을 시뮬레이션하기 위해, 이전의 동일한 예제 앱을 <a href="https://rawcdn.rawgit.net/GoogleChrome/samples/c4192bd7a3c66fc288a7b22b77acb935df00b8a1/transformersjs-automatic-speech-recognition/index.html">different origin</a>에서 제공하는 것으로 가정합니다. 이 다른 원본(origin) 애플리케이션을 방문하면, 거의 즉시 사용할 수 있도록 하는 대신 브라우저는 모든 모델 리소스를 다시 다운로드하고 캐시해야 하므로 바이트 단위로 동일하더라도 중복 다운로드 및 저장이 발생합니다. 이 toy 예제에서도 이는 누적되어 177 MB의 중복 다운로드 및 저장으로 이어진다는 점을 Chrome DevTools의 Storage 섹션에서 확인할 수 있습니다 <a href="https://developer.chrome.com/docs/devtools/application#open_the_application_panel">Application panel</a>. 이를 상상해 보실 수 있습니다.</p>
-
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/cross-origin-storage/9byoniem0pw.png" alt="The Chrome DevTools Storage overview showing 177 MB of used storage." /></p>
-
-<h3 id="wasm-런타임-리소스">Wasm 런타임 리소스</h3>
-
-<p>더 악화됩니다. toy 예제에 두 번째 파이프라인으로 감성 분석을 추가해 보겠습니다. 감성 분석 <a href="https://github.com/huggingface/transformers.js/blob/bc9cf7400f4f2c8695016699f879e31026ff0313/packages/transformers/src/pipelines/index.js#L65">by default</a>은 <a href="https://huggingface.co/Xenova/distilbert-base-uncased-finetuned-sst-2-english"><code class="language-plaintext highlighter-rouge">Xenova/distilbert-base-uncased-finetuned-sst-2-english</code></a> 모델을 사용합니다. 모델을 명시하지 않으면 Transformers.js의 기본 모델 해상도는 자동으로 이를 선택합니다.</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">classifier</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">pipeline</span><span class="p">(</span><span class="dl">'</span><span class="s1">sentiment-analysis</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">sentiment</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">classifier</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
-<span class="nx">pre</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="dl">'</span><span class="se">\n\n</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nx">sentiment</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">));</span>
-</code></pre></div></div>
-
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/cross-origin-storage/le7l1km7o4g.png" alt="image" /></p>
-
-<p>두 개의 완전히 다른 AI 모델이지만, 이들은 Transformers.js가 기반으로 삼는 동일한 4,733 kB <code class="language-plaintext highlighter-rouge">ort-wasm-simd-threaded.asyncify.wasm</code> WebAssembly(Wasm) 런타임 파일 <a href="https://onnxruntime.ai/docs/api/js/interfaces/Env.WasmFilePaths.html#wasm">from the underlying ONNX Runtime library</a>에 의존합니다. <a href="https://rawcdn.rawgit.net/GoogleChrome/samples/d47114a15637383015c274e7bdcd81e1a17b0ccf/transformersjs-automatic-speech-recognition/index2.html">extended demo on a different origin</a>를 열어보면 Wasm 런타임도 다시 다운로드되고 캐시된다는 것을 <a href="https://developer.chrome.com/docs/devtools/network#load"><strong>Network</strong> tab</a>에서 확인하실 수 있습니다.</p>
-
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/cross-origin-storage/pz12g20fqeg.png" alt="Chrome DevTools Network panel showing the download of the Wasm runtime resource." /></p>
-
-<p>따라서 동일한 AI 모델을 공유하지 않는 앱이라도 브라우저는 이미 보유 중인 공유 Wasm 리소스에 대해 중복 요청을 하며, 그 위에 다시 캐시하기도 하여 하드 디스크 공간을 차지합니다.</p>
-
-<h3 id="캐시-분리">캐시 분리</h3>
-
-<h4 id="ai-모델-리소스-제공">AI 모델 리소스 제공</h4>
-
-<p>기본적으로, <strong>AI 모델 리소스</strong>는 <a href="https://huggingface.co/docs/hub/en/models-the-hub">Hugging Face Hub</a>에서 오며 궁극적으로 허깅페이스 CDN에서 제공합니다. 브라우저는 <a href="https://huggingface.co/Xenova/distilbert-base-uncased-finetuned-sst-2-english/resolve/main/config.json"><code class="language-plaintext highlighter-rouge">https://huggingface.co/Xenova/distilbert-base-uncased-finetuned-sst-2-english/resolve/main/config.json</code></a> 같은 리소스를 요청하고, 이 리소스는 이 경우 최종 CDN URL인 <a href="https://huggingface.co/api/resolve-cache/models/Xenova/distilbert-base-uncased-finetuned-sst-2-english/0b6928efcb76139cae2c6881d49cda67fe119f42/config.json?%2FXenova%2Fdistilbert-base-uncased-finetuned-sst-2-english%2Fresolve%2Fmain%2Fconfig.json=&amp;etag=%223c36342ef1f74de2797d667c68c6b7b988d0b87c%22"><code class="language-plaintext highlighter-rouge">https://huggingface.co/api/resolve-cache/models/Xenova/distilbert-base-uncased-finetuned-sst-2-english/0b6928efcb76139cae2c6881d49cda67fe119f42/config.json?%2FXenova%2Fdistilbert-base-uncased-finetuned-sst-2-english%2Fresolve%2Fmain%2Fconfig.json=&amp;etag=%223c36342ef1f74de2797d667c68c6b7b988d0b87c%22</code></a>로 리다이렉션됩니다.</p>
-
-<h4 id="wasm-런타임-리소스-제공">Wasm 런타임 리소스 제공</h4>
-
-<p>기본적으로 <strong>Wasm 런타임 리소스</strong>는 <a href="https://www.jsdelivr.com/">jsDelivr CDN</a>에서 제공됩니다. 예를 들어, <code class="language-plaintext highlighter-rouge">ort-wasm-simd-threaded.asyncify.wasm</code>은 이 글을 쓰는 시점에 <a href="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.26.0-dev.20260416-b7804b056c/dist/ort-wasm-simd-threaded.asyncify.wasm"><code class="language-plaintext highlighter-rouge">https://cdn.jsdelivr.net/npm/onnxruntime-web@1.26.0-dev.20260416-b7804b056c/dist/ort-wasm-simd-threaded.asyncify.wasm</code></a>에서 나옵니다.</p>
-
-<p>다양한 앱이 서로 다른 오리진에서 실행되더라도 결국 동일한 CDN URL에서 리소스를 제공한다면 캐싱 문제는 없을 것이라고 생각할 수 있습니다. 하지만 오랜 기간 브라우저에서의 캐싱 방식은 그렇지 않습니다. 기사 <a href="https://developer.chrome.com/blog/http-cache-partitioning">Gaining security and privacy by partitioning the cache</a>가 모든 세부 정보를 다룹니다. 본질적으로, 캐시가 오리진별로 분리되어 있어 타이밍 공격을 방지합니다: 웹사이트가 HTTP 요청에 응답하는 데 걸리는 시간은 브라우저가 과거에 같은 리소스에 접근했다는 것을 암시할 수 있어 보안 및 개인정보 유출 취약점을 만들 수 있습니다.</p>
-
-<h4 id="chrome의-구현">Chrome의 구현</h4>
-
-<p>구체적인 구현은 브라우저에 따라 다를 수 있지만 Chrome에서는 캐시된 리소스가 <strong>리소스 URL</strong> 외에 네트워크 격리 키(Network Isolation Key)로도 키가 부여됩니다. 네트워크 격리 키는 <strong>최상위 사이트</strong>와 <strong>현재 프레임 사이트</strong>로 구성됩니다. 앞의 toy 예제가 <code class="language-plaintext highlighter-rouge">https://googlechrome.github.io</code>와 <code class="language-plaintext highlighter-rouge">https://rawcdn.rawgit.net</code>에서 호스팅되었다고 가정하고, 둘 다 <code class="language-plaintext highlighter-rouge">https://cdn.jsdelivr.net/npm/onnxruntime-web@1.26.0-dev.20260416-b7804b056c/dist/ort-wasm-simd-threaded.asyncify.wasm</code>의 Wasm 런타임을 사용한다면, 캐시 키는 아래 표와 같이 보일 것입니다.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="2">Network Isolation Key</th>
-      <th rowspan="2"><strong>Resource URL</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Top-level site</strong></td>
-      <td><strong>Current-frame site</strong></td>
-    </tr>
-    <tr>
-      <td><p><pre>
-https://googlechrome.github.io
-</pre></p></td>
-      <td><p><pre>
-https://googlechrome.github.io
-</pre></p></td>
-      <td><p><pre>
-https://cdn.jsdelivr.net/npm/onnxruntime-web@1.26.0-dev.20260416-b7804b056c/dist/ort-wasm-simd-threaded.asyncify.wasm
-</pre></p></td>
-    </tr>
-    <tr>
-      <td><p><pre>
-https://rawcdn.rawgit.net
-</pre></p></td>
-      <td><p><pre>
-https://rawcdn.rawgit.net
-</pre></p></td>
-      <td><p><pre>
-https://cdn.jsdelivr.net/npm/onnxruntime-web@1.26.0-dev.20260416-b7804b056c/dist/ort-wasm-simd-threaded.asyncify.wasm
-</pre></p></td>
-    </tr>
-  </tbody>
-</table>
-
-<p>리소스 URL이 정확히 같더라도 네트워크 격리 키가 일치하지 않으면 캐시 히트가 발생하지 않아 중복 다운로드 및 중복 저장이 발생합니다. 이것이 Cross-Origin Storage 제안이 해결하고자 하는 문제입니다.</p>
-
-<h2 id="section-2">Cross-Origin Storage API 도입</h2>
-
-<blockquote>
-  <p><strong>💡 주의:</strong> Cross-Origin Storage API는 초기 단계의 제안으로 최종 확정된 것은 아닙니다. 제안된 API가 아직 어떤 브라우저에서도 기본적으로 구현되어 있지 않더라도, 실험해 보기를 기다릴 필요는 없습니다. <a href="https://chromewebstore.google.com/detail/cross-origin-storage/denpnpcgjgikjpoglpjefakmdcbmlgih">Cross-Origin Storage extension</a>를 설치하여 모든 페이지에 <code class="language-plaintext highlighter-rouge">navigator.crossOriginStorage</code> 폴리필을 주입하고 전체 흐름을 테스트해 보십시오.</p>
-</blockquote>
-
-<p>제안된 <strong><a href="https://github.com/WICG/cross-origin-storage">Cross-Origin Storage</a> (COS) API</strong>는 웹 앱이 원점 경계를 넘어 큰 파일을 저장하고 검색할 수 있도록 하는 전용 <code class="language-plaintext highlighter-rouge">navigator.crossOriginStorage</code> 인터페이스를 도입합니다. 이는 URL이 아니라 암호학적 해시로 식별됩니다.</p>
-
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/cross-origin-storage/klwb5fryaa.png" alt="The Cross-Origin Storage API logo: a stylized walking person, as typically encountered on crosswalk signs." width="200" height="200" /></p>
-
-<p>암호학적 해시에 관한 마지막 포인트가 핵심입니다. COS는 파일을 URL이나 오리진이 아니라 <strong>해시</strong>로 식별하기 때문에, <code class="language-plaintext highlighter-rouge">ort-wasm-simd-threaded.asyncify.wasm</code> Wasm 런타임이 <code class="language-plaintext highlighter-rouge">https://googlechrome.github.io</code> 방문 중 다운로드한 것과 <code class="language-plaintext highlighter-rouge">https://rawcdn.rawgit.net</code>가 막 요청하려는 것이 동일한 것으로 인식됩니다. 어느 오리진이 그것을 가져갔든 상관없이 말이죠. 기본 흐름을 보여주는 아래 코드 조각을 확인해 보세요.</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">hash</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">algorithm</span><span class="p">:</span> <span class="dl">'</span><span class="s1">SHA-256</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">value</span><span class="p">:</span> <span class="dl">'</span><span class="s1">8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4</span><span class="dl">'</span><span class="p">,</span>
-<span class="p">};</span>
-
-<span class="k">try</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="nx">handle</span> <span class="o">=</span> <span class="k">await</span> <span class="nb">navigator</span><span class="p">.</span><span class="nx">crossOriginStorage</span><span class="p">.</span><span class="nf">requestFileHandle</span><span class="p">(</span><span class="nx">hash</span><span class="p">);</span>
-  <span class="c1">// Cache hit! Get the file as a Blob and use it directly.</span>
-  <span class="kd">const</span> <span class="nx">fileBlob</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">getFile</span><span class="p">();</span>
-<span class="p">}</span> <span class="k">catch </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Cache miss. Download from network, then store for next time.</span>
-  <span class="kd">const</span> <span class="nx">fileBlob</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://cdn.jsdelivr.net/.../ort-wasm-simd-threaded.asyncify.wasm</span><span class="dl">'</span><span class="p">)</span>
-    <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">r</span> <span class="o">=&gt;</span> <span class="nx">r</span><span class="p">.</span><span class="nf">blob</span><span class="p">());</span>
-  <span class="kd">const</span> <span class="nx">handle</span> <span class="o">=</span> <span class="k">await</span> <span class="nb">navigator</span><span class="p">.</span><span class="nx">crossOriginStorage</span><span class="p">.</span><span class="nf">requestFileHandle</span><span class="p">(</span>
-    <span class="nx">hash</span><span class="p">,</span>
-    <span class="p">{</span> <span class="na">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">origins</span><span class="p">:</span> <span class="dl">'</span><span class="s1">*</span><span class="dl">'</span> <span class="p">},</span>
-  <span class="p">);</span>
-  <span class="kd">const</span> <span class="nx">writableStream</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">createWritable</span><span class="p">();</span>
-  <span class="k">await</span> <span class="nx">writableStream</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="nx">fileBlob</span><span class="p">);</span>
-  <span class="k">await</span> <span class="nx">writableStream</span><span class="p">.</span><span class="nf">close</span><span class="p">();</span>  
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>리소스가 COS에 있으면, <a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileHandle"><code class="language-plaintext highlighter-rouge">FileSystemFileHandle</code></a>를 받아 이를 통해 <a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileHandle/getFile"><code class="language-plaintext highlighter-rouge">getFile()</code></a>로 Blob 데이터를 직접 읽을 수 있습니다(결과로 생성되는 <a href="https://developer.mozilla.org/en-US/docs/Web/API/File"><code class="language-plaintext highlighter-rouge">File</code></a>는 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob"><code class="language-plaintext highlighter-rouge">Blob</code></a>에서 파생됩니다). COS에 리소스가 없으면 네트워크로 폴백하고, 다음 앱이 필요로 할 때를 위해 COS에 리소스를 기록합니다. 이는 귀하의 앱일 수도 있고, 전혀 무관한 다른 앱일 수도 있으며, 완전히 다른 오리진에서의 실행일 수도 있습니다.</p>
-
-<p>이 API는 의도적으로 <a href="https://fs.spec.whatwg.org/">File System Standard</a>의 <a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryHandle/getFileHandle"><code class="language-plaintext highlighter-rouge">FileSystemDirectoryHandle.getFileHandle()</code></a>를 본받아 설계되었습니다. 이는 <a href="https://developer.mozilla.org/en-US/docs/Web/API/File_System_API/Origin_private_file_system">Origin Private File System</a>(OPFS) API에서 익숙하게 보신 부분과 같습니다. <code class="language-plaintext highlighter-rouge">hash</code> 매개변수는 OPFS의 <code class="language-plaintext highlighter-rouge">name</code> 매개변수와 같은 역할을 하여 자원을 고유하게 식별합니다. <code class="language-plaintext highlighter-rouge">options.create</code> 플래그도 같은 방식으로 작동합니다: 읽기 전용 접근의 경우 부재 또는 <code class="language-plaintext highlighter-rouge">false</code>이며, 쓰려는 경우 <code class="language-plaintext highlighter-rouge">true</code>가 활성화됩니다.</p>
-
-<h3 id="누가-무엇을-읽을-수-있는지-제어">누가 무엇을 읽을 수 있는지 제어</h3>
-
-<p>모든 리소스를 전역적으로 공유해서는 안됩니다. COS는 파일 저장 시 가시성을 제어하기 위해 <code class="language-plaintext highlighter-rouge">origins</code> 옵션을 통해 개발자에게 정밀한 제어를 제공합니다.</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">origins: '*'</code>를 설정하면 파일이 <strong>전역적으로 사용 가능</strong>해집니다. 어떤 오리진이든 해시로 그것을 찾을 수 있습니다. 이것은 AI 모델 리소스나 Transformers.js 예제의 Wasm 런타임에 적합한 선택입니다: 웹의 모든 앱이 하나의 캐시된 복사본으로부터 이익을 얻는 것이 핵심입니다.</li>
-  <li>특정 오리진 목록, 예를 들어 <code class="language-plaintext highlighter-rouge">origins: ['https://write.example.com', 'https://calculate.example.com']</code>과 같은 목록은 이 사이트들에 대한 접근을 <strong>제한</strong>합니다. 이는 서로의 소유 자산 간에 공유되지만 다른 누구도 검색될 필요가 없는 리소스와 같은 사례에 잘 맞습니다. 예: 상업용 오피스 도구에서 사용되는 독점 교정 AI 모델.</li>
-  <li><code class="language-plaintext highlighter-rouge">origins</code>를 완전히 생략하면 파일은 오직 <strong><a href="https://web.dev/articles/same-site-same-origin#same-site-cross-site">same-site</a> 오리진</strong>에서만 사용할 수 있습니다. 이는 조직의 모든 하위 도메인 간에 공유되는 리소스에 대한 합리적인 기본값이지만, 조직 경계를 넘지 않도록 의도된 경우가 많습니다.</li>
-</ul>
-
-<p>하나 중요한 규칙: 가시성은 상향은 가능하지만 하향은 불가능합니다. 파일이 이미 전역적으로 공유 가능하면, 나중에 제한된 <code class="language-plaintext highlighter-rouge">origins</code> 목록으로 저장하려는 시도는 묵시적으로 무시됩니다. 이는 악의적인 행위자가 공개 리소스를 재저장하고 가용성을 축소하는 것을 방지합니다. 반대로도 가능합니다: 처음에 제한된 <code class="language-plaintext highlighter-rouge">origins</code> 목록으로 저장된 파일은 나중에 더 관대하게 설정될 수 있습니다. 어떤 사이트든, 원래 저장자뿐 아니라, 같은 해시(<code class="language-plaintext highlighter-rouge">requestFileHandle()</code>)에 대해 같은 해시를 가진 리소스에 대해 더 넓은 <code class="language-plaintext highlighter-rouge">origins</code> 값을 갖고 호출할 수 있으며, 브라우저가 해시가 일치하는지 확인하면 그 리소스는 그 시점부터 더 넓은 대중에게 제공됩니다. 업그레이드가 이루어져도 반환된 핸들을 통해 전체 파일을 여전히 써야 한다는 점에 주의하십시오. 이 요건은 COS에 특정 파일이 이미 저장되어 있는지 여부를 악용하려는 사이드 채널을 방지하기 위해 존재합니다.</p>
-
-<h3 id="integrity-by-design">Integrity by design</h3>
-
-<p>COS의 미묘하지만 중요한 속성 중 하나는 브라우저가 파일을 저장할 때 해시를 검증한다는 점입니다. 저장하려는 데이터가 선언된 해시와 일치하지 않으면 기록은 오류로 실패합니다. 이로써 무결성 검사는 자동으로 이루어집니다: COS에서 파일을 읽는 앱은 기대한 정확한 바이트를 받고 있다고 확신할 수 있습니다. 네트워크 다운로드 후 직접 해시를 계산했다면 얻을 수 있었던 보장과 동일합니다.</p>
-
-<p>이것은 Transformers.js 시나리오에서 이중으로 유용합니다. 오늘날 모델 가중치를 다운로드한 후에는 CDN이 올바른 바이트를 서비스했는지 확인하는 실용적인 방법이 거의 없습니다. COS를 사용하면 스토어의 모든 파일이 기록 시점에 암묵적으로 검증되므로, 출처가 허깅페이스 CDN이든 임의의 사이트의 자체 호스팅 미러이든 관계없이 검증됩니다.</p>
-
-<h3 id="프라이버시를-해치지-않는-유용성">프라이버시를 해치지 않는 유용성</h3>
-
-<p>물론 교차 출처 공유 캐시는 분할된 HTTP 캐시와 같은 문제를 역으로 제기합니다: 어떤 사이트든 해시로 파일의 존재 여부를 확인할 수 있다면, 예를 들어 게임 엔진 Wasm 모듈이 캐시되어 있는지 확인함으로써 사용자의 브라우징 이력에 대해 뭔가를 알아낼 수 있지 않을까요?</p>
-
-<p>COS는 이를 두 가지 보완적 메커니즘으로 해결합니다:</p>
-
-<ul>
-  <li>먼저, <code class="language-plaintext highlighter-rouge">origins</code> 필드: 전역적으로 탐지 가능하지 않는 독점 리소스는 단순히 <code class="language-plaintext highlighter-rouge">origins: '*'</code>로 저장해서는 안 됩니다. 필요할 때마다 개발자 교육을 통해 고려되도록 권장됩니다.</li>
-  <li>둘째, 접근 가능성 게이팅(availability gating): 전역으로 선언된 파일이라도 충분한 수의 서로 다른 오리진에서 충분히 많이 만나지 않았다면 브라우저가 파일의 존재 여부 확인을 억제할 수 있습니다. 한두 사이트에만 나타나는 파일도 교차 사이트 식별자로 작용할 수 있기 때문에, 브라우저는 파일이 존재하지 않는 것처럼 오류를 반환할 수 있습니다. Chrome 팀은 잘 알려지지 않은 리소스에서 발생할 수 있는 프라이버시 누수를 의식하고 있으며, 캐시될 수 있는 정확한 리소스의 제한을 통해 일반적으로 이를 완화할 계획입니다. 구체적인 완화 방법은 아직 확정 중입니다.</li>
-</ul>
-
-<p>중요한 점은 에러가 결정적인 답이 아니라는 점입니다. 이는 “저장되지 않음”일 수도 있고, “저장되었지만 브라우저가 알려주지 않음”일 수도 있습니다. 애플리케이션은 항상 같은 방식으로 처리해야 하며 네트워크로의 폴백을 수행해야 합니다.</p>
-
-<h3 id="transformersjs-예제에-대한-시사점">Transformers.js 예제에 대한 시사점</h3>
-
-<p>토이 예제에서 돌아가 보자면: <code class="language-plaintext highlighter-rouge">ort-wasm-simd-threaded.asyncify.wasm</code> 런타임은 4,733 kB 크기로, 어떤 AI 모델을 사용하든 Transformers.js로 구동되는 모든 앱에서 공유됩니다. COS를 사용하면 이를 처음 로드하는 앱이 한 번 다운로드하고 그 해시의 SHA-256로 <code class="language-plaintext highlighter-rouge">origins: '*'</code>에 저장합니다. 이후의 모든 앱은 <code class="language-plaintext highlighter-rouge">https://googlechrome.github.io</code>나 <code class="language-plaintext highlighter-rouge">https://rawcdn.rawgit.net</code> 또는 다른 오리진에서도 즉시 COS에서 이를 찾습니다. 177 MB의 중복 Whisper 모델 가중치? 같은 이야기입니다: <code class="language-plaintext highlighter-rouge">Xenova/whisper-tiny.en</code>가 한 번 다운로드되고 두 번째 실행에서 해시로 인식되며 COS에서 밀리초 단위로 제공합니다. 그리고 물론 같은 일은 <code class="language-plaintext highlighter-rouge">Xenova/distilbert-base-uncased-finetuned-sst-2-english</code>에서도 발생합니다.</p>
-
-<p>Transformers.js 자체도 COS API를 라이브러리 차원에서 이미 시도 중입니다. <a href="https://github.com/huggingface/transformers.js/pull/1549">Pull request #1549</a>은 선택적 플래그(opt-in) 뒤에 실험적 COS 캐시 백엔드를 도입했습니다. 파이프라인을 설정하기 전에 한 줄의 명령으로 활성화합니다:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">env</span><span class="p">,</span> <span class="nx">pipeline</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.2.0</span><span class="dl">"</span><span class="p">;</span>
-
-<span class="c1">// 👇 Opt in to the experimental Cross-Origin Storage cache backend.</span>
-<span class="nx">env</span><span class="p">.</span><span class="nx">experimental_useCrossOriginStorage</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-
-<span class="kd">const</span> <span class="nx">asr</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">pipeline</span><span class="p">(</span><span class="dl">'</span><span class="s1">automatic-speech-recognition</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Xenova/whisper-tiny.en</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">device</span><span class="p">:</span> <span class="dl">'</span><span class="s1">webgpu</span><span class="dl">'</span> <span class="p">});</span>
-<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">asr</span><span class="p">(</span><span class="dl">'</span><span class="s1">jfk.wav</span><span class="dl">'</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>해당 플래그를 설정하면, 각 <a href="https://huggingface.co/docs/hub/en/xet/index">Xet-tracked</a> 모델 파일(대형 ONNX 가중치 파일)의 SHA-256 해시를 원시 포인터 <a href="https://huggingface.co/Xenova/whisper-tiny.en/raw/main/onnx/decoder_model.onnx">example raw pointer file</a>를 가져와서 <code class="language-plaintext highlighter-rouge">oid sha256:</code> 필드를 추출해 얻은 해시를 <code class="language-plaintext highlighter-rouge">navigator.crossOriginStorage</code>의 키로 사용합니다. 만약 다른 사이트가 먼저 COS에 저장해 두었다면 네트워크 왕복 없이 즉시 제공됩니다. 그렇지 않으면 일반 다운로드로 폴백하고 다음 호출자를 위해 COS에 결과를 저장합니다. 토이 예제에서 실제 이점은 <code class="language-plaintext highlighter-rouge">Xenova/whisper-tiny.en</code>와 <code class="language-plaintext highlighter-rouge">Xenova/distilbert-base-uncased-finetuned-sst-2-english</code>(그리고 물론 <code class="language-plaintext highlighter-rouge">ort-wasm-simd-threaded.asyncify.wasm</code>)가 서로 다른 오리진에서 요청하더라도 한 번만 교차하면 된다는 점입니다.</p>
-
-<p>해당 플래그의 <code class="language-plaintext highlighter-rouge">experimental_</code> 접두사는 의도적이며, 기반 브라우저 API가 아직 표준화되지 않았고 메이저 버전 증가 없이도 변경될 수 있음을 시사합니다.</p>
-
-<h3 id="지금-바로-시도해-보기">지금 바로 시도해 보기</h3>
-
-<p>COS API는 아직 어떤 브라우저에서도 기본적으로 구현되어 있지 않지만, 실험해 볼 수 있는 기회는 있습니다. 모든 페이지에 <code class="language-plaintext highlighter-rouge">navigator.crossOriginStorage</code> 폴리필을 주입하기 위해 <a href="https://chromewebstore.google.com/detail/cross-origin-storage/denpnpcgjgikjpoglpjefakmdcbmlgih">Cross-Origin Storage extension</a>를 설치하고 전체 흐름을 테스트해 보십시오. 시작하려면 <a href="https://github.com/web-ai-community/cross-origin-storage-extension">source code of the extension</a>를 확인하고 <a href="https://github.com/web-ai-community/cross-origin-storage-extension?tab=readme-ov-file#usage">usage instructions</a>를 따라가 보세요.</p>
-
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/cross-origin-storage/0q3rowmy67ta.png" alt="Chrome Web Store page for the Cross-Origin Storage extension." /></p>
-
-<p>확장 프로그램이 설치되면 지금 바로 전체 엔드투엔드 경험을 시도해 볼 수 있습니다: 첫 번째 <a href="https://googlechrome.github.io/samples/transformersjs-automatic-speech-recognition/index3.html">toy example with COS enabled</a>를 열고 <code class="language-plaintext highlighter-rouge">Xenova/whisper-tiny.en</code>가 로드되도록 한 뒤 <a href="https://rawcdn.rawgit.net/GoogleChrome/samples/1e4f2b8c10adc394352c6ec8327bb503bac7aba1/transformersjs-automatic-speech-recognition/index3.html">toy example with COS enabled from the second origin</a>를 열어보세요. 이전에 보셨던 177 MB의 재다운로드 대신, 모델은 COS에서 밀리초 단위로 제공합니다. 확장 팝업 창을 열면 COS가 작동하는 것을 볼 수 있습니다. 만약 <strong>리소스로 보기(View by Resource)</strong>를 클릭하면 SHA-256 해시 <code class="language-plaintext highlighter-rouge">950978b1dbcbf250335358c1236053ba19a7f7849b33dc777f4421b72b7626fa</code>가 있는 리소스가 <code class="language-plaintext highlighter-rouge">https://googlechrome.github.io</code> 및 <code class="language-plaintext highlighter-rouge">https://rawcdn.rawgit.net</code>에 걸쳐 공유되는 것을 볼 수 있습니다. 눈에 띄지 않을 수 있지만 허깅페이스에서 SHA-256 해시를 비교해 보면 <a href="https://huggingface.co/Xenova/whisper-tiny.en/blob/main/onnx/decoder_model_merged.onnx"><code class="language-plaintext highlighter-rouge">https://huggingface.co/Xenova/whisper-tiny.en/blob/main/onnx/decoder_model_merged.onnx</code></a>를 보고 계신다는 것을 확인할 수 있습니다. 지금은 이 확장이 주로 당신과 같은 파워 유저를 위한 것입니다. 브라우저에 구현되면 브라우저의 <strong>설정(Settings)</strong> 페이지에 더 친숙한 통합이 제공될 것입니다. 아래 스크린샷은 활성화된 <strong>리소스로 보기</strong> 탭이 있는 확장 팝업 창으로, 공유 리소스와 그것의 해시, COS 캐시에 이를 보유한 두 원점(origin)을 확인할 수 있습니다.</p>
-
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/cross-origin-storage/usg5dq7dhm.png" alt="A resource seen in the Cross-Origin Storage extension, showing it's shared between two origins." /></p>
-
-<h2 id="section-3">행동 촉구</h2>
-
-<p>자신의 Transformers.js 앱을 구축 중이라면, 행동 촉구는 간단합니다: 첫 번째 <code class="language-plaintext highlighter-rouge">pipeline()</code> 호출 전에 <code class="language-plaintext highlighter-rouge">env.experimental_useCrossOriginStorage = true</code>를 추가하고, 확장 프로그램을 설치한 뒤 네트워크 탭에서 중복 다운로드가 사라지는 것을 지켜보세요. 참여하는 모든 사이트는 다른 사이트의 사용자들에게 더 빠르고 저렴한 경험을 제공합니다. 참여는 완전히 위험이 없으며: COS API가 지원되지 않는 경우(사용자가 COS 확장 설치를 하지 않아서) 코드는 기본 경로( <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">Web Cache</a> API)로 폴백합니다.</p>
-
-<p>Transformers.js는 COS를 실험하는 데 있어 독립적이지 않습니다. <a href="https://webllm.mlc.ai/">WebLLM</a>(옵트인, 자세한 내용은 <a href="https://webllm.mlc.ai/docs/user/advanced_usage.html#using-cross-origin-storage-cache">documentation</a> 참조)과 <a href="https://github.com/ngxson/wllama">wllama</a>(자동, 자세한 내용은 <a href="https://github.com/ngxson/wllama/pull/248">PR</a> 참조) 역시 이 제안된 API에 대해 기대를 가지고 있습니다.</p>
-
-<p>크롬 팀은 브라우저에서 이를 네이티브로 구현하기 위해 노력하고 있습니다 <a href="https://chromestatus.com/feature/5163371507875840">considering implementing the COS API</a>. 초기 단계의 제안으로, API와 제안의 형태에 대한 피드백을 환영합니다. 이슈를 제기하려면 <a href="https://github.com/WICG/cross-origin-storage">Cross-Origin Storage repository</a>를 이용하고, <a href="https://github.com/WICG/cross-origin-storage/labels/expression%20of%20support">express support</a>를 확인하거나 PR을 여세요.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p>모델을 제출하고, Analysis 탭을 탐색하며, <a href="https://huggingface.co/spaces/treble-technologies/ffasr/discussions">FFASR forum</a>에 아이디어와 제안을 남겨 주시고, 현장이 다루는 문제에 실제로 유용한 벤치마크를 함께 만들어 갑시다.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-172/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-172/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
