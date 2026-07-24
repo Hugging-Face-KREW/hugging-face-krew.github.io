@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-132/assets/images/favicon.ico" />
+
+    <title>Reachy Mini를 로컬에서 완전히 실행하기 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Reachy Mini를 로컬에서 완전히 실행하기 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Reachy Mini를 로컬에서 완전히 실행하기" />
+<meta name="author" content="dailybot" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-132/local-reachy-mini-conversation/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-05-27T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-05-27T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-132/local-reachy-mini-conversation/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" />
+<meta name="twitter:title" content="Reachy Mini를 로컬에서 완전히 실행하기" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-05-27T00:00:00+09:00","datePublished":"2026-05-27T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.","headline":"Reachy Mini를 로컬에서 완전히 실행하기","image":"/pr-preview/pr-132/local-reachy-mini-conversation/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-132/local-reachy-mini-conversation/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-132/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-132/local-reachy-mini-conversation/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-132/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-132/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-132/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-132/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-132/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-132/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-132/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-132/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-132/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-132/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-132/categories#huggingface">HuggingFace</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-132/categories#translation">Translation</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">Reachy Mini를 로컬에서 완전히 실행하기</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#reachy-mini를-로컬에서-완전히-실행하기" id="markdown-toc-reachy-mini를-로컬에서-완전히-실행하기">Reachy Mini를 로컬에서 완전히 실행하기</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">빠른 시작</a>        <ul>
+          <li><a href="#로컬에서-llm-서빙" id="markdown-toc-로컬에서-llm-서빙">로컬에서 LLM 서빙</a></li>
+          <li><a href="#음성-음성-설정" id="markdown-toc-음성-음성-설정">음성-음성 설정</a></li>
+          <li><a href="#reachy-mini를-음성-음성으로-연결하기" id="markdown-toc-reachy-mini를-음성-음성으로-연결하기">Reachy Mini를 음성-음성으로 연결하기</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-2" id="markdown-toc-section-2">더 깊이 들어가기</a>        <ul>
+          <li><a href="#왜-자체-speech-to-speech-서버를-운영하나요" id="markdown-toc-왜-자체-speech-to-speech-서버를-운영하나요">왜 자체 Speech-to-Speech 서버를 운영하나요?</a></li>
+          <li><a href="#우리의-고정-관점-기본값-vad-stt-tts" id="markdown-toc-우리의-고정-관점-기본값-vad-stt-tts">우리의 고정 관점 기본값: VAD, STT, TTS</a></li>
+          <li><a href="#llm-선택하기" id="markdown-toc-llm-선택하기">LLM 선택하기</a>            <ul>
+              <li><a href="#the-responses-api-뇌와-음성-루프의-분리" id="markdown-toc-the-responses-api-뇌와-음성-루프의-분리">The Responses API: 뇌와 음성 루프의 분리</a>                <ul>
+                  <li><a href="#옵션-1-llamacpp를-한-터미널에서-speech-to-speech를-다른-터미널에서" id="markdown-toc-옵션-1-llamacpp를-한-터미널에서-speech-to-speech를-다른-터미널에서">옵션 1: llama.cpp를 한 터미널에서, speech-to-speech를 다른 터미널에서</a></li>
+                  <li><a href="#옵션-2-vllm을-한-터미널에서-speech-to-speech를-다른-터미널에서" id="markdown-toc-옵션-2-vllm을-한-터미널에서-speech-to-speech를-다른-터미널에서">옵션 2: vLLM을 한 터미널에서, speech-to-speech를 다른 터미널에서</a></li>
+                  <li><a href="#옵션-3-hugging-face-inference-endpoints" id="markdown-toc-옵션-3-hugging-face-inference-endpoints">옵션 3: Hugging Face Inference Endpoints</a></li>
+                  <li><a href="#옵션-4-hugging-face-inference-providers" id="markdown-toc-옵션-4-hugging-face-inference-providers">옵션 4: Hugging Face Inference Providers</a></li>
+                  <li><a href="#옵션-5-openai또는-openai-호환-공급자" id="markdown-toc-옵션-5-openai또는-openai-호환-공급자">옵션 5: OpenAI(또는 OpenAI 호환 공급자)</a></li>
+                </ul>
+              </li>
+              <li><a href="#llm을-인-프로세스로-실행하기" id="markdown-toc-llm을-인-프로세스로-실행하기">LLM을 인-프로세스로 실행하기</a>                <ul>
+                  <li><a href="#옵션-1-mlxapple-silicon에서-로컬-llm-실행" id="markdown-toc-옵션-1-mlxapple-silicon에서-로컬-llm-실행">옵션 1: MLX(Apple Silicon)에서 로컬 LLM 실행</a></li>
+                  <li><a href="#옵션-2-transformers에서-로컬-llm-실행-cuda--cpu--mps" id="markdown-toc-옵션-2-transformers에서-로컬-llm-실행-cuda--cpu--mps">옵션 2: Transformers에서 로컬 LLM 실행 (CUDA / CPU / MPS)</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#노트북에서-엔진을-실행하고-로봇에서-앱을-실행하기" id="markdown-toc-노트북에서-엔진을-실행하고-로봇에서-앱을-실행하기">노트북에서 엔진을 실행하고 로봇에서 앱을 실행하기</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-3" id="markdown-toc-section-3">마무리</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/local-reachy-mini-conversation">Reachy Mini goes fully local</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/local-reachy-mini-conversation -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="reachy-mini를-로컬에서-완전히-실행하기">Reachy Mini를 로컬에서 완전히 실행하기</h1>
+
+<p>Reachy Mini를 만든 후에는 <a href="https://github.com/pollen-robotics/reachy_mini_conversation_app">conversation app</a>를 설치하고 대화를 시작합니다. 지금까지는 오디오를 서버로 전송해야 했지만, 이제는 다릅니다. 오늘은 전체 스택을 로컬에서 실행하는 방법을 안내합니다.</p>
+
+<p>이 스택은 <a href="https://github.com/huggingface/speech-to-speech"><code class="language-plaintext highlighter-rouge">speech-to-speech</code></a>로 구동됩니다. 이는 VAD → STT → LLM → TTS 파이프라인을 계층적으로 연결한 것으로, Realtime API-호환 <code class="language-plaintext highlighter-rouge">/v1/realtime</code> WebSocket을 노출합니다. 백엔드를 시작하면 UI에서 로봇이 그 백엔드를 가리키도록 설정합니다.</p>
+
+<p>캐스캐이드는 오늘날 오픈 소스 생태계에서 가장 유연한 옵션이며, 올바른 구성 요소를 사용하면 가장 빠릅니다. 우리는 우리가 가장 좋아하는 구성 요소를 추천하겠지만, 캐스캐이드는 그것들을 교체할 수 있다는 점이 핵심입니다. 매주 새로운 모델이 출시됩니다.</p>
+
+<blockquote>
+  <p><strong>TL;DR</strong></p>
+  <ul>
+    <li>Reachy Mini용 로컬 음성 백엔드 배포합니다.</li>
+    <li>우리는 <code class="language-plaintext highlighter-rouge">speech-to-speech</code> 라이브러리, 캐스캐이드 방식입니다.</li>
+    <li>권장: <strong>llama.cpp</strong>와 <strong>Gemma 4</strong>, <strong>Silero VAD</strong>, <strong>Parakeet-TDT 0.6B v3 STT</strong>, <strong>Qwen3-TTS</strong>.</li>
+  </ul>
+</blockquote>
+
+<hr />
+
+<h2 id="section-1">빠른 시작</h2>
+
+<p>이 블로그는 Reachy Mini와의 대화를 완전히 로컬에서 실행하는 방법을 안내합니다. 클라우드도, API 키도, 데이터가 기기에서 벗어나지 않습니다. 아래는 이를 실시간으로 보여주는 영상입니다:</p>
+
+<video controls="" width="360" style="display: block; max-width: 100%; height: auto; margin: 0 auto;">
+  <source src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/local_reachy_mini_conversation/Reachy mini local.mp4" type="video/mp4" />
+</video>
+
+<h3 id="로컬에서-llm-서빙">로컬에서 LLM 서빙</h3>
+
+<p>LLM을 서빙하려면 Hugging Face의 <code class="language-plaintext highlighter-rouge">llama.cpp</code>를 사용할 예정입니다. 설치가 필요하면 가장 간단한 방법은 <code class="language-plaintext highlighter-rouge">brew install llama.cpp</code> 또는 <code class="language-plaintext highlighter-rouge">winget install llama.cpp</code>이며, 추가 도움은 <a href="https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md">check the docs</a>를 참조하십시오. 먼저 다음을 실행합니다:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>llama-server <span class="nt">-hf</span> ggml-org/gemma-4-E4B-it-GGUF <span class="nt">-np</span> 2 <span class="nt">-c</span> 65536 <span class="nt">-fa</span> on <span class="nt">--swa-full</span>
+</code></pre></div></div>
+
+<p>완료! 처음 실행 시 모델을 다운로드하지만, 이후 실행은 빠릅니다.</p>
+
+<details>
+<summary>What do those flags do?</summary>
+
+- `-hf ggml-org/gemma-4-E4B-it-GGUF` — 모델을 `-hf ggml-org/gemma-4-E4B-it-GGUF`에서 직접 가져옵니다. 첫 실행은 다운로드하고, 이후 실행은 캐시를 사용합니다.
+- `-np 2` — 두 개의 병렬 슬롯. 서버가 두 번째 요청을 처리하게 해 주며, 첫 번째 요청이 차단되지 않습니다.
+- `-c 65536` — 64k 컨텍스트 윈도우, 슬롯 간 공유. 긴 대화에 충분한 여유 공간이 있습니다.
+- `-fa on` — 플래시 어텐션. 더 빠르고 메모리 사용량이 적으며, 현대 하드웨어에서 사실상 비용이 없습니다.
+- `--swa-full` — 전체 슬라이딩 윈도우 어텐션 캐시를 유지해 재계산 없이 더 빠른 프롬프트 처리를 가능하게 합니다. Gemma에서 메모리 사용을 약간 늘려도 속도를 높입니다.
+
+</details>
+
+<h3 id="음성-음성-설정">음성-음성 설정</h3>
+
+<p>우선 간단히 라이브러리를 설치합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv pip <span class="nb">install </span>speech-to-speech
+</code></pre></div></div>
+
+<p>그런 다음 LLM을 다른 터미널에서 서빙하는 동안, 간단히 실행합니다:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>speech-to-speech <span class="nt">--responses_api_base_url</span> <span class="s2">"http://127.0.0.1:8080"</span> <span class="nt">--responses_api_api_key</span> <span class="s2">""</span> <span class="nt">--mode</span> <span class="nb">local</span>
+</code></pre></div></div>
+
+<p>터미널을 통해 모델과 대화를 시작할 수 있습니다! 처음 실행 시 Parakeet-TDT 0.6B v3와 Qwen3TTS를 다운로드해야 하지만, 이후 실행은 빠릅니다.</p>
+
+<p>다음은 로컬 대화 모드를 보여주는 영상입니다:</p>
+
+<video controls="" width="100%">
+  <source src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/local_reachy_mini_conversation/s2s-llamacpp.mp4" type="video/mp4" />
+</video>
+
+<p>이제 <code class="language-plaintext highlighter-rouge">--mode local</code>에서 시도한 후에는 그 옵션 없이 명령을 다시 실행해 로봇에 speech-to-speech를 제공할 수 있습니다.</p>
+
+<h3 id="reachy-mini를-음성-음성으로-연결하기">Reachy Mini를 음성-음성으로 연결하기</h3>
+
+<p>llama.cpp와 speech-to-speech가 실행되면 로봇을 데스크탑 앱으로 시작하고 대화 앱을 실행할 수 있습니다. 대화 앱의 UI에서 HF 백엔드의 ‘edit connection’(연결 편집)을 클릭해 로컬 모드를 선택해야 합니다. 아래는 이를 수행하는 방법을 보여주는 영상입니다:</p>
+
+<video controls="" width="100%">
+  <source src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/local_reachy_mini_conversation/setting_up_conv_app.mp4" type="video/mp4" />
+</video>
+
+<p>이제 끝났습니다. 로봇과 대화를 시작할 수 있습니다. 파이프라인의 각 단계는 트레이드오프가 있습니다: 더 빠른 TTS 모델은 품질이 낮고, 더 느린 STT 모델은 품질이 더 높습니다. 우리는 다국어를 위해 최적화했으며, 단일 언어에 맞추려면 최적화를 원할 수 있습니다. 남은 블로그 글에서 커스터마이즈 방법을 다룹니다.</p>
+
+<h2 id="section-2">더 깊이 들어가기</h2>
+
+<h3 id="왜-자체-speech-to-speech-서버를-운영하나요">왜 자체 Speech-to-Speech 서버를 운영하나요?</h3>
+
+<p>호스팅된 실시간 백엔드는 편리하지만, 자체 엔진을 실행하면 세 가지를 가능하게 합니다:</p>
+
+<ul>
+  <li><strong>개인정보 보호.</strong> 오디오가 네트워크를 벗어나지 않으며, 전체 파이프라인이 사용자가 제어하는 하드웨어에서 실행됩니다.</li>
+  <li><strong>API 비용 없음.</strong> 분당 요금이나 토큰당 요금이 없습니다.</li>
+  <li><strong>파이프라인에 대한 완전한 제어.</strong> VAD, STT, LLM, TTS를 자유롭게 교체합니다. Hub 🤗에 더 나은 것이 새로 도입될 때마다 교체 가능합니다.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">speech-to-speech</code> 저장소는 이를 한 번에 한 CLI로 제공합니다. <code class="language-plaintext highlighter-rouge">/v1/realtime</code>에서 Reachy Mini가 이미 알고 있는 동일한 프로토콜로 작동하는 WebSocket 서버를 시작합니다.</p>
+
+<h3 id="우리의-고정-관점-기본값-vad-stt-tts">우리의 고정 관점 기본값: VAD, STT, TTS</h3>
+
+<p>캐스캐이드된 음성 파이프라인은 네 단계로 구성됩니다: VAD, STT, LLM, TTS. 이 중 세 단계에 대해 우리는 확실한 기본값을 선택해 LLM에 집중할 수 있도록 합니다:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>단계</th>
+      <th>선택</th>
+      <th>이유</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>VAD</td>
+      <td><strong>Silero VAD v5</strong></td>
+      <td>작고 정확하며 CPU에서 실행됩니다. 오픈 소스 음성 에이전트 세계의 사실상 기본값입니다.</td>
+    </tr>
+    <tr>
+      <td>STT</td>
+      <td><strong>Parakeet-TDT 0.6B v3</strong></td>
+      <td>스트리밍에 친화적이고 매우 빠르며 영어 품질이 훌륭합니다.</td>
+    </tr>
+    <tr>
+      <td>TTS</td>
+      <td><strong>Qwen3-TTS</strong></td>
+      <td>표현력이 풍부하고 지연이 낮으며 다국어를 지원하고 맞춤 음성을 지원합니다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>이 선택들에 대해 우리는 주관적 입장을 가지고 있습니다. 선호하는 경우 자유롭게 바꿔도 좋습니다.</p>
+
+<h3 id="llm-선택하기">LLM 선택하기</h3>
+
+<p>LLM은 지연 시간과 시스템 전반 성능에 가장 큰 영향을 주는 계층입니다. 두 가지 옵션을 지원합니다: <strong>로컬에서 모델 실행</strong>(llama.cpp, MLX, Transformers, vLLM) 또는 <strong>Responses API를 통해 서버 사용</strong>(OpenAI, Gemini, HF Inference Endpoints, llama.cpp, vLLM 등).</p>
+
+<h4 id="the-responses-api-뇌와-음성-루프의-분리">The Responses API: 뇌와 음성 루프의 분리</h4>
+
+<p>시스템의 주요 병목은 LLM 추론 지연입니다. 이를 해결하기 위해, Responses API 프로토콜을 통해 외부 추론 엔진을 노출합니다.</p>
+
+<p>따라서 <code class="language-plaintext highlighter-rouge">speech-to-speech</code> 엔진은 LLM이 Responses API 프로토콜을 말하는 한 별도 프로세스에서 실행되는 두 번째 모드를 지원합니다. 한 터미널에서 모델 서버를 시작하고, 다른 터미널에서 음성 루프를 시작하며, 두 프로세스는 HTTP로 통신합니다.</p>
+
+<h5 id="옵션-1-llamacpp를-한-터미널에서-speech-to-speech를-다른-터미널에서">옵션 1: llama.cpp를 한 터미널에서, speech-to-speech를 다른 터미널에서</h5>
+
+<p><strong>터미널 1: llama.cpp 서버:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>llama-server <span class="nt">-hf</span> ggml-org/gemma-4-E4B-it-GGUF <span class="nt">-np</span> 2 <span class="nt">-c</span> 65536 <span class="nt">-fa</span> on <span class="nt">--swa-full</span>
+</code></pre></div></div>
+
+<p><strong>터미널 2: speech-to-speech 클라이언트:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>speech-to-speech <span class="se">\</span>
+  <span class="nt">--mode</span> realtime <span class="se">\</span>
+  <span class="nt">--stt</span> parakeet-tdt <span class="se">\</span>
+  <span class="nt">--tts</span> qwen3 <span class="se">\</span>
+  <span class="nt">--llm_backend</span> responses-api <span class="se">\</span>
+  <span class="nt">--model_name</span> <span class="s2">"ggml-org/gemma-4-E4B-it-GGUF"</span> <span class="se">\</span>
+  <span class="nt">--responses_api_base_url</span> <span class="s2">"http://127.0.0.1:8080/v1"</span>
+</code></pre></div></div>
+
+<h5 id="옵션-2-vllm을-한-터미널에서-speech-to-speech를-다른-터미널에서">옵션 2: vLLM을 한 터미널에서, speech-to-speech를 다른 터미널에서</h5>
+
+<blockquote>
+  <p><strong>vLLM ≥ 0.21.0이 필요합니다.</strong> Speech-to-speech 백엔드에서 사용하는 도구 호출 스트리밍을 포함한 Responses API 프로토콜에 대한 완전한 지원은 vLLM 0.21.0에서 도입되었습니다. 이전 버전은 부트는 되지만 도구 호출 시 문제가 발생합니다.</p>
+</blockquote>
+
+<p>이 파이프라인을 위해 vLLM에서 모델을 서빙할 때는 사실상 세 가지 플래그가 필요합니다:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--enable-auto-tool-choice</code> — 모델의 원시 출력을 구조화된 도구 호출로 변환하는 파서를 선택합니다. (예: <code class="language-plaintext highlighter-rouge">qwen3_coder</code>는 Qwen3 지시형 모델용, <code class="language-plaintext highlighter-rouge">llama3_json</code>은 Llama 3용, <code class="language-plaintext highlighter-rouge">hermes</code>은 Hermes 스타일 모델용, …).</li>
+  <li><code class="language-plaintext highlighter-rouge">--default-chat-template-kwargs '{"enable_thinking":false}'</code> : <code class="language-plaintext highlighter-rouge">&lt;think&gt;</code> 추론 채널을 비활성화합니다. 더 어려운 에이전트 작업의 경우 이를 <code class="language-plaintext highlighter-rouge">true</code>로 바꿔 모델이 추론하게 할 수 있지만, 자연스러운 대화를 원한다면 이를 끈 상태로 두는 것을 강력히 권합니다: 생각하는 토큰 하나하나가 로봇이 말을 시작하기까지의 지연으로 들립니다.</li>
+</ul>
+
+<p><strong>터미널 1: vLLM 추론 서버 (<code class="language-plaintext highlighter-rouge">Qwen/Qwen3-4B-Instruct-2507</code>):</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vllm serve Qwen/Qwen3-4B-Instruct-2507 <span class="se">\</span>
+  <span class="nt">--port</span> 8000 <span class="se">\</span>
+  <span class="nt">--host</span> 127.0.0.1 <span class="se">\</span>
+  <span class="nt">--max-model-len</span> 32768 <span class="se">\</span>
+  <span class="nt">--enable-auto-tool-choice</span> <span class="se">\</span>
+  <span class="nt">--tool-call-parser</span> qwen3_coder <span class="se">\</span>
+  <span class="nt">--default-chat-template-kwargs</span> <span class="s1">'{"enable_thinking":false}'</span> <span class="se">\</span>
+  <span class="nt">--speculative-config</span> <span class="s1">'{"method":"qwen3_next_mtp","num_speculative_tokens":1}'</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">--speculative-config</code> 라인은 Multi-Token Prediction (MTP)을 가능하게 합니다. 이는 선택적이지만 엔드-투-엔드 지연에 큰 영향을 미칩니다. 모델이 이를 지원할 때는 활성화해 두십시오.</p>
+</blockquote>
+
+<p><strong>터미널 2: speech-to-speech 클라이언트:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>speech-to-speech <span class="se">\</span>
+  <span class="nt">--mode</span> realtime <span class="se">\</span>
+  <span class="nt">--stt</span> parakeet-tdt <span class="se">\</span>
+  <span class="nt">--tts</span> qwen3 <span class="se">\</span>
+  <span class="nt">--llm_backend</span> responses-api <span class="se">\</span>
+  <span class="nt">--model_name</span> <span class="s2">"Qwen/Qwen3-4B-Instruct-2507"</span> <span class="se">\</span>
+  <span class="nt">--responses_api_base_url</span> <span class="s2">"http://127.0.0.1:8000/v1"</span>
+</code></pre></div></div>
+
+<h5 id="옵션-3-hugging-face-inference-endpoints">옵션 3: Hugging Face Inference Endpoints</h5>
+
+<p>같은 프로토콜이지만 모델은 Hugging Face의 관리형 GPU에서 실행됩니다. 어떤 채팅 모델이든 Inference Endpoint로 배포한 뒤, 음성 루프를 엔드포인트 URL로 가리키세요:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>speech-to-speech <span class="se">\</span>
+  <span class="nt">--mode</span> realtime <span class="se">\</span>
+  <span class="nt">--stt</span> parakeet-tdt <span class="se">\</span>
+  <span class="nt">--tts</span> qwen3 <span class="se">\</span>
+  <span class="nt">--llm_backend</span> responses-api <span class="se">\</span>
+  <span class="nt">--model_name</span> <span class="s2">"Qwen/Qwen3-4B-Instruct-2507"</span> <span class="se">\</span>
+  <span class="nt">--responses_api_base_url</span> <span class="s2">"https://&lt;your-endpoint&gt;.endpoints.huggingface.cloud/v1"</span> <span class="se">\</span>
+  <span class="nt">--responses_api_api_key</span> <span class="s2">"</span><span class="nv">$HF_TOKEN</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<h5 id="옵션-4-hugging-face-inference-providers">옵션 4: Hugging Face Inference Providers</h5>
+
+<p>직접 엔드포인트를 관리하고 싶지 않다면 <a href="https://huggingface.co/docs/inference-providers">Inference Provider</a>를 사용하세요. Hugging Face는 요청을 제3자 백엔드(예: Together, Fireworks, Replicate)로 단일 URL로 라우팅합니다:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>speech-to-speech <span class="se">\</span>
+  <span class="nt">--mode</span> realtime <span class="se">\</span>
+  <span class="nt">--stt</span> parakeet-tdt <span class="se">\</span>
+  <span class="nt">--tts</span> qwen3 <span class="se">\</span>
+  <span class="nt">--llm_backend</span> responses-api <span class="se">\</span>
+  <span class="nt">--model_name</span> <span class="s2">"Qwen/Qwen3.6-35B-A3B:deepinfra"</span> <span class="se">\</span>
+  <span class="nt">--responses_api_base_url</span> <span class="s2">"https://router.huggingface.co/v1"</span> <span class="se">\</span>
+  <span class="nt">--responses_api_api_key</span> <span class="s2">"</span><span class="nv">$HF_TOKEN</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<h5 id="옵션-5-openai또는-openai-호환-공급자">옵션 5: OpenAI(또는 OpenAI 호환 공급자)</h5>
+
+<p>원Infra 없이 최전방 모델을 테스트하고 싶다면 같은 플래그를 OpenAI에 지정하세요:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>speech-to-speech <span class="se">\</span>
+  <span class="nt">--mode</span> realtime <span class="se">\</span>
+  <span class="nt">--stt</span> parakeet-tdt <span class="se">\</span>
+  <span class="nt">--tts</span> qwen3 <span class="se">\</span>
+  <span class="nt">--llm_backend</span> responses-api <span class="se">\</span>
+  <span class="nt">--model_name</span> <span class="s2">"gpt-5.4"</span> <span class="se">\</span>
+  <span class="nt">--responses_api_api_key</span> <span class="s2">"</span><span class="nv">$OPENAI_API_KEY</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">--responses_api_*</code> 플래그는 프로토콜을 구현하는 모든 공급자(OpenRouter, Together, Fireworks, …)에서도 동일하게 작동합니다. 기본 URL과 API 키를 바꾸고 나머지 파이프라인은 동일하게 유지합니다.</p>
+
+<hr />
+
+<h4 id="llm을-인-프로세스로-실행하기">LLM을 인-프로세스로 실행하기</h4>
+
+<h5 id="옵션-1-mlxapple-silicon에서-로컬-llm-실행">옵션 1: MLX(Apple Silicon)에서 로컬 LLM 실행</h5>
+
+<p>맥에서 실행하는 경우 MLX는 합리적인 지연으로 실제 모델을 실행하는 가장 낮은 마찰의 방법입니다. <strong>Qwen3-4B-Instruct-2507</strong>를 추천합니다. 이 모델은 M 시리즈 칩에서 즉시 반응을 느낄 만큼 작고, 대화도 충분히 버틸 수 있을 정도로 강력합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>speech-to-speech <span class="se">\</span>
+  <span class="nt">--llm_backend</span> mlx-lm <span class="se">\</span>
+  <span class="nt">--model_name</span> <span class="s2">"mlx-community/Qwen3-4B-Instruct-2507-bf16"</span>
+</code></pre></div></div>
+
+<p>서버는 기본적으로 <code class="language-plaintext highlighter-rouge">ws://127.0.0.1:8765/v1/realtime</code>에서 수신합니다. 실행 상태를 유지하고 로컬 백엔드에 대화 앱을 연결하면 로봇과 대화를 시작할 수 있습니다.</p>
+
+<h5 id="옵션-2-transformers에서-로컬-llm-실행-cuda--cpu--mps">옵션 2: Transformers에서 로컬 LLM 실행 (CUDA / CPU / MPS)</h5>
+
+<p>동일한 아이디어이지만 일반적인 <code class="language-plaintext highlighter-rouge">transformers</code>를 사용합니다. CUDA 박스에서 실행 중이거나 Linux를 사용할 경우, 또는 MLX용 가중치를 다시 변환하지 않고 자유롭게 모델을 바꾸고 싶을 때 이 옵션을 사용하세요.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>speech-to-speech <span class="se">\</span>
+  <span class="nt">--llm_backend</span> transformers <span class="se">\</span>
+  <span class="nt">--model_name</span> <span class="s2">"Qwen/Qwen3-4B-Instruct-2507"</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>팁.</strong> <code class="language-plaintext highlighter-rouge">Qwen3-4B-Instruct-2507</code>은 단일 컨슈머 GPU에서 속도/품질 균형을 잘 제공하기 때문에 LLM에 또 다른 좋은 선택지입니다. 백엔드가 지원하는 어떤 HF 모델이든 <code class="language-plaintext highlighter-rouge">--model_name</code>으로 가리킬 수 있습니다 — 예를 들어 더 큰 Gemma, Qwen, 또는 Mistral 같은 모델도 가능합니다.</p>
+</blockquote>
+
+<h3 id="노트북에서-엔진을-실행하고-로봇에서-앱을-실행하기">노트북에서 엔진을 실행하고 로봇에서 앱을 실행하기</h3>
+
+<p>노트북에서 음성 엔진을 실행하고 Reachy Mini Wireless에서 대화 앱을 실행하는 경우, 바뀌는 것은 URL뿐입니다. 엔진이 LAN 주소에 바인딩되도록 하고, UI에서 IP를 선택할 때 로봇의 IP를 노트북의 IP로 사용하세요.</p>
+
+<p>IP를 모르는 경우, 찾는 방법은 아래와 같습니다:</p>
+
+<details>
+<summary>macOS</summary>
+
+```bash
+ipconfig getifaddr en0    # wifi
+ipconfig getifaddr en1    # ethernet (sometimes en0, varies)
+```
+
+
+</details>
+
+<details>
+<summary>Linux</summary>
+
+```bash
+hostname -I
+```
+
+
+</details>
+
+<details>
+<summary>Windows</summary>
+
+```powershell
+ipconfig
+```
+
+
+활성 어댑터에서 IPv4 주소를 찾으십시오.
+
+</details>
+
+<p>당신은 <code class="language-plaintext highlighter-rouge">192.168.x.x</code> 또는 <code class="language-plaintext highlighter-rouge">10.x.x.x</code> 중 하나를 원합니다. <code class="language-plaintext highlighter-rouge">169.254.x.x</code>가 보이면 네트워크에 실제로 연결되어 있지 않은 것입니다.</p>
+
+<hr />
+
+<h2 id="section-3">마무리</h2>
+
+<p>이제 완전히 로컬 음성 루프가 있습니다:</p>
+
+<ul>
+  <li>로봇이 <strong>Silero</strong>로 듣고,</li>
+  <li><strong>Parakeet-TDT 0.6B v3</strong>로 전사하고,</li>
+  <li>선택한 LLM으로 사고한 뒤, 로컬 MLX, 로컬 Transformers, vLLM 또는 옆의 llama.cpp 서버이든, 혹은 호스팅된 Responses API 엔드포인트이든 간에,</li>
+  <li><strong>Qwen3-TTS</strong>로 응답합니다.</li>
+</ul>
+
+<p><a href="https://github.com/huggingface/speech-to-speech"><code class="language-plaintext highlighter-rouge">huggingface/speech-to-speech</code></a>와 <a href="https://github.com/pollen-robotics/reachy_mini_conversation_app"><code class="language-plaintext highlighter-rouge">pollen-robotics/reachy_mini_conversation_app</code></a>에 별표를 표시해 주시고, 로봇에 어떤 오픈 소스 cascade를 실행하게 되었는지 토론에 남겨 주세요.</p>
+
+<!-- publication refresh -->
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-05-27">27 May 2026</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#reachy-mini를-로컬에서-완전히-실행하기" id="markdown-toc-reachy-mini를-로컬에서-완전히-실행하기">Reachy Mini를 로컬에서 완전히 실행하기</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">빠른 시작</a>        <ul>
+          <li><a href="#로컬에서-llm-서빙" id="markdown-toc-로컬에서-llm-서빙">로컬에서 LLM 서빙</a></li>
+          <li><a href="#음성-음성-설정" id="markdown-toc-음성-음성-설정">음성-음성 설정</a></li>
+          <li><a href="#reachy-mini를-음성-음성으로-연결하기" id="markdown-toc-reachy-mini를-음성-음성으로-연결하기">Reachy Mini를 음성-음성으로 연결하기</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-2" id="markdown-toc-section-2">더 깊이 들어가기</a>        <ul>
+          <li><a href="#왜-자체-speech-to-speech-서버를-운영하나요" id="markdown-toc-왜-자체-speech-to-speech-서버를-운영하나요">왜 자체 Speech-to-Speech 서버를 운영하나요?</a></li>
+          <li><a href="#우리의-고정-관점-기본값-vad-stt-tts" id="markdown-toc-우리의-고정-관점-기본값-vad-stt-tts">우리의 고정 관점 기본값: VAD, STT, TTS</a></li>
+          <li><a href="#llm-선택하기" id="markdown-toc-llm-선택하기">LLM 선택하기</a>            <ul>
+              <li><a href="#the-responses-api-뇌와-음성-루프의-분리" id="markdown-toc-the-responses-api-뇌와-음성-루프의-분리">The Responses API: 뇌와 음성 루프의 분리</a>                <ul>
+                  <li><a href="#옵션-1-llamacpp를-한-터미널에서-speech-to-speech를-다른-터미널에서" id="markdown-toc-옵션-1-llamacpp를-한-터미널에서-speech-to-speech를-다른-터미널에서">옵션 1: llama.cpp를 한 터미널에서, speech-to-speech를 다른 터미널에서</a></li>
+                  <li><a href="#옵션-2-vllm을-한-터미널에서-speech-to-speech를-다른-터미널에서" id="markdown-toc-옵션-2-vllm을-한-터미널에서-speech-to-speech를-다른-터미널에서">옵션 2: vLLM을 한 터미널에서, speech-to-speech를 다른 터미널에서</a></li>
+                  <li><a href="#옵션-3-hugging-face-inference-endpoints" id="markdown-toc-옵션-3-hugging-face-inference-endpoints">옵션 3: Hugging Face Inference Endpoints</a></li>
+                  <li><a href="#옵션-4-hugging-face-inference-providers" id="markdown-toc-옵션-4-hugging-face-inference-providers">옵션 4: Hugging Face Inference Providers</a></li>
+                  <li><a href="#옵션-5-openai또는-openai-호환-공급자" id="markdown-toc-옵션-5-openai또는-openai-호환-공급자">옵션 5: OpenAI(또는 OpenAI 호환 공급자)</a></li>
+                </ul>
+              </li>
+              <li><a href="#llm을-인-프로세스로-실행하기" id="markdown-toc-llm을-인-프로세스로-실행하기">LLM을 인-프로세스로 실행하기</a>                <ul>
+                  <li><a href="#옵션-1-mlxapple-silicon에서-로컬-llm-실행" id="markdown-toc-옵션-1-mlxapple-silicon에서-로컬-llm-실행">옵션 1: MLX(Apple Silicon)에서 로컬 LLM 실행</a></li>
+                  <li><a href="#옵션-2-transformers에서-로컬-llm-실행-cuda--cpu--mps" id="markdown-toc-옵션-2-transformers에서-로컬-llm-실행-cuda--cpu--mps">옵션 2: Transformers에서 로컬 LLM 실행 (CUDA / CPU / MPS)</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#노트북에서-엔진을-실행하고-로봇에서-앱을-실행하기" id="markdown-toc-노트북에서-엔진을-실행하고-로봇에서-앱을-실행하기">노트북에서 엔진을 실행하고 로봇에서 앱을 실행하기</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-3" id="markdown-toc-section-3">마무리</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-132/" alt="">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href=""></a>
+        <span class="author-description"></span>                        
+    </div>
+</div>
+
+
+<!-- footer -->
+<div class="row post-footer">
+    <div class="footer">
+    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
+
+        <div class="footer-card-container">
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-132/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
+            </a>
+            &nbsp;
+            <a href="https://www.contribution.ac/">
+                <img src="/pr-preview/pr-132/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
+            </a>
+            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
+            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
+        </div>
+</div>
+</div>
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">10</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="translation">
+            Translation
+            <span class="count">10</span>
+          </button>
+        
+      
+        
+        
+          <button class="filter-btn" data-category="huggingface">
+            HuggingFace
+            <span class="count">9</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-132/grabette/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-132/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-132/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">21 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-132/native-speed-vllm-transformers-backend/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-132/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-132/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">08 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-132/cerebras-gemma4-voice-ai/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-132/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-132/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">01 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-132/vllm-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-132/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-132/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">26 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-132/ffasr-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-132/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-132/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">24 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-132/cross-origin-storage/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-132/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-132/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-132/peft-beyond-lora/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-132/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-132/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-132/paddleocr-transformers/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-132/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-132/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">19 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-132/granite-embedding-multilingual-r2/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-132/assets/images/blog/posts/2026-05-15-granite-embedding-multilingual-r2/thumbnail.png" alt="Granite Embedding Multilingual R2: 32K 컨텍스트를 갖춘 Apache 2.0 다국어 임베딩 — 100M 미만 중 최상의 검색 품질" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-132/granite-embedding-multilingual-r2/">Granite Embedding Multilingual R2: 32K 컨텍스트를 갖춘 Apache 2.0 다국어 임베딩 — 100M 미만 중 최상의 검색 품질</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Granite Embedding Multilingual R2: Open Apache 2.0 Multilingual Embeddings with...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">15 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="transformers translation ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-132/how-to-use-translator/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-132/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-132/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
+        <p class="card-text text-muted">
+Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">05 Oct 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section></main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-132/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-132/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-132/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-132/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-132/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-132/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-132/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-132/assets/js/category.js"></script>
+  </body>
+</html>
