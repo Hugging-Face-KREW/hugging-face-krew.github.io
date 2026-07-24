@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/pr-preview/pr-155/feed.xml" rel="self" type="application/atom+xml" /><link href="/pr-preview/pr-155/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-07-04T16:15:32+09:00</updated><id>/pr-preview/pr-155/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</title><link href="/pr-preview/pr-155/ffasr-leaderboard/" rel="alternate" type="text/html" title="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" /><published>2026-06-24T00:00:00+09:00</published><updated>2026-06-24T00:00:00+09:00</updated><id>/pr-preview/pr-155/ffasr-leaderboard</id><content type="html" xml:base="/pr-preview/pr-155/ffasr-leaderboard/"><![CDATA[<blockquote>
-  <p>Source: https://huggingface.co/blog/ffasr-leaderboard</p>
-</blockquote>
-
-<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/pr-preview/pr-155/feed.xml" rel="self" type="application/atom+xml" /><link href="/pr-preview/pr-155/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-07-24T20:56:11+09:00</updated><id>/pr-preview/pr-155/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</title><link href="/pr-preview/pr-155/ffasr-leaderboard/" rel="alternate" type="text/html" title="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" /><published>2026-06-24T00:00:00+09:00</published><updated>2026-06-24T00:00:00+09:00</updated><id>/pr-preview/pr-155/ffasr-leaderboard</id><content type="html" xml:base="/pr-preview/pr-155/ffasr-leaderboard/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#ffasr-leaderboard-소개-현실-세계에서의-asr-벤치마크" id="markdown-toc-ffasr-leaderboard-소개-현실-세계에서의-asr-벤치마크">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">왜 원거리 평가가 중요한가</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">벤치마크 구성 방법</a></li>
@@ -13,8 +9,9 @@
   </li>
 </ul>
 <!--toc-->
-
 <p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/ffasr-leaderboard">Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/ffasr-leaderboard -->
 
 <hr />
 
@@ -115,7 +112,7 @@ Review instructions:
 
 <p>다음에 무엇을 구축할지는 커뮤니티가 격차가 가장 큰 지점을 어디에 두는지에 달려 있습니다. 현재 벤치마크에 잘 반영되지 않은 배포 환경이나 사용 사례에 대해 작업하신다면 저희에게 들려 주세요. FFASR Leaderboard는 확장하도록 설계되었고, 그 방향은 실제 필요를 반영해야 합니다.</p>
 
-<p>모델을 제출하고, Analysis 탭을 탐색하며, <a href="https://huggingface.co/spaces/treble-technologies/ffasr/discussions">FFASR forum</a>에 아이디어와 제안을 남겨 주시고, 현장이 다루는 문제에 실제로 유용한 벤치마크를 함께 만들어 갑시다.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[Source: https://huggingface.co/blog/ffasr-leaderboard]]></summary></entry><entry><title type="html">n8n으로 번역 MCP Server 워크플로우 구축하기: 실전 트러블슈팅과 실행 방식 비교</title><link href="/pr-preview/pr-155/hf-translation-mcp-n8n/" rel="alternate" type="text/html" title="n8n으로 번역 MCP Server 워크플로우 구축하기: 실전 트러블슈팅과 실행 방식 비교" /><published>2026-01-05T00:00:00+09:00</published><updated>2026-01-05T00:00:00+09:00</updated><id>/pr-preview/pr-155/hf-translation-mcp-n8n</id><content type="html" xml:base="/pr-preview/pr-155/hf-translation-mcp-n8n/"><![CDATA[<ul id="markdown-toc">
+<p>모델을 제출하고, Analysis 탭을 탐색하며, <a href="https://huggingface.co/spaces/treble-technologies/ffasr/discussions">FFASR forum</a>에 아이디어와 제안을 남겨 주시고, 현장이 다루는 문제에 실제로 유용한 벤치마크를 함께 만들어 갑시다.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-155/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-155/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">n8n으로 번역 MCP Server 워크플로우 구축하기: 실전 트러블슈팅과 실행 방식 비교</title><link href="/pr-preview/pr-155/hf-translation-mcp-n8n/" rel="alternate" type="text/html" title="n8n으로 번역 MCP Server 워크플로우 구축하기: 실전 트러블슈팅과 실행 방식 비교" /><published>2026-01-05T00:00:00+09:00</published><updated>2026-01-05T00:00:00+09:00</updated><id>/pr-preview/pr-155/hf-translation-mcp-n8n</id><content type="html" xml:base="/pr-preview/pr-155/hf-translation-mcp-n8n/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#들어가며" id="markdown-toc-들어가며">들어가며</a></li>
   <li><a href="#n8n-번역-mcp-server-워크플로우-소개" id="markdown-toc-n8n-번역-mcp-server-워크플로우-소개">n8n 번역 MCP Server 워크플로우 소개</a></li>
   <li><a href="#n8n-워크플로우-구축-결과" id="markdown-toc-n8n-워크플로우-구축-결과">n8n 워크플로우 구축 결과</a>    <ul>
