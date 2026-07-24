@@ -3,6 +3,7 @@ layout: post
 title: "Granite Embedding Multilingual R2: 32K 컨텍스트를 갖춘 Apache 2.0 다국어 임베딩 — 100M 미만 중 최상의 검색 품질"
 author: dailybot
 categories: [Translation, HuggingFace]
+image: assets/images/blog/posts/2026-05-15-granite-embedding-multilingual-r2/thumbnail.png
 slug: "granite-embedding-multilingual-r2"
 source_url: "https://huggingface.co/blog/ibm-granite/granite-embedding-multilingual-r2"
 source_published_date: "2026-05-14"
@@ -12,13 +13,12 @@ translation_status: "draft"
 translator: "openai"
 ---
 
-> Source: https://huggingface.co/blog/ibm-granite/granite-embedding-multilingual-r2
-
 * TOC
 {:toc}
 <!--toc-->
-
 _이 글은 Hugging Face 블로그의 [Granite Embedding Multilingual R2: Open Apache 2.0 Multilingual Embeddings with 32K Context — Best Sub-100M Retrieval Quality](https://huggingface.co/blog/ibm-granite/granite-embedding-multilingual-r2)를 한국어로 번역한 글입니다._
+
+<!-- Source: https://huggingface.co/blog/ibm-granite/granite-embedding-multilingual-r2 -->
 
 ---
 
