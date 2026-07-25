@@ -31,8 +31,8 @@
 <meta property="og:title" content="🤗 Kernels: 주요 업데이트" />
 <meta name="author" content="dailybot" />
 <meta property="og:locale" content="ko" />
-<meta name="description" content="Hugging Face Kernels의 새 repository type, 보안 강화, CLI 개편, framework 지원 확대를 소개합니다." />
-<meta name="twitter:description" property="og:description" content="Hugging Face Kernels의 새 repository type, 보안 강화, CLI 개편, framework 지원 확대를 소개합니다." />
+<meta name="description" content="Hugging Face Kernels의 새 저장소 유형, 보안 강화, CLI 개편, 프레임워크 지원 확대를 소개합니다." />
+<meta name="twitter:description" property="og:description" content="Hugging Face Kernels의 새 저장소 유형, 보안 강화, CLI 개편, 프레임워크 지원 확대를 소개합니다." />
 <meta property="og:site_name" content="Hugging Face KREW" />
 <meta property="og:image" content="/pr-preview/pr-165/revamped-kernels/assets/images/blog/posts/2026-07-06-revamped-kernels/thumbnail.png" />
 <meta property="og:type" content="article" />
@@ -42,7 +42,7 @@
 <meta name="twitter:image" content="/pr-preview/pr-165/revamped-kernels/assets/images/blog/posts/2026-07-06-revamped-kernels/thumbnail.png" />
 <meta name="twitter:title" content="🤗 Kernels: 주요 업데이트" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-07-06T00:00:00+09:00","datePublished":"2026-07-06T00:00:00+09:00","description":"Hugging Face Kernels의 새 repository type, 보안 강화, CLI 개편, framework 지원 확대를 소개합니다.","headline":"🤗 Kernels: 주요 업데이트","image":"/pr-preview/pr-165/revamped-kernels/assets/images/blog/posts/2026-07-06-revamped-kernels/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-165/revamped-kernels/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-165/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-165/revamped-kernels/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-07-06T00:00:00+09:00","datePublished":"2026-07-06T00:00:00+09:00","description":"Hugging Face Kernels의 새 저장소 유형, 보안 강화, CLI 개편, 프레임워크 지원 확대를 소개합니다.","headline":"🤗 Kernels: 주요 업데이트","image":"/pr-preview/pr-165/revamped-kernels/assets/images/blog/posts/2026-07-06-revamped-kernels/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-165/revamped-kernels/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-165/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-165/revamped-kernels/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -216,14 +216,14 @@
 			<div class="article-post serif-font">
 				<ul id="markdown-toc">
   <li><a href="#-kernels-주요-업데이트" id="markdown-toc--kernels-주요-업데이트">🤗 Kernels: 주요 업데이트</a>    <ul>
-      <li><a href="#section-1" id="markdown-toc-section-1">Kernels — 새로운 repository type</a></li>
+      <li><a href="#section-1" id="markdown-toc-section-1">Kernels — 새로운 저장소 유형</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">보안 개선</a>        <ul>
           <li><a href="#trusted-kernel-publisher" id="markdown-toc-trusted-kernel-publisher">Trusted kernel publisher</a></li>
           <li><a href="#kernel-signing" id="markdown-toc-kernel-signing">Kernel signing</a></li>
         </ul>
       </li>
       <li><a href="#section-3" id="markdown-toc-section-3">CLI 개편</a></li>
-      <li><a href="#section-4" id="markdown-toc-section-4">framework와 backend 지원 확대</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">프레임워크와 백엔드 지원 확대</a></li>
       <li><a href="#section-5" id="markdown-toc-section-5">agentic kernel 개발을 위한 기반</a></li>
       <li><a href="#section-6" id="markdown-toc-section-6">기타 업데이트</a>        <ul>
           <li><a href="#환경-설정" id="markdown-toc-환경-설정">환경 설정</a></li>
@@ -251,23 +251,23 @@ Review instructions:
 
 <h1 id="-kernels-주요-업데이트">🤗 Kernels: 주요 업데이트</h1>
 
-<p><a href="https://huggingface.co/blog/kernel-builder">이전 글(From Zero to GPU)</a>에서는 custom kernel을 패키징하고, 배포하고, 사용하는 방식을 표준화하기 위한 🤗 Kernels 프로젝트를 소개했습니다. 이 프로젝트의 목표는 Hub와 최대한 잘 맞으면서도 사용 흐름은 매끄럽고 보안은 견고하게 만드는 것입니다.</p>
+<p><a href="https://huggingface.co/blog/kernel-builder">이전 글(From Zero to GPU)</a>에서는 custom kernels를 패키징하고, 배포하고, 사용하는 방식을 표준화하기 위한 🤗 Kernels 프로젝트를 소개했습니다. 이 프로젝트의 목표는 Hub와 최대한 잘 맞으면서도 사용 흐름은 매끄럽고 보안은 견고하게 만드는 것입니다.</p>
 
 <p>지난 몇 달 동안 우리는 이 목표를 향해 작업해 왔습니다. 그 과정에서 프로젝트도 거의 전면적으로 다시 설계했습니다. 이 글에서는 지금까지 배포한 주요 업데이트와 앞으로의 방향을 정리합니다.</p>
 
 <p><strong>목차</strong></p>
 
 <ul>
-  <li><a href="#kernels--a-new-repository-type">Kernels — 새로운 repository type</a></li>
+  <li><a href="#kernels--a-new-repository-type">Kernels — 새로운 저장소 유형</a></li>
   <li><a href="#improved-security">보안 개선</a></li>
   <li><a href="#revamped-clis">CLI 개편</a></li>
-  <li><a href="#more-coverage-of-frameworks-and-backends">framework와 backend 지원 확대</a></li>
+  <li><a href="#more-coverage-of-frameworks-and-backends">프레임워크와 백엔드 지원 확대</a></li>
   <li><a href="#foundation-for-agentic-kernel-development">agentic kernel 개발을 위한 기반</a></li>
   <li><a href="#misc">기타 업데이트</a></li>
   <li><a href="#conclusion">마무리</a></li>
 </ul>
 
-<h2 id="section-1">Kernels — 새로운 repository type</h2>
+<h2 id="section-1">Kernels — 새로운 저장소 유형</h2>
 
 <p>Hub에 <a href="https://huggingface.co/kernels">“kernel”</a>이라는 새로운 repository type을 도입했습니다. 이를 통해 compute 관련 요구가 구체적인 사용자들을 더 잘 지원할 수 있습니다. 예를 들어 사용자는 특정 kernel이 어떤 accelerator, operating system, backend version을 지원하는지 확인할 수 있습니다.</p>
 
@@ -276,7 +276,7 @@ Review instructions:
     <figcaption>Kernel page: <a href="https://huggingface.co/kernels/kernels-community/flash-attn3">kernels-community/flash-attn3</a></figcaption>
 </figure>
 
-<p>Hub에서 사용 가능한 모든 kernel은 <a href="https://huggingface.co/kernels">https://huggingface.co/kernels</a>에서 둘러볼 수 있습니다.</p>
+<p>Hub에서 사용 가능한 모든 kernel은 <a href="https://huggingface.co/kernels">https://huggingface.co/kernels.</a>에서 둘러볼 수 있습니다.</p>
 
 <p>이 kernel들을 Hub의 first-class citizen으로 만들면 AI 생태계에도 도움이 됩니다. 이제 사용자는 kernel, model, 그리고 이를 사용하는 application 전반의 흐름을 볼 수 있습니다. 또한 kernel은 사용자에게 더 쉽게 발견될 수 있습니다.</p>
 
@@ -309,22 +309,22 @@ Review instructions:
 
 <p>보안을 더 강화하기 위해 Sigstore의 cosign을 사용해 ephemeral private key로 서명합니다. 이 signing key는 제한된 시간 동안만 유효하므로, 유출되더라도 공격자가 private key를 사용하기 어렵습니다. 또한 kernel이 trusted GitHub repository의 trusted GitHub workflow에서 서명되었는지도 검증합니다.</p>
 
-<p>Kernel signing은 이미 <code class="language-plaintext highlighter-rouge">kernel-builder</code>에서 지원되며, kernel을 검증할 수 있도록 <code class="language-plaintext highlighter-rouge">kernels verify-signature</code>도 제공합니다. 다만 Kernels는 아직 kernel load 시점에 signature를 검증하지 않습니다. 이 기능을 완전히 rollout하기 전에 더 테스트하고 싶기 때문입니다. 자체 kernel에 code signing을 설정하는 예비 안내는 kernels 0.16.0 release note에서 볼 수 있습니다. <a href="https://github.com/huggingface/kernels/releases/tag/v0.16.0">https://github.com/huggingface/kernels/releases/tag/v0.16.0</a></p>
+<p>Kernel signing은 이미 kernel-builder에서 지원되며, kernel을 검증할 수 있도록 <code class="language-plaintext highlighter-rouge">kernels verify-signature</code>도 제공합니다. 다만 Kernels는 아직 kernel load 시점에 signature를 검증하지 않습니다. 이 기능을 완전히 rollout하기 전에 더 테스트하고 싶기 때문입니다. 자체 kernel에 code signing을 설정하는 예비 안내는 kernels 0.16.0 release note에서 볼 수 있습니다. <a href="https://github.com/huggingface/kernels/releases/tag/v0.16.0">https://github.com/huggingface/kernels/releases/tag/v0.16.0.</a></p>
 
 <h2 id="section-3">CLI 개편</h2>
 
-<p>이전에는 여러 utility가 <code class="language-plaintext highlighter-rouge">kernels</code>와 <code class="language-plaintext highlighter-rouge">kernel-builder</code> 사이에 뒤섞여 있었습니다. 이제 <code class="language-plaintext highlighter-rouge">kernels</code> CLI와 <code class="language-plaintext highlighter-rouge">kernel-builder</code> CLI 사이의 concern을 더 명확히 분리했습니다. 여기서의 mental model은 <code class="language-plaintext highlighter-rouge">kernels</code>가 kernel을 load하고 사용할 준비를 하는 library라는 것입니다. 따라서 “building” kernel과 관련된 기능은 포함하지 않는 것이 맞습니다.</p>
+<p>이전에는 여러 utility가 kernels와 kernel-builder 사이에 뒤섞여 있었습니다. 이제 kernels CLI와 kernel-builder CLI 사이의 concern을 더 명확히 분리했습니다. 여기서의 mental model은 kernels가 kernel을 load하고 사용할 준비를 하는 library라는 것입니다. 따라서 “building” kernel과 관련된 기능은 포함하지 않는 것이 맞습니다.</p>
 
 <p>그 결과 <code class="language-plaintext highlighter-rouge">kernels</code>와 <code class="language-plaintext highlighter-rouge">kernel-builder</code>는 모두 훨씬 더 가볍고 목적이 분명해졌습니다. 자세한 내용은 documentation을 참고하세요.</p>
 
 <ul>
-  <li><a href="https://huggingface.co/docs/kernels/en/cli"><code class="language-plaintext highlighter-rouge">kernels</code> CLI</a></li>
-  <li><a href="https://huggingface.co/docs/kernels/en/builder-cli"><code class="language-plaintext highlighter-rouge">kernel-builder</code> CLI</a></li>
+  <li><a href="https://huggingface.co/docs/kernels/en/cli">kernels CLI</a></li>
+  <li><a href="https://huggingface.co/docs/kernels/en/builder-cli">kernel-builder CLI</a></li>
 </ul>
 
 <p>개선된 CLI 경험은 agentic kernel development가 부상하는 흐름에도 더 잘 대응하게 해 줍니다. 이에 대해서는 <a href="#foundation-for-agentic-kernel-development">뒤에서</a> 더 설명합니다.</p>
 
-<h2 id="section-4">framework와 backend 지원 확대</h2>
+<h2 id="section-4">프레임워크와 백엔드 지원 확대</h2>
 
 <p>framework 지원도 확장했습니다. 가장 눈에 띄는 변화는 다음과 같습니다.</p>
 
@@ -468,14 +468,14 @@ torch29-metal-aarch64-darwin: rejected <span class="o">(</span>OS <span class="o
     <div class="toc-content">
         <ul id="markdown-toc">
   <li><a href="#-kernels-주요-업데이트" id="markdown-toc--kernels-주요-업데이트">🤗 Kernels: 주요 업데이트</a>    <ul>
-      <li><a href="#section-1" id="markdown-toc-section-1">Kernels — 새로운 repository type</a></li>
+      <li><a href="#section-1" id="markdown-toc-section-1">Kernels — 새로운 저장소 유형</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">보안 개선</a>        <ul>
           <li><a href="#trusted-kernel-publisher" id="markdown-toc-trusted-kernel-publisher">Trusted kernel publisher</a></li>
           <li><a href="#kernel-signing" id="markdown-toc-kernel-signing">Kernel signing</a></li>
         </ul>
       </li>
       <li><a href="#section-3" id="markdown-toc-section-3">CLI 개편</a></li>
-      <li><a href="#section-4" id="markdown-toc-section-4">framework와 backend 지원 확대</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">프레임워크와 백엔드 지원 확대</a></li>
       <li><a href="#section-5" id="markdown-toc-section-5">agentic kernel 개발을 위한 기반</a></li>
       <li><a href="#section-6" id="markdown-toc-section-6">기타 업데이트</a>        <ul>
           <li><a href="#환경-설정" id="markdown-toc-환경-설정">환경 설정</a></li>
