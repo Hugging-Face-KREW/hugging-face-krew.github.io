@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "🤗 Kernels: Major Updates"
+title: "🤗 Kernels: 주요 업데이트"
+description: "Hugging Face Kernels의 새 repository type, 보안 강화, CLI 개편, framework 지원 확대를 소개합니다."
 author: dailybot
 categories: [Translation, HuggingFace]
 image: assets/images/blog/posts/2026-07-06-revamped-kernels/thumbnail.png
@@ -32,48 +33,48 @@ Review instructions:
 - Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
 -->
 
-# 🤗 Kernels: Major Updates
+# 🤗 Kernels: 주요 업데이트
 
-In our [previous post (From Zero to GPU)](https://huggingface.co/blog/kernel-builder), we introduced the 🤗 Kernels project, which aims at standardizing how custom kernels are packaged, distributed, and consumed. We want the project to be frictionless and secure, while making it as Hub-friendly as possible.
+[이전 글(From Zero to GPU)](https://huggingface.co/blog/kernel-builder)에서는 custom kernel을 패키징하고, 배포하고, 사용하는 방식을 표준화하기 위한 🤗 Kernels 프로젝트를 소개했습니다. 이 프로젝트의 목표는 Hub와 최대한 잘 맞으면서도 사용 흐름은 매끄럽고 보안은 견고하게 만드는 것입니다.
 
-Over the past few months, we have worked towards this goal. In the process, we also almost completely redesigned the project. This post will summarize the major updates we have shipped and what’s coming.
+지난 몇 달 동안 우리는 이 목표를 향해 작업해 왔습니다. 그 과정에서 프로젝트도 거의 전면적으로 다시 설계했습니다. 이 글에서는 지금까지 배포한 주요 업데이트와 앞으로의 방향을 정리합니다.
 
-**Table of contents**
+**목차**
 
-* [Kernels – a new repository type](#kernels--a-new-repository-type)
-* [Improved security](#improved-security)
-* [Revamped CLIs](#revamped-clis)
-* [More coverage of frameworks and backends](#more-coverage-of-frameworks-and-backends)
-* [Foundation for agentic kernel development](#foundation-for-agentic-kernel-development)
-* [Misc](#misc)
-* [Conclusion](#conclusion)
+* [Kernels — 새로운 repository type](#kernels--a-new-repository-type)
+* [보안 개선](#improved-security)
+* [CLI 개편](#revamped-clis)
+* [framework와 backend 지원 확대](#more-coverage-of-frameworks-and-backends)
+* [agentic kernel 개발을 위한 기반](#foundation-for-agentic-kernel-development)
+* [기타 업데이트](#misc)
+* [마무리](#conclusion)
 
-## Kernels – a new repository type {#section-1}
+## Kernels — 새로운 repository type {#section-1}
 
-We have introduced a new repository type on the Hub called ["kernel"](https://huggingface.co/kernels). This enables us to cater to users with compute-related specificities. For example, a user can get a sense of which accelerators, operating systems, and backend versions are supported for a given kernel:
+Hub에 ["kernel"](https://huggingface.co/kernels)이라는 새로운 repository type을 도입했습니다. 이를 통해 compute 관련 요구가 구체적인 사용자들을 더 잘 지원할 수 있습니다. 예를 들어 사용자는 특정 kernel이 어떤 accelerator, operating system, backend version을 지원하는지 확인할 수 있습니다.
 
 <figure align="center">
     <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/revamped-kernels/flash-attn3.png" alt="Flash Attention 3 Kernel Page" width="600"/>
     <figcaption>Kernel page: <a href="https://huggingface.co/kernels/kernels-community/flash-attn3">kernels-community/flash-attn3</a></figcaption>
 </figure>
 
-One can browse all available kernels on the Hub here: [https://huggingface.co/kernels](https://huggingface.co/kernels).
+Hub에서 사용 가능한 모든 kernel은 [https://huggingface.co/kernels](https://huggingface.co/kernels)에서 둘러볼 수 있습니다.
 
-Making these kernels first-class citizens of the Hub also benefits the AI ecosystem. Users can now see trends across kernels, models, and the applications that use them. The kernels become more discoverable to users.
+이 kernel들을 Hub의 first-class citizen으로 만들면 AI 생태계에도 도움이 됩니다. 이제 사용자는 kernel, model, 그리고 이를 사용하는 application 전반의 흐름을 볼 수 있습니다. 또한 kernel은 사용자에게 더 쉽게 발견될 수 있습니다.
 
-## Improved security {#section-2}
+## 보안 개선 {#section-2}
 
-Kernels run native code with the same privileges as the Python process that loads them, so a malicious kernel can do real harm. Therefore, security has always been of utmost importance to the Kernels project.
+Kernel은 이를 불러오는 Python process와 같은 권한으로 native code를 실행합니다. 따라서 악성 kernel은 실제 피해를 줄 수 있습니다. 그래서 보안은 Kernels 프로젝트에서 항상 가장 중요한 요소였습니다.
 
-This is why we focused early on reproducibility: you should be able to recompile a kernel yourself and verify that it matches the publicly available source. We use Nix to make this possible, since it keeps builds pure through hermetic evaluation of the build recipe and a strongly isolated sandbox. We further improve provenance by embedding the source Git SHA1 into the kernel itself.
+이 때문에 우리는 초기부터 reproducibility에 집중했습니다. 사용자가 kernel을 직접 다시 compile하고, 그 결과가 공개된 source와 일치하는지 검증할 수 있어야 합니다. 이를 가능하게 하기 위해 Nix를 사용합니다. Nix는 build recipe를 hermetic하게 평가하고 강하게 격리된 sandbox를 사용해 build를 순수하게 유지합니다. 또한 source Git SHA1을 kernel 자체에 embedding해 provenance를 더 강화했습니다.
 
-In recent months, we have added additional layers of defense: trusted kernel publishers and code signing.
+최근 몇 달 동안 trusted kernel publisher와 code signing이라는 추가 방어 계층도 도입했습니다.
 
-### Trusted kernel publishers
+### Trusted kernel publisher
 
-With the new repo type, we also introduced “trusted publishers”. Since kernels execute code on a machine with the same privileges as the Python process they are used in, an attacker could compromise machines by uploading a malicious kernel and coaxing you to use that kernel. To help you avoid such malicious kernels, the kernels package will now only load kernels by *trusted publishers* by default. A trusted publisher is an organization that is trusted by the community to act in good faith.
+새로운 repo type과 함께 “trusted publisher”도 도입했습니다. Kernel은 사용되는 machine에서 Python process와 같은 권한으로 code를 실행하므로, 공격자는 악성 kernel을 업로드하고 사용자가 그 kernel을 쓰도록 유도해 machine을 compromise할 수 있습니다. 이런 악성 kernel을 피할 수 있도록, 이제 `kernels` package는 기본적으로 *trusted publisher*의 kernel만 load합니다. trusted publisher는 community가 선의로 행동한다고 신뢰하는 organization입니다.
 
-We still want to support loading kernels from organizations or users that are not trusted publishers, but you have to explicitly opt in using the `trust_remote_code` argument when loading a kernel from the Hub:
+물론 trusted publisher가 아닌 organization이나 user의 kernel도 load할 수 있어야 합니다. 다만 Hub에서 kernel을 load할 때 `trust_remote_code` argument를 사용해 명시적으로 opt in해야 합니다.
 
 ```py 
 from kernels import get_kernel
@@ -84,72 +85,71 @@ kernel_module = get_kernel(
 ```
 
 
-By default, users cannot publish kernel repositories on the Hub. They have to request to be a kernel publisher. Users and organizations can request for access from their account settings. This gives us time to treat these requests on a case-by-case basis.
+기본적으로 사용자는 Hub에 kernel repository를 publish할 수 없습니다. kernel publisher가 되려면 요청해야 합니다. user와 organization은 account settings에서 access를 요청할 수 있으며, 이를 통해 우리는 요청을 case-by-case로 검토할 시간을 확보합니다.
 
 ### Kernel signing
 
-An additional layer of security that we are adding is code signing. Code signing protects against the scenario where an attacker uploads a malicious kernel to a kernel repo from a trusted publisher whose Hub credentials were compromised. In code signing, a kernel is signed with a private key known only to the kernel developer and validated with a public key that is generally available. In the Hub compromise scenario, an attacker cannot sign the malicious kernel since they do not own the private key needed for signing.
+추가하고 있는 또 다른 보안 계층은 code signing입니다. code signing은 trusted publisher의 Hub credential이 compromise되어 공격자가 해당 publisher의 kernel repo에 악성 kernel을 업로드하는 상황을 방어합니다. code signing에서는 kernel developer만 알고 있는 private key로 kernel에 서명하고, 일반적으로 공개된 public key로 이를 검증합니다. Hub가 compromise된 상황에서도 공격자는 signing에 필요한 private key를 갖고 있지 않으므로 악성 kernel에 서명할 수 없습니다.
 
-To further improve security, we use Sigstore’s cosign to sign using ephemeral private keys. Since these signing keys are only valid for a limited time, an attacker typically cannot use the private key, even when it is leaked. We also verify that the kernel was signed by a trusted GitHub workflow from a trusted GitHub repository.
+보안을 더 강화하기 위해 Sigstore의 cosign을 사용해 ephemeral private key로 서명합니다. 이 signing key는 제한된 시간 동안만 유효하므로, 유출되더라도 공격자가 private key를 사용하기 어렵습니다. 또한 kernel이 trusted GitHub repository의 trusted GitHub workflow에서 서명되었는지도 검증합니다.
 
-Kernel signing is already supported by `kernel-builder` and we have provided the `kernels verify-signature` to verify a kernel. Kernels does not verify the signature upon loading a kernel yet, since we would like to test this new functionality more before fully rolling it out. Preliminary notes on setting up code signing for your own kernels can be found in the kernels 0.16.0 release notes: [https://github.com/huggingface/kernels/releases/tag/v0.16.0](https://github.com/huggingface/kernels/releases/tag/v0.16.0).
+Kernel signing은 이미 `kernel-builder`에서 지원되며, kernel을 검증할 수 있도록 `kernels verify-signature`도 제공합니다. 다만 Kernels는 아직 kernel load 시점에 signature를 검증하지 않습니다. 이 기능을 완전히 rollout하기 전에 더 테스트하고 싶기 때문입니다. 자체 kernel에 code signing을 설정하는 예비 안내는 kernels 0.16.0 release note에서 볼 수 있습니다. [https://github.com/huggingface/kernels/releases/tag/v0.16.0](https://github.com/huggingface/kernels/releases/tag/v0.16.0)
 
-## Revamped CLIs {#section-3}
+## CLI 개편 {#section-3}
 
-Previously, a bunch of utilities were intertwined between `kernels` and `kernel-builder`. We have established a better separation of concern between the CLI of `kernels` and `kernel-builder`. The mental model here is that `kernels` is a library for loading and preparing kernels for use. Therefore, it should not include anything related to “building” kernels.
+이전에는 여러 utility가 `kernels`와 `kernel-builder` 사이에 뒤섞여 있었습니다. 이제 `kernels` CLI와 `kernel-builder` CLI 사이의 concern을 더 명확히 분리했습니다. 여기서의 mental model은 `kernels`가 kernel을 load하고 사용할 준비를 하는 library라는 것입니다. 따라서 “building” kernel과 관련된 기능은 포함하지 않는 것이 맞습니다.
 
-As a result of this, both `kernels` and `kernel-builder` are now much leaner and more specific. Refer to the documentation to learn more about this:
+그 결과 `kernels`와 `kernel-builder`는 모두 훨씬 더 가볍고 목적이 분명해졌습니다. 자세한 내용은 documentation을 참고하세요.
 
 * [`kernels` CLI](https://huggingface.co/docs/kernels/en/cli)  
 * [`kernel-builder` CLI](https://huggingface.co/docs/kernels/en/builder-cli)
 
-This improved CLI experience also lets us cater to the rise of agentic kernel
-development in a better manner. More on this [later](#foundation-for-agentic-kernel-development).
+개선된 CLI 경험은 agentic kernel development가 부상하는 흐름에도 더 잘 대응하게 해 줍니다. 이에 대해서는 [뒤에서](#foundation-for-agentic-kernel-development) 더 설명합니다.
 
-## More coverage of frameworks and backends {#section-4}
+## framework와 backend 지원 확대 {#section-4}
 
-We have extended support for frameworks, the most visible changes are:
+framework 지원도 확장했습니다. 가장 눈에 띄는 변화는 다음과 같습니다.
 
-* We added support for the Torch Stable ABI to kernels and kernel-builder. The Torch Stable ABI allows kernel developers to target a particular Torch version or any version that is released after it for roughly two years. For instance, a kernel that targets the Torch 2.9 Stable ABI support Torch \>= 2.9.  
-* Apache TVM FFI is the first framework to be supported besides Torch. TVM FFI is standardized ABI for kernels that interoperates with other frameworks such as PyTorch, Jax and CuPy. This allows kernel developers to make kernels that runs across frameworks.
+* `kernels`와 `kernel-builder`에 Torch Stable ABI 지원을 추가했습니다. Torch Stable ABI를 사용하면 kernel developer가 특정 Torch version이나 그 이후 약 2년 동안 release되는 version을 target할 수 있습니다. 예를 들어 Torch 2.9 Stable ABI를 target하는 kernel은 Torch \>= 2.9를 지원합니다.
+* Apache TVM FFI는 Torch 외에 처음으로 지원되는 framework입니다. TVM FFI는 PyTorch, JAX, CuPy 같은 다른 framework와 상호 운용되는 kernel용 standardized ABI입니다. 이를 통해 kernel developer는 여러 framework에서 동작하는 kernel을 만들 수 있습니다.
 
-## Foundation for agentic kernel development {#section-5}
+## agentic kernel 개발을 위한 기반 {#section-5}
 
-`kernel-builder` and `kernels` complement the rise of agentic kernel development wherein an agent is leveraged to come up with an (optimized) kernel from scratch. Together, they support a workflow in which agents can scaffold, build, benchmark, and iteratively optimize kernels.
+`kernel-builder`와 `kernels`는 agent가 처음부터 최적화된 kernel을 만들어 내는 agentic kernel development의 부상을 보완합니다. 두 도구를 함께 사용하면 agent가 kernel을 scaffold하고, build하고, benchmark하고, 반복적으로 optimize하는 workflow를 지원할 수 있습니다.
 
-Agentic kernel development is still nascent, and the right development loops will continue to evolve. That makes simple, clear fundamentals especially important where the tools should be easy to compose into whichever agent workflows or frameworks people choose to use.
+Agentic kernel development는 아직 초기 단계이며, 적절한 development loop도 계속 진화할 것입니다. 그렇기 때문에 단순하고 명확한 기본기가 특히 중요합니다. 도구는 사람들이 선택하는 어떤 agent workflow나 framework에도 쉽게 조합될 수 있어야 합니다.
 
-`kernel-builder` helps enforce a structure in how kernel source code should be scaffolded and used to perform reproducible builds. This gives agents a predictable project layout and repeatable workflow to operate within. Its CLI is also meant to be [agent-optimized](https://huggingface.co/blog/is-it-agentic-enough). For example, this can mean non-interactive commands and outputs that are straightforward for an agent to interpret programmatically. To this end, we also have [backend-specific skills](https://huggingface.co/docs/kernels/en/cli-skills) to help agents navigate the idiosyncrasies of different backends. These skills can capture backend-specific toolchains, compilation paths, and performance considerations.
+`kernel-builder`는 kernel source code를 어떻게 scaffold하고 reproducible build에 사용할지에 대한 구조를 강제하는 데 도움을 줍니다. 이를 통해 agent는 예측 가능한 project layout과 반복 가능한 workflow 안에서 작업할 수 있습니다. CLI 역시 [agent-optimized](https://huggingface.co/blog/is-it-agentic-enough)되도록 설계되었습니다. 예를 들어 non-interactive command와 agent가 programmatic하게 해석하기 쉬운 output을 의미할 수 있습니다. 이를 위해 서로 다른 backend의 특성을 agent가 다룰 수 있도록 [backend-specific skills](https://huggingface.co/docs/kernels/en/cli-skills)도 제공합니다. 이러한 skill은 backend별 toolchain, compilation path, performance consideration을 포착할 수 있습니다.
 
-Building a kernel successfully isn’t the only goal, we need to ensure that it delivers actual speedups over a baseline on the target hardware. A successful build is therefore only the first validation step. Usually, this target hardware can include many different accelerators, even different families of the same accelerator.
+kernel을 성공적으로 build하는 것만이 목표는 아닙니다. target hardware에서 baseline 대비 실제 speedup을 제공하는지도 확인해야 합니다. 따라서 성공적인 build는 첫 번째 validation step일 뿐입니다. 일반적으로 target hardware에는 여러 accelerator가 포함될 수 있고, 같은 accelerator의 서로 다른 family가 포함될 수도 있습니다.
 
- This makes it important to evaluate results across hardware vendors and generations where relevant. Our tight [integration with HF Jobs](https://huggingface.co/docs/kernels/en/builder/github-actions) can make this benchmarking process easy. Agents can use this integration to run benchmark suites, collect performance results, and compare them against a defined baseline.
+따라서 관련이 있는 경우 hardware vendor와 generation 전반에서 결과를 평가하는 것이 중요합니다. [HF Jobs와의 긴밀한 integration](https://huggingface.co/docs/kernels/en/builder/github-actions)은 이 benchmarking 과정을 쉽게 만들어 줍니다. Agent는 이 integration을 사용해 benchmark suite를 실행하고, performance result를 수집하며, 정의된 baseline과 비교할 수 있습니다.
 
-This way, agents can run tests across different hardware configurations to get reliable feedback on the performance of the generated kernels and identify what needs to be done. That feedback can then inform the next optimization iteration.
+이 방식으로 agent는 서로 다른 hardware configuration 전반에서 test를 실행해 생성된 kernel의 performance에 대한 신뢰할 수 있는 feedback을 얻고, 무엇을 해야 하는지 식별할 수 있습니다. 그 feedback은 다음 optimization iteration에 반영됩니다.
 
-Below are some examples of agent-augmented kernels. These illustrate the kinds of kernels that can be developed and evaluated through this workflow:
+아래는 agent-augmented kernel의 몇 가지 예시입니다. 이 예시들은 이 workflow를 통해 어떤 종류의 kernel을 개발하고 평가할 수 있는지 보여줍니다.
 
 * [https://huggingface.co/kernels/drbh/yamoe](https://huggingface.co/kernels/drbh/yamoe)   
 * [https://huggingface.co/kernels/sayakpaul/qk-norm-rope](https://huggingface.co/kernels/sayakpaul/qk-norm-rope)
 
-## Misc {#section-6}
+## 기타 업데이트 {#section-6}
 
-### Environment setup
+### 환경 설정
 
-The environment setup for building kernels with `kernel-builder` can be daunting. To make it easier for users, we now have an [installation script](https://huggingface.co/docs/kernels/en/builder/writing-kernels#quick-install) for setting up an environment in one click. If you prefer working with ephemeral instances, our [Terraform setup guide](https://github.com/huggingface/kernels/tree/main/terraform) is worth following.
+`kernel-builder`로 kernel을 build하기 위한 환경 설정은 부담스러울 수 있습니다. 사용자가 더 쉽게 시작할 수 있도록, 이제 한 번의 click으로 환경을 설정할 수 있는 [installation script](https://huggingface.co/docs/kernels/en/builder/writing-kernels#quick-install)를 제공합니다. ephemeral instance에서 작업하는 것을 선호한다면 [Terraform setup guide](https://github.com/huggingface/kernels/tree/main/terraform)도 참고할 만합니다.
 
-### System card for kernels
+### kernel용 system card
 
-After the kernels are built, we create a system card for each kernel to expose useful information, including how to use it and its exposed interfaces. When the kernel is pushed to the Hub, this system card becomes the front matter for the kernel:
+kernel이 build된 뒤에는 각 kernel에 대해 system card를 생성합니다. 여기에는 사용 방법과 노출된 interface 등 유용한 정보가 포함됩니다. kernel이 Hub에 push되면 이 system card가 kernel의 front matter가 됩니다.
 
 <figure align="center">
     <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/revamped-kernels/kernel-card.png" alt="System card for a kernel" width="600"/>
     <figcaption>System card for <a href="https://huggingface.co/kernels/kernels-community/flash-attn3">kernels-community/flash-attn3</a></figcaption>
 </figure>
 
-### Is a kernel compatible on my system?
+### 내 system에서 kernel이 호환되나요?
 
-Is a question one would ask multiple times to plan things better. Use the [`has_kernel()`](https://huggingface.co/docs/kernels/main/en/api/kernels#kernels.has_kernel) method for this purpose:
+이는 더 나은 계획을 세우기 위해 여러 번 묻게 되는 질문입니다. 이 목적에는 [`has_kernel()`](https://huggingface.co/docs/kernels/main/en/api/kernels#kernels.has_kernel) method를 사용할 수 있습니다.
 
 ```py 
 from kernels import has_kernel
@@ -158,7 +158,7 @@ print(has_kernel("kernels-community/activation", version=1))
 ```
 
 
-It returns a `bool`. If you’re looking for more explanations around why a given kernel isn’t supported then use [`get_kernel_variants()`](https://huggingface.co/docs/kernels/main/en/api/kernels#kernels.get_kernel_variants):
+이 method는 `bool`을 반환합니다. 특정 kernel이 왜 지원되지 않는지 더 자세한 설명이 필요하다면 [`get_kernel_variants()`](https://huggingface.co/docs/kernels/main/en/api/kernels#kernels.get_kernel_variants)를 사용하세요.
 
 ```py 
  from kernels import get_kernel_variants, VariantAccepted
@@ -172,7 +172,7 @@ for decision in get_kernel_variants("kernels-community/activation", version=1):
 ```
 
 
-It should print (depends on the machine you’re on):
+실행 중인 machine에 따라 다음과 비슷한 output이 출력됩니다.
 
 ```bash  
 torch212-cxx11-cu130-aarch64-linux: compatible  
@@ -186,16 +186,16 @@ torch29-metal-aarch64-darwin: rejected (OS (darwin) does not match system OS (li
 ```
 
 
-### Improved manylinux_2_28 support
+### 개선된 manylinux_2_28 지원
 
-Kernel-builder has targeted `manylinux_2_28` almost since the beginning. We used to target `manylinux` by using a modern gcc toolchain compiled with glibc 2.28. To avoid compatibility issues with older versions of `libstdc++`, we statically linked libstdc++.
+Kernel-builder는 거의 초기부터 `manylinux_2_28`을 target해 왔습니다. 이전에는 glibc 2.28로 compile된 최신 gcc toolchain을 사용해 `manylinux`를 target했습니다. 오래된 `libstdc++` version과의 compatibility issue를 피하기 위해 libstdc++를 static link했습니다.
 
-However, this approach recently resulted in some issues. Some `libstdc++` functionality uses global initialization. This can lead to corrupted data when multiple `libstdc++` versions come into play, such as the `libstdc++` that is linked dynamically by PyTorch and the `libstdc++` that is linked statically by a kernel. Some recent kernels use functionality (e.g. C++ regexes) that trigger global initializations, leading to such corrupted data, causing segfaults and other issues.
+하지만 최근 이 접근 방식에서 몇 가지 문제가 발생했습니다. 일부 `libstdc++` 기능은 global initialization을 사용합니다. PyTorch가 dynamic link한 `libstdc++`와 kernel이 static link한 `libstdc++`처럼 여러 `libstdc++` version이 함께 사용되면 data corruption이 발생할 수 있습니다. 일부 최신 kernel은 C++ regex 같은 global initialization을 유발하는 기능을 사용하며, 이로 인해 data corruption, segfault, 기타 문제가 발생했습니다.
 
-To solve this issue, kernels now link `libstdc++` dynamically. To ensure compatibility with old `libstdc++` versions, we now compile kernels with the official `manylinux_2_28` toolchain.
+이 문제를 해결하기 위해 kernel은 이제 `libstdc++`를 dynamic link합니다. 오래된 `libstdc++` version과의 compatibility를 보장하기 위해, 이제 공식 `manylinux_2_28` toolchain으로 kernel을 compile합니다.
 
-## Conclusion {#section-7}
+## 마무리 {#section-7}
 
-Our goal with the Kernels project is to serve both kernel developers and users of custom kernels. We’re always keen on receiving feedback from the community on how we can improve it. Don’t hesitate to contribute!
+Kernels 프로젝트의 목표는 kernel developer와 custom kernel 사용자 모두를 지원하는 것입니다. 우리는 프로젝트를 어떻게 개선할 수 있을지에 대한 community feedback을 항상 환영합니다. 언제든 기여해 주세요!
 
-*Acknowledgements: Thanks to [Aritra](ariG23498) for reviewing the post.*
+*감사의 말: 글을 review해 준 [Aritra](ariG23498)에게 감사드립니다.*
