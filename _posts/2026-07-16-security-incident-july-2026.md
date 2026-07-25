@@ -1,21 +1,22 @@
 ---
 layout: post
-title: "보안 사고 공개 — 2026년 7월"
-description: "2026년 7월 Hugging Face 보안 사고의 탐지, 대응, 영향 범위와 후속 보안 조치를 설명합니다."
+title: 보안 사고 공개 — 2026년 7월
+description: 2026년 7월 Hugging Face 보안 사고의 탐지, 대응, 영향 범위와 후속 보안 조치를 설명합니다.
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 image: assets/images/blog/posts/2026-07-16-security-incident-july-2026/thumbnail.png
 authors:
-  - user: huggingface
-slug: "security-incident-july-2026"
-source_url: "https://huggingface.co/blog/security-incident-july-2026"
-source_published_date: "2026-07-16"
-source_published_at: "2026-07-16T00:00:00+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: huggingface
+slug: security-incident-july-2026
+source_url: https://huggingface.co/blog/security-incident-july-2026
+source_published_date: '2026-07-16'
+source_published_at: '2026-07-16T00:00:00+00:00'
+locale: ko
+translation_status: draft
+translator: openai
 ---
-
 * TOC
 {:toc}
 <!--toc-->
