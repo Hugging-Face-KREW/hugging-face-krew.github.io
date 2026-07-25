@@ -36,9 +36,9 @@ Review instructions:
 
 대형 확산 트랜스포머는 멋진 이미지(또는 비디오, 오디오 조각, 이제 텍스트까지)도 만들 수 있지만, BF16 정밀도로 최신 텍스트-투-이미지 모델을 로드하는 데에는 종종 20-30 GB의 VRAM이 필요합니다. 이로 인해 이들 모델은 대부분의 일반 사용자 GPU에서 손에 닿지 않는 영역이 됩니다. 양자화는 이 문제에 대한 강력한 해결책이며, Diffusers는 이미 bitsandbytes, GGUF, torchao, Quanto 등 여러 양자화 백엔드를 통합하고 있는데, 이는 [Exploring Quantization Backends in Diffusers](https://huggingface.co/blog/diffusers-quantization)에서 다룬 바 있습니다.
 
-대부분의 이러한 백엔드는 _weight-only_ 입니다. 이는 가중치를 저정밀도로 저장하고 계산 시 다시 고정밀도로 디퀀타이즈해 사용하는 것을 의미합니다. 이렇게 하면 메모리 사용량이 크게 감소하지만, 일반적으로 추론 속도를 높이지 못하고, 심지어 약간의 지연 오버헤드를 추가할 수 있습니다.
+대부분의 이러한 백엔드는 _weight-only_ 입니다. 이는 가중치를 저정밀도로 저장하고 계산 시 다시 고정밀도로 디퀀타이즈해 사용하는 것을 의미합니다. 이렇게 하면 메모리 사용량이 크게 감소하지만, 일반적으로 추론 속도를 높이지 못하고, 심지어 약간의 지연 시간(latency) 오버헤드를 추가할 수 있습니다.
 
-[SVDQuant](https://arxiv.org/abs/2411.05007), 대중적인 [Nunchaku](https://github.com/nunchaku-tech/nunchaku) 추론 엔진의 양자화 방법은 다른 접근 방식을 취합니다. 주 트랜스포머 계층을 4비트 가중치와 활성화(W4A4)로 실행하여 메모리를 줄이면서도 디노이징 루프를 가속합니다. 아래에 자세한 내용이 다루어져 있지만, 지금까지 이러한 체크포인트를 사용하려면 별도의 추론 라이브러리가 필요했습니다.
+[SVDQuant](https://arxiv.org/abs/2411.05007), 대중적인 [Nunchaku](https://github.com/nunchaku-tech/nunchaku) 추론 엔진의 양자화(quantization) 방법은 다른 접근 방식을 취합니다. 주 트랜스포머 계층을 4비트 가중치와 활성화(W4A4)로 실행하여 메모리를 줄이면서도 디노이징 루프를 가속합니다. 아래에 자세한 내용이 다루어져 있지만, 지금까지 이러한 체크포인트(checkpoint)를 사용하려면 별도의 추론 라이브러리가 필요했습니다.
 
 현재 Diffusers에서는 `from_pretrained()`를 호출하는 것만으로 Nunchaku 체크포인트를 로드하는 것이 가능하며, 로컬 CUDA 컴파일이 필요 없도록 [`kernels`](https://github.com/huggingface/kernels) 패키지가 제공됩니다. 또한 동반 도구 [diffuse-compressor](https://github.com/rootonchair/diffuse-compressor)를 사용하면 새 아키텍처를 직접 양자화하고 일반 Diffusers 저장소로 게시할 수 있습니다.
 
@@ -48,18 +48,18 @@ Review instructions:
 
 ## 목차 {#section-1}
 
-* [Nunchaku Lite 시작하기](#section-2)
-* [배경: SVDQuant와 Nunchaku](#section-3)
-* [Nunchaku Lite 소개](#section-4)
-* [Diffusers에서의 네이티브 로딩](#section-5)
-* [더 빠른 속도와 더 낮은 메모리 사용량 얻기](#section-6)
-* [벤치마크](#section-7)
+* [Nunchaku Lite 시작하기](#getting-started-with-nunchaku-lite)
+* [배경: SVDQuant와 Nunchaku](#background-svdquant-and-nunchaku)
+* [Nunchaku Lite 소개](#introducing-nunchaku-lite)
+* [Diffusers에서의 네이티브 로딩](#native-loading-in-diffusers)
+* [더 빠른 속도와 더 낮은 메모리 사용량 얻기](#getting-more-speed-and-lower-memory)
+* [벤치마크](#benchmarks)
 * [직접 모델 양자화하기](#section-8)
 * [바로 사용 가능한 체크포인트](#section-9)
-* [결론](#section-10)
-* [감사의 말씀](#section-11)
+* [결론](#conclusion)
+* [감사의 말씀](#acknowledgements)
 
-## Nunchaku Lite 시작하기 {#section-2}
+## Nunchaku Lite 시작하기 {#getting-started-with-nunchaku-lite}
 
 먼저 요구사항을 설치합니다. Diffusers의 최신 버전과 Hugging Face `kernels` 패키지가 필요합니다:
 
@@ -75,7 +75,7 @@ import torch
 from diffusers import ErnieImagePipeline
 
 pipe = ErnieImagePipeline.from_pretrained(
-    "lite-infer/ERNIE-Image-Turbo-nunchaku-lite-nvfp4_r32-bnb4-text-encoder",
+    "rootonchair/ERNIE-Image-Turbo-nunchaku-lite-int4-bnb4-text-encoder",
     torch_dtype=torch.bfloat16,
 ).to("cuda")
 
@@ -96,12 +96,12 @@ image.save("output.png")
   <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/nunchaku-diffusers/fox_bf16_vs_nunchaku_no_metrics.png" alt="BF16 and Nunchaku Lite outputs for a red fox prompt">
 </figure>
 
-커스텀 파이프라인 클래스나 별도의 추론 엔진이 필요하지 않으며, 로컬에서 컴파일할 필요도 없습니다. NVFP4 커널은 사용 시 처음으로 [Nunchaku Lite kernels page](https://huggingface.co/kernels/rootonchair/nunchaku-lite-kernels)를 통해 허브에서 다운로드됩니다. 이 체크포인트는 Nunchaku NVFP4 트랜스포머와 bitsandbytes NF4 텍스트 인코더를 쌍지으며, RTX 5090에서 약 1.7초 만에 1024x1024 이미지를 생성하고 피크 메모리 사용량은 약 12GB로, BF16 파이프라인의 약 24GB와 비교됩니다. Nunchaku Lite 체크포인트 포맷에 대한 자세한 내용은 [official Diffusers documentation](https://huggingface.co/docs/diffusers/main/en/quantization/nunchaku)에서 확인할 수 있습니다.
+커스텀 파이프라인 클래스나 별도의 추론 엔진이 필요하지 않으며, 로컬에서 컴파일할 필요도 없습니다. NVFP4 커널은 사용 시 처음으로 [Nunchaku Lite kernels page](https://huggingface.co/kernels/rootonchair/nunchaku-lite-kernels)를 통해 허브에서 다운로드됩니다. 이 체크포인트는 Nunchaku NVFP4 트랜스포머와 bitsandbytes NF4 텍스트 인코더를 쌍지으며, RTX 5090에서 약 1.7초 만에 1024x1024 이미지를 생성하고 피크 메모리 사용량은 약 12 GB로, BF16 파이프라인의 약 24 GB와 비교됩니다. Nunchaku Lite 체크포인트 포맷에 대한 자세한 내용은 [공식 Diffusers 문서](https://huggingface.co/docs/diffusers/main/en/quantization/nunchaku)에서 확인할 수 있습니다.
 
 > [!참고]
 > NVFP4 체크포인트는 NVIDIA Blackwell GPU( RTX 50 시리즈, RTX PRO 6000, B200 )가 필요합니다. 초기 세대의 경우 INT4 변형을 사용하십시오. 자세한 내용은 아래 [hardware support](#hardware-support) 표를 참조하십시오.
 
-## 배경: SVDQuant와 Nunchaku {#section-3}
+## 배경: SVDQuant와 Nunchaku {#background-svdquant-and-nunchaku}
 
 **SVDQuant**은 **Nunchaku**의 양자화 방식이며, 그것의 참조 CUDA 추론 엔진입니다. 표준 4비트 양자화는 가중치와 활성화에 큰 이상값(outliers)이 포함되어 있어 확산 트랜스포머에 대해 어렵습니다. SVDQuant는 활성화의 이상값을 가중치로 옮겨 각 가중치 행렬의 가장 어렵운 부분을 16비트 저랭크 분기로 표현하고, 남은 잔여 부분을 4비트로 양자화합니다. Nunchaku는 4비트 경로와 저랭크 분기에 대한 융합 커널로 이를 빠르게 만듭니다.
 
@@ -110,7 +110,7 @@ image.save("output.png")
   <figcaption>Nunchaku fuses the low-rank down projection with the quantization kernel and the low-rank up projection with the 4-bit compute kernel, eliminating the memory access overhead of the 16-bit branch. Figure from the <a href="https://arxiv.org/abs/2411.05007">SVDQuant paper</a>.</figcaption>
 </figure>
 
-## Nunchaku Lite 소개 {#section-4}
+## Nunchaku Lite 소개 {#introducing-nunchaku-lite}
 
 **원래의 [Nunchaku engine](https://github.com/nunchaku-ai/nunchaku)는** [model-specific fused execution paths](#quantizing-models-with-structural-rewrites)에서 비롯된 속도의 대부분을 얻습니다. 예를 들어 QKV 프로젝션과 GELU/MLP 커널의 융합 등이 그러합니다. 이러한 최적화는 각 아키텍처의 모듈 구성 및 체크포인트 형식에 묶여 있어, 새로운 모델 패밀리를 지원하려면 보통 아키텍처 특화 통합 작업이 필요합니다.
 
@@ -121,7 +121,7 @@ image.save("output.png")
 
 그 결과, 아키텍처별 융합 커널과 모듈이 없으면 Nunchaku Lite가 원래의 Nunchaku 엔진의 속도 향상을 따라잡지 못하는 단점이 있습니다. 다만 기본 구현은 여전히 약 **30%의 속도 향상**과 함께 같은 수준의 **VRAM 감소**를 제공합니다.
 
-## Diffusers에서의 네이티브 로딩 {#section-5}
+## Diffusers에서의 네이티브 로딩 {#native-loading-in-diffusers}
 
 bitsandbytes나 torchao를 Diffusers에서 사용해 보셨다면 메커니즘이 친숙하게 느껴질 것입니다. Nunchaku Lite 모델 저장소는 일반 Diffusers 저장소입니다. 유일한 특별한 부분은 트랜스포머의 `config.json` 내부에 있는 `quantization_config` 블록입니다:
 
@@ -168,7 +168,7 @@ Nunchaku Lite는 GPU 세대와 체크포인트 정밀도에 따라 서로 다른
 > [!경고]
 > Volta 및 Hopper GPU는 현재 4비트 커널에서 지원되지 않습니다. 양자화 도구는 로드 시 GPU의 CUDA 기능을 검증하고, 잘못된 출력 대신 명확한 오류를 발생시킵니다.
 
-## 더 빠른 속도와 더 낮은 메모리 사용량 얻기 {#section-6}
+## 더 빠른 속도와 더 낮은 메모리 사용량 얻기 {#getting-more-speed-and-lower-memory}
 
 Nunchaku Lite는 Diffusers의 다른 메모리 및 속도 최적화와 결합하여 사용할 수 있습니다.
 
@@ -187,7 +187,7 @@ pipe.transformer.compile_repeated_blocks(fullgraph=True)
 
 **오프로딩.** Diffusers의 오프로딩 도구들인 `enable_model_cpu_offload()` 및 `enable_sequential_cpu_offload()`은 파이프라인을 더 작은 GPU에 맞추고자 할 때 보통대로 작동합니다.
 
-## 벤치마크 {#section-7}
+## 벤치마크 {#benchmarks}
 
 아래 모든 수치는 [rootonchair/ERNIE-Image-Turbo-nunchaku-lite-int4-bnb4-text-encoder](https://huggingface.co/rootonchair/ERNIE-Image-Turbo-nunchaku-lite-int4-bnb4-text-encoder)를 사용하여 1024x1024 해상도에서 NVIDIA RTX PRO 6000(Blackwell)으로 측정되었습니다.
 
@@ -337,7 +337,7 @@ qkv = fused_qkv_norm_rottary(
 - [OzzyGT/Krea_2_Turbo_nunchaku_lite_nvfp4](https://huggingface.co/OzzyGT/Krea_2_Turbo_nunchaku_lite_nvfp4): NVFP4 Krea 2 Turbo 체크포인트
 - [lite-infer](https://huggingface.co/lite-infer): 더 많은 Nunchaku Lite 체크포인트 및 컬렉션
 
-## 결론 {#section-10}
+## 결론 {#conclusion}
 
 Nunchaku의 SVDQuant 커널은 소비자 하드웨어에서 확산 트랜스포머를 효율적으로 실행하는 가장 효과적인 방법 중 하나이며, 이제 Diffusers에서 네이티브로 지원됩니다. 사전 양자화된 체크포인트는 `from_pretrained()`로 로드되며, diffuse-compressor 도구 모음은 엔진 지원을 기다리지 않고도 새로운 아키텍처를 양자화할 수 있게 해줍니다. 가중치와 활성화를 모두 양자화하는 W4A4 경로는 메모리 사용을 줄이는 동시에 디노이징 대기 시간을 개선하고 BF16 원본에 가까운 이미지 품질을 유지합니다.
 
@@ -351,7 +351,7 @@ Nunchaku의 SVDQuant 커널은 소비자 하드웨어에서 확산 트랜스포�
 - [diffuse-compressor](https://github.com/rootonchair/diffuse-compressor)
 - 이전 게시물: [Exploring Quantization Backends in Diffusers](https://huggingface.co/blog/diffusers-quantization) 및 [Memory-efficient Diffusion Transformers with Quanto and Diffusers](https://huggingface.co/blog/quanto-diffusers)
 
-## 감사의 말씀 {#section-11}
+## 감사의 말씀 {#acknowledgements}
 
 Diffusers 유지보수자들에게 통합 전반에 걸친 리뷰와 지도를 해 주신 데에 감사드립니다. 또한 원래 SVDQuant 작업에 대해 MIT HAN Lab / Nunchaku 팀에도 감사드립니다. 블로그 포스트에 대한 피드백을 제공해 준 Marc Sun에게도 감사드립니다. `nunchaku-lite`를 시도해 보고 피드백을 제공해 준 Álvaro Somoza에게도 감사합니다.
 
