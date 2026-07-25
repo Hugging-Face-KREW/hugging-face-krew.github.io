@@ -29,7 +29,7 @@ Review instructions:
 - Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
 -->
 
-# Granite Embedding Multilingual R2: 32K 컨텍스트를 갖춘 Apache 2.0 다국어 임베딩 — 100M 미만 중 최상의 검색 품질
+# Granite Embedding Multilingual R2: 32K 다국어 임베딩
 
 TL;DR: ModernBERT 기반의 두 개의 신규 Apache 2.0 다국어 임베딩 모델 — 97M 매개변수의 컴팩트 모델은 MTEB 다국어 검색에서 모든 오픈 100M 미만 다국어 임베더를 이기는 60.3의 성능을 보이고, 311M 풀사이즈 모델은 MTEB 다국어 검색에서 65.2점으로 오픈 모델 중 500M 매개변수 이하에서 2위에 해당하며 Matryoshka 지원이 더해져 있습니다. 두 모델 모두 200개가 넘는 언어를 아우르고, 52개 언어에 대해 튜닝되었으며, 32,768 토큰의 컨텍스트를 처리하고(이전 R1 대비 64배 증가), 9개 프로그래밍 언어에 대한 코드 검색도 추가합니다.
 
@@ -41,9 +41,11 @@ Granite Embedding Multilingual R2 릴리스는 그 격차를 상당히 좁힙니
 
 - [granite-embedding-311m-multilingual-r2](https://huggingface.co/ibm-granite/granite-embedding-311m-multilingual-r2) — 768 차원의 임베딩, Matryoshka 차원 지원, 그리고 최상위 다국어 검색 품질의 311M 매개변수 풀사이즈 모델.
 
-- [granite-embedding-97m-multilingual-r2](https://huggingface.co/ibm-granite/granite-embedding-97m-multilingual-r2) — 384 차원 임베딩을 가지는 97M 매개변수의 컴팩트 모델로, 그 규모에 비해 강력한 검색 품질을 제공합니다.
+- [granite-embedding-97m-multilingual-r2](https://huggingface.co/ibm-granite/granite-embedding-97m-multilingual-r2) — 384 차원 임베딩을 제공하는 97M 매개변수의 컴팩트 모델로, 그 규모에 비해 강력한 검색 품질을 제공합니다.
 
-두 모델 모두 200+개 언어를 지원하고, 52개 언어 및 프로그래밍 코드에 대해 향상된 검색 품질, 32,768 토큰까지의 컨텍스트 처리(이전 모델 대비 64배 증가), Apache 2.0 라이선스 하에 배포됩니다. 기본적으로 `sentence-transformers`와 `transformers`에서 바로 작동하며, 과제별 특별한 지시가 필요 없고 LangChain, LlamaIndex, Haystack, Milvus에서 모델 이름 한 줄의 변경으로 드롭인 대체로 사용할 수 있습니다. 현재 영어 전용 기본을 사용하는 프레임워크의 경우 한 줄 변경으로 커뮤니티의 모든 사용자가 200+개 언어를 지원하게 됩니다 — API 변경, 새로운 의존성, 또는 End에서의 코드 변경이 필요 없습니다. 두 모델 모두 CPU 최적화 추론용 ONNX 및 OpenVINO 가중치를 함께 제공합니다.
+두 모델 모두 200+개 언어를 지원하고, 52개 언어 및 프로그래밍 코드에 대해 향상된 검색 품질을 제공합니다. 또한 최대 32,768 토큰의 컨텍스트를 처리할 수 있으며(이전 모델 대비 64배 증가), Apache 2.0 라이선스로 배포됩니다. 기본적으로 `sentence-transformers`와 `transformers`에서 바로 작동하며, 과제별 특별한 지시가 필요 없고 LangChain, LlamaIndex, Haystack, Milvus에서 모델 이름 한 줄의 변경으로 드롭인 대체로 사용할 수 있습니다. 현재 영어 전용 기본을 사용하는 프레임워크의 경우 한 줄 변경으로 커뮤니티의 모든 사용자가 200+개 언어를 지원할 수 있습니다 — API 변경, 새로운 의존성, 또는 endpoint 코드 변경이 필요 없습니다. 두 모델 모두 CPU 최적화 추론용 ONNX 및 OpenVINO 가중치를 함께 제공합니다.
+
+Hugging Face 생태계에서는 Datasets, Spaces, Inference Endpoints, Inference Providers, Tokenizers 같은 제품 및 library 이름을 그대로 유지해 검색성과 호환성을 보존합니다.
 
 기저 인코더는 200+개 언어의 텍스트로 사전 학습되어, 그 중 어떤 언어에 대해서도 일반 목적의 임베딩을 생성합니다. 아래의 52개 언어는 명시적 검색 페어 및 교차 언어 훈련이 적용되어 더 높은 품질의 검색을 제공합니다:
 
@@ -73,7 +75,7 @@ Granite Embedding Multilingual R1 모델은 512 토큰 컨텍스트 윈도우를
 
 311M 모델은 22-layer ModernBERT 인코더와 262K 토큰 다국어 어휘를 갖고, 다단계 파이프라인으로 학습됩니다:
 
-- 지식 증류(Knowledge distillation): 모델은 여러 교사 모델로부터 동시에 학습합니다. 교사는 Granite 3.3 Instruct 및 Mistral v0.2 Instruct 디코더 기반 모델이며, 텍스트 임베딩에 맞춰 추가로 미세 조정되어 검색 전용 지식을 311M 인코더 아키텍처로 전달합니다.
+- 지식 증류(Knowledge distillation): 모델은 여러 교사 모델로부터 동시에 학습합니다. 교사는 Granite 3.3 Instruct 및 Mistral v0.2 Instruct 디코더 기반 모델이며, 텍스트 임베딩에 맞춰 추가로 미세 조정(fine-tuning)되어 검색 전용 지식을 311M 인코더 아키텍처로 전달합니다.
 
 - 대조 정합(Contrastive fine-tuning): 52개 언어 및 코드에 걸친 다국어 검색 쌍에 대해 표준 대조 학습을 수행하여 관련 결과와 무관한 결과를 구분하는 능력을 향상시킵니다.
 
@@ -111,9 +113,9 @@ Granite Embedding Multilingual R1 모델은 512 토큰 컨텍스트 윈도우를
 
 - 더 넓은 경쟁 구도에서 harrier-oss-v1-270m가 MTEB 다국어 검색에서 선두를 달리고(RaR-b 32.9 포함) 있고, jina-embeddings-v5-text-nano가 코드(71.2)와 영어 검색(58.8)에서 선두를 달리는 가운데, 311M Granite 모델은 평균적으로는 경쟁력이 있으며(LongEmbed 71.7에서 이점을 보이고), jina-embeddings-v5-text-nano보다 인코딩 처리량이 훨씬 높습니다(아래 속도 표 참조).
 
-### 속도 및 처리량
+### 속도 및 처리량(throughput)
 
-생산 워크로드에서 인코딩 속도는 중요합니다. 특히 수백만 개 문서를 인덱싱하거나 낮은 지연의 쿼리 인코딩이 필요한 경우 더욱 그렇습니다. 우리는 512-token 청크를 사용한 단일 NVIDIA H100 GPU에서 지연 시간과 처리량을 측정했습니다:
+생산 워크로드에서 인코딩 속도는 중요합니다. 특히 수백만 개 문서를 인덱싱하거나 낮은 지연 시간(latency)의 쿼리 인코딩이 필요한 경우 더욱 그렇습니다. 우리는 512-token 청크를 사용한 단일 NVIDIA H100 GPU에서 지연 시간과 처리량을 측정했습니다:
 
 97M 모델은 초당 2,500건 이상의 문서를 인코딩 — 다국어-e5-small와 비슷한 처리량이며, 검색 품질은 훨씬 우수합니다. 311M 모델은 약 1,800건/초로, 검색 품질 측면에서 jina-embeddings-v5-text-nano보다 더 좋으며(65.2 대 63.3), 인코딩 속도는 5.5배 이상 빠릅니다(참고: 속도 수치는 최신 트랜스포머 코드로 계산되었으며, Jina 및 Granite 모델 모두에서 4.57 버전과의 속도 저하가 있습니다. 자세한 내용은 기술 보고서를 참조하시기 바랍니다). 이 목록에 있는 경쟁 모델 중 harrier-oss-v1-270m가 가장 빠른 속도와 검색 점수의 조합을 제공합니다.
 
