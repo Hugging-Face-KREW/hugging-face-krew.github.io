@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "LeRobot v0.6.0: 상상하고, 평가하고, 개선하기"
+description: "LeRobot v0.6.0의 새로운 벤치마크, 데이터셋, 학습 개선 사항과 로봇 정책 평가 흐름을 한국어로 정리합니다."
 author: KREW
 categories: [Translation, HuggingFace]
 image: assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png
@@ -187,7 +188,7 @@ lerobot-annotate \
 
 ## 벤치마크: 모든 것을 평가하는 하나의 CLI {#section-7}
 
-<!-- TODO: gif idea: grid of rollouts across the six new benchmarks, hosted at documentation-images/lerobot-blog/release-v0.6.0/ -->
+<!-- Planned visual: grid of rollouts across the six new benchmarks, hosted at documentation-images/lerobot-blog/release-v0.6.0/ -->
 
 v0.5.0은 LeRobot을 VLAs 평가 허브로 확립했고, v0.6.0은 여섯 개의 새로운 시뮬레이션 벤치마크를 추가하여 실제 기능으로 만들었습니다. 모두 동일한 `lerobot-eval` CLI를 통해 실행 가능하고, 각 벤치마크에는 문서 페이지, Docker 이미지, CI에서 스모크 테스트된 SmolVLA 기준 체크포인트가 있습니다.
 
@@ -236,7 +237,7 @@ lerobot-rollout \
 
 배포하고, 보정을 수집하고, 미세 조정하고, 반복하세요: 로봇 학습 플라이휠은 이제 CLI 플래그입니다. [deployment docs](https://huggingface.co/docs/lerobot/v0.6.0/inference)를 읽어보라.
 
-<!-- TODO: gif idea: DAgger takeover moment (policy fails, human grabs leader arm, correction recorded), hosted at documentation-images/lerobot-blog/release-v0.6.0/ -->
+<!-- Planned visual: DAgger takeover moment (policy fails, human grabs leader arm, correction recorded), hosted at documentation-images/lerobot-blog/release-v0.6.0/ -->
 
 ### FSDP: GPU보다 큰 모델 학습
 
