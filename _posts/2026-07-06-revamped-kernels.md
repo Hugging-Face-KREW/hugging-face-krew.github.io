@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "🤗 Kernels: 주요 업데이트"
-description: "Hugging Face Kernels의 새 repository type, 보안 강화, CLI 개편, framework 지원 확대를 소개합니다."
+description: "Hugging Face Kernels의 새 저장소 유형, 보안 강화, CLI 개편, 프레임워크 지원 확대를 소개합니다."
 author: dailybot
 categories: [Translation, HuggingFace]
 image: assets/images/blog/posts/2026-07-06-revamped-kernels/thumbnail.png
@@ -35,21 +35,21 @@ Review instructions:
 
 # 🤗 Kernels: 주요 업데이트
 
-[이전 글(From Zero to GPU)](https://huggingface.co/blog/kernel-builder)에서는 custom kernel을 패키징하고, 배포하고, 사용하는 방식을 표준화하기 위한 🤗 Kernels 프로젝트를 소개했습니다. 이 프로젝트의 목표는 Hub와 최대한 잘 맞으면서도 사용 흐름은 매끄럽고 보안은 견고하게 만드는 것입니다.
+[이전 글(From Zero to GPU)](https://huggingface.co/blog/kernel-builder)에서는 custom kernels를 패키징하고, 배포하고, 사용하는 방식을 표준화하기 위한 🤗 Kernels 프로젝트를 소개했습니다. 이 프로젝트의 목표는 Hub와 최대한 잘 맞으면서도 사용 흐름은 매끄럽고 보안은 견고하게 만드는 것입니다.
 
 지난 몇 달 동안 우리는 이 목표를 향해 작업해 왔습니다. 그 과정에서 프로젝트도 거의 전면적으로 다시 설계했습니다. 이 글에서는 지금까지 배포한 주요 업데이트와 앞으로의 방향을 정리합니다.
 
 **목차**
 
-* [Kernels — 새로운 repository type](#kernels--a-new-repository-type)
+* [Kernels — 새로운 저장소 유형](#kernels--a-new-repository-type)
 * [보안 개선](#improved-security)
 * [CLI 개편](#revamped-clis)
-* [framework와 backend 지원 확대](#more-coverage-of-frameworks-and-backends)
+* [프레임워크와 백엔드 지원 확대](#more-coverage-of-frameworks-and-backends)
 * [agentic kernel 개발을 위한 기반](#foundation-for-agentic-kernel-development)
 * [기타 업데이트](#misc)
 * [마무리](#conclusion)
 
-## Kernels — 새로운 repository type {#section-1}
+## Kernels — 새로운 저장소 유형 {#section-1}
 
 Hub에 ["kernel"](https://huggingface.co/kernels)이라는 새로운 repository type을 도입했습니다. 이를 통해 compute 관련 요구가 구체적인 사용자들을 더 잘 지원할 수 있습니다. 예를 들어 사용자는 특정 kernel이 어떤 accelerator, operating system, backend version을 지원하는지 확인할 수 있습니다.
 
@@ -58,7 +58,7 @@ Hub에 ["kernel"](https://huggingface.co/kernels)이라는 새로운 repository 
     <figcaption>Kernel page: <a href="https://huggingface.co/kernels/kernels-community/flash-attn3">kernels-community/flash-attn3</a></figcaption>
 </figure>
 
-Hub에서 사용 가능한 모든 kernel은 [https://huggingface.co/kernels](https://huggingface.co/kernels)에서 둘러볼 수 있습니다.
+Hub에서 사용 가능한 모든 kernel은 [https://huggingface.co/kernels.](https://huggingface.co/kernels)에서 둘러볼 수 있습니다.
 
 이 kernel들을 Hub의 first-class citizen으로 만들면 AI 생태계에도 도움이 됩니다. 이제 사용자는 kernel, model, 그리고 이를 사용하는 application 전반의 흐름을 볼 수 있습니다. 또한 kernel은 사용자에게 더 쉽게 발견될 수 있습니다.
 
@@ -93,20 +93,20 @@ kernel_module = get_kernel(
 
 보안을 더 강화하기 위해 Sigstore의 cosign을 사용해 ephemeral private key로 서명합니다. 이 signing key는 제한된 시간 동안만 유효하므로, 유출되더라도 공격자가 private key를 사용하기 어렵습니다. 또한 kernel이 trusted GitHub repository의 trusted GitHub workflow에서 서명되었는지도 검증합니다.
 
-Kernel signing은 이미 `kernel-builder`에서 지원되며, kernel을 검증할 수 있도록 `kernels verify-signature`도 제공합니다. 다만 Kernels는 아직 kernel load 시점에 signature를 검증하지 않습니다. 이 기능을 완전히 rollout하기 전에 더 테스트하고 싶기 때문입니다. 자체 kernel에 code signing을 설정하는 예비 안내는 kernels 0.16.0 release note에서 볼 수 있습니다. [https://github.com/huggingface/kernels/releases/tag/v0.16.0](https://github.com/huggingface/kernels/releases/tag/v0.16.0)
+Kernel signing은 이미 kernel-builder에서 지원되며, kernel을 검증할 수 있도록 `kernels verify-signature`도 제공합니다. 다만 Kernels는 아직 kernel load 시점에 signature를 검증하지 않습니다. 이 기능을 완전히 rollout하기 전에 더 테스트하고 싶기 때문입니다. 자체 kernel에 code signing을 설정하는 예비 안내는 kernels 0.16.0 release note에서 볼 수 있습니다. [https://github.com/huggingface/kernels/releases/tag/v0.16.0.](https://github.com/huggingface/kernels/releases/tag/v0.16.0)
 
 ## CLI 개편 {#section-3}
 
-이전에는 여러 utility가 `kernels`와 `kernel-builder` 사이에 뒤섞여 있었습니다. 이제 `kernels` CLI와 `kernel-builder` CLI 사이의 concern을 더 명확히 분리했습니다. 여기서의 mental model은 `kernels`가 kernel을 load하고 사용할 준비를 하는 library라는 것입니다. 따라서 “building” kernel과 관련된 기능은 포함하지 않는 것이 맞습니다.
+이전에는 여러 utility가 kernels와 kernel-builder 사이에 뒤섞여 있었습니다. 이제 kernels CLI와 kernel-builder CLI 사이의 concern을 더 명확히 분리했습니다. 여기서의 mental model은 kernels가 kernel을 load하고 사용할 준비를 하는 library라는 것입니다. 따라서 “building” kernel과 관련된 기능은 포함하지 않는 것이 맞습니다.
 
 그 결과 `kernels`와 `kernel-builder`는 모두 훨씬 더 가볍고 목적이 분명해졌습니다. 자세한 내용은 documentation을 참고하세요.
 
-* [`kernels` CLI](https://huggingface.co/docs/kernels/en/cli)  
-* [`kernel-builder` CLI](https://huggingface.co/docs/kernels/en/builder-cli)
+* [kernels CLI](https://huggingface.co/docs/kernels/en/cli)  
+* [kernel-builder CLI](https://huggingface.co/docs/kernels/en/builder-cli)
 
 개선된 CLI 경험은 agentic kernel development가 부상하는 흐름에도 더 잘 대응하게 해 줍니다. 이에 대해서는 [뒤에서](#foundation-for-agentic-kernel-development) 더 설명합니다.
 
-## framework와 backend 지원 확대 {#section-4}
+## 프레임워크와 백엔드 지원 확대 {#section-4}
 
 framework 지원도 확장했습니다. 가장 눈에 띄는 변화는 다음과 같습니다.
 
