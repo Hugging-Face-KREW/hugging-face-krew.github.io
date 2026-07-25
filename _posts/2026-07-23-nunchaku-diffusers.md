@@ -7,7 +7,7 @@ categories: [Translation, HuggingFace]
 thumbnail: /blog/assets/nunchaku-diffusers/thumbnail.png
 image: assets/images/blog/posts/2026-07-23-nunchaku-diffusers/thumbnail.png
 authors:
-  - user: rootonchair
+  - user: sayakpaul
 slug: "nunchaku-diffusers"
 source_url: "https://huggingface.co/blog/nunchaku-diffusers"
 source_published_date: "2026-07-23"
@@ -54,8 +54,8 @@ Review instructions:
 * [Diffusers에서의 네이티브 로딩](#native-loading-in-diffusers)
 * [더 빠른 속도와 더 낮은 메모리 사용량 얻기](#getting-more-speed-and-lower-memory)
 * [벤치마크](#benchmarks)
-* [직접 모델 양자화하기](#section-8)
-* [바로 사용 가능한 체크포인트](#section-9)
+* [직접 모델 양자화하기](#quantizing-your-own-model)
+* [바로 사용 가능한 체크포인트](#ready-to-use-checkpoints)
 * [결론](#conclusion)
 * [감사의 말씀](#acknowledgements)
 
@@ -75,7 +75,7 @@ import torch
 from diffusers import ErnieImagePipeline
 
 pipe = ErnieImagePipeline.from_pretrained(
-    "rootonchair/ERNIE-Image-Turbo-nunchaku-lite-int4-bnb4-text-encoder",
+    "lite-infer/ERNIE-Image-Turbo-nunchaku-lite-nvfp4_r32-bnb4-text-encoder",
     torch_dtype=torch.bfloat16,
 ).to("cuda")
 
@@ -209,7 +209,7 @@ pipe.transformer.compile_repeated_blocks(fullgraph=True)
   <figcaption>BF16 vs 4-bit outputs with identical seeds and settings.</figcaption>
 </figure>
 
-## 직접 모델 양자화하기 {#section-8}
+## 직접 모델 양자화하기 {#quantizing-your-own-model}
 
 Diffusers에서 Nunchaku Lite 지원은 아키텍처에 독립적이며, [diffuse-compressor](https://github.com/rootonchair/diffuse-compressor) 도구킷은 Diffusers 모델에 대한 엔드 투 엔드 SVDQuant 워크플로를 제공합니다: 보정(calibrate), 양자화(quantize), 패키징(package), 게시(publish).
 
@@ -328,7 +328,7 @@ qkv = fused_qkv_norm_rottary(
 
 이러한 구조적 재작성은 양자화 중 모델별 대상 구성(target config)에 의해 설명되며, 체크포인트가 로드될 때 소형 런타임 어댑터에 의해 처리됩니다. [FLUX.2 Klein 4B quantization script](https://github.com/rootonchair/diffuse-compressor/blob/main/examples/text_to_image/quantize_flux2_klein_4b.py)는 구조적으로 재작성된 체크포인트를 생성하기 위한 구체적인 대상 구성 예를 제공하고, [rootonchair/nunchaku-lite](https://github.com/rootonchair/nunchaku-lite)은 묶음 QKV 텐서를 로드하고 융합된 투영을 분할하는 등 다른 융합 작업을 로드하는 데 필요한 런타임 어댑터를 제공합니다. 전체 워크플로우는 [Adding A New Model](https://github.com/rootonchair/diffuse-compressor/blob/main/docs/adding_new_model.md) 가이드를 확인하면 됩니다.
 
-## 바로 사용 가능한 체크포인트 {#section-9}
+## 바로 사용 가능한 체크포인트 {#ready-to-use-checkpoints}
 
 즉시 시작하려면 아래 저장소를 확인하십시오:
 
