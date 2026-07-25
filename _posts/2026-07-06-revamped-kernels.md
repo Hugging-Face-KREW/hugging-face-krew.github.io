@@ -198,4 +198,4 @@ Kernel-builder는 거의 초기부터 `manylinux_2_28`을 target해 왔습니다
 
 Kernels 프로젝트의 목표는 kernel developer와 custom kernel 사용자 모두를 지원하는 것입니다. 우리는 프로젝트를 어떻게 개선할 수 있을지에 대한 community feedback을 항상 환영합니다. 언제든 기여해 주세요!
 
-*감사의 말: 글을 review해 준 [Aritra](ariG23498)에게 감사드립니다.*
+*감사의 말: 글을 review해 준 [Aritra](https://huggingface.co/ariG23498)에게 감사드립니다.*
