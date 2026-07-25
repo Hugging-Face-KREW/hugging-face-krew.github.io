@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "TRL에서 Hub Bucket으로 1조 매개변수 전송: 델타 가중치 동기화"
+description: "TRL의 Delta Weight Sync가 Hub Bucket을 활용해 대규모 모델 체크포인트를 효율적으로 동기화하는 방법을 설명합니다."
 author: dailybot
 categories: [Translation, HuggingFace]
 thumbnail: /blog/assets/delta-weight-sync/thumbnail.png
@@ -348,7 +349,7 @@ Fireworks 프레임에서 1 TB급 모델에 대한 측정 수치를 보면, 1024
 
 - **Two CPU bf16 snapshots, one too many.** 트레이너는 변경 탐지기에 쓰기 위해 하나를 보관하고, 롤아웃 서버는 vLLM의 `load_weights`를 재구성하기 위해 하나를 보관합니다. 첫 번째 것은 누군가 정밀한 분석 마스크를 찾을 때까지 남아 있습니다. 두 번째는 vLLM이 sparse `load_weights` API를 얻으면 사라집니다. PR은 곧 나올 예정입니다.
 - **고정된 앵커 주기.** 현재는 매 \(N\\) 스텝마다 전체 앵커를 덤프합니다. 누적 드리프트가 X를 초과할 때 앵커를 잡는 적응 정책은 긴 실행에서 앵커 비용을 줄여 줍니다.
-- **다중 노드 FSDP2 트레이너.** `BF16ChangeDetector`는 프로세스당 옵티마이저 훅을 기반으로 합니다. FSDP2에 대해 깔끔하게 일반화될 가능성이 있지만 다중 노드 규모에서 아직 측정하지 않았습니다. PR에는 우리 이름이 달린 `TODO`가 있습니다.
+- **다중 노드 FSDP2 트레이너.** `BF16ChangeDetector`는 프로세스당 옵티마이저 훅을 기반으로 합니다. FSDP2에 대해 깔끔하게 일반화될 가능성이 있지만 다중 노드 규모에서 아직 측정하지 않았습니다. PR에는 우리 이름이 달린 후속 작업 항목이 있습니다.
 - **옵티마이저와의 훅 연결.** \((m, v)\\)만으로 마스크를 예측하려는 우리의 시도는 재현이 낮아, 분석적 bf16 임계값이 교과서 공식이 말하는 것보다 더 미묘한 작용을 한다는 것을 의미합니다. 이를 해결한 사람의 이야기를 듣고 싶습니다.
 - **와이어 상 압축과의 스태킹.** 희소 safetensors와 청크당 gzip은 직교합니다. 아직 이 둘을 결합해 보지 않았습니다. 큰 압축 이득은 기대하지 않습니다.
 
