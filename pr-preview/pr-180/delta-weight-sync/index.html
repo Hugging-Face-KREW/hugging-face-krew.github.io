@@ -31,8 +31,8 @@
 <meta property="og:title" content="TRL에서 Hub Bucket으로 1조 매개변수 전송: 델타 가중치 동기화" />
 <meta name="author" content="dailybot" />
 <meta property="og:locale" content="ko" />
-<meta name="description" content="이 글은 Hugging Face 블로그의 Shipping a Trillion Parameters With a Hub Bucket: Delta Weight Sync in TRL를 한국어로 번역한 글입니다." />
-<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Shipping a Trillion Parameters With a Hub Bucket: Delta Weight Sync in TRL를 한국어로 번역한 글입니다." />
+<meta name="description" content="TRL의 Delta Weight Sync가 Hub Bucket을 활용해 대규모 모델 체크포인트를 효율적으로 동기화하는 방법을 설명합니다." />
+<meta name="twitter:description" property="og:description" content="TRL의 Delta Weight Sync가 Hub Bucket을 활용해 대규모 모델 체크포인트를 효율적으로 동기화하는 방법을 설명합니다." />
 <meta property="og:site_name" content="Hugging Face KREW" />
 <meta property="og:image" content="/pr-preview/pr-180/delta-weight-sync/assets/images/blog/posts/2026-05-27-delta-weight-sync/thumbnail.png" />
 <meta property="og:type" content="article" />
@@ -42,7 +42,7 @@
 <meta name="twitter:image" content="/pr-preview/pr-180/delta-weight-sync/assets/images/blog/posts/2026-05-27-delta-weight-sync/thumbnail.png" />
 <meta name="twitter:title" content="TRL에서 Hub Bucket으로 1조 매개변수 전송: 델타 가중치 동기화" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-05-27T00:00:00+09:00","datePublished":"2026-05-27T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Shipping a Trillion Parameters With a Hub Bucket: Delta Weight Sync in TRL를 한국어로 번역한 글입니다.","headline":"TRL에서 Hub Bucket으로 1조 매개변수 전송: 델타 가중치 동기화","image":"/pr-preview/pr-180/delta-weight-sync/assets/images/blog/posts/2026-05-27-delta-weight-sync/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-180/delta-weight-sync/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-180/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-180/delta-weight-sync/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-05-27T00:00:00+09:00","datePublished":"2026-05-27T00:00:00+09:00","description":"TRL의 Delta Weight Sync가 Hub Bucket을 활용해 대규모 모델 체크포인트를 효율적으로 동기화하는 방법을 설명합니다.","headline":"TRL에서 Hub Bucket으로 1조 매개변수 전송: 델타 가중치 동기화","image":"/pr-preview/pr-180/delta-weight-sync/assets/images/blog/posts/2026-05-27-delta-weight-sync/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-180/delta-weight-sync/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-180/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-180/delta-weight-sync/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -590,7 +590,7 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
 <ul>
   <li><strong>Two CPU bf16 snapshots, one too many.</strong> 트레이너는 변경 탐지기에 쓰기 위해 하나를 보관하고, 롤아웃 서버는 vLLM의 <code class="language-plaintext highlighter-rouge">load_weights</code>를 재구성하기 위해 하나를 보관합니다. 첫 번째 것은 누군가 정밀한 분석 마스크를 찾을 때까지 남아 있습니다. 두 번째는 vLLM이 sparse <code class="language-plaintext highlighter-rouge">load_weights</code> API를 얻으면 사라집니다. PR은 곧 나올 예정입니다.</li>
   <li><strong>고정된 앵커 주기.</strong> 현재는 매 (N\) 스텝마다 전체 앵커를 덤프합니다. 누적 드리프트가 X를 초과할 때 앵커를 잡는 적응 정책은 긴 실행에서 앵커 비용을 줄여 줍니다.</li>
-  <li><strong>다중 노드 FSDP2 트레이너.</strong> <code class="language-plaintext highlighter-rouge">BF16ChangeDetector</code>는 프로세스당 옵티마이저 훅을 기반으로 합니다. FSDP2에 대해 깔끔하게 일반화될 가능성이 있지만 다중 노드 규모에서 아직 측정하지 않았습니다. PR에는 우리 이름이 달린 <code class="language-plaintext highlighter-rouge">TODO</code>가 있습니다.</li>
+  <li><strong>다중 노드 FSDP2 트레이너.</strong> <code class="language-plaintext highlighter-rouge">BF16ChangeDetector</code>는 프로세스당 옵티마이저 훅을 기반으로 합니다. FSDP2에 대해 깔끔하게 일반화될 가능성이 있지만 다중 노드 규모에서 아직 측정하지 않았습니다. PR에는 우리 이름이 달린 후속 작업 항목이 있습니다.</li>
   <li><strong>옵티마이저와의 훅 연결.</strong> ((m, v)\)만으로 마스크를 예측하려는 우리의 시도는 재현이 낮아, 분석적 bf16 임계값이 교과서 공식이 말하는 것보다 더 미묘한 작용을 한다는 것을 의미합니다. 이를 해결한 사람의 이야기를 듣고 싶습니다.</li>
   <li><strong>와이어 상 압축과의 스태킹.</strong> 희소 safetensors와 청크당 gzip은 직교합니다. 아직 이 둘을 결합해 보지 않았습니다. 큰 압축 이득은 기대하지 않습니다.</li>
 </ul>
@@ -696,24 +696,8 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
 </div>
 
 
-<!-- footer -->
-<div class="row post-footer">
-    <div class="footer">
-    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
 
-        <div class="footer-card-container">
-            <a href="https://www.contribution.ac/">
-                <img src="/pr-preview/pr-180/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
-            </a>
-            &nbsp;
-            <a href="https://www.contribution.ac/">
-                <img src="/pr-preview/pr-180/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
-            </a>
-            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
-            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
-        </div>
-</div>
-</div>
+
     <!-- End Article
 ================================================== -->
 
@@ -730,7 +714,7 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
     <div class="filter-tabs">
       <button class="filter-btn active" data-category="all">
         All
-        <span class="count">9</span>
+        <span class="count">21</span>
       </button>
 
       
@@ -738,7 +722,7 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
         
           <button class="filter-btn" data-category="translation">
             Translation
-            <span class="count">9</span>
+            <span class="count">21</span>
           </button>
         
       
@@ -746,7 +730,7 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
         
           <button class="filter-btn" data-category="huggingface">
             HuggingFace
-            <span class="count">8</span>
+            <span class="count">20</span>
           </button>
         
       
@@ -756,6 +740,30 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
 
 
 <section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
   
       
   
@@ -799,8 +807,66 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
                 <span class="author-meta">
-                By  <span class="post-name"> , </span>             
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
                 on <span class="post-date">21 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-180/thinkingmachines-inkling/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-180/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" alt="Thinking Machines의 Inkling에 오신 것을 환영합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-180/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-180/torch-attention-profile/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-180/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" alt="파이토치의 프로파일링(3부): 어텐션이 전부다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-180/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">10 Jul 2026</span>
                 </span>               
                 <div class="clearfix"></div>
             </div>
@@ -829,8 +895,38 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
                 <span class="author-meta">
-                By  <span class="post-name"> , </span>             
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
                 on <span class="post-date">08 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-180/lerobot-release-v060/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-180/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" alt="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-180/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">07 Jul 2026</span>
                 </span>               
                 <div class="clearfix"></div>
             </div>
@@ -857,8 +953,36 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
                 <span class="author-meta">
-                By  <span class="post-name"> , </span>             
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
                 on <span class="post-date">01 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-180/eee-community-evals/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-180/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" alt="Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-180/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Featuring Every Eval Ever Results on Hugging Face Model Pages를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">30 Jun 2026</span>
                 </span>               
                 <div class="clearfix"></div>
             </div>
@@ -885,7 +1009,7 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
                 <span class="author-meta">
-                By  <span class="post-name"> , </span>             
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
                 on <span class="post-date">26 Jun 2026</span>
                 </span>               
                 <div class="clearfix"></div>
@@ -913,8 +1037,36 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
                 <span class="author-meta">
-                By  <span class="post-name"> , </span>             
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
                 on <span class="post-date">24 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-180/huggingface-hub-release-ci/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-180/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" alt="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-180/huggingface-hub-release-ci/">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
                 </span>               
                 <div class="clearfix"></div>
             </div>
@@ -941,7 +1093,7 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
                 <span class="author-meta">
-                By  <span class="post-name"> , </span>             
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
                 on <span class="post-date">23 Jun 2026</span>
                 </span>               
                 <div class="clearfix"></div>
@@ -969,8 +1121,208 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
                 <span class="author-meta">
-                By  <span class="post-name"> , </span>             
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
                 on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-180/is-it-agentic-enough/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-180/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" alt="충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-180/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-180/agentic-resource-discovery-launch/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-180/assets/images/blog/posts/2026-06-17-agentic-resource-discovery-launch/thumbnail.png" alt="에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-180/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Agentic Resource Discovery: Let agents search를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">17 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-180/github-ci-hf-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-180/assets/images/blog/posts/2026-06-09-github-ci-hf-jobs/thumbnail.gif" alt="GitHub CI를 Hugging Face Jobs로 마이그레이션" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-180/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Migrating Your GitHub CI to Hugging Face Jobs를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">09 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-180/openenv-agentic-rl/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-180/assets/images/blog/posts/2026-06-08-openenv-agentic-rl/thumbnail.png" alt="오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-180/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Open Source Community is backing OpenEnv for Agentic RL를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-180/torch-profiler/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-180/assets/images/blog/posts/2026-05-29-torch-profiler/thumbnail.png" alt="PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-180/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 1): A Beginner’s Guide to torch.profiler를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">29 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-180/local-reachy-mini-conversation/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-180/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-180/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">27 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-180/olmoearth-v1-1/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-180/assets/images/blog/posts/2026-05-20-olmoearth-v1-1/thumbnail.png" alt="OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-180/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 OlmoEarth v1.1: A more efficient family of models를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">20 May 2026</span>
                 </span>               
                 <div class="clearfix"></div>
             </div>
@@ -997,7 +1349,7 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
                 <span class="author-meta">
-                By  <span class="post-name"> , </span>             
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
                 on <span class="post-date">19 May 2026</span>
                 </span>               
                 <div class="clearfix"></div>
@@ -1041,7 +1393,8 @@ Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사�
       
     </div>
   </div>
-</section></main>
+</section>
+</main>
 
 
     <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
