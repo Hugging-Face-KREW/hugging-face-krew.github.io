@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "hf CLI를 에이전트에 최적화된 방식으로 Hugging Face Hub와 함께 작동하도록 설계하기"
+description: "Hugging Face Hub 작업을 코딩 에이전트에 맞게 단순화한 hf CLI 설계와 벤치마크 결과를 소개합니다."
 author: dailybot
 categories: [Translation, HuggingFace]
 thumbnail: /blog/assets/hf-cli-for-agents/thumbnail.png
