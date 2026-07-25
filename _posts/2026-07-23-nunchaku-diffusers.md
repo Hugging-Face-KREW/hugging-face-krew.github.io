@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Nunchaku 4비트 확산 추론을 Diffusers에 도입하기"
+description: "Nunchaku의 4비트 diffusion inference를 Diffusers에 통합하고 성능과 사용 흐름을 개선하는 방법을 소개합니다."
 author: dailybot
 categories: [Translation, HuggingFace]
 thumbnail: /blog/assets/nunchaku-diffusers/thumbnail.png
