@@ -35,7 +35,7 @@ Review instructions:
 
 # hf CLI를 에이전트에 최적화된 방식으로 Hugging Face Hub와 함께 작동하도록 설계하기
 
-`hf`은 Hugging Face Hub의 공식 명령줄 진입점입니다. Hub에서 Python SDK로 할 수 있는 모든 작업은 터미널에서도 가능합니다: 모델, 데이터셋, Spaces를 다운로드 및 업로드; 리포지토리, 브랜치, 태그 및 풀 리퀘스트 생성 및 관리; HF 인프라에서 Jobs 실행; Buckets, Collections, webhooks 및 Inference Endpoints 관리.
+`hf`는 Hugging Face Hub의 공식 명령줄 인터페이스입니다. Hub에서 Python SDK로 할 수 있는 모든 작업을 터미널에서도 수행할 수 있습니다. 모델·데이터셋·Spaces를 다운로드하고 업로드할 수 있으며, 리포지토리·브랜치·태그·풀 리퀘스트를 생성하고 관리할 수 있습니다. 또한 HF 인프라에서 Jobs를 실행하고, Buckets·Collections·webhooks·Inference Endpoints를 관리할 수 있습니다.
 
 `hf` CLI는 수년간 우리의 사용자들을 위해 주로 구축되었습니다. 그러나 이제는 **코딩 에이전트**들: Claude Code, Codex, Cursor 등에게도 점점 더 많이 사용되고 있습니다. 그래서 두 관객 모두를 한꺼번에 활용할 수 있도록 재구축했습니다. 이 블로그 글은 우리가 한 일과 이를 벤치마크한 방법을 요약합니다. 복잡하고 다단계인 작업에서 비-CLI 기준선(에이전트가 `curl`를 수동으로 구성하거나 Python SDK)을 사용할 때 `hf` CLI에 비해 최대 **6배** 더 많은 토큰을 소모하는 것을 발견했습니다.
 
@@ -48,7 +48,7 @@ Review instructions:
     <img class="hidden dark:block" src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/huggingface_hub/chart-users-dark.png" alt="Distinct users of the Hugging Face Hub by coding agent since April 2026. Claude Code leads with 39.5k users and 48.6M requests, then Codex with 34.8k users and 36.4M requests, followed by antigravity, cursor-cli, openclaw, cursor, gemini and pi." width="100%"/>
 </div>
 
-막대 그래프는 에이전트별 서로 다른 사용자를 세며, 요청량은 하위 라벨입니다. Claude Code 단독으로 약 4만 명의 사용자와 거의 4900만 건의 요청을 보유하고 있으며, Codex가 그 뒤를 잇습니다. 이는 초기 수치에 불과하지만(에이전트 트래픽의 속성을 본 것은 2026년 4월부터였음), 규모가 이미 상당하며 코딩 에이전트가 Hub와 함께 작업하는 표준 방식으로 자리잡아 가면서 계속 커질 것으로 기대됩니다.
+막대 그래프는 에이전트별 고유 사용자 수를 보여주며, 요청량은 하위 라벨입니다. Claude Code만 보아도 약 40,000명의 사용자와 거의 49,000,000건의 요청을 기록했고, Codex가 그 뒤를 잇습니다. 이는 초기 수치에 불과하지만(에이전트 트래픽 속성을 확인하기 시작한 시점은 2026년 4월), 규모는 이미 상당하며 코딩 에이전트가 Hub와 함께 작업하는 표준 방식으로 자리잡아 가면서 계속 커질 수 있습니다.
 
 ## 사람과 에이전트를 위한 설계 {#section-2}
 
@@ -146,25 +146,25 @@ Qwen/Qwen3-4B
 
 ## 코딩 에이전트를 위한 hf CLI 벤치마크 {#section-3}
 
-`hf` CLI가 에이전트에 대해 realmente 더 효율적인지 알아보기 위해 이를 측정했습니다. 간단한 평가 허용치를 구축하고 Hub를 구동하는 동일한 작업 집합을 여러 방식으로 반복 실행해 라이브 Hub와 각 실행을 채점했습니다. 방법론에 앞서 간단한 요약: 두 에이전트의 모든 경우에서 `hf` CLI가 앞서며, 특히 다단계의 복잡한 작업에서 토큰을 훨씬 적게 사용합니다.
+`hf` CLI가 에이전트에 대해 실제로 더 효율적인지 알아보기 위해 이를 측정했습니다. 간단한 평가 하네스를 구축하고 Hub를 구동하는 동일한 작업 집합을 여러 방식으로 반복 실행해 라이브 Hub와 각 실행을 채점했습니다. 방법론에 앞서 간단히 요약하면, 두 에이전트의 모든 경우에서 `hf` CLI가 앞섰고, 특히 다단계의 복잡한 작업에서 토큰을 훨씬 적게 사용했습니다.
 
 | agent                        | tool              | success score | token usage     | self-report error |
 | ---------------------------- | ----------------- | ------------- | --------------- | ----------------- |
 | **Claude Code (Sonnet 4.6)** | `hf` CLI          | **0.94**      | baseline        | **2 / 163**       |
-|                              | curl / Python SDK | 0.84          | **1.3-1.6× tokens** | 11 / 163      |
+|                              | curl/SDK          | 0.84          | **1.3-1.6× tokens** | 11 / 163      |
 | **Codex (GPT-5.5)**          | `hf` CLI          | **0.93**      | baseline        | **3 / 163**       |
-|                              | curl / Python SDK | 0.92          | **1.6-1.8× tokens** | 10 / 163      |
+|                              | curl/SDK          | 0.92          | **1.6-1.8× tokens** | 10 / 163      |
 
-*(self-report error = 에이전트가 17개의 해결 가능한 작업에서 성공을 보고했으나 Hugging Face Hub가 다르게 말했습니다. `hf` CLI 행은 기술이 설치된 CLI이고, 베어 CLI 위의 기술이 추가하는 것(주로 더 적은 도구 호출)이 아래 [the skill section](#the-hf-cli-skill)에서 분리되어 있습니다. 대표 대화 기록은 [in this bucket](https://huggingface.co/buckets/celinah/hf-cli-agent-benchmark)에 게시됩니다.)*
+*(self-report error = 에이전트가 17개의 해결 가능한 작업에서 성공을 보고했으나 Hugging Face Hub가 다르게 말한 경우입니다. `hf` CLI 행은 스킬이 설치된 CLI이고, 기본 CLI 위에서 스킬이 추가하는 효과(주로 더 적은 도구 호출)는 아래 [스킬 섹션](#the-hf-cli-skill)에서 분리해 다룹니다. 대표 대화 기록은 [이 버킷](https://huggingface.co/buckets/celinah/hf-cli-agent-benchmark)에 게시됩니다.)*
 
 ### 설정
 
 우리는 **18개의 비사소적 Hugging Face Hub 작업**을 정의했습니다. 이것은 단순히 "파일 다운로드" 같은 것이 아니라 실제로 요청받을 만한 작업들입니다: 트렌딩 조직의 모델을 집계하고, 리포지토리의 파일과 용량을 검사하고, 포함/제외 규칙으로 폴더를 업로드하고, 파일을 삭제하고, 리포지토리 간 파일을 복사하고, 라이선스를 추가하는 PR을 열고, 브랜치와 태그가 있는 리포지토리를 만들고, 버킷을 동기화하고 정리하고, 컬렉션을 구성합니다. 각 작업은 Hugging Face Hub에 대해 정확히 하나의 대화 방식으로 대화하는 최신 코딩 에이전트로 전달됩니다:
 
 - `hf` CLI, 혹은
-- **curl / the Python SDK**: `hf` CLI가 전혀 없으므로 에이전트는 REST API 대비 `curl`를 사용하거나 `huggingface_hub` Python 라이브러리에 의존합니다.
+- **curl / the Python SDK**: `hf` CLI가 전혀 없으므로 에이전트는 REST API에 대해 `curl`을 사용하거나 `huggingface_hub` Python 라이브러리에 의존합니다.
 
-우리는 `hf` CLI를 두 가지 구성으로 실행합니다: 스킬이 있는 구성과 없는 구성(생성된 명령 참조로 [its own section](#the-hf-cli-skill)에서 다시 다룹니다). 그러나 아래의 헤드라인 비교는 단순히 **`hf` CLI 대 curl / SDK**이며, 스킬의 증가 효과는 충분히 작아서 메인 결과에 포함시키기보다 독립적으로 다룹니다.
+우리는 `hf` CLI를 두 가지 구성으로 실행합니다: 스킬이 있는 구성과 없는 구성(생성된 명령 참조는 [별도 섹션](#the-hf-cli-skill)에서 다시 다룹니다). 그러나 아래의 헤드라인 비교는 단순히 **`hf` CLI 대 curl/SDK**이며, 스킬의 증가 효과는 충분히 작아서 메인 결과에 포함시키기보다 독립적으로 다룹니다.
 
 구성은 의도적으로 깔끔합니다: 실행당 새 인스턴스, 커스텀 MCP 서버 없음, `CLAUDE.md`나 `AGENTS.md`도 없음, 맥락에서의 동작을 좌우하는 어떠한 nudges도 없음. 작업과 도구를 하나의 프롬프트에 넣고, 에이전트는 `TASK_COMPLETE` 또는 `TASK_FAILED` 마커로 종료하지만, 그 마커를 신뢰하지 않으므로 각 실행은 라이브 Hub를 재질의로 재조회하여 실제로 브랜치가 생성되었는지, 파일이 실제로 사라졌는지, 버킷이 존재하는지 등을 독립적으로 평가합니다. 각 작업/도구 조합은 **10회** 실행되며, 코딩 에이전트가 비결정적이므로 약 **520회 실행**(18개 작업 × 3개 도구 × 10회 반복, 하나의 청구 가능한 Jobs 작업에 대한 상한 제외) 정도의 총 평가 실행이 필요합니다. 이를 두 에이전트(가장 인기 있는 두 코딩 에이전트: Claude Code와 OpenAI Codex)에서 각각 수행했습니다.
 
@@ -253,4 +253,4 @@ Take a look at how I am currently using the Hub and suggest a few ways you could
 
 ## 에이전트 하네스 등록 {#section-6}
 
-에이전트 하네스를 구축하고 있나요? **등록하십시오!** 이것이 `hf`가 이를 감지하는 방식이고, Hub가 트래픽을 당신의 하네스에 귀속하는 방법입니다. `hf`에 항목을 추가하는 간단한 PR을 열기만 하면 됩니다. 자세한 내용은 [Register your agent harness](https://huggingface.co/docs/hub/agents-overview#register-your-agent-harness) 가이드를 참고하십시오.
+에이전트 하네스를 구축하고 있나요? **등록하십시오!** 이것이 `hf`가 이를 감지하는 방식이고, Hub가 트래픽을 당신의 하네스에 귀속하는 방법입니다. [`agent-harnesses.ts`](https://github.com/huggingface/huggingface.js/blob/main/packages/tasks/src/agent-harnesses.ts)에 항목을 추가하는 간단한 PR을 열기만 하면 됩니다. 자세한 내용은 [Register your agent harness](https://huggingface.co/docs/hub/agents-overview#register-your-agent-harness) 가이드를 참고하십시오.
