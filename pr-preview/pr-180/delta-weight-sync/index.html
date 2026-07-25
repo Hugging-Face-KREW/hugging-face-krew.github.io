@@ -255,9 +255,9 @@ Review instructions:
   <p><strong>TL;DR</strong>, 왜냐하면 당신은 모델을 훈련해야 하고 우리는 그것을 존중합니다:</p>
 
   <ul>
-    <li>Async RL에는 더러운 비밀이 있습니다: 매 단계마다 트레이너는 추론 엔진으로 전체 모델을 전송해야 합니다. bf16으로 7B인 경우 14GB입니다. 프런티어 1T 모델 체크포인트의 경우 테라바이트 규모입니다. 매 단계마다.</li>
+    <li>Async RL에는 더러운 비밀이 있습니다: 매 단계마다 트레이너는 추론 엔진으로 전체 모델을 전송해야 합니다. bf16으로 7B인 경우 14 GB입니다. 프런티어 1T 모델 체크포인트의 경우 테라바이트 규모입니다. 매 단계마다.</li>
     <li>사실은 그럴 필요가 없다는 겁니다. 두 연속 RL 옵티마이저 스텝 사이에서, <strong>대략 99%의 bf16 가중치는 비트 동일성(bit-identical)</strong>(최악의 경우 98% 이하)이 유지됩니다. 실제 델타는 아주 작습니다.</li>
-    <li><a href="https://github.com/huggingface/trl/pull/5417">a TRL PR</a>를 통해 변경된 요소만 인코딩하는 <strong>희소 safetensors 파일</strong>을 업로드하고 <strong>Hugging Face Bucket</strong>에 업로드하고 vLLM이 가져가도록 합니다. Qwen3-0.6B에서 매 스텝 페이로드는 1.2GB에서 <strong>20~35MB</strong>로 떨어집니다.</li>
+    <li><a href="https://github.com/huggingface/trl/pull/5417">a TRL PR</a>를 통해 변경된 요소만 인코딩하는 <strong>희소 safetensors 파일</strong>을 업로드하고 <strong>Hugging Face Bucket</strong>에 업로드하고 vLLM이 가져가도록 합니다. Qwen3-0.6B에서 매 스텝 페이로드는 1.2 GB에서 <strong>20~35 MB</strong>로 떨어집니다.</li>
     <li>하이라이트: 우리는 한 대의 박스에 트레이너, <strong>Hugging Face Space</strong>에 vLLM, 다른 Space에 Wordle 환경이 위치하고, 가중치는 하나의 Hub bucket를 통해 흐르게 하는 완전 분리형 훈련을 수행했습니다. 공유 클러스터도, RDMA도, VPN도 없습니다.</li>
   </ul>
 
@@ -348,7 +348,7 @@ Review instructions:
 
 <h2 id="section-3">3. HF Buckets와 아키텍처</h2>
 
-<p>여기서 이야기의 두 번째 부분이 들어오고, 이 글이 Fireworks/Cursor의 번역에서 Hugging Face의 것처럼 보이기 시작합니다.</p>
+<p>여기서 이야기의 두 번째 요소가 등장하고, 이 글은 Fireworks/Cursor를 번역한 글에서 벗어나 Hugging Face의 글이 되기 시작합니다.</p>
 
 <h3 id="31-버킷이란-무엇인가">3.1 버킷이란 무엇인가?</h3>
 
@@ -573,11 +573,11 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
 
 <p><strong>디버깅 가능한 와이어 포맷.</strong> 델타는 safetensors 파일입니다. 노Notebook에서 <code class="language-plaintext highlighter-rouge">safe_open</code>로 불러오고, 키를 나열하고, 인덱스를 점검하고, 희소성을 직접 계산할 수 있습니다. 불투명한 NCCL 스트림에서 tcpdump를 수십 시간을 보낸 경험이 이를 높이 평가하게 만듭니다.</p>
 
-<p><strong>프런티어 масштаб으로 가는 경로.</strong> 20~35 MB 수치는 Qwen3-0.6B에 대한 것입니다. 다이얼을 높이면 곡선이 어떻게 보일지 흥미로운 문제입니다. 냅킨 계산으로 한 번 해봅시다.</p>
+<p><strong>프런티어 규모로 가는 경로.</strong> 20~35 MB 수치는 Qwen3-0.6B에 대한 것입니다. 다이얼을 높이면 곡선이 어떻게 보일지 흥미로운 문제입니다. 냅킨 계산으로 한 번 해봅시다.</p>
 
 <p>Llama-3.1-405B를 예로 들자. bf16에서 디스크상 810 GB입니다. PULSE는 RL 학습률에서 매 스텝 평균 희소도를 약 99%로 측정하므로 실제 델타는 매개변수의 약 1% 정도입니다. 그들의 배포 측정 인코딩은 7B 모델에서 108 MB에 도달하며, 이는 PULSE가 보고한 약 130배 감소에 해당합니다. 405B로 선형 확장하면 델타는 대략 매 스텝 6 GB에 도달합니다.</p>
 
-<p>wall-clock 기준으로는 무엇을 얻을 수 있을까요? NCCL은 클러스터 내부에서 빠르지만, 대역폭이 100 GB/s인 가정하에 전체 동기화 시간은 매 스텝 추론 정지의 일부입니다. 델타 경로를 사용하면 트레이너는 6 GB를 버킷으로 백그라운드에서 스트리밍하고, 생성은 계속되며, 롤아웃 서버의 실제 일시 중지 창은 적용 단계뿐입니다. 이 규모에서의 적용 시간은 몇 초에 불과합니다. 따라서 클러스터를 떠나도 델타는 가시 중지 시간을 약 4배 줄이고, 와이어 상의 바이트는 약 130배 줄입니다.</p>
+<p>wall-clock 기준으로는 무엇을 얻을 수 있을까요? NCCL은 클러스터 내부에서는 빠르다고 해도, 넉넉하게 잡아 총 브로드캐스트 대역폭을 100 GB/s로 가정해 보겠습니다. 전체 동기화에는 <code class="language-plaintext highlighter-rouge">810 GB / 100 GB/s ≈ 8 seconds</code>가 걸리므로, 매 스텝마다 추론이 약 8초 동안 멈춥니다. 델타 경로를 사용하면 트레이너는 6 GB를 버킷으로 백그라운드에서 스트리밍하고, 생성은 계속되며, 롤아웃 서버의 실제 일시 중지 창은 적용 단계뿐입니다. 이 규모에서의 적용 시간은 몇 초에 불과합니다. 따라서 클러스터를 떠나도 델타는 가시 중지 시간을 약 4배 줄이고, 와이어 상의 바이트는 약 130배 줄입니다.</p>
 
 <p>이제 클러스터를 떠납니다. NCCL은 클라우드 간에는 작동하지 않습니다. 만약 당신이 <code class="language-plaintext highlighter-rouge">us-east</code>의 롤아웃 파견대, 다른 하나의 <code class="language-plaintext highlighter-rouge">eu-west</code> 파견대, 그리고 어쩌면 Hugging Face Space 하나를 원한다면, 버킷 기반 경로가 유일한 경로입니다. 사용 가능한 인터넷 대역폭이 1 GB/s일 때 단일 전체 방송은 13분이 걸리지만, 델타는 6초 만에 처리합니다.</p>
 
@@ -590,7 +590,7 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
 <ul>
   <li><strong>Two CPU bf16 snapshots, one too many.</strong> 트레이너는 변경 탐지기에 쓰기 위해 하나를 보관하고, 롤아웃 서버는 vLLM의 <code class="language-plaintext highlighter-rouge">load_weights</code>를 재구성하기 위해 하나를 보관합니다. 첫 번째 것은 누군가 정밀한 분석 마스크를 찾을 때까지 남아 있습니다. 두 번째는 vLLM이 sparse <code class="language-plaintext highlighter-rouge">load_weights</code> API를 얻으면 사라집니다. PR은 곧 나올 예정입니다.</li>
   <li><strong>고정된 앵커 주기.</strong> 현재는 매 (N\) 스텝마다 전체 앵커를 덤프합니다. 누적 드리프트가 X를 초과할 때 앵커를 잡는 적응 정책은 긴 실행에서 앵커 비용을 줄여 줍니다.</li>
-  <li><strong>다중 노드 FSDP2 트레이너.</strong> <code class="language-plaintext highlighter-rouge">BF16ChangeDetector</code>는 프로세스당 옵티마이저 훅을 기반으로 합니다. FSDP2에 대해 깔끔하게 일반화될 가능성이 있지만 다중 노드 규모에서 아직 측정하지 않았습니다. PR에는 우리 이름이 달린 후속 작업 항목이 있습니다.</li>
+  <li><strong>다중 노드 FSDP2 트레이너.</strong> <code class="language-plaintext highlighter-rouge">BF16ChangeDetector</code>는 프로세스당 옵티마이저 훅을 기반으로 합니다. FSDP2에 대해 깔끔하게 일반화될 가능성이 있지만 다중 노드 규모에서 아직 측정하지 않았습니다. PR에는 우리 이름이 달린 <code class="language-plaintext highlighter-rouge">TODO</code>가 있습니다.</li>
   <li><strong>옵티마이저와의 훅 연결.</strong> ((m, v)\)만으로 마스크를 예측하려는 우리의 시도는 재현이 낮아, 분석적 bf16 임계값이 교과서 공식이 말하는 것보다 더 미묘한 작용을 한다는 것을 의미합니다. 이를 해결한 사람의 이야기를 듣고 싶습니다.</li>
   <li><strong>와이어 상 압축과의 스태킹.</strong> 희소 safetensors와 청크당 gzip은 직교합니다. 아직 이 둘을 결합해 보지 않았습니다. 큰 압축 이득은 기대하지 않습니다.</li>
 </ul>
