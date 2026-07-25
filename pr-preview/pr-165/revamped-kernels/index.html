@@ -23,16 +23,16 @@
     />
     <link rel="icon" href="/pr-preview/pr-165/assets/images/favicon.ico" />
 
-    <title>🤗 Kernels: Major Updates | Hugging Face KREW</title>
+    <title>🤗 Kernels: 주요 업데이트 | Hugging Face KREW</title>
 
     <!-- Begin Jekyll SEO tag v2.9.0 -->
-<title>🤗 Kernels: Major Updates | Hugging Face KREW</title>
+<title>🤗 Kernels: 주요 업데이트 | Hugging Face KREW</title>
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="🤗 Kernels: Major Updates" />
+<meta property="og:title" content="🤗 Kernels: 주요 업데이트" />
 <meta name="author" content="dailybot" />
 <meta property="og:locale" content="ko" />
-<meta name="description" content="이 글은 Hugging Face 블로그의 🤗 Kernels: Major Updates를 한국어로 번역한 글입니다." />
-<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 🤗 Kernels: Major Updates를 한국어로 번역한 글입니다." />
+<meta name="description" content="Hugging Face Kernels의 새 repository type, 보안 강화, CLI 개편, framework 지원 확대를 소개합니다." />
+<meta name="twitter:description" property="og:description" content="Hugging Face Kernels의 새 repository type, 보안 강화, CLI 개편, framework 지원 확대를 소개합니다." />
 <meta property="og:site_name" content="Hugging Face KREW" />
 <meta property="og:image" content="/pr-preview/pr-165/revamped-kernels/assets/images/blog/posts/2026-07-06-revamped-kernels/thumbnail.png" />
 <meta property="og:type" content="article" />
@@ -40,9 +40,9 @@
 <meta property="article:modified_time" content="2026-07-06T00:00:00+09:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="/pr-preview/pr-165/revamped-kernels/assets/images/blog/posts/2026-07-06-revamped-kernels/thumbnail.png" />
-<meta name="twitter:title" content="🤗 Kernels: Major Updates" />
+<meta name="twitter:title" content="🤗 Kernels: 주요 업데이트" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-07-06T00:00:00+09:00","datePublished":"2026-07-06T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 🤗 Kernels: Major Updates를 한국어로 번역한 글입니다.","headline":"🤗 Kernels: Major Updates","image":"/pr-preview/pr-165/revamped-kernels/assets/images/blog/posts/2026-07-06-revamped-kernels/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-165/revamped-kernels/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-165/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-165/revamped-kernels/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-07-06T00:00:00+09:00","datePublished":"2026-07-06T00:00:00+09:00","description":"Hugging Face Kernels의 새 repository type, 보안 강화, CLI 개편, framework 지원 확대를 소개합니다.","headline":"🤗 Kernels: 주요 업데이트","image":"/pr-preview/pr-165/revamped-kernels/assets/images/blog/posts/2026-07-06-revamped-kernels/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-165/revamped-kernels/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-165/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-165/revamped-kernels/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -179,8 +179,8 @@
             
         
             <div id="featured-image">
-                <img class="back-image img-fluid rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-07-06-revamped-kernels/thumbnail.png" alt="🤗 Kernels: Major Updates">    
-                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-07-06-revamped-kernels/thumbnail.png" alt="🤗 Kernels: Major Updates">    
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-07-06-revamped-kernels/thumbnail.png" alt="🤗 Kernels: 주요 업데이트">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-07-06-revamped-kernels/thumbnail.png" alt="🤗 Kernels: 주요 업데이트">    
             </div>
         
         <!-- End Featured Image -->
@@ -206,7 +206,7 @@
                 <!-- End Categories -->
                 
                 <!-- Post Title -->
-				<h1 class="posttitle">🤗 Kernels: Major Updates</h1> 
+				<h1 class="posttitle">🤗 Kernels: 주요 업데이트</h1> 
                 
 			</div>
 
@@ -215,24 +215,24 @@
 			<!-- Post Content -->
 			<div class="article-post serif-font">
 				<ul id="markdown-toc">
-  <li><a href="#-kernels-major-updates" id="markdown-toc--kernels-major-updates">🤗 Kernels: Major Updates</a>    <ul>
-      <li><a href="#section-1" id="markdown-toc-section-1">Kernels – a new repository type</a></li>
-      <li><a href="#section-2" id="markdown-toc-section-2">Improved security</a>        <ul>
-          <li><a href="#trusted-kernel-publishers" id="markdown-toc-trusted-kernel-publishers">Trusted kernel publishers</a></li>
+  <li><a href="#-kernels-주요-업데이트" id="markdown-toc--kernels-주요-업데이트">🤗 Kernels: 주요 업데이트</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">Kernels — 새로운 repository type</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">보안 개선</a>        <ul>
+          <li><a href="#trusted-kernel-publisher" id="markdown-toc-trusted-kernel-publisher">Trusted kernel publisher</a></li>
           <li><a href="#kernel-signing" id="markdown-toc-kernel-signing">Kernel signing</a></li>
         </ul>
       </li>
-      <li><a href="#section-3" id="markdown-toc-section-3">Revamped CLIs</a></li>
-      <li><a href="#section-4" id="markdown-toc-section-4">More coverage of frameworks and backends</a></li>
-      <li><a href="#section-5" id="markdown-toc-section-5">Foundation for agentic kernel development</a></li>
-      <li><a href="#section-6" id="markdown-toc-section-6">Misc</a>        <ul>
-          <li><a href="#environment-setup" id="markdown-toc-environment-setup">Environment setup</a></li>
-          <li><a href="#system-card-for-kernels" id="markdown-toc-system-card-for-kernels">System card for kernels</a></li>
-          <li><a href="#is-a-kernel-compatible-on-my-system" id="markdown-toc-is-a-kernel-compatible-on-my-system">Is a kernel compatible on my system?</a></li>
-          <li><a href="#improved-manylinux_2_28-support" id="markdown-toc-improved-manylinux_2_28-support">Improved manylinux_2_28 support</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">CLI 개편</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">framework와 backend 지원 확대</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">agentic kernel 개발을 위한 기반</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">기타 업데이트</a>        <ul>
+          <li><a href="#환경-설정" id="markdown-toc-환경-설정">환경 설정</a></li>
+          <li><a href="#kernel용-system-card" id="markdown-toc-kernel용-system-card">kernel용 system card</a></li>
+          <li><a href="#내-system에서-kernel이-호환되나요" id="markdown-toc-내-system에서-kernel이-호환되나요">내 system에서 kernel이 호환되나요?</a></li>
+          <li><a href="#개선된-manylinux_2_28-지원" id="markdown-toc-개선된-manylinux_2_28-지원">개선된 manylinux_2_28 지원</a></li>
         </ul>
       </li>
-      <li><a href="#section-7" id="markdown-toc-section-7">Conclusion</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">마무리</a></li>
     </ul>
   </li>
 </ul>
@@ -249,50 +249,50 @@ Review instructions:
 - Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
 -->
 
-<h1 id="-kernels-major-updates">🤗 Kernels: Major Updates</h1>
+<h1 id="-kernels-주요-업데이트">🤗 Kernels: 주요 업데이트</h1>
 
-<p>In our <a href="https://huggingface.co/blog/kernel-builder">previous post (From Zero to GPU)</a>, we introduced the 🤗 Kernels project, which aims at standardizing how custom kernels are packaged, distributed, and consumed. We want the project to be frictionless and secure, while making it as Hub-friendly as possible.</p>
+<p><a href="https://huggingface.co/blog/kernel-builder">이전 글(From Zero to GPU)</a>에서는 custom kernel을 패키징하고, 배포하고, 사용하는 방식을 표준화하기 위한 🤗 Kernels 프로젝트를 소개했습니다. 이 프로젝트의 목표는 Hub와 최대한 잘 맞으면서도 사용 흐름은 매끄럽고 보안은 견고하게 만드는 것입니다.</p>
 
-<p>Over the past few months, we have worked towards this goal. In the process, we also almost completely redesigned the project. This post will summarize the major updates we have shipped and what’s coming.</p>
+<p>지난 몇 달 동안 우리는 이 목표를 향해 작업해 왔습니다. 그 과정에서 프로젝트도 거의 전면적으로 다시 설계했습니다. 이 글에서는 지금까지 배포한 주요 업데이트와 앞으로의 방향을 정리합니다.</p>
 
-<p><strong>Table of contents</strong></p>
+<p><strong>목차</strong></p>
 
 <ul>
-  <li><a href="#kernels--a-new-repository-type">Kernels – a new repository type</a></li>
-  <li><a href="#improved-security">Improved security</a></li>
-  <li><a href="#revamped-clis">Revamped CLIs</a></li>
-  <li><a href="#more-coverage-of-frameworks-and-backends">More coverage of frameworks and backends</a></li>
-  <li><a href="#foundation-for-agentic-kernel-development">Foundation for agentic kernel development</a></li>
-  <li><a href="#misc">Misc</a></li>
-  <li><a href="#conclusion">Conclusion</a></li>
+  <li><a href="#kernels--a-new-repository-type">Kernels — 새로운 repository type</a></li>
+  <li><a href="#improved-security">보안 개선</a></li>
+  <li><a href="#revamped-clis">CLI 개편</a></li>
+  <li><a href="#more-coverage-of-frameworks-and-backends">framework와 backend 지원 확대</a></li>
+  <li><a href="#foundation-for-agentic-kernel-development">agentic kernel 개발을 위한 기반</a></li>
+  <li><a href="#misc">기타 업데이트</a></li>
+  <li><a href="#conclusion">마무리</a></li>
 </ul>
 
-<h2 id="section-1">Kernels – a new repository type</h2>
+<h2 id="section-1">Kernels — 새로운 repository type</h2>
 
-<p>We have introduced a new repository type on the Hub called <a href="https://huggingface.co/kernels">“kernel”</a>. This enables us to cater to users with compute-related specificities. For example, a user can get a sense of which accelerators, operating systems, and backend versions are supported for a given kernel:</p>
+<p>Hub에 <a href="https://huggingface.co/kernels">“kernel”</a>이라는 새로운 repository type을 도입했습니다. 이를 통해 compute 관련 요구가 구체적인 사용자들을 더 잘 지원할 수 있습니다. 예를 들어 사용자는 특정 kernel이 어떤 accelerator, operating system, backend version을 지원하는지 확인할 수 있습니다.</p>
 
 <figure align="center">
     <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/revamped-kernels/flash-attn3.png" alt="Flash Attention 3 Kernel Page" width="600" />
     <figcaption>Kernel page: <a href="https://huggingface.co/kernels/kernels-community/flash-attn3">kernels-community/flash-attn3</a></figcaption>
 </figure>
 
-<p>One can browse all available kernels on the Hub here: <a href="https://huggingface.co/kernels">https://huggingface.co/kernels</a>.</p>
+<p>Hub에서 사용 가능한 모든 kernel은 <a href="https://huggingface.co/kernels">https://huggingface.co/kernels</a>에서 둘러볼 수 있습니다.</p>
 
-<p>Making these kernels first-class citizens of the Hub also benefits the AI ecosystem. Users can now see trends across kernels, models, and the applications that use them. The kernels become more discoverable to users.</p>
+<p>이 kernel들을 Hub의 first-class citizen으로 만들면 AI 생태계에도 도움이 됩니다. 이제 사용자는 kernel, model, 그리고 이를 사용하는 application 전반의 흐름을 볼 수 있습니다. 또한 kernel은 사용자에게 더 쉽게 발견될 수 있습니다.</p>
 
-<h2 id="section-2">Improved security</h2>
+<h2 id="section-2">보안 개선</h2>
 
-<p>Kernels run native code with the same privileges as the Python process that loads them, so a malicious kernel can do real harm. Therefore, security has always been of utmost importance to the Kernels project.</p>
+<p>Kernel은 이를 불러오는 Python process와 같은 권한으로 native code를 실행합니다. 따라서 악성 kernel은 실제 피해를 줄 수 있습니다. 그래서 보안은 Kernels 프로젝트에서 항상 가장 중요한 요소였습니다.</p>
 
-<p>This is why we focused early on reproducibility: you should be able to recompile a kernel yourself and verify that it matches the publicly available source. We use Nix to make this possible, since it keeps builds pure through hermetic evaluation of the build recipe and a strongly isolated sandbox. We further improve provenance by embedding the source Git SHA1 into the kernel itself.</p>
+<p>이 때문에 우리는 초기부터 reproducibility에 집중했습니다. 사용자가 kernel을 직접 다시 compile하고, 그 결과가 공개된 source와 일치하는지 검증할 수 있어야 합니다. 이를 가능하게 하기 위해 Nix를 사용합니다. Nix는 build recipe를 hermetic하게 평가하고 강하게 격리된 sandbox를 사용해 build를 순수하게 유지합니다. 또한 source Git SHA1을 kernel 자체에 embedding해 provenance를 더 강화했습니다.</p>
 
-<p>In recent months, we have added additional layers of defense: trusted kernel publishers and code signing.</p>
+<p>최근 몇 달 동안 trusted kernel publisher와 code signing이라는 추가 방어 계층도 도입했습니다.</p>
 
-<h3 id="trusted-kernel-publishers">Trusted kernel publishers</h3>
+<h3 id="trusted-kernel-publisher">Trusted kernel publisher</h3>
 
-<p>With the new repo type, we also introduced “trusted publishers”. Since kernels execute code on a machine with the same privileges as the Python process they are used in, an attacker could compromise machines by uploading a malicious kernel and coaxing you to use that kernel. To help you avoid such malicious kernels, the kernels package will now only load kernels by <em>trusted publishers</em> by default. A trusted publisher is an organization that is trusted by the community to act in good faith.</p>
+<p>새로운 repo type과 함께 “trusted publisher”도 도입했습니다. Kernel은 사용되는 machine에서 Python process와 같은 권한으로 code를 실행하므로, 공격자는 악성 kernel을 업로드하고 사용자가 그 kernel을 쓰도록 유도해 machine을 compromise할 수 있습니다. 이런 악성 kernel을 피할 수 있도록, 이제 <code class="language-plaintext highlighter-rouge">kernels</code> package는 기본적으로 <em>trusted publisher</em>의 kernel만 load합니다. trusted publisher는 community가 선의로 행동한다고 신뢰하는 organization입니다.</p>
 
-<p>We still want to support loading kernels from organizations or users that are not trusted publishers, but you have to explicitly opt in using the <code class="language-plaintext highlighter-rouge">trust_remote_code</code> argument when loading a kernel from the Hub:</p>
+<p>물론 trusted publisher가 아닌 organization이나 user의 kernel도 load할 수 있어야 합니다. 다만 Hub에서 kernel을 load할 때 <code class="language-plaintext highlighter-rouge">trust_remote_code</code> argument를 사용해 명시적으로 opt in해야 합니다.</p>
 
 <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">kernels</span> <span class="kn">import</span> <span class="n">get_kernel</span>
 
@@ -301,85 +301,84 @@ Review instructions:
 <span class="p">)</span>  
 </code></pre></div></div>
 
-<p>By default, users cannot publish kernel repositories on the Hub. They have to request to be a kernel publisher. Users and organizations can request for access from their account settings. This gives us time to treat these requests on a case-by-case basis.</p>
+<p>기본적으로 사용자는 Hub에 kernel repository를 publish할 수 없습니다. kernel publisher가 되려면 요청해야 합니다. user와 organization은 account settings에서 access를 요청할 수 있으며, 이를 통해 우리는 요청을 case-by-case로 검토할 시간을 확보합니다.</p>
 
 <h3 id="kernel-signing">Kernel signing</h3>
 
-<p>An additional layer of security that we are adding is code signing. Code signing protects against the scenario where an attacker uploads a malicious kernel to a kernel repo from a trusted publisher whose Hub credentials were compromised. In code signing, a kernel is signed with a private key known only to the kernel developer and validated with a public key that is generally available. In the Hub compromise scenario, an attacker cannot sign the malicious kernel since they do not own the private key needed for signing.</p>
+<p>추가하고 있는 또 다른 보안 계층은 code signing입니다. code signing은 trusted publisher의 Hub credential이 compromise되어 공격자가 해당 publisher의 kernel repo에 악성 kernel을 업로드하는 상황을 방어합니다. code signing에서는 kernel developer만 알고 있는 private key로 kernel에 서명하고, 일반적으로 공개된 public key로 이를 검증합니다. Hub가 compromise된 상황에서도 공격자는 signing에 필요한 private key를 갖고 있지 않으므로 악성 kernel에 서명할 수 없습니다.</p>
 
-<p>To further improve security, we use Sigstore’s cosign to sign using ephemeral private keys. Since these signing keys are only valid for a limited time, an attacker typically cannot use the private key, even when it is leaked. We also verify that the kernel was signed by a trusted GitHub workflow from a trusted GitHub repository.</p>
+<p>보안을 더 강화하기 위해 Sigstore의 cosign을 사용해 ephemeral private key로 서명합니다. 이 signing key는 제한된 시간 동안만 유효하므로, 유출되더라도 공격자가 private key를 사용하기 어렵습니다. 또한 kernel이 trusted GitHub repository의 trusted GitHub workflow에서 서명되었는지도 검증합니다.</p>
 
-<p>Kernel signing is already supported by <code class="language-plaintext highlighter-rouge">kernel-builder</code> and we have provided the <code class="language-plaintext highlighter-rouge">kernels verify-signature</code> to verify a kernel. Kernels does not verify the signature upon loading a kernel yet, since we would like to test this new functionality more before fully rolling it out. Preliminary notes on setting up code signing for your own kernels can be found in the kernels 0.16.0 release notes: <a href="https://github.com/huggingface/kernels/releases/tag/v0.16.0">https://github.com/huggingface/kernels/releases/tag/v0.16.0</a>.</p>
+<p>Kernel signing은 이미 <code class="language-plaintext highlighter-rouge">kernel-builder</code>에서 지원되며, kernel을 검증할 수 있도록 <code class="language-plaintext highlighter-rouge">kernels verify-signature</code>도 제공합니다. 다만 Kernels는 아직 kernel load 시점에 signature를 검증하지 않습니다. 이 기능을 완전히 rollout하기 전에 더 테스트하고 싶기 때문입니다. 자체 kernel에 code signing을 설정하는 예비 안내는 kernels 0.16.0 release note에서 볼 수 있습니다. <a href="https://github.com/huggingface/kernels/releases/tag/v0.16.0">https://github.com/huggingface/kernels/releases/tag/v0.16.0</a></p>
 
-<h2 id="section-3">Revamped CLIs</h2>
+<h2 id="section-3">CLI 개편</h2>
 
-<p>Previously, a bunch of utilities were intertwined between <code class="language-plaintext highlighter-rouge">kernels</code> and <code class="language-plaintext highlighter-rouge">kernel-builder</code>. We have established a better separation of concern between the CLI of <code class="language-plaintext highlighter-rouge">kernels</code> and <code class="language-plaintext highlighter-rouge">kernel-builder</code>. The mental model here is that <code class="language-plaintext highlighter-rouge">kernels</code> is a library for loading and preparing kernels for use. Therefore, it should not include anything related to “building” kernels.</p>
+<p>이전에는 여러 utility가 <code class="language-plaintext highlighter-rouge">kernels</code>와 <code class="language-plaintext highlighter-rouge">kernel-builder</code> 사이에 뒤섞여 있었습니다. 이제 <code class="language-plaintext highlighter-rouge">kernels</code> CLI와 <code class="language-plaintext highlighter-rouge">kernel-builder</code> CLI 사이의 concern을 더 명확히 분리했습니다. 여기서의 mental model은 <code class="language-plaintext highlighter-rouge">kernels</code>가 kernel을 load하고 사용할 준비를 하는 library라는 것입니다. 따라서 “building” kernel과 관련된 기능은 포함하지 않는 것이 맞습니다.</p>
 
-<p>As a result of this, both <code class="language-plaintext highlighter-rouge">kernels</code> and <code class="language-plaintext highlighter-rouge">kernel-builder</code> are now much leaner and more specific. Refer to the documentation to learn more about this:</p>
+<p>그 결과 <code class="language-plaintext highlighter-rouge">kernels</code>와 <code class="language-plaintext highlighter-rouge">kernel-builder</code>는 모두 훨씬 더 가볍고 목적이 분명해졌습니다. 자세한 내용은 documentation을 참고하세요.</p>
 
 <ul>
   <li><a href="https://huggingface.co/docs/kernels/en/cli"><code class="language-plaintext highlighter-rouge">kernels</code> CLI</a></li>
   <li><a href="https://huggingface.co/docs/kernels/en/builder-cli"><code class="language-plaintext highlighter-rouge">kernel-builder</code> CLI</a></li>
 </ul>
 
-<p>This improved CLI experience also lets us cater to the rise of agentic kernel
-development in a better manner. More on this <a href="#foundation-for-agentic-kernel-development">later</a>.</p>
+<p>개선된 CLI 경험은 agentic kernel development가 부상하는 흐름에도 더 잘 대응하게 해 줍니다. 이에 대해서는 <a href="#foundation-for-agentic-kernel-development">뒤에서</a> 더 설명합니다.</p>
 
-<h2 id="section-4">More coverage of frameworks and backends</h2>
+<h2 id="section-4">framework와 backend 지원 확대</h2>
 
-<p>We have extended support for frameworks, the most visible changes are:</p>
+<p>framework 지원도 확장했습니다. 가장 눈에 띄는 변화는 다음과 같습니다.</p>
 
 <ul>
-  <li>We added support for the Torch Stable ABI to kernels and kernel-builder. The Torch Stable ABI allows kernel developers to target a particular Torch version or any version that is released after it for roughly two years. For instance, a kernel that targets the Torch 2.9 Stable ABI support Torch &gt;= 2.9.</li>
-  <li>Apache TVM FFI is the first framework to be supported besides Torch. TVM FFI is standardized ABI for kernels that interoperates with other frameworks such as PyTorch, Jax and CuPy. This allows kernel developers to make kernels that runs across frameworks.</li>
+  <li><code class="language-plaintext highlighter-rouge">kernels</code>와 <code class="language-plaintext highlighter-rouge">kernel-builder</code>에 Torch Stable ABI 지원을 추가했습니다. Torch Stable ABI를 사용하면 kernel developer가 특정 Torch version이나 그 이후 약 2년 동안 release되는 version을 target할 수 있습니다. 예를 들어 Torch 2.9 Stable ABI를 target하는 kernel은 Torch &gt;= 2.9를 지원합니다.</li>
+  <li>Apache TVM FFI는 Torch 외에 처음으로 지원되는 framework입니다. TVM FFI는 PyTorch, JAX, CuPy 같은 다른 framework와 상호 운용되는 kernel용 standardized ABI입니다. 이를 통해 kernel developer는 여러 framework에서 동작하는 kernel을 만들 수 있습니다.</li>
 </ul>
 
-<h2 id="section-5">Foundation for agentic kernel development</h2>
+<h2 id="section-5">agentic kernel 개발을 위한 기반</h2>
 
-<p><code class="language-plaintext highlighter-rouge">kernel-builder</code> and <code class="language-plaintext highlighter-rouge">kernels</code> complement the rise of agentic kernel development wherein an agent is leveraged to come up with an (optimized) kernel from scratch. Together, they support a workflow in which agents can scaffold, build, benchmark, and iteratively optimize kernels.</p>
+<p><code class="language-plaintext highlighter-rouge">kernel-builder</code>와 <code class="language-plaintext highlighter-rouge">kernels</code>는 agent가 처음부터 최적화된 kernel을 만들어 내는 agentic kernel development의 부상을 보완합니다. 두 도구를 함께 사용하면 agent가 kernel을 scaffold하고, build하고, benchmark하고, 반복적으로 optimize하는 workflow를 지원할 수 있습니다.</p>
 
-<p>Agentic kernel development is still nascent, and the right development loops will continue to evolve. That makes simple, clear fundamentals especially important where the tools should be easy to compose into whichever agent workflows or frameworks people choose to use.</p>
+<p>Agentic kernel development는 아직 초기 단계이며, 적절한 development loop도 계속 진화할 것입니다. 그렇기 때문에 단순하고 명확한 기본기가 특히 중요합니다. 도구는 사람들이 선택하는 어떤 agent workflow나 framework에도 쉽게 조합될 수 있어야 합니다.</p>
 
-<p><code class="language-plaintext highlighter-rouge">kernel-builder</code> helps enforce a structure in how kernel source code should be scaffolded and used to perform reproducible builds. This gives agents a predictable project layout and repeatable workflow to operate within. Its CLI is also meant to be <a href="https://huggingface.co/blog/is-it-agentic-enough">agent-optimized</a>. For example, this can mean non-interactive commands and outputs that are straightforward for an agent to interpret programmatically. To this end, we also have <a href="https://huggingface.co/docs/kernels/en/cli-skills">backend-specific skills</a> to help agents navigate the idiosyncrasies of different backends. These skills can capture backend-specific toolchains, compilation paths, and performance considerations.</p>
+<p><code class="language-plaintext highlighter-rouge">kernel-builder</code>는 kernel source code를 어떻게 scaffold하고 reproducible build에 사용할지에 대한 구조를 강제하는 데 도움을 줍니다. 이를 통해 agent는 예측 가능한 project layout과 반복 가능한 workflow 안에서 작업할 수 있습니다. CLI 역시 <a href="https://huggingface.co/blog/is-it-agentic-enough">agent-optimized</a>되도록 설계되었습니다. 예를 들어 non-interactive command와 agent가 programmatic하게 해석하기 쉬운 output을 의미할 수 있습니다. 이를 위해 서로 다른 backend의 특성을 agent가 다룰 수 있도록 <a href="https://huggingface.co/docs/kernels/en/cli-skills">backend-specific skills</a>도 제공합니다. 이러한 skill은 backend별 toolchain, compilation path, performance consideration을 포착할 수 있습니다.</p>
 
-<p>Building a kernel successfully isn’t the only goal, we need to ensure that it delivers actual speedups over a baseline on the target hardware. A successful build is therefore only the first validation step. Usually, this target hardware can include many different accelerators, even different families of the same accelerator.</p>
+<p>kernel을 성공적으로 build하는 것만이 목표는 아닙니다. target hardware에서 baseline 대비 실제 speedup을 제공하는지도 확인해야 합니다. 따라서 성공적인 build는 첫 번째 validation step일 뿐입니다. 일반적으로 target hardware에는 여러 accelerator가 포함될 수 있고, 같은 accelerator의 서로 다른 family가 포함될 수도 있습니다.</p>
 
-<p>This makes it important to evaluate results across hardware vendors and generations where relevant. Our tight <a href="https://huggingface.co/docs/kernels/en/builder/github-actions">integration with HF Jobs</a> can make this benchmarking process easy. Agents can use this integration to run benchmark suites, collect performance results, and compare them against a defined baseline.</p>
+<p>따라서 관련이 있는 경우 hardware vendor와 generation 전반에서 결과를 평가하는 것이 중요합니다. <a href="https://huggingface.co/docs/kernels/en/builder/github-actions">HF Jobs와의 긴밀한 integration</a>은 이 benchmarking 과정을 쉽게 만들어 줍니다. Agent는 이 integration을 사용해 benchmark suite를 실행하고, performance result를 수집하며, 정의된 baseline과 비교할 수 있습니다.</p>
 
-<p>This way, agents can run tests across different hardware configurations to get reliable feedback on the performance of the generated kernels and identify what needs to be done. That feedback can then inform the next optimization iteration.</p>
+<p>이 방식으로 agent는 서로 다른 hardware configuration 전반에서 test를 실행해 생성된 kernel의 performance에 대한 신뢰할 수 있는 feedback을 얻고, 무엇을 해야 하는지 식별할 수 있습니다. 그 feedback은 다음 optimization iteration에 반영됩니다.</p>
 
-<p>Below are some examples of agent-augmented kernels. These illustrate the kinds of kernels that can be developed and evaluated through this workflow:</p>
+<p>아래는 agent-augmented kernel의 몇 가지 예시입니다. 이 예시들은 이 workflow를 통해 어떤 종류의 kernel을 개발하고 평가할 수 있는지 보여줍니다.</p>
 
 <ul>
   <li><a href="https://huggingface.co/kernels/drbh/yamoe">https://huggingface.co/kernels/drbh/yamoe</a></li>
   <li><a href="https://huggingface.co/kernels/sayakpaul/qk-norm-rope">https://huggingface.co/kernels/sayakpaul/qk-norm-rope</a></li>
 </ul>
 
-<h2 id="section-6">Misc</h2>
+<h2 id="section-6">기타 업데이트</h2>
 
-<h3 id="environment-setup">Environment setup</h3>
+<h3 id="환경-설정">환경 설정</h3>
 
-<p>The environment setup for building kernels with <code class="language-plaintext highlighter-rouge">kernel-builder</code> can be daunting. To make it easier for users, we now have an <a href="https://huggingface.co/docs/kernels/en/builder/writing-kernels#quick-install">installation script</a> for setting up an environment in one click. If you prefer working with ephemeral instances, our <a href="https://github.com/huggingface/kernels/tree/main/terraform">Terraform setup guide</a> is worth following.</p>
+<p><code class="language-plaintext highlighter-rouge">kernel-builder</code>로 kernel을 build하기 위한 환경 설정은 부담스러울 수 있습니다. 사용자가 더 쉽게 시작할 수 있도록, 이제 한 번의 click으로 환경을 설정할 수 있는 <a href="https://huggingface.co/docs/kernels/en/builder/writing-kernels#quick-install">installation script</a>를 제공합니다. ephemeral instance에서 작업하는 것을 선호한다면 <a href="https://github.com/huggingface/kernels/tree/main/terraform">Terraform setup guide</a>도 참고할 만합니다.</p>
 
-<h3 id="system-card-for-kernels">System card for kernels</h3>
+<h3 id="kernel용-system-card">kernel용 system card</h3>
 
-<p>After the kernels are built, we create a system card for each kernel to expose useful information, including how to use it and its exposed interfaces. When the kernel is pushed to the Hub, this system card becomes the front matter for the kernel:</p>
+<p>kernel이 build된 뒤에는 각 kernel에 대해 system card를 생성합니다. 여기에는 사용 방법과 노출된 interface 등 유용한 정보가 포함됩니다. kernel이 Hub에 push되면 이 system card가 kernel의 front matter가 됩니다.</p>
 
 <figure align="center">
     <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/revamped-kernels/kernel-card.png" alt="System card for a kernel" width="600" />
     <figcaption>System card for <a href="https://huggingface.co/kernels/kernels-community/flash-attn3">kernels-community/flash-attn3</a></figcaption>
 </figure>
 
-<h3 id="is-a-kernel-compatible-on-my-system">Is a kernel compatible on my system?</h3>
+<h3 id="내-system에서-kernel이-호환되나요">내 system에서 kernel이 호환되나요?</h3>
 
-<p>Is a question one would ask multiple times to plan things better. Use the <a href="https://huggingface.co/docs/kernels/main/en/api/kernels#kernels.has_kernel"><code class="language-plaintext highlighter-rouge">has_kernel()</code></a> method for this purpose:</p>
+<p>이는 더 나은 계획을 세우기 위해 여러 번 묻게 되는 질문입니다. 이 목적에는 <a href="https://huggingface.co/docs/kernels/main/en/api/kernels#kernels.has_kernel"><code class="language-plaintext highlighter-rouge">has_kernel()</code></a> method를 사용할 수 있습니다.</p>
 
 <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">kernels</span> <span class="kn">import</span> <span class="n">has_kernel</span>
 
 <span class="nf">print</span><span class="p">(</span><span class="nf">has_kernel</span><span class="p">(</span><span class="sh">"</span><span class="s">kernels-community/activation</span><span class="sh">"</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>  
 </code></pre></div></div>
 
-<p>It returns a <code class="language-plaintext highlighter-rouge">bool</code>. If you’re looking for more explanations around why a given kernel isn’t supported then use <a href="https://huggingface.co/docs/kernels/main/en/api/kernels#kernels.get_kernel_variants"><code class="language-plaintext highlighter-rouge">get_kernel_variants()</code></a>:</p>
+<p>이 method는 <code class="language-plaintext highlighter-rouge">bool</code>을 반환합니다. 특정 kernel이 왜 지원되지 않는지 더 자세한 설명이 필요하다면 <a href="https://huggingface.co/docs/kernels/main/en/api/kernels#kernels.get_kernel_variants"><code class="language-plaintext highlighter-rouge">get_kernel_variants()</code></a>를 사용하세요.</p>
 
 <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">from</span> <span class="n">kernels</span> <span class="kn">import</span> <span class="n">get_kernel_variants</span><span class="p">,</span> <span class="n">VariantAccepted</span>
 
@@ -391,7 +390,7 @@ development in a better manner. More on this <a href="#foundation-for-agentic-ke
         <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: rejected (</span><span class="si">{</span><span class="n">decision</span><span class="p">.</span><span class="n">reason</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>  
 </code></pre></div></div>
 
-<p>It should print (depends on the machine you’re on):</p>
+<p>실행 중인 machine에 따라 다음과 비슷한 output이 출력됩니다.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>torch212-cxx11-cu130-aarch64-linux: compatible  
 torch210-cu128-x86_64-windows: rejected <span class="o">(</span>CPU <span class="o">(</span>x86_64<span class="o">)</span> does not match system CPU <span class="o">(</span>aarch64<span class="o">))</span>  
@@ -403,19 +402,19 @@ torch29-metal-aarch64-darwin: rejected <span class="o">(</span>OS <span class="o
 …  
 </code></pre></div></div>
 
-<h3 id="improved-manylinux_2_28-support">Improved manylinux_2_28 support</h3>
+<h3 id="개선된-manylinux_2_28-지원">개선된 manylinux_2_28 지원</h3>
 
-<p>Kernel-builder has targeted <code class="language-plaintext highlighter-rouge">manylinux_2_28</code> almost since the beginning. We used to target <code class="language-plaintext highlighter-rouge">manylinux</code> by using a modern gcc toolchain compiled with glibc 2.28. To avoid compatibility issues with older versions of <code class="language-plaintext highlighter-rouge">libstdc++</code>, we statically linked libstdc++.</p>
+<p>Kernel-builder는 거의 초기부터 <code class="language-plaintext highlighter-rouge">manylinux_2_28</code>을 target해 왔습니다. 이전에는 glibc 2.28로 compile된 최신 gcc toolchain을 사용해 <code class="language-plaintext highlighter-rouge">manylinux</code>를 target했습니다. 오래된 <code class="language-plaintext highlighter-rouge">libstdc++</code> version과의 compatibility issue를 피하기 위해 libstdc++를 static link했습니다.</p>
 
-<p>However, this approach recently resulted in some issues. Some <code class="language-plaintext highlighter-rouge">libstdc++</code> functionality uses global initialization. This can lead to corrupted data when multiple <code class="language-plaintext highlighter-rouge">libstdc++</code> versions come into play, such as the <code class="language-plaintext highlighter-rouge">libstdc++</code> that is linked dynamically by PyTorch and the <code class="language-plaintext highlighter-rouge">libstdc++</code> that is linked statically by a kernel. Some recent kernels use functionality (e.g. C++ regexes) that trigger global initializations, leading to such corrupted data, causing segfaults and other issues.</p>
+<p>하지만 최근 이 접근 방식에서 몇 가지 문제가 발생했습니다. 일부 <code class="language-plaintext highlighter-rouge">libstdc++</code> 기능은 global initialization을 사용합니다. PyTorch가 dynamic link한 <code class="language-plaintext highlighter-rouge">libstdc++</code>와 kernel이 static link한 <code class="language-plaintext highlighter-rouge">libstdc++</code>처럼 여러 <code class="language-plaintext highlighter-rouge">libstdc++</code> version이 함께 사용되면 data corruption이 발생할 수 있습니다. 일부 최신 kernel은 C++ regex 같은 global initialization을 유발하는 기능을 사용하며, 이로 인해 data corruption, segfault, 기타 문제가 발생했습니다.</p>
 
-<p>To solve this issue, kernels now link <code class="language-plaintext highlighter-rouge">libstdc++</code> dynamically. To ensure compatibility with old <code class="language-plaintext highlighter-rouge">libstdc++</code> versions, we now compile kernels with the official <code class="language-plaintext highlighter-rouge">manylinux_2_28</code> toolchain.</p>
+<p>이 문제를 해결하기 위해 kernel은 이제 <code class="language-plaintext highlighter-rouge">libstdc++</code>를 dynamic link합니다. 오래된 <code class="language-plaintext highlighter-rouge">libstdc++</code> version과의 compatibility를 보장하기 위해, 이제 공식 <code class="language-plaintext highlighter-rouge">manylinux_2_28</code> toolchain으로 kernel을 compile합니다.</p>
 
-<h2 id="section-7">Conclusion</h2>
+<h2 id="section-7">마무리</h2>
 
-<p>Our goal with the Kernels project is to serve both kernel developers and users of custom kernels. We’re always keen on receiving feedback from the community on how we can improve it. Don’t hesitate to contribute!</p>
+<p>Kernels 프로젝트의 목표는 kernel developer와 custom kernel 사용자 모두를 지원하는 것입니다. 우리는 프로젝트를 어떻게 개선할 수 있을지에 대한 community feedback을 항상 환영합니다. 언제든 기여해 주세요!</p>
 
-<p><em>Acknowledgements: Thanks to <a href="ariG23498">Aritra</a> for reviewing the post.</em></p>
+<p><em>감사의 말: 글을 review해 준 <a href="ariG23498">Aritra</a>에게 감사드립니다.</em></p>
 
                 <div class="clearfix"></div>
 			</div>
@@ -468,24 +467,24 @@ torch29-metal-aarch64-darwin: rejected <span class="o">(</span>OS <span class="o
         <div class="sidebar sticky-top">
     <div class="toc-content">
         <ul id="markdown-toc">
-  <li><a href="#-kernels-major-updates" id="markdown-toc--kernels-major-updates">🤗 Kernels: Major Updates</a>    <ul>
-      <li><a href="#section-1" id="markdown-toc-section-1">Kernels – a new repository type</a></li>
-      <li><a href="#section-2" id="markdown-toc-section-2">Improved security</a>        <ul>
-          <li><a href="#trusted-kernel-publishers" id="markdown-toc-trusted-kernel-publishers">Trusted kernel publishers</a></li>
+  <li><a href="#-kernels-주요-업데이트" id="markdown-toc--kernels-주요-업데이트">🤗 Kernels: 주요 업데이트</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">Kernels — 새로운 repository type</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">보안 개선</a>        <ul>
+          <li><a href="#trusted-kernel-publisher" id="markdown-toc-trusted-kernel-publisher">Trusted kernel publisher</a></li>
           <li><a href="#kernel-signing" id="markdown-toc-kernel-signing">Kernel signing</a></li>
         </ul>
       </li>
-      <li><a href="#section-3" id="markdown-toc-section-3">Revamped CLIs</a></li>
-      <li><a href="#section-4" id="markdown-toc-section-4">More coverage of frameworks and backends</a></li>
-      <li><a href="#section-5" id="markdown-toc-section-5">Foundation for agentic kernel development</a></li>
-      <li><a href="#section-6" id="markdown-toc-section-6">Misc</a>        <ul>
-          <li><a href="#environment-setup" id="markdown-toc-environment-setup">Environment setup</a></li>
-          <li><a href="#system-card-for-kernels" id="markdown-toc-system-card-for-kernels">System card for kernels</a></li>
-          <li><a href="#is-a-kernel-compatible-on-my-system" id="markdown-toc-is-a-kernel-compatible-on-my-system">Is a kernel compatible on my system?</a></li>
-          <li><a href="#improved-manylinux_2_28-support" id="markdown-toc-improved-manylinux_2_28-support">Improved manylinux_2_28 support</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">CLI 개편</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">framework와 backend 지원 확대</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">agentic kernel 개발을 위한 기반</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">기타 업데이트</a>        <ul>
+          <li><a href="#환경-설정" id="markdown-toc-환경-설정">환경 설정</a></li>
+          <li><a href="#kernel용-system-card" id="markdown-toc-kernel용-system-card">kernel용 system card</a></li>
+          <li><a href="#내-system에서-kernel이-호환되나요" id="markdown-toc-내-system에서-kernel이-호환되나요">내 system에서 kernel이 호환되나요?</a></li>
+          <li><a href="#개선된-manylinux_2_28-지원" id="markdown-toc-개선된-manylinux_2_28-지원">개선된 manylinux_2_28 지원</a></li>
         </ul>
       </li>
-      <li><a href="#section-7" id="markdown-toc-section-7">Conclusion</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">마무리</a></li>
     </ul>
   </li>
 </ul>
@@ -509,24 +508,8 @@ torch29-metal-aarch64-darwin: rejected <span class="o">(</span>OS <span class="o
 </div>
 
 
-<!-- footer -->
-<div class="row post-footer">
-    <div class="footer">
-    <h4 style="text-align: center;"><span>  열린 프로젝트  </span></h4>
 
-        <div class="footer-card-container">
-            <a href="https://www.contribution.ac/">
-                <img src="/pr-preview/pr-165/assets/images/manage/2025-OSSCA.jpg" class="footer-card" alt="이미지" />
-            </a>
-            &nbsp;
-            <a href="https://www.contribution.ac/">
-                <img src="/pr-preview/pr-165/assets/images/manage/HF_OSS.jpg" class="footer-card" alt="이미지" />
-            </a>
-            <!-- NOTE: 진행 중인 프로젝트가 있을때 uncomment 해주세요 -->
-            <!-- <h5 style="text-align: center;"><span> 진행 중 </span></h4> -->
-        </div>
-</div>
-</div>
+
     <!-- End Article
 ================================================== -->
 
@@ -543,7 +526,7 @@ torch29-metal-aarch64-darwin: rejected <span class="o">(</span>OS <span class="o
     <div class="filter-tabs">
       <button class="filter-btn active" data-category="all">
         All
-        <span class="count">1</span>
+        <span class="count">21</span>
       </button>
 
       
@@ -551,11 +534,16 @@ torch29-metal-aarch64-darwin: rejected <span class="o">(</span>OS <span class="o
         
           <button class="filter-btn" data-category="translation">
             Translation
-            <span class="count">1</span>
+            <span class="count">21</span>
           </button>
         
       
         
+        
+          <button class="filter-btn" data-category="huggingface">
+            HuggingFace
+            <span class="count">20</span>
+          </button>
         
       
     </div>
@@ -567,6 +555,46 @@ torch29-metal-aarch64-darwin: rejected <span class="o">(</span>OS <span class="o
   
       
   
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
 </section>
 
 <section class="row">
@@ -574,6 +602,576 @@ torch29-metal-aarch64-darwin: rejected <span class="o">(</span>OS <span class="o
     <div class="row posts-container">
       
           
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/grabette/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">21 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/thinkingmachines-inkling/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" alt="Thinking Machines의 Inkling에 오신 것을 환영합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/torch-attention-profile/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" alt="파이토치의 프로파일링(3부): 어텐션이 전부다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">10 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/native-speed-vllm-transformers-backend/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/lerobot-release-v060/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" alt="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">07 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/cerebras-gemma4-voice-ai/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">01 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/eee-community-evals/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" alt="Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Featuring Every Eval Ever Results on Hugging Face Model Pages를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">30 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/vllm-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">26 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/ffasr-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">24 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/huggingface-hub-release-ci/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" alt="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/huggingface-hub-release-ci/">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/cross-origin-storage/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/peft-beyond-lora/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/is-it-agentic-enough/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" alt="충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/agentic-resource-discovery-launch/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-06-17-agentic-resource-discovery-launch/thumbnail.png" alt="에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Agentic Resource Discovery: Let agents search를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">17 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/github-ci-hf-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-06-09-github-ci-hf-jobs/thumbnail.gif" alt="GitHub CI를 Hugging Face Jobs로 마이그레이션" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Migrating Your GitHub CI to Hugging Face Jobs를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">09 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/openenv-agentic-rl/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-06-08-openenv-agentic-rl/thumbnail.png" alt="오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Open Source Community is backing OpenEnv for Agentic RL를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/torch-profiler/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-05-29-torch-profiler/thumbnail.png" alt="PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 1): A Beginner’s Guide to torch.profiler를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">29 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/local-reachy-mini-conversation/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">27 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/olmoearth-v1-1/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-05-20-olmoearth-v1-1/thumbnail.png" alt="OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 OlmoEarth v1.1: A more efficient family of models를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">20 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-165/paddleocr-transformers/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-165/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-165/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">19 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
       
       
       <div class="col-md-4 mb-5 post-item" data-categories="transformers translation ">
@@ -607,7 +1205,8 @@ Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사�
       
     </div>
   </div>
-</section></main>
+</section>
+</main>
 
 
     <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
