@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "Granite Embedding Multilingual R2: 32K 컨텍스트를 갖춘 Apache 2.0 다국어 임베딩 — 100M 미만 중 최상의 검색 품질"
+title: "Granite Embedding Multilingual R2: 32K 다국어 임베딩"
+description: "IBM Granite Embedding Multilingual R2의 32K 컨텍스트, 다국어 검색 성능, Matryoshka 지원을 정리합니다."
 author: dailybot
 categories: [Translation, HuggingFace]
 image: assets/images/blog/posts/2026-05-15-granite-embedding-multilingual-r2/thumbnail.png
