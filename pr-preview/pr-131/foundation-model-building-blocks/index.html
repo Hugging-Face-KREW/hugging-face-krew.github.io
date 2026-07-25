@@ -255,8 +255,8 @@ Review instructions:
 
 <h1 id="aws에서-foundation-model-학습-및-추론을-위한-구성-요소">AWS에서 Foundation Model 학습 및 추론을 위한 구성 요소</h1>
 
-<p>오랜 기간 동안, 파운데이션 모델의 “스케일링”은 대개 한 가지를 뜻했다: 프리-트레이닝에 더 많은 컴퓨트를 투자하면 능력이 상승한다. 이 직감은 <a href="https://arxiv.org/abs/2001.08361">Kaplan et al. (2020)</a> 같은 경험적 연구에 의해 뒷받침되었으며, 모델 파라미터 수, 데이터셋 크기, 학습 컴퓨트의 증가에 따라 손실이 예측 가능한 멱 법칙(power-law) 트렌드를 보인다고 보고했다. 실제로 이러한 경향은 대규모 가속기 용량과 이를 효율적으로 활용하는 분산 인프라스트럭처에 지속적인 투자를 정당화했다.
-그러나 프론티어는 진화했고—스케일링은 더 이상 하나의 곡선이 아니다. NVIDIA의 “하나에서 세 가지 스케일링 법칙” 프레이밍은 프리-트레이닝을 넘어서 성능이 포스트-트레이닝(예: 감독 학습 파인튜닝(SFT) 및 강화학습(RL) 기반 방법) 및 테스트 타임 컴퓨트(“오랜 사고”, 검색/검증, 다중 샘플 전략)에서 점차 스케일링된다는 점을 유용하게 강조한다.</p>
+<p>오랜 기간 동안, 파운데이션 모델의 “스케일링”은 대개 한 가지를 뜻했다: 프리-트레이닝에 더 많은 컴퓨트를 투자하면 능력이 상승한다. 이 직감은 <a href="https://arxiv.org/abs/2001.08361">Kaplan et al. (2020)</a> 같은 경험적 연구가 뒷받침했으며, 모델 파라미터 수, 데이터셋 크기, 학습 컴퓨트의 증가에 따라 손실이 예측 가능한 멱 법칙(power-law) 트렌드를 보인다고 보고했다. 실제로 이러한 경향은 대규모 가속기 용량과 이를 효율적으로 활용하는 분산 인프라스트럭처에 지속적인 투자를 정당화했다.
+그러나 프론티어는 진화했고—스케일링은 더 이상 하나의 곡선이 아니다. NVIDIA의 “하나에서 세 가지 스케일링 법칙” 프레이밍은 프리-트레이닝을 넘어서 성능이 포스트-트레이닝(예: 감독 학습 미세 조정(fine-tuning, SFT) 및 강화학습(RL) 기반 방법) 및 테스트 타임 컴퓨트(“오랜 사고”, 검색/검증, 다중 샘플 전략)에서 점차 스케일링된다는 점을 유용하게 강조한다.</p>
 
 <p>Figure: Adapted from <a href="https://blogs.nvidia.com/blog/ai-scaling-laws/">“AI’s Three Scaling Laws, Explained”</a> (NVIDIA Blog).</p>
 
@@ -274,10 +274,10 @@ Review instructions:
 
 <h3 id="인프라-컴퓨트-네트워크-및-스토리지">인프라: 컴퓨트, 네트워크, 및 스토리지</h3>
 
-<p>Figure 1에 도시된 바와 같이, 인프라는 세 가지 상호 결합된 구성요소에 의해 고정된다: 대형 디바이스 메모리를 가진 가속화된 컴퓨트, 집합적 통신을 위한 광대역 대역폭의 인터커넥트, 데이터 및 체크포인트를 위한 확장 가능한 분산 스토리지.</p>
+<p>Figure 1에 도시된 바와 같이, 인프라는 세 가지 상호 결합된 구성요소로 구성된다: 대형 디바이스 메모리를 가진 가속화된 컴퓨트, 집합적 통신을 위한 광대역 대역폭의 인터커넥트, 데이터 및 체크포인트(checkpoint)를 위한 확장 가능한 분산 스토리지.</p>
 
 <p>대규모 파운데이션 모델의 프리-트레이닝, 포스트-트레이닝, 추론의 기초를 이루는 가속화된 컴퓨트는 필수적이다. AWS는 <a href="https://aws.amazon.com/ec2/instance-types/accelerated-computing/">Amazon EC2 accelerated computing instances</a>의 여러 세대를 제공하며, 그 중 <a href="https://aws.amazon.com/ec2/instance-types/p5/">P계 인스턴스 패밀리</a>가 포함된다. p5.48xlarge은 여덟 대의 <a href="https://www.nvidia.com/en-us/data-center/h100/">NVIDIA H100</a> GPU를 갖추고 있으며, p5.4xlarge는 소형 규모의 작업에 적합한 단일 H100 GPU를 제공하고, p5e.48xlarge/p5en.48xlarge 변형은 <a href="https://www.nvidia.com/en-us/data-center/h200/">NVIDIA H200</a> GPU를 탑재한다. <a href="https://aws.amazon.com/ec2/instance-types/p6/">P6 인스턴스 패밀리</a>는 <a href="https://www.nvidia.com/en-us/data-center/dgx-b200/">NVIDIA Blackwell B200</a> 아키텍처를 도입하며 p6-b200.48xlarge 및 <a href="https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/">Blackwell Ultra B300</a>의 p6-b300.48xlarge를 제공한다.
-이 세대 전반에 걸쳐 지배적인 스케일링 축은 피크 Tensor 처리량, HBM 용량 및 대역폭, 그리고 노드 간 인터커넥트 대역폭이다.</p>
+이 세대 전반에 걸쳐 지배적인 스케일링 축은 피크 Tensor 처리량(throughput), HBM 용량 및 대역폭, 그리고 노드 간 인터커넥트 대역폭이다.</p>
 
 <p>일차 근사로, 피크 Tensor Core 처리량은 초당 부동소수점 연산(FLOPS)으로 측정되며, 이 값을 통해 이 가속기들을 공통 축에 위치시키는 데 도움을 준다. 아래 표는 dense BF16/FP16 및 FP8 텐서 연산의 GPU당 피크 처리량, HBM 용량 및 대역폭을 SXM/HGX급 사양과 일치하도록 요약한다. 이 표는 NVSwitch/NVLink 기반의 다중-GPU 노드에 맞춘다.</p>
 
@@ -364,17 +364,17 @@ Review instructions:
 
 <p>최상위 계층은 PyTorch를 기반으로 분산 학습과 대규모 추론에 대한 고수준 추상화를 제공하는 프레임워크들로 구성된다. 학습을 위해서는 복잡성-성과 트레이드오프의 서로 다른 지점을 다루는 세 가지 범주의 프레임워크가 있다. 아래는 몇 가지 예이다.</p>
 
-<p><a href="https://huggingface.co/docs/transformers/">Hugging Face Transformers</a>는 분산 학습을 위한 내장 지원을 갖춘 <code class="language-plaintext highlighter-rouge">Trainer</code> 클래스를 제공하는데, 이는 <a href="https://huggingface.co/docs/accelerate/">Accelerate</a>를 통해 DDP, FSDP, DeepSpeed를 추상화한다. 이 경로는 사용 편의성과 폭넓은 모델 호환성에 중점을 두며, 구성의 단순성이 최대 처리량보다 더 중요할 때 미세 조정 및 중간 규모 학습에 적합하다.</p>
+<p><a href="https://huggingface.co/docs/transformers/">Hugging Face Transformers</a>는 분산 학습을 위한 내장 지원을 갖춘 <code class="language-plaintext highlighter-rouge">Trainer</code> 클래스를 제공하는데, 이는 <a href="https://huggingface.co/docs/accelerate/">Accelerate</a>를 통해 DDP, FSDP, DeepSpeed를 추상화한다. 이 경로는 사용 편의성과 폭넓은 모델 호환성에 중점을 두며, 구성의 단순성이 최대 처리량보다 더 중요할 때 미세 조정 및 중간 규모 학습에 적합하다. Hugging Face Hub, Datasets, Spaces, Inference Endpoints, Inference Providers 같은 제품명은 검색성과 문서 호환성을 위해 원문 표기를 유지한다.</p>
 
 <p><a href="https://developer.nvidia.com/megatron-core">NVIDIA Megatron Core</a>는 대규모에서의 최대 효율을 목표로 3D 병렬성(텐서, 파이프라인, 전문가 병렬성)을 구현하고, Transformer Engine을 통한 FP8 혼합 정밀도 등 최적화를 포함한다. <a href="https://docs.nvidia.com/nemo-framework/user-guide/latest/">NeMo Framework</a>는 Megatron Core를 기반으로 사전 학습(pre-training) 및 미세 조정 파이프라인을 제공한다.</p>
 
 <p>RLHF(또는 관련 포스트-트레이닝 방법)에서는 <a href="https://github.com/volcengine/verl">veRL</a> (Volcano Engine Reinforcement Learning)이 PPO, GRPO, REINFORCE++ 등의 알고리즘을 구현하는 유연한 프레임워크를 제공한다. veRL의 HybridFlow 아키텍처는 학습 백엔드(FSDP2, Megatron)와 추론 엔진(vLLM, SGLang)을 동일 작업에서 혼합하는 것을 가능하게 하며, actor와 rollout 컴포넌트 간 모델 가중치를 메모리에 공유해 가중치 동기화 오버헤드를 줄인다.</p>
 
-<p>추론 서빙을 위한 프레임워크로는 <a href="https://github.com/vllm-project/vllm">vLLM</a>이 PagedAttention를 구현하고 KV 캐시를 페이지화된 가상 메모리로 관리해 단편화를 줄이고 더 큰 배치 크기를 가능하게 한다. <a href="https://github.com/sgl-project/sglang">SGLang</a>은 이러한 기능을 RadixAttention으로 확장해 요청 간 프리픽스 재사용을 자동화하고, CPU 스케줄링과 GPU 연산을 중첩하는 제로-오버헤드 배치 스케줄러 및 예측된 캐시 적중률 기반의 로드 밸런서를 제공한다. 두 프레임워크 모두 단일 GPU 메모리 초과를 위한 텐서 병렬성을 지원하고, <a href="https://developer.nvidia.com/blog/introducing-nvidia-dynamo-a-low-latency-distributed-inference-framework-for-scaling-reasoning-ai-models/">NVIDIA Dynamo</a>와의 통합으로 데이터 분리(serving의 prefill/decode를 분리하는 아키텍처)에 대응한다.</p>
+<p>추론 서빙(serving)을 위한 프레임워크로는 <a href="https://github.com/vllm-project/vllm">vLLM</a>이 PagedAttention를 구현하고 KV 캐시를 페이지화된 가상 메모리로 관리해 단편화를 줄이고 더 큰 배치 크기를 가능하게 한다. <a href="https://github.com/sgl-project/sglang">SGLang</a>은 이러한 기능을 RadixAttention으로 확장해 요청 간 프리픽스 재사용을 자동화하고, CPU 스케줄링과 GPU 연산을 중첩하는 제로-오버헤드 배치 스케줄러 및 예측된 캐시 적중률 기반의 로드 밸런서를 제공한다. 두 프레임워크 모두 단일 GPU 메모리 초과를 위한 텐서 병렬성을 지원하고, <a href="https://developer.nvidia.com/blog/introducing-nvidia-dynamo-a-low-latency-distributed-inference-framework-for-scaling-reasoning-ai-models/">NVIDIA Dynamo</a>와의 통합으로 데이터 분리(serving의 prefill/decode를 분리하는 아키텍처)에 대응한다.</p>
 
 <h3 id="관측성">관측성</h3>
 
-<p>관측성은 대규모 분산 학습 시스템의 디버깅 및 운영에 선행된다. 학습 작업이 정체되거나 처리량이 저하될 때, 원인이 하드웨어 장애인지, 네트워크 혼잡인지, 스토리지 병목인지, 애플리케이션 레벨의 비효율인지에 대한 가시성이 필요하다. 이 시리즈에서 다루는 인프라 규모(수천 개의 GPU, 페타비트급 인터커넥트 대역폭, 테라바이트 단위의 체크포인트 데이터)에서는 모니터링만으로는 충분하지 않고 체계적인 원격 측정 수집, 저장 및 분석으로의 확장이 필요하다. 관측성은 인프라 메트릭( GPU, 네트워크, 스토리지), 워크로드 메트릭(학습 처리량, 큐 지연), 그리고 사전 예방적 장애 탐지를 위한 경보의 세 가지 텔레메트리 카테고리를 포함한다.</p>
+<p>관측성은 대규모 분산 학습 시스템의 디버깅 및 운영에 선행된다. 학습 작업이 정체되거나 처리량이 저하될 때, 원인이 하드웨어 장애인지, 네트워크 혼잡인지, 스토리지 병목인지, 애플리케이션 레벨의 비효율인지에 대한 가시성이 필요하다. 이 시리즈에서 다루는 인프라 규모(수천 개의 GPU, 페타비트급 인터커넥트 대역폭, 테라바이트 단위의 체크포인트 데이터)에서는 모니터링만으로는 충분하지 않고 체계적인 원격 측정 수집, 저장 및 분석으로의 확장이 필요하다. 관측성은 인프라 메트릭(GPU, 네트워크, 스토리지), 워크로드 메트릭(학습 처리량, 큐 지연), 그리고 사전 예방적 장애 탐지를 위한 경보의 세 가지 텔레메트리 카테고리를 포함한다.</p>
 
 <h4 id="코어-스택-prometheus와-grafana">코어 스택: Prometheus와 Grafana</h4>
 
@@ -388,7 +388,7 @@ Review instructions:
 
 <p>EFA는 드라이버 수준의 통계를 노출한다(바이트/패킷/재전송/타임아웃). 이를 통해 분산 학습의 집합 연산 병목 현상을 진단할 수 있다. <a href="https://github.com/aws/aws-ofi-nccl">aws-ofi-nccl</a> 플러그인은 NCCL을 libfabric 인터페이스에 매핑하여 MDOS의 OS-bypass 및 SRD 프로토콜을 활용할 수 있게 한다. 운영자는 EFA 카운터를 NCCL 진단(NCCL_DEBUG=INFO)과 결합해 네트워크 계층의 이슈를 파악할 수 있다.</p>
 
-<p><a href="https://aws.amazon.com/fsx/lustre/">Amazon FSx for Lustre</a>은 처리량 및 메타데이터 지연 시간 등 클라이언트 측 메트릭을 노출하고, 애플리케이션 차원의 메트릭(학습의 경우 단계 시간, 초당 토큰 수, 손실 값; 추론의 경우 TTFT, 토큰 간 지연)도 Prometheus 클라이언트 라이브러리를 통해 수출할 수 있다.</p>
+<p><a href="https://aws.amazon.com/fsx/lustre/">Amazon FSx for Lustre</a>은 처리량 및 메타데이터 지연 시간(latency) 등 클라이언트 측 메트릭을 노출하고, 애플리케이션 차원의 메트릭(학습의 경우 단계 시간, 초당 토큰 수, 손실 값; 추론의 경우 TTFT, 토큰 간 지연)도 Prometheus 클라이언트 라이브러리를 통해 수출할 수 있다.</p>
 
 <h4 id="gpu-건강-상태-모니터링-및-경보">GPU 건강 상태 모니터링 및 경보</h4>
 
