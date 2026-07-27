@@ -72,7 +72,7 @@ Kernel은 이를 불러오는 Python process와 같은 권한으로 native code�
 
 ### Trusted kernel publisher
 
-새로운 repo type과 함께 “trusted publisher”도 도입했습니다. Kernel은 사용되는 machine에서 Python process와 같은 권한으로 code를 실행하므로, 공격자는 악성 kernel을 업로드하고 사용자가 그 kernel을 쓰도록 유도해 machine을 compromise할 수 있습니다. 이런 악성 kernel을 피할 수 있도록, 이제 `kernels` package는 기본적으로 *trusted publisher*의 kernel만 load합니다. trusted publisher는 community가 선의로 행동한다고 신뢰하는 organization입니다.
+새로운 repo type과 함께 “trusted publisher”도 도입했습니다. Kernel은 사용되는 machine에서 Python process와 같은 권한으로 code를 실행하므로, 공격자는 악성 kernel을 업로드하고 사용자가 그 kernel을 쓰도록 유도해 machine을 compromise할 수 있습니다. 이런 악성 kernel을 피할 수 있도록, 이제 kernels package는 기본적으로 *trusted publisher*의 kernel만 load합니다. trusted publisher는 community가 선의로 행동한다고 신뢰하는 organization입니다.
 
 물론 trusted publisher가 아닌 organization이나 user의 kernel도 load할 수 있어야 합니다. 다만 Hub에서 kernel을 load할 때 `trust_remote_code` argument를 사용해 명시적으로 opt in해야 합니다.
 
@@ -93,16 +93,16 @@ kernel_module = get_kernel(
 
 보안을 더 강화하기 위해 Sigstore의 cosign을 사용해 ephemeral private key로 서명합니다. 이 signing key는 제한된 시간 동안만 유효하므로, 유출되더라도 공격자가 private key를 사용하기 어렵습니다. 또한 kernel이 trusted GitHub repository의 trusted GitHub workflow에서 서명되었는지도 검증합니다.
 
-Kernel signing은 이미 kernel-builder에서 지원되며, kernel을 검증할 수 있도록 `kernels verify-signature`도 제공합니다. 다만 Kernels는 아직 kernel load 시점에 signature를 검증하지 않습니다. 이 기능을 완전히 rollout하기 전에 더 테스트하고 싶기 때문입니다. 자체 kernel에 code signing을 설정하는 예비 안내는 kernels 0.16.0 release note에서 볼 수 있습니다. [https://github.com/huggingface/kernels/releases/tag/v0.16.0.](https://github.com/huggingface/kernels/releases/tag/v0.16.0)
+Kernel signing은 이미 `kernel-builder`에서 지원되며, kernel을 검증할 수 있도록 `kernels verify-signature`도 제공합니다. 다만 Kernels는 아직 kernel load 시점에 signature를 검증하지 않습니다. 이 기능을 완전히 rollout하기 전에 더 테스트하고 싶기 때문입니다. 자체 kernel에 code signing을 설정하는 예비 안내는 kernels 0.16.0 release note에서 볼 수 있습니다. [https://github.com/huggingface/kernels/releases/tag/v0.16.0.](https://github.com/huggingface/kernels/releases/tag/v0.16.0)
 
 ## CLI 개편 {#section-3}
 
-이전에는 여러 utility가 kernels와 kernel-builder 사이에 뒤섞여 있었습니다. 이제 kernels CLI와 kernel-builder CLI 사이의 concern을 더 명확히 분리했습니다. 여기서의 mental model은 kernels가 kernel을 load하고 사용할 준비를 하는 library라는 것입니다. 따라서 “building” kernel과 관련된 기능은 포함하지 않는 것이 맞습니다.
+이전에는 여러 utility가 `kernels`와 `kernel-builder` 사이에 뒤섞여 있었습니다. 이제 `kernels` CLI와 `kernel-builder` CLI 사이의 concern을 더 명확히 분리했습니다. 여기서의 mental model은 `kernels`가 kernel을 load하고 사용할 준비를 하는 library라는 것입니다. 따라서 “building” kernel과 관련된 기능은 포함하지 않는 것이 맞습니다.
 
 그 결과 `kernels`와 `kernel-builder`는 모두 훨씬 더 가볍고 목적이 분명해졌습니다. 자세한 내용은 documentation을 참고하세요.
 
-* [kernels CLI](https://huggingface.co/docs/kernels/en/cli)  
-* [kernel-builder CLI](https://huggingface.co/docs/kernels/en/builder-cli)
+* [`kernels` CLI](https://huggingface.co/docs/kernels/en/cli)
+* [`kernel-builder` CLI](https://huggingface.co/docs/kernels/en/builder-cli)
 
 개선된 CLI 경험은 agentic kernel development가 부상하는 흐름에도 더 잘 대응하게 해 줍니다. 이에 대해서는 [뒤에서](#foundation-for-agentic-kernel-development) 더 설명합니다.
 
@@ -110,7 +110,7 @@ Kernel signing은 이미 kernel-builder에서 지원되며, kernel을 검증할 
 
 framework 지원도 확장했습니다. 가장 눈에 띄는 변화는 다음과 같습니다.
 
-* `kernels`와 `kernel-builder`에 Torch Stable ABI 지원을 추가했습니다. Torch Stable ABI를 사용하면 kernel developer가 특정 Torch version이나 그 이후 약 2년 동안 release되는 version을 target할 수 있습니다. 예를 들어 Torch 2.9 Stable ABI를 target하는 kernel은 Torch \>= 2.9를 지원합니다.
+* kernels와 kernel-builder에 Torch Stable ABI 지원을 추가했습니다. Torch Stable ABI를 사용하면 kernel developer가 특정 Torch version이나 그 이후 약 2년 동안 release되는 version을 target할 수 있습니다. 예를 들어 Torch 2.9 Stable ABI를 target하는 kernel은 Torch \>= 2.9를 지원합니다.
 * Apache TVM FFI는 Torch 외에 처음으로 지원되는 framework입니다. TVM FFI는 PyTorch, JAX, CuPy 같은 다른 framework와 상호 운용되는 kernel용 standardized ABI입니다. 이를 통해 kernel developer는 여러 framework에서 동작하는 kernel을 만들 수 있습니다.
 
 ## agentic kernel 개발을 위한 기반 {#section-5}
