@@ -3,6 +3,8 @@ name: HF Agent PR Review
 on:
   pull_request:
     types: [opened, reopened, ready_for_review, synchronize, labeled]
+    paths:
+      - "_posts/**/*.md"
   workflow_dispatch:
     inputs:
       pr_number:
@@ -33,7 +35,6 @@ jobs:
         with:
           repository: Hugging-Face-KREW/hf-workflow
           ref: 530521318e28c1c82491393e264fe608aa029634
-          token: ${{ secrets.KREW_BOT_TOKEN }}
           path: workflow
 
       - name: Capture trusted PR snapshot
