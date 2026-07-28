@@ -1,19 +1,21 @@
 ---
 layout: post
-title: "Granite Embedding Multilingual R2: 32K 다국어 임베딩"
-description: "IBM Granite Embedding Multilingual R2의 32K 컨텍스트, 다국어 검색 성능, Matryoshka 지원을 정리합니다."
+title: 'Granite Embedding Multilingual R2: 32K 다국어 임베딩'
+description: IBM Granite Embedding Multilingual R2의 32K 컨텍스트, 다국어 검색 성능, Matryoshka
+  지원을 정리합니다.
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 image: assets/images/blog/posts/2026-05-15-granite-embedding-multilingual-r2/thumbnail.png
-slug: "granite-embedding-multilingual-r2"
-source_url: "https://huggingface.co/blog/ibm-granite/granite-embedding-multilingual-r2"
-source_published_date: "2026-05-14"
-source_published_at: "2026-05-14T18:55:01+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+slug: granite-embedding-multilingual-r2
+source_url: https://huggingface.co/blog/ibm-granite/granite-embedding-multilingual-r2
+source_published_date: '2026-05-14'
+source_published_at: '2026-05-14T18:55:01+00:00'
+locale: ko
+translation_status: draft
+translator: openai
 ---
-
 * TOC
 {:toc}
 <!--toc-->
