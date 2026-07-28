@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-191/assets/images/favicon.ico" />
+
+    <title>쉽게 에이전트를 만들 수 있는 라이브러리, smolagents를 소개합니다. | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>쉽게 에이전트를 만들 수 있는 라이브러리, smolagents를 소개합니다. | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="쉽게 에이전트를 만들 수 있는 라이브러리, smolagents를 소개합니다." />
+<meta name="author" content="jeong" />
+<meta property="og:locale" content="en_us" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 Introducing smolagents, a simple library to build agents를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Introducing smolagents, a simple library to build agents를 한국어로 번역한 글입니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-191/Introducing-smolagents/assets/images/blog/posts/2025-09-26-Introducing-smolagents/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-09-26T00:00:00+09:00" />
+<meta property="article:modified_time" content="2025-09-26T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-191/Introducing-smolagents/assets/images/blog/posts/2025-09-26-Introducing-smolagents/thumbnail.png" />
+<meta name="twitter:title" content="쉽게 에이전트를 만들 수 있는 라이브러리, smolagents를 소개합니다." />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"jeong"},"dateModified":"2025-09-26T00:00:00+09:00","datePublished":"2025-09-26T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Introducing smolagents, a simple library to build agents를 한국어로 번역한 글입니다.","headline":"쉽게 에이전트를 만들 수 있는 라이브러리, smolagents를 소개합니다.","image":"/pr-preview/pr-191/Introducing-smolagents/assets/images/blog/posts/2025-09-26-Introducing-smolagents/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-191/Introducing-smolagents/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-191/assets/images/hfkr_logo.png"},"name":"jeong"},"url":"/pr-preview/pr-191/Introducing-smolagents/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-191/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-191/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-191/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-191/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-191/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-191/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-191/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-191/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-191/assets/images/blog/posts/2025-09-26-Introducing-smolagents/thumbnail.png" alt="쉽게 에이전트를 만들 수 있는 라이브러리, smolagents를 소개합니다.">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-191/assets/images/blog/posts/2025-09-26-Introducing-smolagents/thumbnail.png" alt="쉽게 에이전트를 만들 수 있는 라이브러리, smolagents를 소개합니다.">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-191/categories#agent">Agent</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">쉽게 에이전트를 만들 수 있는 라이브러리, smolagents를 소개합니다.</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#목차" id="markdown-toc-목차">목차</a></li>
+  <li><a href="#에이전트란-무엇인가" id="markdown-toc-에이전트란-무엇인가"><strong>🤔 에이전트란 무엇인가?</strong></a></li>
+  <li><a href="#에이전트를-언제-써야하고--언제-피해야-하는지" id="markdown-toc-에이전트를-언제-써야하고--언제-피해야-하는지"><strong>✅ 에이전트를 언제 써야하고 / ⛔ 언제 피해야 하는지</strong></a></li>
+  <li><a href="#코드-에이전트code-agents" id="markdown-toc-코드-에이전트code-agents"><strong>코드 에이전트(Code agents)</strong></a></li>
+  <li><a href="#smolagents-소개-쉽게-에이전트-만들기-" id="markdown-toc-smolagents-소개-쉽게-에이전트-만들기-"><strong><em>smolagents 소개</em>: 쉽게 에이전트 만들기 🥳</strong></a></li>
+  <li><a href="#에이전트-만들기" id="markdown-toc-에이전트-만들기"><strong>에이전트 만들기</strong></a></li>
+  <li><a href="#에이전틱-워크플로우에서-오픈-모델은-얼마나-강력할까" id="markdown-toc-에이전틱-워크플로우에서-오픈-모델은-얼마나-강력할까"><strong>에이전틱 워크플로우에서 오픈 모델은 얼마나 강력할까?</strong></a>    <ul>
+      <li><a href="#다음-단계-" id="markdown-toc-다음-단계-"><strong>다음 단계 🚀</strong></a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/smolagents">Introducing smolagents, a simple library to build agents</a>를 한국어로 번역한 글입니다.</em></p>
+
+<hr />
+<p>HuggingFace에서 LLM(Language Model)에 <strong>에이전트 기능</strong>을 부여하는 라이브러리 <code class="language-plaintext highlighter-rouge">smolagents</code>를 공개했습니다! 
+간단히 살펴볼까요?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">smolagents</span> <span class="kn">import</span> <span class="n">CodeAgent</span><span class="p">,</span> <span class="n">DuckDuckGoSearchTool</span><span class="p">,</span> <span class="n">HfApiModel</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="nc">CodeAgent</span><span class="p">(</span><span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="nc">DuckDuckGoSearchTool</span><span class="p">()],</span> <span class="n">model</span><span class="o">=</span><span class="nc">HfApiModel</span><span class="p">())</span>
+
+<span class="n">agent</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="sh">"</span><span class="s">How many seconds would it take for a leopard at full speed to run through Pont des Arts?</span><span class="sh">"</span><span class="p">)</span> <span class="c1"># 표범이 최고 속력으로 Pont des Arts 다리를 달린다면 몇 초 걸리는가?
+</span></code></pre></div></div>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/smolagents/smolagents.gif" alt="" /></p>
+
+<h2 id="목차">목차</h2>
+
+<ul>
+  <li><a href="https://hugging-face-krew.github.io/Introducing-smolagents/#-에이전트란-무엇인가">🤔 에이전트란 무엇인가?</a></li>
+  <li><a href="https://hugging-face-krew.github.io/Introducing-smolagents/#-에이전트를-언제-써야하고--언제-피해야-하는지">✅ 에이전트를 언제 써야하고 / ⛔ 언제 피해야 하는지</a></li>
+  <li><a href="https://hugging-face-krew.github.io/Introducing-smolagents/#코드-에이전트code-agents">코드 에이전트(Code Agents)</a></li>
+  <li><a href="https://hugging-face-krew.github.io/Introducing-smolagents/#smolagents-소개-쉽게-에이전트-만들기-">smolagents 소개: 쉽게 에이전트 만들기 🥳</a>
+    <ul>
+      <li><a href="https://hugging-face-krew.github.io/Introducing-smolagents/#에이전트-만들기">에이전트 만들기</a></li>
+      <li><a href="https://hugging-face-krew.github.io/Introducing-smolagents/#에이전틱-워크플로우에서-오픈-모델은-얼마나-강력할까">에이전틱 워크플로우에서 오픈 모델은 얼마나 강력할까?</a></li>
+    </ul>
+  </li>
+  <li><a href="https://hugging-face-krew.github.io/Introducing-smolagents/#다음-단계-">다음 단계 🚀</a></li>
+</ul>
+
+<h2 id="에이전트란-무엇인가"><strong>🤔 에이전트란 무엇인가?</strong></h2>
+
+<p>효율적인 AI 시스템은 <strong>LLM이 외부 세계와 상호작용할 수 있는 방법</strong>을 제공해야 합니다. 예를 들어 외부 정보를 가져오기 위해 검색 도구를 호출하거나, 특정 프로그램을 실행하여 과제를 해결하도록 하는 것입니다. 다시 말해, LLM에는 <strong>에이전시(agency)</strong>가 필요합니다. 에이전틱 프로그램(agentic programs)은 LLM이 외부 세계와 연결되는 관문입니다.</p>
+
+<p>AI 에이전트란 <strong>LLM의 출력이 워크플로우를 제어하는 프로그램</strong>입니다.</p>
+
+<ul>
+  <li>
+    <p>LLM을 사용하는 시스템은 LLM 출력을 코드로 통합합니다. LLM 입력이 코드 워크플로우에 미치는 영향력이 해당 시스템에서 LLM이 가지는 에이전시의 수준을 결정합니다.</p>
+  </li>
+  <li>
+    <p>이 정의에 따르면 ‘에이전트(agent)’는 0 또는 1처럼 이산적인 개념이 아니라, LLM에 권한을 얼마나 주느냐에 따라 연속적인 ‘에이전시(agency)’의 스펙트럼을 가진다는 것을 보여줍니다.</p>
+  </li>
+</ul>
+
+<p>시스템별 에이전시 단계표</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Agency Level(에이전시 단계)</strong></th>
+      <th><strong>설명</strong></th>
+      <th><strong>명칭</strong></th>
+      <th><strong>예시</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>☆☆☆</td>
+      <td>LLM 출력이 프로그램 흐름에 아무런 영향을 줄 수 없음</td>
+      <td>단순 처리기</td>
+      <td><code class="language-plaintext highlighter-rouge">process_llm_output(llm_response)</code></td>
+    </tr>
+    <tr>
+      <td>★☆☆</td>
+      <td>LLM 출력이 분기를 제어함</td>
+      <td>라우터</td>
+      <td><code class="language-plaintext highlighter-rouge">if llm_decision(): path_a() else: path_b()</code></td>
+    </tr>
+    <tr>
+      <td>★★☆</td>
+      <td>LLM 출력이 함수 실행을 결정</td>
+      <td>툴 호출(Tool call)</td>
+      <td><code class="language-plaintext highlighter-rouge">run_function(llm_chosen_tool, llm_chosen_args)</code></td>
+    </tr>
+    <tr>
+      <td>★★★</td>
+      <td>LLM 출력이 반복, 프로그램 지속을 제어함</td>
+      <td>멀티스텝(Multi-step) 에이전트</td>
+      <td><code class="language-plaintext highlighter-rouge">while llm_should_continue(): execute_next_step()</code></td>
+    </tr>
+    <tr>
+      <td>★★★</td>
+      <td>한 에이전틱 워크플로우가 다른 에이전트 실행 가능</td>
+      <td>멀티 에이전트(Multi-Agent)</td>
+      <td><code class="language-plaintext highlighter-rouge">if llm_trigger(): execute_agent()</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>멀티스텝 에이전트는 아래 구조를 가집니다:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">memory</span> <span class="o">=</span> <span class="p">[</span><span class="n">user_defined_task</span><span class="p">]</span>
+<span class="k">while</span> <span class="nf">llm_should_continue</span><span class="p">(</span><span class="n">memory</span><span class="p">):</span> <span class="c1"># 반복이 멀티스텝 부분
+</span>    <span class="n">action</span> <span class="o">=</span> <span class="nf">llm_get_next_action</span><span class="p">(</span><span class="n">memory</span><span class="p">)</span> <span class="c1"># 툴 호출 부분
+</span>    <span class="n">observations</span> <span class="o">=</span> <span class="nf">execute_action</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+    <span class="n">memory</span> <span class="o">+=</span> <span class="p">[</span><span class="n">action</span><span class="p">,</span> <span class="n">observations</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>이 시스템은 루프를 돌면서 각 단계마다 새로운 동작(Action)을 수행합니다.(함수 형태로 정의된 사전 지정 <em>도구</em> 호출 등). 그런 다음 관찰(Observe) 결과를 통해 주어진 작업을 해결하기에 충분한 상태에 도달했다고 판단될 때까지 반복합니다.</p>
+
+<p>아래는 멀티스텝 에이전트가 간단한 수학 문제를 푸는 예시입니다:</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/Agent_ManimCE.gif" alt="" /></p>
+
+<h2 id="에이전트를-언제-써야하고--언제-피해야-하는지"><strong>✅ 에이전트를 언제 써야하고 / ⛔ 언제 피해야 하는지</strong></h2>
+
+<p>에이전트는 LLM이 애플리케이션의 워크플로우를 결정해야 할 때 유용합니다. 그러나 종종 과도하게 복잡해질 수 있습니다. 여기서 고려해야 할 질문은 다음과 같습니다: “현재 과제를 효율적으로 해결하기 위해 정말로 워크플로우의 유연성이 필요한가?” 만약 미리 정해둔 워크플로가 자주 한계를 드러낸다면, 더 많은 유연성이 필요하다는 의미입니다. 예를 들어, 서핑 여행 웹사이트에서 고객 요청을 처리하는 앱을 만든다고 가정해봅시다.</p>
+
+<p>사용자의 선택에 따라 요청이 두 가지 경우 중 반드시 하나에 속할 것이라는 걸 미리 알 수 있고, 각 경우마다 미리 정해둔 워크플로가 있다고 가정해 봅시다.</p>
+
+<ol>
+  <li>여행 관련 정보를 알고 싶다 ⇒ 지식베이스를 검색할 수 있는 검색창 제공</li>
+  <li>영업팀과 이야기하고 싶다 ⇒ 문의 양식을 작성하도록 안내</li>
+</ol>
+
+<p>만약 이런 워크플로우가 모든 요청을 처리할 수 있다면, 모두 다 코드로 짜는 게 좋습니다!</p>
+
+<p>이렇게 하면 LLM 같은 예측 불가능한 요소가 개입해 오류를 만들 위험 없이 100% 안정적인 시스템을 얻을 수 있습니다. 에이전트 같은 행위자적 기능을 사용하지 않아야 앱을 단순하고 견고하게 만들 수 있죠.</p>
+
+<p>하지만 워크플로우를 미리 정할 수 없는 경우는 어떨까요?</p>
+
+<p>예를 들어, 한 사용자가 이렇게 묻는다고 해봅시다: <code class="language-plaintext highlighter-rouge">"나는 월요일에 올 수 있는데, 여권을 잊어버려서 수요일까지 늦어질 수도 있어. 화요일 아침에 내 짐과 나를 서핑하러 데려갈 수 있을까? 취소 보험도 포함해서?"</code></p>
+
+<p>이 질문은 여러 요인에 달려 있으며, 위에서 말한 사전 정의된 기준만으로는 대응하기 어렵습니다.</p>
+
+<p>만약 미리 정해둔 워크플로우가 자주 한계를 드러낸다면, 더 많은 유연성이 필요하다는 의미입니다.</p>
+
+<p>바로 이럴 때 에이전틱 설정이 도움이 됩니다.</p>
+
+<p>위 예시에서, 멀티스텝 에이전트를 만들어 날씨 예보를 위한 Weather API, 이동 거리 계산을 위한 Google Maps API, 직원 가용성 대시보드, 그리고 지식베이스를 위한 RAG 시스템에 접근하도록 할 수 있습니다.</p>
+
+<p>최근까지 프로그램은 미리 정해진 워크플로우에 제한되어, 복잡한 액션을 처리하기 위해 if/else 조건문을 잔뜩 쌓는 방식에만 머물러 있었습니다. 이런 프로그램들은 “이 숫자들의 합을 계산하라”거나 “이 그래프에서 최단 경로를 찾아라” 같은 극도로 좁은 과제에 집중했습니다. 하지만 위의 여행 예시 같은 실생활 과제들은 미리 정해둔 워크플로에 잘 들어맞지 않습니다. 이런 관점에서 에이전틱 시스템은 프로그램에게 실생활의 다양한 과제를 연결해주는 열쇠입니다.</p>
+
+<h2 id="코드-에이전트code-agents"><strong>코드 에이전트(Code agents)</strong></h2>
+
+<p>멀티스텝 에이전트에서는 각 단계마다 LLM이 <strong>외부 도구를 호출하는 형태의 동작</strong>을 작성할 수 있습니다.</p>
+
+<p>Anthropic, OpenAI 등 여러 곳에서 사용하는 일반적인 방식은 “도구 이름과 사용할 인자를 JSON 형태로 작성하고, 이를 파싱해서 어떤 도구를 어떤 인자로 실행할지 결정하는 것”입니다.</p>
+
+<p>하지만 <a href="https://huggingface.co/papers/2402.01030"><strong>여러</strong></a> <a href="https://huggingface.co/papers/2411.01747"><strong>연구</strong></a> <a href="https://huggingface.co/papers/2401.00812"><strong>논문</strong></a>들은 <strong>코드로 직접 도구 호출을 작성하는 방식이 훨씬 더 낫다</strong>는 것을 보여주었는데, 이유는 간단합니다.</p>
+
+<p><em>우리는 컴퓨터가 수행할 동작을 표현하기 위해 가장 최적화된 방법으로 프로그래밍 언어를 만들어 왔기 때문입니다.</em></p>
+
+<p>만약 JSON이 더 나은 표현 수단이었다면, JSON이 최고의 프로그래밍 언어가 되었을 것이고 프로그래밍은 지옥이 되었을 겁니다.</p>
+
+<p>아래 그림은 <a href="https://huggingface.co/papers/2402.01030"><strong>Executable Code Actions Elicit Better LLM Agents</strong></a> 논문에서 가져온 것으로, 동작을 코드로 작성했을 때의 장점을 보여줍니다.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/code_vs_json_actions.png" alt="" /></p>
+
+<p>코드로 동작을 작성하는 것은 JSON과 같은 형식보다 이러한 장점을 가집니다:</p>
+
+<ul>
+  <li><strong>조합성(Composability):</strong> JSON 동작을 서로 중첩하거나, 재사용할 JSON 동작을 정의할 수 있는지? → 파이썬 함수로는 아주 쉽게 할 수 있습니다.</li>
+  <li><strong>객체 관리(Object management):</strong> <code class="language-plaintext highlighter-rouge">generate_image</code> 같은 함수/동작의 출력을 JSON에 어떻게 저장할지?</li>
+  <li><strong>일반성(Generality):</strong> 코드는 컴퓨터가 할 수 있는 모든 작업을 단순하게 표현하기 위해 설계되었습니다.</li>
+  <li><strong>LLM 학습 데이터에서의 표현력:</strong> 이미 LLM 학습 데이터에 양질의 코드 동작들이 다수 포함되어 있어, LLM이 이미 코드 기반 동작 작성에 훈련되어 있습니다.</li>
+</ul>
+
+<h2 id="smolagents-소개-쉽게-에이전트-만들기-"><strong><em>smolagents 소개</em>: 쉽게 에이전트 만들기 🥳</strong></h2>
+
+<p>우리는 다음 목표로 <a href="https://github.com/huggingface/smolagents"><strong><code class="language-plaintext highlighter-rouge">smolagents</code></strong></a>를 만들었습니다:</p>
+
+<p>✨ <strong>단순함</strong>: 에이전트 로직은 약 수천 줄 정도의 코드에 담겨 있습니다(<a href="https://github.com/huggingface/smolagents/blob/main/src/smolagents/agents.py">참고</a>). 불필요한 추상화는 최소화하고, 원시 코드 위에 꼭 필요한 부분만 남겼습니다!</p>
+
+<p>🧑‍💻 <strong>코드 에이전트(Code Agents)에 대한 일급 지원 :</strong> 동작을 코드로 작성하는 에이전트(“코드를 작성하는 데 쓰이는 에이전트”와는 다름)를 지원합니다. 보안을 위해 <a href="https://e2b.dev/"><strong>E2B</strong></a>를 통한 샌드박스 환경에서 실행할 수 있도록 했습니다.</p>
+
+<ul>
+  <li>이 <a href="https://huggingface.co/docs/smolagents/reference/agents#smolagents.CodeAgent"><strong><code class="language-plaintext highlighter-rouge">CodeAgent</code></strong></a> 클래스 위에,  JSON/text 블롭으로 동작을 작성하는 표준 <a href="https://huggingface.co/docs/smolagents/reference/agents#smolagents.ToolCallingAgent"><strong><code class="language-plaintext highlighter-rouge">ToolCallingAgent</code></strong></a>도 지원합니다.</li>
+</ul>
+
+<p>🤗 <strong>Hub 통합</strong>: 도구를 Hub에 공유하거나 불러올 수 있으며, 앞으로 더 많은 기능이 추가될 예정입니다!</p>
+
+<p>🌐 <strong>모든 LLM 지원</strong>: Hub에 호스팅된 모델을 <code class="language-plaintext highlighter-rouge">transformers</code> 버전이나 추론 API를 통해 불러올 수 있을 뿐 아니라, OpenAI, Anthropic 등 다양한 모델도 <a href="https://www.litellm.ai/">LiteLLM</a> 통합을 통해 지원합니다.</p>
+
+<p><a href="https://github.com/huggingface/smolagents"><code class="language-plaintext highlighter-rouge">smolagents</code></a>는 <a href="https://huggingface.co/blog/agents"><code class="language-plaintext highlighter-rouge">transformers.agents</code></a>의 후속 라이브러리로, 앞으로 <a href="https://huggingface.co/blog/agents"><code class="language-plaintext highlighter-rouge">transformers.agents</code></a>는 더이상 지원되지 않을 예정입니다.</p>
+
+<h1 id="에이전트-만들기"><strong>에이전트 만들기</strong></h1>
+
+<p>에이전트를 만들기 위해 필요한 것은 최소 두가지 입니다 :</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">tools</code>: 에이전트가 접근 가능한 도구 목록</li>
+  <li><code class="language-plaintext highlighter-rouge">model</code>: 에이전트의 엔진이 되어줄 LLM</li>
+</ul>
+
+<p> <code class="language-plaintext highlighter-rouge">model</code> 의 경우, Hugging Face의 무료 추론 API를 활용하는<code class="language-plaintext highlighter-rouge">HfApiModel</code> 클래스를 사용해 오픈 모델을 쓸 수도 있고(위의 leopard 예시 참고), <a href="https://github.com/BerriAI/litellm"><strong>litellm</strong></a>을 활용하는 <code class="language-plaintext highlighter-rouge">LiteLLMModel</code> 을 사용해 100개 이상의 다양한 클라우드 LLM 중에서 선택할 수도 있습니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">tool</code>의 경우, 아래 두가지를 추가한 함수를 만든 뒤 <code class="language-plaintext highlighter-rouge">@tool</code> 데코레이터를 붙이면 도구로 기능합니다.</p>
+
+<ul>
+  <li>입력과 출력에 타입 힌트</li>
+  <li>입력에 대한 설명을 담은 docstring</li>
+</ul>
+
+<p>Google Maps에서 이동 시간을 가져오는 <strong>커스텀 도구</strong>를 만들어, 이 도구를 활용하는 여행 계획 에이전트를 만들어 보겠습니다 :</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="n">smolagents</span> <span class="kn">import</span> <span class="n">CodeAgent</span><span class="p">,</span> <span class="n">HfApiModel</span><span class="p">,</span> <span class="n">tool</span>
+
+<span class="nd">@tool</span>
+<span class="k">def</span> <span class="nf">get_travel_duration</span><span class="p">(</span><span class="n">start_location</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">destination_location</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">transportation_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">두 장소 사이의 이동 시간을 가져옵니다.
+
+    Args:
+        start_location: 출발지
+        destination_location: 도착지
+        transportation_mode: 이동 수단.</span><span class="sh">'</span><span class="s">driving</span><span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="s">walking</span><span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="s">bicycling</span><span class="sh">'</span><span class="s">,</span><span class="sh">'</span><span class="s">transit</span><span class="sh">'</span><span class="s">중 하나이며, Defaults값은 </span><span class="sh">'</span><span class="s">driving</span><span class="sh">'</span><span class="s">.
+    </span><span class="sh">"""</span>
+    <span class="kn">import</span> <span class="n">os</span>   <span class="c1"># 모든 import는 Hub 공유를 위해 함수 안에 배치합니다.
+</span>    <span class="kn">import</span> <span class="n">googlemaps</span>
+    <span class="kn">from</span> <span class="n">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+    <span class="n">gmaps</span> <span class="o">=</span> <span class="n">googlemaps</span><span class="p">.</span><span class="nc">Client</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">GMAPS_API_KEY</span><span class="sh">"</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">transportation_mode</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">transportation_mode</span> <span class="o">=</span> <span class="sh">"</span><span class="s">driving</span><span class="sh">"</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">directions_result</span> <span class="o">=</span> <span class="n">gmaps</span><span class="p">.</span><span class="nf">directions</span><span class="p">(</span>
+            <span class="n">start_location</span><span class="p">,</span>
+            <span class="n">destination_location</span><span class="p">,</span>
+            <span class="n">mode</span><span class="o">=</span><span class="n">transportation_mode</span><span class="p">,</span>
+            <span class="n">departure_time</span><span class="o">=</span><span class="nf">datetime</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="c1"># 6월 6일 오전 11시로 설정
+</span>        <span class="p">)</span>
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">directions_result</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sh">"</span><span class="s">요청한 교통 수단으로는 이 두 장소 사이 경로를 찾을 수 없습니다.</span><span class="sh">"</span>
+        <span class="k">return</span> <span class="n">directions_result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="sh">"</span><span class="s">legs</span><span class="sh">"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="sh">"</span><span class="s">duration</span><span class="sh">"</span><span class="p">][</span><span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">]</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">e</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="nc">CodeAgent</span><span class="p">(</span><span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">get_travel_duration</span><span class="p">],</span> <span class="n">model</span><span class="o">=</span><span class="nc">HfApiModel</span><span class="p">(),</span> <span class="n">additional_authorized_imports</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">datetime</span><span class="sh">"</span><span class="p">])</span>
+
+<span class="n">agent</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="sh">"</span><span class="s">파리 주변에서 하루 동안 자전거로 여행할 수 있는 코스를 짜줄래? 시내든 외곽이든 상관없지만 하루 안에 끝나야 해. 나는 대여한 자전거만 타고 다녀.</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>몇 단계 동안 이동 시간을 수집하고 계산을 실행한 뒤, 에이전트는 최종적으로 다음 일정을 제안했습니다:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>당일치기 파리 자전거 여행 일정:
+<span class="p">1.</span> 오전 9:00 에펠탑에서 출발
+<span class="p">2.</span> 오전 10:30까지 에펠탑 관광
+<span class="p">3.</span> 오전 10:46 노트르담 대성당으로 이동
+<span class="p">4.</span> 오후 12:16까지 노트르담 대성당 관광
+<span class="p">5.</span> 오후 12:41 몽마르트르로 이동
+<span class="p">6.</span> 오후 2:11까지 몽마르트르 관광
+<span class="p">7.</span> 오후 2:33 뤽상부르 공원으로 이동
+<span class="p">8.</span> 오후 4:03까지 뤽상부르 공원 관광
+<span class="p">9.</span> 오후 4:12 루브르 박물관으로 이동
+<span class="p">10.</span> 오후 5:42까지 루브르 박물관 관광
+<span class="p">11.</span> 오후 6:12까지 저녁 식사
+<span class="p">12.</span> 종료 예정 시간: 오후 6:12
+</code></pre></div></div>
+
+<p>도구를 만든 뒤, Hub에 공유하는 방법은 매우 간단합니다:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">get_travel_duration</span><span class="p">.</span><span class="nf">push_to_hub</span><span class="p">(</span><span class="sh">"</span><span class="s">{your_username}/get-travel-duration-tool</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>결과는 <a href="https://huggingface.co/spaces/m-ric/get-travel-duration-tool"><strong>이 스페이스</strong></a>에서 확인할 수 있습니다. 도구의 로직은 <a href="https://huggingface.co/spaces/m-ric/get-travel-duration-tool/blob/main/tool.py"><strong>스페이스 내 tool.py</strong></a>에서 볼 수 있습니다.</p>
+
+<p>보시다시피, 이 도구는 실제로 <a href="https://huggingface.co/docs/smolagents/reference/tools#smolagents.Tool"><strong><code class="language-plaintext highlighter-rouge">Tool</code></strong></a>클래스를 상속한 클래스로 내보내졌으며, 이는 모든 도구의 기본 구조입니다.</p>
+
+<h1 id="에이전틱-워크플로우에서-오픈-모델은-얼마나-강력할까"><strong>에이전틱 워크플로우에서 오픈 모델은 얼마나 강력할까?</strong></h1>
+
+<p>여러 최신 모델들로 <a href="https://huggingface.co/docs/smolagents/reference/agents#smolagents.CodeAgent"><strong><code class="language-plaintext highlighter-rouge">CodeAgent</code></strong></a> 인스턴스를 만들고, 다양한 벤치마크에서 질문을 모아 여러 유형의 과제를 제공하는 <a href="https://huggingface.co/datasets/m-ric/agents_medium_benchmark_2"><strong>벤치마크</strong></a>로 비교했습니다.</p>
+
+<p>에이전트 설정에 대한 자세한 내용은 <a href="https://github.com/huggingface/smolagents/blob/main/examples/benchmark.ipynb"><strong>여기 벤치마크 노트북</strong></a>에서 확인할 수 있으며, 코드 에이전트와 툴 호출 에이전트의 성능 비교도 볼 수 있습니다.</p>
+
+<p>(스포일러: <strong>코드 방식이 더 잘 작동합니다.</strong>)</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/smolagents/benchmark_code_agents.png" alt="benchmark of different models on agentic workflows" /></p>
+
+<p>오픈소스 모델이 최고의 Closed 모델과 붙을 수준임을 볼 수 있습니다!</p>
+
+<h2 id="다음-단계-"><strong>다음 단계 🚀</strong></h2>
+
+<ul>
+  <li><a href="https://huggingface.co/docs/smolagents/guided_tour"><strong>가이드 투어</strong></a>로 smolagents 라이브러리를 익혀보세요</li>
+  <li>심화 튜토리얼로 <a href="https://huggingface.co/docs/smolagents/tutorials/tools"><strong>도구</strong></a> 사용법이나 <a href="https://huggingface.co/docs/smolagents/tutorials/building_good_agents"><strong>일반적인 예제</strong></a> 들을 학습하세요.</li>
+  <li>예제를 살펴보며 특정 시스템을 설정해 보세요: <a href="https://huggingface.co/docs/smolagents/examples/text_to_sql"><strong>text-to-SQL</strong></a>, <a href="https://huggingface.co/docs/smolagents/examples/rag"><strong>에이전틱 RAG</strong></a>, <a href="https://huggingface.co/docs/smolagents/examples/multiagents"><strong>멀티 에이전트 오케스트레이션</strong></a>.</li>
+  <li>에이전트에 대해 더 읽어보기:
+    <ul>
+      <li>Anthropic <a href="https://www.anthropic.com/research/building-effective-agents"><strong>블로그 포스팅</strong></a>  : 탄탄한 기본 개념에 대해 알 수 있습니다.</li>
+      <li><a href="https://huggingface.co/collections/m-ric/agents-65ba776fbd9e29f771c07d4e"><strong>컬렉션</strong></a> : 에이전트 관련 가장 영향력 있는 연구 논문들을 모아둔 자료입니다.</li>
+    </ul>
+  </li>
+</ul>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2025-09-26">26 Sep 2025</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#목차" id="markdown-toc-목차">목차</a></li>
+  <li><a href="#에이전트란-무엇인가" id="markdown-toc-에이전트란-무엇인가"><strong>🤔 에이전트란 무엇인가?</strong></a></li>
+  <li><a href="#에이전트를-언제-써야하고--언제-피해야-하는지" id="markdown-toc-에이전트를-언제-써야하고--언제-피해야-하는지"><strong>✅ 에이전트를 언제 써야하고 / ⛔ 언제 피해야 하는지</strong></a></li>
+  <li><a href="#코드-에이전트code-agents" id="markdown-toc-코드-에이전트code-agents"><strong>코드 에이전트(Code agents)</strong></a></li>
+  <li><a href="#smolagents-소개-쉽게-에이전트-만들기-" id="markdown-toc-smolagents-소개-쉽게-에이전트-만들기-"><strong><em>smolagents 소개</em>: 쉽게 에이전트 만들기 🥳</strong></a></li>
+  <li><a href="#에이전트-만들기" id="markdown-toc-에이전트-만들기"><strong>에이전트 만들기</strong></a></li>
+  <li><a href="#에이전틱-워크플로우에서-오픈-모델은-얼마나-강력할까" id="markdown-toc-에이전틱-워크플로우에서-오픈-모델은-얼마나-강력할까"><strong>에이전틱 워크플로우에서 오픈 모델은 얼마나 강력할까?</strong></a>    <ul>
+      <li><a href="#다음-단계-" id="markdown-toc-다음-단계-"><strong>다음 단계 🚀</strong></a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-191/assets/images/author/jeong.JPG" alt="jeong">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href="https://github.com/ahnjj/">jeong</a>
+        <span class="author-description">Hello, I'm jeong!🤗</span>                        
+    </div>
+</div>
+
+
+
+
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">4</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="agent">
+            Agent
+            <span class="count">4</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-191/agent-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-191/assets/images/blog/posts/2025-11-17-agent-leaderboard/thumbnail.png" alt="에이전트 리더보드: 다중 도메인 시나리오에서의 AI 에이전트 평가" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-191/agent-leaderboard/">에이전트 리더보드: 다중 도메인 시나리오에서의 AI 에이전트 평가</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Agent Leaderboard: Evaluating AI Agents in Multi-Domain Scenarios를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Jimin, </span>             
+                on <span class="post-date">17 Nov 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="benchmark agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-191/DABStep/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-191/assets/images/thumbnail_default.png" alt="DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-191/DABStep/">DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 DABStep: Data Agent Benchmark for Multi-step Reasoning를 한국어로 번역한 글입니다....</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> sohyun, </span>             
+                on <span class="post-date">02 Nov 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-191/structured-codeagent-ko/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-191/assets/images/blog/posts/2025-10-13-structured-codeagent/thumbnail.png" alt="CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-191/structured-codeagent-ko/">CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 CodeAgents + Structure: A Better Way to Execute Actions를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Jimin, </span>             
+                on <span class="post-date">13 Oct 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-191/python-tiny-agents-ko/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-191/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" alt="파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-191/python-tiny-agents-ko/">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Tiny Agents in Python: an MCP-powered agent in ~70 lines...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">14 Sep 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+</main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-191/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-191/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-191/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-191/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-191/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-191/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-191/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-191/assets/js/category.js"></script>
+  </body>
+</html>

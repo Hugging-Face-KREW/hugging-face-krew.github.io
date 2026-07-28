@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-191/assets/images/favicon.ico" />
+
+    <title>파이썬 Tiny Agents 스터디 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>파이썬 Tiny Agents 스터디 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="파이썬 Tiny Agents 스터디" />
+<meta name="author" content="minju" />
+<meta property="og:locale" content="en_us" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 Tiny Agents in Python: an MCP-powered agent in ~70 lines of code를 읽고 공부한 내용을 바탕으로 정리했습니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Tiny Agents in Python: an MCP-powered agent in ~70 lines of code를 읽고 공부한 내용을 바탕으로 정리했습니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-191/python-tiny-agents-study/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail2.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-09-14T00:00:00+09:00" />
+<meta property="article:modified_time" content="2025-09-14T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-191/python-tiny-agents-study/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail2.png" />
+<meta name="twitter:title" content="파이썬 Tiny Agents 스터디" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"minju"},"dateModified":"2025-09-14T00:00:00+09:00","datePublished":"2025-09-14T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Tiny Agents in Python: an MCP-powered agent in ~70 lines of code를 읽고 공부한 내용을 바탕으로 정리했습니다.","headline":"파이썬 Tiny Agents 스터디","image":"/pr-preview/pr-191/python-tiny-agents-study/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail2.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-191/python-tiny-agents-study/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-191/assets/images/hfkr_logo.png"},"name":"minju"},"url":"/pr-preview/pr-191/python-tiny-agents-study/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-191/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-191/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-191/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-191/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-191/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-191/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-191/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-191/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-191/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail2.png" alt="파이썬 Tiny Agents 스터디">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-191/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail2.png" alt="파이썬 Tiny Agents 스터디">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-191/categories#스터디">스터디</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">파이썬 Tiny Agents 스터디</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#주요-개념" id="markdown-toc-주요-개념">주요 개념</a></li>
+  <li><a href="#tiny-agents-구조" id="markdown-toc-tiny-agents-구조">Tiny Agents 구조</a></li>
+  <li><a href="#agent-구조-및-mcp-server-설정" id="markdown-toc-agent-구조-및-mcp-server-설정">Agent 구조 및 MCP server 설정</a></li>
+  <li><a href="#tiny-agents-동작-원리" id="markdown-toc-tiny-agents-동작-원리">Tiny Agents 동작 원리</a>    <ul>
+      <li><a href="#tiny-agents--agent--mcp-server--tool-호출-흐름" id="markdown-toc-tiny-agents--agent--mcp-server--tool-호출-흐름">Tiny-Agents → Agent → MCP Server → Tool 호출 흐름</a></li>
+      <li><a href="#-포인트" id="markdown-toc--포인트">🔑 포인트</a></li>
+    </ul>
+  </li>
+  <li><a href="#실습-및-생각해볼-것" id="markdown-toc-실습-및-생각해볼-것">실습 및 생각해볼 것</a>    <ul>
+      <li><a href="#실습" id="markdown-toc-실습">실습</a></li>
+      <li><a href="#생각해볼-것" id="markdown-toc-생각해볼-것">생각해볼 것</a>        <ul>
+          <li><a href="#예시-상황" id="markdown-toc-예시-상황">예시 상황:</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/python-tiny-agents">Tiny Agents in Python: an MCP-powered agent in ~70 lines of code</a>를 읽고 공부한 내용을 바탕으로 정리했습니다.</em></p>
+
+<hr />
+<h2 id="주요-개념">주요 개념</h2>
+
+<ul>
+  <li><strong>Tiny Agents in Python</strong> 블로그 글은 Hugging Face가 <code class="language-plaintext highlighter-rouge">Tiny Agents</code>라는 간단한 에이전트 프레임워크를 Python에서 구현한 것에 대해 설명하는 글이에요. Tiny Agents는 <code class="language-plaintext highlighter-rouge">huggingface_hub</code> 라이브러리에 새로 추가된 기능이고, MCP을 이용해서 외부 도구(tools)들과 상호작용하도록 구성됩니다.</li>
+  <li><strong>MCP (Model Context Protocol)</strong> 는 LLM(large language models)이 외부 툴, API 등을 사용하는 방법을 표준화한 프로토콜이에요.</li>
+  <li><a href="https://github.com/huggingface/huggingface_hub"><code class="language-plaintext highlighter-rouge">huggingface_hub</code></a>는 Hugging Face Hub와 상호작용할 수 있는 공식 Python 클라이언트로, 모델/데이터셋 업로드·다운로드, 저장소(repo) 관리, Hub 검색, Inference 실행 등 다양한 기능을 제공합니다.</li>
+</ul>
+
+<h2 id="tiny-agents-구조">Tiny Agents 구조</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">huggingface_hub</code> 안에 <a href="https://github.com/huggingface/huggingface_hub/tree/main/src/huggingface_hub/inference/_mcp"><code class="language-plaintext highlighter-rouge">inference/_mcp</code></a> 경로가 있고, 여기서 <code class="language-plaintext highlighter-rouge">MCPClient</code>, <code class="language-plaintext highlighter-rouge">Agent</code> 등의 코드가 Tiny Agents 기능 핵심을 이루는 부분이에요.</li>
+  <li>Tiny Agents는 <code class="language-plaintext highlighter-rouge">Agent</code> 클래스를 사용해서, 설정 파일(agent.json)을 읽고, 연결할 MCP 서버들을 구성하고, LLM + 외부 도구의 루프(loop) 형태로 사용자 입력을 처리합니다. 이 루프, 도구(tool) 호출, 툴 결과의 반환 등이 <code class="language-plaintext highlighter-rouge">huggingface_hub</code>에서 제공하는 기능을 통해 작동해요.</li>
+</ul>
+
+<h2 id="agent-구조-및-mcp-server-설정">Agent 구조 및 MCP server 설정</h2>
+
+<p>Demo에서 사용하는 <a href="https://huggingface.co/datasets/tiny-agents/tiny-agents">tiny-agent datasets</a>에 정의된 에이전트의 구조를 살펴봅니다.
+<code class="language-plaintext highlighter-rouge">celinah</code>, <code class="language-plaintext highlighter-rouge">evalstate</code>, <code class="language-plaintext highlighter-rouge">julien-c</code>, <code class="language-plaintext highlighter-rouge">wauplin</code> 등 여러 개의 agent 폴더들이 있고, 각 folder마다 다음 같은 파일들이 있어요:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>항목</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">agent.json</code></td>
+      <td>해당 agent의 설정 파일. 모델(model), provider, servers (MCP 서버), inputs (어떤 외부 입력 필요할지) 등이 정의됨. <img src="../assets/images/blog/posts/2015-09-14-python-tiny-agents/image-1.png" alt="image-1" /></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">EXAMPLES.md</code></td>
+      <td>프롬프트(prompt) 예시들이 들어 있음. 사용자가 agent에게 해볼 수 있는 입력 예제들.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">PROMPT.md</code> (혹은 <code class="language-plaintext highlighter-rouge">AGENTS.md</code>)</td>
+      <td>agent에게 LLM에게 줄 system prompt / 프롬프트 지침 문구. agent가 어떻게 응답해야 할지 방향성(instructions)을 정의. <img src="../assets/images/blog/posts/2015-09-14-python-tiny-agents/image-3.png" alt="image-3" /></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">readme</code> 또는 <code class="language-plaintext highlighter-rouge">README.md</code></td>
+      <td>agent에 대한 간단한 설명, 주로 용도나 기능을 요약해 놓은 문서.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="tiny-agents-동작-원리">Tiny Agents 동작 원리</h2>
+
+<ul>
+  <li>Tiny-agents는 여러 작은 Agent를 <strong>한곳에서 관리하고 실행하는 프레임워크</strong></li>
+  <li>각 에이전트의 <code class="language-plaintext highlighter-rouge">agent.json</code> 설정(provider, MCP 서버 등)에 따라 <strong>독립적으로 MCP 도구를 호출</strong></li>
+</ul>
+
+<h3 id="tiny-agents--agent--mcp-server--tool-호출-흐름">Tiny-Agents → Agent → MCP Server → Tool 호출 흐름</h3>
+
+<p><img src="../assets/images/blog/posts/2015-09-14-python-tiny-agents/image-4.png" alt="image-4" />
+(LLM으로 생성된 이미지입니다.)</p>
+
+<hr />
+
+<h3 id="-포인트">🔑 포인트</h3>
+
+<ol>
+  <li>
+    <p><strong>Tiny-Agents</strong></p>
+
+    <ul>
+      <li>Agent Manager / Launcher 역할</li>
+      <li>사용자 입력을 Agent에 전달</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Agent</strong></p>
+
+    <ul>
+      <li>메시지 관리, 서버 연결, 도구 호출</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>MCP Server</strong></p>
+
+    <ul>
+      <li>여러 서버 등록 가능</li>
+      <li>각 서버는 독립적으로 도구 호출</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Tool 호출 흐름</strong></p>
+
+    <ul>
+      <li>Agent 내부 <a href="https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/inference/_mcp/mcp_client.py#L250"><code class="language-plaintext highlighter-rouge">process_single_turn_with_tools</code></a>에서 관리</li>
+      <li>서버 결과를 모아 LLM 메시지를 사용자에게 반환</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="실습-및-생각해볼-것">실습 및 생각해볼 것</h2>
+
+<h3 id="실습">실습</h3>
+<p>데모 비디오에 나온 것처럼 실습을 진행하면서, 생각해본 질문입니다.</p>
+
+<p>step 1. <code class="language-plaintext highlighter-rouge">pip install "huggingface_hub[mcp]&gt;=0.32.0"</code></p>
+<blockquote>
+  <p>Q. huggingface_hub에 mcp 옵션을 달아서 설치하네요. 왜 그럴까요?</p>
+</blockquote>
+
+<p>step 2. <code class="language-plaintext highlighter-rouge">tiny-agents run julien-c/flux-schnell-generator</code></p>
+<blockquote>
+  <p>Q. 몇 개의 도구 리스트가 보이나요?</p>
+</blockquote>
+
+<p>step 3. <code class="language-plaintext highlighter-rouge">tiny-agents run celinah/web-browser</code></p>
+<blockquote>
+  <p>Q. 몇 개의 도구 리스트가 보이나요?</p>
+</blockquote>
+
+<p>step 4. <code class="language-plaintext highlighter-rouge">tiny-agents run</code></p>
+<blockquote>
+  <p>Q. 여기서 몇 개의 도구 리스트가 보이나요? (path를 지정하지 않을 경우  <a href="https://github.com/huggingface/huggingface_hub/blob/main/src/huggingface_hub/inference/_mcp/constants.py#L13"><code class="language-plaintext highlighter-rouge">DEFAULT_AGENT</code></a>를 사용합니다.)</p>
+</blockquote>
+
+<p>step 5. 에이전트에 자신만의 prompt를 던져서 원하는 도구 호출이 잘 되는지 확인합니다.</p>
+
+<ul>
+  <li>(1) 번역글의 첫 번째 데모를 따라하며 웹 검색 MCP 서버를 통해 사이트 자동 검색을 구현해보고,
+ (2) 두 번째 데모로 Flux MCP 서버로 원하는 이미지를 생성하는 과정이 매우 흥미로웠습니다.</li>
+  <li>또한 Nebius AI Studio를 API 공급자로 사용해 본 점 또한 색다른 재미였습니다.</li>
+  <li>다만 무료 크레딧이 금방 소진돼 여러 시도를 다양하게 해보진 못한 건 아쉬웠지만, 그 안에서도 배울 점이 분명 있었습니다.</li>
+</ul>
+
+<p>아래 왼쪽 사진 속 캐릭터는 <code class="language-plaintext highlighter-rouge">julien-c/flux-schnell-generator</code> 서버로 생성한 이미지입니다! 어떤 프롬프트를 사용했을까요?</p>
+
+<p>제가 사용한 프롬프트는 <code class="language-plaintext highlighter-rouge">Hugging Face의 허기(Huggie) 캐릭터를 20대 여성 버전으로 만들어줘</code>였는데,
+ 허기 캐릭터 정보가 MCP 서버 혹은 Agent에 없었던지라 기대했던 모습은 잘 드러나지 않았습니다.
+조금 더 제 의도에 가까운 결과는 오른쪽 사진처럼 나오길 바랐습니다.
+(오른쪽 사진은 <a href="https://lnkd.in/g4Wxpnzt">HFBA 사이트</a>에서 받을 수 있어요.)</p>
+
+<p><img src="../assets/images/blog/posts/2015-09-14-python-tiny-agents/flux-generated-image.png" alt="image-1" /></p>
+
+<h3 id="생각해볼-것">생각해볼 것</h3>
+
+<p>오른쪽 사진 처럼 결과물이 나오려면 웹 검색 MCP 서버에서 허기 캐릭터에 대한 정보를 먼저 수집하고, 이를 Flux MCP 서버 이미지 생성에 활용할 수 있었다면 의도한대로 이미지를 얻을 수 있었을 것 같아요.</p>
+
+<p>서로 다른 MCP 서버를 연계하여 정보를 주고받고, 복잡한 작업을 효율적으로 처리할 수 있다는 아이디어입니다.</p>
+
+<p>그래서 tiny-agent에서 여러 에이전트를 실행하려면 어떤 것이 필요할지 고민해보았습니다.</p>
+
+<h4 id="예시-상황">예시 상황:</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">celinah/agent.json</code>은 <strong>provider=nebius</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">evalstate/agent.json</code>은 <strong>provider=hf-inference</strong></li>
+</ul>
+
+<p>이러한 상황일 경우,  tiny-agents에서 multi-agent 기능이 필요할 것 같다는 생각이 들었습니다.</p>
+
+<p><strong>상상하는 동작 원리:</strong></p>
+
+<p><img src="../assets/images/blog/posts/2015-09-14-python-tiny-agents/image-5.png" alt="image-5" />
+(LLM으로 생성된 이미지 입니다.)</p>
+
+<hr />
+
+<p>이제까지 Tiny Agents에 대해서 알아보았습니다. 앞으로의 발전도 꽤 기대되는 프로젝트인 것 같습니다.</p>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2025-09-14">14 Sep 2025</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#주요-개념" id="markdown-toc-주요-개념">주요 개념</a></li>
+  <li><a href="#tiny-agents-구조" id="markdown-toc-tiny-agents-구조">Tiny Agents 구조</a></li>
+  <li><a href="#agent-구조-및-mcp-server-설정" id="markdown-toc-agent-구조-및-mcp-server-설정">Agent 구조 및 MCP server 설정</a></li>
+  <li><a href="#tiny-agents-동작-원리" id="markdown-toc-tiny-agents-동작-원리">Tiny Agents 동작 원리</a>    <ul>
+      <li><a href="#tiny-agents--agent--mcp-server--tool-호출-흐름" id="markdown-toc-tiny-agents--agent--mcp-server--tool-호출-흐름">Tiny-Agents → Agent → MCP Server → Tool 호출 흐름</a></li>
+      <li><a href="#-포인트" id="markdown-toc--포인트">🔑 포인트</a></li>
+    </ul>
+  </li>
+  <li><a href="#실습-및-생각해볼-것" id="markdown-toc-실습-및-생각해볼-것">실습 및 생각해볼 것</a>    <ul>
+      <li><a href="#실습" id="markdown-toc-실습">실습</a></li>
+      <li><a href="#생각해볼-것" id="markdown-toc-생각해볼-것">생각해볼 것</a>        <ul>
+          <li><a href="#예시-상황" id="markdown-toc-예시-상황">예시 상황:</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-191/assets/images/author/minju.png" alt="minju">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href="https://github.com/Jwaminju/">minju</a>
+        <span class="author-description">Hello, I'm minju! 🤗</span>                        
+    </div>
+</div>
+
+
+
+
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">1</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="스터디">
+            스터디
+            <span class="count">1</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="스터디 ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-191/building-hf-mcp-study/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-191/assets/images/blog/posts/2025-09-29-building-hf-mcp/thumbnail-study.png" alt="Hugging Face MCP 서버 스터디" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-191/building-hf-mcp-study/">Hugging Face MCP 서버 스터디</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Building the Hugging Face MCP Server를 읽고 공부한 내용을 바탕으로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> hyeonseo, </span>             
+                on <span class="post-date">29 Sep 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+</main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-191/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-191/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-191/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-191/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-191/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-191/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-191/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-191/assets/js/category.js"></script>
+  </body>
+</html>
