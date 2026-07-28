@@ -1,19 +1,20 @@
 ---
 layout: post
-title: "AWS에서 Foundation Model 학습 및 추론을 위한 구성 요소"
-description: "AWS 기반 Foundation Model 학습과 추론 인프라를 구성하는 컴퓨트, 네트워크, 스토리지, 운영 요소를 정리합니다."
+title: AWS에서 Foundation Model 학습 및 추론을 위한 구성 요소
+description: AWS 기반 Foundation Model 학습과 추론 인프라를 구성하는 컴퓨트, 네트워크, 스토리지, 운영 요소를 정리합니다.
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 image: assets/images/blog/posts/2026-05-12-foundation-model-building-blocks/thumbnail.png
-slug: "foundation-model-building-blocks"
-source_url: "https://huggingface.co/blog/amazon/foundation-model-building-blocks"
-source_published_date: "2026-05-11"
-source_published_at: "2026-05-11T23:18:26+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+slug: foundation-model-building-blocks
+source_url: https://huggingface.co/blog/amazon/foundation-model-building-blocks
+source_published_date: '2026-05-11'
+source_published_at: '2026-05-11T23:18:26+00:00'
+locale: ko
+translation_status: draft
+translator: openai
 ---
-
 * TOC
 {:toc}
 <!--toc-->
