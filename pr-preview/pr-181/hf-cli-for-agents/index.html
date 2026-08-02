@@ -253,7 +253,7 @@ Review instructions:
 
 <p><code class="language-plaintext highlighter-rouge">hf</code>는 Hugging Face Hub의 공식 명령줄 인터페이스입니다. Hub에서 Python SDK로 할 수 있는 모든 작업을 터미널에서도 수행할 수 있습니다. 모델·데이터셋·Spaces를 다운로드하고 업로드할 수 있으며, 리포지토리·브랜치·태그·풀 리퀘스트를 생성하고 관리할 수 있습니다. 또한 HF 인프라에서 Jobs를 실행하고, Buckets·Collections·webhooks·Inference Endpoints를 관리할 수 있습니다.</p>
 
-<p><code class="language-plaintext highlighter-rouge">hf</code> CLI는 수년간 우리의 사용자들을 위해 주로 구축되었습니다. 그러나 이제는 <strong>코딩 에이전트</strong>들: Claude Code, Codex, Cursor 등에게도 점점 더 많이 사용되고 있습니다. 그래서 두 관객 모두를 한꺼번에 활용할 수 있도록 재구축했습니다. 이 블로그 글은 우리가 한 일과 이를 벤치마크한 방법을 요약합니다. 복잡하고 다단계인 작업에서 비-CLI 기준선(에이전트가 <code class="language-plaintext highlighter-rouge">curl</code>를 수동으로 구성하거나 Python SDK)을 사용할 때 <code class="language-plaintext highlighter-rouge">hf</code> CLI에 비해 최대 <strong>6배</strong> 더 많은 토큰을 소모하는 것을 발견했습니다.</p>
+<p><code class="language-plaintext highlighter-rouge">hf</code> CLI는 수년 동안 주로 사용자를 위해 개발되어 왔습니다. 하지만 이제는 Claude Code, Codex, Cursor 등의 <strong>코딩 에이전트</strong>도 점점 더 많이 사용하고 있습니다. 그래서 두 사용자층 모두가 사용할 수 있도록 <code class="language-plaintext highlighter-rouge">hf</code> CLI를 다시 구축했습니다. 이 글에서는 무엇을 바꾸었고 어떻게 벤치마크했는지 정리합니다. 복잡한 다단계 작업에서는 에이전트가 <code class="language-plaintext highlighter-rouge">curl</code> 요청을 직접 작성하거나 Python SDK를 사용하는 비-CLI 기준선이 <code class="language-plaintext highlighter-rouge">hf</code> CLI보다 최대 <strong>6배 더 많은 토큰</strong>을 사용한다는 사실을 확인했습니다.</p>
 
 <h2 id="section-1">Hugging Face Hub의 AI 에이전트 트래픽</h2>
 
@@ -268,7 +268,7 @@ Review instructions:
 
 <h2 id="section-2">사람과 에이전트를 위한 설계</h2>
 
-<p>사람과 코딩 에이전트는 같은 <code class="language-plaintext highlighter-rouge">hf</code> 명령에 대해 서로 다른 출력 형식을 기대합니다. 사람은 ANSI 색상, 화면에 맞게 잘려진 표, 성공 시 녹색 ✅, 부울 값 <code class="language-plaintext highlighter-rouge">✔</code>, 진행 표시줄, 서술형 힌트 등을 원합니다. 반면 에이전트는 역으로 원합니다: ANSI 코드 없이, 잘리지 않게 모든 값을 완전하게 표기하며, 에이전트가 인간보다 더 촘촘한 출력을 처리할 수 있도록 간결하고 구조화되어 토큰을 가볍게 유지합니다. 또한 CLI 프롬프트에 답하지 못하고, 시간초과 후에도 기꺼이 명령을 재실행합니다. 이 섹션의 나머지는 <code class="language-plaintext highlighter-rouge">hf</code>가 각 측에 필요한 것을 어떻게 제공하는지에 대한 내용입니다. 에이전트-모드 출력은 <code class="language-plaintext highlighter-rouge">hf</code> v1.9.0에서 도입했고, 이후 릴리스에서 CLI의 나머지 부분을 차례로 그 방향으로 마이그레이션해 왔습니다.</p>
+<p>사람과 코딩 에이전트는 같은 <code class="language-plaintext highlighter-rouge">hf</code> 명령에서도 서로 다른 출력 형식을 기대합니다. 사람은 ANSI 색상, 터미널 너비에 맞게 줄인 표, 성공을 나타내는 녹색 ✅, 불리언 값 <code class="language-plaintext highlighter-rouge">✔</code>, 진행 표시줄, 설명형 힌트 등을 원합니다. 반대로 에이전트는 ANSI 없이 모든 값을 생략하지 않고 표시하며, 사람보다 훨씬 밀도 높은 출력도 처리할 수 있으므로 토큰 수를 줄일 수 있도록 간결하고 구조화된 형식을 원합니다. 또한 CLI 프롬프트에 응답할 수 없으며, 시간 초과가 발생하면 명령을 다시 실행할 수 있습니다. 이 절의 나머지 부분에서는 <code class="language-plaintext highlighter-rouge">hf</code>가 양쪽에 필요한 출력을 어떻게 제공하는지 설명합니다. 에이전트 모드 출력은 <code class="language-plaintext highlighter-rouge">hf</code> v1.9.0에서 도입했으며, 이후 릴리스에서 CLI의 나머지 부분도 차례로 이 방식으로 전환해 왔습니다.</p>
 
 <h3 id="하나의-명령-다중-렌더링">하나의 명령, 다중 렌더링</h3>
 
