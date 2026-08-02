@@ -266,7 +266,7 @@ Review instructions:
 
 <figure class="image text-center">
   <iframe src="https://aminedirohf-delta-weight-sync-timeline.static.hf.space" width="100%" height="460" frameborder="0" scrolling="no"></iframe>
-  <figcaption style="font-size: 12px; color: #6b7280; margin-top: 4px;">Two ways to ship the same weights. Red is wall-clock time during which no tokens are being generated.</figcaption>
+  <figcaption style="font-size: 12px; color: #6b7280; margin-top: 4px;">동일한 가중치를 전송하는 두 가지 방식입니다. 빨간색은 토큰이 생성되지 않는 실제 경과 시간을 나타냅니다.</figcaption>
 </figure>
 
 <hr />
@@ -284,9 +284,9 @@ Review instructions:
 <p>두 논문은 세 가지에 동의하며, 이 글의 나머지 부분은 사실상 오픈 소스 번역에 충실하므로 천천히 반복하고자 합니다:</p>
 
 <ol>
-  <li>인접한 두 RL 스텝 사이에 가중치의 대다수가 실제로 변하지 않았다.</li>
-  <li>바뀐 부분만 보낸다면 대역폭 비용이 대략 두 자릿수 만큼 감소한다.</li>
-  <li>이 작은 차이들을 공유 객체 저장소로 라우팅하면 트레이너와 추론 클러스터가 같은 데이터 센터에 있을 필요가 없다.</li>
+  <li>인접한 두 RL 스텝 사이에서는 대부분의 가중치가 실제로 변하지 않습니다.</li>
+  <li>바뀐 부분만 보내면 대역폭 비용이 약 100분의 1로 줄어듭니다.</li>
+  <li>이 작은 변경분을 공유 객체 저장소를 통해 전달하면 트레이너와 추론 클러스터를 같은 데이터 센터에 둘 필요가 없습니다.</li>
 </ol>
 
 <p>이 이야기를 <code class="language-plaintext highlighter-rouge">pip install</code>로 읽을 수 있는 버전이 필요했을 뿐이다. 그래서 하나를 썼다.</p>
@@ -327,7 +327,7 @@ Review instructions:
   </tbody>
 </table>
 
-<p>다시 말해: 옵티마이저는 속삭이고 bf16은 듣지 못합니다. 업데이트는 반올림에 의해 흡수되고, 가중치의 바이트 표현은 바뀌지 않으며, 추론 엔진의 관점에서 이 가중치는 움직이지 않았습니다. 이를 수백만 개의 매개변수에 곱하면, 보정 없이도 &gt;99%의 희소성을 얻을 수 있습니다.</p>
+<p>다시 말해 옵티마이저는 속삭이지만 bf16은 이를 듣지 못합니다. 업데이트는 반올림에 흡수되고 가중치의 바이트 표현은 바뀌지 않으므로, 추론 엔진의 관점에서는 이 가중치가 변하지 않은 것입니다. 이를 수억 개의 매개변수에 적용하면 근사 없이도 99%가 넘는 희소성을 얻을 수 있습니다.</p>
 
 <table>
   <tbody>
@@ -339,11 +339,11 @@ Review instructions:
   </tbody>
 </table>
 
-<p>우리는 이를 분석적으로 예측할 필요가 없습니다(사실 Adam의 (m)와 (v) 통계에서 마스크를 예측하려고 시도했지만 기억은 약 30%에 불과했습니다). 다만 어떤 바이트가 뒤집혔는지 관찰하면 됩니다. 이는 옵티마이저 스텝 직전에 계산되는 매 매개변수당 아주 작은 부울 텐서입니다.</p>
+<p>우리는 이를 분석적으로 예측할 필요가 없습니다(실제로 Adam의 (m)와 (v) 통계로 변경 마스크를 예측해 보았지만 재현율은 약 30%에 불과했습니다). 어떤 바이트가 바뀌었는지만 관찰하면 됩니다. 이는 옵티마이저 스텝 전후에 바로 계산되는 매개변수별 작은 불리언 텐서입니다.</p>
 
 <figure class="image text-center">
   <iframe src="https://aminedirohf-delta-weight-sync-bf16-ulp.static.hf.space" width="100%" height="780" frameborder="0" scrolling="no"></iframe>
-  <figcaption style="font-size: 12px; color: #6b7280; margin-top: 4px;">Drag the learning rate down to RL territory and watch the cast-back-to-bf16 marker snap to the original tick. The 256-element grid on the bottom left is the aggregate effect across a tiny model.</figcaption>
+  <figcaption style="font-size: 12px; color: #6b7280; margin-top: 4px;">학습률을 RL 영역까지 낮추면서 bf16으로 다시 캐스팅하는 마커가 원래 눈금으로 되돌아가는 모습을 확인해 보세요. 왼쪽 아래의 256개 요소 그리드는 작은 모델 전체에서 나타나는 효과를 집계한 것입니다.</figcaption>
 </figure>
 
 <h2 id="section-3">3. HF Buckets와 아키텍처</h2>
@@ -590,7 +590,7 @@ hf upload <span class="nv">$USER</span>/vllm-wordle-inference examples/scripts/o
 <ul>
   <li><strong>Two CPU bf16 snapshots, one too many.</strong> 트레이너는 변경 탐지기에 쓰기 위해 하나를 보관하고, 롤아웃 서버는 vLLM의 <code class="language-plaintext highlighter-rouge">load_weights</code>를 재구성하기 위해 하나를 보관합니다. 첫 번째 것은 누군가 정밀한 분석 마스크를 찾을 때까지 남아 있습니다. 두 번째는 vLLM이 sparse <code class="language-plaintext highlighter-rouge">load_weights</code> API를 얻으면 사라집니다. PR은 곧 나올 예정입니다.</li>
   <li><strong>고정된 앵커 주기.</strong> 현재는 매 (N\) 스텝마다 전체 앵커를 덤프합니다. 누적 드리프트가 X를 초과할 때 앵커를 잡는 적응 정책은 긴 실행에서 앵커 비용을 줄여 줍니다.</li>
-  <li><strong>다중 노드 FSDP2 트레이너.</strong> <code class="language-plaintext highlighter-rouge">BF16ChangeDetector</code>는 프로세스당 옵티마이저 훅을 기반으로 합니다. FSDP2에 대해 깔끔하게 일반화될 가능성이 있지만 다중 노드 규모에서 아직 측정하지 않았습니다. PR에는 우리 이름이 달린 <code class="language-plaintext highlighter-rouge">TODO</code>가 있습니다.</li>
+  <li><strong>다중 노드 FSDP2 트레이너.</strong> <code class="language-plaintext highlighter-rouge">BF16ChangeDetector</code>는 프로세스당 옵티마이저 훅을 기반으로 합니다. FSDP2에 자연스럽게 일반화할 수 있을 것으로 보이지만 다중 노드 규모에서는 아직 측정하지 않았습니다. PR에는 담당자가 명시된 미완료 작업 표시가 남아 있습니다.</li>
   <li><strong>옵티마이저와의 훅 연결.</strong> ((m, v)\)만으로 마스크를 예측하려는 우리의 시도는 재현이 낮아, 분석적 bf16 임계값이 교과서 공식이 말하는 것보다 더 미묘한 작용을 한다는 것을 의미합니다. 이를 해결한 사람의 이야기를 듣고 싶습니다.</li>
   <li><strong>와이어 상 압축과의 스태킹.</strong> 희소 safetensors와 청크당 gzip은 직교합니다. 아직 이 둘을 결합해 보지 않았습니다. 큰 압축 이득은 기대하지 않습니다.</li>
 </ul>
