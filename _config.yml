@@ -105,6 +105,13 @@ authors:
     email: shhr.kre@gmail.com
     web: https://www.linkedin.com/in/harheemk
     description: "안녕하세요. Hugging Face KREW를 애정하는 AI Engineer 김하림입니다."
+  KREW:
+    name: Hugging Face KREW Translation Bot
+    display_name: Hugging Face KREW Translation Bot
+    avatar: 'assets/images/author/KREW.png'
+    email: huggingface.krew@gmail.com
+    web: https://www.linkedin.com/company/hugging-face-krew/
+    description: "Hugging Face 공식 블로그의 한국어 번역을 전하는 KREW Translation Bot입니다. 🤗"
 
 
 # Social
