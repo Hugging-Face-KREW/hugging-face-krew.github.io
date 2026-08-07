@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-192/assets/images/favicon.ico" />
+
+    <title>한국어 Text2SQL 프로젝트 - Part 1: 번역한 데이터셋의 품질 개선하기 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>한국어 Text2SQL 프로젝트 - Part 1: 번역한 데이터셋의 품질 개선하기 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="한국어 Text2SQL 프로젝트 - Part 1: 번역한 데이터셋의 품질 개선하기" />
+<meta name="author" content="sohyun" />
+<meta property="og:locale" content="en_us" />
+<meta name="description" content="2025년 상반기에 가짜연구소의 Hugging Face Hub Garden 스터디에서는 Text2SQL 한국어 데이터셋 구축 프로젝트가 진행되었습니다." />
+<meta name="twitter:description" property="og:description" content="2025년 상반기에 가짜연구소의 Hugging Face Hub Garden 스터디에서는 Text2SQL 한국어 데이터셋 구축 프로젝트가 진행되었습니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-192/text2sql-spider-ko-dataset/assets/images/blog/posts/2025-06-14-text2sql-spider-ko-dataset/text2sql-thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-06-14T00:00:00+09:00" />
+<meta property="article:modified_time" content="2025-06-14T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-192/text2sql-spider-ko-dataset/assets/images/blog/posts/2025-06-14-text2sql-spider-ko-dataset/text2sql-thumbnail.png" />
+<meta name="twitter:title" content="한국어 Text2SQL 프로젝트 - Part 1: 번역한 데이터셋의 품질 개선하기" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"sohyun"},"dateModified":"2025-06-14T00:00:00+09:00","datePublished":"2025-06-14T00:00:00+09:00","description":"2025년 상반기에 가짜연구소의 Hugging Face Hub Garden 스터디에서는 Text2SQL 한국어 데이터셋 구축 프로젝트가 진행되었습니다.","headline":"한국어 Text2SQL 프로젝트 - Part 1: 번역한 데이터셋의 품질 개선하기","image":"/pr-preview/pr-192/text2sql-spider-ko-dataset/assets/images/blog/posts/2025-06-14-text2sql-spider-ko-dataset/text2sql-thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-192/text2sql-spider-ko-dataset/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-192/assets/images/hfkr_logo.png"},"name":"sohyun"},"url":"/pr-preview/pr-192/text2sql-spider-ko-dataset/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-192/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-192/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-192/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-192/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-192/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-192/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-192/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-192/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-192/assets/images/blog/posts/2025-06-14-text2sql-spider-ko-dataset/text2sql-thumbnail.png" alt="한국어 Text2SQL 프로젝트 - Part 1: 번역한 데이터셋의 품질 개선하기">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-192/assets/images/blog/posts/2025-06-14-text2sql-spider-ko-dataset/text2sql-thumbnail.png" alt="한국어 Text2SQL 프로젝트 - Part 1: 번역한 데이터셋의 품질 개선하기">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-192/categories#nlp">NLP</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-192/categories#sql">SQL</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">한국어 Text2SQL 프로젝트 - Part 1: 번역한 데이터셋의 품질 개선하기</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#프로젝트-배경과-목표" id="markdown-toc-프로젝트-배경과-목표">프로젝트 배경과 목표</a>    <ul>
+      <li><a href="#왜-한국어-text2sql-데이터셋이-필요할까요" id="markdown-toc-왜-한국어-text2sql-데이터셋이-필요할까요">왜 한국어 Text2SQL 데이터셋이 필요할까요?</a></li>
+      <li><a href="#프로젝트-목표" id="markdown-toc-프로젝트-목표">프로젝트 목표</a></li>
+    </ul>
+  </li>
+  <li><a href="#데이터셋-구축-과정" id="markdown-toc-데이터셋-구축-과정">데이터셋 구축 과정</a>    <ul>
+      <li><a href="#spider-데이터셋-선택-이유" id="markdown-toc-spider-데이터셋-선택-이유">Spider 데이터셋 선택 이유</a></li>
+      <li><a href="#초기-번역-결과와-문제-발견" id="markdown-toc-초기-번역-결과와-문제-발견">초기 번역 결과와 문제 발견</a></li>
+    </ul>
+  </li>
+  <li><a href="#번역-과정에서-발견된-문제점들" id="markdown-toc-번역-과정에서-발견된-문제점들">번역 과정에서 발견된 문제점들</a>    <ul>
+      <li><a href="#문제-유형-분석" id="markdown-toc-문제-유형-분석">문제 유형 분석</a></li>
+      <li><a href="#고유명사-번역-딜레마" id="markdown-toc-고유명사-번역-딜레마">고유명사 번역 딜레마</a></li>
+    </ul>
+  </li>
+  <li><a href="#품질-개선-전략" id="markdown-toc-품질-개선-전략">품질 개선 전략</a>    <ul>
+      <li><a href="#1단계-개선된-프롬프트로-3단-번역" id="markdown-toc-1단계-개선된-프롬프트로-3단-번역">1단계: 개선된 프롬프트로 3단 번역</a></li>
+      <li><a href="#2단계-오류-유형별-수동-검수" id="markdown-toc-2단계-오류-유형별-수동-검수">2단계: 오류 유형별 수동 검수</a></li>
+      <li><a href="#3단계-번역-기준-논의-및-결정" id="markdown-toc-3단계-번역-기준-논의-및-결정">3단계: 번역 기준 논의 및 결정</a></li>
+    </ul>
+  </li>
+  <li><a href="#다른-프로젝트에-적용할-수-있는-인사이트" id="markdown-toc-다른-프로젝트에-적용할-수-있는-인사이트">다른 프로젝트에 적용할 수 있는 인사이트</a>    <ul>
+      <li><a href="#1-자연스러운-한국어-문장-만들기" id="markdown-toc-1-자연스러운-한국어-문장-만들기">1. 자연스러운 한국어 문장 만들기</a></li>
+      <li><a href="#2-번역-범위-명확히-구분하기" id="markdown-toc-2-번역-범위-명확히-구분하기">2. 번역 범위 명확히 구분하기</a></li>
+      <li><a href="#3-원문-의미-정확히-보존하기" id="markdown-toc-3-원문-의미-정확히-보존하기">3. 원문 의미 정확히 보존하기</a></li>
+    </ul>
+  </li>
+  <li><a href="#마무리" id="markdown-toc-마무리">마무리</a>    <ul>
+      <li><a href="#프로젝트를-통해-배운-점" id="markdown-toc-프로젝트를-통해-배운-점">프로젝트를 통해 배운 점</a></li>
+      <li><a href="#다음-단계" id="markdown-toc-다음-단계">다음 단계</a></li>
+      <li><a href="#참고-자료" id="markdown-toc-참고-자료">참고 자료</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p>2025년 상반기에 가짜연구소의 Hugging Face Hub Garden 스터디에서는 <strong>Text2SQL 한국어 데이터셋 구축 프로젝트</strong>가 진행되었습니다.</p>
+
+<p>이번 포스트에서는 Spider 데이터셋을 한국어로 번역하면서 발견한 다양한 문제점들과 이를 해결하여 데이터셋 품질을 개선한 과정을 자세히 공유하려고 합니다.</p>
+
+<hr />
+
+<h2 id="프로젝트-배경과-목표">프로젝트 배경과 목표</h2>
+
+<h3 id="왜-한국어-text2sql-데이터셋이-필요할까요">왜 한국어 Text2SQL 데이터셋이 필요할까요?</h3>
+
+<p>최근 AI의 도움으로 다양한 업무 영역에서 생산성이 크게 향상되고 있습니다. 데이터 분야도 마찬가지로, 많은 데이터 웨어하우스 서비스에서 구성원들이 전문적인 SQL 지식 없이도 데이터를 쉽게 활용할 수 있도록 AI 어시스턴트를 제공하고 있습니다.</p>
+
+<p>하지만 현실적인 문제들이 있었습니다:</p>
+
+<ul>
+  <li><strong>비용 부담</strong>: 데이터 웨어하우스의 AI 어시스턴트 사용 비용이 상당함</li>
+  <li><strong>성능 한계</strong>: 실제 사용 시 기대만큼 의도에 맞는 쿼리를 생성하지 못하는 경우가 많음</li>
+  <li><strong>도메인 특성</strong>: 각 회사의 고유한 도메인과 데이터 설계 방식으로 인해 일반적인 모델의 성능이 제한적</li>
+</ul>
+
+<h3 id="프로젝트-목표">프로젝트 목표</h3>
+
+<p>이러한 배경에서 다음과 같은 목표를 설정했습니다:</p>
+
+<ol>
+  <li><strong>성능 검증</strong>: Text2SQL 데이터셋으로 파인튜닝했을 때 태스크 성능 향상 여부 확인</li>
+  <li><strong>한국어 지원</strong>: 한국어 사용자를 위한 자연어 질의와 SQL 쿼리 연결 데이터셋 구축</li>
+  <li><strong>품질 확보</strong>: 실용적으로 활용 가능한 고품질 데이터셋 완성</li>
+</ol>
+
+<hr />
+
+<h2 id="데이터셋-구축-과정">데이터셋 구축 과정</h2>
+
+<h3 id="spider-데이터셋-선택-이유">Spider 데이터셋 선택 이유</h3>
+
+<p>여러 영어 Text2SQL 데이터셋 중 <strong>Spider 1.0</strong>을 번역 대상으로 선택한 이유는 다음과 같습니다:</p>
+
+<p><strong>Spider vs WikiSQL 비교</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>특징</th>
+      <th>Spider</th>
+      <th>WikiSQL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>데이터 규모</td>
+      <td>Train 7,000개, Validation 1,034개</td>
+      <td>더 방대한 데이터 양</td>
+    </tr>
+    <tr>
+      <td>쿼리 복잡도</td>
+      <td>서브쿼리, 조인, 집계 등 복합 구문 포함</td>
+      <td>단일 테이블 대상 간단한 쿼리</td>
+    </tr>
+    <tr>
+      <td>실용성</td>
+      <td>실제 활용도가 높은 다양한 쿼리</td>
+      <td>제한적인 쿼리 패턴</td>
+    </tr>
+    <tr>
+      <td>한국어 버전</td>
+      <td>존재하지 않음</td>
+      <td>Kaggle에 한국어 데이터셋 존재</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Spider는 데이터 양은 적지만 <strong>실제 업무에서 사용할만한 복잡하고 다양한 쿼리</strong>를 포함하고 있어 더 실용적이라고 판단했습니다.</p>
+
+<h3 id="초기-번역-결과와-문제-발견">초기 번역 결과와 문제 발견</h3>
+
+<p>Spider 데이터셋의 validation 데이터를 LLM으로 기계번역한 후 결과를 확인해보니, 예상보다 많은 문제점들이 발견되었습니다.</p>
+
+<p><strong>초기 번역 결과 예시</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>원문 (영어)</th>
+      <th>번역 결과 (한국어)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>What model has the most different versions?</td>
+      <td>어떤 모델이 가장 많은 버전을 가지고 있나요?</td>
+    </tr>
+    <tr>
+      <td>What are the names of the singers and number of concerts for each person?</td>
+      <td>각 사람별 가수 이름과 콘서트 횟수가 어떻게 되나요?</td>
+    </tr>
+    <tr>
+      <td>Among the cars with more than lowest horsepower, which ones do not have more than 3 cylinders?</td>
+      <td>최저 마력보다 높은 마력을 가진 차들 중에서 실린더가 3개를 초과하지 않는 차량의 제조사 ID와 제조사명을 나열하세요.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>보시다시피 문법적으로는 문제없지만, <strong>자연스럽지 않은 한국어 표현</strong>들이 상당히 많았습니다.</p>
+
+<hr />
+
+<h2 id="번역-과정에서-발견된-문제점들">번역 과정에서 발견된 문제점들</h2>
+
+<p>단순한 기계번역으로는 해결되지 않는 다양한 문제점들을 발견하고, 이를 <strong>5가지 주요 유형</strong>으로 분류했습니다.</p>
+
+<h3 id="문제-유형-분석">문제 유형 분석</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>오류 유형</th>
+      <th>주요 내용</th>
+      <th>개선 방향</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>1. 시간/수 비교 표현 오류</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">more than</code>을 ‘이상’으로, <code class="language-plaintext highlighter-rouge">before</code>/<code class="language-plaintext highlighter-rouge">after</code>를 ‘이전’/’이후’로 번역</td>
+      <td>‘초과’, ‘미만’, ‘~보다 전/후’ 등 경계값을 명확히 구분하는 표현으로 수정</td>
+    </tr>
+    <tr>
+      <td><strong>2. 어색한 한국어 표현</strong></td>
+      <td>불필요한 주어(<code class="language-plaintext highlighter-rouge">우리는</code>), 수식어(<code class="language-plaintext highlighter-rouge">모든 다른</code>), 어색한 단어(<code class="language-plaintext highlighter-rouge">역알파벳순</code>) 사용</td>
+      <td>한국어 문맥에 맞게 자연스럽게 생략하거나 ‘국가들은’, ‘알파벳 역순’ 등으로 수정</td>
+    </tr>
+    <tr>
+      <td><strong>3. 서술어 호응 오류</strong></td>
+      <td>개수나 나이를 묻는데 ‘무엇인가요?’로 답하거나, 여러 주어에 하나의 서술어만 사용</td>
+      <td>주어에 맞는 서술어(‘몇 명인가요?’, ‘얼마인가요?’) 사용</td>
+    </tr>
+    <tr>
+      <td><strong>4. 도메인 어휘 오번역</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">production time</code>을 ‘생산 시간’으로, <code class="language-plaintext highlighter-rouge">accelerate</code>를 ‘가속도’로 번역</td>
+      <td>도메인에 맞게 ‘생산일자’, ‘가속 성능’ 등으로 수정</td>
+    </tr>
+    <tr>
+      <td><strong>5. 의미 누락 및 변형</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">average</code>를 ‘평균’으로만 번역하여 ‘평균 수용 인원’의 의미가 누락됨</td>
+      <td>원문 의도를 정확히 반영하도록 누락된 정보 보충</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="고유명사-번역-딜레마">고유명사 번역 딜레마</h3>
+
+<p>흥미로운 논의 포인트도 있었습니다. 바로 <strong>질의에 포함된 고유명사를 번역할지 여부</strong>였습니다.</p>
+
+<p><strong>예시:</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>원문</th>
+      <th>번역 결과</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>What is the TV Channel of TV series with Episode “A Love of a Lifetime”?</td>
+      <td>에피소드 “평생의 사랑”이 포함된 TV 시리즈를 방영한 TV 채널과 그 채널의 시리즈명을 알려주세요.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>실제 업무 환경에서는 테이블 데이터가 영어일 수도, 한글일 수도 있고, 사용자도 상황에 따라 영어나 한글로 질의할 수 있습니다. 따라서 <strong>다양한 상황을 반영</strong>하기 위해 번역 여부를 일관되게 정하지 않고 혼재시키기로 결정했습니다.</p>
+
+<hr />
+
+<h2 id="품질-개선-전략">품질 개선 전략</h2>
+
+<p>발견된 문제점들을 해결하기 위해 <strong>3단계 개선 전략</strong>을 수립했습니다.</p>
+
+<h3 id="1단계-개선된-프롬프트로-3단-번역">1단계: 개선된 프롬프트로 3단 번역</h3>
+
+<p>기본적인 문장 검수를 위해 피드백 과정을 포함한 3단계 번역을 진행했습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"""</span><span class="s">Human: 다음 영어 질문을 한국어로 번역해주세요. 다음 규칙을 엄격히 따라주세요:
+
+1. 항상 질문이나 요청 형식으로 번역하세요.
+2. </span><span class="sh">"</span><span class="s">~를 표시합니다</span><span class="sh">"</span><span class="s">, </span><span class="sh">"</span><span class="s">~를 출력합니다</span><span class="sh">"</span><span class="s">, </span><span class="sh">"</span><span class="s">~를 보여줍니다</span><span class="sh">"</span><span class="s"> 같은 설명형/명령형 종결로 번역하지 마세요.
+3. 대신 </span><span class="sh">"</span><span class="s">~를 알려주세요</span><span class="sh">"</span><span class="s">, </span><span class="sh">"</span><span class="s">~를 보여주세요</span><span class="sh">"</span><span class="s">, </span><span class="sh">"</span><span class="s">~는 무엇인가요?</span><span class="sh">"</span><span class="s"> 같은 요청/질문 형식으로 번역하세요.
+4. 번역문만 작성하고 쌍따옴표나 다른 설명 부호는 사용하지 마세요.
+5. SQL 쿼리와 영어 질문이 일치하지 않을 수 있으니, SQL 쿼리의 내용을 우선적으로 참고하세요.
+6. 데이터베이스 컨텍스트에 맞는 적절한 용어를 사용하세요.
+
+데이터베이스 ID: </span><span class="si">{</span><span class="n">db_id</span><span class="si">}</span><span class="s">
+SQL 쿼리: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s">
+영어 질문: </span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="s">
+
+잘못된 예시:
+- ❌ </span><span class="sh">"</span><span class="s">수용량이 5,000명에서 10,000명 사이인 모든 경기장의 위치와 이름을 표시합니다.</span><span class="sh">"</span><span class="s">
+- ⭕ </span><span class="sh">"</span><span class="s">수용량이 5,000명에서 10,000명 사이인 모든 경기장의 위치와 이름을 보여주세요.</span><span class="sh">"</span><span class="s">
+
+한국어 번역:
+</span><span class="sh">"""</span>
+</code></pre></div></div>
+
+<h3 id="2단계-오류-유형별-수동-검수">2단계: 오류 유형별 수동 검수</h3>
+
+<p>프롬프트 개선으로도 해결되지 않는 문제들은 팀원들과 함께 <strong>오류 유형별로 체계적인 수동 검수</strong>를 진행했습니다.</p>
+
+<h3 id="3단계-번역-기준-논의-및-결정">3단계: 번역 기준 논의 및 결정</h3>
+
+<p>번역 여부를 판단해야 하는 부분들은 팀 내 논의를 통해 일관된 기준을 마련했습니다.</p>
+
+<hr />
+
+<h2 id="다른-프로젝트에-적용할-수-있는-인사이트">다른 프로젝트에 적용할 수 있는 인사이트</h2>
+
+<p>이번 프로젝트를 통해 얻은 경험을 다른 번역 프로젝트에도 적용할 수 있도록 <strong>3가지 핵심 원칙</strong>으로 정리했습니다.</p>
+
+<h3 id="1-자연스러운-한국어-문장-만들기">1. 자연스러운 한국어 문장 만들기</h3>
+
+<p><strong>한국어 화자가 실제로 사용할 법한 자연스러운 문장</strong>으로 번역하는 것이 가장 기본입니다.</p>
+
+<p>한국어 사용자라면 읽으면서 바로 느낄 수 있는 부분인데요, LLM을 통해 번역 품질을 개선하고자 할 때에는 어떤 부분이 부자연스러운지 구체적인 예시를 포함해 프롬프트를 작성하는 것이 좋습니다.</p>
+
+<h3 id="2-번역-범위-명확히-구분하기">2. 번역 범위 명확히 구분하기</h3>
+
+<p>태스크 특성에 따라 <strong>번역할 부분과 번역하지 않을 부분을 명확히 구분</strong>해야 합니다.</p>
+
+<ul>
+  <li><strong>번역 불필요</strong>: SQL 쿼리 구문 내 테이블/컬럼명 (업계 관례상 영어 사용)</li>
+  <li><strong>번역 고려</strong>: 질의 내 고유명사 (사용자 상황을 고려하여 결정)</li>
+</ul>
+
+<h3 id="3-원문-의미-정확히-보존하기">3. 원문 의미 정확히 보존하기</h3>
+
+<p><strong>번역 후에도 원문의 정확한 의미를 유지</strong>하는 것이 가장 중요합니다.</p>
+
+<p>이 부분은 검수 과정을 여러 번 반복하여 가장 큰 개선 효과를 얻을 수 있습니다. 이번 작업에서는 시간 제약으로 충분히 개선하지 못했지만, 향후 프로젝트에서는 LLM을 활용한 반복 검수 과정을 구축하여 보완해보려고 합니다.</p>
+
+<hr />
+
+<h2 id="마무리">마무리</h2>
+
+<p>이렇게 구축된 한국어 Text2SQL 데이터셋은 <a href="https://huggingface.co/datasets/huggingface-KREW/spider-ko">Hugging Face Hub</a>에 배포되었습니다🎉</p>
+
+<h3 id="프로젝트를-통해-배운-점">프로젝트를 통해 배운 점</h3>
+
+<p>데이터셋 구축 작업을 처음 진행하면서 <strong>예상보다 사람이 직접 확인하고 고민해야 할 부분이 많다</strong>는 것을 깨달았습니다. 특히 개선 방향을 판단하는 과정에서 인간의 판단력이 필수적이었는데, 이런 부분을 AI로 더 효율적으로 처리할 수 있는 방법을 계속 고민하게 되었습니다.</p>
+
+<h3 id="다음-단계">다음 단계</h3>
+
+<p>현재 작업 과정에서 발견된 추가 개선 포인트들은 모델 학습과 평가 후 실제 성능에 미치는 영향을 분석하여 우선순위를 정해 보완하는 것으로 진행 방식을 정했습니다.</p>
+
+<p>이렇게 구축한 Text2SQL 데이터셋으로 모델을 파인튜닝하고 평가하는 과정에서의 경험도 다음 포스트에서 소개하도록 하겠습니다! 이어지는 포스트에도 많은 관심 부탁 드립니다. 🤗</p>
+
+<hr />
+
+<h3 id="참고-자료">참고 자료</h3>
+
+<ul>
+  <li><a href="https://huggingface.co/datasets/huggingface-KREW/spider-ko">Spider-Ko 데이터셋 (Hugging Face)</a></li>
+  <li><a href="https://github.com/Pseudo-Lab/Hugging-Face-Hub-Garden">Hugging Face Hub Garden 프로젝트</a></li>
+  <li><a href="https://yale-lily.github.io/spider">Spider 1.0 원본 데이터셋</a></li>
+</ul>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2025-06-14">14 Jun 2025</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#프로젝트-배경과-목표" id="markdown-toc-프로젝트-배경과-목표">프로젝트 배경과 목표</a>    <ul>
+      <li><a href="#왜-한국어-text2sql-데이터셋이-필요할까요" id="markdown-toc-왜-한국어-text2sql-데이터셋이-필요할까요">왜 한국어 Text2SQL 데이터셋이 필요할까요?</a></li>
+      <li><a href="#프로젝트-목표" id="markdown-toc-프로젝트-목표">프로젝트 목표</a></li>
+    </ul>
+  </li>
+  <li><a href="#데이터셋-구축-과정" id="markdown-toc-데이터셋-구축-과정">데이터셋 구축 과정</a>    <ul>
+      <li><a href="#spider-데이터셋-선택-이유" id="markdown-toc-spider-데이터셋-선택-이유">Spider 데이터셋 선택 이유</a></li>
+      <li><a href="#초기-번역-결과와-문제-발견" id="markdown-toc-초기-번역-결과와-문제-발견">초기 번역 결과와 문제 발견</a></li>
+    </ul>
+  </li>
+  <li><a href="#번역-과정에서-발견된-문제점들" id="markdown-toc-번역-과정에서-발견된-문제점들">번역 과정에서 발견된 문제점들</a>    <ul>
+      <li><a href="#문제-유형-분석" id="markdown-toc-문제-유형-분석">문제 유형 분석</a></li>
+      <li><a href="#고유명사-번역-딜레마" id="markdown-toc-고유명사-번역-딜레마">고유명사 번역 딜레마</a></li>
+    </ul>
+  </li>
+  <li><a href="#품질-개선-전략" id="markdown-toc-품질-개선-전략">품질 개선 전략</a>    <ul>
+      <li><a href="#1단계-개선된-프롬프트로-3단-번역" id="markdown-toc-1단계-개선된-프롬프트로-3단-번역">1단계: 개선된 프롬프트로 3단 번역</a></li>
+      <li><a href="#2단계-오류-유형별-수동-검수" id="markdown-toc-2단계-오류-유형별-수동-검수">2단계: 오류 유형별 수동 검수</a></li>
+      <li><a href="#3단계-번역-기준-논의-및-결정" id="markdown-toc-3단계-번역-기준-논의-및-결정">3단계: 번역 기준 논의 및 결정</a></li>
+    </ul>
+  </li>
+  <li><a href="#다른-프로젝트에-적용할-수-있는-인사이트" id="markdown-toc-다른-프로젝트에-적용할-수-있는-인사이트">다른 프로젝트에 적용할 수 있는 인사이트</a>    <ul>
+      <li><a href="#1-자연스러운-한국어-문장-만들기" id="markdown-toc-1-자연스러운-한국어-문장-만들기">1. 자연스러운 한국어 문장 만들기</a></li>
+      <li><a href="#2-번역-범위-명확히-구분하기" id="markdown-toc-2-번역-범위-명확히-구분하기">2. 번역 범위 명확히 구분하기</a></li>
+      <li><a href="#3-원문-의미-정확히-보존하기" id="markdown-toc-3-원문-의미-정확히-보존하기">3. 원문 의미 정확히 보존하기</a></li>
+    </ul>
+  </li>
+  <li><a href="#마무리" id="markdown-toc-마무리">마무리</a>    <ul>
+      <li><a href="#프로젝트를-통해-배운-점" id="markdown-toc-프로젝트를-통해-배운-점">프로젝트를 통해 배운 점</a></li>
+      <li><a href="#다음-단계" id="markdown-toc-다음-단계">다음 단계</a></li>
+      <li><a href="#참고-자료" id="markdown-toc-참고-자료">참고 자료</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-192/assets/images/author/sohyun.png" alt="sohyun">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href="https://github.com/sim-so/">sohyun</a>
+        <span class="author-description">Hello, I'm sohyun, a data analyst who explores the world of data with curiosity and passion. 🤗</span>                        
+    </div>
+</div>
+
+
+
+
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">2</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="nlp">
+            NLP
+            <span class="count">2</span>
+          </button>
+        
+      
+        
+        
+          <button class="filter-btn" data-category="sql">
+            SQL
+            <span class="count">1</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="nlp web ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-192/creating-web-interface/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-192/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" alt="Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-192/creating-web-interface/">Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기</a></h2>
+        <p class="card-text text-muted">안녕하세요🤗 오늘은 Hugging Face에서 개발한 Gradio 라이브러리를 사용하여 머신러닝 모델을 위한 웹 인터페이스를 쉽고 빠르게...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Chaewon, </span>             
+                on <span class="post-date">02 Oct 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="nlp sql chatbot ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-192/creating-gradio-based-NL2SQL-chatbot/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-192/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" alt="Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-192/creating-gradio-based-NL2SQL-chatbot/">Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋</a></h2>
+        <p class="card-text text-muted">안녕하세요🤗 첫 포스트는 NL2SQL 챗봇 개발 시리즈의 첫 번째 파트로, 이론적 배경과 데이터셋에 대해 다뤄보려합니다....</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Chaewon, </span>             
+                on <span class="post-date">19 Sep 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+</main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-192/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-192/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-192/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-192/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-192/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-192/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-192/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-192/assets/js/category.js"></script>
+  </body>
+</html>
