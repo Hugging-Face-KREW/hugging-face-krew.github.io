@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-193/assets/images/favicon.ico" />
+
+    <title>Meta가 Muse Glimmer로 돌아왔다: 로컬, 에이전트형, 멀티모달, 그리고 오픈 소스! | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Meta가 Muse Glimmer로 돌아왔다: 로컬, 에이전트형, 멀티모달, 그리고 오픈 소스! | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Meta가 Muse Glimmer로 돌아왔다: 로컬, 에이전트형, 멀티모달, 그리고 오픈 소스!" />
+<meta name="author" content="dailybot" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 Meta is back with Muse Glimmer: local, agentic, multimodal, and open source를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Meta is back with Muse Glimmer: local, agentic, multimodal, and open source를 한국어로 번역한 글입니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-193/muse-glimmer/assets/images/blog/posts/2026-08-10-muse-glimmer/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-08-10T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-08-10T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-193/muse-glimmer/assets/images/blog/posts/2026-08-10-muse-glimmer/thumbnail.png" />
+<meta name="twitter:title" content="Meta가 Muse Glimmer로 돌아왔다: 로컬, 에이전트형, 멀티모달, 그리고 오픈 소스!" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-08-10T00:00:00+09:00","datePublished":"2026-08-10T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Meta is back with Muse Glimmer: local, agentic, multimodal, and open source를 한국어로 번역한 글입니다.","headline":"Meta가 Muse Glimmer로 돌아왔다: 로컬, 에이전트형, 멀티모달, 그리고 오픈 소스!","image":"/pr-preview/pr-193/muse-glimmer/assets/images/blog/posts/2026-08-10-muse-glimmer/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-193/muse-glimmer/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-193/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-193/muse-glimmer/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-193/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-193/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-193/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-193/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-193/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-193/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-193/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-193/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-08-10-muse-glimmer/thumbnail.png" alt="Meta가 Muse Glimmer로 돌아왔다: 로컬, 에이전트형, 멀티모달, 그리고 오픈 소스!">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-08-10-muse-glimmer/thumbnail.png" alt="Meta가 Muse Glimmer로 돌아왔다: 로컬, 에이전트형, 멀티모달, 그리고 오픈 소스!">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-193/categories#huggingface">HuggingFace</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-193/categories#translation">Translation</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">Meta가 Muse Glimmer로 돌아왔다: 로컬, 에이전트형, 멀티모달, 그리고 오픈 소스!</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#meta가-muse-glimmer로-돌아왔다-로컬-에이전트형-멀티모달-그리고-오픈-소스" id="markdown-toc-meta가-muse-glimmer로-돌아왔다-로컬-에이전트형-멀티모달-그리고-오픈-소스">Meta가 Muse Glimmer로 돌아왔다: 로컬, 에이전트형, 멀티모달, 그리고 오픈 소스!</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">벤치마크</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">아키텍처</a>        <ul>
+          <li><a href="#텍스트-디코더" id="markdown-toc-텍스트-디코더">텍스트 디코더</a></li>
+          <li><a href="#perception-encoder" id="markdown-toc-perception-encoder">Perception Encoder</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-3" id="markdown-toc-section-3">트랜스포머</a>        <ul>
+          <li><a href="#텍스트-전용-추론" id="markdown-toc-텍스트-전용-추론">텍스트 전용 추론</a></li>
+          <li><a href="#이미지와-텍스트로-모델에-프롬프트하기" id="markdown-toc-이미지와-텍스트로-모델에-프롬프트하기">이미지와 텍스트로 모델에 프롬프트하기</a></li>
+          <li><a href="#비디오-추론" id="markdown-toc-비디오-추론">비디오 추론</a></li>
+          <li><a href="#멀티모달-도구-호출" id="markdown-toc-멀티모달-도구-호출">멀티모달 도구 호출</a></li>
+          <li><a href="#객체-검출" id="markdown-toc-객체-검출">객체 검출</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-4" id="markdown-toc-section-4">Llama.cpp</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">Speculative Decoding</a>        <ul>
+          <li><a href="#트랜스포머를-이용한-추측-디코딩" id="markdown-toc-트랜스포머를-이용한-추측-디코딩">트랜스포머를 이용한 추측 디코딩</a></li>
+          <li><a href="#llamacpp를-이용한-추측-디코딩" id="markdown-toc-llamacpp를-이용한-추측-디코딩">llama.cpp를 이용한 추측 디코딩</a></li>
+          <li><a href="#inference-endpoints" id="markdown-toc-inference-endpoints">Inference Endpoints</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-6" id="markdown-toc-section-6">Muse Glimmer vLLM에 대한 transformers 백엔드 지원</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">TRL로 파인튜닝</a></li>
+      <li><a href="#section-8" id="markdown-toc-section-8">Demos</a></li>
+      <li><a href="#section-9" id="markdown-toc-section-9">OpenClaw를 Muse Glimmer에 연결하기</a>        <ul>
+          <li><a href="#hey-muse-glimmer-스스로-양자화하기" id="markdown-toc-hey-muse-glimmer-스스로-양자화하기">Hey Muse Glimmer, 스스로 양자화하기</a></li>
+          <li><a href="#hey-muse-glimmer-스스로-배포하기" id="markdown-toc-hey-muse-glimmer-스스로-배포하기">Hey Muse Glimmer, 스스로 배포하기</a></li>
+          <li><a href="#hey-muse-glimmer-스스로-최적화하기" id="markdown-toc-hey-muse-glimmer-스스로-최적화하기">Hey Muse Glimmer, 스스로 최적화하기</a></li>
+          <li><a href="#hey-muse-glimmer-허브-연구하기" id="markdown-toc-hey-muse-glimmer-허브-연구하기">Hey Muse Glimmer, 허브 연구하기</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-10" id="markdown-toc-section-10">마무리</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/muse-glimmer">Meta is back with Muse Glimmer: local, agentic, multimodal, and open source</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/muse-glimmer -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="meta가-muse-glimmer로-돌아왔다-로컬-에이전트형-멀티모달-그리고-오픈-소스">Meta가 Muse Glimmer로 돌아왔다: 로컬, 에이전트형, 멀티모달, 그리고 오픈 소스!</h1>
+
+<p>오픈 소스 LLM의 원조들로부터 반가운 소식! Muse Glimmer는 오늘 출시된 메타의 새로운 멀티모달 모델로, 특히 로컬 에이전트형 사용 사례를 위해 설계되었습니다. Muse를 <strong>30B</strong> 파라미터로 축소하고, <strong>Apache 2.0 license</strong> 하에 공개되어 개인정보 보호를 위해 로컬 배포, 비용 절감, 또는 단순한 해킹에 이상적입니다. 코딩, 문서 분석, 개인 비서, Claw- 또는 Hermes와 같은 설정과 같은 프라이버시 중심 애플리케이션을 위한 목적입니다.</p>
+
+<p>축하의 의미로, <code class="language-plaintext highlighter-rouge">transformers</code>, <code class="language-plaintext highlighter-rouge">llama.cpp</code>, <code class="language-plaintext highlighter-rouge">vLLM</code>, Inference Endpoints 및 기타 라이브러리에서 메타의 day-0 지원을 제공합니다. 우리는 몇 가지 멋진 것들을 만들었고 이 블로그에서 우리의 발견을 설명합니다.</p>
+
+<p><a href="#demos"><strong>Check out the demos below for inspiration.</strong></a></p>
+
+<p>다음에서 <a href="https://huggingface.co/meta-models/Muse-Glimmer-30B">Muse Glimmer on the Hugging Face Hub</a>를 찾을 수 있습니다.</p>
+
+<h2 id="section-1">벤치마크</h2>
+
+<details>
+<summary>Benchmark results</summary>
+
+점수는 게시된 방식으로 보고됩니다. **Bold**는 비교 대상 모델 중 최상의 결과를 나타내고; ↓는 더 낮은 값이 더 좋음을 의미합니다.
+
+| 범주 | 벤치마크 | Muse Glimmer-30B<br />고차 추론 | Gemma4-31B<br />사고 모드 | Qwen3.6-27B<br />사고 모드 |
+| --- | --- | ---: | ---: | ---: |
+| 일반 에이전트형 | MCP Atlas | **75.5** | 54.2 | 62.5 |
+| 일반 에이전트형 | DeepSearch QA | **74.6** | 61.7 | 71.1 |
+| 일반 에이전트형 | τ³-Banking | **23.5** | 15.1 | 16.7 |
+| 일반 에이전트형 | WildClawBench | **47.6** | 37.6 | 43.2 |
+| 일반 에이전트형 | GDPval-AA | 953 | 811 | **1141** |
+| 일반 에이전트형 | GAIA2 | **43.3** | 36.4 | 40.0 |
+| 일반 에이전트형 | SkillsBench (With Skills) | 44.3 | 32.4 | **46.6** |
+| 일반 에이전트형 | OSWorld-Verified | 65.9 | 58.5 | **75.6** |
+| 에이전트적 코딩 | SWE-Bench Pro | **51.2** | 36.9 | 50.2 |
+| 에이전트적 코딩 | SWE-Bench Verified | 76.0 | 66.6 | **77.2** |
+| 에이전트적 코딩 | TerminalBench 2.1 | 51.7 | 43.4 | **60.7** |
+| 에이전트적 코딩 | SciCode | **43.6** | 43.4 | 39.8 |
+| 멀티모달 | Charxiv Reasoning | **78.8** | 77.7 | 78.4 |
+| 멀티모달 | ScreenSpot Pro | 75.4 | 75.9 | **76.1** |
+| 멀티모달 | OmniDocBench v1.5 | 75.8 | 72.5 | **77.8** |
+| 멀티모달 | MMMU Pro | 74 | 73 | **75** |
+| 안전성 | CI Memories | Violation (↓): 26.4<br />Coverage: 64.8 | **Violation (↓): 12.1**<br />Coverage: 53.0 | Violation (↓): 53.4<br />Coverage: 66.9 |
+| 안전성 | Siren AgentDojo | Attack Success Rate (↓): 28.4<br />Utility: 94.2 | **Attack Success Rate (↓): 25.6**<br />Utility: 90.8 | Attack Success Rate (↓): 40.3<br />Utility: 92.7 |
+| 일반적 능력 및 추론 | IFBench | **77.0** | 76.0 | 70.8 |
+| 일반적 능력 및 추론 | AIME 2026 | **94.7** | 89.2 | 94.1 |
+| 일반적 능력 및 추론 | GPQA Diamond | 83.5 | **85.7** | 84.2 |
+| 일반적 능력 및 추론 | Humanity’s Last Exam (Text + No Tools) | 22.0 | **23.6** | 23.1 |
+| 일반적 능력 및 추론 | AA-LCR | **80.0** | 68.3 | 73.3 |
+| 일반적 능력 및 추론 | Beam 128K | **65.1** | 58.2 | 63.0 |
+
+</details>
+
+<h2 id="section-2">아키텍처</h2>
+
+<p>Muse Glimmer는 30B 파라미터의 밀도형 모델로 구성되어 있습니다:</p>
+
+<ul>
+  <li>2B ViT 스타일 인코더(Perception Encoder)</li>
+  <li>28B 파라미터 텍스트 디코더</li>
+</ul>
+
+<p>메인 VLM 외에도 DFlash에서 구현된 추측적 디코딩 드래프터가 있습니다. 이 모듈의 사용은 선택 사항이며, 약간의 메모리 비용과 교환으로 더 빠른 생성 속도를 제공할 수 있습니다. 우리는 이 드래프터가 코딩과 같은 구조화된 콘텐츠 생성을 위해 특히 잘 맞는다고 판단했습니다.</p>
+
+<h3 id="텍스트-디코더">텍스트 디코더</h3>
+
+<p>언어 모델은 다음 아키텍처 구성 요소를 사용합니다:</p>
+
+<ul>
+  <li><strong>하이브리드 어텐션:</strong> 로터리 위치 임베딩을 사용하는 2,048 토큰의 세 개의 슬라이딩 윈도우 계층을 교대로 사용한 뒤, 전체 어텐션과 NoPE(위치 임베딩 없음)를 사용하는 네 번째 계층이 뒤따릅니다. 따라서 패턴은 (SWA, SWA, SWA, Full)을 13회 반복하여 총 52층이 됩니다. 이로써 RoPE를 사용해 상대적 순서와 거리 정보를 유지하고 NoPE로 정보를 전역적으로 보존합니다.</li>
+  <li><strong>게이티드 그룹드-쿼리 어텐션:</strong> 각 키-값 헤드는 16개의 쿼리 헤드가 공유하여 KV-캐시 메모리를 16배로 줄이고 생성 속도와 비용을 낮춥니다.</li>
+  <li><strong>Q-K 정규화와 추가 쿼리 스케일링:</strong> 어텐션을 계산하기 전에 Muse Glimmer는 모든 쿼리 및 키 헤드에 RMS 정규화를 적용하여 어텐션 로짓의 안정성을 유지합니다. 그 후 정규화 후 목표 로짓 스케일을 설정하기 위해 쿼리에 스케일 계수를 곱합니다. 추가 쿼리 스케일링은 소프트맥스 단계에서 역온도와 같은 작용을 합니다.</li>
+</ul>
+
+<h3 id="perception-encoder">Perception Encoder</h3>
+
+<p>Muse Glimmer는 이미지와 비디오를 모두 처리하기 위해 하나의 이미지 인코더를 사용합니다. 다른 VLM에서 사용되는 상대적으로 작은 비전 인코더와 달리, 이는 Perception Encoder 아키텍처를 따라 설계된 상당히 큰 2B ViT-유사 모델입니다. Perception Encoder는 이전에 Meta <a href="https://huggingface.co/papers/2504.13181">as a backbone for various downstream spatial and multimodal tasks</a>에 의해 소개되었습니다. 인코더는 이미지를 2 프레임 x 3 채널 x 14 x 14의 형태로 패치화하고, 이를 학습된 위치 테이블에서 보간된 절대 위치 임베딩을 더한 뒤, 이 임베딩들을 시각 타워로 전달합니다. 시각 타워는 50개의 계층과 GELU MLP로 구성됩니다. 언어 모델과 마찬가지로 어텐션 패턴은 세 개의 윈도우 어텐션 계층 뒤에 하나의 전체 어텐션 계층이 이어집니다. 어텐션 계층 내부에는 2D RoPE가 쿼리와 키에 적용됩니다.</p>
+
+<p>트랜스포머 이후 픽셀 셔플은 인접한 공간 토큰의 2x2 묶음을 연결하여 채널을 버리지 않고 이미지 토큰의 수를 4배 감소시킵니다. 병합된 특징은 텍스트 디코더의 공유 임베딩 공간으로 투영됩니다.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>비디오도 프레임별로 같은 인코더를 거치며, 각 프레임은 패치로 변환됩니다(모양 [배치, 시간 그룹, 격자 높이, 격자 너비, 2 프레임, 3 채널, 14, 14]). 프로세서는 초당 2프레임을 목표로 하며 비디오를 고르게 샘플링하여 96프레임으로 상한을 둡니다. 프로세서는 타임스탬프가 있는 비디오 플레이스홀더를 생성하고 예를 들어 텍스트와 프레임을 교차시키며 “Time: 0.0s &lt;</td>
+      <td>video</td>
+      <td>&gt; x N” 형태를 삽입합니다. 최종 비디오 임베딩은 최종 투영 계층 전에 대체됩니다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-3">트랜스포머</h2>
+
+<p>Muse Glimmer를 사용하려면 트랜스포머를 최신 버전으로 업그레이드하십시오.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="nt">--upgrade</span> transformers accelerate
+</code></pre></div></div>
+
+<p>Muse Glimmer는 트랜스포머에서 day-0 지원을 제공합니다. 주요 모델과 추측 디코더 드래프터 모두에 대해 그렇습니다. <code class="language-plaintext highlighter-rouge">AutoModelForMultimodalLM</code>와 <code class="language-plaintext highlighter-rouge">AutoProcessor</code> 클래스를 사용하여 모델과 프로세서를 로드할 수 있습니다.</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoProcessor</span><span class="p">,</span> <span class="n">AutoModelForMultimodalLM</span>
+
+<span class="n">MODEL_ID</span> <span class="o">=</span> <span class="sh">"</span><span class="s">meta-models/Muse-Glimmer-30B</span><span class="sh">"</span>
+
+<span class="c1"># Load model
+</span><span class="n">processor</span> <span class="o">=</span> <span class="n">AutoProcessor</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">MODEL_ID</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForMultimodalLM</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="n">MODEL_ID</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>같은 스니펫은 NVIDIA(CUDA), AMD(ROCm) 및 Intel(XPU) GPU에서 변경 없이 실행됩니다. <code class="language-plaintext highlighter-rouge">device_map="auto"</code>은 사용 가능한 가속기에 모델을 배치합니다.</p>
+
+<h3 id="텍스트-전용-추론">텍스트 전용 추론</h3>
+
+<p>모델을 로드한 후 아래와 같이 텍스트 전용 추론을 수행할 수 있습니다.</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoProcessor</span><span class="p">,</span> <span class="n">AutoModelForMultimodalLM</span>
+
+<span class="n">MODEL_ID</span> <span class="o">=</span> <span class="sh">"</span><span class="s">meta-models/Muse-Glimmer-30B</span><span class="sh">"</span>
+
+<span class="c1"># Load model
+</span><span class="n">processor</span> <span class="o">=</span> <span class="n">AutoProcessor</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">MODEL_ID</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForMultimodalLM</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="n">MODEL_ID</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="c1"># Prompt
+</span><span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Write a short joke about saving RAM.</span><span class="sh">"</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="c1"># Process input
+</span><span class="n">inputs</span> <span class="o">=</span> <span class="n">processor</span><span class="p">.</span><span class="nf">apply_chat_template</span><span class="p">(</span>
+    <span class="n">messages</span><span class="p">,</span>
+    <span class="n">tokenize</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_dict</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_tensors</span><span class="o">=</span><span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">add_generation_prompt</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">reasoning_strength</span><span class="o">=</span><span class="sh">"</span><span class="s">low</span><span class="sh">"</span>
+<span class="p">).</span><span class="nf">to</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">device</span><span class="p">)</span>
+<span class="n">input_len</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="sh">"</span><span class="s">input_ids</span><span class="sh">"</span><span class="p">].</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Generate output
+</span><span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">processor</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">input_len</span><span class="p">:],</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="이미지와-텍스트로-모델에-프롬프트하기">이미지와 텍스트로 모델에 프롬프트하기</h3>
+
+<p>이미지와 텍스트를 사용하려면 <code class="language-plaintext highlighter-rouge">torchvision</code>가 필요합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>torchvision
+</code></pre></div></div>
+
+<p>Muse Glimmer는 입력으로 이미지를 허용합니다. 아래에서 시연합니다:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoProcessor</span><span class="p">,</span> <span class="n">AutoModelForMultimodalLM</span>
+
+<span class="n">MODEL_ID</span> <span class="o">=</span> <span class="sh">"</span><span class="s">meta-models/Muse-Glimmer-30B</span><span class="sh">"</span>
+
+<span class="c1"># Load model
+</span><span class="n">processor</span> <span class="o">=</span> <span class="n">AutoProcessor</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">MODEL_ID</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForMultimodalLM</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="n">MODEL_ID</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="c1"># Images + Text
+</span><span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">image</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">image</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">https://huggingface.co/datasets/merve/vl-test-suite/resolve/main/SF.png</span><span class="sh">"</span><span class="p">},</span>
+            <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">What is shown in this image?</span><span class="sh">"</span><span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">processor</span><span class="p">.</span><span class="nf">apply_chat_template</span><span class="p">(</span>
+    <span class="n">messages</span><span class="p">,</span>
+    <span class="n">tokenize</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_dict</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_tensors</span><span class="o">=</span><span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">add_generation_prompt</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">reasoning_strength</span><span class="o">=</span><span class="sh">"</span><span class="s">low</span><span class="sh">"</span>
+<span class="p">).</span><span class="nf">to</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">device</span><span class="p">)</span>
+<span class="n">input_len</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="sh">"</span><span class="s">input_ids</span><span class="sh">"</span><span class="p">].</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Generate output
+</span><span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">processor</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">input_len</span><span class="p">:],</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="비디오-추론">비디오 추론</h3>
+
+<p>비디오 작업을 위해서는 환경에 <code class="language-plaintext highlighter-rouge">torchcodec</code>를 설치하는 것을 권장합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>torchcodec
+</code></pre></div></div>
+
+<p>Muse Glimmer는 오디오 없이도 비디오에 대한 복잡한 질문에 답할 수 있습니다. 아래와 같이 비디오 추론을 수행할 수 있으며, 아래 예시는 VideoMME2로, 가장 인기 있는 비디오 질문 응답 벤치마크입니다.</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoProcessor</span><span class="p">,</span> <span class="n">AutoModelForMultimodalLM</span>
+
+<span class="n">MODEL_ID</span> <span class="o">=</span> <span class="sh">"</span><span class="s">meta-models/Muse-Glimmer-30B</span><span class="sh">"</span>
+
+<span class="c1"># Load model
+</span><span class="n">processor</span> <span class="o">=</span> <span class="n">AutoProcessor</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">MODEL_ID</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForMultimodalLM</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="n">MODEL_ID</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="c1"># Videos + Text
+</span><span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">video</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">video</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">https://huggingface.co/datasets/merve/vl-test-suite/resolve/main/IMG_8137.mp4</span><span class="sh">"</span><span class="p">},</span>
+            <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Describe what happens in this video.</span><span class="sh">"</span><span class="p">},</span>
+        <span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">processor</span><span class="p">.</span><span class="nf">apply_chat_template</span><span class="p">(</span>
+    <span class="n">messages</span><span class="p">,</span>
+    <span class="n">tokenize</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_dict</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_tensors</span><span class="o">=</span><span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">add_generation_prompt</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">reasoning_strength</span><span class="o">=</span><span class="sh">"</span><span class="s">low</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">processor_kwargs</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">num_frames</span><span class="sh">"</span><span class="p">:</span> <span class="mi">96</span><span class="p">},</span>
+<span class="p">).</span><span class="nf">to</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">device</span><span class="p">)</span>
+
+<span class="n">input_len</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="sh">"</span><span class="s">input_ids</span><span class="sh">"</span><span class="p">].</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">processor</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span>
+    <span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">input_len</span><span class="p">:],</span>
+    <span class="n">skip_special_tokens</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="멀티모달-도구-호출">멀티모달 도구 호출</h3>
+
+<p>Muse Glimmer는 멀티모달 도구 호출을 수행할 수 있습니다. 아래 예시에서는 이미지 속 도시를 기반으로 날씨 도구를 호출하도록 모델에 요청합니다.</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">json</span>
+<span class="kn">import</span> <span class="n">re</span>
+<span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoProcessor</span><span class="p">,</span> <span class="n">AutoModelForMultimodalLM</span>
+
+<span class="n">MODEL_ID</span> <span class="o">=</span> <span class="sh">"</span><span class="s">meta-models/Muse-Glimmer-30B</span><span class="sh">"</span>
+
+<span class="c1"># Load model
+</span><span class="n">processor</span> <span class="o">=</span> <span class="n">AutoProcessor</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">MODEL_ID</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForMultimodalLM</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="n">MODEL_ID</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="n">tools</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">function</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">function</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">weather.get</span><span class="sh">"</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">description</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Get the current weather for a city.</span><span class="sh">"</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">parameters</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">object</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">properties</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="sh">"</span><span class="s">city</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">string</span><span class="sh">"</span><span class="p">},</span>
+                <span class="p">},</span>
+                <span class="sh">"</span><span class="s">required</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">city</span><span class="sh">"</span><span class="p">],</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+
+
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">image</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">image</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">https://huggingface.co/datasets/merve/vl-test-suite/resolve/main/SF.png</span><span class="sh">"</span><span class="p">},</span>
+            <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">I</span><span class="sh">'</span><span class="s">m going to the city in this picture. What clothes should I wear?</span><span class="sh">"</span><span class="p">},</span>
+        <span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">processor</span><span class="p">.</span><span class="nf">apply_chat_template</span><span class="p">(</span>
+    <span class="n">messages</span><span class="p">,</span>
+    <span class="n">tools</span><span class="o">=</span><span class="n">tools</span><span class="p">,</span>
+    <span class="n">tokenize</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_dict</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_tensors</span><span class="o">=</span><span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">add_generation_prompt</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">reasoning_strength</span><span class="o">=</span><span class="sh">"</span><span class="s">low</span><span class="sh">"</span>
+<span class="p">).</span><span class="nf">to</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">device</span><span class="p">)</span>
+
+<span class="n">input_len</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="sh">"</span><span class="s">input_ids</span><span class="sh">"</span><span class="p">].</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">processor</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">input_len</span><span class="p">:],</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="객체-검출">객체 검출</h3>
+
+<p>다음과 같이 Muse Glimmer를 사용하여 이미지에서 열린(Open-ended) 객체 검출을 수행할 수 있습니다.</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoProcessor</span><span class="p">,</span> <span class="n">AutoModelForMultimodalLM</span>
+
+<span class="n">MODEL_ID</span> <span class="o">=</span> <span class="sh">"</span><span class="s">meta-models/Muse-Glimmer-30B</span><span class="sh">"</span>
+
+<span class="c1"># Load model
+</span><span class="n">processor</span> <span class="o">=</span> <span class="n">AutoProcessor</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">MODEL_ID</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForMultimodalLM</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="n">MODEL_ID</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[{</span>
+    <span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">image</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">image</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">https://huggingface.co/datasets/merve/vl-test-suite/resolve/main/SF.png</span><span class="sh">"</span><span class="p">},</span>
+        <span class="p">{</span>
+            <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">:</span> <span class="p">(</span>
+                <span class="sh">"</span><span class="s">Detect the bridge. Return only the detection in the model</span><span class="sh">'</span><span class="s">s </span><span class="sh">"</span>
+                <span class="sh">"</span><span class="s">native object-detection format, with no explanation.</span><span class="sh">"</span>
+            <span class="p">),</span>
+        <span class="p">},</span>
+    <span class="p">],</span>
+<span class="p">}]</span>
+
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">processor</span><span class="p">.</span><span class="nf">apply_chat_template</span><span class="p">(</span>
+    <span class="n">messages</span><span class="p">,</span>
+    <span class="n">tokenize</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_dict</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_tensors</span><span class="o">=</span><span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">add_generation_prompt</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">reasoning_strength</span><span class="o">=</span><span class="sh">"</span><span class="s">low</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">).</span><span class="nf">to</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">device</span><span class="p">)</span>
+
+<span class="n">input_len</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="sh">"</span><span class="s">input_ids</span><span class="sh">"</span><span class="p">].</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">processor</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">input_len</span><span class="p">:],</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">detections</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="nf">loads</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">removesuffix</span><span class="p">(</span><span class="sh">"</span><span class="s">&lt;|eot|&gt;</span><span class="sh">"</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">detections</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>[!TIP]
+여기에 객체 검출을 수행하는 엔드 투 엔드 스크립트가 있습니다 <a href="https://gist.github.com/ariG23498/4f3587eb7753c0ff77c269e2c1efe2c0">GitHub Gist</a></p>
+</blockquote>
+
+<h2 id="section-4">Llama.cpp</h2>
+
+<p>Muse Glimmer는 day-0 llama.cpp 지원을 제공합니다. Meta는 <a href="https://huggingface.co/meta-models/Muse-Glimmer-30B-GGUF">this repo</a>에 보정된 양자값을 배포했고, Unsloth도 최적화된 양자값을 출시하고 있습니다. DFlash 추측 디코딩도 지원됩니다. llama 서버를 시작하거나 CLI를 실행하기 위해 사전 빌드된 llama 바이너리를 사용할 수 있습니다. llama.cpp를 설치하려면 다음을 실행하세요:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-LsSf</span> https://llama.app/install.sh | sh
+</code></pre></div></div>
+
+<p>그다음 아래와 같이 서버를 시작할 수 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>llama serve <span class="nt">-hf</span> meta-models/Muse-Glimmer-30B-GGUF
+</code></pre></div></div>
+
+<p>서버가 시작되면 로컬호스트:8080으로 접속해 내장 WebUI로 대화할 수 있습니다.</p>
+
+<p>또한 다음과 같이 서버에 질의할 수도 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:8080/v1/chat/completions <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+        "messages": [
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": "Write a limerick about python exceptions"}
+        ]
+    }'</span>
+</code></pre></div></div>
+
+<p>llama 서버를 Pi와 같은 코딩 에이전트와 함께 사용할 수도 있습니다.</p>
+
+<h2 id="section-5">Speculative Decoding</h2>
+
+<p>DFlash는 디코딩 단계에서 추가 속도 향상을 제공하기 위해 가벼운 블록 확산 드래프터 모델을 사용합니다. Transformers와 llama.cpp는 Muse Glimmer day-0의 DFlash 드래프터를 지원합니다.</p>
+
+<p>아래에서 추측 디코딩이 현실적인 설정에서 생성을 얼마나 빠르게 하는지 확인할 수 있습니다. 이 비디오는 왼쪽에 DFlash가 적용된 llama.cpp 웹 UI, 오른쪽에 일반 생성 화면을 보여줍니다.</p>
+
+<video controls="" width="100%">
+  <source src="https://huggingface.co/merve/smol-vision/resolve/main/llama.cpp-spec.mp4" type="video/mp4" />
+</video>
+
+<h3 id="트랜스포머를-이용한-추측-디코딩">트랜스포머를 이용한 추측 디코딩</h3>
+
+<p>다음과 같이 드래프터와 모델을 로드하고, 기본 모델에서처럼 추가 매개변수를 사용하여 추론할 수 있습니다(다음 코드 조각에서 보여줍니다).</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">torch</span>
+<span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoProcessor</span><span class="p">,</span> <span class="n">MuseGlimmerAssistantModel</span><span class="p">,</span> <span class="n">MuseGlimmerForConditionalGeneration</span>
+
+<span class="n">model_id</span> <span class="o">=</span> <span class="sh">"</span><span class="s">meta-models/Muse-Glimmer-30B</span><span class="sh">"</span>
+<span class="n">assistant_model_id</span> <span class="o">=</span> <span class="sh">"</span><span class="s">meta-models/Muse-Glimmer-30B-assistant</span><span class="sh">"</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">MuseGlimmerForConditionalGeneration</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">model_id</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">bfloat16</span><span class="p">,</span> <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">assistant</span> <span class="o">=</span> <span class="n">MuseGlimmerAssistantModel</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">assistant_model_id</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">bfloat16</span><span class="p">,</span> <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">processor</span> <span class="o">=</span> <span class="n">AutoProcessor</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">model_id</span><span class="p">)</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">image</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">url</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">https://huggingface.co/datasets/merve/vl-test-suite/resolve/main/SF.png</span><span class="sh">"</span><span class="p">},</span>
+            <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">What is shown in this image?</span><span class="sh">"</span><span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">processor</span><span class="p">.</span><span class="nf">apply_chat_template</span><span class="p">(</span>
+    <span class="n">messages</span><span class="p">,</span>
+    <span class="n">tokenize</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_dict</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_tensors</span><span class="o">=</span><span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">add_generation_prompt</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">reasoning_strength</span><span class="o">=</span><span class="sh">"</span><span class="s">low</span><span class="sh">"</span>
+<span class="p">).</span><span class="nf">to</span><span class="p">(</span><span class="n">target</span><span class="p">.</span><span class="n">device</span><span class="p">)</span>
+<span class="n">input_len</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="sh">"</span><span class="s">input_ids</span><span class="sh">"</span><span class="p">].</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">target</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span>
+    <span class="o">**</span><span class="n">inputs</span><span class="p">,</span>
+    <span class="n">assistant_model</span><span class="o">=</span><span class="n">assistant</span><span class="p">,</span>
+    <span class="n">speculation_type</span><span class="o">=</span><span class="sh">"</span><span class="s">dflash</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">do_sample</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">processor</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">input_len</span><span class="p">:],</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="llamacpp를-이용한-추측-디코딩">llama.cpp를 이용한 추측 디코딩</h3>
+
+<p>다음 명령으로 llama 서버를 시작할 수 있습니다. <code class="language-plaintext highlighter-rouge">--spec-draft-n-max</code> 인자는 각 추측 디코딩 단계에서 DFlash가 제안하는 미래 토큰의 수를 제어합니다. Muse Glimmer의 DFlash 모델은 블록 크기 16, 하나의 앵커 토큰과 15개의 제안 토큰으로 학습되었으므로 15를 초과하는 값은 15로 제한됩니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>llama serve <span class="nt">-hf</span> meta-models/Muse-Glimmer-30B-GGUF <span class="nt">--spec-type</span> draft-dflash <span class="nt">--spec-draft-n-max</span> 15
+</code></pre></div></div>
+
+<p>다음과 같이 추측 디코딩 드래프터와 함께 llama cli를 사용할 수도 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>llama cli <span class="nt">-hf</span> meta-models/Muse-Glimmer-30B-GGUF <span class="nt">--spec-type</span> draft-dflash
+
+</code></pre></div></div>
+
+<h3 id="inference-endpoints">Inference Endpoints</h3>
+
+<p>관리형 자동 확장 배포의 경우, <a href="https://endpoints.huggingface.co/huggingface/new/meta-models/Muse-Glimmer-30B">Muse Glimmer 30B Inference Endpoints preset</a>를 엽니다. 모델은 이미 선택되어 있습니다: 조직, 클라우드 공급자, 지역, 호환 GPU 인스턴스, 인증 및 자동 확장 설정을 선택한 뒤 시간당 가격을 검토하고 <strong>Create Endpoint</strong>를 클릭합니다. 상태가 <strong>Running</strong>이 되면 Playground에서 테스트하고 개요에서 엔드포인트 URL과 모델 이름을 복사할 수 있습니다.</p>
+
+<p><a href="https://endpoints.huggingface.co/huggingface/new/meta-models/Muse-Glimmer-30B"><img src="https://endpoints.huggingface.co/social-share/thumbnail-main.jpg" alt="Deploy Muse Glimmer 30B with Hugging Face Inference Endpoints" /></a></p>
+
+<p>배포된 모델은 OpenAI-호환 Chat Completions API를 노출합니다. Hugging Face 토큰을 환경 변수에 저장하고, <code class="language-plaintext highlighter-rouge">HF_ENDPOINT_URL</code>를 개요에 표시된 URL로 설정하되 <code class="language-plaintext highlighter-rouge">/v1</code>은 생략하며, 엔드포인트의 모델 이름은 <code class="language-plaintext highlighter-rouge">HF_ENDPOINT_MODEL</code>로 설정합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">HF_TOKEN</span><span class="o">=</span><span class="s2">"hf_..."</span>
+<span class="nb">export </span><span class="nv">HF_ENDPOINT_URL</span><span class="o">=</span><span class="s2">"https://&lt;endpoint-id&gt;.&lt;region&gt;.&lt;cloud&gt;.endpoints.huggingface.cloud"</span>
+<span class="nb">export </span><span class="nv">HF_ENDPOINT_MODEL</span><span class="o">=</span><span class="s2">"&lt;endpoint-model-name&gt;"</span>
+pip <span class="nb">install</span> <span class="nt">--upgrade</span> openai
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
+<span class="kn">from</span> <span class="n">openai</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">'</span><span class="s">HF_ENDPOINT_URL</span><span class="sh">'</span><span class="p">].</span><span class="nf">rstrip</span><span class="p">(</span><span class="sh">'</span><span class="s">/</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="s">/v1/</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">"</span><span class="s">HF_TOKEN</span><span class="sh">"</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">chat</span><span class="p">.</span><span class="n">completions</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">"</span><span class="s">HF_ENDPOINT_MODEL</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">system</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">You are a helpful assistant.</span><span class="sh">"</span><span class="p">},</span>
+        <span class="p">{</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Write a limerick about Python exceptions.</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">],</span>
+    <span class="n">max_tokens</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">message</span><span class="p">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>구성, 자동 확장, 보안, 로그 및 모니터링에 대한 내용은 <a href="https://huggingface.co/docs/inference-endpoints/en/index">Inference Endpoints documentation</a>를 참고하십시오.</p>
+
+<h2 id="section-6">Muse Glimmer vLLM에 대한 transformers 백엔드 지원</h2>
+
+<p>이번 릴리스에서는 transformers 백엔드로 vLLM에 대한 지원을 제공합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c"># tensor parallel serving across 4 GPUs</span>
+vllm serve meta-models/Muse-Glimmer-30B <span class="nt">--model-impl</span> transformers <span class="nt">--tensor-parallel-size</span> 4
+
+<span class="c"># infer</span>
+curl <span class="nt">-s</span> http://127.0.0.1:8000/v1/chat/completions <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+      "model": "meta-models/Muse-Glimmer-30B",
+      "messages": [
+        {"role": "user", "content": "Explain tensor parallelism briefly."}
+      ],
+      "temperature": 0.0,
+      "max_tokens": 256
+    }'</span>
+
+</code></pre></div></div>
+
+<h2 id="section-7">TRL로 파인튜닝</h2>
+
+<p>TRL을 사용하여 Muse Glimmer를 SFT에서 Async GRPO에 이르는 다양한 방법으로 파인튜닝할 수 있습니다. Hopper급 GPU 80GB VRAM 각각으로 bf16에서 두 가지 실험을 수행했습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>작업 부하</th>
+      <th style="text-align: right">실용적 최소값</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>추론 / 평가, BF16</td>
+      <td style="text-align: right">1×80 GB H100</td>
+    </tr>
+    <tr>
+      <td>LoRA SFT, BF16</td>
+      <td style="text-align: right">1×80 GB H100, 마이크로배치 1 + 체크포인팅</td>
+    </tr>
+    <tr>
+      <td>Full SFT, BF16</td>
+      <td style="text-align: right">8×80 GB H100 with FSDP/ZeRO-3</td>
+    </tr>
+    <tr>
+      <td>LoRA GRPO, Transformers 롤아웃</td>
+      <td style="text-align: right">1×80 GB H100, 느림/타이트</td>
+    </tr>
+    <tr>
+      <td>LoRA GRPO, separate vLLM rollout server</td>
+      <td style="text-align: right">8×H100: 4 롤아웃 + 4 트레이닝</td>
+    </tr>
+    <tr>
+      <td>Full-finetune GRPO</td>
+      <td style="text-align: right">8 GPUs는 보통 부족</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>이번 릴리스의 일부로, <a href="https://huggingface.co/merve/smol-vision/blob/main/qlora_click_grounding.ipynb">Muse Glimmer on small split of MolmoWeb dataset</a>를 파인튜닝하는 예제를 함께 제공합니다. 이는 모델이 구조화된 출력을 생성하도록 만드는 방법과 이미지를 대상으로 파인튜닝하는 방법을 보여줍니다.</p>
+
+<p>또한 <a href="https://github.com/huggingface/trl/blob/main/examples/scripts/openenv/opencode.py">OpenCode with AsyncGRPO example</a>에서 모델을 실행하는 실험도 수행했습니다. 모델은 우수한 코딩 능력을 보여주므로 OpenEnv 및 TRL에서 코딩 환경으로의 훈련을 시도해 보시길 권장합니다.</p>
+
+<h2 id="section-8">Demos</h2>
+
+<p>Muse Glimmer를 시도해 볼 수 있는 재미있는 방법들이 있습니다. 우리 생각에 이 모델의 가장 멋진 점은 로컬 규모의 개인 비서로서 코딩까지 가능하다는 것입니다. 즉, 스스로 양자화하고 Hub에서 양자화된 가중치를 찾고, 추론 엔드포인트에 자체 배포하며, 특정 하드웨어에 맞춰 자체 최적화하는 것까지 할 수 있습니다! 함께 로컬로 가봅시다 🚀</p>
+
+<h2 id="section-9">OpenClaw를 Muse Glimmer에 연결하기</h2>
+
+<p>추론 엔드포인트가 OpenAI-호환 <code class="language-plaintext highlighter-rouge">/v1</code> API를 공개한다고 가정합니다.</p>
+
+<p>OpenClaw 게이트웨이 환경에 <code class="language-plaintext highlighter-rouge">HF_TOKEN</code>를 설정한 다음 <code class="language-plaintext highlighter-rouge">~/.openclaw/openclaw.json</code>에 이 내용을 추가합니다:</p>
+
+<details>
+<summary>OpenClaw configuration</summary>
+
+```json5
+{
+  models: {
+    mode: "merge",
+    providers: {
+      muse: {
+        baseUrl: "https://YOUR-ENDPOINT.endpoints.huggingface.cloud/v1",
+        apiKey: {
+          source: "env",
+          provider: "default",
+          id: "HF_TOKEN"
+        },
+        api: "openai-completions",
+        authHeader: true,
+        models: [{
+          id: "meta-models/Muse-Glimmer-30B",
+          name: "Muse Glimmer",
+          reasoning: false,
+          input: ["text", "image"],
+          contextWindow: 32768,
+          maxTokens: 8192
+        }]
+      }
+    }
+  },
+  agents: {
+    defaults: {
+      model: { primary: "muse/meta-models/Muse-Glimmer-30B" }
+    }
+  }
+}
+```
+
+
+OpenClaw를 재시작합니다:
+
+```bash
+openclaw gateway restart
+```
+
+
+새로운 세션에서 확인합니다:
+
+```bash
+openclaw agent --message "Reply with: muse-ready"
+```
+
+
+</details>
+
+<p>엔드포인트의 <code class="language-plaintext highlighter-rouge">/v1/models</code> 응답에서 반환된 정확한 모델 ID를 사용하십시오(다르면).</p>
+
+<h3 id="hey-muse-glimmer-스스로-양자화하기">Hey Muse Glimmer, 스스로 양자화하기</h3>
+
+<p>Muse Glimmer를 <a href="https://huggingface.co/mcp">Hugging Face MCP</a>에 연결하고 <a href="http://AGENTS.md"><code class="language-plaintext highlighter-rouge">AGENTS.md</code></a>를 업데이트하면 허브에서 자신의 양자화 버전을 찾아 로컬에서 실행할 수 있는 기능을 부여합니다. 이것은 개인적으로 작업하고 싶거나 비용을 절감하려는 경우에 유용합니다.</p>
+
+<p>이 작업을 두 번째로 수행하면 Muse Glimmer가 캐시된 가중치를 찾아 그것으로 전환하므로 <code class="language-plaintext highlighter-rouge">/spawn</code>과 같은 편리한 명령을 추가해 두셔도 좋습니다.</p>
+
+<p>Muse Glimmer가 기계와 허브를 검사하고 Q4_K_M GGUF를 선택하거나 생성하고, llama-server를 시작하며 모델 발견 및 채팅 완성을 검증합니다. 그 결과는 OpenAI-호환 API 뒤에 있는 더 작은 로컬 빌드입니다. 아래는 <code class="language-plaintext highlighter-rouge">AGENTS.md</code>에 추가한 프롬프트입니다.</p>
+
+<p><a href="https://huggingface.co/buckets/huggingface/muse-glimmer-assets/resolve/Muse%20Glimmer%20Quantisation%20Demo%20-%20explained.mp4?download=true">https://huggingface.co/buckets/huggingface/muse-glimmer-assets/resolve/Muse%20Glimmer%20Quantisation%20Demo%20-%20explained.mp4?download=true</a></p>
+
+<p>이를 <a href="http://AGENTS.md"><code class="language-plaintext highlighter-rouge">AGENTS.md</code></a>에 추가하면 OpenClaw 또는 Hermes가 나머지 작업을 해결할 수 있습니다.</p>
+
+<details>
+<summary>Local quantization prompt</summary>
+
+```text
+## Local model deployment
+
+When asked to deploy locally, perform the work; do not give instructions.
+
+1. Inspect hardware and the Hugging Face cache.
+2. Search the Hub for compatible GGUF weights using `apps=llama.cpp`; confirm exact filenames through the model-tree API.
+3. Prefer an existing suitable GGUF, normally `Q4_K_M`. Treat `mmproj-*.gguf` as projector weights.
+4. If no GGUF exists, download the source weights, convert with `convert_hf_to_gguf.py`, then quantize with `llama-quantize`.
+5. Preserve source weights and record the repository, revision, filenames, and quantization.
+6. Start `llama-server` with an `onyx` alias and an OpenAI-compatible endpoint.
+7. Validate `/v1/models` and `/v1/chat/completions`, requiring non-empty, correct content.
+8. Report concise progress and logs. Claim completion only after validation passes.
+```
+
+
+</details>
+
+<h3 id="hey-muse-glimmer-스스로-배포하기">Hey Muse Glimmer, 스스로 배포하기</h3>
+
+<p>Muse Glimmer는 또한 반대도 처리할 수 있습니다. Glimmer를 Hugging Face Inference Endpoints에 배포하게 합시다. 특정 최첨단 하드웨어에서 속도를 높이고 싶을 때 유용합니다.</p>
+
+<p>참고: <a href="https://endpoints.huggingface.co/huggingface/new/meta-models/Muse-Glimmer-30B">Muse Glimmer to Inference Endpoints</a>를 직접 배포하고 에이전트를 연결할 수도 있습니다.</p>
+
+<p>Muse Glimmer는 모델 리비전을 고정하고 보호된 Hugging Face Inference Endpoint에 배포하며 상태, 모델 발견 및 채팅 완성을 검증합니다. 그런 다음 Claw 에이전트를 비밀 키와 롤백 보존과 함께 연결합니다. 아래는 <a href="http://AGENTS.md"><code class="language-plaintext highlighter-rouge">AGENTS.md</code></a>에 추가한 프롬프트입니다. Muse Glimmer는 또한 <a href="https://huggingface.co/mcp">Hugging Face MCP</a> 및/또는 <a href="https://huggingface.co/docs/hub/en/agents-skills">Hugging Face CLI and Skills</a>가 필요합니다.</p>
+
+<details>
+<summary>Inference Endpoint deployment prompt</summary>
+
+```text
+## Hugging Face Inference Endpoint deployment
+
+When asked to deploy on Hugging Face Inference Endpoints, perform the work; do
+not give instructions.
+
+1. Inspect Hugging Face authentication, the current model repository, and any
+   existing endpoints.
+2. Confirm the exact model repository and immutable revision through the Hub
+   API; inspect its architecture, configuration, and chat template.
+3. Confirm that the model is supported by vLLM, then deploy or update a
+   protected Inference Endpoint using the managed native vLLM engine.
+4. Choose an available region and the smallest suitable accelerator. Use one
+   replica and enable scale-to-zero when supported.
+5. Preserve the previous endpoint configuration for rollback. Do not expose
+   tokens, publish private weights, or replace an unrelated endpoint.
+6. Wait for the endpoint to become ready. If startup fails, inspect the logs
+   and report the actual blocker rather than repeatedly changing settings.
+7. Validate `/health`, `/v1/models`, and `/v1/chat/completions`, requiring the
+   expected model and non-empty, correct content. When agent use is required,
+   also validate a real structured tool call.
+8. Configure the Claw agent to use the endpoint's OpenAI-compatible `/v1` URL,
+   storing credentials as secrets and retaining the previous provider as
+   rollback. Test the connection in a fresh session.
+9. Report concise progress and finish with the repository, revision, engine,
+   hardware, endpoint URL, scaling state, and validation results. Claim
+   completion only after every required check passes.
+```
+
+
+</details>
+
+<h3 id="hey-muse-glimmer-스스로-최적화하기">Hey Muse Glimmer, 스스로 최적화하기</h3>
+
+<p>마지막으로 Muse Glimmer가 경미한 RSI를 수행하도록 합시다. 에이전트에게 특정 하드웨어, 예를 들어 Nvidia H100에 맞춰 자체 추론 엔진을 최적화하도록 지시할 수 있습니다. 이를 위해서는 Inference Endpoints와 같은 다른 추론 엔진을 사용해야 합니다.</p>
+
+<p>Muse Glimmer는 자신의 단일-H100 서빙 스택을 벤치마킹하며 워크로드를 고정한 채 한 가지 가역적 변경을 하나씩 테스트합니다. 정확도 보장을 통과하는 이득만 남기고 가장 빠르고 재현 가능한 구성으로 마무리합니다. 아래는 <a href="http://AGENTS.md"><code class="language-plaintext highlighter-rouge">AGENTS.md</code></a>에 추가한 프롬프트입니다. Muse Glimmer는 또한 <a href="https://huggingface.co/mcp">Hugging Face MCP</a> 및 <a href="https://huggingface.co/docs/hub/en/agents-skills">Hugging Face CLI and Skills</a>가 필요합니다.</p>
+
+<details>
+<summary>Self-optimization prompt</summary>
+
+```text
+You are Muse Glimmer acting as an autonomous inference-optimization engineer for your own serving stack.
+
+Goal: maximize valid single-H100 aggregate completion throughput in tokens/second.
+
+Protocol:
+1. Establish a correctness-passing baseline.
+2. Test one reversible optimization at a time.
+3. Keep the prompt, concurrency, sampling, request count, warm-up, and decode length fixed.
+4. Reject results that fail correctness or prefix checks.
+5. Record every experiment chronologically with its configuration, raw throughput, correctness, and delta.
+6. Keep improvements and revert regressions.
+7. Stop after six consecutive regressions or when the experiment budget is exhausted.
+8. Report the best valid configuration and exact reproduction command.
+
+Create a minimal scientific animation of the results:
+- white background;
+- raw tokens/second—never normalize;
+- one point revealed per experiment;
+- connect every point chronologically;
+- begin with the lowest valid result;
+- stop at the best result;
+- export as a GIF.
+
+Never fabricate, interpolate, or count correctness-failing measurements.
+```
+
+
+</details>
+
+<p><a href="https://huggingface.co/buckets/huggingface/muse-glimmer-assets/resolve/onyx-optimization-progress.gif?download=true">https://huggingface.co/buckets/huggingface/muse-glimmer-assets/resolve/onyx-optimization-progress.gif?download=true</a></p>
+
+<h3 id="hey-muse-glimmer-허브-연구하기">Hey Muse Glimmer, 허브 연구하기</h3>
+
+<p>Muse Glimmer를 Hugging Face 연구 에이전트로 사용해 보십시오. Gradio Space는 각 모델 요청을 OpenAI-호환 API를 통해 개인 Hugging Face Inference Endpoint로 보냅니다. 또한 공식 Hugging Face MCP 서버에 연결하여 에이전트가 허브 저장소, 모델, 데이터셋, Spaces, 문서 및 논문을 검색하고 검사할 수 있는 읽기 전용 도구를 제공합니다.</p>
+
+<iframe src="https://burtenshaw-muse-glimmer-chat.hf.space" frameborder="0" width="100%" height="700" allow="clipboard-read; clipboard-write"></iframe>
+
+<h2 id="section-10">마무리</h2>
+
+<p>저희는 Muse Glimmer를 Hugging Face Hub에 환영하게 되어 기쁩니다. 오늘 바로 로컬 코딩 설정과 함께 <a href="https://huggingface.co/meta-models/Muse-Glimmer-30B">Muse Glimmer</a>를 사용해 보세요!</p>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-08-10">10 Aug 2026</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#meta가-muse-glimmer로-돌아왔다-로컬-에이전트형-멀티모달-그리고-오픈-소스" id="markdown-toc-meta가-muse-glimmer로-돌아왔다-로컬-에이전트형-멀티모달-그리고-오픈-소스">Meta가 Muse Glimmer로 돌아왔다: 로컬, 에이전트형, 멀티모달, 그리고 오픈 소스!</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">벤치마크</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">아키텍처</a>        <ul>
+          <li><a href="#텍스트-디코더" id="markdown-toc-텍스트-디코더">텍스트 디코더</a></li>
+          <li><a href="#perception-encoder" id="markdown-toc-perception-encoder">Perception Encoder</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-3" id="markdown-toc-section-3">트랜스포머</a>        <ul>
+          <li><a href="#텍스트-전용-추론" id="markdown-toc-텍스트-전용-추론">텍스트 전용 추론</a></li>
+          <li><a href="#이미지와-텍스트로-모델에-프롬프트하기" id="markdown-toc-이미지와-텍스트로-모델에-프롬프트하기">이미지와 텍스트로 모델에 프롬프트하기</a></li>
+          <li><a href="#비디오-추론" id="markdown-toc-비디오-추론">비디오 추론</a></li>
+          <li><a href="#멀티모달-도구-호출" id="markdown-toc-멀티모달-도구-호출">멀티모달 도구 호출</a></li>
+          <li><a href="#객체-검출" id="markdown-toc-객체-검출">객체 검출</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-4" id="markdown-toc-section-4">Llama.cpp</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">Speculative Decoding</a>        <ul>
+          <li><a href="#트랜스포머를-이용한-추측-디코딩" id="markdown-toc-트랜스포머를-이용한-추측-디코딩">트랜스포머를 이용한 추측 디코딩</a></li>
+          <li><a href="#llamacpp를-이용한-추측-디코딩" id="markdown-toc-llamacpp를-이용한-추측-디코딩">llama.cpp를 이용한 추측 디코딩</a></li>
+          <li><a href="#inference-endpoints" id="markdown-toc-inference-endpoints">Inference Endpoints</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-6" id="markdown-toc-section-6">Muse Glimmer vLLM에 대한 transformers 백엔드 지원</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">TRL로 파인튜닝</a></li>
+      <li><a href="#section-8" id="markdown-toc-section-8">Demos</a></li>
+      <li><a href="#section-9" id="markdown-toc-section-9">OpenClaw를 Muse Glimmer에 연결하기</a>        <ul>
+          <li><a href="#hey-muse-glimmer-스스로-양자화하기" id="markdown-toc-hey-muse-glimmer-스스로-양자화하기">Hey Muse Glimmer, 스스로 양자화하기</a></li>
+          <li><a href="#hey-muse-glimmer-스스로-배포하기" id="markdown-toc-hey-muse-glimmer-스스로-배포하기">Hey Muse Glimmer, 스스로 배포하기</a></li>
+          <li><a href="#hey-muse-glimmer-스스로-최적화하기" id="markdown-toc-hey-muse-glimmer-스스로-최적화하기">Hey Muse Glimmer, 스스로 최적화하기</a></li>
+          <li><a href="#hey-muse-glimmer-허브-연구하기" id="markdown-toc-hey-muse-glimmer-허브-연구하기">Hey Muse Glimmer, 허브 연구하기</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-10" id="markdown-toc-section-10">마무리</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-193/" alt="">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href=""></a>
+        <span class="author-description"></span>                        
+    </div>
+</div>
+
+
+
+
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">21</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="translation">
+            Translation
+            <span class="count">21</span>
+          </button>
+        
+      
+        
+        
+          <button class="filter-btn" data-category="huggingface">
+            HuggingFace
+            <span class="count">20</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/grabette/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">21 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/thinkingmachines-inkling/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" alt="Thinking Machines의 Inkling에 오신 것을 환영합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/torch-attention-profile/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" alt="파이토치의 프로파일링(3부): 어텐션이 전부다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">10 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/native-speed-vllm-transformers-backend/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/lerobot-release-v060/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" alt="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">07 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/cerebras-gemma4-voice-ai/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">01 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/eee-community-evals/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" alt="Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Featuring Every Eval Ever Results on Hugging Face Model Pages를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">30 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/vllm-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">26 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/ffasr-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">24 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/huggingface-hub-release-ci/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" alt="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/huggingface-hub-release-ci/">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/cross-origin-storage/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/peft-beyond-lora/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/is-it-agentic-enough/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" alt="충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/agentic-resource-discovery-launch/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-06-17-agentic-resource-discovery-launch/thumbnail.png" alt="에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Agentic Resource Discovery: Let agents search를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">17 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/github-ci-hf-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-06-09-github-ci-hf-jobs/thumbnail.gif" alt="GitHub CI를 Hugging Face Jobs로 마이그레이션" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Migrating Your GitHub CI to Hugging Face Jobs를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">09 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/openenv-agentic-rl/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-06-08-openenv-agentic-rl/thumbnail.png" alt="오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Open Source Community is backing OpenEnv for Agentic RL를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/torch-profiler/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-05-29-torch-profiler/thumbnail.png" alt="PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 1): A Beginner’s Guide to torch.profiler를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">29 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/local-reachy-mini-conversation/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">27 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/olmoearth-v1-1/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-05-20-olmoearth-v1-1/thumbnail.png" alt="OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 OlmoEarth v1.1: A more efficient family of models를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">20 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/paddleocr-transformers/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">19 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="transformers translation ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-193/how-to-use-translator/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-193/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-193/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
+        <p class="card-text text-muted">
+Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">05 Oct 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+</main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-193/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-193/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-193/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-193/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-193/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-193/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-193/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-193/assets/js/category.js"></script>
+  </body>
+</html>
