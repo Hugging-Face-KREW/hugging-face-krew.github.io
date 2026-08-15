@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-195/assets/images/favicon.ico" />
+
+    <title>오픈 모델 현황: 2026년 여름 관찰 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>오픈 모델 현황: 2026년 여름 관찰 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="오픈 모델 현황: 2026년 여름 관찰" />
+<meta name="author" content="dailybot" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 State of Open Models: Summer 2026 Observations를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 State of Open Models: Summer 2026 Observations를 한국어로 번역한 글입니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-195/state-of-open-models-summer-2026/assets/images/blog/posts/2026-08-14-state-of-open-models-summer-2026/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-08-14T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-08-14T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-195/state-of-open-models-summer-2026/assets/images/blog/posts/2026-08-14-state-of-open-models-summer-2026/thumbnail.png" />
+<meta name="twitter:title" content="오픈 모델 현황: 2026년 여름 관찰" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-08-14T00:00:00+09:00","datePublished":"2026-08-14T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 State of Open Models: Summer 2026 Observations를 한국어로 번역한 글입니다.","headline":"오픈 모델 현황: 2026년 여름 관찰","image":"/pr-preview/pr-195/state-of-open-models-summer-2026/assets/images/blog/posts/2026-08-14-state-of-open-models-summer-2026/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-195/state-of-open-models-summer-2026/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-195/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-195/state-of-open-models-summer-2026/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-195/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-195/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-195/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-195/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-195/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-195/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-195/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-195/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-08-14-state-of-open-models-summer-2026/thumbnail.png" alt="오픈 모델 현황: 2026년 여름 관찰">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-08-14-state-of-open-models-summer-2026/thumbnail.png" alt="오픈 모델 현황: 2026년 여름 관찰">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-195/categories#huggingface">HuggingFace</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-195/categories#translation">Translation</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">오픈 모델 현황: 2026년 여름 관찰</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#오픈-모델-현황-2026년-여름-관찰" id="markdown-toc-오픈-모델-현황-2026년-여름-관찰">오픈 모델 현황: 2026년 여름 관찰</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1"><strong>2\. Attention ≠ Adoption</strong></a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2"><strong>3\. Open weights shift where value accumulates</strong></a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3"><strong>4\. Qwen has become the community’s base model</strong></a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4"><strong>5\. Small models remain the practical layer</strong></a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5"><strong>6\. Agents are the new user</strong></a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6"><strong>Looking forward</strong></a>        <ul>
+          <li><a href="#notes-on-method" id="markdown-toc-notes-on-method"><strong>Notes on method</strong></a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/state-of-open-models-summer-2026">State of Open Models: Summer 2026 Observations</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/state-of-open-models-summer-2026 -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="오픈-모델-현황-2026년-여름-관찰">오픈 모델 현황: 2026년 여름 관찰</h1>
+
+<p>AI 세계에서 시간은 압축된 느낌이다. 우리의 <a href="https://huggingface.co/blog/huggingface/state-of-os-hf-spring-2026">spring report</a>이 생태계를 살펴본 연 2회 분석 이후 불과 몇 달이 지났고, 이번 여름까지 관찰한 여러 발견들이 있다. 이 보고서는 2026년 1월부터 8월까지의 관찰을 제시하고 각 관찰 뒤의 데이터를 제시한다.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/state-of-open-models-summer-2026/dataset-growth.png" alt="Cumulative growth of Hugging Face datasets by task category, reaching one million in 2026" /></p>
+
+<p>Hugging Face Hub의 모델과 데이터셋은 매일 증가하고 있다. 공개 모델 저장소는 기간 동안 2.43 to 2.96 million으로 증가했고, 데이터셋은 711,000에서 1 million으로, Spaces는 1.00에서 1.44 million으로 증가했다. 아래의 분포는 여전히 극단적이며, 대략 85.6%의 모델이 lifetimesDownloads가 200 미만이고, 저장소의 1.5%가 모든 다운로드의 99.2%를 차지한다. 아래의 모든 내용은 그 형태 안에서 일어난다.</p>
+
+<p><strong>1\. The frontier is moving fast</strong></p>
+
+<p><strong>과거에는 명확한 발전 경로가 있었다: 연구소들은 작고 가벼운 모델을 먼저 공개하고 점차 규모의 상단으로 진행했다. 2026년에는 다수의 중국 연구소가 이 발전 과정을 완전히 건너뛰었다.</strong></p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/state-of-open-models-summer-2026/frontier-ceiling-by-country.png" alt="Largest open-model releases from Chinese and US labs by month in 2026" /></p>
+
+<p><strong>In almost every month of 2026, the largest and most performant open model from a Chinese lab was larger than anything an American lab released of its own.</strong> China’s monthly ceiling ran between 754B and 2.78 trillion parameters; America’s own ceiling stayed under 130B in five of seven months, the exception being NVIDIA’s <a href="https://huggingface.co/collections/nvidia/nvidia-nemotron-v3">Nemotron 3 Ultra</a> at 561B in May and June, and <a href="https://huggingface.co/collections/thinkingmachines/inkling">Inkling</a> from Thinking Machines Lab.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/state-of-open-models-summer-2026/lab-size-strategy.png" alt="Every lab has a different size strategy" /></p>
+
+<p>The chart splits the labs into two camps. <a href="https://huggingface.co/moonshotai">Moonshot</a>, <a href="https://huggingface.co/MiniMaxAI">MiniMax</a>, <a href="https://huggingface.co/XiaomiMiMo">Xiaomi</a> and <a href="http://Z.ai">Z.ai</a> publish almost nothing below 70B, so a developer’s first encounter with them is a model too large to run on anything they own. <a href="https://huggingface.co/tencent">Tencent</a> and <a href="https://huggingface.co/Qwen">Alibaba Qwen</a> cover the whole range instead, from under 1B upward.</p>
+
+<p>Two things made the first camp possible. Building large stopped being a differentiator. Xiaomi and <a href="https://huggingface.co/meituan-longcat">Meituan</a> both cleared a trillion parameters this year, and neither was a household name in open weights twelve months ago. And a lab no longer has to ship a small model to be reachable, because the community’s quantization layer will make a large one runnable within days, a dependency we return to below.</p>
+
+<p>That leaves the size profile as a statement of intent rather than of capability. A frontier only portfolio stakes everything on benchmark position and API demand. A full spectrum portfolio is a bid to be the family developers standardise on. Both are rational, they are playing for different prizes.</p>
+
+<p>The United States, meanwhile, is not absent from open source.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/state-of-open-models-summer-2026/new-homegrown-models.png" alt="New homegrown models" /></p>
+
+<p>The two organizations publishing the most new open models this year are also the companies making the hardware: <a href="https://huggingface.co/amd">AMD</a> and <a href="https://huggingface.co/nvidia">NVIDIA</a>. Each released more than 200 new model repositories, far ahead of the rest of the field, with <a href="https://huggingface.co/LiquidAI">LiquidAI</a> ranking third at around 100. Hardware vendors have realized that open models are a way to sell chips: a model optimized for your hardware and freely available is the clearest proof that the hardware works.</p>
+
+<p>When smaller models and embedding models are included, where Google, Microsoft, IBM Granite, and OpenAI’s older vision and speech models generate hundreds of millions of downloads annually,  <strong>U.S. participation in open source AI is still growing.</strong></p>
+
+<p>However, the center of gravity has shifted. Google and Meta now rank well below NVIDIA in new model releases, despite being the companies that defined open model publishing in previous years. Meta’s move toward closed flagship models further highlights this change. Open source has moved from model labs to <strong>hardware and infrastructure companies</strong>.</p>
+
+<p>At the frontier scale, the picture is very different. Most U.S. releases above 100B parameters this year are not new models, but built on top of Chinese models. Only a few major original American models appear at this scale: Thinking Machines’ <a href="https://huggingface.co/collections/thinkingmachines/inkling">Inkling</a> (952B), NVIDIA’s <a href="https://huggingface.co/collections/nvidia/nvidia-nemotron-v3">Nemotron 3 Ultra</a> (561B), <a href="https://huggingface.co/collections/nvidia/nvidia-nemotron-v3">Nemotron 3 Super</a> (124B), and Arcee AI’s <a href="https://huggingface.co/collections/arcee-ai/trinity-large-thinking">Trinity-Large</a> (399B).</p>
+
+<p>AMD contributed many conversions but no original model at this scale. This work is still important: it enables trillion-parameter Chinese models to run efficiently on American hardware. But it represents a <strong>distribution and optimization layer rather than model creation</strong>.</p>
+
+<p>Meanwhile, Chinese open models are increasingly optimized for domestic chips,  the same competition in reverse, where models are designed around specific hardware ecosystems.</p>
+
+<h2 id="section-1"><strong>2\. Attention ≠ Adoption</strong></h2>
+
+<p>We took the top 25 model repositories by downloads accumulated this year and the top 25 by likes. <strong>Exactly one repository appears in both lists.</strong></p>
+
+<p><strong><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/state-of-open-models-summer-2026/attention-vs-usage.png" alt="Attention and usage are two different economies" /></strong></p>
+
+<p>We counted downloads inside the window rather than lifetime, so nothing is credited for merely having existed longer,  and controlling for age makes the split sharper. Not one model published in 2026 reaches the download top 25, while thirteen of the twenty-five date from 2022. <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2</a> was pulled 1.55 billion times in seven months against 5,156 likes; <a href="https://huggingface.co/moonshotai/Kimi-K3">Kimi-K3</a> was pulled about 60 times per like it received.</p>
+
+<p>The two numbers record different acts. A like says a release matters, and goes to frontier models in the weeks after they ship. A download says something is wired into a pipeline that runs on a schedule, and accrues to small, stable models over years. Likes are the right instrument for reading what the field is excited about, downloads for reading what it currently depends on. Treating either as a proxy for the other is the most common mistake we see in coverage of the Hub, including our own earlier work. The same split appears at the level of the publisher.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/state-of-open-models-summer-2026/downloads-by-lab-and-model-size.png" alt="Who downloads what" /></p>
+
+<p>Chinese frontier labs are the only accounts on the Hub where the heavy band carries the volume. Effectively all of MiniMax’s 2026 downloads are of models above 70B, along with 88% of Moonshot’s, 55% of DeepSeek’s and 39% of Z.ai’s. No large American account looks like this: Google, Microsoft and IBM Granite record essentially none of their 2026 downloads above 70B, and NVIDIA and Meta only 14% and 9%.</p>
+
+<p>The difference becomes clearer in total downloads. Moonshot’s frontier-only portfolio recorded 37M downloads over the year, while Qwen’s broader release strategy across model sizes reached 2,045M (across repositories with declared parameter counts, 2,061M including all repositories) , about 55 times more. The continued expansion of the family, from the 2.4T-parameter Qwen 3.8 Max to smaller variants such as 27B, shows the same focus on coverage across different use cases.</p>
+
+<p>Time also plays an important role. Most models experience a sharp decline in usage after release, followed by a long tail of steady activity. A model’s adoption is largely determined within its first few months.</p>
+
+<p>This helps explain why today’s download volume is often driven not by the newest releases, but by a smaller group of models that have become established infrastructure over time.</p>
+
+<h2 id="section-2"><strong>3\. Open weights shift where value accumulates</strong></h2>
+
+<p>If frontier models were a licensing business, you would expect the biggest releases to carry the tightest terms. However, the data below shows a different story.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/state-of-open-models-summer-2026/model-licenses-by-region-and-size.png" alt="The licence is not the business model" /></p>
+
+<p>Of 178 Chinese releases above 20B parameters this year, 59% carry Apache 2.0 and 22% carry MIT, and <strong>exactly none carry a non-commercial restriction</strong>.</p>
+
+<p>DeepSeek and Z.ai ship models between 700 billion and 1.65 trillion parameters under plain MIT. Chinese labs license their largest models about as permissively as their smallest, and more permissively than American labs license theirs: on the American side of the same size band, 29% is Apache or MIT, 41% sits under custom terms and 30% declares nothing at all.</p>
+
+<p>Whatever these releases are for, it is not licence revenue. The weights are given away on the most permissive terms available. The return has to come from somewhere else: <strong>API and cloud business, hardware and platform positioning, or the ecosystem position itself.</strong>  For instance, the valuations of Z.ai and Kimi point to an effective open source strategy, getting traction and growth opportunities in the community. Going forward, however, the industry is likely to shift toward clearer monetization paths from open-source adoption.</p>
+
+<h2 id="section-3"><strong>4\. Qwen has become the community’s base model</strong></h2>
+
+<p>A model’s ecosystem position is not defined only by its own releases, but by how much the community builds on top of it. As mentioned above, Qwen is one exception which is getting attention and adoption.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/state-of-open-models-summer-2026/derivatives-by-organization.png" alt="Derivatives on Hugging Face by organization" /></p>
+
+<p>Data from Hugging Face</p>
+
+<p>By this measure, Qwen has become one of the largest foundations in the open model ecosystem. Qwen-based models now account for <strong>151,448 derivatives</strong> on the Hub, 2.6× Meta’s total footprint and 4.7× the Llama repositories specifically. Google follows with 82,506 derivatives. The third-largest source is Unsloth, a community account publishing quantized and fine-tuning-ready builds, many of which further extend the Qwen ecosystem.</p>
+
+<p>Qwen derivatives have increased at roughly <strong>180–210 new repositories per day</strong> throughout the first seven months of 2026, showing that adoption is not driven only by individual launches. Qwen has become part of the default workflow for developers deciding what models to fine-tune and deploy.</p>
+
+<p>Several factors contributed to this position. <strong>First, consistency.</strong> Qwen has maintained a regular release cadence, continuously updating its model family rather than relying on occasional flagship releases. <strong>Second, coverage.</strong> It publishes models across a wide range of sizes and use cases, allowing developers to stay within the same ecosystem whether they need a small local model or a larger deployment model. <strong>Third, openness.</strong> Apache 2.0 licensing reduces friction for modification, redistribution, and commercial use.</p>
+
+<p>These factors reinforce each other. A broad model family attracts more developers; more developers create more derivatives; and those derivatives make the ecosystem more attractive to future users.</p>
+
+<p>This position was built largely by the community. The <strong>151,448 derivatives</strong> represent downstream work created by other developers, not releases produced by Qwen itself. Even among the <strong>28,531 GGUF conversions</strong> of Qwen models on the Hub, Qwen published only 54.</p>
+
+<h2 id="section-4"><strong>5\. Small models remain the practical layer</strong></h2>
+
+<p>Among models that declare a parameter count, those under 1B take 83% of all-time downloads and everything above 100B takes 1%. Restricting to downloads accumulated in 2026 changes nothing: 3% of the volume goes to models above 70B. This is the March finding that has held up most cleanly, for the same reason as before,  small models are the only ones that run on the hardware most developers actually have.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/state-of-open-models-summer-2026/downloads-by-model-size.png" alt="Downloads still belong to small models" /></p>
+
+<p>So how does a trillion-parameter model reach anyone at all? Through llama.cpp.</p>
+
+<p>In February the ggml team <a href="https://huggingface.co/blog/ggml-joins-hf">joined Hugging Face</a>, with the project remaining fully open-source, community-governed and in the same technical direction. What changed is that the most important project in local inference now has durable resources behind it.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/state-of-open-models-summer-2026/llama-cpp-hub-growth.png" alt="llama.cpp on the Hub in 2026" /></p>
+
+<p>The ceiling moved with llama.cpp. The July snapshot carries GGUF builds of DeepSeek-V4-Flash at roughly 284B parameters and Kimi-K3 at roughly 2.8 trillion. Local inference used to mean an 8B model on a laptop. It now means a trillion-parameter mixture-of-experts spread across a few consumer machines, which is the alternative route the frontier did not have a year ago, and the reason a frontier-first release strategy is viable at all.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/state-of-open-models-summer-2026/local-downloads-by-model-family.png" alt="What people actually run locally" /></p>
+
+<p>And that route runs on Qwen: 39.6 million GGUF downloads a month, nearly twice Gemma’s 20.8 million and more than five times Llama’s 7.5 million. The Llama gap is not a supply problem, Llama-derived GGUF repositories slightly outnumber Qwen’s. Same shelf space, a fifth of the traffic.</p>
+
+<p>Model repositories grew 21.5% over these seven months. Several things around them grew several times faster.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/state-of-open-models-summer-2026/runtime-layer-growth.png" alt="The runtime layer is growing fastest" /></p>
+
+<p>Repositories declaring the gguf library rose 464%, lerobot 194% and Apple’s mlx148%, against 16% for transformers and peft and 21% for diffusers. The modelling core is growing at roughly the platform average. The layer that decides where a model can physically run local inference formats, Apple silicon, robot control stacks, is growing three to seven times faster than that.</p>
+
+<p>Across the ten largest model families, the labs behind these models publish very few official GGUF conversions. Yet GGUF versions are often the ones used by developers running models locally. Providing an official conversion at release, documenting quantization choices, and signing the artifacts would require limited additional effort. Rather than maintaining this workflow internally, labs could collaborate with existing ecosystem contributors such as Unsloth. Doing so would narrow the gap between the weights tested by model creators and the versions adopted by the broader community.</p>
+
+<h2 id="section-5"><strong>6\. Agents are the new user</strong></h2>
+
+<p>We could not have written this section in March, because the instrument did not exist. The <a href="https://huggingface.co/datasets/huggingface/agent-usage">agent-usage</a> dataset, published in July, records the agent/&lt;name&gt; token that coding agents send when they call the Hub through huggingface\_hub or the hf CLI — searching for models, pushing datasets, running Jobs, creating Spaces. For the first time we can see how much agent traffic the Hub receives and which harnesses it comes from.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/state-of-open-models-summer-2026/agent-hub-traffic.png" alt="Agents calling the Hugging Face Hub" />
+Claude Code led July with 44.4%, but a single month conceals the real finding: it held 67.8% in April and 6.4% in May, while Codex climbed steadily from 10.4% to 20.8%. This is a market with no incumbent, where one release or one changed default can move half the traffic in a month.</p>
+
+<p>The second finding is the unregistered row. Nearly a quarter of agent-tagged traffic in July came from harnesses not yet named in the dataset, and in May that figure was 59.8%. Between April and July more than a dozen new client identifiers appeared. New entrants are arriving faster than any registry can name them — which is itself the finding.</p>
+
+<p>We spent much of the year building for this reader rather than only for human browsers. Papers began serving machine-readable Markdown in March. April brought <a href="https://huggingface.co/changelog/agent-trace-viewer">agent traces as a first-class dataset type</a> and an agents.md endpoint on every Gradio Space, so an agent can read a Space’s API and call it directly. July brought the <a href="https://huggingface.co/changelog/mcp-improvements-jul-26">hf_fs tool</a> on our MCP server, exposing repositories, storage, docs and papers through a single interface in just over a thousand tokens, alongside attachable sandboxes for secure execution. The same consolidation happened at the protocol layer, with MCP moving into the Linux Foundation’s Agentic AI Foundation.</p>
+
+<p>Then, in July, an agent stopped being a reader and became an intruder. What appears to be the first documented case of an autonomous agent running a sustained intrusion on its own initiative happened to us. While our team tried to use frontier closed models to analyze the captured attack code, their safety guardrails declined the work. The analysis was completed in the end on a quantized open model GLM-5.2 running on our own infrastructure. We published a <a href="https://huggingface.co/blog/security-incident-july-2026">disclosure</a> and a <a href="https://huggingface.co/blog/agent-intrusion-technical-timeline">full technical timeline</a>.</p>
+
+<h2 id="section-6"><strong>Looking forward</strong></h2>
+
+<p>Compared to the spring report, the geographical rebalancing of power continues to accelerate. While the US open source models continue, the racing between several Chinese frontier models, drawing also strong attention within the community. Many likes on these frontier models are pointing to what excites the community the most, and growth opportunity for companies leveraging the attention for valuations.</p>
+
+<p>However, the AI race is not only sprints, but also a marathon, tools like llama.cpp helps deploying the big models locally, but a broad model family and its adoption is still the key, to build a positive feedback loop between developers, publisher and future users. Models to be embedded in the infrastructure and being part of the ecosystem, may lead to a commercially sound exit at the end of the tunnel.</p>
+
+<p>In the end, having for the first time agents being the number 1 user on HF hub, the next report may also look very different.</p>
+
+<p>As In AI, a few months can reshape the ecosystem.</p>
+
+<hr />
+
+<h3 id="notes-on-method"><strong>Notes on method</strong></h3>
+
+<p>This analysis is based on activity observed on the Hugging Face Hub during the first seven months of 2026.</p>
+
+<p>The metrics used in this report, including downloads, likes, derivatives, and model releases,  represent different aspects of ecosystem activity. They should not be interpreted as direct measures of model quality, commercial adoption, or overall market share.</p>
+
+<p>Downloads indicate usage within the Hub ecosystem, but they do not capture API usage, private deployments, or models distributed through other channels.</p>
+
+<p>Likes reflect community attention and interest, while derivative models provide a signal of how much developers build on top of an existing model.</p>
+
+<p>Because open-source AI adoption happens across many channels, Hub activity should be viewed as one perspective on ecosystem development rather than a complete measurement of the AI market.</p>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-08-14">14 Aug 2026</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#오픈-모델-현황-2026년-여름-관찰" id="markdown-toc-오픈-모델-현황-2026년-여름-관찰">오픈 모델 현황: 2026년 여름 관찰</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1"><strong>2\. Attention ≠ Adoption</strong></a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2"><strong>3\. Open weights shift where value accumulates</strong></a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3"><strong>4\. Qwen has become the community’s base model</strong></a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4"><strong>5\. Small models remain the practical layer</strong></a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5"><strong>6\. Agents are the new user</strong></a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6"><strong>Looking forward</strong></a>        <ul>
+          <li><a href="#notes-on-method" id="markdown-toc-notes-on-method"><strong>Notes on method</strong></a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-195/" alt="">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href=""></a>
+        <span class="author-description"></span>                        
+    </div>
+</div>
+
+
+
+
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">21</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="translation">
+            Translation
+            <span class="count">21</span>
+          </button>
+        
+      
+        
+        
+          <button class="filter-btn" data-category="huggingface">
+            HuggingFace
+            <span class="count">20</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/grabette/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">21 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/thinkingmachines-inkling/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" alt="Thinking Machines의 Inkling에 오신 것을 환영합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/torch-attention-profile/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" alt="파이토치의 프로파일링(3부): 어텐션이 전부다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">10 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/native-speed-vllm-transformers-backend/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/lerobot-release-v060/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" alt="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">07 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/cerebras-gemma4-voice-ai/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">01 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/eee-community-evals/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" alt="Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Featuring Every Eval Ever Results on Hugging Face Model Pages를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">30 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/vllm-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">26 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/ffasr-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">24 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/huggingface-hub-release-ci/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" alt="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/huggingface-hub-release-ci/">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/cross-origin-storage/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/peft-beyond-lora/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/is-it-agentic-enough/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" alt="충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/agentic-resource-discovery-launch/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-06-17-agentic-resource-discovery-launch/thumbnail.png" alt="에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Agentic Resource Discovery: Let agents search를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">17 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/github-ci-hf-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-06-09-github-ci-hf-jobs/thumbnail.gif" alt="GitHub CI를 Hugging Face Jobs로 마이그레이션" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Migrating Your GitHub CI to Hugging Face Jobs를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">09 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/openenv-agentic-rl/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-06-08-openenv-agentic-rl/thumbnail.png" alt="오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Open Source Community is backing OpenEnv for Agentic RL를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/torch-profiler/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-05-29-torch-profiler/thumbnail.png" alt="PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 1): A Beginner’s Guide to torch.profiler를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">29 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/local-reachy-mini-conversation/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">27 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/olmoearth-v1-1/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-05-20-olmoearth-v1-1/thumbnail.png" alt="OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 OlmoEarth v1.1: A more efficient family of models를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">20 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/paddleocr-transformers/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">19 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="transformers translation ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-195/how-to-use-translator/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-195/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-195/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
+        <p class="card-text text-muted">
+Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">05 Oct 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+</main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-195/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-195/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-195/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-195/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-195/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-195/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-195/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-195/assets/js/category.js"></script>
+  </body>
+</html>
