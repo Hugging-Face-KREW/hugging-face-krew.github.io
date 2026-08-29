@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-200/assets/images/favicon.ico" />
+
+    <title>Open ASR Leaderboard에 최초의 글로벌 사우스 언어가 추가되다 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Open ASR Leaderboard에 최초의 글로벌 사우스 언어가 추가되다 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Open ASR Leaderboard에 최초의 글로벌 사우스 언어가 추가되다" />
+<meta name="author" content="dailybot" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 The Open ASR Leaderboard Adds Its First Global South Language를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 The Open ASR Leaderboard Adds Its First Global South Language를 한국어로 번역한 글입니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-200/open-asr-leaderboard-global-south/assets/images/blog/posts/2026-08-28-open-asr-leaderboard-global-south/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-08-28T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-08-28T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-200/open-asr-leaderboard-global-south/assets/images/blog/posts/2026-08-28-open-asr-leaderboard-global-south/thumbnail.png" />
+<meta name="twitter:title" content="Open ASR Leaderboard에 최초의 글로벌 사우스 언어가 추가되다" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-08-28T00:00:00+09:00","datePublished":"2026-08-28T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 The Open ASR Leaderboard Adds Its First Global South Language를 한국어로 번역한 글입니다.","headline":"Open ASR Leaderboard에 최초의 글로벌 사우스 언어가 추가되다","image":"/pr-preview/pr-200/open-asr-leaderboard-global-south/assets/images/blog/posts/2026-08-28-open-asr-leaderboard-global-south/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-200/open-asr-leaderboard-global-south/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-200/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-200/open-asr-leaderboard-global-south/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-200/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-200/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-200/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-200/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-200/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-200/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-200/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-200/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-08-28-open-asr-leaderboard-global-south/thumbnail.png" alt="Open ASR Leaderboard에 최초의 글로벌 사우스 언어가 추가되다">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-08-28-open-asr-leaderboard-global-south/thumbnail.png" alt="Open ASR Leaderboard에 최초의 글로벌 사우스 언어가 추가되다">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-200/categories#huggingface">HuggingFace</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-200/categories#translation">Translation</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">Open ASR Leaderboard에 최초의 글로벌 사우스 언어가 추가되다</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#open-asr-leaderboard에-최초의-글로벌-사우스-언어가-추가되다" id="markdown-toc-open-asr-leaderboard에-최초의-글로벌-사우스-언어가-추가되다">Open ASR Leaderboard에 최초의 글로벌 사우스 언어가 추가되다</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">수집 설계</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">데이터셋 구성</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">화자 범위</a>        <ul>
+          <li><a href="#메타데이터-필드" id="markdown-toc-메타데이터-필드">메타데이터 필드</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-4" id="markdown-toc-section-4">수집 및 품질 관리</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">지역적 변이</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">Hindi의 표기 변이</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">평가받는 방법</a></li>
+      <li><a href="#section-8" id="markdown-toc-section-8">앞으로의 과제</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/open-asr-leaderboard-global-south">The Open ASR Leaderboard Adds Its First Global South Language</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/open-asr-leaderboard-global-south -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="open-asr-leaderboard에-최초의-글로벌-사우스-언어가-추가되다">Open ASR Leaderboard에 최초의 글로벌 사우스 언어가 추가되다</h1>
+
+<p><em>Voice Arena와 Hugging Face가 Hindi 및 Indian English를 위한 오픈 ASR 평가를 출시하기 위해 협력합니다</em></p>
+
+<p>벤치마크는 무엇이 만들어질지를 결정합니다. <a href="https://huggingface.co/spaces/hf-audio/open_asr_leaderboard">Open ASR Leaderboard</a>에서 높은 점수를 받은 모델은 채택되고 개선되는 반면, 리더보드가 측정하지 않는 역량은 개선되지 않는 경향이 있습니다. 최근 리더보드 관련 작업의 상당 부분은 평가 지표를 더 신뢰할 수 있게 만드는 데 집중되어 왔습니다.</p>
+
+<ol>
+  <li><a href="https://huggingface.co/blog/open-asr-leaderboard-private-data">Held-out private splits</a>.</li>
+  <li>모델이 오디오만 듣고 전사하는 것이 아니라 참조 전사를 얼마나 재현하는지 정량화하기 위한 <a href="https://huggingface.co/blog/asr-benchmark-optimization">Benchmark-fitting analysis</a>.</li>
+  <li>올바른 예측/변형이 불이익을 받지 않도록 정규화기의 격차를 해소하기.</li>
+</ol>
+
+<p>이 모든 작업은 하나의 수치(WER)를 조작하기 어렵게 만듭니다. 하지만 여전히 하나의 수치입니다. 오랜 기간 이어진 연구에 따르면 ASR 오류율은 이를 사용하는 사람들 사이에 고르게 분포하지 않습니다. <a href="https://www.pnas.org/doi/10.1073/pnas.1915768117">Racial disparities in automated speech recognition</a>은 상용 시스템이 백인 화자보다 흑인 화자에게 대략 두 배 더 나쁜 성능을 보인다는 사실을 발견했으며, <a href="https://huggingface.co/papers/2103.15122">Quantifying Bias in Automatic Speech Recognition</a>은 성별, 연령, 억양에 따른 추가적인 차이를 발견했습니다. 이 중 어느 것도 리더보드에는 드러나지 않으며, 이는 리더보드가 이를 숨기기 때문이 아닙니다. 리더보드가 실행하는 테스트 세트는 발화된 내용을 기록할 뿐, 누가 말했는지에 대해서는 거의 아무것도 기록하지 않기 때문입니다.</p>
+
+<p>이 격차를 해결하기 위해 Open ASR Leaderboard에 두 개의 평가 세트를 도입합니다: <a href="https://huggingface.co/datasets/VoiceArena/MonsoonASR-Open-ASR-leaderboard-en-IN">Monsoon en-IN</a> 및 <a href="https://huggingface.co/datasets/VoiceArena/MonsoonASR-Open-ASR-leaderboard-hi-IN">Monsoon hi-IN</a>. <strong>5억 명이 넘는 사람들이 사용하는</strong> Hindi는 현재 유럽 언어만 다루는 다국어 탭에 추가되는 최초의 Indic language입니다. 각 세트는 공개 스플릿으로 출시되어 자체 점수 산출이 가능하며, 벤치마크별 최적화를 제한하기 위해 비공개 스플릿은 공개하지 않습니다. 네 개의 스플릿은 화자가 서로 겹치지 않으며, 총 4,888명의 화자로 구성되고 각 화자에 대해 12개의 화자 속성이 기록됩니다.</p>
+
+<h2 id="section-1">수집 설계</h2>
+
+<p>테스트 세트는 변화를 주어 수집한 축을 따라서만 실패 모드를 드러낼 수 있습니다. 대부분의 벤치마크는 쉽게 구할 수 있었던 오디오로 구성됩니다. Monsoon은 지리, 연령, 성별, 어휘, 기기, 음향 환경, 발화 유형, 발화 속도, 동일한 오디오에 대해 유효한 전사가 여러 개 존재하는지 여부라는 아홉 가지 축에서 변화를 주도록 설계되었습니다. 각각은 집계된 WER이 평균적으로는 맞지만 특정 집단에 대해서는 틀릴 수 있는 방식입니다.</p>
+
+<p><img src="https://storage.googleapis.com/research_team_data/blog_figures/nine-axes-gray.png" alt="nine axes of variation in the Monsoon collection" /></p>
+
+<p>수집 방법은 이러한 설계에서 자연스럽게 도출됩니다.</p>
+
+<ul>
+  <li><strong>지리적 범위</strong>는 적은 지역에서 더 긴 세션을 녹음하는 대신 수백 개의 지구에서 모집하여 확보했습니다.</li>
+  <li><strong>기기와 음향 조건</strong>은 조용한 방에서 제공된 하드웨어를 사용하는 대신 참여자가 자신의 휴대전화와 네트워크를 사용해 실내와 실외에서 녹음하여 확보했습니다.</li>
+  <li><strong>어휘, 발화 유형, 발화 속도</strong>는 프롬프트에서 비롯됩니다. 일상적인 주제가 참여자를 의견 제시, 이견 표현, 서술, 회상으로 이끌도록 하며, 이 과정에서 고유명사, 숫자, 준비되지 않은 표현이 등장합니다.</li>
+  <li><strong>연령과 성별</strong>은 화자별로 기록하고 검증했습니다.</li>
+  <li><strong>유효한 전사가 여러 개 존재하는 것</strong>은 오디오가 아니라 참조 전사의 속성이며, 이후 절에서 다룹니다.</li>
+</ul>
+
+<h2 id="section-2">데이터셋 구성</h2>
+
+<p>하나의 파이프라인을 통해 수집한 네 개의 스플릿과 두 개의 언어입니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">세트</th>
+      <th style="text-align: left">언어</th>
+      <th style="text-align: right">길이</th>
+      <th style="text-align: right">화자 수</th>
+      <th style="text-align: right">클립 길이(평균 / 중앙값)</th>
+      <th style="text-align: right">남/여</th>
+      <th style="text-align: right">지구 수</th>
+      <th style="text-align: right">주/연방 직할지</th>
+      <th style="text-align: right">기기 수</th>
+      <th style="text-align: left">스타일</th>
+      <th style="text-align: left">전사</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><a href="https://huggingface.co/datasets/VoiceArena/MonsoonASR-Open-ASR-leaderboard-en-IN">Monsoon en-IN public</a></td>
+      <td style="text-align: left">Indian English</td>
+      <td style="text-align: right">5.62 h</td>
+      <td style="text-align: right">1,444</td>
+      <td style="text-align: right">9.6s / 10.4s</td>
+      <td style="text-align: right">50/50</td>
+      <td style="text-align: right">428</td>
+      <td style="text-align: right">24/6</td>
+      <td style="text-align: right">556</td>
+      <td style="text-align: left">대화형, 즉흥적</td>
+      <td style="text-align: left">정규화됨, 비유창성 포함</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Monsoon en-IN private</td>
+      <td style="text-align: left">Indian English</td>
+      <td style="text-align: right">5.58 h</td>
+      <td style="text-align: right">1,405</td>
+      <td style="text-align: right">9.6s / 10.4s</td>
+      <td style="text-align: right">45/55</td>
+      <td style="text-align: right">420</td>
+      <td style="text-align: right">24/6</td>
+      <td style="text-align: right">560</td>
+      <td style="text-align: left">대화형, 즉흥적</td>
+      <td style="text-align: left">정규화됨, 비유창성 포함</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://huggingface.co/datasets/VoiceArena/MonsoonASR-Open-ASR-leaderboard-hi-IN">Monsoon hi-IN public</a></td>
+      <td style="text-align: left">Hindi</td>
+      <td style="text-align: right">1.33 h</td>
+      <td style="text-align: right">468</td>
+      <td style="text-align: right">6.4s / 5.0s</td>
+      <td style="text-align: right">54/46</td>
+      <td style="text-align: right">202</td>
+      <td style="text-align: right">11/3</td>
+      <td style="text-align: right">315</td>
+      <td style="text-align: left">대화형, 즉흥적</td>
+      <td style="text-align: left">lattice(허용되는 철자 변형)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Monsoon hi-IN private</td>
+      <td style="text-align: left">Hindi</td>
+      <td style="text-align: right">4.47 h</td>
+      <td style="text-align: right">1,571</td>
+      <td style="text-align: right">6.6s / 5.3s</td>
+      <td style="text-align: right">55/45</td>
+      <td style="text-align: right">295</td>
+      <td style="text-align: right">12/3</td>
+      <td style="text-align: right">582</td>
+      <td style="text-align: left">대화형, 즉흥적</td>
+      <td style="text-align: left">lattice(허용되는 철자 변형)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>데이터는 대본 없이 진행된 양방향 즉흥 대화에서 가져왔으며, 각 클립에는 한 명의 화자만 포함되도록 단일 채널에서 분할했습니다. 표에 보고된 필드 외에도 각 클립에는 직업, 학력, 결혼 여부, 소득 구간, 휴대전화 브랜드, 현재 도시, 현재 지구에서 거주한 연수가 기록되어 있습니다.</p>
+
+<p>공개 Indian English 스플릿에서 가져온 다섯 개의 클립과 각 클립에 포함된 메타데이터입니다.</p>
+
+<p>29세 여성, West Tripura, Tripura. 학생, samsung SM-G781B.</p>
+
+<audio controls="" src="https://storage.googleapis.com/delivery_team_data/sampled_chunks/english/41512950_850_59_859_68.wav"></audio>
+
+<p>32세 여성, Satna, Madhya Pradesh. 무직, samsung SM-E146B.</p>
+
+<audio controls="" src="https://storage.googleapis.com/delivery_team_data/sampled_chunks/english/04646786_238_95_252_63.wav"></audio>
+
+<p>22세 남성, Rohtas, Bihar. 학생, motorola moto g54 5G.</p>
+
+<audio controls="" src="https://storage.googleapis.com/delivery_team_data/sampled_chunks/english/19508278_139_86_149_79.wav"></audio>
+
+<p>27세 여성, Warangal, Telangana. 무직, vivo V2247.</p>
+
+<audio controls="" src="https://storage.googleapis.com/delivery_team_data/sampled_chunks/english/41114168_788_37_795_21.wav"></audio>
+
+<p>57세 남성, Puducherry. 민간 기업 근무, Xiaomi M2006C3LI.</p>
+
+<audio controls="" src="https://storage.googleapis.com/delivery_team_data/sampled_chunks/english/21485437_227_25_237_45.wav"></audio>
+
+<p>English 세트는 표준 문자열 참조를 사용하며, 리더보드의 정규화기는 대부분의 철자 변형을 하나로 통합합니다. Hindi에는 이러한 변형이 훨씬 많고, 정규화기로 해결할 수 없습니다. 변형이 두 관례 사이의 고정된 매핑이 아니기 때문입니다. 따라서 Hindi 세트는 lattice를 제공합니다. 전사의 각 구간마다 정답으로 허용되는 철자 목록이 포함됩니다.</p>
+
+<h2 id="section-3">화자 범위</h2>
+
+<p>Monsoon은 시간으로 측정하면 작지만 화자 수로 측정하면 큽니다. 이것이 설계이며, 대부분의 가치가 집중되는 지점이기도 합니다.</p>
+
+<p><strong>위의 필드로 나타나는 범위를 넘어선 화자 집중도와 다양성.</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: left"><a href="https://huggingface.co/datasets/VoiceArena/MonsoonASR-Open-ASR-leaderboard-hi-IN">Monsoon hi-IN public</a></th>
+      <th style="text-align: left">Monsoon hi-IN private</th>
+      <th style="text-align: left"><a href="https://huggingface.co/datasets/VoiceArena/MonsoonASR-Open-ASR-leaderboard-en-IN">Monsoon en-IN public</a></th>
+      <th style="text-align: left">Monsoon en-IN private</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">화자당 세그먼트 수(평균)</td>
+      <td style="text-align: left">1.61</td>
+      <td style="text-align: left">1.56</td>
+      <td style="text-align: left">1.46</td>
+      <td style="text-align: left">1.48</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">단일 세그먼트만 보유한 화자 수</td>
+      <td style="text-align: left">261</td>
+      <td style="text-align: left">994</td>
+      <td style="text-align: left">956</td>
+      <td style="text-align: left">924</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">화자당 오디오 길이(중앙값)</td>
+      <td style="text-align: left">8.34 s</td>
+      <td style="text-align: left">8.28 s</td>
+      <td style="text-align: left">12.36 s</td>
+      <td style="text-align: left">12.39 s</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">상위 10명의 화자가 차지하는 비율</td>
+      <td style="text-align: left">6.8%</td>
+      <td style="text-align: left">3.1%</td>
+      <td style="text-align: left">2.8%</td>
+      <td style="text-align: left">2.9%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">현재 도시 수</td>
+      <td style="text-align: left">289</td>
+      <td style="text-align: left">814</td>
+      <td style="text-align: left">641</td>
+      <td style="text-align: left">584</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">기기 제조업체 수</td>
+      <td style="text-align: left">18</td>
+      <td style="text-align: left">25</td>
+      <td style="text-align: left">23</td>
+      <td style="text-align: left">20</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>세 가지 특성이 나타나며, 각각은 데이터의 양이 아니라 분산에 대한 주장입니다.</p>
+
+<ul>
+  <li>
+    <p><strong>어떤 한 목소리도 점수를 좌우하지 않습니다:</strong> 가장 많은 기여를 한 10명이 전체 길이에서 차지하는 비율은 2.8%에서 6.8% 사이이며, 전체 화자의 절반 이상은 정확히 한 번만 등장합니다. Monsoon의 결과는 장시간 녹음된 소수의 화자가 아니라 수백 개의 서로 다른 목소리에 대한 평균입니다. 비슷한 길이의 테스트 세트는 보통 반대 방식으로 구성됩니다.</p>
+  </li>
+  <li>
+    <p><strong>지역이나 휴대전화도 점수를 좌우하지 않습니다:</strong> Indian English 공개 세트는 30개 주 및 연방 직할지에 걸친 428개의 고유 지구를 포함합니다. Hindi 세트는 Hindi belt 언어이므로 더 좁게 집중되어 있지만, 여전히 202개 및 295개의 지구를 아우릅니다. 녹음에는 315개에서 582개의 서로 다른 기기 모델이 사용되었으며, 어떤 하위 집합에서도 단일 모델이 세그먼트의 2.1%를 초과하지 않습니다. 표준화된 하드웨어로 수집한 말뭉치는 하나의 마이크 응답에 과적합되지만, 이 데이터셋은 그럴 수 없습니다.</p>
+  </li>
+  <li>
+    <p><strong>여기서 Indian English는 하나의 억양이 아닙니다:</strong> 이는 한 지역의 English가 아니라 전국에서 사용되는 English입니다. 여섯 개 구역이 모두 포함됩니다. 공개 세트에서는 세그먼트의 35%가 남부 화자, 18%가 동부, 18%가 중부, 16%가 북부, 11%가 서부 화자의 기여입니다. 이러한 분포에서 비롯되는 억양 변이는 단정하는 대신 메타데이터에 기록됩니다.</p>
+  </li>
+</ul>
+
+<h3 id="메타데이터-필드">메타데이터 필드</h3>
+
+<p>Monsoon은 세그먼트당 18개의 열을 제공하며, 이 중 12개가 메타데이터입니다. 대부분의 공개 ASR 테스트 세트가 식별자, 전사, 길이만 제공하는 것과 대조적입니다. 인구통계학적 필드는 완전하거나 거의 완전하며, 참여자들은 이러한 사용에 동의했습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">그룹</th>
+      <th style="text-align: left">필드</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">세그먼트</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">audio</code>, <code class="language-plaintext highlighter-rouge">audio_length_s</code>, <code class="language-plaintext highlighter-rouge">language</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">참조</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">lattice</code> (Hindi) 또는 <code class="language-plaintext highlighter-rouge">text</code> (Indian English)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">화자</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">speaker_id</code>, <code class="language-plaintext highlighter-rouge">gender</code>, <code class="language-plaintext highlighter-rouge">date_of_birth</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">배경</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">occupation</code>, <code class="language-plaintext highlighter-rouge">educational_background</code>, <code class="language-plaintext highlighter-rouge">marital_status</code>, <code class="language-plaintext highlighter-rouge">income</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">지리</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">native_district</code>, <code class="language-plaintext highlighter-rouge">native_state</code>, <code class="language-plaintext highlighter-rouge">current_city</code>, <code class="language-plaintext highlighter-rouge">years_spent_in_current_district</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">녹음</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">device_manufacturer</code>, <code class="language-plaintext highlighter-rouge">device_model</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>두 언어는 서로 다른 지리적 분포를 보이며, 이 분포는 유의미한 정보를 제공합니다. Hindi 세트는 Hindi belt에 집중되어 있으며, 화자의 약 40%를 Uttar Pradesh가 차지합니다. 이는 인구 비례로 표본을 추출한 Hindi 말뭉치에서 예상되는 모습입니다. Indian English 세트의 분포는 훨씬 평평합니다. 어떤 주도 13%를 초과하지 않으며, 화자의 3분의 1은 규모가 가장 큰 8개 주 밖에서 왔습니다. 공개 및 비공개 절반은 두 언어 모두에서 매우 유사한 분포를 보입니다.</p>
+
+<p>인도의 주 경계는 언어적 기준에 따라 설정되었으므로 지구와 주는 실제 억양 신호를 포함합니다. 따라서 이 필드들은 요약으로 없애지 않고 공개됩니다. 인도 ASR에 대해서는 이러한 유형의 분석이 대규모로 보고된 바 있습니다. 지구별 오류율은 대략 4%에서 44%까지 분포하며, 대표성이 낮은 지역은 Hindi belt와 대도시에 크게 뒤처집니다. 또한 오디오 품질, 발화 속도, 발화 지속 시간, 성별, 연령, 기기별 세분화도 이루어졌습니다. 이러한 실행은 비공개 벤치마크에서 수행되었습니다. Monsoon은 공개 리더보드 테스트 세트에서 동일한 종류의 분석을 가능하게 합니다.</p>
+
+<h2 id="section-4">수집 및 품질 관리</h2>
+
+<p><img src="https://storage.googleapis.com/research_team_data/blog_figures/flowchart%201.png" alt="monsoon_collection_and_annotation_pipeline" /></p>
+
+<p>폭넓은 지리적 범위를 확보하려면 소수의 화자로부터 더 긴 세션을 수집하는 대신 수백 개의 지구에서 참여자를 모집해야 합니다. 이러한 규모의 분산 모집은 소규모 수집에서는 나타나지 않는 실패 모드를 유발합니다. 참여자가 과제를 조작하거나, 실제 발화로 제출해야 할 오디오를 재생해 녹음하거나, 부주의하게 주석을 다는 경우가 그 예입니다. 각각의 문제는 명시적인 검사를 통해 처리합니다.</p>
+
+<ul>
+  <li>
+    <p><strong>모집 및 녹음:</strong> 참여자는 Voice Arena 커뮤니티를 통해 모집되었습니다. Voice Arena는 전 세계 디지털 플랫폼으로, 음성 말뭉치에서 거의 다루지 않는 농촌 및 준도시 지구까지 도달합니다. 이후 두 명씩 짝을 이루어 지정된 일상 주제에 관해 P2P 인터페이스를 통해 양방향 채널로 대화를 녹음했습니다. 참여자는 자신의 휴대전화와 네트워크를 사용했습니다. 그중 상당수는 불안정한 대역폭을 사용하는 저가형 기기였으며, 이러한 조건을 필터링하지 않고 공개 오디오에 포함한 이유도 여기에 있습니다. 참여 희망자는 녹음 권한을 받기 전에 언어 능력 선별 검사를 완료했으며, 보상을 받고 학습 및 배포에 사용하는 데 대한 사전 동의를 제공했습니다. 화자별 지속 시간 상한은 각 언어 화자의 인구 규모와 지리적 분포에 맞게 조정하여, 소수의 활발한 참여자가 특정 언어나 지역을 지배하지 못하도록 했습니다. 이 세트의 화자 중 절반 이상은 정확히 하나의 세그먼트만 제공합니다.</p>
+  </li>
+  <li>
+    <p><strong>발화 유도:</strong> 대규모로 즉흥 발화를 유도하는 일은 그 자체로 어렵습니다. 구조화된 안내가 없으면 참여자는 짧고 내용이 빈약한 응답을 하는 경향이 있기 때문입니다. 따라서 각 대화는 개방형 서술 단서로 시작하고, 여행, 의료, 농업, 교육, 디지털 서비스 등을 포함하는 영역의 후속 질문을 점진적으로 공개했습니다. 이를 통해 대화를 대본 없이도 긴 설명으로 이끌었습니다. 후보 주제는 대규모 언어 모델로 생성한 뒤 모국어 화자인 언어학자가 검토하고 현지화했습니다.</p>
+  </li>
+  <li>
+    <p><strong>품질 관리:</strong> 모든 녹음은 전사에 앞서 일련의 통과 검사를 거쳤습니다. 30개 이상의 언어에 걸친 사람 주석 데이터로 학습한 언어 식별 모델을 사용해 발화 언어가 지정된 언어와 일치하는지 확인했습니다. 화자의 성별은 전용 분류기를 사용해 자기 보고 레이블과 대조했으며, 자기 보고를 대체하는 것이 아니라 이를 뒷받침하는 용도로 적용했습니다. 추가 모델은 진짜 즉흥 대화와 사전 녹음 또는 재생된 오디오를 구분했습니다. 신호 대 잡음비 추정으로 명료도를 저해하는 수준으로 품질이 저하된 녹음을 제거했지만, 자연스러운 환경 소음은 의도적으로 보존하여 실제 환경에서 수집된 발화의 음향적 현실성을 유지했습니다. 검사를 통과한 녹음은 음성 활동 감지로 분할했으며, 2초간 연속된 무음 지점 또는 다음에 감지되는 무음 지점에서 닫히는 15초의 소프트 상한에서 분할했습니다. 분할은 채널별로 독립적으로 적용했으므로 모든 세그먼트는 단일 화자이자 단일 채널입니다. 이후 세그먼트는 DNSMOS P.808 검사를 통과했습니다.</p>
+  </li>
+  <li>
+    <p><strong>전사:</strong> 참조 전사는 사람이 작성합니다. 첫 초안은 도메인 내 데이터로 학습한 내부 ASR 모델이 생성했습니다. 이 모델들은 어떤 공개 리더보드에도 등장하지 않으므로, 이 세트에서 평가되는 시스템은 자신이 평가받는 참조 전사 작성에 기여하지 않았습니다. 이후의 모든 단계는 모국어 화자인 언어학자가 5단계 프로토콜에 따라 수행했습니다. 이 프로토콜은 엄격한 업무 분리를 기반으로 하며, 각 수정 라운드 뒤에는 다른 주석자가 독립적으로 검증하는 라운드가 이어지므로 어떤 언어학자도 자신의 결과를 직접 감사하지 않습니다. 먼저 한 언어학자가 음향 신호를 기준으로 세그먼트별 초안을 수정하고, 두 번째 언어학자가 이를 다시 검증하며 남은 의견 불일치를 표시합니다. 이후 단계에서는 새로운 주석자가 이 과정을 반복하면서 모호한 음성 실현, 코드 스위칭 경계, 고유명사, 철자 변형 간의 표기 일관성을 점진적으로 해결합니다. 숫자는 단어로 작성하여 전사가 실제 발화와 직접 대응하도록 했습니다. 최종 단계에서도 표시가 남은 세그먼트는 수록 전에 재전사하도록 돌려보냈습니다. 주석자의 행동은 전 과정에서 자동으로 모니터링했으며, 대상 문자 체계에 없는 문자가 포함된 제출물, 부자연스러운 문자 또는 단어 반복, 비정상적으로 적거나 많은 편집 횟수를 표시했습니다.</p>
+  </li>
+</ul>
+
+<h2 id="section-5">지역적 변이</h2>
+
+<p>이하에서는 공개 Indian English 스플릿을 대상으로 수행한 한 가지 예를 통해 메타데이터로 어떤 평가가 가능한지 보여줍니다. 이는 이 세트가 제공하고자 존재하는 핵심 발견이 아니라, 모든 클립에 화자 정보가 포함될 때 무엇을 답할 수 있게 되는지를 보여주는 예시입니다.</p>
+
+<p>리더보드의 8개 모델은 이 세트에서 4.81에서 4.99 WER 사이의 점수를 기록합니다. 최고와 최저의 차이는 0.18포인트로, 5시간의 데이터가 구분할 수 있는 범위 안에 있습니다. 말뭉치 전체에서 순위를 매기면 이들은 동일한 모델입니다.</p>
+
+<p>화자를 지역별로 묶으면 다른 이야기가 나타납니다. 각 화자의 출신 지구를 인도 주를 분류하는 내무부의 구역 위원회 기준에 따라 상위 구역으로 집계하면, 표본이 충분한 5개 구역이 됩니다. <a href="https://huggingface.co/openai/whisper-large-v3-turbo">openai/whisper-large-v3-turbo</a>의 차이는 이들 사이에서 0.46포인트입니다. 말뭉치 전체에서는 <a href="https://huggingface.co/mistralai/Voxtral-Mini-3B-2507">mistralai/Voxtral-Mini-3B-2507</a>보다 14/100포인트 뒤처졌지만, 구역별 차이는 1.68포인트로, 중부 구역에서는 4.38, 동부 구역에서는 6.06을 기록합니다. 리더보드에서는 구분할 수 없는 두 시스템이 화자의 출신 지역에 따라 정확도가 얼마나 달라지는지에서는 거의 네 배의 차이를 보입니다.</p>
+
+<p><img src="https://storage.googleapis.com/research_team_data/csv_files/corpus_wer_versus_zone_range_coloured_by_zone.png" alt="corpus wer against zone range" /></p>
+
+<p>어느 구역이 가장 어려운지도 고정되어 있지 않습니다. <a href="https://huggingface.co/ibm-granite/granite-speech-3.3-2b">ibm-granite/granite-speech-3.3-2b</a>은 북부에서, <a href="https://huggingface.co/microsoft/VibeVoice-ASR-HF">microsoft/VibeVoice-ASR-HF</a>은 남부에서, <a href="https://huggingface.co/mistralai/Voxtral-Mini-3B-2507">mistralai/Voxtral-Mini-3B-2507</a>는 동부에서 가장 낮은 성능을 보입니다. 단순히 특정 지역의 전사가 더 어렵다면 모든 모델이 같은 방식으로 구역 순위를 매겨야 합니다. 하지만 그렇지 않으며, 이는 오디오보다는 모델 자체를 가리킵니다.</p>
+
+<p>지역은 기록된 12개 속성 중 하나이며, 위의 구역은 428개 지구를 거칠게 집계한 것입니다. 동일한 분석은 연령, 학력, 직업, 휴대전화에도 적용할 수 있으며, 공개된 파일에는 이를 재현하는 데 필요한 모든 정보가 포함되어 있습니다. 발화된 내용만 기록하는 테스트 세트에서는 이 중 어느 것도 사용할 수 없습니다.</p>
+
+<h2 id="section-6">Hindi의 표기 변이</h2>
+
+<p>English의 표기 변이는 한정적입니다. 영국식과 미국식 철자, 구두점, 대소문자, 숫자와 단어의 차이 등은 정규화기가 대부분 하나의 형식으로 매핑할 수 있으며, 리더보드의 정규화기도 그렇게 합니다. Hindi는 같은 방식으로 한정되지 않습니다. 일상적인 발화에는 코드 믹싱이 많이 나타나고, English에서 유래한 단어에는 정착된 Devanagari 철자가 없으며, 합성어는 선호에 따라 붙여 쓰거나 띄어 씁니다. 하나의 구절에 유효한 표기 형식이 10개 이상 존재할 수 있으며, 이를 하나로 통합할 고정된 매핑도 없습니다. 매핑할 표준적인 한쪽 형식이 없기 때문입니다.</p>
+
+<p><img src="https://storage.googleapis.com/research_team_data/blog_figures/flowchart%202.png" alt="english_normaliser" /></p>
+
+<p>단일 참조로 평가하면 WER은 주석자가 우연히 선택한 철자를 시스템이 생성했을 때 그 시스템에 보상을 줍니다. 오디오를 동일하게 잘 인식한 두 시스템도 표기만으로 몇 포인트씩 차이가 날 수 있습니다.</p>
+
+<p>따라서 Hindi 세트는 lattice를 제공합니다. 전사의 각 구간마다 정답으로 허용되는 표기 형식의 집합이 포함됩니다. 이를 구축하는 일은 수작업입니다. 동일한 오디오에 대한 여러 ASR 전사에서 후보 변형을 추출하고 언어 모델로 확장한 다음, 모국어 화자인 언어학자가 해당 발화에 유효한 형식을 결정하고 나머지를 제거합니다. 이를 통해 실제 발화 내용과 일치하는 형식만 허용됩니다.</p>
+
+<p><img src="https://storage.googleapis.com/research_team_data/blog_figures/flowchart%203a.png" alt="hindi_oiwer_scoring" /></p>
+
+<p>따라서 Hindi에는 WER 대신 AI4Bharat가 도입한 <a href="https://huggingface.co/papers/2603.00941">Orthographically-Informed Word Error Rate (OIWER)</a>를 보고합니다. 각 구간에서 가설을 허용된 집합과 정렬하므로, 허용된 형식은 무엇이든 정답으로 처리되고 실제 인식 오류에 대해서만 오류가 부과됩니다.</p>
+
+<p>효과를 정량화하기 위해 동일한 가설을 두 번 평가했습니다. 각 lattice를 구간별 첫 번째 변형으로 평탄화하면 일반적인 벤치마크가 제공하는 것과 같은 단일 문자열 참조가 생성됩니다. 허용된 변형 중 어느 것이든 동일하게 사용할 수 있으며, 어떤 변형을 선택하느냐에 따라 다른 참조가 만들어집니다. 평탄화된 참조와 비교해 평가하면 모든 시스템의 오류율이 상승하지만, 상승 폭은 균일하지 않습니다. 그 결과 순위가 바뀝니다. 아래 그림은 두 참조 사이에서 순서가 뒤집히는 두 쌍의 시스템을 보여줍니다. 단일 참조에서는 시스템이 주석자의 표기를 재현한 것에 대해 부분적으로 보상을 받지만, lattice는 인식만 평가합니다.</p>
+
+<p><img src="https://storage.googleapis.com/research_team_data/csv_files/hindi_oiwer_flips.png" alt="WER against OIWER on Monsoon hi" /></p>
+
+<p>또한 모든 사람이 이 세트의 결과를 직접 재현할 수 있도록 구현체 <a href="https://pypi.org/project/voi-oiwer">voi-oiwer</a>를 오픈 소스로 공개합니다.</p>
+
+<h2 id="section-7">평가받는 방법</h2>
+
+<p>비공개 스플릿의 경우 Open ASR Leaderboard에 모델을 등록하면 Hugging Face 팀이 평가를 실행합니다. 이전과 마찬가지로 리더보드에 모델을 추가하는 절차는 <a href="https://github.com/huggingface/open_asr_leaderboard">Open ASR Leaderboard GitHub</a>에서 진행됩니다.</p>
+
+<ol>
+  <li>pull request를 열면 <a href="https://github.com/huggingface/open_asr_leaderboard/blob/main/.github/PULL_REQUEST_TEMPLATE.md#new-model-checklist">model checklist</a>가 표시됩니다. 이전과 마찬가지로 공개 데이터셋에서의 결과를 보고해야 합니다.</li>
+  <li>공개 세트에서 결과를 검증하고 비공개 세트의 지표를 계산합니다.</li>
+  <li>저희가 얻은 결과를 확인합니다.</li>
+</ol>
+
+<p>Indian-English는 <a href="https://huggingface.co/spaces/hf-audio/open_asr_leaderboard">main leaderboard</a>에 <code class="language-plaintext highlighter-rouge">Voice Arena Monsoon</code>로 추가되며, 선택적으로 활성화하는 토글이 아니라 기본 열 집합에 포함됩니다. 따라서 모든 모델의 대표 Average WER에 반영됩니다. 비공개 스플릿은 <a href="https://huggingface.co/blog/open-asr-leaderboard-private-data">Appen and DataoceanAI data</a>와 함께 집계된 <code class="language-plaintext highlighter-rouge">Private (conversational)</code> 열에 반영됩니다. 공개 및 비공개 Hindi는 <a href="https://huggingface.co/spaces/hf-audio/open_asr_leaderboard">Multilingual tab</a>에 표시됩니다. 이 열에서는 선택한 모든 언어를 지원하는 모델만 순위에 포함되므로, 동일한 조건에서 비교할 수 있습니다. 또는 “Language dataset breakdown” 드롭다운 메뉴에서 “Hindi”를 선택할 수 있습니다.</p>
+
+<h2 id="section-8">앞으로의 과제</h2>
+
+<p>Hindi는 일반적인 문제를 선명하게 보여주는 사례입니다. 하나 이상의 방식으로 표기되고, 벤치마크가 표본으로 포함하지 않은 사람들이 사용하며, 이 글에서 설명한 두 가지 실패를 모두 지니는 언어는 무엇이든 같은 문제를 겪습니다. 이 세트들이 문제를 해결하는 것은 아닙니다. 대신 문제를 볼 수 있는 방법을 추가합니다. 즉, 해당 분야가 이미 주목하고 있는 리더보드의 테스트 세트에 각 화자와 각 참조 전사에 대한 충분한 정보가 담기므로, 두 시스템 간 차이를 하나의 수치 속에서 사라지게 하지 않고 누가 말했는지, 그리고 어떻게 표기하는지에 따라 추적할 수 있게 합니다.</p>
+
+<p>이 네 개의 세트는 Global South를 위한 Voice Arena의 광범위한 데이터셋 이니셔티브인 Monsoon의 일부입니다.</p>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-08-28">28 Aug 2026</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#open-asr-leaderboard에-최초의-글로벌-사우스-언어가-추가되다" id="markdown-toc-open-asr-leaderboard에-최초의-글로벌-사우스-언어가-추가되다">Open ASR Leaderboard에 최초의 글로벌 사우스 언어가 추가되다</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">수집 설계</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">데이터셋 구성</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">화자 범위</a>        <ul>
+          <li><a href="#메타데이터-필드" id="markdown-toc-메타데이터-필드">메타데이터 필드</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-4" id="markdown-toc-section-4">수집 및 품질 관리</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">지역적 변이</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">Hindi의 표기 변이</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">평가받는 방법</a></li>
+      <li><a href="#section-8" id="markdown-toc-section-8">앞으로의 과제</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-200/" alt="">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href=""></a>
+        <span class="author-description"></span>                        
+    </div>
+</div>
+
+
+
+
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">21</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="translation">
+            Translation
+            <span class="count">21</span>
+          </button>
+        
+      
+        
+        
+          <button class="filter-btn" data-category="huggingface">
+            HuggingFace
+            <span class="count">20</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/grabette/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">21 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/thinkingmachines-inkling/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" alt="Thinking Machines의 Inkling에 오신 것을 환영합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/torch-attention-profile/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" alt="파이토치의 프로파일링(3부): 어텐션이 전부다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">10 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/native-speed-vllm-transformers-backend/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/lerobot-release-v060/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" alt="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">07 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/cerebras-gemma4-voice-ai/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">01 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/eee-community-evals/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" alt="Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Featuring Every Eval Ever Results on Hugging Face Model Pages를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">30 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/vllm-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">26 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/ffasr-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">24 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/huggingface-hub-release-ci/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" alt="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/huggingface-hub-release-ci/">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/cross-origin-storage/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/peft-beyond-lora/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/is-it-agentic-enough/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" alt="충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/agentic-resource-discovery-launch/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-06-17-agentic-resource-discovery-launch/thumbnail.png" alt="에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Agentic Resource Discovery: Let agents search를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">17 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/github-ci-hf-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-06-09-github-ci-hf-jobs/thumbnail.gif" alt="GitHub CI를 Hugging Face Jobs로 마이그레이션" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Migrating Your GitHub CI to Hugging Face Jobs를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">09 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/openenv-agentic-rl/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-06-08-openenv-agentic-rl/thumbnail.png" alt="오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Open Source Community is backing OpenEnv for Agentic RL를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/torch-profiler/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-05-29-torch-profiler/thumbnail.png" alt="PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 1): A Beginner’s Guide to torch.profiler를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">29 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/local-reachy-mini-conversation/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">27 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/olmoearth-v1-1/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-05-20-olmoearth-v1-1/thumbnail.png" alt="OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 OlmoEarth v1.1: A more efficient family of models를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">20 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/paddleocr-transformers/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">19 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="transformers translation ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-200/how-to-use-translator/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-200/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-200/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
+        <p class="card-text text-muted">
+Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">05 Oct 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+</main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-200/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-200/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-200/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-200/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-200/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-200/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-200/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-200/assets/js/category.js"></script>
+  </body>
+</html>
