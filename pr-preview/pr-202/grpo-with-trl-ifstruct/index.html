@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-202/assets/images/favicon.ico" />
+
+    <title>Fine-tuning a 350M Model for Better Structured Outputs in 100 GRPO Steps | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Fine-tuning a 350M Model for Better Structured Outputs in 100 GRPO Steps | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Fine-tuning a 350M Model for Better Structured Outputs in 100 GRPO Steps" />
+<meta name="author" content="dailybot" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 Fine-tuning a 350M Model for Better Structured Outputs in 100 GRPO Steps를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Fine-tuning a 350M Model for Better Structured Outputs in 100 GRPO Steps를 한국어로 번역한 글입니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-202/grpo-with-trl-ifstruct/assets/images/blog/posts/2026-09-03-grpo-with-trl-ifstruct/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-09-03T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-09-03T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-202/grpo-with-trl-ifstruct/assets/images/blog/posts/2026-09-03-grpo-with-trl-ifstruct/thumbnail.png" />
+<meta name="twitter:title" content="Fine-tuning a 350M Model for Better Structured Outputs in 100 GRPO Steps" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-09-03T00:00:00+09:00","datePublished":"2026-09-03T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Fine-tuning a 350M Model for Better Structured Outputs in 100 GRPO Steps를 한국어로 번역한 글입니다.","headline":"Fine-tuning a 350M Model for Better Structured Outputs in 100 GRPO Steps","image":"/pr-preview/pr-202/grpo-with-trl-ifstruct/assets/images/blog/posts/2026-09-03-grpo-with-trl-ifstruct/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-202/grpo-with-trl-ifstruct/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-202/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-202/grpo-with-trl-ifstruct/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-202/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-202/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-202/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-202/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-202/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-202/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-202/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-202/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-09-03-grpo-with-trl-ifstruct/thumbnail.png" alt="Fine-tuning a 350M Model for Better Structured Outputs in 100 GRPO Steps">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-09-03-grpo-with-trl-ifstruct/thumbnail.png" alt="Fine-tuning a 350M Model for Better Structured Outputs in 100 GRPO Steps">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-202/categories#huggingface">HuggingFace</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-202/categories#translation">Translation</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">Fine-tuning a 350M Model for Better Structured Outputs in 100 GRPO Steps</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#section-1" id="markdown-toc-section-1">사전 요구 사항</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">LFM2.5-350M (Base model)의 IFStruct 평가</a></li>
+  <li><a href="#section-3" id="markdown-toc-section-3">구조화된 출력에 대한 TRL 기반 GRPO 미세 조정</a>    <ul>
+      <li><a href="#학습-데이터" id="markdown-toc-학습-데이터">학습 데이터</a></li>
+      <li><a href="#모델-및-lora" id="markdown-toc-모델-및-lora">모델 및 LoRA</a></li>
+      <li><a href="#보상-함수" id="markdown-toc-보상-함수">보상 함수</a></li>
+      <li><a href="#학습" id="markdown-toc-학습">학습</a></li>
+      <li><a href="#모델-병합-및-저장" id="markdown-toc-모델-병합-및-저장">모델 병합 및 저장</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-4" id="markdown-toc-section-4">GRPO로 튜닝한 LFM2.5-350M의 IFStruct 평가</a></li>
+  <li><a href="#section-5" id="markdown-toc-section-5">결론</a></li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/grpo-with-trl-ifstruct">Fine-tuning a 350M Model for Better Structured Outputs in 100 GRPO Steps</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/grpo-with-trl-ifstruct -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<p>이 가이드는 구조화된 출력 준수 능력을 소형 모델에서 크게 향상시키기 위한 완전 공개형 저비용 레시피입니다. <a href="https://huggingface.co/LiquidAI/LFM2.5-350M">LFM2.5-350M</a>을(를) <a href="https://huggingface.co/docs/trl/en/index">TRL library</a>을(를) 사용해 Group Relative Policy Optimization (GRPO)으로 미세 조정하고, <a href="https://huggingface.co/datasets/LiquidAI/ifstruct-v1.0">IFStruct benchmark</a>에서 평가합니다. 전체 실행에는 약 500개의 샘플과 100회의 학습 단계만 필요하므로 무료 Colab 또는 Kaggle GPU에서도 충분히 실행할 수 있으며, <a href="https://github.com/Liquid4All/cookbook/blob/main/finetuning/notebooks/grpo_with_trl_ifstruct.ipynb">GitHub</a>에서 확인할 수 있습니다. 결과에 따르면 가벼운 미세 조정 절차만으로도 IFStruct 벤치마크 성능이 <strong>22.6%에서 29.7%로</strong> 향상됩니다.</p>
+
+<p>구조화된 출력은 LLM의 실제 사용 사례에서 가장 흔한 작업 중 하나이지만, 대부분의 벤치마크는 이를 별도로 측정하기보다 더 광범위한 추론 또는 추출 점수에 포함합니다. 모델이 요청된 형식과 구조로 유효하고 파싱 가능한 출력을 안정적으로 반환하는지, 즉 스키마를 준수하는지는 해당 모델을 다운스트림 시스템에 연결할 수 있는지를 결정하는 경우가 많습니다.</p>
+
+<p><em>여기서 설명하는 학습 파이프라인은 <a href="https://www.liquid.ai/blog/ifstruct-v1.0">IFStruct blog</a>에 설명된 RL 모델을 학습하는 데 사용된 파이프라인과 다르다는 점에 유의하세요. 이 notebook은 IFStruct 벤치마크 점수를 재현하는 것이 아니라, 소형 모델에 대한 작업별 미세 조정으로 성능을 향상시키고 훨씬 큰 모델과 비슷한 수준에 도달할 수 있음을 보여주는 것을 목표로 합니다.</em></p>
+
+<h2 id="section-1">사전 요구 사항</h2>
+
+<p>이 가이드는 서로 다른 환경에서 실행되는 두 부분으로 구성됩니다:</p>
+
+<ul>
+  <li><strong>미세 조정</strong>은 GPU에서 실행됩니다. 함께 제공되는 notebook은 무료 Colab 또는 Kaggle GPU에 맞춰져 있습니다.</li>
+  <li><strong>평가</strong>는 <code class="language-plaintext highlighter-rouge">llama.cpp</code>을(를) 통해 MacBook에서 로컬로 실행할 수 있습니다. 여기서는 Apple M5 Max와 36 GB 통합 메모리를 탑재한 MacBook Pro를 사용하며, <code class="language-plaintext highlighter-rouge">llama.cpp</code>은 IFStruct 평가기가 통신하는 OpenAI 호환 서버를 제공합니다.</li>
+</ul>
+
+<p>Python 도구에는 <a href="https://docs.astral.sh/uv/"><code class="language-plaintext highlighter-rouge">uv</code></a>이(가), 서빙에는 <code class="language-plaintext highlighter-rouge">llama.cpp</code>이(가) 필요합니다. <a href="https://docs.liquid.ai/deployment/on-device/llama-cpp">Liquid AI llama.cpp deployment docs</a>에 따라 Homebrew로 <code class="language-plaintext highlighter-rouge">llama.cpp</code>을(를) 설치하고 <code class="language-plaintext highlighter-rouge">llama-server</code>을(를) 사용할 수 있는지 확인합니다:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>llama.cpp
+llama-server <span class="nt">--version</span>
+</code></pre></div></div>
+
+<h2 id="section-2">LFM2.5-350M (Base model)의 IFStruct 평가</h2>
+
+<p>시작하기 전에 <a href="https://huggingface.co/datasets/LiquidAI/ifstruct-v1.0">IFStruct benchmark</a>에서 LFM2.5-350M을 평가하고 <strong>보고된 21.1% 점수를 재현할 수 있는지</strong> 확인해 보겠습니다.</p>
+
+<p><strong>IFStruct</strong>는 LLM 출력의 유효성과 스키마 준수 여부를 테스트하는 벤치마크입니다. 이 벤치마크는 <a href="https://github.com/Liquid4All/ifstruct">Liquid4All/ifstruct</a>에서 오픈 소스로 제공되며, 공개 벤치마크 데이터셋은 Hugging Face의 <a href="https://huggingface.co/datasets/LiquidAI/ifstruct-v1.0">LiquidAI/ifstruct-v1.0</a>에서 사용할 수 있습니다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/Liquid4All/ifstruct.git
+</code></pre></div></div>
+
+<p>평가 비교를 위해 <code class="language-plaintext highlighter-rouge">llama.cpp</code>을(를) 사용해 MacBook에서 모델을 로컬로 서빙합니다. <code class="language-plaintext highlighter-rouge">BF16</code> GGUF (<a href="https://huggingface.co/LiquidAI/LFM2.5-350M-GGUF">LiquidAI/LFM2.5-350M-GGUF</a>)를 사용합니다.</p>
+
+<p>그런 다음 다음 명령어로 base model 서버를 시작합니다:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>llama-server <span class="se">\</span>
+  <span class="nt">-hf</span> LiquidAI/LFM2.5-350M-GGUF:BF16 <span class="se">\</span>
+  <span class="nt">-c</span> 32768 <span class="se">\</span>
+  <span class="nt">-np</span> 4 <span class="se">\</span>
+  <span class="nt">-ngl</span> 99 <span class="se">\</span>
+  <span class="nt">--alias</span> LiquidAI/LFM2.5-350M <span class="se">\</span>
+  <span class="nt">--host</span> 127.0.0.1 <span class="se">\</span>
+  <span class="nt">--port</span> 8080
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--alias</code>: OpenAI 호환 엔드포인트로 IFStruct가 전송하는 모델 이름</li>
+  <li><code class="language-plaintext highlighter-rouge">-ngl 99</code>: 사용 가능한 경우 <code class="language-plaintext highlighter-rouge">llama.cpp</code>에 모든 레이어를 GPU로 오프로드하도록 요청</li>
+  <li><code class="language-plaintext highlighter-rouge">-np 4</code>: 네 개의 요청을 병렬로 처리</li>
+  <li><code class="language-plaintext highlighter-rouge">-c 32768</code>: 프롬프트 컨텍스트의 크기</li>
+</ul>
+
+<p>서버가 실행되면 2000개의 샘플로 전체 벤치마크를 실행할 수 있습니다:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run ifstruct-eval <span class="se">\</span>
+  <span class="nt">--model</span> LiquidAI/LFM2.5-350M <span class="se">\</span>
+  <span class="nt">--base-url</span> http://localhost:8080/v1 <span class="se">\</span>
+  <span class="nt">--api-key</span> dummy <span class="se">\</span>
+  <span class="nt">--dataset</span> data/test.jsonl <span class="se">\</span>
+  <span class="nt">--results-file</span> results/lfm2.5-350m-llamacpp-base.json <span class="se">\</span>
+  <span class="nt">--n-threads</span> 4 <span class="se">\</span>
+  <span class="nt">--max-tokens</span> 2048 <span class="se">\</span>
+  <span class="nt">-v</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>============================================================
+Model: LiquidAI/LFM2.5-350M
+============================================================
+Overall: 452/2000 passed (22.6%)
+Average latency: 1453ms
+
+By format:
+  JSON: 180/1000 passed (18.0%)
+  YAML: 272/1000 passed (27.2%)
+
+By top-level structure:
+  Wrapper key 288/1011 passed (28.5%)
+  Bare list   164/989 passed (16.6%)
+
+By entity type:
+  test__camera_review                 6/83 passed (7.2%)
+  test__clinical_trial                20/104 passed (19.2%)
+  test__conference_schedule           7/87 passed (8.0%)
+  test__escaping__bug_report_batch    24/89 passed (27.0%)
+  test__escaping__config_snippet_audit 15/85 passed (17.6%)
+  test__escaping__customer_email_thread 5/73 passed (6.8%)
+  test__escaping__dialogue_sample     14/95 passed (14.7%)
+  test__escaping__interview_transcript_segment 21/80 passed (26.2%)
+  test__escaping__log_parser_examples 21/72 passed (29.2%)
+  test__escaping__pr_discussion       22/87 passed (25.3%)
+  test__escaping__repro_steps_batch   16/73 passed (21.9%)
+  test__escaping__screenplay_scene    16/92 passed (17.4%)
+  test__escaping__short_story_chapter 15/84 passed (17.9%)
+  test__escaping__support_ticket_batch 27/73 passed (37.0%)
+  test__escaping__terminal_session_notes 20/70 passed (28.6%)
+  test__event_ticket_booking          49/107 passed (45.8%)
+  test__gpu_review                    6/94 passed (6.4%)
+  test__invoice                       28/86 passed (32.6%)
+  test__job_posting                   25/85 passed (29.4%)
+  test__real_estate_listing           31/82 passed (37.8%)
+  test__recipe                        3/70 passed (4.3%)
+  test__rental_car_booking            27/79 passed (34.2%)
+  test__scientific_experiment         13/69 passed (18.8%)
+  test__travel_itinerary              21/81 passed (25.9%)
+
+Common errors:
+  7228x required field missing
+  738x wrong item count
+  540x type mismatch
+  317x Unclosed code block
+  190x extraneous field 'notes'
+  181x extraneous field 'path'
+  175x extraneous field 'constraints'
+  170x extraneous field 'type'
+  170x missing code block
+  100x expected bare list, got wrapper
+</code></pre></div></div>
+
+<p><a href="https://www.liquid.ai/blog/ifstruct-v1.0">IFStruct release blog reports 21.1% for LFM2.5-350M</a>. 로컬 llama.cpp/BF16 설정에서는 22.6%가 측정되었으며, 이는 IFStruct 블로그에 보고된 21.1%에 가깝습니다. 동일한 서빙 스택 비교를 위한 기준선으로 이 로컬 결과를 사용합니다.</p>
+
+<h2 id="section-3">구조화된 출력에 대한 TRL 기반 GRPO 미세 조정</h2>
+
+<p>실행 가능한 전체 파이프라인은 <a href="https://github.com/Liquid4All/cookbook/blob/main/finetuning/notebooks/grpo_with_trl_ifstruct.ipynb">accompanying notebook</a>에 있습니다. 이 절에서는 관련된 부분만 다룹니다.</p>
+
+<h3 id="학습-데이터">학습 데이터</h3>
+
+<p><a href="https://huggingface.co/datasets/nvidia/Nemotron-RL-instruction_following-structured_outputs"><code class="language-plaintext highlighter-rouge">nvidia/Nemotron-RL-instruction_following-structured_outputs</code></a>을(를) 사용합니다. 이 데이터는 각 프롬프트를 대상 JSON Schema 및 예상 필드 수와 연결합니다. 학습에는 약 500개의 샘플을 사용합니다.</p>
+
+<p>Nemotron 데이터 분포가 IFStruct 평가와 다르기 때문에, 두 데이터 사이의 다음 두 가지 차이를 줄이도록 프롬프트를 보강합니다:</p>
+
+<ul>
+  <li><strong>40%</strong>에는 “fenced code block 안에 출력을 반환하라”는 지시를 추가하여, 모델이 항상 raw JSON을 출력하는 대신 형식 지시를 <em>따르도록</em> 학습합니다.</li>
+  <li>서로 겹치지 않는 <strong>20%</strong>는 최상위 배열 작업으로 변환합니다. 스키마를 필수 항목 수가 포함된 <code class="language-plaintext highlighter-rouge">array</code>으로 감싸며, 이를 통해 bare-list 출력과 항목 수 준수를 학습합니다.</li>
+</ul>
+
+<h3 id="모델-및-lora">모델 및 LoRA</h3>
+
+<p><code class="language-plaintext highlighter-rouge">LiquidAI/LFM2.5-350M</code>을(를) 로드하고 LoRA adapter를 연결합니다. LFM2.5는 attention/convolution 하이브리드 아키텍처를 사용하므로 LFM 전용 모듈 이름을 대상으로 지정합니다:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lora_config</span> <span class="o">=</span> <span class="nc">LoraConfig</span><span class="p">(</span>
+    <span class="n">r</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> 
+    <span class="n">lora_alpha</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> 
+    <span class="n">bias</span><span class="o">=</span><span class="sh">"</span><span class="s">none</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="n">task_type</span><span class="o">=</span><span class="sh">"</span><span class="s">CAUSAL_LM</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">target_modules</span><span class="o">=</span><span class="p">[</span>
+        <span class="sh">"</span><span class="s">q_proj</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">k_proj</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">v_proj</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">out_proj</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">in_proj</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">w1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">w2</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">w3</span><span class="sh">"</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>약 ~6M개의 파라미터를 학습하며, 이는 모델의 약 1.66%입니다.</p>
+
+<h3 id="보상-함수">보상 함수</h3>
+
+<p>그런 다음 세 가지 보상 함수를 정의합니다. 각 함수는 <code class="language-plaintext highlighter-rouge">[0, 1]</code> 스케일로 작동하며, 추출된 <em>구조</em>가 올바른지를 기준으로 모든 completion을 평가합니다:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">json_format_reward</code>: 출력이 파싱 가능하고 요청된 형식인가? 요청된 형식(fenced 또는 raw)이면 만점(<code class="language-plaintext highlighter-rouge">1.0</code>), 형식은 다르지만 파싱 가능하면 <code class="language-plaintext highlighter-rouge">0.2</code>, 파싱할 수 없는 출력이면 <code class="language-plaintext highlighter-rouge">0.0</code>을 부여합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">field_count_reward</code>: 객체가 예상된 최상위 필드 수를 가지고 있는가? 정확히 일치하면 <code class="language-plaintext highlighter-rouge">1.0</code>을 얻고, 차이가 클수록 점수가 선형적으로 감소합니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">schema_validation_reward</code>: 출력이 해당 행의 JSON Schema에 따라 검증되는가? 모든 제약 조건 위반을 계산하며, 필수 키의 충족 범위에 따라 부분 점수 부여 여부를 결정합니다.</li>
+</ul>
+
+<p>세 함수를 <code class="language-plaintext highlighter-rouge">reward_weights=[1.0, 0.5, 2.0]</code>을(를) 사용한 가중합으로 결합합니다.</p>
+
+<h3 id="학습">학습</h3>
+
+<p>무료 등급의 16 GB GPU에 맞춰 프롬프트 그룹당 8개의 generation으로 100 step 동안 학습합니다:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">trl</span> <span class="kn">import</span> <span class="n">GRPOConfig</span>
+
+<span class="n">training_args</span> <span class="o">=</span> <span class="nc">GRPOConfig</span><span class="p">(</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="sh">"</span><span class="s">./outputs/lfm25-350m-nemotron-schema-grpo</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">5e-5</span><span class="p">,</span>
+    <span class="n">max_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">warmup_steps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">num_generations</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>              <span class="c1"># completions sampled per prompt group
+</span>    <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">gradient_accumulation_steps</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>  <span class="c1"># 4 prompt groups per optimizer step
+</span>    <span class="n">steps_per_generation</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">max_completion_length</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>     <span class="c1"># room for nested JSON
+</span>    <span class="n">mask_truncated_completions</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span>                <span class="c1"># hotter sampling keeps groups varied
+</span>    <span class="n">beta</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>                      <span class="c1"># KL penalty toward the reference model
+</span>    <span class="n">reward_weights</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="c1"># json_format, field_count, schema_validation
+</span>    <span class="n">logging_steps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">save_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>notebook에서 볼 수 있듯이 실행이 진행되는 동안 세 가지 보상 구성 요소가 모두 상승하고, warmup 이후 reference model의 KL이 0에서 벗어나 상승하며, 잘린 completion의 비율은 0에 가깝게 유지됩니다.</p>
+
+<h3 id="모델-병합-및-저장">모델 병합 및 저장</h3>
+
+<p>마지막으로 LoRA adapter를 base weights에 다시 병합하고, 서빙을 위해 GGUF로 변환할 수 있는 단일 독립 checkpoint로 저장합니다:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MERGED_DIR</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">training_args</span><span class="p">.</span><span class="n">output_dir</span><span class="si">}</span><span class="s">-merged</span><span class="sh">"</span>
+
+<span class="n">merged_model</span> <span class="o">=</span> <span class="n">trainer</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="nf">merge_and_unload</span><span class="p">()</span>
+<span class="n">merged_model</span><span class="p">.</span><span class="nf">save_pretrained</span><span class="p">(</span><span class="n">MERGED_DIR</span><span class="p">)</span>
+<span class="n">tokenizer</span><span class="p">.</span><span class="nf">save_pretrained</span><span class="p">(</span><span class="n">MERGED_DIR</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="section-4">GRPO로 튜닝한 LFM2.5-350M의 IFStruct 평가</h2>
+
+<p>GRPO 미세 조정 후 IFStruct 평가를 다시 실행합니다. 이를 위해 병합된 모델 checkpoint를 BF16 GGUF로 변환해야 합니다. 변환기 스크립트는 llama.cpp 소스와 함께 제공되므로 repo를 한 번 clone하고 변환기의 <code class="language-plaintext highlighter-rouge">gguf</code> 패키지를 설치합니다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">--depth</span> 1 https://github.com/ggml-org/llama.cpp
+pip <span class="nb">install</span> ./llama.cpp/gguf-py
+
+<span class="nb">mkdir</span> <span class="nt">-p</span> models
+python llama.cpp/convert_hf_to_gguf.py <span class="se">\</span>
+  PATH_TO_YOUR_MERGED_MODEL <span class="se">\</span>
+  <span class="nt">--outfile</span> ./models/lfm25-350m-grpo-bf16.gguf <span class="se">\</span>
+  <span class="nt">--outtype</span> bf16
+</code></pre></div></div>
+
+<p>그런 다음 다음 명령어로 병합된 모델을 서빙합니다:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>llama-server <span class="se">\</span>
+  <span class="nt">-m</span> ./models/lfm25-350m-grpo-bf16.gguf <span class="se">\</span>
+  <span class="nt">--alias</span> lfm25-350m-grpo-structured-output <span class="se">\</span>
+  <span class="nt">-c</span> 32768 <span class="se">\</span>
+  <span class="nt">-np</span> 4 <span class="se">\</span>
+  <span class="nt">-ngl</span> 99 <span class="se">\</span>
+  <span class="nt">--host</span> 127.0.0.1 <span class="se">\</span>
+  <span class="nt">--port</span> 8081
+</code></pre></div></div>
+
+<p>그런 다음 미세 조정된 모델로 전체 IFStruct 평가를 다시 실행합니다:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run ifstruct-eval <span class="se">\</span>
+  <span class="nt">--model</span> lfm25-350m-grpo-structured-output <span class="se">\</span>
+  <span class="nt">--base-url</span> http://localhost:8081/v1 <span class="se">\</span>
+  <span class="nt">--api-key</span> dummy <span class="se">\</span>
+  <span class="nt">--dataset</span> data/test.jsonl <span class="se">\</span>
+  <span class="nt">--results-file</span> results/lfm25-350m-grpo.json <span class="se">\</span>
+  <span class="nt">--n-threads</span> 4 <span class="se">\</span>
+  <span class="nt">--max-tokens</span> 2048 <span class="se">\</span>
+  <span class="nt">-v</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>============================================================
+Model: lfm25-350m-grpo-structured-output
+============================================================
+Overall: 594/2000 passed (29.7%)
+Average latency: 1518ms
+
+By format:
+  JSON: 319/1000 passed (31.9%)
+  YAML: 275/1000 passed (27.5%)
+
+By top-level structure:
+  Wrapper key 300/1011 passed (29.7%)
+  Bare list   294/989 passed (29.7%)
+
+By entity type:
+  test__camera_review                 5/83 passed (6.0%)
+  test__clinical_trial                31/104 passed (29.8%)
+  test__conference_schedule           11/87 passed (12.6%)
+  test__escaping__bug_report_batch    32/89 passed (36.0%)
+  test__escaping__config_snippet_audit 24/85 passed (28.2%)
+  test__escaping__customer_email_thread 9/73 passed (12.3%)
+  test__escaping__dialogue_sample     17/95 passed (17.9%)
+  test__escaping__interview_transcript_segment 13/80 passed (16.2%)
+  test__escaping__log_parser_examples 33/72 passed (45.8%)
+  test__escaping__pr_discussion       26/87 passed (29.9%)
+  test__escaping__repro_steps_batch   23/73 passed (31.5%)
+  test__escaping__screenplay_scene    34/92 passed (37.0%)
+  test__escaping__short_story_chapter 24/84 passed (28.6%)
+  test__escaping__support_ticket_batch 36/73 passed (49.3%)
+  test__escaping__terminal_session_notes 23/70 passed (32.9%)
+  test__event_ticket_booking          62/107 passed (57.9%)
+  test__gpu_review                    7/94 passed (7.4%)
+  test__invoice                       36/86 passed (41.9%)
+  test__job_posting                   33/85 passed (38.8%)
+  test__real_estate_listing           32/82 passed (39.0%)
+  test__recipe                        7/70 passed (10.0%)
+  test__rental_car_booking            37/79 passed (46.8%)
+  test__scientific_experiment         14/69 passed (20.3%)
+  test__travel_itinerary              25/81 passed (30.9%)
+
+Common errors:
+  7331x required field missing
+  890x wrong item count
+  555x type mismatch
+  102x expected bare list, got wrapper
+   62x extraneous field 'metadata.tone'
+   55x 6 is greater than maximum 5
+   49x extraneous field 'speaker_labels'
+   47x extraneous field 'tone'
+   44x 'cups' not in allowed values ['mg', 'g', 'kg', 'oz', 'lb', 'ml', 'l', 'cl', 'dl'
+   44x extraneous field 'notes'
+</code></pre></div></div>
+
+<p>동일한 서빙 스택에서 두 실행 결과를 비교하면 다음과 같습니다:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">IFStruct 그룹</th>
+      <th style="text-align: left">base</th>
+      <th style="text-align: left">GRPO-tuned</th>
+      <th style="text-align: left">Δ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>전체</strong></td>
+      <td style="text-align: left">22.6%</td>
+      <td style="text-align: left"><strong>29.7%</strong></td>
+      <td style="text-align: left"><strong>+7.1</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">JSON</td>
+      <td style="text-align: left">18.0%</td>
+      <td style="text-align: left">31.9%</td>
+      <td style="text-align: left">+13.9</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">YAML</td>
+      <td style="text-align: left">27.2%</td>
+      <td style="text-align: left">27.5%</td>
+      <td style="text-align: left">+0.3</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Wrapper key</td>
+      <td style="text-align: left">28.5%</td>
+      <td style="text-align: left">29.7%</td>
+      <td style="text-align: left">+1.2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Bare list</td>
+      <td style="text-align: left">16.6%</td>
+      <td style="text-align: left">29.7%</td>
+      <td style="text-align: left">+13.1</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>향상된 부분은 학습이 목표로 한 지점과 정확히 일치합니다. JSON 통과율은 거의 14포인트 상승한 반면(18.0% → 31.9%), YAML은 대부분 동일하게 유지됩니다. 이는 여전히 <a href="https://www.liquid.ai/blog/ifstruct-v1.0">Qwen3.5-2B score of 33.15%</a>보다 낮지만, 가벼운 작업별 미세 조정만으로도 소형 모델을 더 큰 모델에 근접시킬 수 있음을 보여줍니다.</p>
+
+<h2 id="section-5">결론</h2>
+
+<p>약 500개의 샘플과 100 step으로 짧게 GRPO를 실행하면, 350M 파라미터의 소형 모델 성능을 IFStruct에서 22.6%에서 29.7%로 끌어올릴 수 있습니다. 핵심은 저렴한 작업별 보상 신호가 소형 모델의 <em>형식</em> 관련 신뢰성을 크게 높여, 몇 배 더 큰 모델과의 격차를 상당 부분 줄일 수 있다는 점입니다.</p>
+
+<p>이 작업을 재현하거나 확장하려면 원본 <a href="https://www.liquid.ai/blog/ifstruct-v1.0">IFStruct v1.0 blog post</a>, <a href="https://github.com/Liquid4All/ifstruct">Liquid4All/ifstruct</a> 벤치마크 repo, <a href="https://huggingface.co/datasets/LiquidAI/ifstruct-v1.0">LiquidAI/ifstruct-v1.0</a> 데이터셋을 참고하세요.</p>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-09-03">03 Sep 2026</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#section-1" id="markdown-toc-section-1">사전 요구 사항</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">LFM2.5-350M (Base model)의 IFStruct 평가</a></li>
+  <li><a href="#section-3" id="markdown-toc-section-3">구조화된 출력에 대한 TRL 기반 GRPO 미세 조정</a>    <ul>
+      <li><a href="#학습-데이터" id="markdown-toc-학습-데이터">학습 데이터</a></li>
+      <li><a href="#모델-및-lora" id="markdown-toc-모델-및-lora">모델 및 LoRA</a></li>
+      <li><a href="#보상-함수" id="markdown-toc-보상-함수">보상 함수</a></li>
+      <li><a href="#학습" id="markdown-toc-학습">학습</a></li>
+      <li><a href="#모델-병합-및-저장" id="markdown-toc-모델-병합-및-저장">모델 병합 및 저장</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-4" id="markdown-toc-section-4">GRPO로 튜닝한 LFM2.5-350M의 IFStruct 평가</a></li>
+  <li><a href="#section-5" id="markdown-toc-section-5">결론</a></li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-202/" alt="">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href=""></a>
+        <span class="author-description"></span>                        
+    </div>
+</div>
+
+
+
+
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">21</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="translation">
+            Translation
+            <span class="count">21</span>
+          </button>
+        
+      
+        
+        
+          <button class="filter-btn" data-category="huggingface">
+            HuggingFace
+            <span class="count">20</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/grabette/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">21 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/thinkingmachines-inkling/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" alt="Thinking Machines의 Inkling에 오신 것을 환영합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/torch-attention-profile/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" alt="파이토치의 프로파일링(3부): 어텐션이 전부다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">10 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/native-speed-vllm-transformers-backend/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/lerobot-release-v060/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" alt="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">07 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/cerebras-gemma4-voice-ai/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">01 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/eee-community-evals/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" alt="Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Featuring Every Eval Ever Results on Hugging Face Model Pages를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">30 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/vllm-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">26 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/ffasr-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">24 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/huggingface-hub-release-ci/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" alt="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/huggingface-hub-release-ci/">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/cross-origin-storage/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/peft-beyond-lora/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/is-it-agentic-enough/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" alt="충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/agentic-resource-discovery-launch/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-06-17-agentic-resource-discovery-launch/thumbnail.png" alt="에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Agentic Resource Discovery: Let agents search를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">17 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/github-ci-hf-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-06-09-github-ci-hf-jobs/thumbnail.gif" alt="GitHub CI를 Hugging Face Jobs로 마이그레이션" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Migrating Your GitHub CI to Hugging Face Jobs를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">09 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/openenv-agentic-rl/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-06-08-openenv-agentic-rl/thumbnail.png" alt="오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Open Source Community is backing OpenEnv for Agentic RL를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/torch-profiler/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-05-29-torch-profiler/thumbnail.png" alt="PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 1): A Beginner’s Guide to torch.profiler를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">29 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/local-reachy-mini-conversation/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">27 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/olmoearth-v1-1/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-05-20-olmoearth-v1-1/thumbnail.png" alt="OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 OlmoEarth v1.1: A more efficient family of models를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">20 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/paddleocr-transformers/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">19 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="transformers translation ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-202/how-to-use-translator/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-202/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-202/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
+        <p class="card-text text-muted">
+Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">05 Oct 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+</main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-202/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-202/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-202/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-202/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-202/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-202/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-202/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-202/assets/js/category.js"></script>
+  </body>
+</html>
