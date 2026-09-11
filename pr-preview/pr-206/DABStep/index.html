@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-206/assets/images/favicon.ico" />
+
+    <title>DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크" />
+<meta name="author" content="sohyun" />
+<meta property="og:locale" content="en_us" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 DABStep: Data Agent Benchmark for Multi-step Reasoning를 한국어로 번역한 글입니다. —" />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 DABStep: Data Agent Benchmark for Multi-step Reasoning를 한국어로 번역한 글입니다. —" />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-206/DABStep/assets/images/thumbnail_default.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-11-02T00:00:00+09:00" />
+<meta property="article:modified_time" content="2025-11-02T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-206/DABStep/assets/images/thumbnail_default.png" />
+<meta name="twitter:title" content="DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"sohyun"},"dateModified":"2025-11-02T00:00:00+09:00","datePublished":"2025-11-02T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 DABStep: Data Agent Benchmark for Multi-step Reasoning를 한국어로 번역한 글입니다. —","headline":"DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크","image":"/pr-preview/pr-206/DABStep/assets/images/thumbnail_default.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-206/DABStep/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-206/assets/images/hfkr_logo.png"},"name":"sohyun"},"url":"/pr-preview/pr-206/DABStep/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-206/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-206/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-206/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-206/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-206/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-206/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-206/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-206/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-206/assets/images/thumbnail_default.png" alt="DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-206/assets/images/thumbnail_default.png" alt="DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-206/categories#agent">Agent</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-206/categories#benchmark">Benchmark</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#dabstep-다단계-추론을-위한-데이터-에이전트-벤치마크" id="markdown-toc-dabstep-다단계-추론을-위한-데이터-에이전트-벤치마크">DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크</a>    <ul>
+      <li><a href="#동기" id="markdown-toc-동기">동기</a></li>
+      <li><a href="#dabstep-소개" id="markdown-toc-dabstep-소개">DABstep 소개</a></li>
+      <li><a href="#dabstep의-구성-요소는" id="markdown-toc-dabstep의-구성-요소는">DABstep의 구성 요소는?</a>        <ul>
+          <li><a href="#데이터" id="markdown-toc-데이터">데이터</a></li>
+          <li><a href="#작업" id="markdown-toc-작업">작업</a>            <ul>
+              <li><a href="#레벨" id="markdown-toc-레벨">레벨</a></li>
+              <li><a href="#일반화" id="markdown-toc-일반화">일반화</a></li>
+            </ul>
+          </li>
+          <li><a href="#평가" id="markdown-toc-평가">평가</a></li>
+          <li><a href="#실시간-리더보드" id="markdown-toc-실시간-리더보드">실시간 리더보드</a></li>
+          <li><a href="#베이스라인" id="markdown-toc-베이스라인">베이스라인</a></li>
+        </ul>
+      </li>
+      <li><a href="#시작하기-및-인프라" id="markdown-toc-시작하기-및-인프라">시작하기 및 인프라</a></li>
+      <li><a href="#향후-방향" id="markdown-toc-향후-방향">향후 방향</a></li>
+      <li><a href="#관련-연구" id="markdown-toc-관련-연구">관련 연구</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/dabstep">DABStep: Data Agent Benchmark for Multi-step Reasoning</a>를 한국어로 번역한 글입니다.</em>
+—</p>
+
+<h1 id="dabstep-다단계-추론을-위한-데이터-에이전트-벤치마크">DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크</h1>
+
+<p>언어 모델은 점점 더 강력해지고 있으며, 에이전트로서 작업을 자율적으로 수행할 수 있게 되었습니다. 특히 추론, 코드, 데이터가 교차하는 영역에서 흥미로운 사용 사례가 많습니다. 하지만 실제 문제에 대한 적절한 평가 벤치마크가 부족하여 이 분야의 발전이 저해되고 있습니다.</p>
+
+<p>이러한 과제를 해결하기 위해 Adyen과 Hugging Face는 함께 다단계 추론을 위한 데이터 에이전트 벤치마크(Data Agent Benchmark for Multi-step Reasoning, DABstep)를 구축했습니다. DABstep은 최첨단 LLM과 AI 에이전트의 능력을 평가하기 위해 설계된 450개 이상의 데이터 분석 작업으로 구성되어 있습니다.</p>
+
+<blockquote>
+  <p><em>연구 결과에 따르면, DABstep은 가장 유능한 추론 기반 에이전트조차도 정확도 16%만 달성하는 것을 보이며, 현재 AI모델에 도전 과제를 제시함과 동시에 이 분야에 상당한 발전이 필요함을 보여줍니다.</em></p>
+</blockquote>
+
+<p>DABstep은 AI 모델에 다음을 요구합니다:</p>
+
+<ul>
+  <li>데이터를 깊이 파고들고 엄밀하게 접근할 것 (환각 금지)</li>
+  <li>자유 형식 텍스트와 데이터베이스에 대한 추론</li>
+  <li>실제 사용 사례와의 연결 (단순 수학이나 코드가 아님)</li>
+</ul>
+
+<p>이 블로그 게시물에서는 벤치마크의 설계와 구성을 다루고, 평가 결과를 탐색하며, 현재 모델과 복잡한 데이터 분석 작업을 효과적으로 해결하는 능력 사이의 상당한 격차에 대해 논의합니다.</p>
+
+<h2 id="동기">동기</h2>
+
+<p>데이터 분석은 기술적 역량, 도메인 지식, 창의성을 모두 요구하는 예술이자 과학이므로 거의 간단하지 않습니다. 숙련된 데이터 분석가조차도 다음과 같은 어려움에 직면합니다:</p>
+
+<ul>
+  <li><strong>간단하지만 시간이 많이 소요되는 작업</strong>: 간단한 작업이라도 엄청난 양 때문에 간단한 분석이 수 시간의 반복 작업으로 변할 수 있습니다.</li>
+  <li><strong>복잡한 맥락과 높은 인지 부하</strong>: 일부 작업은 분석가가 복잡한 도메인별 지식을 처리해야 하므로 시간과 정신적으로 소모적입니다. 예를 들어, (1) 분산되고, 중첩되고, 복잡한 문서를 읽고 (2) 데이터를 분석하고 (3) 결과에 대해 추론하고, 마지막으로 비즈니스 방향을 결정할 권장 사항을 제공하는 것입니다.</li>
+  <li><strong>기술적 통찰력</strong>: 데이터가 높은 가용성, 높은 품질, 제공 가능한 상태라면 데이터 분석은 간단한 작업일 수 있습니다. 불행히도 이는 거의 드물며, 분석가는 데이터를 소비하고, 변환하고, 제공하는 파이프라인을 만들기 위한 기술적 깊이가 필요합니다. 데이터 분석가는 종종 공식적으로 데이터 엔지니어링에 속하는 작업을 맡기도 합니다.</li>
+</ul>
+
+<p>Adyen과 같은 회사에서 분석가는 일상적인 쿼리부터 창의성, 정밀성, 반복적 추론이 필요한 복잡한 워크플로우까지 다양한 문제를 해결합니다. 간단하고 반복적인 작업을 자동화하고 복잡한 작업을 지원할 수 있는 능력 있는 데이터 분석 에이전트에 대한 접근은 분석가가 더 빠르게 작업하고, 정신적 부담을 줄이고, 더 영향력 있는 문제 해결에 집중할 수 있게 해줍니다. 이는 금융과 같이 데이터 분석과 통찰력이 필요한 많은 산업에 중요한 순간이 될 것입니다.</p>
+
+<p><em>에이전트 워크플로우</em>의 최근 발전 — 도구를 갖춘 LLM이 다단계 작업을 독립적으로 실행하는 것 — 은 코딩, <a href="https://openai.com/index/introducing-deep-research/">개방형 QA</a>, <a href="https://www.swebench.com">소프트웨어 엔지니어링</a>, 심지어 <a href="https://openai.com/index/mle-bench/">Kaggle 대회</a>와 같은 영역에서 엄청난 가능성을 보여주었습니다. 이러한 시스템은 단지 이론적이지 않으며, 실제 생산성 향상을 주도하고 있습니다.</p>
+
+<p>그렇다면 질문은 다음과 같습니다: <strong>에이전트 워크플로우가 데이터 분석에 접근하는 방식을 재편할 수 있을까요?</strong></p>
+
+<h2 id="dabstep-소개">DABstep 소개</h2>
+
+<p>기계 학습의 발전은 신뢰할 수 있는 진행 신호를 제공하는 고품질 벤치마크에 의해 추진됩니다. 때문에 우리는 데이터 분석에서 에이전트 워크플로우를 평가하고 발전시키기 위한 새로운 벤치마크인 다단계 추론을 위한 데이터 에이전트 벤치마크(DABstep)를 소개하게 되어 기쁘게 생각합니다.</p>
+
+<p>DABstep의 독특한 점은 다음과 같습니다:</p>
+
+<ul>
+  <li><strong>실제 사용 사례</strong>: Adyen의 실제 업무에서 추출한 450개 이상의 실제 작업을 기반으로 구축되었습니다. 이러한 작업은 인위적인 장난감 문제가 아니며, 분석가가 매일 직면하는 도전 과제를 반영하여 DS-1000 또는 DS Bench<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>와 같은 다른 벤치마크와 차별화됩니다.</li>
+  <li><strong>구조화된 데이터와 비구조화된 데이터의 균형</strong>: 이러한 작업은 구조화된 데이터를 탐색하고 비구조화된 데이터로 캡처된 여러 데이터 세트와 문서를 이해하기 위한 고급 데이터 분석 기술이 필요합니다.</li>
+  <li><strong>간단한 설정</strong>: SWE-bench 또는 MLE-bench와 같이 복잡한 구성이 필요한 벤치마크와 달리, DABstep은 사용하기 간단합니다. 모델로 답변을 생성하려면 코드 실행 환경에 대한 액세스만 필요하며, 참가자는 자동 평가를 위해 답변을 리더보드에 직접 제출할 수 있습니다.</li>
+  <li><strong>사실 기반 평가</strong>: 작업은 객관적으로 평가되도록 설계되었으며, 작업 출력의 평가는 해석 없이 항상 옳거나 그른 이진 결과로 매핑됩니다.</li>
+  <li><strong>다단계 복잡성</strong>: DABstep은 일상적인 쿼리부터 다단계 반복 워크플로우까지 다양한 분석 작업에 걸쳐 시스템을 테스트합니다. 고립된 질문에 초점을 맞춘 벤치마크와 달리, DABstep은 모델이 다양하고 실용적인 작업 전체 과정에 에이전트로서 추론하도록 요구합니다.</li>
+</ul>
+
+<p>DABstep이 이 모든 것을 달성하면서도 실행하기 간단한 벤치마크로 유지되는 방법은 무엇일까요? 설계를 살펴보겠습니다!</p>
+
+<h2 id="dabstep의-구성-요소는">DABstep의 구성 요소는?</h2>
+
+<p>DABstep은 사용 장벽이 낮고 품질 평가가 용이하며 난이도 상승이 가능하도록 설계되었습니다. 이를 위한 DABstep의 구성 요소 중 일부인 데이터 세트, 작업, 평가, 실시간 리더보드 및 베이스라인을 공개합니다.</p>
+
+<h3 id="데이터">데이터</h3>
+
+<p>분석가가 실제 문제를 다룰 때 극복해야 하는 가장 큰 과제 중 하나는 도메인 지식과 기술적 역량의 균형을 맞추는 것입니다. 이를 위해 DABstep은 각각 도메인 지식과 기술적 역량을 측정하기 위해 비구조화된 데이터와 구조화된 데이터를 모두 포함합니다.</p>
+
+<p>표 1은 벤치마크와 함께 공개하는 일부 데이터 세트의 스냅샷을 보여줍니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">이름</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">payments.csv</td>
+      <td style="text-align: left">사기 및 위험 사용 사례와 관련된 다양한 신호가 있는 138k개의 (익명화된) 거래 결제 데이터 세트.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">payments-readme.md</td>
+      <td style="text-align: left">결제 데이터 세트에 대한 문서</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">acquirer_countries.csv</td>
+      <td style="text-align: left">매입 은행 및 관련 국가 테이블</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">fees.json</td>
+      <td style="text-align: left">1000개의 스킴 수수료 구조로 구성된 광범위한 데이터 세트.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">merchant_category_codes.csv</td>
+      <td style="text-align: left">가맹점 업종 코드(MCC) 테이블</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">merchant_data.json</td>
+      <td style="text-align: left">가맹점을 설명하는 테이블</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">manual.md</td>
+      <td style="text-align: left">금융 분야에서 비즈니스 맥락은 종종 네트워크, 규제 기관, 프로세서의 광범위한 핸드북에 설명되어 있습니다. 이 벤치마크의 첫 번째 버전에서는 작업을 정확하게 해결하기 위한 필수 비즈니스 지식을 정확하면서도 단순화된 형식으로 정리한 마크다운 파일(manual.md)을 만들었습니다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>표 1: 벤치마크는 금융 결제 부문을 포함한 다양한 작업에 걸친 여러 데이터 세트로 구성됩니다</em></p>
+
+<p>일부 구조화된 데이터 세트에는 거래 원격 측정 및 비즈니스 메타데이터(예: 가맹점 업종 코드)와 같은 실제 데이터를 나타내는 CSV 및 JSON 파일이 포함됩니다. 또한 예를 들어 네트워크, 규제 기관, 프로세서가 발행하는 문서, 긴 매뉴얼 및 상세한 핸드북과 같은 비구조화된 데이터도 있습니다.</p>
+
+<p>이러한 모든 데이터 세트는 Adyen의 실제 업무에서 추출되었습니다.</p>
+
+<h3 id="작업">작업</h3>
+
+<p>DABStep에 포함된 새로운 데이터 세트를 기반으로, AI 에이전트의 정확도를 테스트하기 위해 난이도가 증가하는 작업들을 공개합니다.</p>
+
+<p>각 작업에는 다음 항목이 포함됩니다:</p>
+
+<ol>
+  <li>분석가에게 도전 과제를 제안하는 <strong>질문</strong>.</li>
+  <li>작업의 난이도를 나타내는 <strong>레벨</strong>.</li>
+  <li>사실 기반 평가(Factoid)의 사양을 충족하도록 답변 형식을 지정하는 방법에 대한 <strong>지침</strong>.</li>
+</ol>
+
+<p>작업 중 어느 것도 1-shot 코드로 해결할 수 없습니다. 즉, 추론만으로는 해결할 수 없으며, 반복적인 문제 해결의 순차적 단계가 필요합니다. 예를 들어, 에이전트는 질문에 답하기 위해 최소한 해당 데이터 세트에 어떤 열이 존재하는지 알아야 합니다. 이는 1-shot 코드로 여러 질문에 올바르게 답할 수 있는 GAIA, MATH 및 SimpleQA와 같은 인기 있는 벤치마크와 대조됩니다.</p>
+
+<p>두 가지 예제 작업은 그림 1에 표시되고, 사람이 만든 참조 솔루션 예는 그림 2에 표시됩니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">이름</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>질문:</strong> 2023년에 가장 높은 평균 사기율을 보인 카드 스킴은 무엇입니까?<br /><br /><strong>지침:</strong> 답변은 스킴의 이름이어야 합니다.<br /><br /><em>[LLM/에이전트 루프…]</em><br /><br /><strong>답변:</strong> SwiftCharge</td>
+      <td style="text-align: left"><strong>질문:</strong> 2023년에 Crossfit Hanna 가맹점에 초점을 맞춰, 인센티브를 통해 사용자가 다른 권한 부여 특성 지표로 전환하도록 장려하여 사기 거래를 줄이는 것을 목표로 한다면, 가능한 가장 낮은 수수료를 기준으로 어떤 옵션이 가장 비용 효율적일까요?<br /><br /><strong>지침:</strong> 답변은 인센티브를 제공할 ACI와 소수점 둘째 자리로 반올림된 관련 비용을 다음 형식으로 제공해야 합니다: {card_scheme}:{fee}.<br /><br /><em>[LLM/에이전트 루프…]</em><br /><br /><strong>답변:</strong> E:346.49</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>그림 1: 왼쪽은 Easy Set의 위험/사기 질문 예입니다. 솔루션은 최소 2개의 데이터 소스와 3-shot 코드를 참조해야 합니다. 오른쪽은 Hard Set의 스킴 수수료 질문 예입니다. 솔루션은 최소 2개의 데이터 소스와 여러 shot의 코드를 참조해야 합니다. 포함된 답변은 시연 목적일 뿐이며 데이터 세트에는 포함되지 않습니다.</em></p>
+
+<h4 id="레벨">레벨</h4>
+
+<p>벤치마크는 두 가지 난이도 수준으로 구성됩니다:</p>
+
+<ul>
+  <li><strong>Easy 레벨</strong>: 이러한 작업은 워밍업 역할을 하며, 설정, 통합 및 연구 방향을 확인하는 데 도움이 됩니다. 일반적으로 단일 구조화된 데이터 세트와 최소한의 맥락적 지식만 필요합니다. 평균적으로 사람은 3시간 이상의 작업 후 이러한 작업에서 62%의 베이스라인을 달성하는 반면, Llama 70B zero-shot 프롬프트는 90% 이상의 정확도를 초과할 수 있습니다.</li>
+  <li><strong>Hard 레벨</strong>: 이러한 작업은 여러 구조화된 데이터 세트와 도메인별 지식을 포함하는 더 복잡한 접근 방식을 요구합니다. Easy 레벨과 달리, 일반적으로 단일 shot 코드 생성으로 해결할 수 없으며 여러 단계의 추론이 필요합니다.</li>
+</ul>
+
+<p>다단계 추론 문제의 예로, 다음 코드는 Hard 레벨 작업에 대한 사람이 만든 참조 솔루션의 일부를 보여줍니다. 전체적으로 다양한 지원 매크로 개발을 포함하여 4개의 순차적 단계로 나뉩니다. 이 솔루션을 코딩하려면 에이전트는 특정 도메인 지식과 반복적 추론의 순차적 단계에서 작업할 수 있는 능력이 있어야 합니다.</p>
+
+<div style="height: 300px; overflow-y: auto;">
+<script src="https://gist.github.com/eggie5/e738b4fc0e4e247e2e31820739383819.js"></script>
+</div>
+
+<p><em>그림 2: Hard Set의 질문에 대한 220줄의 참조 솔루션: “{merchant} 가맹점이 2023년 초 이전에 MCC 코드를 {target_mcc}로 전환했다면, 2023년에 지불해야 할 수수료의 차이는 얼마입니까?” 솔루션은 1 shot 코드 생성에 어려운 여러 단계의 귀납적 추론이 필요합니다.</em></p>
+
+<h4 id="일반화">일반화</h4>
+
+<p>벤치마크로 일반화를 장려하는 방법에 대한 몇 가지 간단한 의견입니다.</p>
+
+<p><strong>상징적 추론:</strong> <a href="https://arxiv.org/abs/2410.05229">GSM-Symbolic</a>의 정신에 따라, 시간 범위, 가맹점 이름 등의 순열을 사용하여 작업의 카디널리티(조합 수)를 확장했습니다. 이는 “운 좋은 추측” 가능성을 제거하고 핵심 추론(추론의 재현성) 및 일반화 능력을 검증하기 위함입니다.</p>
+
+<p><strong>숨겨진 테스트 세트:</strong> 데이터 세트를 검증 및 테스트 세트로 나누지 않기로 선택했으며 홀드아웃(held-out) 테스트 세트만 공개합니다. 이는 데이터 분석가 에이전트가 이 벤치마크 버전에 반드시 캡처되지 않은 다양한 분석 작업에 걸쳐 일반화할 수 있어야 하기 때문입니다.</p>
+
+<p>**개발 세트: ** 이러한 엄격한 일반화 설정과 벤치마크 규모(450개 문제), 개발자 편의성을 고려하여 전체 테스트 세트의 대표 하위 집합인 개발 세트(정답 포함)도 공개했습니다. 이 개발 세트는 연구자들이 평가 및 신속한 피드백 루프를 포함한 E2E 제출 파이프라인을 로컬에서 구성한 후 리더보드에 제출할 수 있도록 하기 위한 것입니다.</p>
+
+<p>광범위한 일반화를 테스트하기 위해, DABstep은 단독으로 벤치마크되어서는 안 되며, 전반적인 일반화 및 문제 해결을 테스트하는 다른 벤치마크(예: MMLU, SuperGlue, GPQA)와 함께 보아야 합니다.</p>
+
+<h3 id="평가">평가</h3>
+
+<p>간결함을 위해 사실 기반 답변 평가 시스템을 선택했습니다. 이는 벤치마크 질문에 대한 답변이 간단한 단어, 숫자 또는 다중 선택 조합이어야 함을 의미합니다. 이를 통해 편향되지 않고, 정량화 가능하며, 모델에 의존하지 않는 평가가 가능합니다. (이는 심판 LLM이 평가하는 자연어 답변 제출 방식과 대비됩니다)</p>
+
+<p>따라서 답변 형식 자체가 벤치마크의 핵심이 되도록 의도하지 않았습니다. 이를 위해 형식보다는 답변 정확도에 초점을 맞추도록 보장하는 일련의 유연한 평가 방법을 구현했습니다. 예를 들어, 수치 비교 시 정밀도와 형식 차이를 허용하는 적응형 허용 오차를 사용합니다. 문자열은 정규화 후 유사도 비율 임계값을 적용한 퍼지 매칭으로 비교합니다. 리스트는 정규화 후 요소별로 평가됩니다.</p>
+
+<h3 id="실시간-리더보드">실시간 리더보드</h3>
+
+<p>DABstep은 Hugging Face에서 호스팅되는 실시간 리더보드를 제공하며, 참가자는 답변을 제출하여 즉시 채점받을 수 있습니다. 즉각적인 피드백과 함께 전 세계 다른 참가자들과의 순위를 확인할 수 있습니다.</p>
+
+<iframe src="https://adyen-DABstep.hf.space" frameborder="0" width="850" height="450"></iframe>
+
+<p><em>최고 순위의 제출물이 표시된 순위표 보기. 링크: <a href="https://huggingface.co/spaces/adyen/DABstep">DABstep 리더보드</a></em></p>
+
+<h3 id="베이스라인">베이스라인</h3>
+
+<p>인기 있는 공개 및 비공개 모델에 걸친 베이스라인 평가 세트를 제공합니다.</p>
+
+<p><img src="https://huggingface.co/datasets/lvwerra/dabstep/resolve/main/benchmark.png" alt="benchmark" />
+<em>그림 3: 공개 및 비공개 모델/공급자에 걸친 성능(Hard 세트에서). * Reasoning 모델은 모든 채팅 모델에서 사용하는 통합 ReAct 프롬프트에서 잘 작동하지 않아 특별한 Reasoning 프롬프트를 제작해야 했습니다. 베이스라인 구현 및 프롬프트 <a href="https://huggingface.co/spaces/adyen/data-agents-benchmark/blob/main/baseline/run.py">세부 정보는 여기</a>를 참조하세요. DeepSeek-V3의 상업적 제공을 벤치마크했습니다.</em></p>
+
+<p>그림 3에서 볼 수 있듯이, 가장 좋은 에이전트조차도 20% 선을 넘지 못하는 등 많은 발전이 필요합니다.</p>
+
+<p>최고 성능 에이전트는 최신 추론 모델을 기반으로 했으며, o3-mini가 16% 정확도로 1위를 차지했고 R1이 13%**로 뒤를 이었습니다. 가장 가까운 채팅 기반 모델은 Claude Sonnet으로 12%, 오픈 DeepSeek V3가 6%였습니다.</p>
+
+<p>놀라운 발견 중 하나는 인스트럭트 모델이 ReAct 프롬프트로 즉시 잘 수행되는 반면, 추론 모델은 그렇지 않아 0% 정확도를 달성한다는 것입니다. 일반적인 실패 모드에는 지시 사항 따르기 부족, 잘못된 코드 구문, 코드 블록 닫기(부족), 도구 사용(부적절) 및 1-턴 대화(즉, 순차적 단계 없음)가 포함됩니다. 이 벤치마크에서 추론 모델이 잘 수행되도록 하려면 프롬프트에 대한 여러 반복이 필요했습니다.</p>
+
+<p>벤치마크의 일부로 제공되는 베이스라인은 채팅 및 추론 모델에 걸쳐 표준화된 프롬프트이므로, 최적화되지 않은 것으로 간주되어야 하며 <em>성능의 하한</em>입니다.</p>
+
+<p>*우리의 통합 ReAct 프롬프트가 채팅 모델에서는 훌륭하게 수행되었지만 모든 추론 모델에서 예외적으로 낮은 성능을 보였기 때문에 추론 모델을 위한 특별한 프롬프트를 설계해야 했습니다.</p>
+
+<p>** R1 성능은 이 출판 시점의 장기간 중단으로 인해 샘플에서 외삽되었습니다.</p>
+
+<p>또한, 각 상업적 제공에 대해 전체 벤치마크를 실행하는 비용을 추적하고 아래 표 2에서 비교합니다:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">이름</th>
+      <th style="text-align: left">비용</th>
+      <th style="text-align: left">작업당 비용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">o1</td>
+      <td style="text-align: left">$435</td>
+      <td style="text-align: left">$0.967</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Claude 3.5 Sonnet</td>
+      <td style="text-align: left">$90</td>
+      <td style="text-align: left">$0.200</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o3-mini</td>
+      <td style="text-align: left">$85</td>
+      <td style="text-align: left">$0.198</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">GPT 4o</td>
+      <td style="text-align: left">$50</td>
+      <td style="text-align: left">$0.111</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Claude 3.5 Haiku</td>
+      <td style="text-align: left">$35</td>
+      <td style="text-align: left">$0.078</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">GPT 4o-mini</td>
+      <td style="text-align: left">$3</td>
+      <td style="text-align: left">$0.007</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Deepseek R1</td>
+      <td style="text-align: left">$3</td>
+      <td style="text-align: left">$0.007</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Deepseek V3</td>
+      <td style="text-align: left">$2</td>
+      <td style="text-align: left">$0.004</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>표 2: 상업적 모델의 비용. 주관성/분산으로 인해 오픈 모델의 가격 분석은 포함하지 않았습니다. 비용/성능 %는 그림 4에서 탐색됩니다.</em></p>
+
+<p>그림 4에서 정확도 대 비용 균형을 살펴보며 경제성을 분석합니다.</p>
+
+<p><img src="https://huggingface.co/datasets/lvwerra/dabstep/resolve/main/benchmark-cost.png?download=true" alt="cost-performance-tradeoff" />
+<em>그림 4: 상업적 공급자 간의 성능 및 비용 균형 곡선.</em></p>
+
+<p>논란의 여지가 있지만, DeepSeek R1의 경제성은 본질적으로 성능과 비용 사이의 균형이 매우 이상적입니다.</p>
+
+<p>이제 이러한 벤치마크를 직접 실행하고 자체 모델을 평가하는 방법을 살펴보겠습니다.</p>
+
+<h2 id="시작하기-및-인프라">시작하기 및 인프라</h2>
+
+<p>벤치마크와 상호 작용하며 에이전트 연구를 수행하려면 실행 환경이 필요하고 비용이 발생한다는 점을 잘 알고 있습니다. 저희는 HuggingFace의 <strong>Inference API</strong>와 <a href="https://huggingface.co/docs/smolagents/en/index"><strong>smolagents</strong></a>에 대한 액세스를 제공하여 장벽을 낮추고 있습니다. 이 도구들을 통해 연구자는 <strong>일일 1천개 무료 LLM 요청</strong>을 보낼 수 있고 <strong>보안 로컬 코드 실행 환경</strong>에 접근할 수 있습니다.</p>
+
+<p>편의를 위해 비용 없이 바로 제출 가능한 솔루션이 담긴 <strong>예제 노트북</strong>을 제공합니다. (<a href="https://colab.research.google.com/drive/1pXi5ffBFNJQ5nn1111SnIfjfKCOlunxu">quickstart.ipynb</a>).</p>
+
+<p>DABstep은 접근 장벽을 제거하고 숙련된 연구자부터 호기심 많은 신규 사용자까지 누구나 데이터 분석에서 에이전트 워크플로우 발전에 기여할 수 있도록 보장합니다.</p>
+
+<h2 id="향후-방향">향후 방향</h2>
+
+<p>DABstep의 출시에 대해 정말 기쁘게 생각하며, 이 벤치마크가 오늘날 데이터 분석 에이전트의 상태를 테스트하는 데 도움이 될 것이라고 생각합니다. 그러나 이번 출시는 첫 번째 단계일 뿐이며 시간이 지남에 따라 벤치마크를 발전시켜 나갈 계획입니다.</p>
+
+<p>AI의 발전 속도를 고려할 때, 현재 상태의 벤치마크는 결국 해결되었다고 간주될 것으로 예상합니다. 그러나 이 벤치마크는 여러 차원에서 난이도를 높여 더 오랜 기간 유효하도록 설계되었습니다. 우리는 완전한 하위 호환성을 유지하며 벤치마크를 확장해 나갈 것입니다. 아래는 베이스라인을 개선할 주요 방향입니다.</p>
+
+<p><strong>작업:</strong> 사기 및 결제 수수료에 국한되어 매우 좁고 제한적입니다. 이 작업은 현실 세계의 일부에 불과하며, 실제로는 다른 차원과 변수가 다양하게 작용합니다. 향후 동일한 벤치마크를 확장하여 승인률(발행자 거부), 인증 중단률, 계절적 요소를 포함한 더 넓은 시간 범위의 실시간 상황 등 분야의 과제를 포함할 예정입니다. 이것으로 에이전트가 여러 변수를 동시에 균형 있게 조정하고 다차원적 차원에서 절충점을 실행하는 능력을 테스트하게 될 것입니다.</p>
+
+<p><strong>도메인:</strong> 벤치마크는 현재 금융 부문의 작업을 중심으로 합니다. 그러나 우리는 의료, 생물학, 보험, 통신 등 다른 분야의 연구자와 실무자들이 새로운 하위 집합을 벤치마크에 기여하여 다양한 도메인에서의 성능을 평가할 수 있도록 하는 것을 환영합니다.</p>
+
+<p><strong>데이터 규모:</strong> 구조화된 데이터는 결국 메모리에 모두 담을 수 없게 될 것입니다. 표준 도구로 분석되며 분석가가 분산 컴퓨팅 엔진을 사용하거나 나중에 평가하기 위한 워크플로우 스케줄링을 사용하도록 해야 합니다.</p>
+
+<p><strong>문서:</strong> 도메인 지식을 매핑하는 비정형 데이터는 시간 경과에 따른 변화(예: 공지), 다른 형식(예: PDF), 각 스킴, 매입자 또는 파트너를 매핑하는 유사하지만 다른 논리의 다른 버전 등을 포함하여 파일 수가 폭발적으로 증가할 것입니다. 컨텍스트는 현재 및 미래 토큰 카디널리티에서 허용되는 컨텍스트 윈도우에 논리적으로 맞지 않는 단계에 도달할 것입니다.</p>
+
+<p><strong>멀티모달:</strong> 에이전트는 멀티모달이 되어야 합니다. 이를 위해 플롯 및 그래프를 해석하고 생성하여 논리를 추출해야 하는 작업으로 벤치마크를 강화할 것입니다.</p>
+
+<h2 id="관련-연구">관련 연구</h2>
+
+<p>데이터 분석에서 AI를 평가하기 위한 기존 벤치마크는 이 분야를 발전시켰으며 DABstep은 그 기반 위에 구축되었습니다.</p>
+
+<p>DS Bench에서 평가하는 Modeloff 대회의 466개 질문은 주로 엑셀 기반 워크플로우를 위해 설계되었습니다. 소규모 작업에는 효과적이지만, 엑셀은 실제 데이터 분석에서 흔히 사용되는 반복적인 코드 기반 워크플로우(예: Jupyter 노트북)를 지원하지 않습니다. 또한 평가자로서 GPT-4에 의존하면 편향이 발생하고 일반화 가능성이 줄어듭니다.</p>
+
+<p>DS 1000은 StackOverflow에서 가져와 암기를 피하도록 선별된 Python 기반 데이터 분석 작업을 테스트합니다. 그러나 작업은 짧고 단발적이며, 실제 데이터 세트와 반복적 추론이 부족합니다. 이는 전체적인 워크플로우 또는 멀티모달 기능을 평가하는 능력을 제한합니다.</p>
+
+<p><strong>감사의 말:</strong> Harm de Vries (Graidd), Arjun Guha (Northeastern University), Hanna van der Vlis (Adyen)</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>과제는 현실적인 시나리오를 기반으로 하지만, 데이터는 합성하여 생성되었습니다. 비즈니스 맥락(가맹점 이름, 비율, 거래량, 거래 가치, 사기율 및 수수료 포함)은 인위적으로 만들어진 것이며 실제 비즈니스의 성과를 반영하지 않습니다. 예를 들어, 이번 실험의 목적을 위해 사기 발생률은 의도적으로 높게 설정되었습니다. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2025-11-02">02 Nov 2025</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#dabstep-다단계-추론을-위한-데이터-에이전트-벤치마크" id="markdown-toc-dabstep-다단계-추론을-위한-데이터-에이전트-벤치마크">DABStep: 다단계 추론을 위한 데이터 에이전트 벤치마크</a>    <ul>
+      <li><a href="#동기" id="markdown-toc-동기">동기</a></li>
+      <li><a href="#dabstep-소개" id="markdown-toc-dabstep-소개">DABstep 소개</a></li>
+      <li><a href="#dabstep의-구성-요소는" id="markdown-toc-dabstep의-구성-요소는">DABstep의 구성 요소는?</a>        <ul>
+          <li><a href="#데이터" id="markdown-toc-데이터">데이터</a></li>
+          <li><a href="#작업" id="markdown-toc-작업">작업</a>            <ul>
+              <li><a href="#레벨" id="markdown-toc-레벨">레벨</a></li>
+              <li><a href="#일반화" id="markdown-toc-일반화">일반화</a></li>
+            </ul>
+          </li>
+          <li><a href="#평가" id="markdown-toc-평가">평가</a></li>
+          <li><a href="#실시간-리더보드" id="markdown-toc-실시간-리더보드">실시간 리더보드</a></li>
+          <li><a href="#베이스라인" id="markdown-toc-베이스라인">베이스라인</a></li>
+        </ul>
+      </li>
+      <li><a href="#시작하기-및-인프라" id="markdown-toc-시작하기-및-인프라">시작하기 및 인프라</a></li>
+      <li><a href="#향후-방향" id="markdown-toc-향후-방향">향후 방향</a></li>
+      <li><a href="#관련-연구" id="markdown-toc-관련-연구">관련 연구</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-206/assets/images/author/sohyun.png" alt="sohyun">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href="https://github.com/sim-so/">sohyun</a>
+        <span class="author-description">Hello, I'm sohyun, a data analyst who explores the world of data with curiosity and passion. 🤗</span>                        
+    </div>
+</div>
+
+
+
+
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">5</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="benchmark">
+            Benchmark
+            <span class="count">1</span>
+          </button>
+        
+      
+        
+        
+          <button class="filter-btn" data-category="agent">
+            Agent
+            <span class="count">4</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="retrieval embedding benchmark ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-206/rteb/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-206/assets/images/blog/posts/2025-12-01-rteb/thumbnail.png" alt="RTEB: 검색 평가의 새로운 표준" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-206/rteb/">RTEB: 검색 평가의 새로운 표준</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing RTEB: A New Standard for Retrieval Evaluation를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> sohyun, </span>             
+                on <span class="post-date">01 Dec 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-206/agent-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-206/assets/images/blog/posts/2025-11-17-agent-leaderboard/thumbnail.png" alt="에이전트 리더보드: 다중 도메인 시나리오에서의 AI 에이전트 평가" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-206/agent-leaderboard/">에이전트 리더보드: 다중 도메인 시나리오에서의 AI 에이전트 평가</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Agent Leaderboard: Evaluating AI Agents in Multi-Domain Scenarios를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Jimin, </span>             
+                on <span class="post-date">17 Nov 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-206/structured-codeagent-ko/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-206/assets/images/blog/posts/2025-10-13-structured-codeagent/thumbnail.png" alt="CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-206/structured-codeagent-ko/">CodeAgents + Structure: 액션 실행을 위한 더 좋은 방법</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 CodeAgents + Structure: A Better Way to Execute Actions를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Jimin, </span>             
+                on <span class="post-date">13 Oct 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-206/Introducing-smolagents/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-206/assets/images/blog/posts/2025-09-26-Introducing-smolagents/thumbnail.png" alt="쉽게 에이전트를 만들 수 있는 라이브러리, smolagents를 소개합니다." width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-206/Introducing-smolagents/">쉽게 에이전트를 만들 수 있는 라이브러리, smolagents를 소개합니다.</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing smolagents, a simple library to build agents를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> jeong, </span>             
+                on <span class="post-date">26 Sep 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="agent ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-206/python-tiny-agents-ko/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-206/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail.png" alt="파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-206/python-tiny-agents-ko/">파이썬 Tiny Agents: 약 70줄의 코드로 MCP 기반 에이전트 구현하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Tiny Agents in Python: an MCP-powered agent in ~70 lines...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">14 Sep 2025</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+</main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-206/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-206/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-206/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-206/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-206/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-206/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-206/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-206/assets/js/category.js"></script>
+  </body>
+</html>
