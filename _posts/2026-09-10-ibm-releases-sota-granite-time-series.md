@@ -1,21 +1,24 @@
 ---
 layout: post
-title: "상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시"
+title: 상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/69d3d41eef229c09afea5d83/KYse3pX6t3l8FnI-1pKsi.png
 image: assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png
 authors:
-  - user: ibm-research
-slug: "ibm-releases-sota-granite-time-series"
-source_url: "https://huggingface.co/blog/ibm-research/ibm-releases-sota-granite-time-series"
-source_published_date: "2026-09-09"
-source_published_at: "2026-09-09T15:36:24+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: ibm-research
+slug: ibm-releases-sota-granite-time-series
+source_url: https://huggingface.co/blog/ibm-research/ibm-releases-sota-granite-time-series
+source_published_date: '2026-09-09'
+source_published_at: '2026-09-09T15:36:24+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: '* TOC {:toc} <!--toc--> _이 글은 Hugging Face 블로그의 [IBM releases SOTA Granite
+  Time Series PatchTST-FM-r2 model with commercial-friendly license](https://huggingface.'
 ---
-
 * TOC
 {:toc}
 <!--toc-->
