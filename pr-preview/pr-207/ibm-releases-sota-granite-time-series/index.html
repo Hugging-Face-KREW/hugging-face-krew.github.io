@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-207/assets/images/favicon.ico" />
+
+    <title>상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시" />
+<meta name="author" content="dailybot" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 IBM releases SOTA Granite Time Series PatchTST-FM-r2 model with commercial-friendly license를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 IBM releases SOTA Granite Time Series PatchTST-FM-r2 model with commercial-friendly license를 한국어로 번역한 글입니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-207/ibm-releases-sota-granite-time-series/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-09-10T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-09-10T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-207/ibm-releases-sota-granite-time-series/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png" />
+<meta name="twitter:title" content="상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-09-10T00:00:00+09:00","datePublished":"2026-09-10T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 IBM releases SOTA Granite Time Series PatchTST-FM-r2 model with commercial-friendly license를 한국어로 번역한 글입니다.","headline":"상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시","image":"/pr-preview/pr-207/ibm-releases-sota-granite-time-series/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-207/ibm-releases-sota-granite-time-series/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-207/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-207/ibm-releases-sota-granite-time-series/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-207/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-207/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-207/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-207/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-207/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-207/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-207/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-207/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png" alt="상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png" alt="상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-207/categories#huggingface">HuggingFace</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-207/categories#translation">Translation</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시</h1> 
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+				<ul id="markdown-toc">
+  <li><a href="#상업-친화적-라이선스와-함께-sota-granite-time-series-patchtst-fm-r2-모델-출시" id="markdown-toc-상업-친화적-라이선스와-함께-sota-granite-time-series-patchtst-fm-r2-모델-출시">상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">TL;DR</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">GIFT-Eval에서 강력한 zero-shot forecasting</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">벤치마크 학습 데이터를 사용할 수 있는 모델과 비교해도 경쟁력 있는 성능</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">아키텍처: PatchTST-FM-r1에서 무엇이 바뀌었나?</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">학습 데이터</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">연구 실험 및 상업적 사용을 위해 공개</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">몇 줄의 Python 코드로 PatchTST-FM-r2 사용해 보기</a></li>
+      <li><a href="#section-8" id="markdown-toc-section-8">Notebook에서 스트리밍 시계열까지</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/ibm-research/ibm-releases-sota-granite-time-series">IBM releases SOTA Granite Time Series PatchTST-FM-r2 model with commercial-friendly license</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/ibm-research/ibm-releases-sota-granite-time-series -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="상업-친화적-라이선스와-함께-sota-granite-time-series-patchtst-fm-r2-모델-출시">상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시</h1>
+
+<p>상업 친화적인 오픈 라이선스를 제공하는 고성능 zero-shot forecasting</p>
+
+<p>시계열 파운데이션 모델은 forecasting 시스템을 구축하는 방식을 바꾸고 있습니다. 각 데이터셋마다 별도의 모델을 학습하고 유지 관리하는 대신, 사용자는 사전 학습된 모델을 사용해 zero-shot 방식으로 forecasting을 생성할 수 있습니다.</p>
+
+<p>IBM은 Granite TSFM 제품군의 최신 모델인 <a href="https://huggingface.co/ibm-granite/granite-timeseries-patchtst-fm-r2">Granite Time Series PatchTST-FM-r2</a>(<a href="https://github.com/ibm-granite/granite-tsfm">github</a>, <a href="https://research.ibm.com/blog/time-series-ai-enterprise">blog</a>)를 출시했습니다. 이전 버전인 <a href="https://huggingface.co/ibm-granite/granite-timeseries-patchtst-fm-r1">PatchTST-FM-r1</a>의 새로운 버전인 PatchTST-FM-r2는 업데이트된 아키텍처, 더 큰 사전 학습 코퍼스, 확률적 forecasting, 결측값 imputation 지원, 그리고 약 385M개 파라미터 모델에서의 강력한 zero-shot 성능을 결합합니다.</p>
+
+<p>2026년 9월 8일 기준으로 이 모델은 GIFT-Eval 리더보드의 재현 가능한 zero-shot 모델 가운데, 관대한 상업 친화적 오픈 소스 라이선스(Apache 2.0 및 OpenMDW 1.0)로 출시된 모델 중 가장 높은 성능을 보이는 zero-shot 모델입니다. GIFT-Eval은 다양한 forecasting 시나리오에서 모델을 평가하도록 설계된 종합 시계열 forecasting 벤치마크이며, 이 모델은 재현 가능한 zero-shot 모델 가운데 전체 2위를 차지합니다.</p>
+
+<p>벤치마크 결과를 재현하는 데 필요한 모델 가중치, 아키텍처, 추론 파이프라인, 코드가 모두 제공됩니다.</p>
+
+<p>이 블로그에서는 모델을 설명하고, 벤치마크 결과와 모델 아키텍처를 자세히 살펴보며, 학습 데이터와 라이선스를 논의하고, 모델 사용 방법을 보여 주는 코드 예제를 제공합니다. 마지막으로 <a href="https://events.confluent.io/early-access-flink-features">Confluent product</a>를 활용해 Granite Time Series 제품군의 모델을 프로덕션 환경의 스트리밍 애플리케이션에서 사용하는 방법도 소개합니다.</p>
+
+<p>직접 사용해 볼 준비가 되셨나요? <a href="https://huggingface.co/ibm-granite/granite-timeseries-patchtst-fm-r2">Open Granite Time Series PatchTST-FM-r2 on Hugging Face</a></p>
+
+<h2 id="section-1">TL;DR</h2>
+
+<ul>
+  <li>
+    <p>수요, 가격, 에너지 부하, 트래픽, 텔레메트리 및 기타 시계열을 위한 범용 zero-shot forecasting.</p>
+  </li>
+  <li>
+    <p>약 385M개 파라미터, 최대 8,192의 context length, 유연한 forecast length, 99-quantile prediction head를 통한 확률적 forecasting.</p>
+  </li>
+  <li>
+    <p>모델 backbone은 multi-head self-attention과 temporal convolution을 결합하는 conformer block으로 구성되어 장기 및 단기 temporal structure를 포착합니다.</p>
+  </li>
+  <li>
+    <p>GIFT-Eval 벤치마크의 재현 가능한 zero-shot category에서 최고의 성능을 보이는 관대한 라이선스 모델(Apache-2.0 및 OpenMDW-1.0 이중 라이선스이며, 사용자는 두 라이선스 중 하나를 선택할 수 있음).</p>
+  </li>
+  <li>
+    <p>벤치마크를 재현하는 데 필요한 오픈 가중치, 아키텍처, 추론 파이프라인 및 코드 제공.</p>
+  </li>
+</ul>
+
+<h2 id="section-2">GIFT-Eval에서 강력한 zero-shot forecasting</h2>
+
+<p>파운데이션 모델은 특별히 학습되지 않은 시계열에도 일반화할 때 가장 유용합니다. 이러한 이유로 먼저 zero-shot 성능에 초점을 맞춥니다.</p>
+
+<p>GIFT-Eval은 서로 다른 데이터셋과 forecasting 시나리오에 걸쳐 forecasting 모델을 폭넓게 평가합니다. 리더보드를 zero-shot이고 재현 가능하며 테스트 누수 없이 평가된 모델로 제한하면, 2026년 9월 8일 기준 PatchTST-FM-r2는 Figures 1 및 2에 나와 있듯 CRPS와 MASE 모두에서 2위를 차지합니다(두 지표 모두 값이 낮을수록 더 좋습니다). 중요한 점은, 동일한 category에서 관대하고 상업 친화적인 라이선스를 보유한 모델 가운데 PatchTST-FM-r2가 가장 높은 성능을 보이는 모델이라는 것입니다.</p>
+
+<p><img src="https://cdn-uploads.huggingface.co/production/uploads/64b01b5252349201f972ba17/EHyv5DrZggfNQPIZzZ-Lk.png" alt="GIFT-Eval CRPS for leading replicable zero-shot models" /></p>
+
+<p>Figure 1. 주요 재현 가능 zero-shot 모델의 GIFT-Eval CRPS. PatchTST-FM-r2는 기하평균 CRPS 0.467을 달성해 이 비교에서 TimesFM-3 바로 다음 순위에 올랐으며, 관대한 라이선스를 보유한 모델 가운데 1위를 차지했습니다.</p>
+
+<p><img src="https://cdn-uploads.huggingface.co/production/uploads/64b01b5252349201f972ba17/5zG7qXwRtBp-ceZ_0UnAY.png" alt="GIFT-Eval MASE for leading replicable zero-shot models" /></p>
+
+<p>Figure 2. 주요 재현 가능 zero-shot 모델의 GIFT-Eval MASE. PatchTST-FM-r2는 기하평균 MASE 0.6846을 달성했습니다. 파란색 막대는 IBM 시계열 파운데이션 모델 팀이 출시한 모델을 나타냅니다.</p>
+
+<h2 id="section-3">벤치마크 학습 데이터를 사용할 수 있는 모델과 비교해도 경쟁력 있는 성능</h2>
+
+<p>GIFT-Eval의 일부 모델은 엄격한 zero-shot이 아닌 pretrained 모델로 분류됩니다. 이러한 모델은 GIFT-Eval 평가 데이터셋의 학습 부분을 사전 학습 코퍼스에 포함할 수 있습니다.</p>
+
+<p>이러한 pretrained 모델을 비교에 추가하더라도 PatchTST-FM-r2는 Figures 3 및 4에서 볼 수 있듯 상위권을 유지합니다. 재현 가능한 모델 가운데 CRPS에서는 3위, MASE에서는 4위입니다. 일부 경쟁 모델이 상당히 더 큰 규모임에도 Chronos-2, Timer-S1, Toto 변형 모델을 포함한 여러 pretrained 모델보다 우수한 성능을 보입니다.</p>
+
+<p><img src="https://cdn-uploads.huggingface.co/production/uploads/64b01b5252349201f972ba17/5nFJSV8NMdjQUGsRIKW2l.png" alt="GIFT-Eval CRPS with zero-shot and pretrained replicable models" /></p>
+
+<p>Figure 3. zero-shot 모델과 pretrained 재현 가능 모델을 모두 고려한 GIFT-Eval CRPS.</p>
+
+<p><img src="https://cdn-uploads.huggingface.co/production/uploads/64b01b5252349201f972ba17/Y8p3_pQBcUC2j7XgILUL5.png" alt="GIFT-Eval MASE with zero-shot and pretrained replicable models" /></p>
+
+<p>Figure 4. zero-shot 모델과 pretrained 재현 가능 모델을 모두 고려한 GIFT-Eval MASE.</p>
+
+<h2 id="section-4">아키텍처: PatchTST-FM-r1에서 무엇이 바뀌었나?</h2>
+
+<p>PatchTST-FM-r2는 PatchTST 제품군의 효과를 뒷받침한 patch 기반 표현을 유지하지만, 장기 및 단기 관계를 효율적으로 포착하고 inter-patch prediction을 평활화하도록 내부 아키텍처를 재설계했습니다. 이 두 가지 변화는 모두 오류 지표를 크게 개선합니다.</p>
+
+<p>한 가지 변화는 표준 transformer layer에서 multi-head self-attention과 함께 convolution을 통합하는 layer로 전환한 것입니다. 이러한 layer를 conformer layer라고 하며, 음성 처리 애플리케이션에서 <a href="https://arxiv.org/pdf/2005.08100">origin</a>를 보유하고 있습니다.</p>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/64b01b5252349201f972ba17/gYPoFfbdOqaT9nZmABON1.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/64b01b5252349201f972ba17/gYPoFfbdOqaT9nZmABON1.png" alt="Architectural evolution from PatchTST-FM-r1 to Conformer-based PatchTST-FM-r2" /></a></p>
+
+<p>Figure 5. PatchTST-FM-r1에서 Conformer 기반 PatchTST-FM-r2로의 아키텍처 진화.</p>
+
+<p>PatchTST-FM-r1 block은 multi-head self-attention과 feed-forward network를 결합합니다. r2에서는 이를 conformer 스타일 block으로 교체했으며, 이 block은 multi-head self-attention과 temporal convolution layer를 두 개의 half-step feed-forward layer가 둘러싸는 구조입니다.</p>
+
+<p>이를 통해 모델은 시계열을 추론하는 두 가지 상호 보완적인 메커니즘을 갖게 됩니다. Self-attention은 patch 간 장거리 관계를 모델링할 수 있고, convolution은 local temporal structure에 대한 inductive bias를 제공합니다. 따라서 convolution component는 단기 상호작용을 포착하는 동시에 attention이 더 긴 horizon의 관계에 집중하도록 할 수 있습니다. 이 현상은 transformer 및 conformer 버전에서 포착된 attention pattern에서 확인할 수 있습니다(아래 예시 figure는 ETTh1 dataset의 실제 sample을 사용함). Transformer의 self-attention 상당 부분(figure 왼쪽)은 대각선 부근에 집중되어 local relationship을 포착하는 반면, conformer block의 attention(figure 오른쪽)은 convolution layer가 짧은 거리를 담당하기 때문에 장거리(대각선에서 먼 위치)에 집중하는 모습을 보입니다. Backbone의 conformer block은 3과 5의 convolution kernel size를 {5, 5, 3, 3} 패턴으로 반복해 교차 사용합니다.</p>
+
+<p><img src="https://cdn-uploads.huggingface.co/production/uploads/64b01b5252349201f972ba17/VvDbogaOneDquekkRG6TW.png" alt="Transformer and conformer attention patterns" /></p>
+
+<p>Figure 6. ETTh1 dataset의 실제 sample을 사용해 transformer(왼쪽)와 conformer 버전(오른쪽)에서 포착된 attention pattern 비교.</p>
+
+<p>또한 PatchTST-FM-r2는 Hamming-window weighting을 적용한 50% overlapping patch와 overlap-and-add forecasting을 사용해 patch 경계를 평활화하고 forecasting accuracy를 향상합니다. 마지막으로 안정성을 위해 normalization을 추가하고 block 수를 20개에서 30개로 늘렸습니다.</p>
+
+<p>이러한 변경을 통해 완성된 모델은 약 385M개 파라미터를 가지며, 최대 8,192 step의 매우 긴 context를 지원하고, 유연한 forecast length에 대해 99개 quantile을 예측합니다. 이 모델은 forecasting distribution과 uncertainty interval을 위한 point forecast와 quantile output을 모두 제공합니다.</p>
+
+<h2 id="section-5">학습 데이터</h2>
+
+<p>실제 애플리케이션을 대상으로 하는 파운데이션 모델에서는 모델 품질이 고려 사항의 전부가 아닙니다. 개발자는 모델에 어떤 데이터가 사용되었는지, 벤치마크 데이터가 학습에 유출되었을 가능성이 있는지, 모델 배포에 어떤 영향이 있는지를 점점 더 잘 이해해야 합니다.</p>
+
+<p>PatchTST-FM-r2는 네 가지 소스로 구성된 문서화된 사전 학습 코퍼스를 사용합니다. 네 가지 소스는 GiftEvalPretrain에서 선택한 데이터셋, 수정된 periodic kernel과 제한적인 augmentation을 적용한 KernelSynth 기반 custom synthetic data, Chronos가 설명한 접근 방식으로 생성했지만 GIFT-Eval 평가 세트 외부의 데이터셋으로 제한한 TSMixup 코퍼스, 그리고 각각 길이 4,096인 약 500,000개의 synthetic CauKer sequence입니다.</p>
+
+<p>기업 도입자에게 이러한 투명성은 리더보드에서 몇 점을 더 얻는 것만큼 중요할 수 있습니다. 이것이 조직 자체의 모델 거버넌스 및 라이선스 검토 필요성을 없애지는 않지만, 불투명한 사전 학습 코퍼스보다 훨씬 더 많은 정보를 제공하므로 사용자가 해당 검토를 수행하는 데 도움이 됩니다.</p>
+
+<h2 id="section-6">연구 실험 및 상업적 사용을 위해 공개</h2>
+
+<p>커뮤니티에 더 많은 선택권을 제공하기 위해 Granite Time Series PatchTST-FM-r2는 <a href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a> 및 <a href="https://raw.githubusercontent.com/OpenMDW/OpenMDW/refs/heads/main/1.0/LICENSE.openmdw">OpenMDW 1.0</a>의 이중 라이선스로 제공됩니다. 사용자는 두 라이선스 중 하나를 선택할 수 있으며, 두 라이선스 모두 모델을 사용, 수정 및 배포할 수 있는 폭넓고 관대한 권리를 제공합니다. 또한 Linux Foundation의 OpenMDW는 AI 모델과 관련 자료를 위해 특별히 설계된 라이선스 프레임워크를 제공합니다. IBM은 관대한 오픈 소스 라이선스로 모델을 제공함으로써 도입 장벽을 낮추고, 사용을 제한하지 않는 라이선스가 제공하는 확신을 바탕으로 조직, 연구자 및 개발자가 이 기술을 구축해 나갈 수 있도록 하는 것을 목표로 합니다. 아키텍처 구현은 <a href="https://github.com/ibm-granite/granite-tsfm">Granite-TSFM repository</a>를 통해서도 제공되며 PatchTST-FM-r1 checkpoint와 backward-compatible합니다.</p>
+
+<h2 id="section-7">몇 줄의 Python 코드로 PatchTST-FM-r2 사용해 보기</h2>
+
+<p>파운데이션 모델을 평가하는 가장 쉬운 방법은 자체 시계열 데이터에 적용해 보는 것입니다.</p>
+
+<p>Granite TSFM package를 설치합니다:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install "granite-tsfm&gt;=0.3.9"
+</code></pre></div></div>
+
+<p>그런 다음 Hugging Face Hub에서 PatchTST-FM-r2를 직접 불러옵니다:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import pandas as pd
+from tsfm_public import PatchTSTFMForPrediction, TimeSeriesForecastingPipeline
+
+# Load model weights
+model = PatchTSTFMForPrediction.from_pretrained(
+    "ibm-granite/granite-timeseries-patchtst-fm-r2"
+)
+
+# Read some sample data from ETTh
+df = pd.read_csv(
+    "https://raw.githubusercontent.com/zhouhaoyi/ETDataset/main/ETT-small/ETTh1.csv",
+    parse_dates=["date"],
+)
+
+# Set up the forecasting pipeline
+pipe = TimeSeriesForecastingPipeline(
+    model=model,
+    id_columns=[],
+    timestamp_column="date",
+    target_columns=["HUFL"],
+    max_context_length=model.config.context_length,
+    context_length=512,
+    prediction_length=64,
+    impute_method=None,
+    quantile_levels=[0.1, 0.5, 0.9],
+    explode_forecasts=True,
+    freq="1h",
+)
+
+# Create a forecast from the last 512 samples of the input dataframe
+forecast = pipe(df.iloc[-512:])
+</code></pre></div></div>
+
+<p>보시다시피 fine-tuning이나 task-specific model fitting이 필요하지 않습니다. 파이프라인은 series의 최근 history만 입력으로 받아 요청된 quantile을 포함한 future forecast를 생성합니다.</p>
+
+<p>위 예제는 공개적으로 이용 가능한 데이터를 사용한 간단한 예입니다. 예제 input data를 수요, 센서 텔레메트리, CPU 사용률, 에너지 소비량, 거래량, 트래픽, 가격 또는 정기적으로 샘플링된 다른 시계열을 포함한 자체 데이터로 바꿀 수 있습니다.</p>
+
+<p>자체 데이터로 사용해 보세요: <a href="https://huggingface.co/ibm-granite/granite-timeseries-patchtst-fm-r2">Open PatchTST-FM-r2 on the Hugging Face Hub</a></p>
+
+<h2 id="section-8">Notebook에서 스트리밍 시계열까지</h2>
+
+<p>이번 출시는 IBM Granite Time Series 모델을 중심으로 한 더 광범위한 노력과 연결됩니다. <a href="https://research.ibm.com/blog/time-series-ai-enterprise">adding a new model to the broader portfolio</a></p>
+
+<p>데이터가 정적 DataFrame이 아니라 지속적으로 유입되는 애플리케이션을 위해 IBM과 Confluent는 최근 Confluent Cloud의 Early Access 프로그램을 통해 여러 Granite Time Series 모델을 제공하기 시작했습니다. 초기 포트폴리오에는 PatchTST-FM-r1, FlowState-r1.1, TTM-r3 및 TSPulse가 포함됩니다.</p>
+
+<p>이 통합을 통해 Confluent Cloud의 Apache Flink를 사용하여 파운데이션 모델 추론을 스트리밍 애플리케이션에 직접 적용할 수 있습니다. 팀이 별도의 ML 환경을 설정하고 데이터를 이동할 필요 없이, 실시간 스트림에서 forecasting 및 anomaly detection 결과를 생성할 수 있습니다.</p>
+
+<ul>
+  <li>
+    <p><a href="https://www.ibm.com/new/announcements/ibm-granite-time-series-models-bring-real-time-forecasting-and-anomaly-detection-to-confluent-cloud">Read the IBM announcement</a> 또는</p>
+  </li>
+  <li>
+    <p><a href="https://events.confluent.io/early-access-flink-features">Enroll in Early Access</a>.</p>
+  </li>
+</ul>
+
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-09-10">10 Sep 2026</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#상업-친화적-라이선스와-함께-sota-granite-time-series-patchtst-fm-r2-모델-출시" id="markdown-toc-상업-친화적-라이선스와-함께-sota-granite-time-series-patchtst-fm-r2-모델-출시">상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">TL;DR</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">GIFT-Eval에서 강력한 zero-shot forecasting</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">벤치마크 학습 데이터를 사용할 수 있는 모델과 비교해도 경쟁력 있는 성능</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">아키텍처: PatchTST-FM-r1에서 무엇이 바뀌었나?</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">학습 데이터</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">연구 실험 및 상업적 사용을 위해 공개</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">몇 줄의 Python 코드로 PatchTST-FM-r2 사용해 보기</a></li>
+      <li><a href="#section-8" id="markdown-toc-section-8">Notebook에서 스트리밍 시계열까지</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-207/" alt="">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href=""></a>
+        <span class="author-description"></span>                        
+    </div>
+</div>
+
+
+
+
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">21</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="translation">
+            Translation
+            <span class="count">21</span>
+          </button>
+        
+      
+        
+        
+          <button class="filter-btn" data-category="huggingface">
+            HuggingFace
+            <span class="count">20</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/grabette/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">21 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/thinkingmachines-inkling/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" alt="Thinking Machines의 Inkling에 오신 것을 환영합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/torch-attention-profile/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" alt="파이토치의 프로파일링(3부): 어텐션이 전부다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">10 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/native-speed-vllm-transformers-backend/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/lerobot-release-v060/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" alt="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">07 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/cerebras-gemma4-voice-ai/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">01 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/eee-community-evals/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" alt="Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Featuring Every Eval Ever Results on Hugging Face Model Pages를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">30 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/vllm-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">26 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/ffasr-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">24 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/huggingface-hub-release-ci/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" alt="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/huggingface-hub-release-ci/">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/cross-origin-storage/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/peft-beyond-lora/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/is-it-agentic-enough/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" alt="충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/agentic-resource-discovery-launch/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-06-17-agentic-resource-discovery-launch/thumbnail.png" alt="에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Agentic Resource Discovery: Let agents search를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">17 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/github-ci-hf-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-06-09-github-ci-hf-jobs/thumbnail.gif" alt="GitHub CI를 Hugging Face Jobs로 마이그레이션" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Migrating Your GitHub CI to Hugging Face Jobs를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">09 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/openenv-agentic-rl/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-06-08-openenv-agentic-rl/thumbnail.png" alt="오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Open Source Community is backing OpenEnv for Agentic RL를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/torch-profiler/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-05-29-torch-profiler/thumbnail.png" alt="PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 1): A Beginner’s Guide to torch.profiler를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">29 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/local-reachy-mini-conversation/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">27 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/olmoearth-v1-1/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-05-20-olmoearth-v1-1/thumbnail.png" alt="OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 OlmoEarth v1.1: A more efficient family of models를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">20 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/paddleocr-transformers/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">19 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="transformers translation ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-207/how-to-use-translator/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-207/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-207/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
+        <p class="card-text text-muted">
+Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">05 Oct 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+</main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-207/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-207/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-207/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-207/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-207/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-207/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-207/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-207/assets/js/category.js"></script>
+  </body>
+</html>
