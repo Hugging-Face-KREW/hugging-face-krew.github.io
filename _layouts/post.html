@@ -8,6 +8,16 @@ post_class: post-template
 <!-- Begin Article
 ================================================== -->
 
+{% assign remove_duplicate_title = false %}
+{% if page.deduplicate_title %}
+    {% assign headings = content | split: '<h1 id="' %}
+    {% assign title_anchor = headings[1] | split: '"' | first %}
+    {% capture duplicate_title %}<h1 id="{{ title_anchor }}">{{ page.title | escape }}</h1>{% endcapture %}
+    {% if content contains duplicate_title %}
+        {% assign remove_duplicate_title = true %}
+    {% endif %}
+{% endif %}
+
 	<div class="row">
 
 		<!-- Post -->        
@@ -40,7 +50,7 @@ post_class: post-template
                 <!-- End Categories -->
                 
                 <!-- Post Title -->
-				<h1 class="posttitle">{{ page.title }}</h1> 
+				<h1 class="posttitle"{% if remove_duplicate_title %} id="{{ title_anchor }}"{% endif %}>{{ page.title }}</h1>
                 
 			</div>
 
@@ -48,7 +58,11 @@ post_class: post-template
 
 			<!-- Post Content -->
 			<div class="article-post serif-font">
-				{{content}}
+                {% if remove_duplicate_title %}
+                    {{ content | remove_first: duplicate_title }}
+                {% else %}
+                    {{ content }}
+                {% endif %}
                 <div class="clearfix"></div>
 			</div>
 

@@ -1,5 +1,6 @@
 ---
 layout: post
+deduplicate_title: true
 title: 보안 사고 공개 — 2026년 7월
 description: 2026년 7월 Hugging Face 보안 사고의 탐지, 대응, 영향 범위와 후속 보안 조치를 설명합니다.
 author: dailybot
