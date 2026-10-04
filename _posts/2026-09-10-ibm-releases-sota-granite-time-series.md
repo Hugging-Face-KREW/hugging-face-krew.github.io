@@ -16,7 +16,8 @@ source_published_at: '2026-09-09T15:36:24+00:00'
 locale: ko
 translation_status: draft
 translator: openai
-description: "IBM Granite Time Series PatchTST-FM-r2의 제로샷 시계열 예측 성능, Conformer 기반 아키텍처, 학습 데이터와 이중 라이선스, 사용 방법을 소개합니다."
+description: IBM Granite Time Series PatchTST-FM-r2의 제로샷 시계열 예측 성능, Conformer 기반 아키텍처,
+  학습 데이터와 이중 라이선스, 사용 방법을 소개합니다.
 ---
 * TOC
 {:toc}
