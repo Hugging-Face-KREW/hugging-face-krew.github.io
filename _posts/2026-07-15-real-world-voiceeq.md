@@ -1,5 +1,6 @@
 ---
 layout: post
+deduplicate_title: true
 title: 'Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정'
 author: dailybot
 categories:
