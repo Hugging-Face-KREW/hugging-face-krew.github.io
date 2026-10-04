@@ -1,21 +1,24 @@
 ---
 layout: post
-title: "Asta의 빠른 보고서 생성 모델 AstaBrief 오픈 소스 공개"
+title: Asta의 빠른 보고서 생성 모델 AstaBrief 오픈 소스 공개
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/638e39b249de7ae552d977b5/AdqLEBgtQnaDXKLdylC3l.png
 image: assets/images/blog/posts/2026-10-02-astabrief/thumbnail.png
 authors:
-  - user: allenai
-slug: "astabrief"
-source_url: "https://huggingface.co/blog/allenai/astabrief"
-source_published_date: "2026-10-02"
-source_published_at: "2026-10-02T15:19:50+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: allenai
+slug: astabrief
+source_url: https://huggingface.co/blog/allenai/astabrief
+source_published_date: '2026-10-02'
+source_published_at: '2026-10-02T15:19:50+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: '* TOC {:toc} <!--toc--> _이 글은 Hugging Face 블로그의 [Open-sourcing AstaBrief,
+  the fast report-generation model in Asta](https://huggingface.'
 ---
-
 * TOC
 {:toc}
 <!--toc-->
