@@ -1,5 +1,6 @@
 ---
 layout: post
+deduplicate_title: true
 title: 'Granite Embedding Multilingual R2: 32K 다국어 임베딩'
 description: IBM Granite Embedding Multilingual R2의 32K 컨텍스트, 다국어 검색 성능, Matryoshka
   지원을 정리합니다.
