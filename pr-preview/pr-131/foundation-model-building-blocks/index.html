@@ -23,12 +23,12 @@
     />
     <link rel="icon" href="/pr-preview/pr-131/assets/images/favicon.ico" />
 
-    <title>AWS에서 Foundation Model 학습 및 추론을 위한 구성 요소 | Hugging Face KREW</title>
+    <title>AWS에서 파운데이션 모델 학습 및 추론을 위한 구성 요소 | Hugging Face KREW</title>
 
     <!-- Begin Jekyll SEO tag v2.9.1 -->
-<title>AWS에서 Foundation Model 학습 및 추론을 위한 구성 요소 | Hugging Face KREW</title>
+<title>AWS에서 파운데이션 모델 학습 및 추론을 위한 구성 요소 | Hugging Face KREW</title>
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="AWS에서 Foundation Model 학습 및 추론을 위한 구성 요소" />
+<meta property="og:title" content="AWS에서 파운데이션 모델 학습 및 추론을 위한 구성 요소" />
 <meta name="author" content="dailybot" />
 <meta property="og:locale" content="ko" />
 <meta name="description" content="AWS 기반 Foundation Model 학습과 추론 인프라를 구성하는 컴퓨트, 네트워크, 스토리지, 운영 요소를 정리합니다." />
@@ -40,9 +40,9 @@
 <meta property="article:modified_time" content="2026-05-12T00:00:00+09:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="/pr-preview/pr-131/foundation-model-building-blocks/assets/images/blog/posts/2026-05-12-foundation-model-building-blocks/thumbnail.png" />
-<meta name="twitter:title" content="AWS에서 Foundation Model 학습 및 추론을 위한 구성 요소" />
+<meta name="twitter:title" content="AWS에서 파운데이션 모델 학습 및 추론을 위한 구성 요소" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-05-12T00:00:00+09:00","datePublished":"2026-05-12T00:00:00+09:00","description":"AWS 기반 Foundation Model 학습과 추론 인프라를 구성하는 컴퓨트, 네트워크, 스토리지, 운영 요소를 정리합니다.","headline":"AWS에서 Foundation Model 학습 및 추론을 위한 구성 요소","image":"/pr-preview/pr-131/foundation-model-building-blocks/assets/images/blog/posts/2026-05-12-foundation-model-building-blocks/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-131/foundation-model-building-blocks/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-131/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-131/foundation-model-building-blocks/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-05-12T00:00:00+09:00","datePublished":"2026-05-12T00:00:00+09:00","description":"AWS 기반 Foundation Model 학습과 추론 인프라를 구성하는 컴퓨트, 네트워크, 스토리지, 운영 요소를 정리합니다.","headline":"AWS에서 파운데이션 모델 학습 및 추론을 위한 구성 요소","image":"/pr-preview/pr-131/foundation-model-building-blocks/assets/images/blog/posts/2026-05-12-foundation-model-building-blocks/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-131/foundation-model-building-blocks/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-131/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-131/foundation-model-building-blocks/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -170,6 +170,9 @@
     <main class="container"><!-- Begin Article
 ================================================== -->
 
+
+
+
 	<div class="row">
 
 		<!-- Post -->        
@@ -179,8 +182,8 @@
             
         
             <div id="featured-image">
-                <img class="back-image img-fluid rounded" src="/pr-preview/pr-131/assets/images/blog/posts/2026-05-12-foundation-model-building-blocks/thumbnail.png" alt="AWS에서 Foundation Model 학습 및 추론을 위한 구성 요소">    
-                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-131/assets/images/blog/posts/2026-05-12-foundation-model-building-blocks/thumbnail.png" alt="AWS에서 Foundation Model 학습 및 추론을 위한 구성 요소">    
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-131/assets/images/blog/posts/2026-05-12-foundation-model-building-blocks/thumbnail.png" alt="AWS에서 파운데이션 모델 학습 및 추론을 위한 구성 요소">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-131/assets/images/blog/posts/2026-05-12-foundation-model-building-blocks/thumbnail.png" alt="AWS에서 파운데이션 모델 학습 및 추론을 위한 구성 요소">    
             </div>
         
         <!-- End Featured Image -->
@@ -206,7 +209,7 @@
                 <!-- End Categories -->
                 
                 <!-- Post Title -->
-				<h1 class="posttitle">AWS에서 Foundation Model 학습 및 추론을 위한 구성 요소</h1> 
+				<h1 class="posttitle" id="aws에서-파운데이션-모델-학습-및-추론을-위한-구성-요소">AWS에서 파운데이션 모델 학습 및 추론을 위한 구성 요소</h1>
                 
 			</div>
 
@@ -214,7 +217,8 @@
 
 			<!-- Post Content -->
 			<div class="article-post serif-font">
-				<ul id="markdown-toc">
+                
+                    <ul id="markdown-toc">
   <li><a href="#aws에서-파운데이션-모델-학습-및-추론을-위한-구성-요소" id="markdown-toc-aws에서-파운데이션-모델-학습-및-추론을-위한-구성-요소">AWS에서 파운데이션 모델 학습 및 추론을 위한 구성 요소</a>    <ul>
       <li><a href="#aws-빌딩-블록" id="markdown-toc-aws-빌딩-블록">AWS 빌딩 블록</a>        <ul>
           <li><a href="#인프라-컴퓨트-네트워크-및-스토리지" id="markdown-toc-인프라-컴퓨트-네트워크-및-스토리지">인프라: 컴퓨트, 네트워크, 및 스토리지</a></li>
@@ -253,7 +257,7 @@ Review instructions:
 - Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
 -->
 
-<h1 id="aws에서-파운데이션-모델-학습-및-추론을-위한-구성-요소">AWS에서 파운데이션 모델 학습 및 추론을 위한 구성 요소</h1>
+
 
 <p>오랜 기간 동안, 파운데이션 모델의 “스케일링”은 대개 한 가지를 뜻했다: 사전 학습에 더 많은 컴퓨트를 투자하면 능력이 상승한다. 이 직감은 <a href="https://arxiv.org/abs/2001.08361">Kaplan et al. (2020)</a> 같은 경험적 연구가 뒷받침했으며, 모델 파라미터 수, 데이터셋 크기, 학습 컴퓨트의 증가에 따라 손실이 예측 가능한 멱법칙(power-law) 트렌드를 보인다고 보고했다. 실제로 이러한 경향은 대규모 가속기 용량과 이를 효율적으로 활용하는 분산 인프라스트럭처에 지속적인 투자를 정당화했다.
 그러나 프론티어는 진화했고—스케일링은 더 이상 하나의 곡선이 아니다. NVIDIA의 “하나에서 세 가지 스케일링 법칙” 프레이밍은 사전 학습을 넘어서 성능이 사후 학습(예: 지도 미세 조정(fine-tuning, SFT) 및 강화학습(RL) 기반 방법) 및 추론 시점 연산(“오랜 사고”, 검색/검증, 다중 샘플 전략)에서 점차 스케일링된다는 점을 유용하게 강조한다.</p>
@@ -616,6 +620,7 @@ Review instructions:
 
 <p><a href="https://www.linkedin.com/in/keitawatanabe/">Keita Watanabe</a>은 Amazon Web Services의 GenAI ML Frameworks 팀의 수석 솔루션 아키텍트로, ML 시스템 성능 엔지니어링과 AWS에서의 ML 학습 및 추론 최적화를 전 세계 고객에게 지원한다. 그의 배경은 ML 연구 및 개발에 있다. AWS에 합류하기 전에는 Rakuten에서 연구 과학자로 일하며 이미지 기반 상품 검색 시스템을 개발했다. Keita는 도쿄 대학에서 과학 박사 학위를 보유하고 있다.</p>
 
+                
                 <div class="clearfix"></div>
 			</div>
 
@@ -730,7 +735,7 @@ Review instructions:
     <div class="filter-tabs">
       <button class="filter-btn active" data-category="all">
         All
-        <span class="count">21</span>
+        <span class="count">22</span>
       </button>
 
       
@@ -738,7 +743,7 @@ Review instructions:
         
           <button class="filter-btn" data-category="translation">
             Translation
-            <span class="count">21</span>
+            <span class="count">22</span>
           </button>
         
       
@@ -746,7 +751,7 @@ Review instructions:
         
           <button class="filter-btn" data-category="huggingface">
             HuggingFace
-            <span class="count">20</span>
+            <span class="count">21</span>
           </button>
         
       
@@ -799,6 +804,8 @@ Review instructions:
   
       
   
+      
+  
 </section>
 
 <section class="row">
@@ -806,6 +813,34 @@ Review instructions:
     <div class="row posts-container">
       
           
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-131/omlx/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-131/assets/images/blog/posts/2026-09-22-omlx/thumbnail.jpg" alt="oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-131/omlx/">oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Jun Kim, oMLX creator and maintainer, joins Hugging Face to...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">22 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
       
       
       <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
