@@ -1,5 +1,6 @@
 ---
 layout: post
+deduplicate_title: true
 title: 상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시
 author: dailybot
 categories:
