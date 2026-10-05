@@ -170,6 +170,9 @@
     <main class="container"><!-- Begin Article
 ================================================== -->
 
+
+
+
 	<div class="row">
 
 		<!-- Post -->        
@@ -206,7 +209,7 @@
                 <!-- End Categories -->
                 
                 <!-- Post Title -->
-				<h1 class="posttitle">Asta의 빠른 보고서 생성 모델 AstaBrief 오픈 소스 공개</h1> 
+				<h1 class="posttitle">Asta의 빠른 보고서 생성 모델 AstaBrief 오픈 소스 공개</h1>
                 
 			</div>
 
@@ -214,7 +217,8 @@
 
 			<!-- Post Content -->
 			<div class="article-post serif-font">
-				<ul id="markdown-toc">
+                
+                    <ul id="markdown-toc">
   <li><a href="#asta의-빠른-보고서-생성-모델-astabrief-오픈-소스-공개" id="markdown-toc-asta의-빠른-보고서-생성-모델-astabrief-오픈-소스-공개">Asta의 빠른 보고서 생성 모델 AstaBrief 오픈 소스 공개</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">모델 학습</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">SFT 학습 데이터 수집</a></li>
@@ -253,7 +257,7 @@ Review instructions:
 
 <p>언어 모델은 이미 연구자가 문헌을 검색하고, 근거를 종합하며, 복잡한 질문을 해결하는 데 도움을 줄 수 있습니다. 하지만 과학적 작업은 이러한 모델에 특수한 요구를 제시합니다. 답변은 근거에 기반해야 하고, 모델은 연구의 결론을 조용히 확대하지 않고 근거가 실제로 뒷받침하는 내용을 보존해야 하며, 연구자는 최종 결과를 검증할 수 있어야 합니다.</p>
 
-<p>과학자가 과학적 작업을 위한 에이전트 플랫폼인 <a href="https://asta.allen.ai/">Asta</a>를 사용하는 방식에서도 이러한 점을 확인할 수 있습니다. 사용자는 단순한 키워드 검색 대신 상당한 맥락과 여러 제약 조건을 제시하는 경우가 많습니다. 예를 들어 특정 방법, 모집단 또는 환경을 고려하면서 방대한 문헌에서 여러 접근법을 비교해 달라고 Asta에 요청합니다. 또한 많은 사용자가 생성된 보고서를 나중에 다시 찾아보며, 일회성 답변이 아니라 작업 중인 연구 산출물로 다룹니다.</p>
+<p>과학자가 과학적 작업을 위한 에이전트 플랫폼인 <a href="https://asta.allen.ai/">Asta</a>를 사용하는 방식에서도 이러한 점을 확인할 수 있습니다. 사용자는 단순한 키워드 검색 대신 상당한 맥락과 여러 제약 조건을 제시하는 경우가 많습니다. 예를 들면 특정 방법, 모집단 또는 환경을 고려하면서 방대한 문헌에서 여러 접근법을 비교해 달라고 Asta에 요청합니다. 또한 많은 사용자가 생성된 보고서를 나중에 다시 찾아보며, 일회성 답변이 아니라 작업 중인 연구 산출물로 다룹니다.</p>
 
 <p>우리는 과학자가 인용이 포함된 보고서를 더 빠르게 생성하고, 직접 다운로드해 실행할 수 있는 모델을 제공하고자 했습니다. 이를 위해 과학적 보고서 생성에 특화해 학습한 소형 오픈 모델이 우리가 사용하던 독점 모델의 보고서 품질을 유지하면서 생성 시간과 서빙 비용을 줄일 수 있는지 테스트했습니다.</p>
 
@@ -263,7 +267,7 @@ Review instructions:
 
 <p>이러한 효율성 향상은 AstaBrief를 더 큰 목표를 위한 유용한 테스트 사례로 만들었습니다. 바로 과학적 작업의 구체적인 요구에 맞게 조정할 수 있는 오픈 언어 모델을 구축하는 것입니다.</p>
 
-<p>오픈 가중치를 제공하면 기관이 자체 인프라에서 AstaBrief를 실행할 수도 있습니다. 연구 질문에 민감한 정보나 아직 공개되지 않은 작업이 드러날 수 있는 경우에는 이것이 필요합니다. 모델 가중치와 함께 <a href="https://github.com/allenai/ai2-scholarqa-lib/tree/main/api/scholarqa/lite">an example workflow that researchers can adapt to create reports from their own PDFs</a>도 공개하여 로컬 보고서 생성을 위한 출발점을 제공합니다.</p>
+<p>오픈 가중치를 제공하면 기관이 자체 인프라에서 AstaBrief를 실행할 수도 있습니다. 연구 질문에 민감한 정보나 아직 공개되지 않은 작업이 드러날 수 있는 경우에는 이것이 필요합니다. 모델 가중치와 함께 <a href="https://github.com/allenai/ai2-scholarqa-lib/tree/main/api/scholarqa/lite">연구자가 자신의 PDF로부터 보고서를 만들 수 있도록 변형할 수 있는 예시 워크플로</a>도 공개하여 로컬 보고서 생성을 위한 출발점을 제공합니다.</p>
 
 <p>이 글에서는 AstaBrief를 어떻게 학습했는지, 과학적 근거에 기반하도록 만드는 과정에서 무엇을 배웠는지, 그리고 우리의 접근법 중 어떤 부분을 향후 과학 분야 모델에 이어갈 수 있다고 보는지를 다룹니다. 여기에서 설명하는 학습과 평가의 대부분은 2025년에 완료되었으므로, 학습 데이터 생성 및 비교 대상으로 사용한 독점 모델은 당시의 최첨단 수준을 반영합니다. 현재의 최첨단 모델을 대상으로 전체 평가를 다시 실행하지는 않았습니다. 따라서 아래 결과는 우리가 테스트한 특정 학습 및 시스템 설계 선택에 대한 근거로 읽는 것이 가장 적절합니다.</p>
 
@@ -271,7 +275,7 @@ Review instructions:
 
 <p>AstaBrief의 목표는 장문 과학적 종합에 가장 중요한 모든 특성, 즉 답변 품질, 관련성, 구조, 인용 기반성을 갖춘 오픈 가중치 모델을 구축하는 것이었습니다. Qwen3-8B에서 시작해 학습 후 데이터, 평가, 그리고 보고서 생성 주변의 스캐폴딩에 대부분의 노력을 집중했습니다.</p>
 
-<p>범용 모델을 과학적 작업에 맞게 조정하고, 새로운 과학 모델을 처음부터 학습하는 일은 Ai2 전반에서 폭넓게 탐구하고 있는 주제입니다. Ai2가 주도하는 미국의 국가 이니셔티브인 <a href="https://allenai.org/omai">NSF OMAI</a>를 통해 연구자들은 과학적 발견을 위한 완전히 개방된 AI 인프라와 모델을 구축하고 있습니다. 이들은 과학 커뮤니티와 직접 협력해 향후 오픈 모델에 무엇이 필요한지, 오늘날의 범용 모델이 어떤 부분에서 부족한지를 파악하고 있습니다. 여기에는 과학 분야와 작업 흐름에 따라 요구 사항이 어떻게 달라지는지를 연구하는 일도 포함되며, 이 연구의 추가 결과는 향후 공유할 예정입니다.</p>
+<p>범용 모델을 과학적 작업에 맞게 조정하고, 새로운 과학 모델을 처음부터 학습하는 일은 Ai2 전반에서 폭넓게 탐구하고 있는 주제입니다. Ai2가 주도하는 미국의 국가 이니셔티브인 <a href="https://allenai.org/omai">NSF OMAI</a>를 통해 연구자들은 과학적 발견을 위한 완전히 개방된 AI 인프라와 모델을 구축하고 있습니다. 이들은 과학 커뮤니티와 directly 협력해 향후 오픈 모델에 무엇이 필요한지, 오늘날의 범용 모델이 어떤 부분에서 부족한지를 파악하고 있습니다. 여기에는 과학 분야와 작업 흐름에 따라 요구 사항이 어떻게 달라지는지를 연구하는 일도 포함되며, 이 연구의 추가 결과는 향후 공유할 예정입니다.</p>
 
 <p><a href="https://allenai.org/blog/dr-tulu">DR Tulu</a>를 포함한 최근 연구는 강화 학습 기반(RL) 방법이 오픈 가중치 모델의 장문 보고서 생성을 개선할 수 있음을 보여주었습니다. 특히 판정 모델이 학습 루프에 포함된 경우에 그러했습니다. 우리는 AstaBrief에도 이 경로를 고려했지만, 최종적으로 지도 미세 조정(SFT)과 직접 선호 최적화(DPO)를 중심으로 한 더 단순한 방법에 집중했습니다.</p>
 
@@ -283,7 +287,7 @@ Review instructions:
 
 <h2 id="section-2">SFT 학습 데이터 수집</h2>
 
-<p>학습 파이프라인은 논문 “<a href="https://allenai.org/blog/nature-openscilm">Synthesizing scientific literature with retrieval-augmented LMs</a>”에서 설명한 시스템과 현재 Asta의 Generate a report 기능을 뒷받침하는 프레임워크인 <a href="https://aclanthology.org/2025.acl-demo.49.pdf">ScholarQA</a>를 통해 제출된 실제 사용자 질의로 시작했습니다. 합성 프롬프트나 벤치마크 형태의 작업만으로 학습하는 대신, 실제 과학자의 실제 질의에서 AstaBrief가 학습하도록 하고자 했습니다.</p>
+<p>학습 파이프라인은 논문 “Synthesizing scientific literature with retrieval-augmented LMs”(https://allenai.org/blog/nature-openscilm)에서 설명한 시스템과 현재 Asta의 Generate a report 기능을 뒷받침하는 프레임워크인 <a href="https://aclanthology.org/2025.acl-demo.49.pdf">ScholarQA</a>를 통해 제출된 실제 사용자 질의로 시작했습니다. 합성 프롬프트나 벤치마크 형태의 작업만으로 학습하는 대신, 실제 과학자의 실제 질의에서 AstaBrief가 학습하도록 하고자 했습니다.</p>
 
 <p>우리의 연구에 따르면 과학자는 범용 챗봇이나 기존 검색 도구의 사용자와는 다른 방식으로 언어 모델에 질문하는 경우가 많습니다. <a href="https://allenai.org/blog/asta-interaction-dataset">analysis of hundreds of thousands of Asta queries</a>에서 전문 연구자들은 짧은 키워드 형태의 프롬프트에 의존하기보다 상당한 맥락, 여러 제약 조건, 개념 간 관계를 자주 제공했습니다.</p>
 
@@ -328,7 +332,7 @@ Review instructions:
 
 <p>보고서는 세련되고 완성도 높게 들리면서도 질문에서 벗어나 장황해지거나, 근거가 실제로 뒷받침하지 않는 주장에 인용을 붙일 수 있습니다. 과학적 종합을 위해서는 이러한 행동을 별도로 측정해야 했습니다. 하지만 인용 지원은 과학적 충실성의 일부일 뿐입니다. 모델이 올바른 연구를 인용하면서도 해당 연구가 실제로 뒷받침하는 것보다 더 강한 주장을 할 수 있습니다. 예를 들어 <a href="https://royalsocietypublishing.org/rsos/article/12/4/241776/235656/Generalization-bias-in-large-language-model">This can happen in subtle ways</a>는 특정 표본에 대한 발견을 전체 모집단에 대한 일반적인 주장으로 바꾸거나, 과거형으로 보고된 결과를 현재형 문장으로 바꿔 더 보편적으로 참인 것처럼 보이게 하거나, 기술적 발견을 임상의, 정책 입안자 또는 연구자가 무엇을 해야 하는지에 대한 권고로 바꾸는 것입니다.</p>
 
-<p>이러한 일반화는 과학적 보고서 생성에서 특히 중요합니다. 각 단계가 명백히 거짓인 문장을 만들지 않고도 근거가 적용되는 범위를 넓혀 보이게 할 수 있기 때문합니다. 따라서 인용된 문장이 출처와 기술적으로 관련되어 있더라도 연구자가 실제로 입증한 내용을 과장할 수 있습니다. 우리의 개발 지표는 주로 관련성, 포괄성, 인용 기반성에 초점을 맞췄습니다. 과학적 보고서 작성 모델에 대한 더 풍부한 평가에서는 출처의 주장 범위와 강도를 보존하는지도 테스트해야 합니다.</p>
+<p>이러한 일반화는 과학적 보고서 생성에서 특히 중요합니다. 각 단계가 명백히 거짓인 문장을 만들지 않고도 근거가 적용되는 범위를 넓혀 보이게 할 수 있기 때문입니다. 따라서 인용된 문장이 출처와 기술적으로 관련되어 있더라도 연구자가 실제로 입증한 내용을 과장할 수 있습니다. 우리의 개발 지표는 주로 관련성, 포괄성, 인용 기반성에 초점을 맞췄습니다. 과학적 보고서 작성 모델에 대한 더 풍부한 평가에서는 출처의 주장 범위와 강도를 보존하는지도 테스트해야 합니다.</p>
 
 <p>첫 SFT 실행에서는 전반적인 콘텐츠 품질이 향상되었지만, 답변 정밀도와 인용 품질에서는 여전히 Claude 기반 보고서 생성 파이프라인에 뒤처졌습니다. 즉 모델은 보고서를 더 잘 작성하게 되었지만, 과학적 종합에 필요한 수준만큼 일관되게 근거에 기반하지는 못했습니다.</p>
 
@@ -377,7 +381,7 @@ Review instructions:
 
 <p>Asta에서 AstaBrief의 유용성을 검증한 결과, Fast mode는 고무적인 초기 사용 양상을 보였습니다. Fast mode를 사용해 본 Asta 사용자 374명 중 29.1%는 이틀 이상 사용했으며, 사용자는 평균적으로 3.67개의 보고서 스레드를 생성했습니다. Fast mode를 사용해 본 사용자 중 23%는 계속 Fast mode를 사용했으며 이후 스레드에서 Thinking mode로 다시 전환하지 않았습니다. 추가로 18%는 목표에 따라 Fast mode와 Thinking mode를 오가며 사용했고, 스레드의 약 40%에서 Fast mode를 사용했습니다.</p>
 
-<p>피드백이 전반적으로 강한 결론을 내리기에는 너무 적지만, Fast mode는 Thinking mode와 비슷한 비율로 긍정적인 피드백을 받고 있습니다(84.2% 대 85.2%).</p>
+<p>피드백이 전반적으로 강한 결론을 내리기에는 too 적지만, Fast mode는 Thinking mode와 비슷한 비율로 긍정적인 피드백을 받고 있습니다(84.2% 대 85.2%).</p>
 
 <h2 id="section-6">향후 방향</h2>
 
@@ -391,6 +395,7 @@ Review instructions:
 
 <p><a href="https://asta.allen.ai/">Try Fast model today in Asta</a>, 또는 <a href="https://huggingface.co/allenai/AstaBrief_8B">download AstaBrief from Hugging Face</a>.</p>
 
+                
                 <div class="clearfix"></div>
 			</div>
 
@@ -490,7 +495,7 @@ Review instructions:
     <div class="filter-tabs">
       <button class="filter-btn active" data-category="all">
         All
-        <span class="count">21</span>
+        <span class="count">25</span>
       </button>
 
       
@@ -498,7 +503,7 @@ Review instructions:
         
           <button class="filter-btn" data-category="translation">
             Translation
-            <span class="count">21</span>
+            <span class="count">25</span>
           </button>
         
       
@@ -506,7 +511,7 @@ Review instructions:
         
           <button class="filter-btn" data-category="huggingface">
             HuggingFace
-            <span class="count">20</span>
+            <span class="count">24</span>
           </button>
         
       
@@ -516,6 +521,14 @@ Review instructions:
 
 
 <section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
   
       
   
@@ -573,6 +586,62 @@ Review instructions:
 
 <div class="card">
     
+    <a class="post-thumbnail-link" href="/pr-preview/pr-220/omlx/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-220/assets/images/blog/posts/2026-09-22-omlx/thumbnail.jpg" alt="oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-220/omlx/">oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Jun Kim, oMLX creator and maintainer, joins Hugging Face to...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">22 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-220/ibm-releases-sota-granite-time-series/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-220/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png" alt="상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-220/ibm-releases-sota-granite-time-series/">상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 IBM releases SOTA Granite Time Series PatchTST-FM-r2 model with commercial-friendly...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">10 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
     <a class="post-thumbnail-link" href="/pr-preview/pr-220/grabette/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-220/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
     </a>
@@ -585,6 +654,36 @@ Review instructions:
                 <span class="author-meta">
                 By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
                 on <span class="post-date">21 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-220/security-incident-july-2026/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-220/assets/images/blog/posts/2026-07-16-security-incident-july-2026/thumbnail.png" alt="보안 사고 공개 — 2026년 7월" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-220/security-incident-july-2026/">보안 사고 공개 — 2026년 7월</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Security incident disclosure — July 2026를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">16 Jul 2026</span>
                 </span>               
                 <div class="clearfix"></div>
             </div>
@@ -614,6 +713,34 @@ Review instructions:
             <div class="wrapfooter small d-flex align-items-center">
                 <span class="author-meta">
                 By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-220/real-world-voiceeq/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-220/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" alt="Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-220/real-world-voiceeq/">Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing Real World VoiceEQ: Measuring the human quality of voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
                 on <span class="post-date">15 Jul 2026</span>
                 </span>               
                 <div class="clearfix"></div>
