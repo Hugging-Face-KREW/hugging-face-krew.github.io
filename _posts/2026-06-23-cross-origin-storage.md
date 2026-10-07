@@ -157,14 +157,14 @@ const hash = {
 };
 
 try {
-  const handle = await navigator.crossOriginStorage.requestFileHandle(hash);
+  const handle = await navigator.crossOriginStorage.getFileHandle(hash);
   // Cache hit! Get the file as a Blob and use it directly.
   const fileBlob = await handle.getFile();
 } catch (err) {
   // Cache miss. Download from network, then store for next time.
   const fileBlob = await fetch('https://cdn.jsdelivr.net/.../ort-wasm-simd-threaded.asyncify.wasm')
     .then(r => r.blob());
-  const handle = await navigator.crossOriginStorage.requestFileHandle(
+  const handle = await navigator.crossOriginStorage.getFileHandle(
     hash,
     { create: true, origins: '*' },
   );
@@ -187,7 +187,7 @@ try {
 * 특정 오리진 목록, 예를 들어 `origins: ['https://write.example.com', 'https://calculate.example.com']`과 같은 목록은 이 사이트들에 대한 접근을 **제한**합니다. 이는 서로의 소유 자산 간에 공유되지만 다른 누구도 검색될 필요가 없는 리소스와 같은 사례에 잘 맞습니다. 예: 상업용 오피스 도구에서 사용되는 독점 교정 AI 모델.
 * `origins`를 완전히 생략하면 파일은 오직 **[same-site](https://web.dev/articles/same-site-same-origin#same-site-cross-site) 오리진**에서만 사용할 수 있습니다. 이는 조직의 모든 하위 도메인 간에 공유되는 리소스에 대한 합리적인 기본값이지만, 조직 경계를 넘지 않도록 의도된 경우가 많습니다.
 
-하나 중요한 규칙: 가시성은 상향은 가능하지만 하향은 불가능합니다. 파일이 이미 전역적으로 공유 가능하면, 나중에 제한된 `origins` 목록으로 저장하려는 시도는 묵시적으로 무시됩니다. 이는 악의적인 행위자가 공개 리소스를 재저장하고 가용성을 축소하는 것을 방지합니다. 반대로도 가능합니다: 처음에 제한된 `origins` 목록으로 저장된 파일은 나중에 더 관대하게 설정될 수 있습니다. 어떤 사이트든, 원래 저장자뿐 아니라, 같은 해시(`requestFileHandle()`)에 대해 같은 해시를 가진 리소스에 대해 더 넓은 `origins` 값을 갖고 호출할 수 있으며, 브라우저가 해시가 일치하는지 확인하면 그 리소스는 그 시점부터 더 넓은 대중에게 제공됩니다. 업그레이드가 이루어져도 반환된 핸들을 통해 전체 파일을 여전히 써야 한다는 점에 주의하십시오. 이 요건은 COS에 특정 파일이 이미 저장되어 있는지 여부를 악용하려는 사이드 채널을 방지하기 위해 존재합니다.
+하나 중요한 규칙: 가시성은 상향은 가능하지만 하향은 불가능합니다. 파일이 이미 전역적으로 공유 가능하면, 나중에 제한된 `origins` 목록으로 저장하려는 시도는 묵시적으로 무시됩니다. 이는 악의적인 행위자가 공개 리소스를 재저장하고 가용성을 축소하는 것을 방지합니다. 반대로도 가능합니다: 처음에 제한된 `origins` 목록으로 저장된 파일은 나중에 더 관대하게 설정될 수 있습니다. 어떤 사이트든, 원래 저장자뿐 아니라, 같은 해시(`getFileHandle()`)에 대해 같은 해시를 가진 리소스에 대해 더 넓은 `origins` 값을 갖고 호출할 수 있으며, 브라우저가 해시가 일치하는지 확인하면 그 리소스는 그 시점부터 더 넓은 대중에게 제공됩니다. 업그레이드가 이루어져도 반환된 핸들을 통해 전체 파일을 여전히 써야 한다는 점에 주의하십시오. 이 요건은 COS에 특정 파일이 이미 저장되어 있는지 여부를 악용하려는 사이드 채널을 방지하기 위해 존재합니다.
 
 ### Integrity by design
 
