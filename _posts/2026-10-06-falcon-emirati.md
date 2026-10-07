@@ -1,21 +1,24 @@
 ---
 layout: post
-title: "Falcon-Emirati: 언어 모델이 방언과 문화, 뉘앙스를 학습할 때"
+title: 'Falcon-Emirati: 언어 모델이 방언과 문화, 뉘앙스를 학습할 때'
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/659bc8a7b0f43ed69f0b2300/MJHJMYW3O4CkLvXvn7DOp.png
 image: assets/images/blog/posts/2026-10-06-falcon-emirati/thumbnail.png
 authors:
-  - user: tiiuae
-slug: "falcon-emirati"
-source_url: "https://huggingface.co/blog/tiiuae/falcon-emirati"
-source_published_date: "2026-10-06"
-source_published_at: "2026-10-06T06:44:39+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: tiiuae
+slug: falcon-emirati
+source_url: https://huggingface.co/blog/tiiuae/falcon-emirati
+source_published_date: '2026-10-06'
+source_published_at: '2026-10-06T06:44:39+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: '* TOC {:toc} <!--toc--> _이 글은 Hugging Face 블로그의 [Falcon-Emirati: When
+  an LLM Learns the Dialect, the Culture, and the Nuance](https://huggingface.'
 ---
-
 * TOC
 {:toc}
 <!--toc-->
