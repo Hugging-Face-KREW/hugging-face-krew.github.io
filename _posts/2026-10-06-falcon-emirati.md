@@ -19,7 +19,7 @@ translator: "openai"
 * TOC
 {:toc}
 <!--toc-->
-_이 글은 Hugging Face 블로그의 [Falcon-Emirati: When an LLM Learns the Dialect, the Culture, and the Nuance](https://huggingface.co/blog/tiiuae/falcon-emirati)를 한국어로 번역한 글입니다._
+_이 글은 Hugging Face 블로그의 [Falcon-Emirati: When an LLM Learns the Dialect, the Culture, and the Nuance](https://huggingface.co/blog/tiiuae/falcon-emirati)를 한국어로 번역한 글입니다_.
 
 <!-- Source: https://huggingface.co/blog/tiiuae/falcon-emirati -->
 
@@ -63,7 +63,7 @@ Falcon-Emirati-7B는 특히 7B variant를 기반으로 구축했습니다. 이 �
 
 ## 데이터 접근 방식 {#section-3}
 
-Falcon-H1-Arabic의 pretraining 위에 전용 Emirati 데이터 pipeline을 구축하고, 서로 보완적인 세 가지 출처를 활용했습니다.
+Falcon-H1-Arabic의 사전 학습 위에 전용 Emirati 데이터 파이프라인을 구축하고, 서로 보완적인 세 가지 출처를 활용했습니다.
 
 ### 1. 실제 Emirati 방언 웹 데이터
 
@@ -95,7 +95,7 @@ Emirati 원어민이 모델의 output을 직접 검토했습니다. 답이 맞�
 
 ## 결과 {#section-6}
 
-Falcon-Emirati-7B는 Alyah에서 84.83%를 기록해, 비교한 다른 모든 Arabic 및 multilingual model을 앞섰습니다. 여기에는 Falcon-Emirati-7B보다 몇 배나 큰 여러 모델도 포함됩니다. 아래 차트는 Alyah leaderboard의 주요 instruction-tuned model을 대표하는 집합과 비교했을 때 Falcon-Emirati-7B의 위치를 보여줍니다.
+Falcon-Emirati-7B는 Alyah에서 84.83%를 기록해, 비교한 다른 모든 Arabic 및 multilingual model을 앞섰습니다. 여기에는 Falcon-Emirati-7B보다 몇 배나 큰 여러 모델도 포함됩니다. 아래 차트는 Alyah 리더보드의 주요 instruction-tuned 모델을 대표하는 집합과 비교했을 때 Falcon-Emirati-7B의 위치를 보여줍니다.
 
 [![Falcon-Emirati-7B vs. leading Arabic and multilingual models on Alyah](https://cdn-uploads.huggingface.co/production/uploads/659bc8a7b0f43ed69f0b2300/UL3Uy6LFKWEj5fALZ0Sg4.png)](https://cdn-uploads.huggingface.co/production/uploads/659bc8a7b0f43ed69f0b2300/UL3Uy6LFKWEj5fALZ0Sg4.png)
 
@@ -109,11 +109,11 @@ Alyah accuracy (%), instruction-tuned models. Falcon-Emirati-7B는 Falcon-H1-Ara
 
 ## 객관식 평가를 넘어: LLM-as-Judge 평가 {#section-8}
 
-Multiple-choice accuracy는 모델이 네 가지 선택지 중 정답을 인식할 수 있는지를 알려줍니다. 하지만 누군가 모델과 대화할 때 모델이 실제로 스스로 Emirati Arabic을 생성할 수 있는지는 알려주지 않습니다. 그래서 Alyah와 함께 두 번째 평가를 진행했습니다. 동일한 1,173개 Alyah 질문에 대해 open-ended generation을 수행하고, Alyah leaderboard에서 가장 강력한 경쟁 모델로 선택한 다섯 모델인 Falcon-Emirati-7B, ALLaM-7B-Instruct-preview, gemma-3-27b-it, Jais-2-8B-Chat, Fanar-2-27B-Instruct를 대상으로 LLM judge (Gemini 3.7 Flash)가 점수를 매겼습니다.
+Multiple-choice accuracy는 모델이 네 가지 선택지 중 정답을 인식할 수 있는지를 알려줍니다. 하지만 누군가 모델과 대화할 때 모델이 실제로 스스로 Emirati Arabic을 생성할 수 있는지는 알려주지 않습니다. 그래서 Alyah와 함께 두 번째 평가를 진행했습니다. 동일한 1,173개 Alyah 질문에 대해 open-ended generation을 수행하고, Alyah 리더보드에서 가장 강력한 경쟁 모델로 선택한 다섯 모델인 Falcon-Emirati-7B, ALLaM-7B-Instruct-preview, gemma-3-27b-it, Jais-2-8B-Chat, Fanar-2-27B-Instruct를 대상으로 LLM judge (Gemini 3.7 Flash)가 점수를 매겼습니다.
 
 judge는 각 답변을 두 가지 별도 차원으로 평가했습니다. 내용이 올바른지, 그리고 이와 독립적으로 답변이 MSA가 아니라 실제로 Emirati 방언으로 생성되었는지를 평가했습니다. judge의 등급 평가인 partial-credit score와 더 엄격한 pass/fail version을 모두 보고하며, 각 모델이 답변하는 대신 얼마나 자주 abstain했는지도 제시합니다.
 
-[![LLM-judged correctness on open-ended Emirati questions](https://cdn-uploads.huggingface.co/production/uploads/659bc8a7b0f43ed69f0b2300/uc4Lj0T23SxjZVaV1w5bU.png)](https://cdn-uploads.huggingface.co/production/uploads/659bc8a7b0f43ed69f0b2300/uc4Lj0T23SxjZVaV1w5bU.png)
+[![LLM-judged correctness on open-ended Emirati questions](https://cdn-uploads.huggingface.co/production/uploads/659bc8a7b0f43ed69f0b2300/w3???)
 
 1,173개 Alyah 질문에 대한 LLM-judged correctness, open-ended generation, Gemini 3.7 as judge.
 
@@ -123,13 +123,13 @@ judge는 각 답변을 두 가지 별도 차원으로 평가했습니다. 내용
 
 Falcon-Emirati-7B는 correctness에서 앞서지만, 진정한 격차는 두 번째 차트에서 나타납니다. dialect fidelity에서 Falcon-Emirati-7B는 0.52(partial credit)를 기록한 반면 ALLaM은 0.05, gemma-3-27b-it은 0.03, Jais-2-8B-Chat은 0.02, Fanar-2-27B-Instruct는 사실상 0.00을 기록했습니다. 이는 작은 우위가 아니라 낮은 점수대와 비교하면 거의 두 자릿수 배에 가까운 차이입니다. 실제로는 다른 모델들도 정답을 알고 있는 경우가 많지만, Emirati로 직접 질문받았을 때조차 기본적으로 Modern Standard Arabic으로 답합니다. Falcon-Emirati-7B는 다섯 모델 중 질문받은 방언으로 안정적으로 답하는 유일한 모델입니다.
 
-Fanar-2-27B-Instruct는 두 번째 이유에서도 두드러집니다. 다른 어떤 모델보다 훨씬 자주 abstain하며, 26.2%의 경우 답변을 거부했습니다. 비교 대상의 다른 모든 모델은 5% 미만이었습니다. 여기에 다섯 모델 중 가장 낮은 correctness score인 0.27(partial credit)을 함께 고려하면, 단순히 잘못된 register로 답하는 모델이 아니라 Emirati-specific content에 참여하려는 의지도 능력도 모두 낮은 모델임을 시사합니다.
+Fanar-2-27B-Instruct는 두 번째 이유에서도 두드러집니다. 다른 어떤 모델보다 훨씬 자주 abstain하며, 26.2%의 경우 답변을 거부했습니다. 비교 대상의 다른 모든 모델은 5% 미만이었습니다. 여기에 다섯 모델 중 가장 낮은 correctness score인 0.27(partial credit)을 함께 고려하면, 단순히 잘못된 register로 답하는 모델이 아니라 Emirati-specific content에 참여하려는 의지와 능력도 모두 낮은 모델임을 시사합니다.
 
 [![Dialect fidelity by category](https://cdn-uploads.huggingface.co/production/uploads/659bc8a7b0f43ed69f0b2300/sklbQUT3s8CXmcse-BPln.png)](https://cdn-uploads.huggingface.co/production/uploads/659bc8a7b0f43ed69f0b2300/sklbQUT3s8CXmcse-BPln.png)
 
 Alyah category별 dialect fidelity, partial credit. Falcon-Emirati-7B만 일관되게 Emirati로 전환하며, 다른 모델은 거의 모든 category에서 MSA를 유지합니다.
 
-dialect fidelity를 category별로 나누어 보면 패턴이 더욱 명확해집니다. 일상적인 인사부터 poetry까지 Alyah의 모든 category에서 이러한 경향이 나타납니다. 이는 소수의 질문 유형을 위해 학습한 좁은 요령이 아니라는 점을 시사합니다. Emirati가 기대되는 register일 때 모델이 기본적으로 선택하는 register 자체가 전반적으로 바뀐 것입니다. 경쟁 모델이 상대적으로 더 나은 성능을 보이는 유일한 영역인 Greetings & Daily Expressions는 Emirati와 MSA가 가장 많이 겹치는 category이기도 합니다. 따라서 dedicated dialect training이 없어도 일반적인 Arabic model이 우연히 올바르게 들리기 가장 쉬운 영역입니다.
+dialect fidelity를 category별로 나누어 보면 패턴이 더욱 명확해집니다. 일상적인 인사부터 poetry까지 Alyah의 모든 category에서 이러한 경향이 나타납니다. 이는 소수의 질문 유형을 위해 학습한 좁은 요령이 아니라는 점을 시사합니다. Emirati가 기대되는 register일 때 모델이 기본적으로 선택하는 register 자체가 전반적으로 바뀐 것입니다. 경쟁 모델이 상대적으로 더 나은 성능을 보이는 유일한 영역인 Greetings & Daily Expressions는 Emirati와 MSA가 가장 많이 겹치는 category이기도 합니다. 따라서 dedicated dialect training이 없어도 일반적인 Arabic model이 원어민처럼 들리기 가장 쉬운 영역입니다.
 
 ### Category별 Pairwise Comparison
 
