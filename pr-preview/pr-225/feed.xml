@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/pr-preview/pr-225/feed.xml" rel="self" type="application/atom+xml" /><link href="/pr-preview/pr-225/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-10-08T14:55:54+09:00</updated><id>/pr-preview/pr-225/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">하나의 모델 패밀리, 두 개의 금메달급 결과: IOI와 IMO를 위한 Nemotron 미세 조정</title><link href="/pr-preview/pr-225/nemotron-ioi-and-imo-2026/" rel="alternate" type="text/html" title="하나의 모델 패밀리, 두 개의 금메달급 결과: IOI와 IMO를 위한 Nemotron 미세 조정" /><published>2026-10-07T00:00:00+09:00</published><updated>2026-10-07T00:00:00+09:00</updated><id>/pr-preview/pr-225/nemotron-ioi-and-imo-2026</id><content type="html" xml:base="/pr-preview/pr-225/nemotron-ioi-and-imo-2026/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/pr-preview/pr-225/feed.xml" rel="self" type="application/atom+xml" /><link href="/pr-preview/pr-225/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-10-08T15:00:29+09:00</updated><id>/pr-preview/pr-225/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">하나의 모델 패밀리, 두 개의 금메달급 결과: IOI와 IMO를 위한 Nemotron 미세 조정</title><link href="/pr-preview/pr-225/nemotron-ioi-and-imo-2026/" rel="alternate" type="text/html" title="하나의 모델 패밀리, 두 개의 금메달급 결과: IOI와 IMO를 위한 Nemotron 미세 조정" /><published>2026-10-07T00:00:00+09:00</published><updated>2026-10-07T00:00:00+09:00</updated><id>/pr-preview/pr-225/nemotron-ioi-and-imo-2026</id><content type="html" xml:base="/pr-preview/pr-225/nemotron-ioi-and-imo-2026/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#하나의-모델-패밀리-두-개의-금메달급-결과-ioi와-imo를-위한-nemotron-미세-조정" id="markdown-toc-하나의-모델-패밀리-두-개의-금메달급-결과-ioi와-imo를-위한-nemotron-미세-조정">하나의 모델 패밀리, 두 개의 금메달급 결과: IOI와 IMO를 위한 Nemotron 미세 조정</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">재사용 가능한 전문화 레시피</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">일반적인 코딩 능력에서 IOI 금메달까지</a></li>
@@ -27,7 +27,7 @@ Review instructions:
 
 <p>최근 결과는 Nemotron이 세계적 수준의 전문 모델을 구축하기 위한 강력하고 적응력 높은 파운데이션임을 보여줍니다. Nemotron 3에서 시작해, 각 팀은 지도 미세 조정(SFT), 강화 학습(RL), 피드백 기반 추론을 사용하여 <a href="https://arxiv.org/abs/2609.10712">IMO 2026</a>와 <a href="https://arxiv.org/abs/2609.02849">IOI 2026</a> 모두에서 금메달 수준에 도달한 시스템을 만들었습니다.</p>
 
-<p><a href="https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/LqM9etFUGTjJT116M7Hq8.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/LqM9etFUGTjJT116M7Hq8.png" alt="fig_ioi_imo_gold_results_headline" /></a></p>
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/LqM9etFUGTjJT116M7Hq8.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/LqM9etFUGTjJT116M7Hq8.png" alt="IOI 및 IMO 금메달 결과 요약 헤드라인 그림" /></a></p>
 
 <table>
   <thead>
@@ -82,7 +82,7 @@ Review instructions:
 
 <p>IOI 2025에서의 진행 과정은 전문화의 가치를 명확하게 보여줍니다. Nano는 사후 학습 전 130점에서 SFT 후 280점, RL 후 291점으로 향상되었습니다. 반복적인 생성-평가-개선 전략인 GenCorrect를 적용하자 468점에 도달하여 438.3점의 금메달 기준을 넘었습니다. Ultra-CC는 동일한 테스트 시점 전략으로 502점을 기록했습니다.</p>
 
-<p><a href="https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/GptKxXbYlSsm2ksIJqZzE.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/GptKxXbYlSsm2ksIJqZzE.png" alt="fig_main_capability_progression_previous_style" /></a></p>
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/GptKxXbYlSsm2ksIJqZzE.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/GptKxXbYlSsm2ksIJqZzE.png" alt="주요 능력 발전 진행도 차트" /></a></p>
 
 <p>이 실험은 또한 모든 규모에서 적응 방식이 동일할 필요는 없다는 점을 보여주었습니다. Nano에서는 SFT가 대부분의 성능 향상을 이끌었고, RL은 더 작지만 일관된 추가 향상을 가져왔습니다. 더 강력한 Ultra 모델에서는 한 번의 SFT epoch만으로도 IOI, ICPC, LiveCodeBench Pro 전반에서 완전한 사후 학습을 거친 Nano 모델을 능가하기에 충분했습니다. 이 결과를 바탕으로 IOI 2026에 사용된 대회 특화 Ultra-CC 시스템을 구성했으며, 이 시스템은 600점 만점에 535.4점을 기록했습니다.</p>
 
@@ -96,7 +96,7 @@ Review instructions:
 
 <p>각 IMO 문제에 대해 모델은 후보 증명을 생성하고, 점수를 매기고, 비평을 작성하고, 가장 유망한 시도를 개선했습니다. 별도의 고연산 단계에서 최종 제출물을 선택했습니다. 전체 시스템은 형식 증명기, 외부 도구 또는 인터넷 액세스 없이 자연어로 작동했습니다. 총 42점 중 30점을 획득했으며, 6개 문제 중 4개에서 만점을 받아 공식 금메달 기준을 넘었습니다.</p>
 
-<p><a href="https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/Wo0kpoA9qTLPaxWv48DnL.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/Wo0kpoA9qTLPaxWv48DnL.png" alt="image" /></a></p>
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/Wo0kpoA9qTLPaxWv48DnL.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/Wo0kpoA9qTLPaxWv48DnL.png" alt="증명 흐름 다이어그램" /></a></p>
 
 <h2 id="section-4">미세 조정과 테스트 시점 연산의 결합</h2>
 
