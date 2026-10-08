@@ -1,21 +1,24 @@
 ---
 layout: post
-title: "하나의 모델 패밀리, 두 개의 금메달급 결과: IOI와 IMO를 위한 Nemotron 미세 조정"
+title: '하나의 모델 패밀리, 두 개의 금메달급 결과: IOI와 IMO를 위한 Nemotron 미세 조정'
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/zB6BNaB-3tiCCsnOo7gik.png
 image: assets/images/blog/posts/2026-10-07-nemotron-ioi-and-imo-2026/thumbnail.png
 authors:
-  - user: nvidia
-slug: "nemotron-ioi-and-imo-2026"
-source_url: "https://huggingface.co/blog/nvidia/nemotron-ioi-and-imo-2026"
-source_published_date: "2026-10-07"
-source_published_at: "2026-10-07T12:45:31+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: nvidia
+slug: nemotron-ioi-and-imo-2026
+source_url: https://huggingface.co/blog/nvidia/nemotron-ioi-and-imo-2026
+source_published_date: '2026-10-07'
+source_published_at: '2026-10-07T12:45:31+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: '* TOC {:toc} <!--toc--> _이 글은 Hugging Face 블로그의 [One Model Family, Two
+  Gold-Level Results: Fine-Tuning Nemotron for IOI and IMO](https://huggingface.'
 ---
-
 * TOC
 {:toc}
 <!--toc-->
