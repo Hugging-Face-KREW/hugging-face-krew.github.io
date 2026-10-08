@@ -37,7 +37,7 @@ Review instructions:
 
 최근 결과는 Nemotron이 세계적 수준의 전문 모델을 구축하기 위한 강력하고 적응력 높은 파운데이션임을 보여줍니다. Nemotron 3에서 시작해, 각 팀은 지도 미세 조정(SFT), 강화 학습(RL), 피드백 기반 추론을 사용하여 [IMO 2026](https://arxiv.org/abs/2609.10712)와 [IOI 2026](https://arxiv.org/abs/2609.02849) 모두에서 금메달 수준에 도달한 시스템을 만들었습니다.
 
-[![fig_ioi_imo_gold_results_headline](https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/LqM9etFUGTjJT116M7Hq8.png)](https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/LqM9etFUGTjJT116M7Hq8.png)
+[![IOI 및 IMO 금메달 결과 요약 헤드라인 그림](https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/LqM9etFUGTjJT116M7Hq8.png)](https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/LqM9etFUGTjJT116M7Hq8.png)
 
 | 대회 | Nemotron 전문화 | 결과 |
 | --- | --- | --- |
@@ -68,7 +68,7 @@ IOI 결과는 인간 참가자와 동일한 시간, 인터넷 액세스 및 제�
 
 IOI 2025에서의 진행 과정은 전문화의 가치를 명확하게 보여줍니다. Nano는 사후 학습 전 130점에서 SFT 후 280점, RL 후 291점으로 향상되었습니다. 반복적인 생성-평가-개선 전략인 GenCorrect를 적용하자 468점에 도달하여 438.3점의 금메달 기준을 넘었습니다. Ultra-CC는 동일한 테스트 시점 전략으로 502점을 기록했습니다.
 
-[![fig_main_capability_progression_previous_style](https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/GptKxXbYlSsm2ksIJqZzE.png)](https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/GptKxXbYlSsm2ksIJqZzE.png)
+[![주요 능력 발전 진행도 차트](https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/GptKxXbYlSsm2ksIJqZzE.png)](https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/GptKxXbYlSsm2ksIJqZzE.png)
 
 이 실험은 또한 모든 규모에서 적응 방식이 동일할 필요는 없다는 점을 보여주었습니다. Nano에서는 SFT가 대부분의 성능 향상을 이끌었고, RL은 더 작지만 일관된 추가 향상을 가져왔습니다. 더 강력한 Ultra 모델에서는 한 번의 SFT epoch만으로도 IOI, ICPC, LiveCodeBench Pro 전반에서 완전한 사후 학습을 거친 Nano 모델을 능가하기에 충분했습니다. 이 결과를 바탕으로 IOI 2026에 사용된 대회 특화 Ultra-CC 시스템을 구성했으며, 이 시스템은 600점 만점에 535.4점을 기록했습니다.
 
@@ -82,7 +82,7 @@ SFT 코퍼스에는 15,818개의 고유한 증명 문제에 걸쳐 품질 필터
 
 각 IMO 문제에 대해 모델은 후보 증명을 생성하고, 점수를 매기고, 비평을 작성하고, 가장 유망한 시도를 개선했습니다. 별도의 고연산 단계에서 최종 제출물을 선택했습니다. 전체 시스템은 형식 증명기, 외부 도구 또는 인터넷 액세스 없이 자연어로 작동했습니다. 총 42점 중 30점을 획득했으며, 6개 문제 중 4개에서 만점을 받아 공식 금메달 기준을 넘었습니다.
 
-[![image](https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/Wo0kpoA9qTLPaxWv48DnL.png)](https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/Wo0kpoA9qTLPaxWv48DnL.png)
+[![증명 흐름 다이어그램](https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/Wo0kpoA9qTLPaxWv48DnL.png)](https://cdn-uploads.huggingface.co/production/uploads/67b8b0096c3182e96bf6cea1/Wo0kpoA9qTLPaxWv48DnL.png)
 
 ## 미세 조정과 테스트 시점 연산의 결합 {#section-4}
 
