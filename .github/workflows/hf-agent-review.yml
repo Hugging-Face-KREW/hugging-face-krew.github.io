@@ -33,7 +33,6 @@ jobs:
         with:
           repository: Hugging-Face-KREW/hf-workflow
           ref: 530521318e28c1c82491393e264fe608aa029634
-          token: ${{ secrets.KREW_BOT_TOKEN }}
           path: workflow
 
       - name: Capture trusted PR snapshot
