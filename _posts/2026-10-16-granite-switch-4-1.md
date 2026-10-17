@@ -1,21 +1,24 @@
 ---
 layout: post
-title: "Granite Switch 4.1: 하나의 엔드포인트에서 제공하는 대화, 의사 결정, 음성"
+title: 'Granite Switch 4.1: 하나의 엔드포인트에서 제공하는 대화, 의사 결정, 음성'
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/662836b742709fe826510597/gltB0o--PV_Jh0D3aDm8-.png
 image: assets/images/blog/posts/2026-10-15-granite-switch-4-1/thumbnail.png
 authors:
-  - user: ibm-granite
-slug: "granite-switch-4-1"
-source_url: "https://huggingface.co/blog/ibm-granite/granite-switch-4-1"
-source_published_date: "2026-10-15"
-source_published_at: "2026-10-15T20:34:01+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: ibm-granite
+slug: granite-switch-4-1
+source_url: https://huggingface.co/blog/ibm-granite/granite-switch-4-1
+source_published_date: '2026-10-15'
+source_published_at: '2026-10-15T20:34:01+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: '* TOC {:toc} <!--toc--> _이 글은 Hugging Face 블로그의 [Granite Switch 4.1:
+  Chat, Decisions, and Speech from One Endpoint](https://huggingface.'
 ---
-
 * TOC
 {:toc}
 <!--toc-->
