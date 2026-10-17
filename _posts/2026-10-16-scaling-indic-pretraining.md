@@ -1,21 +1,24 @@
 ---
 layout: post
-title: "Indic 사전 학습 확장: 2.8조 토큰과 개방형 데이터 생성 파이프라인"
+title: 'Indic 사전 학습 확장: 2.8조 토큰과 개방형 데이터 생성 파이프라인'
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/68d2fec8856b85d927e44d32/x0aObe_0mduBjWFuKBGoV.png
 image: assets/images/blog/posts/2026-10-16-scaling-indic-pretraining/thumbnail.png
 authors:
-  - user: nvidia
-slug: "scaling-indic-pretraining"
-source_url: "https://huggingface.co/blog/nvidia/scaling-indic-pretraining"
-source_published_date: "2026-10-16"
-source_published_at: "2026-10-16T01:44:47+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: nvidia
+slug: scaling-indic-pretraining
+source_url: https://huggingface.co/blog/nvidia/scaling-indic-pretraining
+source_published_date: '2026-10-16'
+source_published_at: '2026-10-16T01:44:47+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: '* TOC {:toc} <!--toc--> _이 글은 Hugging Face 블로그의 [Scaling Indic Pretraining:
+  2.8 Trillion Tokens and an Open Data Generation Pipeline](https://huggingface.'
 ---
-
 * TOC
 {:toc}
 <!--toc-->
