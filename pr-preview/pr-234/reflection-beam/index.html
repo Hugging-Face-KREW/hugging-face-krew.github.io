@@ -1,0 +1,1985 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-234/assets/images/favicon.ico" />
+
+    <title>Welcome Beam: 소유하고, 커스터마이즈하고, 확장할 수 있는 501B 오픈 모델 | Hugging Face KREW</title>
+
+    <!-- Begin Jekyll SEO tag v2.9.1 -->
+<title>Welcome Beam: 소유하고, 커스터마이즈하고, 확장할 수 있는 501B 오픈 모델 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Welcome Beam: 소유하고, 커스터마이즈하고, 확장할 수 있는 501B 오픈 모델" />
+<meta name="author" content="dailybot" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 Welcome Beam: a 501B open model you can own, customize, and scale를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Welcome Beam: a 501B open model you can own, customize, and scale를 한국어로 번역한 글입니다." />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="/pr-preview/pr-234/reflection-beam/assets/images/blog/posts/2026-10-16-reflection-beam/thumbnail.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-10-16T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-10-16T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/pr-preview/pr-234/reflection-beam/assets/images/blog/posts/2026-10-16-reflection-beam/thumbnail.jpg" />
+<meta name="twitter:title" content="Welcome Beam: 소유하고, 커스터마이즈하고, 확장할 수 있는 501B 오픈 모델" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-10-16T00:00:00+09:00","datePublished":"2026-10-16T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Welcome Beam: a 501B open model you can own, customize, and scale를 한국어로 번역한 글입니다.","headline":"Welcome Beam: 소유하고, 커스터마이즈하고, 확장할 수 있는 501B 오픈 모델","image":"/pr-preview/pr-234/reflection-beam/assets/images/blog/posts/2026-10-16-reflection-beam/thumbnail.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-234/reflection-beam/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-234/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-234/reflection-beam/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-234/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-234/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-234/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-234/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-234/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-234/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-234/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-234/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+
+
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-10-16-reflection-beam/thumbnail.jpg" alt="Welcome Beam: 소유하고, 커스터마이즈하고, 확장할 수 있는 501B 오픈 모델">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-10-16-reflection-beam/thumbnail.jpg" alt="Welcome Beam: 소유하고, 커스터마이즈하고, 확장할 수 있는 501B 오픈 모델">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-234/categories#huggingface">HuggingFace</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-234/categories#translation">Translation</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">Welcome Beam: 소유하고, 커스터마이즈하고, 확장할 수 있는 501B 오픈 모델</h1>
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+                
+                    <ul id="markdown-toc">
+  <li><a href="#welcome-beam-소유하고-커스터마이즈하고-확장할-수-있는-501b-오픈-모델" id="markdown-toc-welcome-beam-소유하고-커스터마이즈하고-확장할-수-있는-501b-오픈-모델">Welcome Beam: 소유하고, 커스터마이즈하고, 확장할 수 있는 501B 오픈 모델</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">Beam으로 구축하기</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">Beam이란?</a>        <ul>
+          <li><a href="#attention" id="markdown-toc-attention">Attention</a></li>
+          <li><a href="#mixture-of-experts" id="markdown-toc-mixture-of-experts">Mixture of Experts</a></li>
+          <li><a href="#residual-stream" id="markdown-toc-residual-stream">Residual Stream</a></li>
+          <li><a href="#long-context" id="markdown-toc-long-context">Long Context</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-3" id="markdown-toc-section-3">Benchmark Results</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">Hardware Requirements</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">Inference Support</a>        <ul>
+          <li><a href="#transformers" id="markdown-toc-transformers">Transformers</a>            <ul>
+              <li><a href="#chat" id="markdown-toc-chat">Chat</a></li>
+              <li><a href="#tool-calling" id="markdown-toc-tool-calling">Tool calling</a></li>
+              <li><a href="#multi-gpu-and-multi-node" id="markdown-toc-multi-gpu-and-multi-node">Multi-GPU and multi-node</a></li>
+            </ul>
+          </li>
+          <li><a href="#vllm" id="markdown-toc-vllm">vLLM</a></li>
+          <li><a href="#sglang" id="markdown-toc-sglang">SGLang</a></li>
+          <li><a href="#inference-providers" id="markdown-toc-inference-providers">Inference Providers</a></li>
+          <li><a href="#inference-endpoints" id="markdown-toc-inference-endpoints">Inference Endpoints</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-6" id="markdown-toc-section-6">What we tested</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">Post-training Beam</a>        <ul>
+          <li><a href="#sft-with-trl" id="markdown-toc-sft-with-trl">SFT with TRL</a></li>
+          <li><a href="#grpo-with-miles" id="markdown-toc-grpo-with-miles">GRPO with Miles</a></li>
+          <li><a href="#train-with-lora" id="markdown-toc-train-with-lora">Train with LoRA</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-8" id="markdown-toc-section-8">Build with Beam: Demos</a>        <ul>
+          <li><a href="#hey-beam-네이티브-로컬-macos-애플리케이션을-만들어-줘" id="markdown-toc-hey-beam-네이티브-로컬-macos-애플리케이션을-만들어-줘">Hey Beam, 네이티브 로컬 MacOS 애플리케이션을 만들어 줘!</a></li>
+          <li><a href="#hey-beam-여러-에이전트에서-어떻게-확장해" id="markdown-toc-hey-beam-여러-에이전트에서-어떻게-확장해">Hey Beam, 여러 에이전트에서 어떻게 확장해?</a></li>
+          <li><a href="#hey-beam-내-코드베이스를-위한-decision-model을-파인튜닝해-줘" id="markdown-toc-hey-beam-내-코드베이스를-위한-decision-model을-파인튜닝해-줘">Hey Beam, 내 코드베이스를 위한 decision model을 파인튜닝해 줘!</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-9" id="markdown-toc-section-9">Wrapping Up</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/reflection-beam">Welcome Beam: a 501B open model you can own, customize, and scale</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/reflection-beam -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="welcome-beam-소유하고-커스터마이즈하고-확장할-수-있는-501b-오픈-모델">Welcome Beam: 소유하고, 커스터마이즈하고, 확장할 수 있는 501B 오픈 모델</h1>
+
+<p><img src="https://huggingface.co/buckets/huggingface/Beam-blog-assets/resolve/images/beam-banner.jpg" alt="Hugging Face mascot with colorful concentric waves on a blue background." width="624" style="max-width: 100%; height: auto; background-color: white;" /></p>
+
+<p>Reflection의 Beam이 Hugging Face에 공개되었습니다! 새로운 미국 연구소 Reflection의 첫 번째 모델이며, 오픈 모델입니다! 501B 파라미터(토큰당 23B 활성)를 사용하는 mixture-of-experts(MoEs) 모델로, 텍스트를 입력으로 지원하고 <strong>1M 토큰의 컨텍스트 윈도우</strong>를 제공하며 Apache 2.0 라이선스로 공개되었습니다.</p>
+
+<p>Beam은 <em>코딩</em> 및 <em>에이전트</em> 사용 사례에 초점을 맞춥니다. 자체 하드웨어, 인프라 또는 클라우드에서 프런티어 규모의 모델을 실행하고, 자체 사용 사례에 맞게 커스터마이즈하려는 팀을 위한 모델입니다. Beam에는 모델에서 최고의 성능을 끌어내는 전용 오픈 소스 Rust 기반 하네스가 함께 제공됩니다.</p>
+
+<p>Beam에는 네이티브 transformers 구현과 함께 vLLM 및 SGLang 같은 다운스트림 라이브러리 지원도 제공됩니다. Reflection 팀과 협력해 이 모델을 필요에 맞게 구축할 수 있도록 추론, SFT(지도 파인튜닝), RL(강화학습) 레시피를 준비했습니다. transformers, SGLang, vLLM에서 day-0 지원을 제공하는 것뿐만 아니라, 이 글에서는 모델 실행 방법, 사후 학습 방법, 그리고 이 모델로 구축한 내용을 소개합니다.</p>
+
+<p><strong>TL;DR</strong></p>
+
+<blockquote>
+  <ul>
+    <li>토큰당 23B가 활성화되는 501B 파라미터 MoEs LLM. 52개 레이어, MoE 레이어당 256개 전문가, 토큰당 8개 라우팅.</li>
+    <li><strong>1M 토큰의 컨텍스트 윈도우</strong>를 지원하는 텍스트 입력 및 텍스트 출력.</li>
+    <li>체크포인트 형식: <a href="https://huggingface.co/reflection/Beam-1.0-501B-A23B"><strong>BF16</strong></a><strong>, <a href="https://huggingface.co/reflection/Beam-1.0-501B-A23B-FP8">FP8</a>,</strong> 및 <a href="https://huggingface.co/reflection/Beam-1.0-501B-A23B-NVFP4"><strong>NVFP4</strong></a></li>
+    <li>턴 간 컨텍스트에 유지할 수 있는 추론(<code class="language-plaintext highlighter-rouge">preserve_thinking</code>), 전용 문법을 사용하는 도구 호출. 모델은 “low”, “medium”(기본값), “high”, “xhigh”, “max”의 다섯 가지 추론 값을 지원합니다.</li>
+    <li>토크나이저에 포함된 응답 템플릿.</li>
+    <li>DFlash2를 사용하는 speculative decoding 드래프트 모델.</li>
+    <li>Day-0 라이브러리: transformers, SGLang, vLLM. Miles를 사용한 전체 파라미터 RL.</li>
+    <li><a href="https://developers.reflection.ai/mirror-overview">Rust-based custom harness.</a>와 함께 제공됩니다.</li>
+    <li>Apache 2.0.</li>
+  </ul>
+</blockquote>
+
+<h2 id="section-1">Beam으로 구축하기</h2>
+
+<p>Reflection은 Beam을 사용하는 최고의 프로젝트에 $10,000 상당의 Hub 크레딧을 제공합니다. 여러분이 할 일은 무언가를 만들고 Hub에서 공유하는 것뿐입니다.</p>
+
+<ul>
+  <li>Spaces에서 Beam 모델을 사용하는 데모를 만들 수 있습니다.</li>
+  <li>선호하는 하드웨어에 맞게 양자화할 수 있습니다.</li>
+  <li>선호하는 문제를 위한 합성 데이터셋을 생성할 수 있습니다.</li>
+  <li>Beam을 사용하거나 Beam을 위한 RL 환경을 구축할 수 있습니다.</li>
+  <li>Beam을 벤치마크하고 결과를 공유할 수 있습니다.</li>
+  <li>우리를 깜짝 놀라게 할 수도 있습니다!</li>
+</ul>
+
+<p>Beam으로 무언가를 구축했다면 Hub에서 공유하고 $10,000를 받을 기회를 얻어 보세요. Space, 모델 또는 데이터셋 저장소를 구축해 <a href="https://huggingface.co/reflection/Beam-1.0-501B-A23B/discussions/5">model’s repo page</a>에서 공유하기만 하면 됩니다. 모든 링크를 수집하고 최고의 프로젝트를 선정한 다음 Hub 계정으로 크레딧을 보내 드립니다.</p>
+
+<h2 id="section-2">Beam이란?</h2>
+
+<p>Beam은 긴 컨텍스트(1M 컨텍스트 길이) 추론과 에이전트 작업을 위해 구축된 텍스트 전용 모델입니다. 희소 MoE 모델로, 각 토큰은 네트워크의 작은 일부만으로 계산되므로 대형 모델의 용량을 유지하면서 훨씬 작은 모델에 가까운 속도로 실행됩니다.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/Beam-blog-assets/resolve/images/beam-architecture.png" alt="Beam architecture: three dense layers followed by 49 mixture-of-experts layers, with hybrid attention and weighted residual connections." width="624" style="max-width: 100%; height: auto; background-color: white;" /></p>
+
+<h3 id="attention">Attention</h3>
+
+<p>디코더는 hidden size 5,120의 52개 레이어로 구성됩니다. 대부분의 레이어는 이전 512개 토큰에 대해 sliding-window attention을 사용하며, 6번째 레이어마다 그리고 마지막 레이어에서는 전체 컨텍스트에 어텐션을 적용합니다. 따라서 sliding-window 레이어는 43개, global 레이어는 9개입니다.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/Beam-blog-assets/resolve/images/beam-attention.png" alt="Attention block with grouped-query attention, RoPE or scalable-softmax query scaling, and a learned sigmoid gate." width="624" style="max-width: 100%; height: auto; background-color: white;" /></p>
+
+<p><em>어텐션 블록 내부(두 레이어 유형 모두)</em></p>
+
+<p>두 종류의 레이어는 위치 정보를 서로 다르게 처리합니다. sliding-window 레이어는 짧은 윈도우 내에서 상대적 위치가 가장 중요하므로 RoPE를 사용합니다. <strong>Global 레이어는 위치 인코딩을 사용하지 않습니다</strong>. 대신 각 쿼리에 보이는 토큰 수에 따라 느리게 증가하는 스케일러를 곱합니다(<code class="language-plaintext highlighter-rouge">(1 + (pos + 1) / 2048) ** 0.1</code>). 이는 temperature처럼 작동합니다. 컨텍스트가 길어져도 softmax가 평탄화되지 않고 정밀도를 유지합니다. 구현에서는 이를 scalable-softmax query scaling이라고 부릅니다.</p>
+
+<p>어텐션은 48개의 쿼리 헤드와 8개의 key-value 헤드를 사용하는 grouped-query attention을 적용하며, 쿼리와 키에는 RMSNorm을 사용합니다. 레이어 입력에서 계산되는 학습된 sigmoid 게이트가 출력 프로젝션 전에 모든 헤드의 모든 채널을 스케일링합니다.</p>
+
+<h3 id="mixture-of-experts">Mixture of Experts</h3>
+
+<p>처음 3개 레이어는 dense SwiGLU MLP를 사용합니다. 나머지 49개 레이어는 이를 256개 전문가로 구성된 Mixture-of-Experts 블록으로 대체합니다. 각 전문가는 intermediate size가 2,560인 SwiGLU MLP이며, 약 39M개의 파라미터를 가집니다. 전문가가 모델 파라미터의 98.4%를 차지합니다.</p>
+
+<p>라우터는 DeepSeek-V3의 group-limited 방식을 따릅니다. sigmoid로 256개 전문가 모두에 점수를 매기고, 이를 32개씩 8개 그룹으로 나눈 다음, 각 그룹의 상위 두 점수의 합으로 순위를 매겨 가장 좋은 4개 그룹을 유지하고, 그 안에서 상위 8개 전문가를 선택합니다. Beam은 DeepSeek-V3와 동일한 그룹 크기를 사용하지만 shared expert는 사용하지 않습니다. 전문가 출력은 정규화된 라우터 가중치로 결합하고 2.5를 곱해 스케일링합니다.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/Beam-blog-assets/resolve/images/beam-expert-routing.png" alt="Beam router scores 256 experts and selects groups before routing each token to eight experts." width="624" style="max-width: 100%; height: auto; background-color: white;" /></p>
+
+<p>토큰당 8개의 전문가만 실행되므로 모델은 각 토큰을 약 23B개의 파라미터로 계산합니다. 256개 전문가 모두 메모리에 유지되므로 배포에는 501B 모델에 해당하는 메모리가 필요하지만, 실행 속도는 23B 모델과 비슷합니다. BF16 체크포인트는 safetensors 형식으로 약 1 TB입니다. NVFP4 체크포인트는 NVIDIA Blackwell GPU를 위해 대부분의 파라미터를 4비트 정밀도로 저장하며, 정확도를 위해 일부 파라미터는 BF16으로 유지합니다. Hub에는 Hopper 및 Ampere 시리즈 칩에 적합한 FP8 체크포인트도 있습니다.</p>
+
+<p>Beam을 직접 배포하려면 아래의 vLLM 또는 SGLang 레시피를 확인하세요.</p>
+
+<h3 id="residual-stream">Residual Stream</h3>
+
+<p>Residual connection이 가장 독특한 부분입니다. 표준 transformer는 각 서브레이어의 출력을 가중치 1로 스트림에 더하므로, 깊이가 깊어질수록 스트림이 커집니다.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/Beam-blog-assets/resolve/images/standard-residual-stream.png" alt="Standard transformer residual stream adds each sublayer output with weight one." width="624" style="max-width: 100%; height: auto; background-color: white;" /></p>
+
+<p>Beam은 입력 임베딩을 1단계로 계산합니다. 단계 <code class="language-plaintext highlighter-rouge">k</code>에서 서브레이어 출력에 가중치 <code class="language-plaintext highlighter-rouge">1/sqrt(k)</code>을 적용해 더하고, 기존 스트림은 가중치 <code class="language-plaintext highlighter-rouge">sqrt((k-1)/k)</code>로 유지합니다. 두 가중치의 제곱 합은 1이므로 첫 번째 레이어부터 마지막 레이어까지 스트림은 일정한 스케일을 유지합니다. 총 104번의 덧셈이 끝나면 최종 hidden state에서 모든 서브레이어 출력과 입력 임베딩이 동일한 가중치를 갖습니다.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/Beam-blog-assets/resolve/images/beam-residual-stream.png" alt="Beam residual stream uses depth-dependent weights to keep the accumulated hidden state at a constant scale." width="624" style="max-width: 100%; height: auto; background-color: white;" /></p>
+
+<p>모든 서브레이어는 전후로 정규화되며, 최종 logits는 FP32로 계산되는 ±30 범위의 tanh softcap을 통과합니다. 구현에서는 router, SwiGLU product, norms, RoPE, query scaling, softcap을 FP32로 계산하도록 위치를 고정합니다.</p>
+
+<h3 id="long-context">Long Context</h3>
+
+<p>Hybrid attention은 긴 컨텍스트에서 효과적입니다. 각 레이어는 토큰당 2 x 8 KV heads x 128 dims = 2,048개의 값을 캐시합니다. 52개 레이어 모두가 모든 토큰을 유지한다면 캐시는 토큰당 208 KiB씩 증가합니다. 전체 시퀀스를 유지하는 것은 9개의 global 레이어뿐입니다. 43개의 sliding-window 레이어는 각각 고정된 512토큰 윈도우를 유지하므로 더 이상 커지지 않습니다. 따라서 캐시는 토큰당 36 KiB씩 증가하며, 단순 계산한 증가율의 약 6분의 1입니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">컨텍스트</th>
+      <th style="text-align: left">52개 레이어가 모두 global인 경우</th>
+      <th style="text-align: left">Beam</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">32K 토큰</td>
+      <td style="text-align: left">6.5 GiB</td>
+      <td style="text-align: left">1.2 GiB</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">128K 토큰</td>
+      <td style="text-align: left">26 GiB</td>
+      <td style="text-align: left">4.6 GiB</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">전체 컨텍스트(1M)</td>
+      <td style="text-align: left">208 GiB</td>
+      <td style="text-align: left"><strong>36.08 GiB</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>이 수치는 transformers dynamic cache를 사용하는 BF16 기준 시퀀스당 수치입니다.</p>
+
+<h2 id="section-3">Benchmark Results</h2>
+
+<p>다음은 Reflection 팀이 제공한 다양한 정밀도 수준에서의 벤치마크 결과입니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: center"><em>Beam (BF16)</em></th>
+      <th style="text-align: center"><em>Beam (FP8)</em></th>
+      <th style="text-align: center"><em>Beam (NVFP4)</em></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Agentic Coding / Terminal</strong></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DeepSWE v1.1</td>
+      <td style="text-align: center">43.3%</td>
+      <td style="text-align: center">43.0%</td>
+      <td style="text-align: center">42.7%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SWE Bench Pro v2-Hard</td>
+      <td style="text-align: center">76.5%</td>
+      <td style="text-align: center">78.4%</td>
+      <td style="text-align: center">78.6%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SWE Bench Pro v1</td>
+      <td style="text-align: center">66.1%</td>
+      <td style="text-align: center">65.9%</td>
+      <td style="text-align: center">65.6%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Terminal Bench v2.1</td>
+      <td style="text-align: center">80.1%</td>
+      <td style="text-align: center">78.9%</td>
+      <td style="text-align: center">78.2%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SWE Atlas Codebase QnA</td>
+      <td style="text-align: center">31.8%</td>
+      <td style="text-align: center">32.2%</td>
+      <td style="text-align: center">31.4%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SWEBench Multilingual</td>
+      <td style="text-align: center">78.3%</td>
+      <td style="text-align: center">78.1%</td>
+      <td style="text-align: center">77.5%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SWEBench Verified</td>
+      <td style="text-align: center">81.6%</td>
+      <td style="text-align: center">80.2%</td>
+      <td style="text-align: center">80.7%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Reasoning</strong></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">AIME 2026</td>
+      <td style="text-align: center">97.7%</td>
+      <td style="text-align: center">98.0%</td>
+      <td style="text-align: center">97.5%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">HLE (no tools)</td>
+      <td style="text-align: center">36.0%</td>
+      <td style="text-align: center">36.0%</td>
+      <td style="text-align: center">34.8%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">HLE (with tools)</td>
+      <td style="text-align: center">51.1%</td>
+      <td style="text-align: center">51.1%</td>
+      <td style="text-align: center">51.1%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SciCode</td>
+      <td style="text-align: center">49.2%</td>
+      <td style="text-align: center">48.3%</td>
+      <td style="text-align: center">46.9%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CriPT AA</td>
+      <td style="text-align: center">16.3%</td>
+      <td style="text-align: center">17.4%</td>
+      <td style="text-align: center">15.4%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">GPQA Diamond</td>
+      <td style="text-align: center">90.6%</td>
+      <td style="text-align: center">90.3%</td>
+      <td style="text-align: center">89.3%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">LiveCodeBench</td>
+      <td style="text-align: center">88.3%</td>
+      <td style="text-align: center">88.1%</td>
+      <td style="text-align: center">87.4%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Tool Calling / Search</strong></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">AutomationBench - public split only</td>
+      <td style="text-align: center">39.3</td>
+      <td style="text-align: center">38.2</td>
+      <td style="text-align: center">39.8%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MCP Atlas</td>
+      <td style="text-align: center">80.8%</td>
+      <td style="text-align: center">81.5%</td>
+      <td style="text-align: center">80.5%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Tau3 Banking</td>
+      <td style="text-align: center">36.1%</td>
+      <td style="text-align: center">36.8%</td>
+      <td style="text-align: center">35.4%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BrowseComp w/ context management</td>
+      <td style="text-align: center">76.8%</td>
+      <td style="text-align: center">76.7%</td>
+      <td style="text-align: center">75.6%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DeepSearchQA w/ context management</td>
+      <td style="text-align: center">80.5%</td>
+      <td style="text-align: center">79.6%</td>
+      <td style="text-align: center">81.1%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>General Capabilities</strong></td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">AA-LCR</td>
+      <td style="text-align: center">78.2%</td>
+      <td style="text-align: center">79.4%</td>
+      <td style="text-align: center">78.7%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">LongBench v2</td>
+      <td style="text-align: center">67.5%</td>
+      <td style="text-align: center">67.6%</td>
+      <td style="text-align: center">67.2%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">IFBench</td>
+      <td style="text-align: center">79.6%</td>
+      <td style="text-align: center">80.7%</td>
+      <td style="text-align: center">79.2%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">AA Omniscience (index) - public split only</td>
+      <td style="text-align: center">10.8</td>
+      <td style="text-align: center">8.8</td>
+      <td style="text-align: center">9.8</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-4">Hardware Requirements</h2>
+
+<p>모델을 제공하는 가장 실용적인 방법은 bf16 체크포인트의 품질 대부분을 유지하는 NVFP4 체크포인트를 사용하는 것입니다. NVFP4는 일부 가중치를 4비트로 저장하므로 BF16에서 1 TB였던 501B 파라미터를 ~280 GB로 줄입니다. Blackwell GPU는 NVFP4를 네이티브로 실행하지만 H200처럼 Blackwell보다 오래된 GPU에서는 실행할 수 없습니다. FP8 체크포인트는 Blackwell보다 오래된 GPU에 적합합니다.</p>
+
+<p>B200 하나에는 180 GB의 HBM3e가 있으므로, 두 개(360 GB)면 Beam 가중치를 저장할 수 있지만 활성값과 KV 캐시를 위한 여유 공간은 거의 남지 않습니다. 장시간 컨텍스트와 동시 요청을 위한 충분한 공간을 확보하려면 B200 4개(720 GB)를 계획하세요. 8xB200 전체 노드에서 제공하거나, 각각 288 GB인 B300 2개 또는 8xRTX Pro 6000에서도 제공할 수 있습니다. Blackwell 하드웨어가 없다면 Inference Providers(서버리스)를 사용해 Reflection을 테스트하세요.</p>
+
+<h2 id="section-5">Inference Support</h2>
+
+<p>Beam은 transformers, SGLang, vLLM에서 day-0 지원을 제공합니다.</p>
+
+<h3 id="transformers">Transformers</h3>
+
+<p>최신 버전의 transformers를 설치하세요.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="nt">-U</span> <span class="s2">"transformers&gt;=5.20.1"</span>
+</code></pre></div></div>
+
+<p>Beam을 실행하는 가장 쉬운 방법은 text-generation pipeline을 사용하는 것입니다.</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="n">pipe</span> <span class="o">=</span> <span class="nf">pipeline</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">text-generation</span><span class="sh">"</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">reflection/Beam-1.0-501B-A23B</span><span class="sh">"</span><span class="p">,</span> <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Write a limerick about Python exceptions.</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">]</span>
+<span class="n">output</span> <span class="o">=</span> <span class="nf">pipe</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+<span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="sh">"</span><span class="s">generated_text</span><span class="sh">"</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+</code></pre></div></div>
+
+<p>pipeline은 전체 채팅을 반환합니다. 마지막 메시지는 응답 템플릿에 의해 이미 파싱된 Beam의 응답입니다.</p>
+
+<p>한 단계 더 낮은 수준에서는 <code class="language-plaintext highlighter-rouge">AutoModelForCausalLM</code> 및 <code class="language-plaintext highlighter-rouge">AutoTokenizer</code>을 사용합니다.</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
+
+<span class="n">model_id</span> <span class="o">=</span> <span class="sh">"</span><span class="s">reflection/Beam-1.0-501B-A23B</span><span class="sh">"</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">model_id</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="n">model_id</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span> <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span>
+<span class="p">)</span>
+
+</code></pre></div></div>
+
+<h4 id="chat">Chat</h4>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">system</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">You should only answer with a number.</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">What is 17 * 23?</span><span class="sh">"</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">.</span><span class="nf">apply_chat_template</span><span class="p">(</span>
+    <span class="n">messages</span><span class="p">,</span>
+    <span class="n">add_generation_prompt</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">tokenize</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_dict</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">return_tensors</span><span class="o">=</span><span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">reasoning_effort</span><span class="o">=</span><span class="sh">"</span><span class="s">medium</span><span class="sh">"</span> <span class="c1"># by default
+</span><span class="p">).</span><span class="nf">to</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">device</span><span class="p">)</span>
+
+<span class="n">input_len</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="sh">"</span><span class="s">input_ids</span><span class="sh">"</span><span class="p">].</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+
+<span class="n">tokenizer</span><span class="p">.</span><span class="nf">parse_response</span><span class="p">(</span>
+    <span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">input_len</span><span class="p">:],</span> <span class="n">prefix</span><span class="o">=</span><span class="n">inputs</span><span class="p">[</span><span class="sh">"</span><span class="s">input_ids</span><span class="sh">"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Beam의 토크나이저에는 응답 템플릿이 포함되어 있습니다. <code class="language-plaintext highlighter-rouge">parse_response</code>은 이를 읽고 원시 출력을 메시지 dict로 변환합니다. 이 dict에는 추론, 답변, 도구 호출이 각각 별도 필드로 들어갑니다. 따라서 추론, 답변, 도구 호출을 분리하기 위한 일반적인 regex가 필요하지 않습니다. 또한 규칙이 토크나이저와 함께 제공되므로, 파싱된 구조가 Beam이 학습하도록 설계된 출력과 일치합니다. 채팅 템플릿은 assistant turn의 일부를 미리 작성할 수 있으며, parser는 이를 확인해야 합니다.</p>
+
+<h4 id="tool-calling">Tool calling</h4>
+
+<details>
+<summary>Complete tool-calling example</summary>
+
+```py
+def get_weather(city: str, unit: str = "celsius"):
+    """
+    Get the current weather for a city.
+
+    Args:
+        city: The city to look up.
+        unit: Temperature unit, "celsius" or "fahrenheit".
+    """
+    ...
+
+tools = [get_weather]
+messages = [
+    {"role": "user", "content": "I land in Paris tonight. Do I need a coat?"}
+]
+
+inputs = tokenizer.apply_chat_template(
+    messages,
+    tools=tools,
+    add_generation_prompt=True,
+    tokenize=True,
+    return_dict=True,
+    return_tensors="pt",
+).to(model.device)
+
+input_len = inputs["input_ids"].shape[-1]
+outputs = model.generate(**inputs, max_new_tokens=1000)
+
+message = tokenizer.parse_response(
+    outputs[0][input_len:], prefix=inputs["input_ids"][0], tools=tools
+)
+message.get("tool_calls")
+
+```
+
+
+</details>
+
+<p><code class="language-plaintext highlighter-rouge">tools</code>도 <code class="language-plaintext highlighter-rouge">parse_response</code>에 전달하세요. Beam은 자체 XML 스타일 문법으로 도구 호출 인자를 인라인으로 작성하므로, 단순한 <code class="language-plaintext highlighter-rouge">7</code>는 숫자일 수도 있고 문자열일 수도 있습니다. 도구 스키마가 있으면 parser가 각 인자를 선언된 타입으로 변환합니다.</p>
+
+<h4 id="multi-gpu-and-multi-node">Multi-GPU and multi-node</h4>
+
+<p>Beam의 config는 expert-parallel plan을 정의합니다. Expert parallelism은 각 전문가를 하나의 디바이스에 배치합니다. Attention, dense 레이어, 임베딩, LM head는 모든 디바이스에 복제됩니다. 이는 8B 파라미터, 즉 BF16에서 16 GB입니다. <code class="language-plaintext highlighter-rouge">DistributedConfig</code>을 사용해 모델을 로드하세요.</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
+
+<span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForCausalLM</span>
+<span class="kn">from</span> <span class="n">transformers.distributed</span> <span class="kn">import</span> <span class="n">DistributedConfig</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">reflection/Beam-1.0-501B-A23B</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">distributed_config</span><span class="o">=</span><span class="nc">DistributedConfig</span><span class="p">(</span>
+        <span class="n">tp_size</span><span class="o">=</span><span class="nf">int</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">"</span><span class="s">WORLD_SIZE</span><span class="sh">"</span><span class="p">]),</span> <span class="n">ep_size</span><span class="o">=</span><span class="nf">int</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">"</span><span class="s">WORLD_SIZE</span><span class="sh">"</span><span class="p">]),</span> <span class="n">tp_plan</span><span class="o">=</span><span class="p">{}</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>16개의 H200 GPU에서 <code class="language-plaintext highlighter-rouge">torchrun</code>을 사용해 스크립트를 실행하세요. 그러면 각 GPU가 78 GB의 가중치를 보유합니다. GPU가 8개라면 각각 139 GB를 보유하게 되어 141 GB H200에는 여유 공간이 남지 않습니다. 디바이스 수는 전문가 수인 256을 나눌 수 있어야 합니다.</p>
+
+<h3 id="vllm">vLLM</h3>
+
+<p>Beam은 vLLM에서 day-0 지원을 제공합니다. 아래 명령은 16개 GPU(8x H200 노드 2개)에 걸쳐 tensor parallelism을 사용해 BF16 체크포인트를 제공하고 OpenAI 호환 API를 노출합니다.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vllm serve reflection/Beam-1.0-501B-A23B <span class="nt">--tensor-parallel-size</span> 16 <span class="nt">--served-model-name</span> beam
+</code></pre></div></div>
+
+<p>더 빠른 생성을 위해 DFlash2 speculative decoding을 추가하세요. 작은 드래프트 모델이 최대 15개의 다음 토큰을 제안하고 Beam이 이를 한 번의 forward pass에서 모두 확인하므로, 각 단계에서 여러 토큰을 수락할 수 있습니다. 비용은 드래프트 모델을 위한 약간의 추가 메모리입니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vllm serve reflection/Beam-1.0-501B-A23B \
+  --tensor-parallel-size 16 \
+  --speculative-config '{ "method": "dflash", "model": "reflection/dflash2-drafter-preview", "num_speculative_tokens": 15 }'
+</code></pre></div></div>
+
+<p>두 명령 모두 OpenAI 호환 서버를 시작하므로 모든 OpenAI 클라이언트를 <code class="language-plaintext highlighter-rouge">http://localhost:8000/v1</code>에 연결할 수 있습니다. 추가 serving 구성은 <a href="https://github.com/vllm-project/recipes/pull/1132">proposed Beam recipe for vLLM</a>을 참조하세요.</p>
+
+<h3 id="sglang">SGLang</h3>
+
+<p>Beam은 SGLang에서도 day-0 지원을 제공합니다. 아래 두 명령에서 모두 활성화하는 DFlash2 speculative decoding과 함께 제공하는 것을 권장합니다. Blackwell에서는 NVFP4 체크포인트가 B300 4개에 들어갑니다.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python <span class="nt">-m</span> sglang.launch_server <span class="se">\</span>
+<span class="nt">--model-path</span> reflection/Beam-1.0-501B-A23B-NVFP4 <span class="se">\</span>
+<span class="nt">--served-model-name</span> beam <span class="se">\</span>
+<span class="nt">--tp</span> 4 <span class="se">\</span>
+<span class="nt">--attention-backend</span> trtllm_mha <span class="se">\</span>
+<span class="nt">--page-size</span> 64 <span class="se">\</span>
+<span class="nt">--context-length</span> 1048576 <span class="se">\</span>
+<span class="nt">--mem-fraction-static</span> 0.85 <span class="se">\</span>
+<span class="nt">--enable-unified-memory</span> <span class="se">\</span>
+<span class="nt">--speculative-algorithm</span> DFLASH <span class="se">\</span>
+<span class="nt">--speculative-draft-model-path</span> reflection/Beam-1.0-501B-A23B-DFlash2 <span class="se">\</span>
+<span class="nt">--speculative-dflash-block-size</span> 8 <span class="se">\</span>
+<span class="nt">--tool-call-parser</span> beam <span class="nt">--reasoning-parser</span> beam <span class="se">\</span>
+<span class="nt">--host</span> 0.0.0.0 <span class="nt">--port</span> 30000
+</code></pre></div></div>
+
+<p>Hopper GPU에서는 대신 8개의 H200에서 FP8 체크포인트를 사용하세요. 변경되는 플래그는 세 개뿐입니다. 체크포인트, tensor-parallel size(4 대신 8), attention backend(trtllm_mha 대신 fa3)입니다. trtllm_mha에는 Blackwell이 필요합니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python -m sglang.launch_server \
+--model-path reflection/Beam-1.0-501B-A23B-FP8 \
+--served-model-name beam \
+--tp 8 \
+--attention-backend fa3 \
+--page-size 64 \
+--context-length 1048576 \
+--mem-fraction-static 0.85 \
+--enable-unified-memory \
+--speculative-algorithm DFLASH \
+--speculative-draft-model-path reflection/Beam-1.0-501B-A23B-DFlash2 \
+--speculative-dflash-block-size 8 \
+--tool-call-parser beam --reasoning-parser beam \
+--host 0.0.0.0 --port 30000
+
+</code></pre></div></div>
+
+<h3 id="inference-providers">Inference Providers</h3>
+
+<p>Beam은 Baseten, Fireworks, Together가 제공하는 Hugging Face Inference Providers에서 사용할 수 있으며, 곧 더 많은 제공자가 추가될 예정입니다.</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
+<span class="kn">from</span> <span class="n">openai</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="sh">"</span><span class="s">https://router.huggingface.co/v1</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">"</span><span class="s">HF_TOKEN</span><span class="sh">"</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">completion</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">chat</span><span class="p">.</span><span class="n">completions</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">reflection/Beam-1.0-501B-A23B:auto</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">What is the capital of France?</span><span class="sh">"</span><span class="p">}],</span>
+<span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">completion</span><span class="p">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">message</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="inference-endpoints">Inference Endpoints</h3>
+
+<p><a href="https://endpoints.huggingface.co/new/reflection/Beam-1.0-501B-A23B-FP8">FP8</a> 또는 <a href="https://endpoints.huggingface.co/new/reflection/Beam-1.0-501B-A23B-NVFP4">NVFP4</a>의 카탈로그에서 Inference Endpoints에 원클릭으로 배포하거나, <code class="language-plaintext highlighter-rouge">hf</code> cli로 다음과 같이 설치할 수 있도록 Beam 레시피를 준비했습니다.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hf endpoints catalog deploy <span class="nt">--repo</span> reflection/Beam-1.0-501B-A23B <span class="nt">--name</span> beam
+</code></pre></div></div>
+
+<h2 id="section-6">What we tested</h2>
+
+<p>Reflection 플랫폼을 통해 다섯 가지 작업에서 Reflection Beam-501B-A23B의 vibe evals를 공유합니다. 각 작업은 낮은 추론 노력과 높은 추론 노력으로 한 번씩 실행했습니다. 이는 벤치마크가 아닌 vibe evals입니다. Beam 사용을 계획하고 있다면 특정 사용 사례에서 어떻게 동작하는지, 그리고 중요한 점으로 어디에서 강점과 약점을 보이는지 확인해 볼 수 있는 좋은 방법입니다.</p>
+
+<p>아래에는 실행한 프롬프트와 Hub의 출력 trace를 요약했습니다. 전체 입력, 출력, API 사용량, 작업 fixture, grader, 대화 trace는 <a href="https://huggingface.co/buckets/burtenshaw/beam-vibe-evals-2026-10-12">this public Hugging Face bucket</a>에 있습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">범주</th>
+      <th style="text-align: left">프롬프트 설명</th>
+      <th style="text-align: left">낮은 추론(토큰)</th>
+      <th style="text-align: left">높은 추론(토큰)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">다단계 도구 호출</td>
+      <td style="text-align: left">ORD-742를 처리합니다. 재고, 예약, 추가 요금, 도착 날짜를 비교하고 자격을 충족하는 가장 저렴한 창고를 예약합니다.</td>
+      <td style="text-align: left">✅ <a href="https://huggingface.co/buckets/burtenshaw/beam-vibe-evals-2026-10-12/tree/traces/multi_step_tools-low.jsonl">544</a></td>
+      <td style="text-align: left">✅ <a href="https://huggingface.co/buckets/burtenshaw/beam-vibe-evals-2026-10-12/tree/traces/multi_step_tools-high.jsonl">811</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">코드베이스에 대한 긴 컨텍스트 검색</td>
+      <td style="text-align: left">세 개의 완전한 소스 파일에서 Click 명령 구성과 두 가지 호출 결과를 도출하고, 구현 심볼 여섯 개를 인용합니다.</td>
+      <td style="text-align: left">🔴 <a href="https://huggingface.co/buckets/burtenshaw/beam-vibe-evals-2026-10-12/tree/traces/long_context-low.jsonl">1,613</a> *</td>
+      <td style="text-align: left">✅ <a href="https://huggingface.co/buckets/burtenshaw/beam-vibe-evals-2026-10-12/tree/traces/long_context-high.jsonl">5,007</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">샌드박스의 터미널 작업</td>
+      <td style="text-align: left">CSV 원장 CLI를 검사하고 수정합니다. 모든 버그를 고치고, 테스트를 보존하며, 테스트와 CLI 검사를 실행합니다.</td>
+      <td style="text-align: left">✅ <a href="https://huggingface.co/buckets/burtenshaw/beam-vibe-evals-2026-10-12/tree/traces/terminal-low.jsonl">582</a></td>
+      <td style="text-align: left">✅ <a href="https://huggingface.co/buckets/burtenshaw/beam-vibe-evals-2026-10-12/tree/traces/terminal-high.jsonl">1,548</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">수학 추론(AIME 스타일)</td>
+      <td style="text-align: left">{1, …, 16}의 8원소 부분집합 중 합이 17로 나누어떨어지는 것은 몇 개인가요? 근거를 제시하세요.</td>
+      <td style="text-align: left">🟠 <a href="https://huggingface.co/buckets/burtenshaw/beam-vibe-evals-2026-10-12/tree/traces/math-low.jsonl">829</a> †</td>
+      <td style="text-align: left">✅ <a href="https://huggingface.co/buckets/burtenshaw/beam-vibe-evals-2026-10-12/tree/traces/math-high.jsonl">2,809</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">구조화된 출력</td>
+      <td style="text-align: left">순서가 뒤섞인 수정 로그를 엄격한 JSON으로 변환합니다. 패치, 취소, null, 날짜, 통화, 합계를 병합합니다.</td>
+      <td style="text-align: left">✅ <a href="https://huggingface.co/buckets/burtenshaw/beam-vibe-evals-2026-10-12/tree/traces/structured_output-low.jsonl">1,040</a></td>
+      <td style="text-align: left">✅ <a href="https://huggingface.co/buckets/burtenshaw/beam-vibe-evals-2026-10-12/tree/traces/structured_output-high.jsonl">2,088</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>* 낮은 추론의 긴 컨텍스트 응답은 모든 코드 동작과 여섯 개의 소스 인용을 정확히 맞혔습니다. 하지만 응답이 parser 형식과 일치하지 않았으므로, 이는 부분적으로 프롬프트의 모호성 때문입니다.</em></p>
+
+<p>† 낮은 추론은 정답을 반환했지만 요청된 근거를 생략했습니다. 높은 추론은 독립적으로 검토된 올바른 unity roots 증명을 제시했습니다.</p>
+
+<p>우리의 말만 믿지 마세요. <a href="https://huggingface.co/buckets/burtenshaw/beam-vibe-evals-2026-10-12">bucket</a>을 자세히 살펴보고, 여러분의 사용 사례나 프로젝트에 맞게 다시 작성해 Beam을 한계까지 밀어붙여 보세요.</p>
+
+<h2 id="section-7">Post-training Beam</h2>
+
+<p>Beam을 자체 사용 사례에 맞게 파인튜닝할 수 있습니다. 여기에서는 지도 파인튜닝과 강화학습을 시작할 수 있도록 TRL과 Miles를 사용하는 몇 가지 예제를 공유합니다.</p>
+
+<h3 id="sft-with-trl">SFT with TRL</h3>
+
+<p>자체 데이터에 Beam을 적용하는 가장 빠른 방법은 TRL의 SFTTrainer를 사용한 지도 파인튜닝입니다. 메모리 사용량을 관리할 수 있도록 501B 파라미터 전체를 업데이트하는 대신 PEFT로 LoRA adapter를 학습합니다.
+<code class="language-plaintext highlighter-rouge">SFTTrainer</code>을 사용해 Beam을 간단한 목표에 맞게 조정했습니다. 사용자가 요청한 언어로 추론을 유지하는 것입니다. LoRA를 사용해 <a href="https://huggingface.co/datasets/HuggingFaceH4/Multilingual-Thinking">Multilingual-Thinking</a>에서 파인튜닝했으며, 이 방식은 base model을 고정한 채 소수의 adapter 가중치만 학습합니다.</p>
+
+<p>이 설정은 로드 시 모델 샤딩, expert parallelism, FlashAttention 4, sequence packing을 결합합니다. LoRA SFT는 8개의 B300 GPU가 장착된 단일 노드에 들어가며 초당 약 19,000토큰에 도달합니다. 이에 해당하는 H100 설정은 4개 노드를 사용합니다.</p>
+
+<p>Multilingual-Thinking을 한 epoch 학습한 후 Beam은 16개의 held-out 프롬프트 중 16개 모두에서 요청된 언어로 추론했습니다. 반면 base model은 16개 중 3개였습니다. 이 소규모 평가는 추론 자체의 정확도가 아니라 언어 준수 여부를 측정합니다.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/Beam-blog-assets/resolve/images/trl-sft-training.png" alt="Training loss and mean token accuracy over a 500-step LoRA supervised fine-tuning run on one eight-GPU B300 node." width="624" style="max-width: 100%; height: auto; background-color: white;" /></p>
+
+<p><em>8-GPU B300 노드 하나에서 open-r1/Mixture-of-Thought의 추론 하위 집합을 사용해 별도로 500-step 실행을 진행하는 동안의 학습 loss(왼쪽)와 평균 토큰 정확도(오른쪽)입니다. 이 학습 지표는 공식 <a href="https://github.com/huggingface/trl/pull/7629">TRL example PR</a>에서 가져왔습니다.</em></p>
+
+<h3 id="grpo-with-miles">GRPO with Miles</h3>
+
+<p>Reflection과 RadixArk는 BF16에서 Miles로 GRPO를 사용해 모델을 학습하는 레시피를 구축했습니다. 전체 모델을 업데이트하거나, base 가중치를 고정한 채 LoRA로 adapter를 학습할 수 있습니다. Megatron이 학습하고, SGLang이 rollout을 생성하며, Miles는 각 업데이트 후 새 가중치를 rollout 엔진에 게시합니다. 이 레시피를 검토했습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">워크로드</th>
+      <th style="text-align: left">참조 구성</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">추론 / 평가, BF16</td>
+      <td style="text-align: left">엔진당 16x H200</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">전체 파라미터 GRPO, BF16(Miles)</td>
+      <td style="text-align: left">96x H200: 학습 64개, rollout 32개. 또는 colocated 64x H200.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">LoRA GRPO, BF16(Miles)</td>
+      <td style="text-align: left">32x H200: 학습 16개, rollout 16개.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">전체 파라미터 GRPO, BF16, 128토큰 컨텍스트(Miles)</td>
+      <td style="text-align: left">48x H200: 학습 32개, rollout 16개. Reflection과 RadixArk가 실제 체크포인트에서 처음 검증한 설정입니다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>이 레시피는 DAPO-Math-17K에서 GRPO를 실행하고 AIME25에서 평가합니다. 이미지를 빌드하고 데이터를 다운로드한 다음, 8x H200 노드 12개로 구성된 Ray 클러스터에 작업을 제출하세요.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-f</span> docker/Dockerfile.beam <span class="nt">-t</span> miles-beam <span class="nb">.</span>
+
+python scripts/run_beam.py prepare <span class="se">\</span>
+  <span class="nt">--model-id</span> reflection/Beam-1.0-501B-A23B <span class="se">\</span>
+  <span class="nt">--model-dir</span> /root/models/Beam <span class="se">\</span>
+  <span class="nt">--data-dir</span> /data/datasets
+
+<span class="nb">export </span><span class="nv">MASTER_ADDR</span><span class="o">=</span>10.0.0.1
+<span class="nb">export </span><span class="nv">RAY_ADDRESS</span><span class="o">=</span>http://<span class="k">${</span><span class="nv">MASTER_ADDR</span><span class="k">}</span>:8265
+
+python scripts/run_beam.py execute <span class="se">\</span>
+  <span class="nt">--model-dir</span> /root/models/Beam <span class="se">\</span>
+  <span class="nt">--data-dir</span> /data/datasets <span class="se">\</span>
+  <span class="nt">--output-dir</span> /root/shared_data/beam-run <span class="se">\</span>
+  <span class="nt">--num-rollout</span> 100
+</code></pre></div></div>
+
+<p>rollout에서 일어나는 과정:</p>
+
+<p><strong>샘플링:</strong> 32개의 프롬프트를 각각 8개의 응답과 함께 모델에 전달합니다. 두 개의 SGLang 엔진이 각각 16개 GPU에서 rollout을 제공합니다.</p>
+
+<p><strong>점수:</strong> boxed answer를 label과 비교해 확인하며, 길이 제한에 가까운 응답에는 소프트 패널티를 적용합니다.</p>
+
+<p><strong>업데이트:</strong> 256개 샘플 전체에 대해 optimizer step을 한 번 수행합니다. truncated importance sampling을 사용하는 group-relative advantage이며, KL 또는 entropy penalty는 없습니다.</p>
+
+<p><strong>병렬 학습:</strong> tensor parallelism 8, expert parallelism 8, data parallelism 8을 사용하며, sequence parallelism과 full recompute를 적용합니다.</p>
+
+<p><strong>Optimizer:</strong> 일정한 1e-6의 Adam을 사용합니다. 그래디언트는 BF16, master weights는 FP32, moments는 BF16입니다. Optimizer state는 노드 로컬 NVMe를 통해 스트리밍되므로 각 trainer 노드에 2 TB의 scratch 공간이 필요합니다.</p>
+
+<p><strong>평가:</strong> rollout 5회마다 AIME25를 평가하며, 문제당 8개의 샘플을 사용합니다. 체크포인트는 20회마다 저장합니다.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/Beam-blog-assets/resolve/images/miles-grpo-aime2025.png" alt="Full-parameter GRPO evaluation on AIME 2025: accuracy increases from 46.25% to 55.8% with a 4,000-token output limit." width="624" style="max-width: 100%; height: auto; background-color: white;" /></p>
+
+<p>현재 rollout을 학습하는 동안 다음 rollout이 생성되므로 응답은 한 업데이트 뒤처집니다. 마지막 체크포인트에서 계속하려면 <code class="language-plaintext highlighter-rouge">--resume</code>을 추가하세요. <code class="language-plaintext highlighter-rouge">execute-colocate</code>은 8개 노드에서 동일한 레시피를 실행하며, 모든 GPU가 차례로 학습과 서빙을 수행합니다.</p>
+
+<h3 id="train-with-lora">Train with LoRA</h3>
+
+<p>8× H200 노드 4개에서 LoRA와 함께 GRPO를 실행할 수도 있습니다. 학습에는 GPU 16개, rollout에는 GPU 16개를 사용합니다. 이 레시피는 base 가중치를 고정한 채 Beam의 attention, dense MLP, expert 레이어에 rank-16 adapter를 학습합니다. SGLang과 동기화되는 것은 adapter 가중치뿐이며, optimizer state는 GPU 메모리에 유지되므로 NVMe optimizer offloading이 필요하지 않습니다.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python scripts/run_beam_lora.py execute <span class="se">\</span>
+  <span class="nt">--model-dir</span> /root/models/Beam <span class="se">\</span>
+  <span class="nt">--data-dir</span> /data/datasets <span class="se">\</span>
+  <span class="nt">--output-dir</span> /root/shared_data/beam-run <span class="se">\</span>
+  <span class="nt">--num-rollout</span> 100
+</code></pre></div></div>
+
+<p><img src="https://huggingface.co/buckets/huggingface/Beam-blog-assets/resolve/images/miles-lora-grpo-aime2025.png" alt="LoRA GRPO evaluation on AIME 2025: accuracy rises from 42.9% to 64.2% while mean output length falls from 3,188 to 2,197 tokens." width="624" style="max-width: 100%; height: auto; background-color: white;" /></p>
+
+<h2 id="section-8">Build with Beam: Demos</h2>
+
+<p>Beam으로 무언가를 구축했다면 Hub에서 공유하고 $10,000를 받을 기회를 얻어 보세요. Space, 모델 또는 데이터셋 저장소를 구축해 <a href="https://huggingface.co/reflection/Beam-1.0-501B-A23B/discussions/5">model’s repo page</a>에서 공유하기만 하면 됩니다. 영감을 얻을 수 있도록 저희가 구축한 몇 가지를 소개합니다.</p>
+
+<h3 id="hey-beam-네이티브-로컬-macos-애플리케이션을-만들어-줘">Hey Beam, 네이티브 로컬 MacOS 애플리케이션을 만들어 줘!</h3>
+
+<p>Hugging Face에서는 하드웨어에서 네이티브로 실행되는 오픈 및 로컬 모델을 좋아하지만, Mac에서 네이티브 앱을 만드는 일은 어려울 수 있습니다! Beam이 도움을 줄 수 있는지 살펴보겠습니다.</p>
+
+<p>Beam에 음성을 텍스트로 변환하고 편리하게 커서 위치에 입력하는 네이티브 MacOS 애플리케이션을 만들어 달라고 요청했습니다. Mac Metal을 최대한 활용하기 위해 MLX를 사용하고, 뛰어난 음성-텍스트 변환을 위해 Parakeet Model을 사용하고자 합니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Build BeamSpeak, a native macOS menu bar dictation app with a compact recording pill and no main window or account.
+
+Use ⌘⇧Space to start and stop microphone recording, showing elapsed time, microphone level, and transcription status. Run speech recognition entirely locally using a Hugging Face model, preferably Parakeet v3 through MLX, and keep the model loaded between recordings. Paste the transcript into the original app if it remains focused and Accessibility permission is granted; otherwise copy it to the clipboard, preserving newer clipboard changes and never pressing Enter. Handle permissions, cancellation, silence, errors, a two-minute recording limit, and temporary audio cleanup. Deliver source code, a runnable BeamSpeak.app, setup instructions, and verification of offline transcription, the physical shortcut, microphone capture, and text delivery.
+</code></pre></div></div>
+
+<p>Pi coding harness와 함께 Beam을 사용해 MLX로 Parakeet을 실행하는 초기 네이티브 macOS 메뉴 바 앱을 구축했습니다. 저장된 실행 기록에는 후속 프롬프트가 포함되어 있으며, 최종 소스에는 이후 Codex 수정도 포함되어 있습니다. 위 프롬프트는 구축 요구 사항을 축약한 버전입니다.</p>
+
+<figure class="image text-center">
+  <video controls="" width="100%">
+    <source src="https://huggingface.co/buckets/burtenshaw/beamspeak-demo/resolve/beamspeak-demo.mp4" type="video/mp4" />
+  </video>
+</figure>
+
+<p>Beam이 pi에서 이를 구축한 agent trace는 <a href="https://huggingface.co/buckets/burtenshaw/beamspeak-demo/tree/trace/beam-build.sanitized.jsonl">this trace</a>에서 확인할 수 있습니다. 데모를 사용해 보려면 <a href="https://huggingface.co/buckets/burtenshaw/beamspeak-demo/resolve/beamspeak-source.zip">source code</a>을 다운로드하거나 <a href="https://huggingface.co/buckets/burtenshaw/beamspeak-demo/resolve/RUNNING.md">setup instructions</a>을 읽어 보세요.</p>
+
+<h3 id="hey-beam-여러-에이전트에서-어떻게-확장해">Hey Beam, 여러 에이전트에서 어떻게 확장해?</h3>
+
+<p>프로그래밍 작업을 여러 에이전트로 나누면 Beam이 더 빠르게 진행할 수 있는지 확인하고자 했습니다. 오픈 소스 Pi coding agent와 Beam을 결합하고 세 가지 설정을 비교했습니다. 1. 혼자 작업하는 에이전트 하나, 2. 공유 Git 저장소를 통해 협력하는 지속형 peer 5개, 3. 비동기 subagent에 작업을 위임하는 lead agent입니다. 하네스는 Hugging Face jobs에서 실행했으며, 추론은 Reflection 플랫폼 API를 사용했습니다.</p>
+
+<p>작업에는 ProgramBench를 사용했습니다. 에이전트는 소스 코드나 평가자의 테스트를 보지 않고 컴파일된 실행 파일과 문서만으로 프로그램을 재현해야 합니다. 각 설정에는 8M API 토큰의 동일한 상한과 작업당 2시간의 solver 제한이 적용되었으며, 이는 해당 설정의 에이전트 전체가 공유했습니다. 구현 snapshot을 저장하고 <a href="https://huggingface.co/datasets/programbench/ProgramBench-Tests">ProgramBench-Tests dataset</a>의 고정된 hidden-test suite를 기준으로 평가했습니다.</p>
+
+<p>저희 <a href="https://burtenshaw-beam-pi-programbench.hf.space/study">score-versus-latency plot</a>은 통과한 테스트의 평균 비율을 보여 줍니다. 시간 축은 경과한 wall time이 아니라 모델 토큰에 대한 고정된 기준 속도와 측정된 도구 시간을 사용합니다. 처음에는 다섯 가지 작업을 실행했습니다. 현재 그래프에는 jq, xsv, FIGlet, hexyl의 사후 subset이 표시되며, 저장된 산출물의 채점이 너무 느려 ripgrep은 세 설정 모두에서 제외했습니다. 게시된 결과에는 원래의 15개 episode가 모두 포함됩니다.</p>
+
+<figure>
+<iframe src="https://burtenshaw-beam-pi-programbench.hf.space/study" title="Beam ProgramBench study: test pass rate versus estimated latency" loading="lazy" frameborder="0" width="100%" height="780"></iframe>
+</figure>
+
+<p><a href="https://burtenshaw-beam-pi-programbench.hf.space/?project=beam-pi-programbench-20261009">Trackio dashboard</a>에서 실행 기록을 검사하고, <a href="https://huggingface.co/spaces/burtenshaw/beam-pi-programbench/tree/main/results/beam-pi-programbench-20261009">published result data</a>을 탐색하며, <a href="https://huggingface.co/spaces/burtenshaw/beam-pi-programbench/tree/main/source">study harness</a>을 재사용할 수 있습니다.</p>
+
+<h3 id="hey-beam-내-코드베이스를-위한-decision-model을-파인튜닝해-줘">Hey Beam, 내 코드베이스를 위한 decision model을 파인튜닝해 줘!</h3>
+
+<p>Decision model은 많은 사용 사례에서 매우 빠르고 실용적이기 때문에 현재 큰 인기를 얻고 있습니다. Beam의 할당량이 소진된 후 Pi에서 Beam으로 시작해 개발자 incident triage를 위한 맞춤형 decision model을 학습하고 평가했습니다.</p>
+
+<p>코딩 에이전트가 incident-triage policy를 작고 빠른 decision model로 바꿀 수 있는지 확인하고자 했습니다. 작업은 개발자 incident를 읽고 담당 팀, 심각도, 즉시 누군가에게 알림을 보내야 하는지를 선택하는 것이었습니다. Unsloth를 사용해 Qwen3.5-0.8B를 파인튜닝하여 이러한 선택지를 직접 점수화했습니다.</p>
+
+<p>먼저 워크플로는 training, calibration, testing을 위해 incident cluster별로 나눈 2.3k개의 incident가 포함된 합성 데이터셋을 구축했습니다. Science Slurm 클러스터의 H100 80GB 하나에서 4비트 backbone을 사용해 LoRA adapter와 decision head를 3개 epoch 동안 학습했습니다.</p>
+
+<p>기준선으로는 예시 없이 전체 triage policy와 ticket을 사용해 적응하지 않은 모델에 프롬프트를 제공하고, 세 가지 결정을 JSON으로 생성하도록 요청했습니다. 동일한 320개의 합성 테스트 ticket에서 파인튜닝된 decision model은 세 가지 답을 모두 맞힌 비율이 76.25%였으며, prompted zero-shot은 4.69%였습니다. 평균 ticket 지연 시간은 1,218.06 ms에서 102.58 ms로 줄어 11.9배 빨라졌습니다.</p>
+
+<p><img src="https://huggingface.co/buckets/huggingface/Beam-blog-assets/resolve/images/decision-model-results.png" alt="Incident triage decision model: accuracy rises from 4.69% to 76.25% and mean latency falls from 1,218.06 ms to 102.58 ms." width="624" style="max-width: 100%; height: auto; background-color: white;" /></p>
+
+<p>이 실험을 직접 시도해 보려면 데이터, 코드, 체크포인트, 결과가 포함된 <a href="https://huggingface.co/buckets/burtenshaw/qwen35-incident-triage-reproduction">artifact bucket</a>을 확인하세요.</p>
+
+<h2 id="section-9">Wrapping Up</h2>
+
+<p>Beam은 자체 하드웨어에서 실행하고 변경할 수 있는 501B 오픈 모델입니다. <a href="https://huggingface.co/reflection/Beam-1.0-501B-A23B"><strong>BF16</strong></a> 체크포인트로 시작하거나 <a href="https://huggingface.co/reflection/Beam-1.0-501B-A23B-FP8"><strong>FP8</strong></a><strong>,</strong> <a href="https://huggingface.co/reflection/Beam-1.0-501B-A23B-NVFP4"><strong>NVFP4</strong></a> 중 하나를 사용해 보세요. Beam으로 무언가를 구축했다면 <a href="https://huggingface.co/reflection/Beam-1.0-501B-A23B/discussions">discussions tab</a>에서 공유해 주세요.</p>
+
+                
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-10-16">16 Oct 2026</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#welcome-beam-소유하고-커스터마이즈하고-확장할-수-있는-501b-오픈-모델" id="markdown-toc-welcome-beam-소유하고-커스터마이즈하고-확장할-수-있는-501b-오픈-모델">Welcome Beam: 소유하고, 커스터마이즈하고, 확장할 수 있는 501B 오픈 모델</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">Beam으로 구축하기</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">Beam이란?</a>        <ul>
+          <li><a href="#attention" id="markdown-toc-attention">Attention</a></li>
+          <li><a href="#mixture-of-experts" id="markdown-toc-mixture-of-experts">Mixture of Experts</a></li>
+          <li><a href="#residual-stream" id="markdown-toc-residual-stream">Residual Stream</a></li>
+          <li><a href="#long-context" id="markdown-toc-long-context">Long Context</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-3" id="markdown-toc-section-3">Benchmark Results</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">Hardware Requirements</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">Inference Support</a>        <ul>
+          <li><a href="#transformers" id="markdown-toc-transformers">Transformers</a>            <ul>
+              <li><a href="#chat" id="markdown-toc-chat">Chat</a></li>
+              <li><a href="#tool-calling" id="markdown-toc-tool-calling">Tool calling</a></li>
+              <li><a href="#multi-gpu-and-multi-node" id="markdown-toc-multi-gpu-and-multi-node">Multi-GPU and multi-node</a></li>
+            </ul>
+          </li>
+          <li><a href="#vllm" id="markdown-toc-vllm">vLLM</a></li>
+          <li><a href="#sglang" id="markdown-toc-sglang">SGLang</a></li>
+          <li><a href="#inference-providers" id="markdown-toc-inference-providers">Inference Providers</a></li>
+          <li><a href="#inference-endpoints" id="markdown-toc-inference-endpoints">Inference Endpoints</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-6" id="markdown-toc-section-6">What we tested</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">Post-training Beam</a>        <ul>
+          <li><a href="#sft-with-trl" id="markdown-toc-sft-with-trl">SFT with TRL</a></li>
+          <li><a href="#grpo-with-miles" id="markdown-toc-grpo-with-miles">GRPO with Miles</a></li>
+          <li><a href="#train-with-lora" id="markdown-toc-train-with-lora">Train with LoRA</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-8" id="markdown-toc-section-8">Build with Beam: Demos</a>        <ul>
+          <li><a href="#hey-beam-네이티브-로컬-macos-애플리케이션을-만들어-줘" id="markdown-toc-hey-beam-네이티브-로컬-macos-애플리케이션을-만들어-줘">Hey Beam, 네이티브 로컬 MacOS 애플리케이션을 만들어 줘!</a></li>
+          <li><a href="#hey-beam-여러-에이전트에서-어떻게-확장해" id="markdown-toc-hey-beam-여러-에이전트에서-어떻게-확장해">Hey Beam, 여러 에이전트에서 어떻게 확장해?</a></li>
+          <li><a href="#hey-beam-내-코드베이스를-위한-decision-model을-파인튜닝해-줘" id="markdown-toc-hey-beam-내-코드베이스를-위한-decision-model을-파인튜닝해-줘">Hey Beam, 내 코드베이스를 위한 decision model을 파인튜닝해 줘!</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-9" id="markdown-toc-section-9">Wrapping Up</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-234/" alt="">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href=""></a>
+        <span class="author-description"></span>                        
+    </div>
+</div>
+
+
+
+
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">25</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="translation">
+            Translation
+            <span class="count">25</span>
+          </button>
+        
+      
+        
+        
+          <button class="filter-btn" data-category="huggingface">
+            HuggingFace
+            <span class="count">24</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/omlx/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-09-22-omlx/thumbnail.jpg" alt="oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/omlx/">oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Jun Kim, oMLX creator and maintainer, joins Hugging Face to...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">22 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/ibm-releases-sota-granite-time-series/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png" alt="상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/ibm-releases-sota-granite-time-series/">상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 IBM releases SOTA Granite Time Series PatchTST-FM-r2 model with commercial-friendly...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">10 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/grabette/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">21 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/security-incident-july-2026/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-07-16-security-incident-july-2026/thumbnail.png" alt="보안 사고 공개 — 2026년 7월" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/security-incident-july-2026/">보안 사고 공개 — 2026년 7월</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Security incident disclosure — July 2026를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">16 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/thinkingmachines-inkling/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" alt="Thinking Machines의 Inkling에 오신 것을 환영합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/real-world-voiceeq/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" alt="Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/real-world-voiceeq/">Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing Real World VoiceEQ: Measuring the human quality of voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/torch-attention-profile/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" alt="파이토치의 프로파일링(3부): 어텐션이 전부다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">10 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/native-speed-vllm-transformers-backend/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/lerobot-release-v060/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" alt="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">07 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/cerebras-gemma4-voice-ai/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">01 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/eee-community-evals/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" alt="Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Featuring Every Eval Ever Results on Hugging Face Model Pages를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">30 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/vllm-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">26 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/ffasr-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">24 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/huggingface-hub-release-ci/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" alt="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/huggingface-hub-release-ci/">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/cross-origin-storage/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/peft-beyond-lora/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/is-it-agentic-enough/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" alt="충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/agentic-resource-discovery-launch/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-06-17-agentic-resource-discovery-launch/thumbnail.png" alt="에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Agentic Resource Discovery: Let agents search를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">17 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/github-ci-hf-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-06-09-github-ci-hf-jobs/thumbnail.gif" alt="GitHub CI를 Hugging Face Jobs로 마이그레이션" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Migrating Your GitHub CI to Hugging Face Jobs를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">09 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/openenv-agentic-rl/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-06-08-openenv-agentic-rl/thumbnail.png" alt="오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Open Source Community is backing OpenEnv for Agentic RL를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/torch-profiler/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-05-29-torch-profiler/thumbnail.png" alt="PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 1): A Beginner’s Guide to torch.profiler를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">29 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/local-reachy-mini-conversation/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">27 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/olmoearth-v1-1/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-05-20-olmoearth-v1-1/thumbnail.png" alt="OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 OlmoEarth v1.1: A more efficient family of models를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">20 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/paddleocr-transformers/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">19 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="transformers translation ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="/pr-preview/pr-234/how-to-use-translator/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-234/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-234/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
+        <p class="card-text text-muted">
+Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">05 Oct 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+</main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-234/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-234/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-234/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-234/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-234/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-234/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-234/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-234/assets/js/category.js"></script>
+  </body>
+</html>
