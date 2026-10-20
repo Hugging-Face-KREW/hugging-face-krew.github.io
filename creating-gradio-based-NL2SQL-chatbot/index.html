@@ -23,8 +23,6 @@
     />
     <link rel="icon" href="/assets/images/favicon.ico" />
 
-    <title>Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋 | Hugging Face KREW</title>
-
     <!-- Begin Jekyll SEO tag v2.9.1 -->
 <title>Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋 | Hugging Face KREW</title>
 <meta name="generator" content="Jekyll v4.4.1" />
@@ -33,16 +31,18 @@
 <meta property="og:locale" content="en_us" />
 <meta name="description" content="안녕하세요🤗 첫 포스트는 NL2SQL 챗봇 개발 시리즈의 첫 번째 파트로, 이론적 배경과 데이터셋에 대해 다뤄보려합니다. NL2SQL의 기본 개념, 필요성, 그리고 데이터셋에 대해 자세히 알아보겠습니다." />
 <meta name="twitter:description" property="og:description" content="안녕하세요🤗 첫 포스트는 NL2SQL 챗봇 개발 시리즈의 첫 번째 파트로, 이론적 배경과 데이터셋에 대해 다뤄보려합니다. NL2SQL의 기본 개념, 필요성, 그리고 데이터셋에 대해 자세히 알아보겠습니다." />
+<link rel="canonical" href="https://huggingface-krew.co/creating-gradio-based-NL2SQL-chatbot/" />
+<meta property="og:url" content="https://huggingface-krew.co/creating-gradio-based-NL2SQL-chatbot/" />
 <meta property="og:site_name" content="Hugging Face KREW" />
-<meta property="og:image" content="/creating-gradio-based-NL2SQL-chatbot/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" />
+<meta property="og:image" content="https://huggingface-krew.co/creating-gradio-based-NL2SQL-chatbot/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2024-09-19T00:00:00+09:00" />
 <meta property="article:modified_time" content="2024-09-19T00:00:00+09:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="/creating-gradio-based-NL2SQL-chatbot/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" />
+<meta name="twitter:image" content="https://huggingface-krew.co/creating-gradio-based-NL2SQL-chatbot/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" />
 <meta name="twitter:title" content="Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"chaewon"},"dateModified":"2024-09-19T00:00:00+09:00","datePublished":"2024-09-19T00:00:00+09:00","description":"안녕하세요🤗 첫 포스트는 NL2SQL 챗봇 개발 시리즈의 첫 번째 파트로, 이론적 배경과 데이터셋에 대해 다뤄보려합니다. NL2SQL의 기본 개념, 필요성, 그리고 데이터셋에 대해 자세히 알아보겠습니다.","headline":"Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋","image":"/creating-gradio-based-NL2SQL-chatbot/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png","mainEntityOfPage":{"@type":"WebPage","@id":"/creating-gradio-based-NL2SQL-chatbot/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/hfkr_logo.png"},"name":"chaewon"},"url":"/creating-gradio-based-NL2SQL-chatbot/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"chaewon"},"dateModified":"2024-09-19T00:00:00+09:00","datePublished":"2024-09-19T00:00:00+09:00","description":"안녕하세요🤗 첫 포스트는 NL2SQL 챗봇 개발 시리즈의 첫 번째 파트로, 이론적 배경과 데이터셋에 대해 다뤄보려합니다. NL2SQL의 기본 개념, 필요성, 그리고 데이터셋에 대해 자세히 알아보겠습니다.","headline":"Gradio 기반 NL2SQL 챗봇 만들기 - Part 1: 이론과 데이터셋","image":"https://huggingface-krew.co/creating-gradio-based-NL2SQL-chatbot/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://huggingface-krew.co/creating-gradio-based-NL2SQL-chatbot/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://huggingface-krew.co/assets/images/hfkr_logo.png"},"name":"chaewon"},"url":"https://huggingface-krew.co/creating-gradio-based-NL2SQL-chatbot/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -621,12 +621,12 @@ gen_sql: </span><span class="si">{</span><span class="n">row</span><span class="
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/text2sql-spider-ko-dataset/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/text2sql-spider-ko-dataset/">
         <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2025-06-14-text2sql-spider-ko-dataset/text2sql-thumbnail.png" alt="한국어 Text2SQL 프로젝트 - Part 1: 번역한 데이터셋의 품질 개선하기" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/text2sql-spider-ko-dataset/">한국어 Text2SQL 프로젝트 - Part 1: 번역한 데이터셋의 품질 개선하기</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/text2sql-spider-ko-dataset/">한국어 Text2SQL 프로젝트 - Part 1: 번역한 데이터셋의 품질 개선하기</a></h2>
         <p class="card-text text-muted">
 2025년 상반기에 가짜연구소의 Hugging Face Hub Garden 스터디에서는 Text2SQL 한국어 데이터셋 구축 프로젝트가 진행되었습니다.
 </p>
@@ -651,12 +651,12 @@ gen_sql: </span><span class="si">{</span><span class="n">row</span><span class="
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/creating-web-interface/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/creating-web-interface/">
         <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2024-09-19-creating-gradio-based-NL2SQL-chatbot/gradio_free_1160.png" alt="Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/creating-web-interface/">Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/creating-web-interface/">Gradio 기반 NL2SQL 챗봇 만들기 - Part 2: 웹 인터페이스 만들기</a></h2>
         <p class="card-text text-muted">안녕하세요🤗 오늘은 Hugging Face에서 개발한 Gradio 라이브러리를 사용하여 머신러닝 모델을 위한 웹 인터페이스를 쉽고 빠르게...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
