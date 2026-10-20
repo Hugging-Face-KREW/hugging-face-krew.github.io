@@ -1,7 +1,8 @@
 title: "Hugging Face KREW"
+url: "https://huggingface-krew.co"
 email: heuristicwave@gmail.com
 timezone: Asia/Seoul
-baseurl: 
+baseurl: ""
 permalink: "/:title/"
 logo: 'assets/images/hfkr_logo.png'
 favicon: 'assets/images/favicon.ico'
