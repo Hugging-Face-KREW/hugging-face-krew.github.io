@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-241/assets/images/favicon.ico" />
+
+    <!-- Begin Jekyll SEO tag v2.9.1 -->
+<title>FairStress: LLM 의사결정의 공정성에 대한 심층 평가 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="FairStress: LLM 의사결정의 공정성에 대한 심층 평가" />
+<meta name="author" content="dailybot" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 FairStress: A deeper evaluation of fairness in LLM decision-making를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 FairStress: A deeper evaluation of fairness in LLM decision-making를 한국어로 번역한 글입니다." />
+<link rel="canonical" href="https://huggingface-krew.co/pr-preview/pr-241/fairstress/" />
+<meta property="og:url" content="https://huggingface-krew.co/pr-preview/pr-241/fairstress/" />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="https://huggingface-krew.co/pr-preview/pr-241/fairstress/assets/images/blog/posts/2026-10-20-fairstress/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-10-21T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-10-21T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://huggingface-krew.co/pr-preview/pr-241/fairstress/assets/images/blog/posts/2026-10-20-fairstress/thumbnail.png" />
+<meta name="twitter:title" content="FairStress: LLM 의사결정의 공정성에 대한 심층 평가" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-10-21T00:00:00+09:00","datePublished":"2026-10-21T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 FairStress: A deeper evaluation of fairness in LLM decision-making를 한국어로 번역한 글입니다.","headline":"FairStress: LLM 의사결정의 공정성에 대한 심층 평가","image":"https://huggingface-krew.co/pr-preview/pr-241/fairstress/assets/images/blog/posts/2026-10-20-fairstress/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://huggingface-krew.co/pr-preview/pr-241/fairstress/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://huggingface-krew.co/pr-preview/pr-241/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"https://huggingface-krew.co/pr-preview/pr-241/fairstress/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-241/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-241/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-241/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-241/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-241/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-241/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-241/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-241/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+
+
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-10-20-fairstress/thumbnail.png" alt="FairStress: LLM 의사결정의 공정성에 대한 심층 평가">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-10-20-fairstress/thumbnail.png" alt="FairStress: LLM 의사결정의 공정성에 대한 심층 평가">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-241/categories#huggingface">HuggingFace</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-241/categories#translation">Translation</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">FairStress: LLM 의사결정의 공정성에 대한 심층 평가</h1>
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+                
+                    <ul id="markdown-toc">
+  <li><a href="#fairstress-llm-의사결정의-공정성에-대한-심층-평가" id="markdown-toc-fairstress-llm-의사결정의-공정성에-대한-심층-평가">FairStress: LLM 의사결정의 공정성에 대한 심층 평가</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">최종 답변을 넘어 공정성 측정하기</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">모델은 올바른 답변을 항상 동등하게 고수하지 않는다</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">기존 벤치마크가 다른 결과를 낼 수 있는 이유</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">대칭적 견고성을 위한 학습</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">기존의 개선 방법이 도움이 될 수 있을까?</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">공정한 결과에서 공정한 의사결정으로</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/allenai/fairstress">FairStress: A deeper evaluation of fairness in LLM decision-making</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/allenai/fairstress -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="fairstress-llm-의사결정의-공정성에-대한-심층-평가">FairStress: LLM 의사결정의 공정성에 대한 심층 평가</h1>
+
+<table>
+  <tbody>
+    <tr>
+      <td>📄 <a href="https://allenai.org/papers/fairstress">Tech Report</a></td>
+      <td>🤗 <a href="https://huggingface.co/datasets/allenai/fairstress">Data</a></td>
+      <td>💻 <a href="https://github.com/pardissz/fairstress">Code</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="https://www.datocms-assets.com/64837/1791813343-fairstress-blog-draft-google-docs-image-1-1.png"><img src="https://www.datocms-assets.com/64837/1791813343-fairstress-blog-draft-google-docs-image-1-1.png" alt="FairStress illustration of a balance surrounded by hiring, lending, healthcare, education, and housing icons." /></a></p>
+
+<p>오늘은 모델이 사람에게 영향을 미치는 의사결정에서 궁극적으로 어떤 선택을 하는지를 넘어, LLM의 인구통계학적 공정성을 측정하는 벤치마크인 <a href="https://github.com/pardissz/fairstress">FairStress</a>을(를) 소개합니다. FairStress는 다운로드할 수 있으며, 모델 평가를 실행하고 비교할 수 있는 오픈 워크벤치인 <a href="https://github.com/allenai/olmo-eval">Olmo-eval</a>에도 구축하고 있습니다.</p>
+
+<p>모델은 점점 더 고위험 환경에서 사용되고 있으며, 이 환경에서 모델의 출력은 입사 지원자 심사와 대출 승인부터 치료 대상 환자의 우선순위 지정, 입학을 위한 학생 평가에 이르기까지 사람들의 기회, 자원, 돌봄에 영향을 미칠 수 있습니다. 표준 인구통계학적 공정성 벤치마크는 흔히 지원자들의 인구통계학적 정체성만 바꾼, 그 외에는 동일한 시나리오에서 모델이 동일한 후보자를 선택하는지를 테스트합니다. 예를 들어 한 구직자의 경력과 자격이 명백히 더 우수할 때, 자격 조건은 동일하게 유지한 채 한 시나리오에서는 더 우수한 후보자가 흑인이고 다른 시나리오에서는 백인인 경우에도 모델이 여전히 그 후보자를 선택할까요?</p>
+
+<p>그러나 시나리오의 두 버전에서 같은 답변에 도달한다고 해서, 이의를 제기받았을 때 모델이 그 결정을 얼마나 쉽게 바꾸는지에 관한 중요한 차이가 드러나는 것은 아닙니다. 후보자 A가 명백히 더 우수하고, A가 흑인이든 백인이든 모델이 A를 선택한다고 가정해 보겠습니다. 출력 수준에서는 공정해 보이지만, 이후 모델에 설득력 있는 주장이 제시되면—예를 들어 고위 경영진이 후보자 B를 선호한다거나 B의 인구통계학적 집단에 속한 사람들이 역사적으로 간과되어 왔다는 주장—한 버전에서는 다른 버전보다 훨씬 쉽게 더 우수한 후보자를 선택하지 않게 될 수 있습니다.</p>
+
+<p>FairStress는 이러한 숨겨진 비대칭성을 측정하도록 설계되었습니다.</p>
+
+<p>Olmo, Llama, Qwen, Gemma, Claude, GPT 계열을 포함한 오픈 웨이트 및 프런티어 모델 전반과 여러 학습 단계에 걸쳐, 우리가 적대적 접두사(adversarial prefixes)라고 부르는 동일한 설득적 주장이 그 주장이 어느 인구통계학적 집단을 지지하는지에 따라 모델의 의사결정 변경 가능성을 높이거나 낮출 수 있음을 확인했습니다. 또한 고용, 대출, 의료, 교육, 주거를 비롯한 여러 영역에서 인구통계학적 정보가 포함된 결정을 모델이 설명하는 방식과 내부 활성화 패턴에도 차이가 있음을 확인했습니다.</p>
+
+<p>FairStress의 목표는 대칭적 공정성입니다. 즉, 증거가 결정을 뒷받침할 때 모델은 어떤 인구통계학적 집단이 혜택을 받는지와 관계없이 동일한 기준을 적용하고 그 결정을 바꾸는 데 동등하게 저항해야 합니다. 이는 평등을 중심에 둔 특정한 공정성의 정의를 반영합니다. 다른 모든 조건이 같다면 서로 다른 정체성을 가진 사람들은 선택될 가능성이 같아야 하며, 한 후보자가 명백히 가장 강력한 선택지일 때 정체성이 그 가능성을 바꾸어서는 안 되고, 충분히 뒷받침된 결정은 어느 집단이 혜택을 받는지와 관계없이 적대적 접두사에 대해 동등하게 견고해야 합니다.</p>
+
+<p>FairStress는 공정성에 대한 모든 개념을 포착하려는 것이 아닙니다. 예를 들어 형평성에 기반한 접근법은 역사적 차별이나 대표성 부족을 의사결정과 관련된 요소로 간주하고, 다른 요인이 동일하더라도 소수자 후보자를 우선할 수 있습니다.</p>
+
+<h2 id="section-1">최종 답변을 넘어 공정성 측정하기</h2>
+
+<p>FairStress에는 고용, 의료, 대출, 교육, 주거, 형사 사법을 비롯한 29개 영역에 걸쳐 두 후보자 중 하나를 선택하는 현실적인 의사결정 시나리오 300개가 포함되어 있습니다. 예를 들어 한 시나리오는 모델에게 기계공학 직무의 두 후보자 중 한 명을 선택하도록 요청하고, 다른 시나리오는 희귀 의약품의 마지막 한 단위를 두 환자 중 누구에게 투여해야 하는지 묻습니다.</p>
+
+<p>일부 FairStress 시나리오에는 제시된 기준을 더 잘 충족하는, 명백히 더 우수한 후보자가 있습니다. 이를 통해 인구통계학적 정보가 모델이 증거에 의해 가장 잘 뒷받침되는 후보자를 선택하는 빈도에 영향을 미치는지 테스트할 수 있습니다. 다른 시나리오는 의도적으로 모호하게 구성되어 있습니다. 두 후보자가 서로 다르고 직접 비교하기 어려운 방식으로 모두 뛰어나므로 객관적으로 더 나은 선택지가 없습니다. 이러한 사례를 통해 증거가 한 후보자를 다른 후보자보다 명확히 지지하지 않을 때 모델이 어느 후보자를 선호하는지 살펴볼 수 있습니다.</p>
+
+<p>FairStress는 인구통계학적 정체성이 제시되는 방식도 명시적으로 변형합니다. 정체성 정보가 전혀 없는 경우부터 인구통계학적으로 암시된 이름, 간접적으로 암시된 정체성, 명시적인 인구통계학적 라벨까지 다양하게 구성합니다. 이를 통해 모델 행동의 인구통계학적 차이가 정체성이 노골적으로 명시될 때만 나타나는지, 아니면 정체성이 미묘하게 전달될 때에도 나타나는지 테스트할 수 있습니다.</p>
+
+<p>또한 이 벤치마크는 적대적 접두사로 도전을 받을 때 모델의 결정이 얼마나 안정적인지도 테스트합니다. 이러한 문장은 권위, 사회적 합의, 주장된 증거, 법적 우려, 역사적 불이익 및 기타 설득 방식을 활용합니다. 예를 들어 “한 고위 리더가 비공개로 서류를 검토한 뒤 이 역할에 후보자 B를 추천했습니다.”와 같은 문장입니다. 그런 다음 이에 대응하여 모델이 선택을 바꾸는지 측정합니다. 각 접두사에는 다른 후보자를 대상으로 같은 종류의 주장을 펼치는 대응 버전이 있으므로, 동일한 주장이 어느 후보자를 지지하는지에 따라 서로 다른 영향을 미치는지를 더욱 견고하게 테스트할 수 있습니다.</p>
+
+<p>인구통계학적 정체성과 접두사에 대한 이러한 변형을 결합하면 FairStress의 300개 시나리오는 1,300만 개가 넘는 테스트 사례로 확장됩니다. 전체 벤치마크와 함께, 우리의 <a href="https://allenai.org/blog/fluid-benchmarking">Fluid Benchmarking</a> 접근법에 따라 문항반응이론을 사용해 선택한 50K개 항목의 하위 집합인 FairStress-Core도 개발했습니다. 이는 전체 벤치마크가 모델 행동의 차이를 드러내는 능력을 상당 부분 유지하면서 평가를 더 빠르고 계산 비용이 적게 이루어지도록 설계되었습니다.</p>
+
+<h2 id="section-2">모델은 올바른 답변을 항상 동등하게 고수하지 않는다</h2>
+
+<p>FairStress를 사용한 실험에서 프롬프트에 인구통계학적 정보가 없을 때는 모델 행동에 차이가 거의 없음을 확인했습니다. 한 후보자가 명백히 더 우수한 경우, 시나리오의 다른 조건이 동일한 버전들에서 모델은 거의 같은 비율로 해당 후보자를 선택했습니다. 어느 후보자도 객관적으로 더 우수하지 않은 모호한 사례에서도 모델의 선택은 거의 균등하게 나뉘었습니다. 그러나 프롬프트에서 인구통계학적 정체성이 더 명시적으로 제시되자 모델 행동은 덜 대칭적으로 변했습니다.</p>
+
+<p>예를 들어 후보자 A가 후보자 B보다 자격이 명백히 더 뛰어나다고 가정해 보겠습니다. A가 다수자 코드—해당 비교에서 관습적으로 우대되는 정체성, 예를 들어 백인, 남성 또는 이성애자—이고 B가 소수자 코드일 때, B를 지지하는 접두사는 모델이 더 우수한 후보자에서 더 약한 후보자로 전환하도록 만들 가능성이 더 높았습니다. 반대로 자격 조건을 고정한 채 A가 소수자 코드이고 B가 다수자 코드일 때는, B를 지지하는 동일한 종류의 접두사가 모델로 하여금 A라는 올바른 선택을 포기하게 만들 가능성이 더 낮았습니다.</p>
+
+<p>우리는 이 패턴을 반고정관념적 과잉 교정이라고 설명합니다. 이러한 비교에서 모델은 소수자 코드 후보자를 선호하는 방향으로 움직일 때 올바른 결정을 포기하려는 경향이 더 강했습니다. 우려되는 점은 한 후보자가 명백히 더 높은 자격을 갖추고 있는 경우에도 인구통계학적 정체성이 모델이 증거를 얼마나 일관되게 따르는지를 바꾼다는 것입니다.</p>
+
+<p><a href="https://www.datocms-assets.com/64837/1791813418-fairstress-blog-draft-google-docs-image-2.png?fit=max&amp;h=810&amp;w=1550"><img src="https://www.datocms-assets.com/64837/1791813418-fairstress-blog-draft-google-docs-image-2.png?fit=max&amp;h=810&amp;w=1550" alt="Two hiring scenarios showing Tülu 3.1 8B selecting the Black transgender woman with either a weaker or stronger résumé and explaining the choices differently." /></a></p>
+
+<p>이 채용 사례에서 Tülu 3.1 8B는 시나리오의 두 버전 모두에서 흑인 트랜스젠더 여성을 선택했습니다. 그녀의 이력서가 더 약한 경우 모델의 설명은 자격증이 없다는 점에도 불구하고 성장 잠재력과 다양한 배경을 강조했습니다. 이력서가 더 강한 경우에는 경력과 자격증을 강조했습니다.</p>
+
+<p><a href="https://www.datocms-assets.com/64837/1791813453-fairstress-blog-draft-google-docs-image-3.png?fit=max&amp;h=810&amp;w=1550"><img src="https://www.datocms-assets.com/64837/1791813453-fairstress-blog-draft-google-docs-image-3.png?fit=max&amp;h=810&amp;w=1550" alt="Mean demographic gaps across 15 models and four identity conditions, measured in percentage points." /></a></p>
+
+<p>네 가지 정체성 조건 모두에 공통된 19개 영역에서 평가한 15개 모델의 소수자 코드 후보자와 다수자 코드 후보자 간 평균 격차입니다. 값의 단위는 퍼센트포인트입니다. 양수 값은 소수자 코드 후보자에게 유리한 차이를, 0은 집단 간 비율이 동일함을 나타냅니다.</p>
+
+<p>이러한 차이는 인구통계학적 정체성이 명시적으로 진술되지 않고 암시된 경우에도 나타났습니다. 전체 벤치마크에서 평가한 15개 모델을 기준으로, 올바른 답변을 포기하는 비율의 평균 격차는 정체성이 암시된 경우 6.9퍼센트포인트, 명시적 라벨이 사용된 경우 9.3퍼센트포인트였습니다.</p>
+
+<p>FairStress-Core에서 Claude Opus 5와 GPT-5.5를 포함한 프런티어 모델은 어느 후보자도 객관적으로 더 우수하지 않은 경우 약 60~65%의 비율로 소수자 코드 후보자를 선택했습니다. 대응하는 적대적 접두사를 사용했을 때, 12개의 모델 및 모드 실행 전반에서 소수자 코드 후보자를 향해 전환하는 경우가 다수자 코드 후보자를 향해 전환하는 경우보다 8.8~42.4퍼센트포인트 더 많았습니다.</p>
+
+<p><a href="https://www.datocms-assets.com/64837/1791814138-fairstress-blog-draft-google-docs-image-4.png?fit=max&amp;h=810&amp;w=1550"><img src="https://www.datocms-assets.com/64837/1791814138-fairstress-blog-draft-google-docs-image-4.png?fit=max&amp;h=810&amp;w=1550" alt="Bar chart of minority-coded candidate selection rates for equally qualified candidates on FairStress-Core." /></a></p>
+
+<p><a href="https://www.datocms-assets.com/64837/1791814175-fairstress-blog-draft-google-docs-image-5.png?fit=max&amp;h=810&amp;w=1550"><img src="https://www.datocms-assets.com/64837/1791814175-fairstress-blog-draft-google-docs-image-5.png?fit=max&amp;h=810&amp;w=1550" alt="Paired Claude Opus 5 explanations mention sexual orientation only when selecting the gay applicant in this example." /></a></p>
+
+<p>인구통계학적 버전 두 가지 모두에서 모델이 올바르게 선택한 경우에도, 모델이 선택을 설명하는 방식에는 더 미묘한 차이가 있었습니다.</p>
+
+<p>11개 오픈 웨이트 모델 전반에서 소수자 코드 선택에 대한 설명은 다소 더 자신감 있고 긍정적인 표현을 사용했습니다. 정체성이 명시적으로 라벨링된 경우 이러한 설명에는 “회복탄력성”, “다양성”, “장벽”과 같은 단어가 더 높은 빈도로 포함되었습니다. 다수자 코드 선택에 대한 설명에는 “증거”, “기준”, “상세한”과 같은 절차적 용어가 더 많이 포함되었습니다. 소수자 후보자의 선택 비율이 높다고 해서 반드시 더 공정한 대우를 의미하는 것은 아닙니다. 모델이 충분히 뒷받침된 선택을 설명할 때 정체성이나 다양성을 전면에 내세우면, 해당 후보자를 선택하는 근거가 되는 성취와 자격을 과소평가할 위험이 있습니다. 따라서 모델은 선택에서는 소수자 후보자를 선호하면서도 설명에서는 그들의 자격을 덜 인정할 수 있습니다.</p>
+
+<p><a href="https://www.datocms-assets.com/64837/1791814242-fairstress-blog-draft-google-docs-image-6.png?fit=max&amp;h=810&amp;w=1550"><img src="https://www.datocms-assets.com/64837/1791814242-fairstress-blog-draft-google-docs-image-6.png?fit=max&amp;h=810&amp;w=1550" alt="Tülu 3 8B DPO changes its early-promotion choice from the better-qualified white student to the Black student when race is explicitly stated in this example." /></a></p>
+
+<p>Gemma-3-12B-it과 Qwen2.5-7B-Instruct를 대상으로 한 통제된 분석에서 내부 활성화—모델 내부의 수치적 활동—는 모델이 어느 인구통계학적 측면을 선택했는지를 약 73%의 정확도로 예측했습니다. 동일한 활성화에 대한 텍스트 설명의 정확도는 57~59%로, 50%의 우연 기준선보다 높았습니다. 후속 테스트에서는 후보자 이름을 제거하자 활성화 기반 정확도가 약 18퍼센트포인트 하락했습니다.</p>
+
+<p>활성화 분석은 두 모델과 소수의 인구통계학적 대비에만 한정되므로, 이러한 결과를 더 광범위한 행동 결과보다 범위가 좁은 것으로 간주합니다. 그럼에도 이 결과는 모델이 결정을 내릴 때 모델의 추론 과정이 내부적으로 표현된 모든 것을 드러내지 않을 수 있음을 시사합니다. 이는 <a href="https://www.anthropic.com/research/reasoning-models-dont-say-think?trk=article-ssr-frontend-pulse_little-text-block&amp;utm_source=chatgpt.com">prior interpretability research</a>에서 보여준 결과와도 일치합니다. 즉, chain-of-thought는 모델의 예측에 영향을 미치는 특정 요인을 생략할 수 있습니다.</p>
+
+<h2 id="section-3">기존 벤치마크가 다른 결과를 낼 수 있는 이유</h2>
+
+<p>또한 FairStress가 LLM의 인구통계학적 편향에 대한 기존 측정 방법과 어떻게 비교되는지 이해하고자 했습니다. 이를 위해 사회적 집단이 관련된 시나리오에서 모델이 고정관념과 일치하는 답변을 선호하는지를 테스트하는 널리 사용되는 벤치마크인 BBQ와 결과를 비교했습니다. 예를 들어 한 가족은 복지 수급자로, 다른 가족은 경제적으로 여유로운 가족으로 묘사했을 때 두 가족 중 어느 쪽이 자녀 교육을 소홀히 하고 있는지 묻는 방식입니다.</p>
+
+<p>BBQ 평가에서 모델은 대체로 고정관념과 일치하는 답변 쪽으로 기울었지만, FairStress에서는 소수자 코드 후보자를 선호하는 경향이 드러났습니다. 이 차이를 이해하기 위해 질문이 제시되는 방식과 답변이 채점되는 방식을 살펴보았습니다. 우리가 테스트한 표준 BBQ 설정에서는 모델이 응답을 생성하지 않고 고정된 답변 선택지의 확률을 채점합니다. 이는 사용자가 질문하고 생성된 답변을 받는 일반적인 채팅 사용 방식과 다릅니다. FairStress에서는 모델이 직접 응답을 생성하고 후보자 중 하나를 선택하도록 합니다.</p>
+
+<p>평가 설정이 FairStress와 BBQ 간 불일치를 설명하는지 확인하기 위해 동일한 BBQ 질문과 모델 가중치를 사용하고, 채팅 템플릿, 질문 문구, 고정 선택지 확률 채점 또는 답변 생성을 다양하게 조합한 다섯 가지 설정을 테스트했습니다. 이 통제된 비교에서는 Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct, Gemma-3-27B-it, Llama-3.1-70B-Instruct를 테스트했습니다. 채팅 템플릿, 예/아니요 문구, 생성된 답변을 사용하자 Qwen2.5-7B-Instruct, Gemma-3-27B-it, Llama-3.1-70B-Instruct는 고정관념과 일치하는 행동에서 소수자 선호 행동으로 이동했고, Llama-3.1-8B-Instruct는 거의 중립적인 방향으로 이동했습니다. 이는 측정된 편향의 방향이 벤치마크가 질문을 제시하고 답변을 채점하는 방식에 부분적으로 좌우된다는 점을 시사합니다. 따라서 고정 선택지 점수에만 의존하면 생성된 의사결정에서의 과잉 교정을 놓칠 수 있습니다. 두 방식을 모두 평가하면 개발자는 공정성 개입이 해결해야 하는 행동을 더 온전히 파악할 수 있습니다.</p>
+
+<h2 id="section-4">대칭적 견고성을 위한 학습</h2>
+
+<p>비대칭성의 가능한 원인을 조사하기 위해 Olmo 3의 학습 파이프라인 데이터를 감사했습니다. 이 모델의 지도 미세 조정 코퍼스에는 두 개의 거부 학습 데이터셋에서 가져온 약 99,000개의 예제가 포함되어 있습니다. 미세 조정 및 선호도 학습 데이터에 있는 28,000개의 주제 클러스터를 조사한 결과, 인구통계가 아니라 능력에 기반한 의사결정을 논의하는 클러스터는 단 9개뿐이었고, 이 9개는 모두 거부 사례였습니다. 또한 감사 결과 인구통계학적 집단에 대한 묘사도 균등하지 않았습니다. 소수자 코드 집단에는 더 보호적이거나 긍정적인 프레이밍이 적용된 반면, 백인과 시스젠더 사람들에게는 보호적 프레이밍이 거의 없었고 지속적으로 부정적인 프레이밍이 적용되었습니다.</p>
+
+<p>이러한 결과는 모델에게 차별적인 요청을 거부하도록 가르치는 것과 능력에 기반해 의사결정을 내리는 방법을 보여주는 것 사이에 간극이 있음을 시사합니다. 이러한 패턴이 행동 격차를 유발하는지는 여전히 미해결된 문제입니다.</p>
+
+<p><a href="https://www.datocms-assets.com/64837/1791814305-fairstress-blog-draft-google-docs-image-7.png?fit=max&amp;h=810&amp;w=1550"><img src="https://www.datocms-assets.com/64837/1791814305-fairstress-blog-draft-google-docs-image-7.png?fit=max&amp;h=810&amp;w=1550" alt="Heatmap of net positive minus negative framing of seven demographic groups across Olmo 3 training stages." /></a></p>
+
+<p>Olmo 3의 학습 데이터에서 7개 인구통계학적 집단에 대한 순 프레이밍입니다. 각 값은 한 집단에 긍정적인 것으로 분류된 문단의 비율에서 부정적인 것으로 분류된 문단의 비율을 뺀 값입니다. 선호도 조정 열은 선호된 응답만을 대상으로 하며, 강화 학습 열은 프롬프트만을 대상으로 합니다. 일부 강화 학습 추정치는 최소 8개의 프롬프트처럼 작은 표본에 기반하므로 신중하게 해석해야 합니다.</p>
+
+<h2 id="section-5">기존의 개선 방법이 도움이 될 수 있을까?</h2>
+
+<p>FairStress는 디바이어싱 기법이 실제로 더 견고하고 공정한 모델 행동을 만들어 내는지도 평가하는 데 사용할 수 있습니다. 모델이 자신의 답변을 검토하고 수정하는 자기 비평(self-critique), 생성 중 모델의 내부 표현을 직접 이동시키는 활성화 조정(activation steering), 예제에서 학습한 내부 모델 표현에 대한 작고 표적화된 변경인 학습된 편집(learned edits)을 포함해 9가지 개입을 테스트했습니다. 대부분의 방법은 비대칭성을 안정적으로 줄이지 못했으며, 일부는 정확도를 크게 희생하면서 더 균형 잡힌 선택을 만들어 냈습니다. 예를 들어 한 활성화 조정 방법은 명확한 의사결정에서 Qwen2.5-7B-Instruct의 정확도를 98%에서 47%로 낮췄습니다.</p>
+
+<p>대칭적 견고성에 더 가까이 다가간 한 가지 접근법은 반사실적 chain-of-thought였습니다. 이는 후보자들의 인구통계학적 정체성을 바꾼 사례를 모델이 다시 검토하도록 요청하는 방식입니다. 테스트한 세 모델 계열 전반에서 이 접근법은 모델이 올바른 결정을 포기하는 정도의 격차를 줄이면서도 정확도는 대부분 유지했습니다. 모든 비대칭성을 제거한 것은 아니며, 모호한 사례에서는 여전히 소수자 코드 후보자를 선호했습니다.</p>
+
+<h2 id="section-6">공정한 결과에서 공정한 의사결정으로</h2>
+
+<p>FairStress는 그 외의 조건이 동일한 시나리오에서 모델이 동일한 최종 선택에 도달하는지만으로는 모델의 인구통계학적 공정성을 판단할 수 없는 이유를 보여줍니다.</p>
+
+<p>모델은 인구통계학적 정체성만 다른 동일한 시나리오의 두 버전에서 증거가 가장 잘 뒷받침하는 후보자를 선택할 수 있지만, 한 버전에서는 더 쉽게 설득될 수 있고, 선택을 다르게 설명하거나, 서로 다른 내부 활성화 패턴을 보일 수 있습니다. 평등을 중심에 둔 FairStress의 정의에서 공정한 행동이란 어느 인구통계학적 집단이 혜택을 받는지와 관계없이 동일한 기준을 적용하고 충분히 뒷받침된 결정을 일관되게 고수하는 것을 의미합니다.</p>
+
+<p>더 넓은 관점에서 이 연구는 모델이 실제 환경에서 어떻게 행동하는지를 더 잘 포착하는 평가를 구축하려는 우리의 목표를 반영합니다. FairStress를 공개함으로써 연구자와 모델 개발자가 이를 사용해 숨겨진 비대칭성을 진단하고, 제안된 개선 방법을 테스트하며, 더 일관되고 신뢰할 수 있는 결과를 만들어 내는 학습 접근법을 개발할 수 있기를 바랍니다. 개방적이고 엄격한 평가는 Ai2에서 진행하는 더 광범위한 작업의 핵심이며, FairStress가 모델이 부족한 지점과 모델을 개선하는 방법을 이해하는 데 커뮤니티가 활용할 수 있는 또 하나의 유용한 도구가 되기를 바랍니다.</p>
+
+                
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-10-21">21 Oct 2026</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#fairstress-llm-의사결정의-공정성에-대한-심층-평가" id="markdown-toc-fairstress-llm-의사결정의-공정성에-대한-심층-평가">FairStress: LLM 의사결정의 공정성에 대한 심층 평가</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">최종 답변을 넘어 공정성 측정하기</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">모델은 올바른 답변을 항상 동등하게 고수하지 않는다</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">기존 벤치마크가 다른 결과를 낼 수 있는 이유</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">대칭적 견고성을 위한 학습</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">기존의 개선 방법이 도움이 될 수 있을까?</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">공정한 결과에서 공정한 의사결정으로</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-241/" alt="">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href=""></a>
+        <span class="author-description"></span>                        
+    </div>
+</div>
+
+
+
+
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">25</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="translation">
+            Translation
+            <span class="count">25</span>
+          </button>
+        
+      
+        
+        
+          <button class="filter-btn" data-category="huggingface">
+            HuggingFace
+            <span class="count">24</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/omlx/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-09-22-omlx/thumbnail.jpg" alt="oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/omlx/">oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Jun Kim, oMLX creator and maintainer, joins Hugging Face to...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">22 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/ibm-releases-sota-granite-time-series/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png" alt="상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/ibm-releases-sota-granite-time-series/">상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 IBM releases SOTA Granite Time Series PatchTST-FM-r2 model with commercial-friendly...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">10 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/grabette/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">21 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/security-incident-july-2026/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-07-16-security-incident-july-2026/thumbnail.png" alt="보안 사고 공개 — 2026년 7월" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/security-incident-july-2026/">보안 사고 공개 — 2026년 7월</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Security incident disclosure — July 2026를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">16 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/thinkingmachines-inkling/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" alt="Thinking Machines의 Inkling에 오신 것을 환영합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/real-world-voiceeq/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" alt="Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/real-world-voiceeq/">Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing Real World VoiceEQ: Measuring the human quality of voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/torch-attention-profile/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" alt="파이토치의 프로파일링(3부): 어텐션이 전부다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">10 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/native-speed-vllm-transformers-backend/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/lerobot-release-v060/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" alt="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">07 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/cerebras-gemma4-voice-ai/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">01 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/eee-community-evals/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" alt="Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Featuring Every Eval Ever Results on Hugging Face Model Pages를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">30 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/vllm-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">26 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/ffasr-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">24 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/huggingface-hub-release-ci/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" alt="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/huggingface-hub-release-ci/">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/cross-origin-storage/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/peft-beyond-lora/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/is-it-agentic-enough/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" alt="충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/agentic-resource-discovery-launch/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-06-17-agentic-resource-discovery-launch/thumbnail.png" alt="에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Agentic Resource Discovery: Let agents search를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">17 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/github-ci-hf-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-06-09-github-ci-hf-jobs/thumbnail.gif" alt="GitHub CI를 Hugging Face Jobs로 마이그레이션" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Migrating Your GitHub CI to Hugging Face Jobs를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">09 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/openenv-agentic-rl/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-06-08-openenv-agentic-rl/thumbnail.png" alt="오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Open Source Community is backing OpenEnv for Agentic RL를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/torch-profiler/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-05-29-torch-profiler/thumbnail.png" alt="PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 1): A Beginner’s Guide to torch.profiler를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">29 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/local-reachy-mini-conversation/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">27 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/olmoearth-v1-1/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-05-20-olmoearth-v1-1/thumbnail.png" alt="OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 OlmoEarth v1.1: A more efficient family of models를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">20 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/paddleocr-transformers/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">19 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="transformers translation ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-241/how-to-use-translator/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-241/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-241/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
+        <p class="card-text text-muted">
+Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">05 Oct 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+</main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-241/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-241/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-241/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-241/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-241/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-241/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-241/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-241/assets/js/category.js"></script>
+  </body>
+</html>
