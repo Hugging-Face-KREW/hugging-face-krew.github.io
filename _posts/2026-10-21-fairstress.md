@@ -1,21 +1,24 @@
 ---
 layout: post
-title: "FairStress: LLM 의사결정의 공정성에 대한 심층 평가"
+title: 'FairStress: LLM 의사결정의 공정성에 대한 심층 평가'
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/638e39b249de7ae552d977b5/7zYjyTWswjO2erWsO5HNf.png
 image: assets/images/blog/posts/2026-10-20-fairstress/thumbnail.png
 authors:
-  - user: allenai
-slug: "fairstress"
-source_url: "https://huggingface.co/blog/allenai/fairstress"
-source_published_date: "2026-10-20"
-source_published_at: "2026-10-20T16:09:19+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: allenai
+slug: fairstress
+source_url: https://huggingface.co/blog/allenai/fairstress
+source_published_date: '2026-10-20'
+source_published_at: '2026-10-20T16:09:19+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: '* TOC {:toc} <!--toc--> _이 글은 Hugging Face 블로그의 [FairStress: A deeper
+  evaluation of fairness in LLM decision-making](https://huggingface.'
 ---
-
 * TOC
 {:toc}
 <!--toc-->
