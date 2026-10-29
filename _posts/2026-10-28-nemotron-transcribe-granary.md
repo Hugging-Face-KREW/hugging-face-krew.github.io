@@ -1,21 +1,26 @@
 ---
 layout: post
-title: "NVIDIA Nemotron 3.5 Transcribe and Granary v2: 프롬프트로 지시하고 조정할 수 있는 지능형 다국어 전사"
+title: 'NVIDIA Nemotron 3.5 Transcribe and Granary v2: 프롬프트로 지시하고 조정할 수 있는 지능형 다국어
+  전사'
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/68127936de624fb6f57d9989/3vFxCEUXz_xJVrTBr4hNr.jpeg
 image: assets/images/blog/posts/2026-10-28-nemotron-transcribe-granary/thumbnail.jpeg
 authors:
-  - user: nvidia
-slug: "nemotron-transcribe-granary"
-source_url: "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary"
-source_published_date: "2026-10-28"
-source_published_at: "2026-10-28T14:58:17+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: nvidia
+slug: nemotron-transcribe-granary
+source_url: https://huggingface.co/blog/nvidia/nemotron-transcribe-granary
+source_published_date: '2026-10-28'
+source_published_at: '2026-10-28T14:58:17+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: '* TOC {:toc} <!--toc--> _이 글은 Hugging Face 블로그의 [NVIDIA Nemotron 3.5
+  Transcribe and Granary v2: Intelligent Multilingual Transcription You Can Prompt
+  and Adapt](https://h...'
 ---
-
 * TOC
 {:toc}
 <!--toc-->
