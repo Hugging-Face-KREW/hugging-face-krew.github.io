@@ -1,21 +1,24 @@
 ---
 layout: post
-title: "LLM이 연구 아이디어의 신규성을 판단한다고 믿을 수 있을까?"
+title: LLM이 연구 아이디어의 신규성을 판단한다고 믿을 수 있을까?
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/638e39b249de7ae552d977b5/ZrKpGOLkSf0LmAf3bnJIX.png
 image: assets/images/blog/posts/2026-10-27-novelty-bench/thumbnail.png
 authors:
-  - user: allenai
-slug: "novelty-bench"
-source_url: "https://huggingface.co/blog/allenai/novelty-bench"
-source_published_date: "2026-10-27"
-source_published_at: "2026-10-27T16:12:42+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: allenai
+slug: novelty-bench
+source_url: https://huggingface.co/blog/allenai/novelty-bench
+source_published_date: '2026-10-27'
+source_published_at: '2026-10-27T16:12:42+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: '* TOC {:toc} <!--toc--> _이 글은 Hugging Face 블로그의 [Can we trust LLMs to
+  judge whether a research idea is novel?](https://huggingface.'
 ---
-
 * TOC
 {:toc}
 <!--toc-->
