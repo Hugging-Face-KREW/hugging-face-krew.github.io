@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-247/assets/images/favicon.ico" />
+
+    <!-- Begin Jekyll SEO tag v2.9.1 -->
+<title>NVIDIA Nemotron 3.5 Transcribe and Granary v2: 프롬프트로 지시하고 조정할 수 있는 지능형 다국어 전사 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="NVIDIA Nemotron 3.5 Transcribe and Granary v2: 프롬프트로 지시하고 조정할 수 있는 지능형 다국어 전사" />
+<meta name="author" content="dailybot" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 NVIDIA Nemotron 3.5 Transcribe and Granary v2: Intelligent Multilingual Transcription You Can Prompt and Adapt를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 NVIDIA Nemotron 3.5 Transcribe and Granary v2: Intelligent Multilingual Transcription You Can Prompt and Adapt를 한국어로 번역한 글입니다." />
+<link rel="canonical" href="https://huggingface-krew.co/pr-preview/pr-247/nemotron-transcribe-granary/" />
+<meta property="og:url" content="https://huggingface-krew.co/pr-preview/pr-247/nemotron-transcribe-granary/" />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="https://huggingface-krew.co/pr-preview/pr-247/nemotron-transcribe-granary/assets/images/blog/posts/2026-10-28-nemotron-transcribe-granary/thumbnail.jpeg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-10-28T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-10-28T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://huggingface-krew.co/pr-preview/pr-247/nemotron-transcribe-granary/assets/images/blog/posts/2026-10-28-nemotron-transcribe-granary/thumbnail.jpeg" />
+<meta name="twitter:title" content="NVIDIA Nemotron 3.5 Transcribe and Granary v2: 프롬프트로 지시하고 조정할 수 있는 지능형 다국어 전사" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-10-28T00:00:00+09:00","datePublished":"2026-10-28T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 NVIDIA Nemotron 3.5 Transcribe and Granary v2: Intelligent Multilingual Transcription You Can Prompt and Adapt를 한국어로 번역한 글입니다.","headline":"NVIDIA Nemotron 3.5 Transcribe and Granary v2: 프롬프트로 지시하고 조정할 수 있는 지능형 다국어 전사","image":"https://huggingface-krew.co/pr-preview/pr-247/nemotron-transcribe-granary/assets/images/blog/posts/2026-10-28-nemotron-transcribe-granary/thumbnail.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"https://huggingface-krew.co/pr-preview/pr-247/nemotron-transcribe-granary/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://huggingface-krew.co/pr-preview/pr-247/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"https://huggingface-krew.co/pr-preview/pr-247/nemotron-transcribe-granary/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-247/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-247/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-247/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-247/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-247/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-247/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-247/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-247/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+
+
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-10-28-nemotron-transcribe-granary/thumbnail.jpeg" alt="NVIDIA Nemotron 3.5 Transcribe and Granary v2: 프롬프트로 지시하고 조정할 수 있는 지능형 다국어 전사">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-10-28-nemotron-transcribe-granary/thumbnail.jpeg" alt="NVIDIA Nemotron 3.5 Transcribe and Granary v2: 프롬프트로 지시하고 조정할 수 있는 지능형 다국어 전사">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-247/categories#huggingface">HuggingFace</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-247/categories#translation">Translation</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">NVIDIA Nemotron 3.5 Transcribe and Granary v2: 프롬프트로 지시하고 조정할 수 있는 지능형 다국어 전사</h1>
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+                
+                    <ul id="markdown-toc">
+  <li><a href="#nvidia-nemotron-35-transcribe-and-granary-v2-프롬프트로-지시하고-조정할-수-있는-지능형-다국어-전사" id="markdown-toc-nvidia-nemotron-35-transcribe-and-granary-v2-프롬프트로-지시하고-조정할-수-있는-지능형-다국어-전사">NVIDIA Nemotron 3.5 Transcribe and Granary v2: 프롬프트로 지시하고 조정할 수 있는 지능형 다국어 전사</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">다국어 전사, 화자 식별, 번역, 오디오 Q&amp;A를 하나의 오픈 모델로 제공하며, 리더보드에서 최고 수준의 결과를 달성하고, 모델을 조정할 수 있는 오픈 Granary v2 데이터 파이프라인과 파인튜닝 레시피까지 지원</a></li>
+    </ul>
+  </li>
+  <li><a href="#자연어로-전사와-분석-안내하기" id="markdown-toc-자연어로-전사와-분석-안내하기">자연어로 전사와 분석 안내하기</a></li>
+  <li><a href="#전사부터-화자-식별까지-이어지는-리더보드-성과" id="markdown-toc-전사부터-화자-식별까지-이어지는-리더보드-성과">전사부터 화자 식별까지 이어지는 리더보드 성과</a></li>
+  <li><a href="#transcribe의-기반이-되는-오픈-데이터-큐레이션-파이프라인-granary-v2" id="markdown-toc-transcribe의-기반이-되는-오픈-데이터-큐레이션-파이프라인-granary-v2">Transcribe의 기반이 되는 오픈 데이터 큐레이션 파이프라인, Granary v2</a></li>
+  <li><a href="#중요한-어휘에-맞게-인식-조정하기" id="markdown-toc-중요한-어휘에-맞게-인식-조정하기">중요한 어휘에 맞게 인식 조정하기</a>    <ul>
+      <li><a href="#section-2" id="markdown-toc-section-2">보류 화자를 대상으로 측정한 도메인 성능 향상</a></li>
+    </ul>
+  </li>
+  <li><a href="#nemotron-35-transcribe와-granary-v2-시작하기" id="markdown-toc-nemotron-35-transcribe와-granary-v2-시작하기">Nemotron 3.5 Transcribe와 Granary v2 시작하기</a></li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/nvidia/nemotron-transcribe-granary">NVIDIA Nemotron 3.5 Transcribe and Granary v2: Intelligent Multilingual Transcription You Can Prompt and Adapt</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/nvidia/nemotron-transcribe-granary -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="nvidia-nemotron-35-transcribe-and-granary-v2-프롬프트로-지시하고-조정할-수-있는-지능형-다국어-전사">NVIDIA Nemotron 3.5 Transcribe and Granary v2: 프롬프트로 지시하고 조정할 수 있는 지능형 다국어 전사</h1>
+
+<h2 id="section-1">다국어 전사, 화자 식별, 번역, 오디오 Q&amp;A를 하나의 오픈 모델로 제공하며, 리더보드에서 최고 수준의 결과를 달성하고, 모델을 조정할 수 있는 오픈 Granary v2 데이터 파이프라인과 파인튜닝 레시피까지 지원</h2>
+
+<p>전사문은 모든 발화 단어를 담고 있어도 누가 무엇을 말했는지, 어떻게 번역할지, 도메인별 전문 용어를 어떻게 표기할지에 대해 사용자나 애플리케이션에 여전히 의문을 남길 수 있습니다. 다국어 통화, 빠르게 진행되는 회의, 의료 받아쓰기는 각각 번역, 화자 레이블, 정확한 의학 용어 표기처럼 서로 다른 출력을 필요로 합니다.</p>
+
+<p>NVIDIA Nemotron 3.5 Transcribe는 녹음된 음성을 유용한 텍스트로 변환하는 오픈 웨이트 프롬프트 가능 모델로, 이제 <a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B">Hugging Face</a> 및 <a href="https://modelscope.ai/collections/nv-community/Nemotron-35-Transcribe">ModelScope</a>에서 사용할 수 있습니다. 하나의 체크포인트에서 전사, 화자 식별(다이어리제이션), 번역, 오디오 질의응답을 제공합니다. 40개 언어를 전사하고, 그중 31개 언어를 영어와 상호 번역하며, 13개 언어에서 화자를 식별합니다. 최대 1시간 길이의 녹음을 처리하고 최대 8명의 화자를 레이블링할 수 있습니다. 개발자는 자연어로 출력 결과를 안내하고, 오디오를 처리할 위치를 선택하며, 도메인 어휘와 억양에 맞게 인식을 조정할 수 있습니다.</p>
+
+<p>Transcribe는 영어 기준 <a href="https://huggingface.co/spaces/hf-audio/open_asr_leaderboard">Hugging Face Open ASR Leaderboard</a>에서 오픈 웨이트 모델 중 1위를 차지했으며, <a href="https://artificialanalysis.ai/speech-to-text/non-streaming?error-rate=word-error-rate-vs-active-size">Artificial Analysis</a>의 정확도–활성 파라미터 프런티어에 위치합니다. 화자 식별에서는 <a href="https://research.withdavid.ai/blog/dai-asr-i18n#leaderboard">David AI’s 21-language diarization leaderboard</a>에서 가장 낮은 오류율을 기록했고 <a href="https://voicearena.com/diarization-bench/methodology">VoiceArena’s 14-system comparison</a>에서 1위를 차지했습니다. 양자화 버전도 곧 출시될 예정이므로, RTX Spark, DGX Spark 또는 Jetson AGX Thor에서 Transcribe를 로컬로 실행하거나 Blackwell 데이터센터 GPU에서 규모를 확장할 수 있습니다.</p>
+
+<p>Granary v2의 다국어 데이터(<a href="https://huggingface.co/datasets/nvidia/Granary-v2">Hugging Face</a> 및 <a href="https://modelscope.ai/datasets/nv-community/Granary-v2">ModelScope</a>에서 제공)와 재사용 가능한 큐레이션 파이프라인은 <a href="https://github.com/NVIDIA-NeMo/Speech/blob/main/tutorials/speechlm2/finetuning/README.md">NeMo Speech fine-tuning tools</a>와 함께 프롬프트 수준의 제어를 학습 단계까지 확장합니다. 개발자는 필요한 표기 형식을 정의하고 애플리케이션에서 접하는 음성에 맞게 모델을 조정할 수 있습니다. <a href="https://github.com/NVIDIA-NeMo/Speech/blob/main/examples/speechlm2/finetuning/docs/medical-asr-synthetic-data.md">medical case study</a>에서 파인튜닝을 수행한 결과, 보류 화자에 대한 단어 오류율(WER)이 최적 프롬프트 대비 상대적으로 45.8% 감소했습니다.</p>
+
+<h1 id="자연어로-전사와-분석-안내하기">자연어로 전사와 분석 안내하기</h1>
+
+<p>동일한 체크포인트라도 지시에 따라 하나의 회의 녹음에서 서로 다른 출력을 생성할 수 있습니다.</p>
+
+<ul>
+  <li>
+    <p>“이 녹음을 전사하고 각 화자를 레이블링하세요.”</p>
+  </li>
+  <li>
+    <p>“이 오디오를 영어로 번역하세요.”</p>
+  </li>
+  <li>
+    <p>“이 회의에서 어떤 결정이 내려졌나요?”</p>
+  </li>
+</ul>
+
+<p>아래 영상에서 모델이 작동하는 모습을 확인해 보세요. 영상에서는 빠르고 서로 겹치는 대사로 유명한 1940년 스크루볼 코미디 영화 His Girl Friday의 대표적인 장면을 처리합니다.</p>
+
+<p>Nemotron 3.5 Transcribe가 His Girl Friday(1940)의 장면에 자막을 생성하고, 겹쳐서 말하는 대화를 포함해 화자를 레이블링합니다.</p>
+
+<p>익숙하지 않은 용어라면 학습 전에 문맥을 활용해 보세요. 예를 들어 의료 환경에서는 다음과 같이 지시할 수 있습니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Transcribe this medical discussion in the original language. Possible terms: HbA1c, metformin. Use these terms only when supported by the audio. Preserve standard medical spelling and write numbers in conventional written form.</code></p>
+
+<p><a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B">model card</a>에는 오디오 질문에 대한 추론을 포함한 권장 프리셋과 전체 프롬프트 가이드, 작업별 언어 지원 매트릭스가 제공됩니다. 작업에 따라 지원 언어가 다르며, 오디오 질의응답은 영어로 학습되었습니다. 단어 수준 타임스탬프도 지원됩니다. 모든 음성 모델과 마찬가지로 이름, 화자 전환, 답변은 녹음과 대조해 일부 확인하는 것이 좋습니다.</p>
+
+<p>실시간 수업에서 오래 남는 학습 자료까지. 앱에서 실시간 대화 기능을 제공하는 실시간 음성 및 비디오 플랫폼 Agora는 강의 데모에서 단어 수준 타임스탬프를 사용했습니다. Nemotron 3.5 Transcribe가 녹화된 수업을 리플레이와 함께 표시되는 전사문으로 변환해 학생들이 무엇이 언제 말해졌는지 확인할 수 있도록 한 것입니다. <a href="https://www.agora.io/en/blog/how-live-teaching-can-become-a-lasting-learning-resource/">Agora’s blog</a>에서 구축 방법을 자세히 설명합니다.</p>
+
+<h1 id="전사부터-화자-식별까지-이어지는-리더보드-성과">전사부터 화자 식별까지 이어지는 리더보드 성과</h1>
+
+<p>오픈 웨이트 모델 가운데 Transcribe는 무엇이 말해졌는지에 대한 평가에서 앞서며, 누가 말했는지에 대해서는 두 화자 식별 벤치마크에서 모두 단독 1위를 차지합니다.</p>
+
+<p>Hugging Face Open ASR Leaderboard. 이 리더보드는 공개 테스트 세트에서 단어 오류율(WER)을 기준으로 전사 정확도를 측정하며, 세 가지 트랙으로 구성됩니다.</p>
+
+<ul>
+  <li>
+    <p>영어: 평균 WER 5.33%로 오픈 웨이트 모델 중 1위(그림 1).</p>
+  </li>
+  <li>
+    <p>다국어: 7개 언어에서 평균 WER 4.62%로, 모델 카드의 Open ASR 비교에 포함된 평가 오픈 웨이트 모델 중 가장 낮음.</p>
+  </li>
+  <li>
+    <p>장문: 평균 WER 10.98%로, 해당 비교에서도 가장 낮음.</p>
+  </li>
+</ul>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/68127936de624fb6f57d9989/vGIg17AxweCAnacvnPOet.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/68127936de624fb6f57d9989/vGIg17AxweCAnacvnPOet.png" alt="Hugging Face Open ASR English Open (2) Leaderboard table showing model rankings on the Hugging Face English Open ASR leaderboard, with columns for rank, model, average WER, RTFx, and dataset scores. nvidia/Nemotron-3.5-Transcribe is ranked first among open-weight models with an average Word Error Rate (WER) of 5.33% and an RTFx of 462.09." /></a></p>
+
+<p>그림 1. Nemotron 3.5 Transcribe는 API 모델을 제외한 <a href="https://huggingface.co/spaces/hf-audio/open_asr_leaderboard">Hugging Face Open ASR Leaderboard</a>(영어)에서 평균 WER 5.33%로 오픈 웨이트 모델 중 1위를 차지합니다. WER이 낮을수록 전사 오류가 적다는 의미입니다.</p>
+
+<p>Artificial Analysis Speech-to-Text Leaderboard. Artificial Analysis는 자체 단어 오류율 지수인 AA-WER를 기준으로 음성-텍스트 모델의 순위를 독립적으로 산정합니다. Nemotron 3.5 Transcribe는 AA-WER 2.8%로 오픈 웨이트 모델 중 공동 1위를 기록했습니다. 활성 파라미터는 약 4B로, 공동 1위를 차지한 모델의 24B보다 적습니다. AA-WER 지수의 50%를 구성하는 보류 음성 에이전트 음성 세트 AA-AgentTalk에서 Transcribe는 WER 1.8%를 기록했으며, 다음으로 우수한 오픈 웨이트 모델은 2.3%였습니다. Transcribe는 음성 인코더를 하이브리드 Mamba–Transformer mixture-of-experts 언어 모델과 결합하므로, 30B 파라미터 중 토큰당 약 4B만 활성화됩니다. 따라서 <a href="https://artificialanalysis.ai/speech-to-text/non-streaming">Artificial Analysis</a>의 활성 파라미터 대비 정확도 오픈 웨이트 파레토 프런티어에 위치합니다. AA의 전체 모델 차트에서는 널리 사용되는 여러 독점 음성 API보다 높은 순위를 기록합니다.</p>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/68127936de624fb6f57d9989/a7N1ycYypBeM7WKuUphE7.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/68127936de624fb6f57d9989/a7N1ycYypBeM7WKuUphE7.png" alt="ArtificialAnalysis-WER vs Model Size (Open Weights) (22 Oct '26)Scatter chart from Artificial Analysis plotting word error rate (AA-WER, non-streaming) against active parameters on a log scale for open-weight speech models. Nemotron 3.5 Transcribe sits on the Pareto frontier at about 4B active parameters and 2.80% WER." /></a></p>
+
+<p>그림 2. 약 6분의 1에 해당하는 활성 파라미터로 <a href="https://artificialanalysis.ai/speech-to-text/non-streaming">Leading AA accuracy</a>: Nemotron 3.5 Transcribe는 약 4B의 활성 파라미터로 2.80% AA-WER를 달성합니다.</p>
+
+<p>언어와 겹침을 아우르는 화자 식별. Sortformer 화자 신호는 음향 특징과 함께 언어 모델에 전달되므로, Transcribe는 이후 단계에서 단어에 화자를 연결하는 방식에만 의존하지 않고 생성 중에 각 발화 차례를 태그할 수 있습니다.</p>
+
+<p>David AI DAI-ASR-I18N Leaderboard. <a href="https://research.withdavid.ai/blog/dai-asr-i18n#leaderboard">David AI’s DAI-ASR-I18N combined transcription-and-speaker-attribution track</a>에서 Transcribe는 평가된 오픈 웨이트 모델 중 1위이며 전체 2위를 차지합니다. 21개 언어에서 누가 언제 말했는지를 평가하는 이 벤치마크의 다이어리제이션 트랙에서, 테스트된 14개 시스템 중 가장 낮은 다이어리제이션 오류율을 기록했으며 NVIDIA의 전용 <a href="https://huggingface.co/nvidia/Nemotron-3-Diarization">Nemotron 3 Diarization</a> 모델보다 근소하게 앞섰습니다.</p>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/68127936de624fb6f57d9989/zwwsN64zfjYDvTOhQapp5.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/68127936de624fb6f57d9989/zwwsN64zfjYDvTOhQapp5.png" alt="DavidAI_Nemotron_3.5_Transcribe_Diarization_Accuracy Bar chart from David AI’s DAI-ASR-I18N benchmark ranking diarization systems by overall diarization error rate (DER) across 21 languages, where lower is better. Nemotron 3.5 Transcribe ranks first at 18.26%, followed by Nemotron 3 Diarization at 18.38%; the remaining open-weight and proprietary systems range from 22.85% to 37.55%" /></a></p>
+
+<p>그림 3. NVIDIA 모델이 <a href="https://research.withdavid.ai/blog/dai-asr-i18n#leaderboard">David AI’s multilingual diarization leaderboard</a>의 상위 두 자리를 차지합니다. Nemotron 3.5 Transcribe는 21개 언어에서 전체 다이어리제이션 오류율(DER) 18.26%로 가장 낮은 수치를 기록했고, <a href="https://huggingface.co/nvidia/Nemotron-3-Diarization">Nemotron 3 Diarization</a>가 18.38%로 뒤를 이었습니다. DER은 화자 시간 오류를 측정하며, 낮을수록 좋습니다.</p>
+
+<p>VoiceArena Diarization-Bench. <a href="https://voicearena.com/diarization-bench">VoiceArena’s English full-session benchmark</a>에서 Transcribe는 14개 시스템 중 연결 최소 순열 WER(cpWER)가 14%로 가장 낮았으며, 대면 및 온라인 환경 모두에서 1위를 차지했습니다. 또한 삭제된 단어 수도 가장 적었습니다. 삭제율은 기준 전사 단어의 8.32%로, 중앙값 약 31%보다 낮았습니다.</p>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/68127936de624fb6f57d9989/kU1uIXD-hl4ikaalIYFfI.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/68127936de624fb6f57d9989/kU1uIXD-hl4ikaalIYFfI.png" alt="VoiceArena_Track2_cpWER_ranking_1Bar chart from VoiceArena’s Diarization-Bench v1 ranking 14 diarization-plus-ASR systems on English full sessions with overlapping speech by concatenated minimum-permutation word error rate (cpWER), where lower is better. NVIDIA Nemotron 3.5 Transcribe ranks first at 32.4%, followed by NVIDIA Multitalker Parakeet + Nemotron 3 Diarization at 34.2%; the remaining systems range from 34.7% to 71.9%" /></a></p>
+
+<p>그림 4. NVIDIA 모델이 <a href="https://voicearena.com/diarization-bench">VoiceArena’s 14-system comparison</a>에서 상위 두 자리를 차지합니다. Nemotron 3.5 Transcribe가 32.4% cpWER로 선두를 차지했고, NVIDIA Multitalker Parakeet with Nemotron 3 Diarization이 34.2%로 뒤를 이었습니다. Diarization-Bench v1은 영어 전체 세션, 겹치는 발화, 2~8명의 화자를 다룹니다. cpWER은 화자 레이블을 매칭한 후 단어 오류를 계산하며, 낮을수록 좋습니다.</p>
+
+<p>추가 평가. Ocular AI의 Converse-STT 평가에서 Transcribe는 최고 오픈 모델로 선정되었습니다. Josh Talks의 <a href="https://voiceofindia.ai">Voice of India</a> 리더보드는 인도 언어 전반에서 Transcribe의 결과를 보고합니다.</p>
+
+<p>고처리량 전사. 벤치마킹에서 Transcribe는 출시 예정인 NVFP4 양자화 버전을 사용해 NVIDIA RTX PRO 6000 Blackwell Server Edition GPU 한 장에서 100시간 분량의 오디오를 3분 이내에 처리했습니다. 결과는 높은 동시성으로 30초 클립을 처리해 측정했습니다.</p>
+
+<p>현재 <a href="https://github.com/NVIDIA-NeMo/Speech/blob/main/docs/source/speechlm2/vllm_serving.rst">vLLM</a>로 제공되는 체크포인트를 서빙할 수 있습니다. 양자화 버전과 함께 <a href="https://github.com/NVIDIA/NeMo-Speech.cpp">NeMo-Speech.cpp</a>를 사용한 로컬 배포도 곧 지원될 예정입니다. Transcribe는 실시간 스트리밍이 아니라 녹음된 오디오를 대상으로 설계되었습니다.</p>
+
+<p>특수한 녹음은 도메인 어휘와 전사 규칙에 맞춘 조정이 필요할 수 있습니다. Granary v2와 NeMo Speech 파인튜닝이 이를 지원하며, Transcribe의 기반 데이터부터 시작합니다.</p>
+
+<h1 id="transcribe의-기반이-되는-오픈-데이터-큐레이션-파이프라인-granary-v2">Transcribe의 기반이 되는 오픈 데이터 큐레이션 파이프라인, Granary v2</h1>
+
+<p>프롬프트 가능한 음성 모델에는 명확한 형식 지정 목표를 갖춘 학습 데이터가 필요합니다. <a href="https://huggingface.co/datasets/nvidia/Granary-v2">Granary v2</a>는 Hugging Face 및 <a href="https://modelscope.ai/collections/nv-community/Nemotron-Speech">ModelScope</a>의 <a href="https://huggingface.co/collections/nvidia/nemotron-speech">Nemotron speech collection</a>에 포함되어 있습니다. <a href="https://github.com/NVIDIA-NeMo/Curator">NVIDIA NeMo Curator</a>로 구축된 이 재사용 가능한 파이프라인은 Nemotron 3.5 Transcribe 학습에 사용된 다국어 음성을 준비하며, 정렬된 전사 변형, 작업 레이블, 검사 가능한 품질 메타데이터를 생성합니다. 공개 매니페스트는 48개 언어와 16개 소스 코퍼스에 걸쳐 463,062시간을 포함하며, <a href="https://huggingface.co/datasets/nvidia/Granary">Granary v1</a>의 25개 언어에서 증가한 수치입니다. 이 수치는 데이터셋 릴리스를 설명하는 것이며, Transcribe의 전체 학습 혼합 데이터나 샘플링 가중치를 의미하지는 않습니다.</p>
+
+<p>Granary v2는 각 녹음에 대해 세 가지 전사 형식을 생성합니다(표 1). 이는 개발자가 Transcribe에 프롬프트로 요청할 수 있는 verbatim 및 clean 스타일과 동일합니다. 전사 외에도 파이프라인은 짧은 오디오 캡션, 차용어의 코드 스위칭 복원, 음성 기반 Q&amp;A 쌍, 문맥 기반 ASR 바이어싱 용어, 자동 품질 점수가 포함된 번역을 생성합니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>학습 목표</th>
+      <th>예시 전사</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>텍스트 정규화, verbatim</td>
+      <td>I paid, uh, twenty-five euros.</td>
+    </tr>
+    <tr>
+      <td>역 텍스트 정규화, 비유창성 포함</td>
+      <td>I paid, uh, €25.</td>
+    </tr>
+    <tr>
+      <td>역 텍스트 정규화, 비유창성 제외</td>
+      <td>I paid €25.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>표 1. 동일한 발화에 대한 Granary v2 학습 목표.</p>
+
+<p>파이프라인은 재사용 가능한 네 단계로 구성됩니다.</p>
+
+<ul>
+  <li>
+    <ol>
+      <li>Audio Preparation (Metadata): 원시 오디오 또는 장시간 오디오를 세그먼트로 나누고, 전체 녹음에서 화자를 추적하며, 음향 이벤트와 언어에 태그를 지정합니다. Granary v2의 소스는 이미 세그먼트로 나뉘어 있었으므로 이번 릴리스에서는 이 단계를 생략했습니다.</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>Transcription (ASR): 각 언어를 주요 ASR 모델과 복구 ASR 모델로 라우팅하고, 주요 모델이 환각 검사를 통과하지 못하면 복구 모델로 전환합니다. 사람이 작성한 참조 전사문을 활용해 신뢰할 수 있는 표기를 유지하면서 구어체 형식과 비유창성을 추가합니다.</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>Task Label Generation (Text): 전사 변형을 생성한 뒤 문자 비율, 환각 패턴, 모델 또는 사람 참조와의 일치 여부를 검사합니다. 승인된 레코드에만 문맥 기반 ASR 용어와 번역을 추가합니다.</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>High Fidelity (HiFi): 잡음이 많거나 클리핑이 발생했거나 여러 화자가 포함된 세그먼트를 필터링해 ASR 이외의 용도에 사용할 고품질 녹음의 소규모 세트를 유지합니다. VoxPopuli 데이터셋의 경우 354k시간을 22개 유럽 언어에 걸친 111k시간으로 줄였습니다.</li>
+    </ol>
+  </li>
+</ul>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/68127936de624fb6f57d9989/yORas7atvTqY3x-4BGaCb.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/68127936de624fb6f57d9989/yORas7atvTqY3x-4BGaCb.png" alt="fig6-granary-v2-pipeline-redesign Diagram of the Granary v2 curation pipeline following one roughly 12-minute sample from raw audio to a training target. The Metadata pipeline segments the audio with voice activity detection and diarization and identifies the language. The ASR pipeline transcribes a segment with a primary and a fallback model and keeps the best prediction, “Like, Granary-v2 is, uh, making every word matter.” The Text pipeline derives tn_raw, itn_raw, and itn_clean transcripts, plus translations, a caption, a speech Q&amp;A pair, and context-ASR terms. The training view packs these into an instruction pair that maps “Transcribe without disfluencies” to “Granary-v2 is making every word matter.”" /></a></p>
+
+<p>그림 6. Granary v2 데이터 큐레이션 파이프라인. 하나의 샘플이 원시 오디오에서 Metadata, ASR, Text 단계를 거쳐 학습 예제로 변환되는 과정을 보여줍니다.</p>
+
+<p>개발자는 Ray 및 <a href="https://github.com/ai-dynamo/dynamo">NVIDIA Dynamo</a> 백엔드를 사용하는 <a href="https://github.com/NVIDIA-NeMo/Curator/tree/main/tutorials/audio/granary_v2">NeMo Curator pipeline</a>를 자체 녹음이나 사용 권한이 있는 공개 코퍼스에서 실행하거나, <a href="https://huggingface.co/datasets/nvidia/Granary-v2">Granary v2 public manifests</a>를 기반으로 구축할 수 있습니다. 매니페스트에는 위에서 설명한 레이블과 함께 세 가지 전사 형식이 tn_raw, itn_raw, itn_clean으로 포함되며, 엔터티 힌트, 생성된 지시 쌍, 출처 정보, 레코드별 품질 플래그도 포함됩니다. 소스 오디오는 각 코퍼스의 원래 라이선스에 따라 별도로 다운로드하고 릴리스에 게시된 약관을 따르세요.</p>
+
+<h1 id="중요한-어휘에-맞게-인식-조정하기">중요한 어휘에 맞게 인식 조정하기</h1>
+
+<p>언어, 문자 체계, 전사 형식을 지정하는 개발 세트 프롬프트부터 시작하세요. 아래 사례 연구에서는 프롬프트에 영어와 라틴 알파벳을 명시해 전체 벤치마크 WER을 30.8%에서 23.8%로 낮췄습니다. 남아 있는 도메인 오류에 대해서는 NeMo Speech 파인튜닝 워크플로가 대표 음성과 명시적인 표기 목표를 결합합니다.</p>
+
+<p><a href="https://github.com/NVIDIA-NeMo/Speech/blob/main/examples/speechlm2/finetuning/docs/medical-asr-synthetic-data.md">NeMo Speech medical ASR case study</a>는 인도 의사와 의대생의 녹음으로 구성된 <a href="https://huggingface.co/datasets/ekacare/eka-medical-asr-evaluation-dataset">Eka Care’s open benchmark</a>에서 이러한 진행 과정을 보여줍니다. 이 데이터셋에는 3,619개의 클립이 있으며 별도의 학습 분할은 지정되지 않았습니다. 이 연구는 생성된 의료 텍스트와 공개 의학 카탈로그로 조정 데이터를 만든 다음, 약 153시간의 합성 음성, Common Voice의 억양이 있는 영어 29시간, MultiMed의 의료 녹음 63시간을 결합합니다.</p>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/68127936de624fb6f57d9989/Dq54q2P9bYJwWZ7prznAT.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/68127936de624fb6f57d9989/Dq54q2P9bYJwWZ7prznAT.png" alt="fig7-eka-care-62pct-rebrand Bar chart titled “62% fewer transcription errors” for the Eka Care medical ASR benchmark of Indian medical speech. On the full test set, word error rate falls from 30.8% out of the box to 23.8% with a better prompt that names English and the Latin alphabet, and to 11.8% after fine-tuning. Side labels note about 14 GPU-hours on one NVIDIA GB300 and about 153 hours of synthetic speech plus 92 hours of public accented and medical speech" /></a></p>
+
+<p>그림 7. Eka Care의 인도 의료 음성 벤치마크 전체 테스트 세트에서 더 나은 프롬프트를 사용하면 WER이 30.8%에서 23.8%로 감소하고, 파인튜닝 후에는 11.8%까지 낮아집니다. 이는 기본 모델보다 전사 오류가 약 62% 적은 수치입니다. 전체 세트에는 프롬프트와 체크포인트를 선택하는 데 사용된 855개의 튜닝 클립이 포함되어 있으며, 아래의 보류 결과가 더 엄격한 테스트입니다.</p>
+
+<p>합성 생성은 표기 목표와 음성 표현을 분리합니다. “HbA1c”는 레이블로 사용하고 “H B A one C”는 합성기로 전달합니다. 여러 TTS 음성을 사용해 오디오의 다양성을 넓히고, 실제 녹음으로 억양과 녹음 환경을 추가합니다. 학습 텍스트는 벤치마크 참조와 정확히 일치하는지, 8단어 연속 구간을 공유하는지 기준으로 필터링합니다.</p>
+
+<p>Granary v2의 명시적 목표와 마찬가지로 학습 예제에서는 숫자, 단위 간격, 회사명 확장, 브랜드명 하이픈 표기를 다양하게 바꾸고, 지시문으로 필요한 규칙을 지정합니다. 일부 프롬프트에는 거의 맞지만 틀린 방해 용어가 포함된 용어 목록이 있어, 모델은 오디오가 뒷받침할 때만 특정 표기를 사용하도록 학습합니다. 최종 시스템은 하나의 고정 규칙 프롬프트와 한 번의 모델 실행을 사용하며, 검색이나 전사 후처리는 수행하지 않습니다.</p>
+
+<p>이 레시피는 음성 인코더와 프로젝션을 학습하고 LoRA를 사용해 언어 모델을 조정합니다. 두 번의 실행에서는 서로 다른 데이터 혼합을 사용하며, 어댑터를 병합한 후 선택된 체크포인트를 균등하게 평균 내 하나의 최종 모델을 만듭니다. 체크포인트 선택은 학습 손실만이 아니라 디코딩한 개발 세트 결과를 사용합니다. 텍스트 생성부터 평가까지 전체 조정 과정에는 NVIDIA GB300 한 장에서 약 14 GPU-시간이 걸렸습니다.</p>
+
+<h2 id="section-2">보류 화자를 대상으로 측정한 도메인 성능 향상</h2>
+
+<p>이 연구는 벤치마크를 화자 기준으로 나누어 프롬프트와 체크포인트 선택에 사용한 855개의 튜닝 클립과 최종 시스템별로 한 번씩 디코딩한 2,764개의 보류 클립으로 구성했습니다. Eka Care의 <a href="https://github.com/eka-care/KARMA-OpenMedEvalKit">KARMA scoring pipeline</a>를 사용했을 때 파인튜닝으로 보류 WER이 최적 프롬프트 기준선의 22.44%에서 12.17%로 감소했습니다. 이는 상대적으로 45.8% 감소한 수치이며, 새로운 화자에게도 성능 향상이 일반화된다는 가장 명확한 근거입니다. 키워드 WER은 9.2%에서 6.5%로, 의미 WER은 10.0%에서 7.6%로 낮아졌습니다. 동일한 보류 화자와 평가기를 기준으로, 조정된 모델의 WER 12.17%는 오픈 의료 전문 모델(13.79%)과 널리 사용되는 범용 ASR 모델(14.92%)보다 낮았습니다.</p>
+
+<p>일반 영어에서는 LibriSpeech test-clean WER이 1.54%에서 1.69%로 소폭 상승했습니다. 의료 전문 모델은 브랜드 의약품과 진단명에 대한 정확한 일치에서는 여전히 앞섰습니다. 이 연구는 임상의가 브랜드명을 말하는 실제 녹음을 다음 단계로 제시합니다. 자체 도메인에 적용할 때는 체크포인트 선택을 위해 실제 레이블이 지정된 클립을 최소 100개 확보하고, 일반 음성 성능 유지와 함께 애플리케이션이 의존하는 엔터티 유형을 평가하세요.</p>
+
+<p>이 사례 연구에는 각 단계를 재현하는 명령이 포함되어 있습니다. <a href="https://github.com/NVIDIA-NeMo/Speech/blob/main/tutorials/speechlm2/finetuning/README.md">fine-tuning tutorials</a>에는 학습, 내보내기, 평가를 위한 레시피, 리소스 요구 사항, 도구가 포함되며 새로운 언어와 코드 스위칭 ASR도 다룹니다. 함께 제공되는 <a href="https://github.com/NVIDIA-NeMo/Speech/blob/main/.claude/skills/finetune-speech-llm/SKILL.md">agent skill</a>를 사용하면 코딩 에이전트가 기준선 선택과 데이터 검사부터 학습 검증, 어댑터 병합, 평가까지 워크플로를 실행할 수 있습니다.</p>
+
+<p>ModelScope를 사용하면 개발자가 특수한 멀티모달 애플리케이션을 위해 <a href="https://github.com/modelscope/ms-swift">ms-swift framework</a>를 통해 Nemotron 3.5 Transcribe를 파인튜닝할 수도 있습니다.</p>
+
+<h1 id="nemotron-35-transcribe와-granary-v2-시작하기">Nemotron 3.5 Transcribe와 Granary v2 시작하기</h1>
+
+<p><a href="https://huggingface.co/spaces/nvidia/nemotron-transcribe">Hugging Face demo</a> 또는 <a href="https://modelscope.ai/studios/nv-community/Nemotron-3.5-Transcribe">ModelScope Studios</a>에서 Nemotron 3.5 Transcribe를 사용해 본 다음, <a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B">Hugging Face</a> 또는 <a href="https://modelscope.ai/collections/nv-community/Nemotron-35-Transcribe">ModelScope</a>에서 체크포인트를 다운로드하세요. 자체 호스팅 전사를 시작하려면 <a href="https://github.com/NVIDIA-NeMo/Speech/blob/main/docs/source/speechlm2/vllm_serving.rst">vLLM</a> 또는 <a href="https://sgl-project.github.io/sglang-omni/cookbook/nemotron_transcribe.html">SGLang-Omni</a>를 이용하세요. 두 환경 모두 출시 첫날부터 지원을 제공합니다.</p>
+
+<p>자체 호스팅을 생략하려면 <a href="https://www.baseten.co/library/nvidia-nemotron-35-transcribe/">Baseten</a>, <a href="https://deepinfra.com/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B">DeepInfra</a> 또는 Simplismart에서 호스팅 엔드포인트를 사용하세요.</p>
+
+<p>도메인에 맞게 조정하려면 <a href="https://huggingface.co/datasets/nvidia/Granary-v2">Hugging Face</a> 또는 <a href="https://modelscope.ai/datasets/nv-community/Granary-v2">ModelScope</a>의 Granary v2 매니페스트와 <a href="https://github.com/NVIDIA-NeMo/Speech/blob/main/examples/speechlm2/finetuning/docs/medical-asr-synthetic-data.md">medical ASR case study</a>부터 시작하거나, <a href="https://github.com/NVIDIA-NeMo/Speech/blob/main/.claude/skills/finetune-speech-llm/SKILL.md">fine-tuning agent skill</a>를 사용해 코딩 에이전트가 워크플로를 실행하도록 하세요.</p>
+
+<p>모델 및 데이터셋</p>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>모델 체크포인트: <a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B">Hugging Face</a>, <a href="https://modelscope.ai/collections/nv-community/Nemotron-35-Transcribe">ModelScope</a>의 NVIDIA Nemotron 3.5 Transcribe</td>
+          <td><a href="https://huggingface.co/spaces/nvidia/nemotron-transcribe">Hugging Face</a>, <a href="https://modelscope.ai/studios/nv-community/Nemotron-3.5-Transcribe">ModelScope</a>의 인터랙티브 데모</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>호스팅 엔드포인트: <a href="https://www.baseten.co/library/nvidia-nemotron-35-transcribe/">Baseten</a>, <a href="https://deepinfra.com/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B">DeepInfra</a></p>
+  </li>
+  <li>
+    <p>데이터셋 매니페스트: <a href="https://huggingface.co/datasets/nvidia/Granary-v2">Hugging Face,</a> <a href="https://modelscope.ai/datasets/nv-community/Granary-v2">ModelScope</a>의 Granary v2 매니페스트</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>High Fidelity 하위 집합: <a href="https://huggingface.co/datasets/nvidia/Granary-HiFi">Hugging Face,</a> <a href="https://modelscope.ai/datasets/nv-community/Granary-HiFi">ModelScope</a>의 매니페스트</td>
+          <td><a href="https://huggingface.co/spaces/nvidia/Granary-HiFi">Space on Hugging Face</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>리포지터리 및 튜토리얼: <a href="https://github.com/NVIDIA-NeMo/Speech">NVIDIA NeMo Speech GitHub</a></td>
+      <td><a href="https://github.com/NVIDIA-NeMo/Curator/tree/main/tutorials/audio/granary_v2">NeMo Curator Granary v2 Pipeline</a></td>
+      <td><a href="https://github.com/NVIDIA-NeMo/Speech/blob/main/docs/source/speechlm2/vllm_serving.rst">vLLM Deployment Guide</a></td>
+      <td><a href="https://github.com/NVIDIA-NeMo/Speech/blob/main/tutorials/speechlm2/finetuning/README.md">Speech Fine-Tuning Guide</a></td>
+      <td><a href="https://github.com/NVIDIA-NeMo/Speech/blob/main/.claude/skills/finetune-speech-llm/SKILL.md">Fine-Tuning Agent Skill</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>파트너 블로그: <a href="https://www.agora.io/en/blog/how-live-teaching-can-become-a-lasting-learning-resource/">Agora</a></td>
+      <td><a href="https://inflection.ai/blog/building-inflection-ais-multi-speaker-capabilities-with-nvidia-nemotron-speech-open-models">Inflection AI</a></td>
+      <td><a href="https://voicearena.com/research/diarization-bench/diarization-asr-track-cpwer-results">VoiceArena</a></td>
+      <td><a href="https://simplismart.ai/blog/nvidia-nemotron-3-5-transcribe">Simplismart</a></td>
+      <td><a href="https://deepinfra.com/blog/nvidia-nemotron-3-5-transcribe-release">DeepInfra</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>로컬 AI: <a href="https://blogs.nvidia.com/blog/local-ai-rtx-spark-laptops-updates-models-agents-games">What’s new in local AI on NVIDIA RTX PCs, laptops, and DGX Spark</a></p>
+
+                
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-10-28">28 Oct 2026</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#nvidia-nemotron-35-transcribe-and-granary-v2-프롬프트로-지시하고-조정할-수-있는-지능형-다국어-전사" id="markdown-toc-nvidia-nemotron-35-transcribe-and-granary-v2-프롬프트로-지시하고-조정할-수-있는-지능형-다국어-전사">NVIDIA Nemotron 3.5 Transcribe and Granary v2: 프롬프트로 지시하고 조정할 수 있는 지능형 다국어 전사</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">다국어 전사, 화자 식별, 번역, 오디오 Q&amp;A를 하나의 오픈 모델로 제공하며, 리더보드에서 최고 수준의 결과를 달성하고, 모델을 조정할 수 있는 오픈 Granary v2 데이터 파이프라인과 파인튜닝 레시피까지 지원</a></li>
+    </ul>
+  </li>
+  <li><a href="#자연어로-전사와-분석-안내하기" id="markdown-toc-자연어로-전사와-분석-안내하기">자연어로 전사와 분석 안내하기</a></li>
+  <li><a href="#전사부터-화자-식별까지-이어지는-리더보드-성과" id="markdown-toc-전사부터-화자-식별까지-이어지는-리더보드-성과">전사부터 화자 식별까지 이어지는 리더보드 성과</a></li>
+  <li><a href="#transcribe의-기반이-되는-오픈-데이터-큐레이션-파이프라인-granary-v2" id="markdown-toc-transcribe의-기반이-되는-오픈-데이터-큐레이션-파이프라인-granary-v2">Transcribe의 기반이 되는 오픈 데이터 큐레이션 파이프라인, Granary v2</a></li>
+  <li><a href="#중요한-어휘에-맞게-인식-조정하기" id="markdown-toc-중요한-어휘에-맞게-인식-조정하기">중요한 어휘에 맞게 인식 조정하기</a>    <ul>
+      <li><a href="#section-2" id="markdown-toc-section-2">보류 화자를 대상으로 측정한 도메인 성능 향상</a></li>
+    </ul>
+  </li>
+  <li><a href="#nemotron-35-transcribe와-granary-v2-시작하기" id="markdown-toc-nemotron-35-transcribe와-granary-v2-시작하기">Nemotron 3.5 Transcribe와 Granary v2 시작하기</a></li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-247/" alt="">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href=""></a>
+        <span class="author-description"></span>                        
+    </div>
+</div>
+
+
+
+
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">25</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="translation">
+            Translation
+            <span class="count">25</span>
+          </button>
+        
+      
+        
+        
+          <button class="filter-btn" data-category="huggingface">
+            HuggingFace
+            <span class="count">24</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/omlx/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-09-22-omlx/thumbnail.jpg" alt="oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/omlx/">oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Jun Kim, oMLX creator and maintainer, joins Hugging Face to...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">22 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/ibm-releases-sota-granite-time-series/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png" alt="상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/ibm-releases-sota-granite-time-series/">상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 IBM releases SOTA Granite Time Series PatchTST-FM-r2 model with commercial-friendly...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">10 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/grabette/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">21 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/security-incident-july-2026/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-07-16-security-incident-july-2026/thumbnail.png" alt="보안 사고 공개 — 2026년 7월" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/security-incident-july-2026/">보안 사고 공개 — 2026년 7월</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Security incident disclosure — July 2026를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">16 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/thinkingmachines-inkling/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" alt="Thinking Machines의 Inkling에 오신 것을 환영합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/real-world-voiceeq/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" alt="Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/real-world-voiceeq/">Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing Real World VoiceEQ: Measuring the human quality of voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/torch-attention-profile/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" alt="파이토치의 프로파일링(3부): 어텐션이 전부다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">10 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/native-speed-vllm-transformers-backend/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/lerobot-release-v060/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" alt="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">07 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/cerebras-gemma4-voice-ai/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">01 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/eee-community-evals/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" alt="Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Featuring Every Eval Ever Results on Hugging Face Model Pages를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">30 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/vllm-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">26 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/ffasr-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">24 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/huggingface-hub-release-ci/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" alt="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/huggingface-hub-release-ci/">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/cross-origin-storage/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/peft-beyond-lora/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/is-it-agentic-enough/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" alt="충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/agentic-resource-discovery-launch/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-06-17-agentic-resource-discovery-launch/thumbnail.png" alt="에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Agentic Resource Discovery: Let agents search를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">17 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/github-ci-hf-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-06-09-github-ci-hf-jobs/thumbnail.gif" alt="GitHub CI를 Hugging Face Jobs로 마이그레이션" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Migrating Your GitHub CI to Hugging Face Jobs를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">09 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/openenv-agentic-rl/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-06-08-openenv-agentic-rl/thumbnail.png" alt="오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Open Source Community is backing OpenEnv for Agentic RL를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/torch-profiler/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-05-29-torch-profiler/thumbnail.png" alt="PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 1): A Beginner’s Guide to torch.profiler를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">29 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/local-reachy-mini-conversation/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">27 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/olmoearth-v1-1/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-05-20-olmoearth-v1-1/thumbnail.png" alt="OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 OlmoEarth v1.1: A more efficient family of models를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">20 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/paddleocr-transformers/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">19 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="transformers translation ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-247/how-to-use-translator/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-247/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-247/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
+        <p class="card-text text-muted">
+Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">05 Oct 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+</main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-247/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-247/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-247/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-247/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-247/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-247/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-247/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-247/assets/js/category.js"></script>
+  </body>
+</html>
