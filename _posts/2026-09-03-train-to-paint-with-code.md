@@ -78,7 +78,7 @@ environment you need to build](#the-rl-environment-you-need-to-build)에서 시�
 
 <figure class="image text-center">
   <video controls autoplay muted loop playsinline src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-to-paint-with-code/three-runs-evolution.mp4" title="Three runs evolving in parallel"></video>
-  <figcaption>Three runs, one per reward mix, evolving in parallel. Each frame shows the median painting of a step. No need to tell them apart yet, the article explains which run is which.</figcaption>
+  <figcaption>reward mix별 세 번의 run이 나란히 진화하는 모습. 각 프레임은 한 step의 median 그림을 보여 줍니다. 아직 구분할 필요는 없습니다. 어느 run이 어느 run인지 글에서 설명합니다.</figcaption>
 </figure>
 
 ## 사람들이 이 작업을 좋아한 이유 {#section-1}
@@ -109,7 +109,7 @@ Belamy](https://en.wikipedia.org/wiki/Edmond_de_Belamy)(2018) 같은 작품은 G
 
 <figure class="image text-center">
   <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-to-paint-with-code/reward-diagram.png" alt="The reward pipeline, piece by piece">
-  <figcaption>Two of the four terms in the reward function are models. Both are proxies for someone's taste.</figcaption>
+  <figcaption>reward function의 네 항 중 두 항은 모델입니다. 둘 다 누군가의 취향을 대신하는 지표입니다.</figcaption>
 </figure>
 
 이것이 Narreddi가 수렴한 가중치입니다. 여기서 취향을 정의하는 것은 pool입니다. 따라서 작업의 초점은 hyperparameter 조정에서 무엇이 아름다운지를 결정하는 집합을 구축하는 일로 이동합니다.
@@ -142,7 +142,7 @@ p5.brush는 47개의 메서드를 노출합니다. 프롬프트에서는 `scaleB
 
 <figure class="image text-center">
   <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-to-paint-with-code/sketch-and-render.png" alt="A generated sketch and the painting it produces">
-  <figcaption>Part of one rollout's <code>draw()</code> and what it renders to. The comments are the model's own. Reward 0.864, 129 lines, step 22. The full source of every painting is in the rollouts dataset.</figcaption>
+  <figcaption>한 rollout의 <code>draw()</code> 일부와 그 렌더링 결과. 주석은 모델이 직접 쓴 것입니다. reward 0.864, 129줄, step 22. 모든 그림의 전체 소스는 rollouts 데이터셋에 있습니다.</figcaption>
 </figure>
 
 그의 블로그 글 덕분에 프롬프트를 반복해서 수정하느라 낭비했을 시간을 크게 줄일 수 있었습니다. 긴 API reference를 제공하면 모델은 존재하지 않는 메서드를 만들어 내고, 그의 200회 GEPA iteration은 documentation 없이 엄격한 allowlist로 수렴했습니다. 저도 같은 실패를 확인했고 allowlist를 직접 작성했습니다. 이 레시피에 추가한 유일한 내용은 꽃잎 하나를 두세 번 칠하라는 한 문장입니다. 먼저 크게 칠하고, 그 안에 더 작고 불투명한 획을 추가합니다. 이 작은 변경으로 제 출력은 훨씬 더 다채로워졌습니다.
@@ -167,7 +167,7 @@ pool은 [178 paintings](https://huggingface.co/datasets/HuggingEnvs/watercolour-
 
 <figure class="image text-center">
   <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-to-paint-with-code/love-and-okay.png" alt="A love reference beside an okay one">
-  <figcaption>The two tiers, as they actually look. Disagreeing with the rating is reasonable, somebody's judgement is now the reward function.</figcaption>
+  <figcaption>두 tier의 실제 모습. 평가에 동의하지 않는 것도 당연합니다. 이제 누군가의 판단이 reward function입니다.</figcaption>
 </figure>
 
 tier는 reward에서 실제로 중요한 역할을 합니다. pairwise judge가 네 개의 reference를 선택할 때 절반은 `love`, 나머지 절반은 `okay`에서 가져옵니다. 따라서 policy는 때때로 이길 수 있는 rival과 항상 맞붙게 되고, 어느 tier를 상대로 이겨도 같은 보상을 받습니다. 이것은 제가 의도적으로 변경한 몇 안 되는 부분 중 하나입니다. 원문에서는 최상위 tier하고만 비교하지만, 초기의 약한 policy도 signal을 받을 수 있도록 더 쉬운 tier를 추첨에 포함했습니다.
@@ -184,7 +184,7 @@ tier는 reward에서 실제로 중요한 역할을 합니다. pairwise judge가 
 
 <figure class="image text-center">
   <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-to-paint-with-code/four-curves.png" alt="Three reward experiments flat against the run that worked">
-  <figcaption>Three experiments on the reward, three flat lines. I swapped the pool, removed renderer noise and turned the pairwise judge off, and none of it moved the curve. The run that moves changed the trainer configuration, so the difference is the trainer, not the reward mix.</figcaption>
+  <figcaption>reward에 대한 세 번의 실험, 세 개의 평평한 곡선. pool을 바꾸고, 렌더러 노이즈를 제거하고, pairwise judge를 꺼 봤지만 곡선은 움직이지 않았습니다. 움직인 run은 trainer 설정을 바꾼 run이므로, 차이는 reward mix가 아니라 trainer입니다.</figcaption>
 </figure>
 
 시간을 들여 찾아낸 또 다른 변경 사항은 LoRA parameter를 올바르게 조정하는 일이었습니다. 일반적인 `target_modules` 목록은 dense model을 가정하지만, [`Qwen/Qwen3.5-35B-A3B`](https://huggingface.co/Qwen/Qwen3.5-35B-A3B)은(는) 대부분의 projection을 다른 이름으로 지정하는 mixture of experts이므로 adapter가 40개 layer 중 10개만 학습하고 있었습니다. 이를 `all-linear`(으)로 변경해 모든 linear layer에 도달하도록 하여 해결했습니다. 이 architecture의 routed expert는 `all-linear`조차 frozen 상태로 두는 fused tensor지만, 나머지에는 모두 adapter가 적용되었고, 그것만으로도 학습하기에 충분했습니다.
@@ -244,14 +244,14 @@ Surya는 자신이 가장 좋아하는 작품 몇 점으로 블로그를 마무�
 
 <figure class="image text-center">
   <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-to-paint-with-code/pick-your-favourites.png" alt="178 paintings from the two judge runs, unlabelled">
-  <figcaption>The reward's 178 favourites from the two judge runs, shuffled. Now pick yours.</figcaption>
+  <figcaption>두 judge run에서 reward가 가장 높았던 178점의 그림을 섞어 놓은 모습. 이제 여러분이 골라 보세요.</figcaption>
 </figure>
 
 고르기 위해 많은 그림을 보고 몇 개를 남겼을 텐데, 이것이 바로 이 프로젝트의 reward를 만든 작업입니다. 모든 run의 모든 그림과 sketch, reward는 rollout 데이터셋에 있으며 [this gallery](https://huggingface.co/spaces/HuggingEnvs/watercolour-gallery)에서 둘러볼 수 있습니다.
 
 <figure class="image text-center">
   <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-to-paint-with-code/three-styles.png" alt="The median painting of the last step of each run">
-  <figcaption>The last step's median painting of each run, in the same order as the opening video. Same base model, same pool, three reward mixes, three styles.</figcaption>
+  <figcaption>각 run의 마지막 step median 그림을 오프닝 영상과 같은 순서로 늘어놓은 모습. 같은 base model, 같은 pool, 세 가지 reward mix, 세 가지 스타일.</figcaption>
 </figure>
 
 reward가 부분적으로 제 취향에 기반했으므로, 보는 사람으로서 제 판단으로 마무리하는 것이 공정할 것 같습니다. 제 눈에는 `judge-led`이(가) 가장 다양하고 예술적으로 흥미롭게 끝나는 run입니다. `hps-led`은(는) 설득력 있는 수채화를 그리지만, 최고의 그림들도 부드러운 wet-on-wet 느낌을 공유하며 거의 독자적인 스타일처럼 보입니다. `hps-only`은(는) 가장 강하게 수렴하고, 대부분의 그림이 같은 색에 안착합니다. 모든 run의 모든 그림을 step과 reward별로 정렬할 수 있는 [the
@@ -268,7 +268,7 @@ upstream](https://github.com/huggingface/OpenEnv/pull/1103)이며, 이를 사용
 
 <figure class="image text-center">
   <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-to-paint-with-code/step-11-vs-step-12.png" alt="Steps 11 and 12 of the judge-led run, best four of each">
-  <figcaption>Two consecutive steps of the <code>judge-led</code> run, best four of each. Whether step 12's paintings look half a point worse is for you to decide.</figcaption>
+  <figcaption><code>judge-led</code> run의 연속된 두 step, 각 step의 최고 그림 네 점씩. step 12의 그림이 0.5점 낮아 보이는지는 여러분이 판단해 보세요.</figcaption>
 </figure>
 
 **한 step의 reward는 어떤 reference를 뽑았는지에 따라 달라집니다.** pairwise judge는 step마다 네 개의 reference를 sample하므로 각 step은 서로 다른 rival 집합을 상대하고, 어떤 draw는 단순히 더 어렵습니다. GRPO 자체는 group 내부에서 advantage를 계산하므로 대부분 안전하며, 어려운 draw가 group 전체를 함께 움직입니다. 제가 읽고 있던 curve는 안전하지 않았고, 나쁜 step처럼 보였던 것 중 일부는 그저 어려운 draw였습니다. 위 이미지는 한 예입니다. Step 12가 step 11보다 0.5점 낮았던 주된 이유는 해당 run에서 가장 어려운 reference를 뽑았기 때문이며, 그림 자체는 비슷해 보입니다.
@@ -291,7 +291,7 @@ scorer를 유지하는 비용이 이를 사용하는 학습보다 더 클 수 �
 
 <figure class="image text-center">
   <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-to-paint-with-code/infra-diagram.png" alt="The infrastructure: what is billed during a run, and what outlives it">
-  <figcaption>Four paid services have to stay healthy at once. Only the Hub and trackio outlive the run.</figcaption>
+  <figcaption>네 개의 유료 서비스가 동시에 정상 상태를 유지해야 합니다. run이 끝난 뒤에도 남는 것은 Hub와 trackio뿐입니다.</figcaption>
 </figure>
 
 모든 것은 [HF
