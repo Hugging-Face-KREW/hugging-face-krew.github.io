@@ -1,1 +1,0 @@
-Sitemap: https://huggingface-krew.co/pr-preview/pr-255/sitemap.xml
