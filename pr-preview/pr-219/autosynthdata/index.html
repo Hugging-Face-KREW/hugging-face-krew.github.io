@@ -23,8 +23,6 @@
     />
     <link rel="icon" href="/pr-preview/pr-219/assets/images/favicon.ico" />
 
-    <title>AutoSynthData: 엔터프라이즈 에이전트를 위한 학습 데이터 생성 | Hugging Face KREW</title>
-
     <!-- Begin Jekyll SEO tag v2.9.1 -->
 <title>AutoSynthData: 엔터프라이즈 에이전트를 위한 학습 데이터 생성 | Hugging Face KREW</title>
 <meta name="generator" content="Jekyll v4.4.1" />
@@ -33,16 +31,18 @@
 <meta property="og:locale" content="ko" />
 <meta name="description" content="이 글은 Hugging Face 블로그의 AutoSynthData: Generating Training Data for Enterprise Agents를 한국어로 번역한 글입니다." />
 <meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 AutoSynthData: Generating Training Data for Enterprise Agents를 한국어로 번역한 글입니다." />
+<link rel="canonical" href="https://huggingface-krew.co/pr-preview/pr-219/autosynthdata/" />
+<meta property="og:url" content="https://huggingface-krew.co/pr-preview/pr-219/autosynthdata/" />
 <meta property="og:site_name" content="Hugging Face KREW" />
-<meta property="og:image" content="/pr-preview/pr-219/autosynthdata/assets/images/blog/posts/2026-10-02-autosynthdata/thumbnail.png" />
+<meta property="og:image" content="https://huggingface-krew.co/pr-preview/pr-219/autosynthdata/assets/images/blog/posts/2026-10-02-autosynthdata/thumbnail.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2026-10-02T00:00:00+09:00" />
 <meta property="article:modified_time" content="2026-10-02T00:00:00+09:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="/pr-preview/pr-219/autosynthdata/assets/images/blog/posts/2026-10-02-autosynthdata/thumbnail.png" />
+<meta name="twitter:image" content="https://huggingface-krew.co/pr-preview/pr-219/autosynthdata/assets/images/blog/posts/2026-10-02-autosynthdata/thumbnail.png" />
 <meta name="twitter:title" content="AutoSynthData: 엔터프라이즈 에이전트를 위한 학습 데이터 생성" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-10-02T00:00:00+09:00","datePublished":"2026-10-02T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 AutoSynthData: Generating Training Data for Enterprise Agents를 한국어로 번역한 글입니다.","headline":"AutoSynthData: 엔터프라이즈 에이전트를 위한 학습 데이터 생성","image":"/pr-preview/pr-219/autosynthdata/assets/images/blog/posts/2026-10-02-autosynthdata/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-219/autosynthdata/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-219/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-219/autosynthdata/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-10-02T00:00:00+09:00","datePublished":"2026-10-02T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 AutoSynthData: Generating Training Data for Enterprise Agents를 한국어로 번역한 글입니다.","headline":"AutoSynthData: 엔터프라이즈 에이전트를 위한 학습 데이터 생성","image":"https://huggingface-krew.co/pr-preview/pr-219/autosynthdata/assets/images/blog/posts/2026-10-02-autosynthdata/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://huggingface-krew.co/pr-preview/pr-219/autosynthdata/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://huggingface-krew.co/pr-preview/pr-219/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"https://huggingface-krew.co/pr-preview/pr-219/autosynthdata/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -170,6 +170,9 @@
     <main class="container"><!-- Begin Article
 ================================================== -->
 
+
+
+
 	<div class="row">
 
 		<!-- Post -->        
@@ -206,7 +209,7 @@
                 <!-- End Categories -->
                 
                 <!-- Post Title -->
-				<h1 class="posttitle">AutoSynthData: 엔터프라이즈 에이전트를 위한 학습 데이터 생성</h1> 
+				<h1 class="posttitle">AutoSynthData: 엔터프라이즈 에이전트를 위한 학습 데이터 생성</h1>
                 
 			</div>
 
@@ -214,7 +217,8 @@
 
 			<!-- Post Content -->
 			<div class="article-post serif-font">
-				<ul id="markdown-toc">
+                
+                    <ul id="markdown-toc">
   <li><a href="#autosynthdata-엔터프라이즈-에이전트를-위한-학습-데이터-생성" id="markdown-toc-autosynthdata-엔터프라이즈-에이전트를-위한-학습-데이터-생성">AutoSynthData: 엔터프라이즈 에이전트를 위한 학습 데이터 생성</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">유용한 에이전트 작업이란 무엇인가?</a>        <ul>
           <li><a href="#시스템-사양" id="markdown-toc-시스템-사양">시스템 사양</a></li>
@@ -225,8 +229,8 @@
       <li><a href="#section-2" id="markdown-toc-section-2">개요</a></li>
       <li><a href="#section-3" id="markdown-toc-section-3">모델의 실패에서 커리큘럼으로</a></li>
       <li><a href="#section-4" id="markdown-toc-section-4">작업 생성 및 확장</a>        <ul>
-          <li><a href="#target" id="markdown-toc-target">Target</a></li>
-          <li><a href="#multiply" id="markdown-toc-multiply">Multiply</a></li>
+          <li><a href="#target-단계" id="markdown-toc-target-단계">Target 단계</a></li>
+          <li><a href="#multiply-단계" id="markdown-toc-multiply-단계">Multiply 단계</a></li>
           <li><a href="#구현-세부-사항" id="markdown-toc-구현-세부-사항">구현 세부 사항</a></li>
         </ul>
       </li>
@@ -266,7 +270,7 @@ Review instructions:
 
 <h1 id="autosynthdata-엔터프라이즈-에이전트를-위한-학습-데이터-생성">AutoSynthData: 엔터프라이즈 에이전트를 위한 학습 데이터 생성</h1>
 
-<p><a href="https://cdn-uploads.huggingface.co/production/uploads/68642da9885da181fde1ad70/mlI168havBLGXY2qbd4ud.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/68642da9885da181fde1ad70/mlI168havBLGXY2qbd4ud.png" alt="AutoSynthData_thumbnail_1200x648 (2)" /></a></p>
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/68642da9885da181fde1ad70/mlI168havBLGXY2qbd4ud.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/68642da9885da181fde1ad70/mlI168havBLGXY2qbd4ud.png" alt="AutoSynthData 소개 썸네일" /></a></p>
 
 <p>엔터프라이즈에는 자체 환경에서 제대로 작동하는 에이전트가 필요합니다. 이러한 에이전트에게 요청하는 작업은 사용하는 시스템, 따르는 규칙, 데이터 상태에 따라 결정됩니다. 모델이 전반적으로 뛰어난 역량을 갖추고 있어도 특정 환경에서는 어려움을 겪을 수 있습니다. 예를 들어 제대로 처리하지 못하는 워크플로, 잘못 사용하는 도구 조합, 지키지 못하는 제약 등이 있을 수 있습니다. 엔터프라이즈가 개선해야 하는 부분은 바로 이러한 약점입니다.</p>
 
@@ -359,11 +363,11 @@ Review instructions:
 
 <p>AutoSynthData는 두 단계로 데이터셋을 구축합니다. 먼저 핵심 샘플을 생성하고 검증한 다음, 이를 새로운 변형으로 확장합니다.</p>
 
-<h3 id="target">Target</h3>
+<h3 id="target-단계">Target 단계</h3>
 
 <p>Target 단계에서는 역량 사양으로부터 핵심 학습 샘플 집합을 만듭니다. 워커는 독립적인 작업을 병렬로 생성하고, 작업을 마치면 새로운 target을 가져옵니다. 각 후보는 승인되기 전에 검증, 실행, 솔버 평가 및 수리 과정을 거칩니다. 그 결과 대상 모델이 학습해야 할 내용을 중심으로 검토가 완료된 예제 배치가 만들어집니다.</p>
 
-<h3 id="multiply">Multiply</h3>
+<h3 id="multiply-단계">Multiply 단계</h3>
 
 <p>Multiply 단계에서는 승인된 target 샘플의 새로운 변형을 만들어 데이터셋을 확장합니다. 각 변형은 자체 사용자 요청, 환경 상태, 엔터티 구성, 참조 궤적 및 검증기를 가지며 동일한 검증 및 실행 검사를 통과해야 합니다. Multiply된 샘플은 다른 Multiply 샘플의 시드가 될 수 없습니다. 이를 통해 확장을 검토가 완료된 target 집합에 고정하고 세대 간 드리프트를 제한합니다.</p>
 
@@ -488,6 +492,7 @@ accept or retry
 
 <p>학습에 가장 유용한 작업은 환경과 그 환경에서 작동하는 모델 모두에 따라 달라집니다. AutoSynthData는 모델의 실패를 활용해 무엇을 생성할지 선택하고, 환경을 기준으로 새로운 작업을 검증하며, 해당 작업을 사후 학습에 사용할 수 있도록 합니다. EnterpriseOps Gym의 결과는 통제된 환경에서 이 접근 방식의 가치를 보여줍니다. 모델이 변화하면 동일한 프로세스를 통해 남아 있는 격차에 집중할 수 있습니다.</p>
 
+                
                 <div class="clearfix"></div>
 			</div>
 
@@ -549,8 +554,8 @@ accept or retry
       <li><a href="#section-2" id="markdown-toc-section-2">개요</a></li>
       <li><a href="#section-3" id="markdown-toc-section-3">모델의 실패에서 커리큘럼으로</a></li>
       <li><a href="#section-4" id="markdown-toc-section-4">작업 생성 및 확장</a>        <ul>
-          <li><a href="#target" id="markdown-toc-target">Target</a></li>
-          <li><a href="#multiply" id="markdown-toc-multiply">Multiply</a></li>
+          <li><a href="#target-단계" id="markdown-toc-target-단계">Target 단계</a></li>
+          <li><a href="#multiply-단계" id="markdown-toc-multiply-단계">Multiply 단계</a></li>
           <li><a href="#구현-세부-사항" id="markdown-toc-구현-세부-사항">구현 세부 사항</a></li>
         </ul>
       </li>
@@ -613,7 +618,7 @@ accept or retry
     <div class="filter-tabs">
       <button class="filter-btn active" data-category="all">
         All
-        <span class="count">21</span>
+        <span class="count">25</span>
       </button>
 
       
@@ -621,7 +626,7 @@ accept or retry
         
           <button class="filter-btn" data-category="translation">
             Translation
-            <span class="count">21</span>
+            <span class="count">25</span>
           </button>
         
       
@@ -629,7 +634,7 @@ accept or retry
         
           <button class="filter-btn" data-category="huggingface">
             HuggingFace
-            <span class="count">20</span>
+            <span class="count">24</span>
           </button>
         
       
@@ -639,6 +644,14 @@ accept or retry
 
 
 <section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
   
       
   
@@ -696,12 +709,68 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/grabette/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/omlx/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-09-22-omlx/thumbnail.jpg" alt="oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/omlx/">oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Jun Kim, oMLX creator and maintainer, joins Hugging Face to...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">22 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/ibm-releases-sota-granite-time-series/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png" alt="상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/ibm-releases-sota-granite-time-series/">상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 IBM releases SOTA Granite Time Series PatchTST-FM-r2 model with commercial-friendly...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">10 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/grabette/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -724,12 +793,42 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/thinkingmachines-inkling/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/security-incident-july-2026/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-07-16-security-incident-july-2026/thumbnail.png" alt="보안 사고 공개 — 2026년 7월" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/security-incident-july-2026/">보안 사고 공개 — 2026년 7월</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Security incident disclosure — July 2026를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">16 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/thinkingmachines-inkling/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" alt="Thinking Machines의 Inkling에 오신 것을 환영합니다" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
         <p class="card-text text-muted">
 이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.
 </p>
@@ -754,12 +853,40 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/torch-attention-profile/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/real-world-voiceeq/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" alt="Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/real-world-voiceeq/">Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing Real World VoiceEQ: Measuring the human quality of voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/torch-attention-profile/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" alt="파이토치의 프로파일링(3부): 어텐션이 전부다" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -782,12 +909,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/native-speed-vllm-transformers-backend/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/native-speed-vllm-transformers-backend/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
         <p class="card-text text-muted">
 이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
 </p>
@@ -812,12 +939,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/lerobot-release-v060/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/lerobot-release-v060/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" alt="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
         <p class="card-text text-muted">
 이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.
 </p>
@@ -842,12 +969,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/cerebras-gemma4-voice-ai/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/cerebras-gemma4-voice-ai/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -870,12 +997,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/eee-community-evals/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/eee-community-evals/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" alt="Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Featuring Every Eval Ever Results on Hugging Face Model Pages를...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -898,12 +1025,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/vllm-jobs/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/vllm-jobs/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -926,12 +1053,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/ffasr-leaderboard/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/ffasr-leaderboard/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -954,12 +1081,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/huggingface-hub-release-ci/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/huggingface-hub-release-ci/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" alt="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/huggingface-hub-release-ci/">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/huggingface-hub-release-ci/">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -982,12 +1109,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/cross-origin-storage/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/cross-origin-storage/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1010,12 +1137,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/peft-beyond-lora/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/peft-beyond-lora/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1038,12 +1165,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/is-it-agentic-enough/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/is-it-agentic-enough/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" alt="충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1066,12 +1193,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/agentic-resource-discovery-launch/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/agentic-resource-discovery-launch/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-06-17-agentic-resource-discovery-launch/thumbnail.png" alt="에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
         <p class="card-text text-muted">
 이 글은 Hugging Face 블로그의 Agentic Resource Discovery: Let agents search를 한국어로 번역한 글입니다.
 </p>
@@ -1096,12 +1223,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/github-ci-hf-jobs/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/github-ci-hf-jobs/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-06-09-github-ci-hf-jobs/thumbnail.gif" alt="GitHub CI를 Hugging Face Jobs로 마이그레이션" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Migrating Your GitHub CI to Hugging Face Jobs를 한국어로 번역한...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1124,12 +1251,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/openenv-agentic-rl/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/openenv-agentic-rl/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-06-08-openenv-agentic-rl/thumbnail.png" alt="오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Open Source Community is backing OpenEnv for Agentic RL를...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1152,12 +1279,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/torch-profiler/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/torch-profiler/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-05-29-torch-profiler/thumbnail.png" alt="PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 1): A Beginner’s Guide to torch.profiler를...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1180,12 +1307,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/local-reachy-mini-conversation/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/local-reachy-mini-conversation/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
         <p class="card-text text-muted">
 이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
 </p>
@@ -1210,12 +1337,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/olmoearth-v1-1/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/olmoearth-v1-1/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-05-20-olmoearth-v1-1/thumbnail.png" alt="OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 OlmoEarth v1.1: A more efficient family of models를 한국어로 번역한...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1238,12 +1365,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/paddleocr-transformers/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/paddleocr-transformers/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1266,12 +1393,12 @@ accept or retry
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-219/how-to-use-translator/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-219/how-to-use-translator/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-219/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-219/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-219/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
         <p class="card-text text-muted">
 Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
 </p>
