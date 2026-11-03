@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "에이전트는 끝났다고 말했다. 데이터베이스는 동의하지 않았다."
+description: "Microsoft와 Hugging Face가 공동 공개한 ThinkingBox는 AI 에이전트를 생성 문장이 아닌 데이터베이스 상태로 평가하는 벤치마크입니다. 507개 워크플로 × 20회 반복 실험의 결과와 일관성의 비용을 다룹니다."
 author: dailybot
 categories: [Translation, HuggingFace]
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/64b8491203124195cd795cad/NStwJm1AafDELVsU4KGwS.png
@@ -33,13 +34,13 @@ Review instructions:
 
 # 에이전트는 끝났다고 말했다. 데이터베이스는 동의하지 않았다.
 
-Microsoft ThinkingBox는 AI 에이전트를 생성한 문장이 아니라 남겨 놓은 레코드를 기준으로 평가한 다음, 이를 연속으로 20회 수행할 수 있는지 묻습니다. 이제 Hugging Face에서 사용할 수 있습니다.
+Microsoft ThinkingBox는 AI 에이전트가 생성한 문장이 아니라 남긴 레코드를 기준으로 평가한 다음, 이를 연속으로 20회 수행할 수 있는지 묻습니다. 이제 Hugging Face에서 사용할 수 있습니다.
 
 [![Figure-1](https://cdn-uploads.huggingface.co/production/uploads/64b8491203124195cd795cad/Dzuml_9K2lfRq4hZi17EY.png)](https://cdn-uploads.huggingface.co/production/uploads/64b8491203124195cd795cad/Dzuml_9K2lfRq4hZi17EY.png)
 
-그림 1: ThinkingBox는 격리된 MCP 도구 세션에서 에이전트를 실행한 다음, 에이전트가 남긴 최종 백엔드 상태와 side effect를 평가합니다. [ThinkingBox paper](https://arxiv.org/abs/2608.19741)에서 가져왔습니다.
+그림 1: ThinkingBox는 격리된 MCP 도구 세션에서 에이전트를 실행한 다음, 에이전트가 남긴 최종 백엔드 상태와 사이드 이펙트(side effect)를 평가합니다. [ThinkingBox 논문](https://arxiv.org/abs/2608.19741)에서 가져왔습니다.
 
-#### 이 글은 Microsoft와 Hugging Face가 공동으로 작성했으며, 공동 집필 및 검토에 참여한 Tommy Guy(Enderis AI 창립자, 전 Microsoft), Hugging Face의 Sergio Paniego, 그리고 전 인턴 Zhuochun Li(University of Pittsburgh), Ali Keramati(UC Irvine), Youngmin Ko(Northwestern)에게 특별히 감사드립니다.
+이 글은 Microsoft와 Hugging Face가 공동으로 작성했으며, 공동 집필 및 검토에 참여한 Tommy Guy(Enderis AI 창립자, 전 Microsoft), Hugging Face의 Sergio Paniego, 그리고 전 인턴 Zhuochun Li(University of Pittsburgh), Ali Keramati(UC Irvine), Youngmin Ko(Northwestern)에게 특별히 감사드립니다.
 
 한 고객이 문의를 보냅니다. 고객의 745달러짜리 주방 가전이 내슈빌 물류 센터에서 배송업체의 "exception" 상태에 멈춰 있으며, 예상 배송일보다 15일이 지났습니다.
 
@@ -53,27 +54,27 @@ AI 에이전트는 신중하게 작업합니다. 아홉 번의 도구 호출을 
 
 ThinkingBox가 측정하는 것은 바로 이 간극입니다. 507개의 상태 기반 비즈니스 워크플로를 대상으로 각각 다양한 LLM 모델에서 20회씩 실행하고, 에이전트의 최종 백엔드 상태와 side effect를 평가합니다. 이 글에서는 우리가 발견한 내용, 일관성에 드는 비용, 그리고 [OpenEnv](https://github.com/huggingface/OpenEnv/tree/main/envs/thinkingbox_env)를 통해 직접 벤치마크를 실행하는 방법을 다룹니다.
 
-이 작업은 직접 실행해 볼 수 있습니다. 위의 예시는 벤치마크 태스크 [sandbox_external_retail_group1.py:test_case_ST003_006](https://github.com/microsoft/thinkingbox-data/blob/thinkingbox-bench-v1.0/dataset/test_case/sandbox_external_retail/sandbox_external_retail_group1.py#L984-L1223)에서 가져온 것이며, 실패하는 실행 가능한 검사는 단일 필드입니다. 티켓의 상태가 필요한 최종 상태인 hold가 아니라 solved로 되어 있습니다. 전체 trace는 [Appendix D.4, Case 3 of our paper](https://arxiv.org/pdf/2608.19741)에 있습니다.
+이 작업은 직접 실행해 볼 수 있습니다. 위의 예시는 벤치마크 태스크 [sandbox_external_retail_group1.py:test_case_ST003_006](https://github.com/microsoft/thinkingbox-data/blob/thinkingbox-bench-v1.0/dataset/test_case/sandbox_external_retail/sandbox_external_retail_group1.py#L984-L1223)에서 가져온 것이며, 실패하는 실행 가능한 검사는 단일 필드입니다. 티켓의 상태가 필요한 최종 상태인 hold가 아니라 solved로 되어 있습니다. 전체 trace는 [우리 논문의 부록 D.4, 사례 3](https://arxiv.org/pdf/2608.19741)에 있습니다.
 
 목차
 
-- [A tool call is not an outcome](#a-tool-call-is-not-an-outcome)
+- [도구 호출은 결과가 아니다](#a-tool-call-is-not-an-outcome)
 
-- [One success is not reliability](#one-success-is-not-reliability)
+- [한 번의 성공은 신뢰성이 아니다](#one-success-is-not-reliability)
 
-- [Can you depend on the model behind your agent?](#can-you-depend-on-the-model-behind-your-agent)
+- [에이전트 뒤의 모델을 믿고 맡길 수 있는가?](#can-you-depend-on-the-model-behind-your-agent)
 
-- [What consistency costs](#what-consistency-costs)
+- [일관성에는 어떤 비용이 드는가](#what-consistency-costs)
 
-- [Failure signatures](#failure-signatures)
+- [실패 시그니처](#failure-signatures)
 
-- [How it works](#how-it-works)
+- [작동 방식](#how-it-works)
 
-- [Run it yourself](#run-it-yourself)
+- [직접 실행해 보기](#run-it-yourself)
 
-- [Where this goes next](#where-this-goes-next)
+- [앞으로의 방향](#where-this-goes-next)
 
-결과를 읽기 전에 직접 시도해 보고 싶으신가요? [Run it yourself](#run-it-yourself) 섹션으로 건너뛰세요.
+> 결과를 읽기 전에 직접 시도해 보고 싶으신가요? [직접 실행해 보기](#run-it-yourself) 섹션으로 건너뛰세요.
 
 ## 도구 호출은 결과가 아니다 {#section-1}
 
@@ -99,11 +100,11 @@ trajectory는 주장입니다. 데이터베이스 상태는 증거입니다. 반
 
 익숙한 관점에서 시작해 보겠습니다. 아래 표는 단일 시도 점수 추정치인 pass@1을 도메인별로 나누어 보여 줍니다. 이는 대부분의 리더보드가 게시하는 수치이며, 이것만 보면 일반적인 성능 순위처럼 읽힙니다.
 
-표 2: 도메인별 ThinkingBox-Bench pass@1 (%). 각 모델은 모든 태스크에 대해 20회의 반복 시도로 평가됩니다. 굵게 표시된 항목은 그룹 선두이고, 밑줄은 2위입니다. 단일 시도 점수 추정치의 표준 오차는 [Table 4 in our ThinkingBox paper](https://arxiv.org/abs/2608.19741)에 제공되어 있습니다.
+표 2: 도메인별 ThinkingBox-Bench pass@1 (%). 각 모델은 모든 태스크에 대해 20회의 반복 시도로 평가됩니다. 굵게 표시된 항목은 그룹 선두이고, 밑줄은 2위입니다. 단일 시도 점수 추정치의 표준 오차는 [ThinkingBox 논문의 표 4](https://arxiv.org/abs/2608.19741)에 제공되어 있습니다.
 
-| Model | Retail (98) | Auto insurance (100) | Travel (104) | Neobank (104) | Consulting (101) | Overall, task-weighted (507) |
+| 모델 | 리테일(98) | 자동차 보험(100) | 여행(104) | 네오뱅크(104) | 컨설팅(101) | 전체, 태스크 가중(507) |
 | --- | --- | --- | --- | --- | --- | --- |
-| Proprietary models |  |  |  |  |  |  |
+| 독점 모델 |  |  |  |  |  |  |
 | Claude Opus 5.5 | 80.97 | 68.40 | 54.28 | 71.25 | 61.58 | 67.16 |
 | Claude Opus 5 | 80.71 | 65.80 | 49.95 | 70.62 | 66.19 | 66.50 |
 | GPT-5.4 | 76.33 | 62.65 | 68.12 | 65.34 | 54.60 | 65.36 |
@@ -114,7 +115,7 @@ trajectory는 주장입니다. 데이터베이스 상태는 증거입니다. 반
 | Claude Opus 4.6 | 68.62 | 8.30 | 21.11 | 35.67 | 27.82 | 32.09 |
 | o3-pro | 37.70 | 2.95 | 17.31 | 24.28 | 14.60 | 19.31 |
 | Grok-4.3 | 43.93 | 2.60 | 15.14 | 1.78 | 9.55 | 14.38 |
-| Open-weight models |  |  |  |  |  |  |
+| 오픈 웨이트 모델 |  |  |  |  |  |  |
 | Kimi-K3 | 82.24 | 50.80 | 61.83 | 41.35 | 51.63 | 57.37 |
 | Qwen3.8-27B | 64.03 | 47.85 | 53.41 | 47.88 | 45.69 | 51.70 |
 | DeepSeek-V4-Pro | 68.21 | 29.65 | 43.13 | 44.86 | 31.04 | 43.26 |
@@ -166,7 +167,7 @@ Claude Opus 5는 반대입니다. 최소 한 번 해결한 태스크는 더 적�
 
 성공한 태스크 시도당 비용 = 태스크당 한 번씩 총 507회 시도에 대한 추정 비용 ÷ (507 × pass@1)
 
-이는 비교를 위한 효율성 지수이지 청구서가 아니며, production request 한 건을 서빙하는 가격도 아닙니다. 또한 일관성이 아니라 단일 성공에 대한 비용입니다. 이제 일관성의 비용을 계산합니다.
+이는 비교를 위한 효율성 지수이지 청구서가 아니며, 프로덕션 요청 한 건을 서빙하는 가격도 아닙니다. 또한 일관성이 아니라 단일 성공에 대한 비용입니다. 이제 일관성의 비용을 계산합니다.
 
 예시: GPT-5.4는 507회 시도(태스크당 한 번)에 43.49달러가 들고 pass@1은 65.36%이므로, 43.49달러 ÷ (507 × 0.6536) = 성공한 태스크 시도당 0.131달러입니다.
 
@@ -192,7 +193,7 @@ Claude Opus 5가 가장 분명한 사례입니다. 성공한 시도당 0.475달�
 
 표 3: 관측된 20/20 태스크가 하나 이상 있는 모델 중 신뢰할 수 있는 태스크당 비용이 가장 낮은 9개 모델을 낮은 순서로 정렬했습니다. 추정 달러이며 실제 클라우드 청구액이 아닙니다.
 
-| Model | 20/20을 통과한 태스크 | 추정 비용, 20회 실행 | 신뢰할 수 있는 태스크당 비용 |
+| 모델 | 20/20을 통과한 태스크 | 추정 비용, 20회 실행 | 신뢰할 수 있는 태스크당 비용 |
 | --- | --- | --- | --- |
 | GPT-5.4 | 128 (25.25%) | $869.80 | $6.80 |
 | GPT-6 Astra | 231 (45.56%) | $1,720.60 | $7.45 |
@@ -235,23 +236,23 @@ ThinkingBox는 에이전트 샌드박스이고, ThinkingBox-Bench는 에이전�
 
 [![Figure-1a](https://cdn-uploads.huggingface.co/production/uploads/64b8491203124195cd795cad/elbRGqTXW6PIqci7xcEJN.png)](https://cdn-uploads.huggingface.co/production/uploads/64b8491203124195cd795cad/elbRGqTXW6PIqci7xcEJN.png)
 
-그림 5: 위 그림 1의 패널 A에 있는 샌드박스 루프. 격리된 도구 세션, 최종 데이터베이스 상태, side effect, 실행 가능한 judge로 구성됩니다.
+그림 5: 위 그림 1의 패널 A에 있는 샌드박스 루프. 격리된 도구 세션, 최종 데이터베이스 상태, 사이드 이펙트(side effect), 실행 가능한 판정자(judge)로 구성됩니다.
 
 각 태스크는 시작 백엔드 상태, 사용자 목표, 사용 가능한 MCP 도구, 도메인 정책, 최종 상태에 대한 실행 가능한 검사를 정의합니다. 시뮬레이션된 사용자는 비공개 컨텍스트(예약 참조 번호, 선호 사항 또는 생년월일)를 보유하고 있으며, 요청받을 때만 이를 공개합니다.
 
 모든 시도에는 새로 초기화된 상태의 격리된 MCP 세션이 할당됩니다. 동일한 태스크에 대한 두 시도는 데이터베이스 행이나 캐시된 도구 상태를 공유하지 않으며, 이것이 20회 시도 비교를 의미 있게 만듭니다.
 
-마지막에는 side-effect extractor가 실제로 변경된 내용을 도출하고, 결정론적인 judge가 이를 필요한 최종 상태와 비교합니다. 올바른 결과를 만들어 내는 모든 trajectory는 허용하고, 잘못되었거나 누락되었거나 추가된 effect는 거부합니다. 깔끔한 데이터베이스 값이 없는 요구사항(“에이전트가 이것이 보장되지 않는다고 고지했는가?”)에는 좁은 범위의 이진 rubric 질문으로 의미를 처리합니다. 507개 태스크 중 477개는 상태만으로 평가하고, 30개는 응답 rubric을 추가합니다.
+마지막에는 사이드 이펙트 추출기(side-effect extractor)가 실제로 변경된 내용을 도출하고, 결정론적인 판정자(judge)가 이를 필요한 최종 상태와 비교합니다. 올바른 결과를 만들어 내는 모든 트라젝토리(trajectory)는 허용하고, 잘못되었거나 누락되었거나 추가된 이펙트(effect)는 거부합니다. 깔끔한 데이터베이스 값이 없는 요구사항(“에이전트가 이것이 보장되지 않는다고 고지했는가?”)에는 좁은 범위의 이진 rubric 질문으로 의미를 처리합니다. 507개 태스크 중 477개는 상태만으로 평가하고, 30개는 응답 rubric을 추가합니다.
 
-신뢰 경계: 모델은 태스크, 대화, 도구 스키마를 봅니다. Golden state, assertion, grading internals, credential은 evaluator 측에 남습니다.
+신뢰 경계: 모델은 태스크, 대화, 도구 스키마를 봅니다. 골든 상태(golden state), 어서션(assertion), 채점 내부 로직(grading internals), 크리덴셜(credential)은 평가자(evaluator) 측에 남습니다.
 
 ## 직접 실행해 보기 {#section-7}
 
-ThinkingBox는 이제 Hugging Face에서 [the harness](https://huggingface.co/docs/openenv/environments/thinkingbox) 및 [the dataset](https://huggingface.co/datasets/microsoft/ThinkingBox-Bench)로 제공됩니다. ThinkingBox-Bench는 이제 OpenEnv 인터페이스 뒤에서 실행되며, 완료된 각 episode는 이진 pass/fail reward를 반환합니다. 공개된 adapter는 평가용으로 설계되었고, 별도의 비벤치마크 시나리오는 training workflow에서 동일한 인터페이스를 사용할 수 있습니다.
+ThinkingBox는 이제 Hugging Face에서 [하네스(harness)](https://huggingface.co/docs/openenv/environments/thinkingbox) 및 [데이터셋(dataset)](https://huggingface.co/datasets/microsoft/ThinkingBox-Bench)로 제공됩니다. ThinkingBox-Bench는 이제 OpenEnv 인터페이스 뒤에서 실행되며, 완료된 각 에피소드(episode)는 이진 pass/fail 리워드(reward)를 반환합니다. 공개된 어댑터(adapter)는 평가용으로 설계되었고, 별도의 비벤치마크 시나리오는 학습 워크플로(training workflow)에서 동일한 인터페이스를 사용할 수 있습니다.
 
 ### 시작하기 전에
 
-Linux와 WSL에서 테스트되었으며, Python 3.11+, [uv](https://docs.astral.sh/uv/), Docker가 필요합니다. 또한 pinned release의 [thinkingbox-data](https://github.com/microsoft/thinkingbox-data) checkout과 agent, simulated user, judge를 위한 model endpoint가 필요합니다. 하나의 endpoint가 세 역할을 모두 수행할 수 있으며, 이것이 시작하는 가장 간단한 방법입니다. OpenEnv image는 OpenEnv API만 시작하며, 나머지는 직접 실행해야 합니다.
+Linux와 WSL에서 테스트되었으며, Python 3.11+, [uv](https://docs.astral.sh/uv/), Docker가 필요합니다. 또한 고정된 릴리스(pinned release)의 [thinkingbox-data](https://github.com/microsoft/thinkingbox-data) 체크아웃(checkout)과 에이전트, 시뮬레이션된 사용자, 판정자(judge)를 위한 모델 엔드포인트(model endpoint)가 필요합니다. 하나의 endpoint가 세 역할을 모두 수행할 수 있으며, 이것이 시작하는 가장 간단한 방법입니다. OpenEnv image는 OpenEnv API만 시작하며, 나머지는 직접 실행해야 합니다.
 
 ### 설치
 
@@ -307,7 +308,7 @@ uv run --project envs/thinkingbox_env --frozen server
 
 ### 준비 상태 확인
 
-무엇이든 실행하기 전에 readiness를 확인하세요. 관찰 가능한 데이터, 구성, Session Proxy 검사가 통과할 때까지 503을 반환합니다. Typesense를 관찰하거나 모든 model endpoint를 실시간으로 probe할 수는 없으므로, 이를 별도로 확인하세요.
+무엇이든 실행하기 전에 준비 상태(readiness)를 확인하세요. 관찰 가능한 데이터, 구성, Session Proxy 검사가 통과할 때까지 503을 반환합니다. Typesense를 관찰하거나 모든 model endpoint를 실시간으로 프로브(probe)할 수는 없으므로, 이를 별도로 확인하세요.
 
 ```
 curl -sS http://127.0.0.1:8000/ready
@@ -316,7 +317,7 @@ curl -sS http://127.0.0.1:8000/ready
 
 ### episode 점수 계산
 
-이제 실제 episode의 점수를 계산합니다. [example_usage.py](https://github.com/huggingface/OpenEnv/blob/main/examples/thinkingbox/example_usage.py)는 reset 및 도구 목록만 수행합니다. agent action, effect, assertion에는 패키지된 evaluator를 사용하세요.
+이제 실제 episode의 점수를 계산합니다. [example_usage.py](https://github.com/huggingface/OpenEnv/blob/main/examples/thinkingbox/example_usage.py)는 리셋(reset) 및 도구 목록만 수행합니다. 에이전트 액션(agent action), 이펙트(effect), 어서션(assertion)에는 패키지된 평가자(evaluator)를 사용하세요.
 
 ```
 echo "- sandbox_external_retail_group1.py:test_case_ST002_001" > one_task.yaml
@@ -329,9 +330,9 @@ uv run --project envs/thinkingbox_env thinkingbox-eval \
 ```
 
 
-OpenEnv adapter는 운영 실패를 errors sidecar에 기록하므로, 모델 결과와 조용히 섞이지 않고 다시 실행할 수 있습니다. canonical result는 이러한 시도를 해결하거나 명시적으로 설명해야 합니다. 우리는 시스템 오류를 실패한 trial로 계산했습니다.
+OpenEnv 어댑터(adapter)는 운영 실패를 errors 사이드카(sidecar)에 기록하므로, 모델 결과와 조용히 섞이지 않고 다시 실행할 수 있습니다. 표준 결과(canonical result)는 이러한 시도를 해소하거나 명시적으로 반영해야 합니다. 우리는 시스템 오류를 실패한 트라이얼(trial)로 계산했습니다.
 
-실행은 pinned framework commit, pinned data release, bundle hash를 기준으로 제한되므로 canonical result는 단순히 주장되는 것이 아니라 검증 가능합니다.
+실행은 고정된 프레임워크 커밋(pinned framework commit), 고정된 데이터 릴리스(pinned data release), 번들 해시(bundle hash)에 묶여 있으므로 표준 결과(canonical result)는 단순히 주장되는 것이 아니라 검증 가능합니다.
 
 ## 앞으로의 방향 {#section-8}
 
@@ -347,23 +348,23 @@ OpenEnv adapter는 운영 실패를 errors sidecar에 기록하므로, 모델 �
 
 자세한 내용은 다음 링크에서 확인할 수 있습니다.
 
-- Environment: [envs/thinkingbox_env](https://github.com/huggingface/OpenEnv/tree/main/envs/thinkingbox_env)
+- **환경:** [envs/thinkingbox_env](https://github.com/huggingface/OpenEnv/tree/main/envs/thinkingbox_env)
 
 - OpenEnv: [https://huggingface.co/docs/openenv/environments/thinkingbox](https://huggingface.co/docs/openenv/environments/thinkingbox)
 
-- Framework: [microsoft/thinkingbox](https://github.com/microsoft/thinkingbox) · [tutorial](https://github.com/microsoft/thinkingbox/blob/main/docs/tutorial.md)
+- **프레임워크:** [microsoft/thinkingbox](https://github.com/microsoft/thinkingbox) · [튜토리얼](https://github.com/microsoft/thinkingbox/blob/main/docs/tutorial.md)
 
-- Benchmark: [microsoft/thinkingbox-data](https://github.com/microsoft/thinkingbox-data) · [v1.0 release](https://github.com/microsoft/thinkingbox-data/releases/tag/thinkingbox-bench-v1.0)
+- **벤치마크:** [microsoft/thinkingbox-data](https://github.com/microsoft/thinkingbox-data) · [v1.0 릴리스](https://github.com/microsoft/thinkingbox-data/releases/tag/thinkingbox-bench-v1.0)
 
-- Dataset viewer: [microsoft/ThinkingBox-Bench](https://huggingface.co/datasets/microsoft/ThinkingBox-Bench)
+- **데이터셋 뷰어:** [microsoft/ThinkingBox-Bench](https://huggingface.co/datasets/microsoft/ThinkingBox-Bench)
 
-- Paper: [arXiv:2608.19741](https://arxiv.org/abs/2608.19741) 또는 [HF](https://huggingface.co/papers/2608.19741)
+- **논문:** [arXiv:2608.19741](https://arxiv.org/abs/2608.19741) 또는 [HF](https://huggingface.co/papers/2608.19741)
 
-- RL training (coming soon): [microsoft/thinkingbox-training](https://github.com/microsoft/thinkingbox-training)
+- **RL 학습(출시 예정):** [microsoft/thinkingbox-training](https://github.com/microsoft/thinkingbox-training)
 
 ThinkingBox 코드는 MIT 라이선스를 따르며, 벤치마크 데이터는 [CDLA-Permissive-2.0](https://cdla.dev/permissive-2-0/)이고, OpenEnv 환경은 OpenEnv의 BSD-3-Clause에 따라 배포됩니다.
 
-면책 조항: 공개 벤치마크의 모든 태스크는 synthetic reconstruction입니다. 워크플로와 정책은 실제 AI agentic enterprise 패턴을 기반으로 모델링되었지만, 고객은 실제 인물이 아닙니다.
+면책 조항: 공개 벤치마크의 모든 태스크는 합성 재구성(synthetic reconstruction)입니다. 워크플로와 정책은 실제 AI agentic enterprise 패턴을 기반으로 모델링되었지만, 고객은 실제 인물이 아닙니다.
 
 ThinkingBox와 ThinkingBox-Bench는 Microsoft Copilot Studio 팀이 Toloka와 협력하고, Microsoft에서 인턴으로 근무했던 University of Pittsburgh, Northwestern University, Columbia University, UC Irvine의 협력자들과 함께 구축했습니다. 질문은 아래 댓글 섹션이나 [github](https://github.com/microsoft/thinkingbox/discussions)에서 남겨 주세요.
 
