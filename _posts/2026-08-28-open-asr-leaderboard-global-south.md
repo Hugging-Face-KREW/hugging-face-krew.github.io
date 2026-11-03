@@ -6,8 +6,7 @@ categories: [Translation, HuggingFace]
 thumbnail: /blog/assets/open-asr-leaderboard-global-south/thumbnail.png
 image: assets/images/blog/posts/2026-08-28-open-asr-leaderboard-global-south/thumbnail.png
 authors:
-  - user: bezzam
-  - user: Shobhitbanga
+  - user: vanshikachhabra-voicearena
 slug: "open-asr-leaderboard-global-south"
 source_url: "https://huggingface.co/blog/open-asr-leaderboard-global-south"
 source_published_date: "2026-08-28"
