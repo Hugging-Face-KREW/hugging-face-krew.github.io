@@ -6,7 +6,8 @@ categories: [Translation, HuggingFace]
 thumbnail: /blog/assets/grpo-with-trl-ifstruct/thumbnail.png
 image: assets/images/blog/posts/2026-09-03-grpo-with-trl-ifstruct/thumbnail.png
 authors:
-  - user: iamleonie
+  - user: burtenshaw
+  - user: sergiopaniego
 slug: "grpo-with-trl-ifstruct"
 source_url: "https://huggingface.co/blog/grpo-with-trl-ifstruct"
 source_published_date: "2026-09-03"
@@ -42,7 +43,7 @@ Review instructions:
 이 가이드는 서로 다른 환경에서 실행되는 두 부분으로 구성됩니다:
 
 - **미세 조정**은 GPU에서 실행됩니다. 함께 제공되는 notebook은 무료 Colab 또는 Kaggle GPU에 맞춰져 있습니다.  
-- **평가**는 `llama.cpp`을(를) 통해 MacBook에서 로컬로 실행할 수 있습니다. 여기서는 Apple M5 Max와 36 GB 통합 메모리를 탑재한 MacBook Pro를 사용하며, `llama.cpp`은 IFStruct 평가기가 통신하는 OpenAI 호환 서버를 제공합니다.
+- **평가**는 `llama.cpp`을(를) 통해 MacBook에서 로컬로 실행할 수 있습니다. 여기서는 Apple M5 Max와 36 GB 통합 메모리를 탑재한 MacBook Pro를 사용하며, llama.cpp은 IFStruct 평가기가 통신하는 OpenAI 호환 서버를 제공합니다.
 
 Python 도구에는 [`uv`](https://docs.astral.sh/uv/)이(가), 서빙에는 `llama.cpp`이(가) 필요합니다. [Liquid AI llama.cpp deployment docs](https://docs.liquid.ai/deployment/on-device/llama-cpp)에 따라 Homebrew로 `llama.cpp`을(를) 설치하고 `llama-server`을(를) 사용할 수 있는지 확인합니다:
 
