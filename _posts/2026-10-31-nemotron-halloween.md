@@ -1,22 +1,24 @@
 ---
 layout: post
-title: "NVIDIA Nemotron 오픈 모델로 유령의 집 만들기"
-description: "NVIDIA Nemotron Voice Agent와 Nemotron 모델들로 할로윈에 말을 거는 유령의 집 MonsterHouse를 만든 과정을 소개합니다."
+title: NVIDIA Nemotron 오픈 모델로 유령의 집 만들기
+description: NVIDIA Nemotron Voice Agent와 Nemotron 모델들로 할로윈에 말을 거는 유령의 집 MonsterHouse를
+  만든 과정을 소개합니다.
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/fownH6rn05tSp1jDBTz8m.png
 image: assets/images/blog/posts/2026-10-30-nemotron-halloween/thumbnail.png
 authors:
-  - user: nvidia
-slug: "nemotron-halloween"
-source_url: "https://huggingface.co/blog/nvidia/nemotron-halloween"
-source_published_date: "2026-10-30"
-source_published_at: "2026-10-30T17:57:24+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: nvidia
+slug: nemotron-halloween
+source_url: https://huggingface.co/blog/nvidia/nemotron-halloween
+source_published_date: '2026-10-30'
+source_published_at: '2026-10-30T17:57:24+00:00'
+locale: ko
+translation_status: draft
+translator: openai
 ---
-
 * TOC
 {:toc}
 <!--toc-->
