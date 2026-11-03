@@ -23,9 +23,7 @@
     />
     <link rel="icon" href="/pr-preview/pr-216/assets/images/favicon.ico" />
 
-    <title>Hugging Face MCP 서버 스터디 | Hugging Face KREW</title>
-
-    <!-- Begin Jekyll SEO tag v2.9.0 -->
+    <!-- Begin Jekyll SEO tag v2.9.1 -->
 <title>Hugging Face MCP 서버 스터디 | Hugging Face KREW</title>
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Hugging Face MCP 서버 스터디" />
@@ -33,16 +31,18 @@
 <meta property="og:locale" content="en_us" />
 <meta name="description" content="이 글은 Hugging Face 블로그의 Building the Hugging Face MCP Server를 읽고 공부한 내용을 바탕으로 정리했습니다." />
 <meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Building the Hugging Face MCP Server를 읽고 공부한 내용을 바탕으로 정리했습니다." />
+<link rel="canonical" href="https://huggingface-krew.co/pr-preview/pr-216/building-hf-mcp-study/" />
+<meta property="og:url" content="https://huggingface-krew.co/pr-preview/pr-216/building-hf-mcp-study/" />
 <meta property="og:site_name" content="Hugging Face KREW" />
-<meta property="og:image" content="/pr-preview/pr-216/building-hf-mcp-study/assets/images/blog/posts/2025-09-29-building-hf-mcp/thumbnail-study.png" />
+<meta property="og:image" content="https://huggingface-krew.co/pr-preview/pr-216/building-hf-mcp-study/assets/images/blog/posts/2025-09-29-building-hf-mcp/thumbnail-study.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2025-09-29T00:00:00+09:00" />
 <meta property="article:modified_time" content="2025-09-29T00:00:00+09:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="/pr-preview/pr-216/building-hf-mcp-study/assets/images/blog/posts/2025-09-29-building-hf-mcp/thumbnail-study.png" />
+<meta name="twitter:image" content="https://huggingface-krew.co/pr-preview/pr-216/building-hf-mcp-study/assets/images/blog/posts/2025-09-29-building-hf-mcp/thumbnail-study.png" />
 <meta name="twitter:title" content="Hugging Face MCP 서버 스터디" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"hyeonseo"},"dateModified":"2025-09-29T00:00:00+09:00","datePublished":"2025-09-29T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Building the Hugging Face MCP Server를 읽고 공부한 내용을 바탕으로 정리했습니다.","headline":"Hugging Face MCP 서버 스터디","image":"/pr-preview/pr-216/building-hf-mcp-study/assets/images/blog/posts/2025-09-29-building-hf-mcp/thumbnail-study.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-216/building-hf-mcp-study/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-216/assets/images/hfkr_logo.png"},"name":"hyeonseo"},"url":"/pr-preview/pr-216/building-hf-mcp-study/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"hyeonseo"},"dateModified":"2025-09-29T00:00:00+09:00","datePublished":"2025-09-29T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Building the Hugging Face MCP Server를 읽고 공부한 내용을 바탕으로 정리했습니다.","headline":"Hugging Face MCP 서버 스터디","image":"https://huggingface-krew.co/pr-preview/pr-216/building-hf-mcp-study/assets/images/blog/posts/2025-09-29-building-hf-mcp/thumbnail-study.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://huggingface-krew.co/pr-preview/pr-216/building-hf-mcp-study/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://huggingface-krew.co/pr-preview/pr-216/assets/images/hfkr_logo.png"},"name":"hyeonseo"},"url":"https://huggingface-krew.co/pr-preview/pr-216/building-hf-mcp-study/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -170,6 +170,9 @@
     <main class="container"><!-- Begin Article
 ================================================== -->
 
+
+
+
 	<div class="row">
 
 		<!-- Post -->        
@@ -202,7 +205,7 @@
                 <!-- End Categories -->
                 
                 <!-- Post Title -->
-				<h1 class="posttitle">Hugging Face MCP 서버 스터디</h1> 
+				<h1 class="posttitle">Hugging Face MCP 서버 스터디</h1>
                 
 			</div>
 
@@ -210,7 +213,8 @@
 
 			<!-- Post Content -->
 			<div class="article-post serif-font">
-				<ul id="markdown-toc">
+                
+                    <ul id="markdown-toc">
   <li><a href="#주요-개념" id="markdown-toc-주요-개념">주요 개념</a></li>
   <li><a href="#mcp-서버-설계-의사결정-흐름-블로그-글-기준" id="markdown-toc-mcp-서버-설계-의사결정-흐름-블로그-글-기준">MCP 서버 설계 의사결정 흐름 (블로그 글 기준)</a></li>
   <li><a href="#1-전송transport-방식" id="markdown-toc-1-전송transport-방식">1. <strong>전송(Transport) 방식</strong></a></li>
@@ -560,6 +564,7 @@ claude_desktop_config.json
 <p><img src="../assets/images/blog/posts/2025-09-29-building-hf-mcp/hf-mcp-transport-metrics.png" alt="hf-mcp-transport-metrics" />
 <img src="../assets/images/blog/posts/2025-09-29-building-hf-mcp/hf-mcp-transport-statistics2.png" alt="hf-mcp-transport-statistics2" /></p>
 
+                
                 <div class="clearfix"></div>
 			</div>
 
@@ -696,12 +701,12 @@ claude_desktop_config.json
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-216/python-tiny-agents-study/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-216/python-tiny-agents-study/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-216/assets/images/blog/posts/2015-09-14-python-tiny-agents/thumbnail2.png" alt="파이썬 Tiny Agents 스터디" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-216/python-tiny-agents-study/">파이썬 Tiny Agents 스터디</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-216/python-tiny-agents-study/">파이썬 Tiny Agents 스터디</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Tiny Agents in Python: an MCP-powered agent in ~70 lines...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
