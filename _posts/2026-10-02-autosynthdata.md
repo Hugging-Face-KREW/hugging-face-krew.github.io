@@ -33,7 +33,7 @@ Review instructions:
 
 # AutoSynthData: 엔터프라이즈 에이전트를 위한 학습 데이터 생성
 
-[![AutoSynthData_thumbnail_1200x648 (2)](https://cdn-uploads.huggingface.co/production/uploads/68642da9885da181fde1ad70/mlI168havBLGXY2qbd4ud.png)](https://cdn-uploads.huggingface.co/production/uploads/68642da9885da181fde1ad70/mlI168havBLGXY2qbd4ud.png)
+[![AutoSynthData 소개 썸네일](https://cdn-uploads.huggingface.co/production/uploads/68642da9885da181fde1ad70/mlI168havBLGXY2qbd4ud.png)](https://cdn-uploads.huggingface.co/production/uploads/68642da9885da181fde1ad70/mlI168havBLGXY2qbd4ud.png)
 
 엔터프라이즈에는 자체 환경에서 제대로 작동하는 에이전트가 필요합니다. 이러한 에이전트에게 요청하는 작업은 사용하는 시스템, 따르는 규칙, 데이터 상태에 따라 결정됩니다. 모델이 전반적으로 뛰어난 역량을 갖추고 있어도 특정 환경에서는 어려움을 겪을 수 있습니다. 예를 들어 제대로 처리하지 못하는 워크플로, 잘못 사용하는 도구 조합, 지키지 못하는 제약 등이 있을 수 있습니다. 엔터프라이즈가 개선해야 하는 부분은 바로 이러한 약점입니다.
 
@@ -120,11 +120,11 @@ AutoSynthData는 대상 환경에서 수행한 평가 실행을 사용해 모델
 
 AutoSynthData는 두 단계로 데이터셋을 구축합니다. 먼저 핵심 샘플을 생성하고 검증한 다음, 이를 새로운 변형으로 확장합니다.
 
-### Target
+### Target 단계
 
 Target 단계에서는 역량 사양으로부터 핵심 학습 샘플 집합을 만듭니다. 워커는 독립적인 작업을 병렬로 생성하고, 작업을 마치면 새로운 target을 가져옵니다. 각 후보는 승인되기 전에 검증, 실행, 솔버 평가 및 수리 과정을 거칩니다. 그 결과 대상 모델이 학습해야 할 내용을 중심으로 검토가 완료된 예제 배치가 만들어집니다.
 
-### Multiply
+### Multiply 단계
 
 Multiply 단계에서는 승인된 target 샘플의 새로운 변형을 만들어 데이터셋을 확장합니다. 각 변형은 자체 사용자 요청, 환경 상태, 엔터티 구성, 참조 궤적 및 검증기를 가지며 동일한 검증 및 실행 검사를 통과해야 합니다. Multiply된 샘플은 다른 Multiply 샘플의 시드가 될 수 없습니다. 이를 통해 확장을 검토가 완료된 target 집합에 고정하고 세대 간 드리프트를 제한합니다.
 
