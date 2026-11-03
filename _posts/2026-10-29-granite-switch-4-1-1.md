@@ -1,22 +1,24 @@
 ---
 layout: post
-title: "Granite Switch 4.1.1 — 소프트웨어를 업데이트하듯 모델을 업데이트하세요"
-description: "Granite Switch 4.1.1 패치 릴리스: 4.1과 완전히 하위 호환되면서 새로운 다국어 음성 인식 모델과 Decision 어댑터를 교체해 모델을 소프트웨어처럼 업데이트하는 방법을 소개합니다."
+title: Granite Switch 4.1.1 — 소프트웨어를 업데이트하듯 모델을 업데이트하세요
+description: 'Granite Switch 4.1.1 패치 릴리스: 4.1과 완전히 하위 호환되면서 새로운 다국어 음성 인식 모델과 Decision
+  어댑터를 교체해 모델을 소프트웨어처럼 업데이트하는 방법을 소개합니다.'
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/662836b742709fe826510597/az6afuuoAkyiMImufSePe.png
 image: assets/images/blog/posts/2026-10-29-granite-switch-4-1-1/thumbnail.png
 authors:
-  - user: ibm-granite
-slug: "granite-switch-4-1-1"
-source_url: "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1"
-source_published_date: "2026-10-29"
-source_published_at: "2026-10-29T13:37:07+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: ibm-granite
+slug: granite-switch-4-1-1
+source_url: https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1
+source_published_date: '2026-10-29'
+source_published_at: '2026-10-29T13:37:07+00:00'
+locale: ko
+translation_status: draft
+translator: openai
 ---
-
 * TOC
 {:toc}
 <!--toc-->
