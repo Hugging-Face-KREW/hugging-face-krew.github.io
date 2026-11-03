@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Hugging Face의 Le Chonk 소개: Mistral Large 4"
+description: "Mistral의 멀티모달 다국어 MoE 모델 Mistral Large 4(Le Chonk)의 아키텍처, 사이버 보안·코딩 벤치마크, Transformers·vLLM·llama.cpp·TRL 활용법을 한국어로 소개합니다."
 author: dailybot
 categories: [Translation, HuggingFace]
 thumbnail: /blog/assets/ml4/thumbnail.png
@@ -43,7 +44,7 @@ Review instructions:
 
 # Hugging Face의 Le Chonk 소개: Mistral Large 4
 
-Mistral Large 4(Le Chonk라고도 함)는 Mistral의 멀티모달 다국어 Mixture-of-Experts(MoE) 모델입니다. 텍스트와 이미지를 입력으로 받아 텍스트를 생성합니다. 총 **약 1T개, 활성 파라미터 49B개**를 가지며, 컨텍스트 윈도우는 **1M 토큰**입니다.
+Mistral Large 4(Le Chonk라고도 함)는 Mistral의 멀티모달 다국어 전문가 혼합(Mixture-of-Experts, MoE) 모델입니다. 텍스트와 이미지를 입력으로 받아 텍스트를 생성합니다. 총 파라미터는 **약 1T개**, 활성 파라미터는 **49B개**이며, 컨텍스트 윈도우는 **1M 토큰**입니다.
 
 이 모델은 두 가지 공식 변형으로 출시되었습니다:
 
@@ -77,32 +78,32 @@ Mistral Large 4는 오픈 소스 소프트웨어의 실제 취약점을 재현�
 
 Mistral은 주로 방어적 보안 작업을 위해 이 모델을 포지셔닝합니다. 취약점 연구와 사고 대응은 모델 입력에서 공격처럼 보이는 경우가 많기 때문에 폐쇄형 소스 필터가 이를 차단할 수 있습니다. API에 의존하는 팀은 사고가 발생한 중간에 액세스 권한을 잃을 수도 있습니다. 중요한 점은 오픈 웨이트 모델을 사용하면 사용 정책과 배포를 모두 사용자가 제어할 수 있다는 것입니다. 다만 이 모델도 유해한 요청은 거부합니다. JailbreakBench, StrongREJECT, AgentHarm의 사이버 프롬프트에서 평균 거부율은 다른 어떤 오픈 웨이트 모델보다 높습니다.
 
-커뮤니티 빌더에게 Mistral Large 4와 같은 오픈 웨이트 모델은 다양한 다운스트림 사용 사례를 가능하게 합니다. 자체 코드베이스, 크래시 로그, 악성 코드 샘플을 중심으로 사이버 보안 시스템을 구축할 수 있습니다. 예를 들어 [TRL you could fine-tune](#fine-tuning-with-trl) Mistral Large 4 trace가 코드베이스 패치를 수행하도록 할 수 있습니다. 실제로 재현 후 패치 작업은 검증 가능한 보상을 사용하므로, 더 작은 보안 모델을 대상으로 추가 RL을 수행하는 데 사용할 수 있는 RL 환경에 적합합니다. 또한 오픈 웨이트를 사용하면 제공자의 설명에 의존하지 않고 연구자가 모델의 거부 동작을 직접 측정할 수 있습니다.
+커뮤니티 빌더에게 Mistral Large 4와 같은 오픈 웨이트 모델은 다양한 다운스트림 사용 사례를 가능하게 합니다. 자체 코드베이스, 크래시 로그, 악성 코드 샘플을 중심으로 사이버 보안 시스템을 구축할 수 있습니다. 예를 들어, [TRL](#section-6)을 사용하면 Mistral Large 4의 트레이스(trace)로부터 코드베이스 패치를 수행하는 더 작은 모델을 미세 조정할 수 있습니다. 실제로 재현 후 패치 작업은 검증 가능한 보상을 사용하므로, 더 작은 보안 모델을 대상으로 추가 RL을 수행하는 데 사용할 수 있는 RL 환경에 적합합니다. 또한 오픈 웨이트를 사용하면 제공자의 설명에 의존하지 않고 연구자가 모델의 거부 동작을 직접 측정할 수 있습니다.
 
 요컨대 ML4와 같은 사이버 보안 기능을 오픈 상태로 제공하는 것은 커뮤니티에 큰 힘이 됩니다.
 
 > [!NOTE]
-> 모델의 사이버 보안 기능에 대해 Pierre Stock과 인터뷰했습니다. [you can watch it here](https://www.youtube.com/embed/FczbSauVvjw)
+> 모델의 사이버 보안 기능에 대해 Pierre Stock과 인터뷰했습니다. [여기에서 볼 수 있습니다](https://www.youtube.com/embed/FczbSauVvjw)
 
 ## 아키텍처 {#section-3}
 
-![ML4](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/ml4/ml4.png)
+![Mistral Large 4 아키텍처 개요 다이어그램](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/ml4/ml4.png)
 
 Mistral Large 4의 텍스트 디코더는 72개 레이어, 6,144의 hidden dimension, 64개의 attention head로 구성됩니다. attention 블록은 Multi-head Latent Attention(MLA)과 DeepSeek Sparse Attention(DSA) indexer를 결합합니다(이는 GLM 5.3과 같은 다른 모델에서도 사용되는 방향입니다). MLA는 압축된 KV 표현을 유지하고, DSA는 각 query에 대해 최대 2,048개의 key 위치를 선택합니다.
 
-![Attention](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/ml4/attention.png)  
+![MLA와 DSA indexer를 결합한 어텐션 블록 다이어그램](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/ml4/attention.png)
 각 decoder block에는 3:1 RoPE 대 NoPE 패턴이 적용됩니다. 즉, decoder layer 3개는 RoPE를 사용하고 네 번째 레이어마다 NoPE를 사용합니다. 또한 모델은 레이어 간에 KV state를 공유합니다.  
 첫 번째 decoder layer는 dense feed-forward network를 사용합니다. 나머지 71개 레이어는 MoE block을 사용하며, 이 블록에서는 softmax router가 각 토큰에 대해 128개 expert 중 4개를 선택합니다. 선택된 expert와 함께 하나의 shared expert가 항상 실행되므로 토큰당 활성 expert는 총 5개입니다.
 
 RoPE와 관련해 Mistral은 주파수마다 하나의 학습 가능한 multiplier를 사용하는 YaRN-scaled RoPE인 *LeRope*를 사용합니다.
 
-![Experts](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/ml4/experts.png)
+![토큰마다 expert를 선택하는 MoE 구조 다이어그램](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/ml4/experts.png)
 
-### Vision encoder
+### 비전 인코더
 
 Mistral Large 4는 1.6B Pixtral encoder를 사용합니다. Pixtral은 30개 레이어, 2,048의 hidden dimension, 16개의 attention head로 구성됩니다. 14 × 14 patch와 spatial merge size가 2인 patch-merge projector를 사용합니다. 아래에서 encoder pipeline을 확인할 수 있습니다.
 
-![Image Encoder](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/ml4/img_encoder.png)
+![Pixtral 이미지 인코더 파이프라인 다이어그램](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/ml4/img_encoder.png)
 
 ## 벤치마크 결과 {#section-4}
 
@@ -122,7 +123,7 @@ Mistral Large 4는 Lakera의 B3 벤치마크에서 **93.3%의 공격 저항성**
 
 ## 추론 지원 {#section-5}
 
-Mistral Large 4는 transformers, vLLM, llama.cpp에 대한 day-0 지원과 함께 제공됩니다. GGUF 양자화 모델은 GGUF와 [llama.cpp team](https://huggingface.co/ggml-org/Mistral-Large-4-1T-A52B-GGUF)에서 사용할 수 있습니다. Inference Endpoints를 사용한 원격 배포 옵션과 Inference Providers를 통한 서버리스 추론도 제공합니다.
+Mistral Large 4는 transformers, vLLM, llama.cpp에 대한 day-0 지원과 함께 제공됩니다. GGUF 양자화 모델은 GGUF와 [llama.cpp 팀](https://huggingface.co/ggml-org/Mistral-Large-4-1T-A52B-GGUF)에서 사용할 수 있습니다. Inference Endpoints를 사용한 원격 배포 옵션과 Inference Providers를 통한 서버리스 추론도 제공합니다.
 
 ### Transformers
 
@@ -248,10 +249,10 @@ llama serve -hf ggml-org/Mistral-Large-4-1T-A52B-GGUF:Q2_K
 ```
 
 
-[Here’s the repository](https://huggingface.co/ggml-org/Mistral-Large-4-1T-A52B-GGUF)은 FP8 체크포인트에서 파생된 quants를 사용하며, [this is the NVFP4 one](https://huggingface.co/ggml-org/Mistral-Large-4-1T-A52B-NVFP4-GGUF)은 공식 NVFP4 repo에서 변환되었습니다.
+[이 저장소](https://huggingface.co/ggml-org/Mistral-Large-4-1T-A52B-GGUF)에는 FP8 체크포인트에서 파생된 quants가 있으며, [NVFP4 저장소](https://huggingface.co/ggml-org/Mistral-Large-4-1T-A52B-NVFP4-GGUF)는 공식 NVFP4 저장소에서 변환된 것입니다.
 
 서버가 시작되면 localhost:9931로 이동해 내장 WebUI에서 채팅할 수 있습니다. 웹 UI에서 추론에 사용할 이미지를 추가하고 reasoning lever를 조정할 수 있습니다.  
-다음과 같이 서버를 쿼리할 수도 있습니다. 멀티모달리티, tool call 등의 기능은 [the API reference](https://llama.app/docs/serve)을 확인해 보세요.
+다음과 같이 서버를 쿼리할 수도 있습니다. 멀티모달리티, tool call 등의 기능은 [API 참조 문서](https://llama.app/docs/serve)를 확인해 보세요.
 
 ```sh
 curl http://localhost:8080/v1/chat/completions \
@@ -299,8 +300,8 @@ llama.cpp 팀은 추가 변환을 위해 다음 quants를 제공합니다: `IQ2_
 
 단일 M3 Ultra에서 `Q2_K`을 실행했을 때 prefill 처리량은 초당 약 90토큰, 생성 속도는 15 tok/s였습니다. 4 x RTX6000 Pro에서는 다음과 같은 결과를 확인했습니다:
 
-* NVFP4: 32K context size, prefill 130-590 t/s, gen speed ~10 t/s  
-* IQ2_XXS: 800K context size. 짧은 컨텍스트 크기에서는 prefill이 500 tok/s이고 생성 속도는 30 tok/s입니다. 그러나 긴 컨텍스트를 사용하면 성능이 129 tok/s(prefill) 및 3 tok/s(생성)로 떨어집니다.
+* NVFP4: 컨텍스트 크기 32K, 프리필 130-590 t/s, 생성 속도 ~10 t/s
+* IQ2_XXS: 컨텍스트 크기 800K. 짧은 컨텍스트 크기에서는 프리필이 500 tok/s이고 생성 속도는 30 tok/s입니다. 그러나 긴 컨텍스트를 사용하면 성능이 프리필 129 tok/s 및 생성 3 tok/s로 떨어집니다.
 
 ## TRL을 사용한 미세 조정 {#section-6}
 
@@ -313,7 +314,7 @@ pip install --upgrade transformers trl peft
 
 다음 예제에서는 모델이 다국어 사고를 수행하도록 학습합니다. 미세 조정된 모델은 system prompt가 요청하는 언어로 추론할 수 있습니다\!
 
-이 스크립트는 8xB300s 노드에서 FP8 변형을 실행합니다. Slurm launcher를 포함한 전체 예제는 [TRL's examples](https://github.com/huggingface/trl/tree/main/examples/sft_mistral_large_4)에 있습니다.
+이 스크립트는 8xB300s 노드에서 FP8 변형을 실행합니다. Slurm launcher를 포함한 전체 예제는 [TRL 예제](https://github.com/huggingface/trl/tree/main/examples/sft_mistral_large_4)에 있습니다.
 
 ```py
 # torchrun --nproc-per-node 8 sft.py
@@ -359,7 +360,7 @@ trainer.train()
 
 ## Inference Endpoints {#section-7}
 
-Mistral Large 4는 Inference Endpoints에서도 사용할 수 있으며, 8 x NVIDIA H200 GPU에 바로 배포할 수 있는 recipe가 제공됩니다. 이 recipe는 tensor 및 expert parallelism을 사용해 8개 GPU 전체에 FP8 weight를 분할하고, 모델에 내장된 DSpark draft head를 사용해 speculative decoding으로 생성 속도를 높입니다. 최대 131K 토큰의 컨텍스트를 제공하고 한 번에 최대 16개의 요청을 처리하며, 다음과 같은 결과를 확인했습니다:
+Mistral Large 4는 Inference Endpoints에서도 사용할 수 있으며, 8 x NVIDIA H200 GPU에 바로 배포할 수 있는 recipe가 제공됩니다. 이 recipe는 vLLM을 실행하며, tensor 및 expert parallelism을 사용해 8개 GPU 전체에 FP8 weight를 분할하고, 모델에 내장된 DSpark draft head를 사용해 speculative decoding으로 생성 속도를 높입니다. 최대 131K 토큰의 컨텍스트를 제공하고 한 번에 최대 16개의 요청을 처리하며, 다음과 같은 결과를 확인했습니다:
 
 * 단일 요청: 1K 토큰 프롬프트에서 첫 토큰까지 약 0.6초가 걸렸고, 생성 속도는 약 65 tok/s였습니다. DSpark의 draft가 승인되는 채팅 프롬프트에서는 120–138 tok/s에 도달했습니다.  
 * 긴 프롬프트: 16K 토큰 프롬프트 4개를 한 번에 처리할 때 총 약 4,300 tok/s의 속도로 prefill되었고, 첫 토큰까지 8–9초가 걸렸습니다.  
