@@ -16,6 +16,13 @@ permissions:
 jobs:
   context:
     name: HF Agent / Capture Context
+    # Use the event's labels, not only a later API snapshot: opened may race
+    # with adding managed. Internal labels must never restart paid review.
+    if: >-
+      ${{ github.event_name == 'workflow_dispatch' ||
+          (contains(github.event.pull_request.labels.*.name, 'hf-agent:managed') &&
+           !contains(github.event.pull_request.labels.*.name, 'hf-agent:paused') &&
+           (github.event.action != 'labeled' || github.event.label.name == 'hf-agent:managed')) }}
     permissions:
       contents: read
       pull-requests: read
@@ -57,6 +64,9 @@ jobs:
   review:
     needs: context
     if: ${{ needs.context.outputs.managed == 'true' }}
+    concurrency:
+      group: hf-agent-pr-${{ github.repository }}-${{ needs.context.outputs.pr_number }}
+      cancel-in-progress: false
     permissions:
       actions: read
       issues: write
