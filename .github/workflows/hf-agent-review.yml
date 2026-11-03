@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
         with:
           repository: Hugging-Face-KREW/hf-workflow
-          ref: 530521318e28c1c82491393e264fe608aa029634
+          ref: 3f1035c7f759b1538a4132b4edc89bdc4e57d391
           token: ${{ secrets.KREW_BOT_TOKEN }}
           path: workflow
 
@@ -63,14 +63,14 @@ jobs:
       contents: read
       pull-requests: write
       statuses: write
-    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-review.yml@530521318e28c1c82491393e264fe608aa029634
+    uses: Hugging-Face-KREW/hf-workflow/.github/workflows/reusable-pr-review.yml@3f1035c7f759b1538a4132b4edc89bdc4e57d391
     with:
       target_repo: ${{ github.repository }}
       pr_number: ${{ needs.context.outputs.pr_number }}
       head_sha: ${{ needs.context.outputs.head_sha }}
       file_path: ${{ needs.context.outputs.file_path }}
       branch: ${{ needs.context.outputs.branch }}
-      workflow_ref: 530521318e28c1c82491393e264fe608aa029634
+      workflow_ref: 3f1035c7f759b1538a4132b4edc89bdc4e57d391
       feedback_revision: ${{ needs.context.outputs.feedback_revision }}
     secrets:
       DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
