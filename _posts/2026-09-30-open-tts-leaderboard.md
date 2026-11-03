@@ -38,7 +38,7 @@ Review instructions:
 
 ### TLDR 👉 오픈 소스 및 다국어에 초점을 맞춘 새로운 [TTS leaderboard](https://huggingface.co/spaces/hf-audio/open_tts_leaderboard)
 
-오픈 소스 Text-to-Speech(TTS) 모델 출시 속도는 놀라울 정도입니다. Hugging Face Hub에는 2026년 9월 30일 기준으로 [8K TTS models](https://huggingface.co/models?pipeline_tag=text-to-speech)개가 넘는 모델이 제공되고 있습니다 🚀
+오픈 소스 Text-to-Speech(TTS) 모델 출시 속도는 놀라울 정도입니다. Hugging Face Hub에는 2026년 9월 30일 기준으로 [8,000개가 넘는 TTS 모델](https://huggingface.co/models?pipeline_tag=text-to-speech)이 제공되고 있습니다 🚀
 
 <figure class="image text-center">
   <iframe src="https://eustlb-tts-models-on-the-hub.static.hf.space" width="100%" height="450" frameborder="0" scrolling="no"></iframe>
@@ -56,7 +56,7 @@ Review instructions:
 
 이를 위해 저희는 [Open TTS Leaderboard](https://huggingface.co/spaces/hf-audio/open_tts_leaderboard)를 구축했습니다. 이 리더보드는 객관적인 메트릭을 사용해 서로 보완적인 성능 측면에서 모델을 평가합니다.
 
-1. **명료성**: [Qwen3 ASR](https://huggingface.co/Qwen/Qwen3-ASR-1.7B-hf)를 사용해 프롬프트와 생성된 오디오의 전사 결과 사이의 단어/문자 오류율(WER 및 CER)을 측정합니다([Open ASR Leaderboard](https://huggingface.co/spaces/hf-audio/open_asr_leaderboard)의 최고 순위 오픈 소스 모델).
+1. **명료성**: [Qwen3 ASR](https://huggingface.co/Qwen/Qwen3-ASR-1.7B-hf)을 사용해 프롬프트와 생성된 오디오의 전사 결과 사이의 단어/문자 오류율(WER 및 CER)을 측정합니다([Open ASR Leaderboard](https://huggingface.co/spaces/hf-audio/open_asr_leaderboard)의 최고 순위 오픈 소스 모델).
 2. **속도**: H200 GPU에서 배치 오프라인 추론의 역실시간 계수(RTFx)와, H200 GPU 및 CPU에서 배치 크기 1의 스트리밍 지연 시간을 정량화하는 첫 오디오까지의 시간(TTFA)을 측정합니다.
 3. 생성된 오디오와 참조 클립의 [WavLM speaker embeddings](https://huggingface.co/bezzam/wavlm_large_finetune_seed_tts_eval) 사이 코사인 유사도(SIM)를 계산해 **화자 유사도**를 측정합니다.
 
