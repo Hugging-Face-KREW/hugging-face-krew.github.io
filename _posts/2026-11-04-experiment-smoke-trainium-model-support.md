@@ -1,20 +1,23 @@
 ---
 layout: post
-title: "모델이 AWS Trainium에서 실행되나요? 확인해 보세요"
+title: 모델이 AWS Trainium에서 실행되나요? 확인해 보세요
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: /blog/assets/torch-neuronx-model-support/thumbnail.jpg
 authors:
-  - user: dacorvo
-slug: "experiment-smoke-trainium-model-support"
-source_url: "https://huggingface.co/blog/torch-neuronx-model-support"
-source_published_date: "2026-10-23"
-source_published_at: "2026-10-23T00:00:00+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: dacorvo
+slug: experiment-smoke-trainium-model-support
+source_url: https://huggingface.co/blog/torch-neuronx-model-support
+source_published_date: '2026-10-23'
+source_published_at: '2026-10-23T00:00:00+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: '* TOC {:toc} <!--toc--> _이 글은 Hugging Face 블로그의 [Does Your Model Run
+  on AWS Trainium?'
 ---
-
 * TOC
 {:toc}
 <!--toc-->
