@@ -33,7 +33,7 @@ Review instructions:
 
 # NVIDIA Warp와 MjWarp를 사용해 로보틱스 시뮬레이션 및 학습 워크플로 가속하기
 
-기존 MuJoCo는 로봇 개발, 테스트, 제어를 위한 빠른 CPU 기반 [robot simulation](https://www.nvidia.com/en-us/use-cases/robotics-simulation/)을 제공하며 CPU 코어 전체에서 샘플링을 병렬화할 수 있습니다. 하지만 학습 워크로드가 커지면 질문은 하나의 월드가 얼마나 빠르게 실행되는가에서 한 번에 얼마나 많은 월드를 실행할 수 있는가로 바뀝니다. GPU 가속을 사용하면 시뮬레이션 및 학습 데이터를 디바이스에 가깝게 유지하면서 이러한 월드를 대규모 배치로 진행할 수 있습니다.
+기존 MuJoCo는 로봇 개발, 테스트, 제어를 위한 빠른 CPU 기반 [로봇 시뮬레이션](https://www.nvidia.com/en-us/use-cases/robotics-simulation/)을 제공하며 CPU 코어 전체에서 샘플링을 병렬화할 수 있습니다. 하지만 학습 워크로드가 커지면 질문은 하나의 월드가 얼마나 빠르게 실행되는가에서 한 번에 얼마나 많은 월드를 실행할 수 있는가로 바뀝니다. GPU 가속을 사용하면 시뮬레이션 및 학습 데이터를 디바이스에 가깝게 유지하면서 이러한 월드를 대규모 배치로 진행할 수 있습니다.
 
 [MuJoCo Warp (MJWarp)](https://mujoco.readthedocs.io/en/latest/mjwarp/)은 [NVIDIA Warp](https://developer.nvidia.com/warp-python)을 기반으로 하며, 호환되는 MuJoCo 모델을 GPU 규모의 실행 영역으로 가져옵니다. 이 글에서는 SO-101 follower arm을 익숙한 MuJoCo 워크플로에서 최대 2,048개의 병렬 MJWarp 환경으로 옮기고, 이러한 전환을 가능하게 하는 기술과 검증 단계를 살펴봅니다.
 
@@ -60,7 +60,7 @@ Review instructions:
 | JAX 학습 레시피 | [MuJoCo Playground](https://github.com/google-deepmind/mujoco_playground) / MJX (impl='warp') |
 | 멀티 솔버 + Isaac Lab 통합 | Newton — 이 시리즈의 다음 글 |
 
-## 유용한 Warp Kernel 하나로 시작하기 {#section-2}
+## 유용한 Warp 커널 하나로 시작하기 {#section-2}
 
 [NVIDIA Warp](https://github.com/NVIDIA/warp)은 고성능 GPU 가속 커널을 작성하기 위한 Python 프레임워크입니다. Warp를 사용하면 개발자가 Python으로 정적 타입 커널을 작성하고 CPU 또는 CUDA 실행을 위해 컴파일할 수 있습니다. 최초 실행 시 네이티브 모듈을 빌드하고 캐시하며, 이후 실행에서는 이를 재사용합니다. 커널 언어는 성능 지향적인 Python의 부분집합이고, 일반 Python은 구성, 할당, 실행 오케스트레이션을 담당합니다.
 
@@ -117,7 +117,7 @@ print(positions.numpy())
 
 이 글의 SO-101 워크플로에서는 사용하지 않지만, Warp의 두 가지 추가 기능도 알아둘 가치가 있습니다. Warp 커널은 미분 가능합니다. wp.Tape는 해당 컨텍스트 내부에서 실행된 정방향 커널 실행을 기록하고, backward()가 호출되면 그 adjoint를 역순으로 재생합니다. 따라서 팀들은 시뮬레이션 및 설계 최적화를 위한 [CAE workflows](https://developer.nvidia.com/topics/cae)을 포함해 Warp에서 미분 가능한 geometry, CFD, 사용자 정의 물리를 구축합니다. Warp는 Warp 1.15에서 도입된 결정적 실행도 지원합니다. GPU atomic은 기본적으로 스케줄러에 따라 실행되므로 동일한 커널을 반복 실행해도 결과가 약간 달라질 수 있으며, opt-in 결정적 모드는 시뮬레이션, 검증, 회귀 테스트에서 재현 가능한 순서를 얻는 대신 일부 성능을 양보합니다. 이는 Warp의 기능이며, 전체 MJWarp rollout의 미분 가능성이나 결정성을 보장하는 것은 아닙니다. 자세한 내용은 미분 가능성과 결정적 실행에 관한 Warp 문서를 참고하세요.
 
-Warp를 사용해 보세요: pip install warp-lang( GPU 결정성에는 ≥ 1.15), 그 다음 python -m warp.examples.browse를 실행하거나 [tutorial notebooks](https://github.com/NVIDIA/accelerated-computing-hub/tree/main/tutorials/warp/notebooks)을 사용하세요.
+Warp를 사용해 보세요: pip install warp-lang (GPU 결정성에는 ≥ 1.15), 그 다음 python -m warp.examples.browse를 실행하거나 [tutorial notebooks](https://github.com/NVIDIA/accelerated-computing-hub/tree/main/tutorials/warp/notebooks)을 사용하세요.
 
 ## MuJoCo Warp(MJWarp)란? {#section-3}
 
@@ -268,7 +268,7 @@ mjm.opt.timestep = frame_dt / sim_substeps # 50 Hz × 10 substeps -> 0.002 s
 
 cube가 성공적으로 쌓였는지 확인하세요. 44 mm cube의 경우 성공은 두 가지 측정 가능한 조건으로 정의됩니다. 수평 중심 오차 xy_err ≤ 0.015 m(cube 중심 간 측정)와 cube 중심 간 수직 간격 0.035 m ≤ dz ≤ 0.055 m(하나의 cube edge에 해당하며 settling을 위한 여유 포함)입니다. cube가 안정된 후 두 조건을 모두 평가하세요. 프로세스가 성공적으로 종료되었다는 사실만으로 task 성공이 입증되지는 않습니다.
 
-동반 checkout에서 CPU task를 실행하세요. 게시 전 차단 사항: 이 지침을 게시하기 전에 접근 가능한 repository URL과 고정된 dependency 및 asset 버전을 확인하세요. 아래 repository placeholder는 실행 가능한 URL이 아닙니다.
+동반 checkout에서 CPU task를 실행하세요.
 
 ```
 git clone https://github.com/NVIDIA/accelerated-computing-hub.git blogs
