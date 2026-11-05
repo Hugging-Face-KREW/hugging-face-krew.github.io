@@ -1,21 +1,24 @@
 ---
 layout: post
-title: "StateBench: 긴 문서에서 언어 모델이 상태 변화를 추적하는 방식 테스트"
+title: 'StateBench: 긴 문서에서 언어 모델이 상태 변화를 추적하는 방식 테스트'
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/638e39b249de7ae552d977b5/5g9HfQLFFaQE0fslWrxh0.png
 image: assets/images/blog/posts/2026-11-03-statebench/thumbnail.png
 authors:
-  - user: allenai
-slug: "statebench"
-source_url: "https://huggingface.co/blog/allenai/statebench"
-source_published_date: "2026-11-03"
-source_published_at: "2026-11-03T17:15:21+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: allenai
+slug: statebench
+source_url: https://huggingface.co/blog/allenai/statebench
+source_published_date: '2026-11-03'
+source_published_at: '2026-11-03T17:15:21+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: '* TOC {:toc} <!--toc--> _이 글은 Hugging Face 블로그의 [StateBench: Testing
+  how language models track state changes over long documents](https://huggingface.'
 ---
-
 * TOC
 {:toc}
 <!--toc-->
