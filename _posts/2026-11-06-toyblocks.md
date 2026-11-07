@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "ToyBlocks: 로봇 학습과 평가를 위한 통제된 세계"
+title: "ToyBlocks: 로봿 학습과 평가를 위한 통제된 세계" 
 author: dailybot
 categories: [Translation, HuggingFace]
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/638e39b249de7ae552d977b5/OAJMu2jr7i5jVAbmsKdZW.jpeg
@@ -19,7 +19,7 @@ translator: "openai"
 * TOC
 {:toc}
 <!--toc-->
-_이 글은 Hugging Face 블로그의 [ToyBlocks: A controlled world for robot learning and evaluation](https://huggingface.co/blog/allenai/toyblocks)를 한국어로 번역한 글입니다._
+_이 글은 Hugging Face 블로그의 [ToyBlocks: A controlled world for robot learning and evaluation](https://huggingface.co/blog/allenai/toyblocks)를 한국어로 번역한 글입니다_.
 
 <!-- Source: https://huggingface.co/blog/allenai/toyblocks -->
 
@@ -33,7 +33,7 @@ Review instructions:
 
 # ToyBlocks: 로봇 학습과 평가를 위한 통제된 세계
 
-💻 [코드](https://github.com/allenai/ToyBlocks) | 📊 [데이터](https://huggingface.co/datasets/allenai/toyblocks-data) | 🤖 [모델](https://huggingface.co/collections/allenai/toyblocks) | 📖 [문서](https://allenai.github.io/ToyBlocks/docs/user_guide/index.html)
+💻 [코드](https://github.com/allenai/ToyBlocks) | 📊 [Datasets](httpshttps://huggingface.co/datasets/allenai/toyblocks-data) | 🤖 [모델](https://huggingface.co/collections/allenai/toyblocks) | 📖 [문서](https://allenai.github.io/ToyBlocks/docs/user_guide/index.html)
 
 [![ToyBlocks isometric robot illustration](https://www.datocms-assets.com/64837/1793826687-david-thumbnail-download-1.jpg)](https://www.datocms-assets.com/64837/1793826687-david-thumbnail-download-1.jpg)
 
@@ -67,7 +67,7 @@ ToyBlocks는 블록을 집고 쌓는 작업만을 위한 것이 아닙니다. �
 
 [![ToyBlocks framework architecture](https://www.datocms-assets.com/64837/1793917318-toyblocks-framework-current.png)](https://www.datocms-assets.com/64837/1793917318-toyblocks-framework-current.png)
 
-ToyBlocks는 모델 학습에 사용하거나 추가 학습(미세 조정)을 통해 기존에 학습된 모델을 적용하는 데 사용할 수 있는 스킬(짧은 작업을 위한 행동)과 작업 시연을 자동으로 생성합니다. 고수준 추론 모델은 무엇을 할지 결정하고, 저수준 행동 모델은 로봇의 움직임을 제어합니다. 이 프레임워크는 실험을 쉽게 설계하고 가설을 검증하는 데에도 사용할 수 있습니다.
+ToyBlocks는 모델 학습에 사용하거나 추가 학습(미세 조정(fine-tuning))을 통해 기존에 학습된 모델을 적용하는 데 사용할 수 있는 스킬(짧은 작업을 위한 행동)과 작업 시연을 자동으로 생성합니다. 고수준 추론 모델은 무엇을 할지 결정하고, 저수준 행동 모델은 로봇의 움직임을 제어합니다. 이 프레임워크는 실험을 쉽게 설계하고 가설을 검증하는 데에도 사용할 수 있습니다.
 
 ToyBlocks는 강화 학습(RL)과 로봇이 어떻게 움직여야 하는지를 계산하는 모션 플래닝을 사용해 짧은 시간 범위의 작업, 즉 짧은 행동 시퀀스로 구성된 작업을 위한 스킬을 생성합니다. 스킬 학습은 시뮬레이션에서 로봇 학습을 위한 Nvidia의 오픈 소스 프레임워크인 Isaac Lab에서 수행됩니다. 로봇의 행동을 선택하는 모델인 정책은 시행착오를 통해 블록을 집지 않고 테이블 위로 밀거나 다른 면으로 뒤집는 비파지 스킬을 학습합니다. 스킬 생성에는 시뮬레이터가 직접 제공할 수 있지만 실제 로봇은 알 수 없는 정보, 예를 들어 블록의 정확한 위치와 방향인 특권 정보가 사용될 수 있습니다. 따라서 실제 환경에서는 원격 조작이 필요한 스킬을 자동으로 생성할 수 있습니다.
 
@@ -113,7 +113,7 @@ Molmo 2를 고수준 추론 모델로 사용하고 ManiFlow 또는 모션 플래
 
 에이전트 시스템을 사용한 실험에서는 프런티어 모델이 도구 호출을 통해 어떻게 계획하고 행동하는지 테스트합니다. Claude Opus 5.5를 사용해 세 가지 설정을 연구합니다. 검색 및 철자 설정에서는 AI 애플리케이션을 도구에 연결하는 표준인 [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro)를 통해 ToyBlocks의 스킬을 제공합니다. 에이전트는 카메라 이미지로 장면을 보고, 픽셀을 가리켜 pick, flip, rotate와 같은 스킬을 호출하며, 검색하거나 쌓기를 시작할지 또는 작업이 완료되었거나 불가능하다고 선언할지를 결정합니다. 동일한 MCP 도구로 ToyBlocks 시연을 생성하는 스크립트 스킬(모션 플래닝 기반 집기 및 배치와 RL 기반 회전 및 뒤집기)이나 학습된 ManiFlow 스킬을 실행할 수 있습니다. ToyBlocks에는 이러한 실험의 기반이 되는 프레임워크가 포함되어 있으며, 앞서 설명한 자연어 웹 인터페이스도 이 프레임워크를 사용합니다.
 
-프런티어 모델(Claude Fable 5.1)이 ToyBlocks 세계에서 로봇을 제어해 “Ai2”를 철자하는 탑을 만들 블록을 검색하고 쌓습니다. 에피소드 중 에이전트는 “집기와 배치가 자연스럽게 방향을 바로잡는지, 아니면 수동으로 수정해야 하는지 알아내야 해… 63번 호출이 남았으니 제어된 테스트를 실행하기에 충분해”라고 말합니다(0:06). 이후 에이전트는 “...아마 그리퍼의 yaw는 방사형일 거야. 로봇 베이스에서 블록을 향하는 방향이지”라고 가설을 세우고(0:15), 결국 이 가설을 확인한 뒤(0:26) 세 블록 탑을 만들지만 ‘A’는 옆으로 누워 있습니다(1:11). 놀랍게도 현재의 프런티어 모델은 인상적인 계획, 공간 추론, 검색 능력에도 불구하고 종종 이와 유사한 인식 오류를 범합니다(다음 그림 참조).
+프런티어 모델(Claude Opus 5.5)을 사용해 ToyBlocks 세계에서 로봇을 제어해 “Ai2”를 철자하는 탑을 만들 블록을 검색하고 쌓습니다. 에피소드 중 에이전트는 “집기와 배치가 자연스럽게 방향을 바로잡는지, 아니면 수동으로 수정해야 하는지 알아내야 해… 63번 호출이 남았으니 제어된 테스트를 실행하기에 충분해”라고 말합니다(0:06). 이후 에이전트는 “...아마 그리퍼의 yaw는 방사형일 거야. 로봇 베이스에서 블록을 향하는 방향이지”라고 가설을 세우고(0:15), 결국 이 가설을 확인한 뒤(0:26) 세 블록 탑을 만들지만 ‘A’는 옆으로 누워 있습니다(1:11). 놀랍게도 현재의 프런티어 모델은 인상적인 계획, 공간 추론, 검색 능력에도 불구하고 종종 이와 유사한 인식 오류를 범합니다(다음 그림 참조).
 
 고전적 계획에서는 에이전트(Claude Opus 5.5를 사용해 계획하고 행동을 선택하는 우리의 시스템)가 텍스트 설명을 사용해 프런티어 모델이 [몇 년 전](https://proceedings.neurips.cc/paper_files/paper/2023/hash/7a92bcdede88c7afd108072faf5485c8-Abstract-Datasets_and_Benchmarks.html) 어려워했던 것과 유사한 블록 쌓기 작업 그룹 30개를 모두 해결합니다. 또한 카메라 이미지를 반복적으로 관찰하고 폐루프 방식으로 다음 행동을 선택하면서 30개 중 30개를 해결합니다.
 
