@@ -1,21 +1,24 @@
 ---
 layout: post
-title: "ToyBlocks: 로봿 학습과 평가를 위한 통제된 세계" 
+title: 'ToyBlocks: 로봿 학습과 평가를 위한 통제된 세계'
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/638e39b249de7ae552d977b5/OAJMu2jr7i5jVAbmsKdZW.jpeg
 image: assets/images/blog/posts/2026-11-06-toyblocks/thumbnail.jpeg
 authors:
-  - user: allenai
-slug: "toyblocks"
-source_url: "https://huggingface.co/blog/allenai/toyblocks"
-source_published_date: "2026-11-06"
-source_published_at: "2026-11-06T14:00:48+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: allenai
+slug: toyblocks
+source_url: https://huggingface.co/blog/allenai/toyblocks
+source_published_date: '2026-11-06'
+source_published_at: '2026-11-06T14:00:48+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: '* TOC {:toc} <!--toc--> _이 글은 Hugging Face 블로그의 [ToyBlocks: A controlled
+  world for robot learning and evaluation](https://huggingface.'
 ---
-
 * TOC
 {:toc}
 <!--toc-->
