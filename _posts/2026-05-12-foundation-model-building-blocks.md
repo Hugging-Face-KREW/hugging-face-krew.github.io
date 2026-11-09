@@ -40,7 +40,7 @@ Review instructions:
 
 그림: 다음 자료를 바탕으로 재구성 — ["AI's Three Scaling Laws, Explained"](https://blogs.nvidia.com/blog/ai-scaling-laws/) (NVIDIA Blog).
 
-이러한 스케일링 규칙들이 모여 파운데이션 모델 생애주기—사전 학습(pre-training), 사후 학습(post-training), 추론(inference)—을 밀접하게 결합된 인프라 요구사항으로 밀어 넣는다: 가깝게 연결된 가속기 컴퓨트, 대역폭이 높은 저지연 네트워크, 그리고 분산 스토리지 백엔드. 또한 리소스 관리 오케스트레이션의 중요성과 대규모로 클러스터 상태를 유지하고 성능 이상 현상을 진단하기 위한 어플리케이션- 및 하드웨어 수준의 관측성(observability)의 중요성도 제고된다.
+이러한 스케일링 규칙들이 모여 파운데이션 모델 생애주기—사전 학습(pre-training), 사후 학습(post-training), 추론(inference)—을 밀접하게 결합된 인프라 요구사항으로 밀어 넣는다: 가깝게 연결된 가속기 컴퓨트, 대역폭이 높은 저지연 네트워크, 그리고 분산 스토리지 백엔드. 또한 리소스 관리 오케스트레이션의 중요성과 대규모로 클러스터 상태를 유지하고 성능 이상 현상을 진단하기 위한 애플리케이션- 및 하드웨어 수준의 관측성(observability)의 중요성도 제고된다.
 
 또 다른 핵심 흐름은 파운데이션 모델 생애주기가 OSS(Open-Source Software) 생태계에 더욱 의존하게 되는 경향이다. OSS 생태계는 모델 개발 프레임워크, 클러스터 리소스 관리, 운영 도구를 포괄한다. 클러스터 계층에서 리소스 관리는 일반적으로 [Slurm](https://slurm.schedmd.com/documentation.html)과 [Kubernetes](https://kubernetes.io/docs/) 같은 시스템으로 제공된다. 모델 개발 및 분산 학습은 일반적으로 [PyTorch](https://pytorch.org/)와 [JAX](https://jax.readthedocs.io/) 같은 프레임워크에서 구현된다. 모니터링 및 시각화—즉, 관측성(observability)—은 일반적으로 메트릭 수집을 위한 [Prometheus](https://prometheus.io/docs/introduction/overview/)와 시각화 및 경보를 위한 [Grafana](https://grafana.com/docs/grafana/latest/)를 사용해 운영 계층에서 인프라 및 리소스 관리 위에 위치한다. 그림 1은 하드웨어 인프라가 리소스 오케스트레이션을 지원하고, 그 위에서 ML 프레임워크가 작동하며, 관측성이 모든 계층에 걸쳐 확산되는 계층형 아키텍처를 시각화한다.
 
@@ -84,19 +84,19 @@ Review instructions:
 | [p6-b200.48xlarge](https://aws.amazon.com/ec2/instance-types/p6/) | B200 | 8 | 1,440 GB HBM3e | 5세대 | 14.4 TB/s | v4 | 400 GB/s |
 | [p6-b300.48xlarge](https://aws.amazon.com/ec2/instance-types/p6/) | B300 | 8 | 2,100 GB HBM3e | 5세대 | 14.4 TB/s | v4 | 800 GB/s |
 
-참고: EFA 대역폭은 일관성을 위해 다른 대역폭 지표와의 비교를 위해 Gbps를 GB/s로 변환하였다(÷8). 또한 NVLink 및 EFA 대역폭 수치는 링크당 값이 아닌 인스턴스당 합계 값으로 표시된다; 내부 노드 간 인터커넥트 및 네트워킹 특성은 해당 [P5 인스턴스 계열 페이지](https://aws.amazon.com/ec2/instance-types/p5/) 및 [P6 인스턴스 계열 페이지](https://aws.amazon.com/ec2/instance-types/p6/)를 참조하자.
+참고: EFA 대역폭은 다른 대역폭 지표와 일관되게 비교하기 위해 Gbps를 GB/s로 변환하였다(÷8). 또한 NVLink 및 EFA 대역폭 수치는 링크당 값이 아닌 인스턴스당 합계 값으로 표시된다; 내부 노드 간 인터커넥트 및 네트워킹 특성은 해당 [P5 인스턴스 계열 페이지](https://aws.amazon.com/ec2/instance-types/p5/) 및 [P6 인스턴스 계열 페이지](https://aws.amazon.com/ec2/instance-types/p6/)를 참조하자.
 
 Elastic Fabric Adapter (EFA)는 OS-bypass 원격 직접 메모리 접근(RDMA)을 지원하는 Amazon EC2의 네트워크 인터페이스다. Scalable Reliable Datagram(SRD) 프로토콜을 사용하는 Libfabric API를 통해 네트워크 디바이스와 애플리케이션이 직접 통신하도록 하여 분산 학습의 집합 연산에서 대기 시간을 줄이고 처리량을 향상시킨다.
 
-다양한 세대의 EFA가 서로 다른 인스턴스 계열에서 제공된다. Amazon EC2 P5 및 P5e 인스턴스는 EFA 버전 2(EFAv2)를 탑재한다. [EFA 버전 3(EFAv3)](https://aws.amazon.com/blogs/machine-learning/aws-ai-infrastructure-with-nvidia-blackwell-two-powerful-compute-solutions-for-the-next-frontier-of-ai/)(https://aws.amazon.com/blogs/aws/new-amazon-ec2-p5en-instances-with-nvidia-h200-tensor-core-gpus-and-efav3-networking/)은 P5en 인스턴스에서 제공되며 EFAv2에 비해 패킷 지연을 약 35% 감소시키는 것으로 알려져 있다. [EFA 버전 4(EFAv4)](https://aws.amazon.com/blogs/machine-learning/aws-ai-infrastructure-with-nvidia-blackwell-two-powerful-compute-solutions-for-the-next-frontier-of-ai/), P6 인스턴스에서 사용 가능하며 EFAv3 대비 집합 연산 성능을 추가로 약 18% 개선한다.
+다양한 세대의 EFA가 서로 다른 인스턴스 계열에서 제공된다. Amazon EC2 P5 및 P5e 인스턴스는 EFA 버전 2(EFAv2)를 탑재한다. [EFA 버전 3(EFAv3)](https://aws.amazon.com/blogs/machine-learning/aws-ai-infrastructure-with-nvidia-blackwell-two-powerful-compute-solutions-for-the-next-frontier-of-ai/은 P5en 인스턴스에서 제공되며 EFAv2에 비해 패킷 지연을 약 35% 감소시키는 것으로 알려져 있다. [EFA 버전 4(EFAv4)](https://aws.amazon.com/blogs/machine-learning/aws-ai-infrastructure-with-nvidia-blackwell-two-powerful-compute-solutions-for-the-next-frontier-of-ai/), P6 인스턴스에서 사용 가능하며 EFAv3 대비 집합 연산 성능을 추가로 약 18% 개선한다.
 
-대규모로 갈수록, 분산 학습(다중 샘플링 코퍼스 스트리밍 및 멀티 테라바이트 체크포인트 작성)과 대규모 추론(가중치 스테이징 및 KV 캐시 성장 관리)은 지역 NVMe SSD를 핫 데이터용으로, Lustre를 공유 고처리량 접근용으로, 그리고 [Amazon S3](https://aws.amazon.com/s3/)를 내구성 있는 지속성을 위한 저장소로 사용하는 계층적 스토리지 구성을 필요로 한다.
+대규모로 갈수록, 분산 학습(코퍼스 스트리밍 및 멀티 테라바이트 체크포인트 작성)과 대규모 추론(가중치 스테이징 및 KV 캐시 성장 관리)은 지역 NVMe SSD를 핫 데이터용으로, Lustre를 공유 고처리량 접근용으로, 그리고 [Amazon S3](https://aws.amazon.com/s3/)를 내구성 있는 지속성을 위한 저장소로 사용하는 계층적 스토리지 구성을 필요로 한다.
 
 이 시리즈의 주요 다중-GPU 인스턴스에서 로컬 NVMe는 인스턴스 스토어(휘발성)로 제공되며, 원시 용량은 30.72 TB(8 × 3.84 TB NVMe SSD)이다; [EC2 accelerated-computing instance store specifications](https://docs.aws.amazon.com/ec2/latest/instancetypes/ac.html#ac_instance-store)를 참조하라.
 
 [Lustre](https://www.lustre.org/about/)는 고성능 컴퓨팅(HPC)에서 폭넓게 사용되는 오픈 소스, POSIX 준수 분산 파일 시스템으로, 다수의 클라이언트에 걸쳐 높은 집계 처리량으로 공유 네임스페이스를 제공한다. [Amazon FSx for Lustre](https://aws.amazon.com/fsx/lustre/)는 Lustre를 완전 관리형 서비스로 제공하고, 초당 테라바이트급 처리량, 수백만 IOPS, 밀리초 미만 지연을 실현하는 병렬 파일 시스템으로 노출한다. Data Repository Associations를 통해 [Amazon S3](https://aws.amazon.com/s3/)와 통합이 가능하며, 학습 데이터셋의 지연 로딩(lazy loading) 및 내구성을 위한 체크포인트 자동 익스포트를 지원한다.
 
-클러스터 규모에서, 이 인스턴스들은 [Amazon EC2 UltraClusters](https://aws.amazon.com/ec2/ultraclusters/)로 배치되며, 수천 대의 가속 인스턴스를 단일, 밀집된 클러스터로 구성하고 페타비트 규모의 논블로킹 네트워크로 상호 연결한다.
+클러스터 규모에서, 이 인스턴스들은 [Amazon EC2 UltraClusters](https://aws.amazon.com/ec2/ultraclusters/)로 배치되며, 수천 대의 가속 인스턴스를 하나의 가용 영역 안에 단일하고 밀집된 클러스터로 구성하고 페타비트 규모의 논블로킹 네트워크로 상호 연결한다.
 
 ![2세대 EC2 UltraCluster](https://cdn-uploads.huggingface.co/production/uploads/64d6b270c2eedf9af82baa23/iMu8fYvHpDiGrquj6d-6m.jpeg)
 
@@ -131,7 +131,7 @@ P6e-GB200 UltraServers의 컴포넌트 인스턴스 타입은 [`p6e-gb200.36xlar
 
 그림 2: AWS의 Slurm 기반 및 Kubernetes 기반 리소스 오케스트레이션의 고수준 아키텍처
 
-[Slurm](https://slurm.schedmd.com/)은 Simple Linux Utility for Resource Management의 약자로, 대규모 HPC 분야에서 지배적인 워크로드 매니저이다. 모듈식 플러그인 아키텍처를 통해 스케줄링 알고리즘, 토폴로지 모델, 리소스 유형, 자원 사용량 집계 백엔드를 독립적으로 구성할 수 있다. 스케줄링 모델은 자원을 파티션(partitions)로 구성하고, `sbatch`를 통해 작업 제출을 받으며, 할당된 노드에서 동기화된 시작으로 병렬 태스크를 `srun`으로 실행한다. 분산 학습에 있어 중요한 점은 Slurm이 작업 단위로 스케줄링한다는 사실이다—다중 노드 작업 전체를 원자적으로 할당하고, 태스크가 시작되기 전에 먼저 배치한다. 낮은 우선순위를 가진 작업을 재배치하는 백필(backfill) 스케줄러와 공정 점유를 위한 다요인 우선순위 시스템, 다중 임차인 간의 큐를 관리하는 큐 운영 정책이 있다. 또한 Slurm은 [토폴로지 인식 배치(topology-aware placement)](https://slurm.schedmd.com/topology.html) 플러그인을 통해 네트워크 스위치 계층 구조를 모델링하고, AWS에서 EFA 패브릭 토폴로지를 이용해 최소 스위치 홉으로 노드에 작업을 배치하도록 한다. 그리고 GPU 유형을 추적하고 기기 친화성을 강제하는 Generic Resource(GRES) 인터페이스를 통해 기본 스케줄링도 지원한다.
+[Slurm](https://slurm.schedmd.com/)은 Simple Linux Utility for Resource Management의 약자로, 대규모 HPC 분야에서 지배적인 워크로드 매니저이다. 모듈식 플러그인 아키텍처를 통해 스케줄링 알고리즘, 토폴로지 모델, 리소스 유형, 자원 사용량 집계 백엔드를 독립적으로 구성할 수 있다. 스케줄링 모델은 자원을 파티션(partitions)로 구성하고, `sbatch`를 통해 작업 제출을 받으며, 할당된 노드에서 동기화된 시작으로 병렬 태스크를 `srun`으로 실행한다. 분산 학습에 있어 중요한 점은 Slurm이 작업 단위로 스케줄링한다는 사실이다—다중 노드 작업 전체를 원자적으로 할당하고, 태스크가 시작되기 전에 먼저 배치한다. 유휴 슬롯에서 낮은 우선순위 작업을 높은 우선순위 작업의 지연 없이 먼저 시작하는 백필(backfill) 스케줄러와, 공정 점유율·작업 나이·QOS 티어를 따져 다중 임차인 간 큐 순서를 정하는 다요인 우선순위 시스템이 있다. 또한 Slurm은 [토폴로지 인식 배치(topology-aware placement)](https://slurm.schedmd.com/topology.html) 플러그인을 통해 네트워크 스위치 계층 구조를 모델링하고, AWS에서 EFA 패브릭 토폴로지를 이용해 최소 스위치 홉으로 노드에 작업을 배치하도록 한다. 그리고 GPU 유형을 추적하고 기기 친화성을 강제하는 Generic Resource(GRES) 인터페이스를 통해 기본 스케줄링도 지원한다.
 
 AWS는 Slurm 기반 오케스트레이션에 대해 여러 배포 옵션을 제공한다. [AWS ParallelCluster](https://github.com/aws/aws-parallelcluster)은 EC2에서 Slurm 클러스터 배포를 자동화하는 오픈 소스 클러스터 관리 도구로, 헤드 노드 프로비저닝, 컴퓨트 플릿 확장 및 공유 스토리지와의 통합을 처리한다. [AWS Parallel Computing Service (PCS)](https://aws.amazon.com/pcs/)는 관리형 컨트롤 플레인을 제공하는 대안을 제시한다. 분산 학습 워크로드의 경우, [Amazon SageMaker HyperPod](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod.html)는 Slurm 모드를 지원하며 대규모 학습에 특화된 기능(예: [지속적 노드 상태 모니터링](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-resiliency-slurm-cluster-health-check.html) 및 [작업 자동 재개 기능](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-resiliency-slurm-auto-resume.html))을 제공한다.
 
@@ -157,7 +157,7 @@ AWS에서 Kubernetes 기반 오케스트레이션을 사용하려면, [Amazon El
 
 [CUDA](https://developer.nvidia.com/cuda-toolkit) 플랫폼은 GPU 컴퓨트용 프로그래밍 모델과 런타임을 제공한다. CUDA에 대해 컴파일된 애플리케이션은 NVIDIA GPU에서 커널을 실행하고, 디바이스 메모리를 관리하며, 다수 디바이스 간의 실행을 조정한다. 현재 릴리스는 CUDA Toolkit 13.x이며, Blackwell 아키텍처(컴퓨트 기능 10.x)를 지원한다.
 
-현대의 학습 및 추론 성능은 일반적인 공급업체의 기본 연산 보다 특수 최적화 라이브러리와 커스텀 커널에 의해 더 좌우된다. 예를 들어 [FlashAttention](https://github.com/Dao-AILab/flash-attention) 같은 커널은 어텐션(attention)를 하나의 메모리-효율적 패스로 융합해 HBM 트래픽을 줄이고 처리량을 향상시킨다. 또한 각 팀은 모델에 맞춘 형태(shape)와 정밀도(precision)에 특화된 융합 커널(layernorm/residual/activation, quantized GEMMs, MoE dispatch, KV-cache ops 등)를 작성한다. 이는 [Triton](https://triton-lang.org/) 같은 프로그래머블 도구체인과 NVIDIA의 [CuTe](https://github.com/NVIDIA/cutlass/blob/1d9e1f6d7a1e820a884765cf3dcfda05c95f39d1/media/docs/cpp/cute/00_quickstart.md) 같은 텐서 레이아웃 및 와프-레벨 DSL, [CUTLASS](https://github.com/NVIDIA/cutlass) 같은 고성능 GEMM 및 퓨전 빌딩 블록의 지원이 필요하다. 실제로 이 커널 및 컴파일러 계층은 ML 프레임워크 못지않게 엔드-투-엔드 성능을 좌우한다.
+현대의 학습 및 추론 성능은 일반적인 공급업체의 기본 연산 보다 특수 최적화 라이브러리와 커스텀 커널에 의해 더 좌우된다. 예를 들어 [FlashAttention](https://github.com/Dao-AILab/flash-attention) 같은 커널은 어텐션(attention)을 하나의 메모리-효율적 패스로 융합해 HBM 트래픽을 줄이고 처리량을 향상시킨다. 또한 각 팀은 모델에 맞춘 형태(shape)와 정밀도(precision)에 특화된 융합 커널(layernorm/residual/activation, quantized GEMMs, MoE dispatch, KV-cache ops 등)를 작성한다. 이는 [Triton](https://triton-lang.org/) 같은 프로그래머블 도구체인과 NVIDIA의 [CuTe](https://github.com/NVIDIA/cutlass/blob/1d9e1f6d7a1e820a884765cf3dcfda05c95f39d1/media/docs/cpp/cute/00_quickstart.md) 같은 텐서 레이아웃 및 와프-레벨 DSL, [CUTLASS](https://github.com/NVIDIA/cutlass) 같은 고성능 GEMM 및 퓨전 빌딩 블록의 지원이 필요하다. 실제로 이 커널 및 컴파일러 계층은 ML 프레임워크 못지않게 엔드-투-엔드 성능을 좌우한다.
 
 #### 통신 기반: NCCL 및 트랜스포트 플러그인
 
@@ -201,9 +201,9 @@ RLHF(또는 관련 사후 학습 방법)에서는 [veRL](https://github.com/volc
 
 EFA는 드라이버 수준의 통계를 노출한다(바이트/패킷/재전송/타임아웃). 이를 통해 분산 학습의 집합 연산 병목 현상을 진단할 수 있다. [aws-ofi-nccl](https://github.com/aws/aws-ofi-nccl) 플러그인은 NCCL을 libfabric 인터페이스에 매핑하여 EFA의 OS 우회 및 SRD 프로토콜을 활용할 수 있게 한다. 운영자는 EFA 카운터를 NCCL 진단(NCCL_DEBUG=INFO)과 결합해 네트워크 계층의 이슈를 파악할 수 있다.
 
-[Amazon FSx for Lustre](https://aws.amazon.com/fsx/lustre/)은 처리량 및 메타데이터 지연 시간(latency) 등 클라이언트 측 메트릭을 노출하고, 애플리케이션 차원의 메트릭(학습의 경우 단계 시간, 초당 토큰 수, 손실 값; 추론의 경우 TTFT, 토큰 간 지연)도 Prometheus 클라이언트 라이브러리를 통해 노출할 수 있다.
+[Amazon FSx for Lustre](https://aws.amazon.com/fsx/lustre/)는 처리량 및 메타데이터 지연 시간(latency) 등 클라이언트 측 메트릭을 노출하고, 애플리케이션 차원의 메트릭(학습의 경우 단계 시간, 초당 토큰 수, 손실 값; 추론의 경우 TTFT, 토큰 간 지연)도 Prometheus 클라이언트 라이브러리를 통해 노출할 수 있다.
 
-#### GPU 상태 상태 모니터링 및 경보
+#### GPU 상태 모니터링 및 경보
 
 사전 장애 탐지는 하드웨어 이슈가 장기간 학습 중단으로 번지지 않도록 방지한다. 일반적인 워크플로우는 DCGM 건강 메트릭을 모니터링하고, 오류 수가 임계값을 초과하면 경보를 트리거한다. ECC 단일 비트 오류(SBE)는 소수의 수에서는 허용될 수 있지만, SBE 비율이 높아지면 이중 비트 오류(DBE) 또는 다른 실패로 이어질 수 있다. XID 63/64(행 재매핑 관련 이벤트)와 XID 94/95(영향이 격리된/격리되지 않은 오류) 등은 후속 조치가 필요한 주요 신호다.
 
@@ -214,8 +214,6 @@ EFA는 드라이버 수준의 통계를 노출한다(바이트/패킷/재전송/
 ![GPU 상태 대시보드](https://cdn-uploads.huggingface.co/production/uploads/64d6b270c2eedf9af82baa23/CNoV_SbvTriVgMgg85ekz.png)
 
 그림 4: GPU Health - Cluster 대시보드에서 GPU 오류 패턴 및 인스턴스 보고
-
-이 시리즈의 Part 5에서는 관측성 아키텍처를 포괄적으로 다루며, 메트릭 수집 전략, 대시보드 구성, 대규모 클러스터 상태 유지를 위한 경보 패턴 등을 다룬다.
 
 ## 결론
 
