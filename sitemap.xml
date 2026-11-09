@@ -129,6 +129,10 @@
 <lastmod>2026-05-12T00:00:00+09:00</lastmod>
 </url>
 <url>
+<loc>https://huggingface-krew.co/granite-embedding-multilingual-r2/</loc>
+<lastmod>2026-05-15T00:00:00+09:00</lastmod>
+</url>
+<url>
 <loc>https://huggingface-krew.co/paddleocr-transformers/</loc>
 <lastmod>2026-05-19T00:00:00+09:00</lastmod>
 </url>
@@ -187,6 +191,10 @@
 <url>
 <loc>https://huggingface-krew.co/cerebras-gemma4-voice-ai/</loc>
 <lastmod>2026-07-01T00:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>https://huggingface-krew.co/revamped-kernels/</loc>
+<lastmod>2026-07-06T00:00:00+09:00</lastmod>
 </url>
 <url>
 <loc>https://huggingface-krew.co/lerobot-release-v060/</loc>
