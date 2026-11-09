@@ -23,26 +23,26 @@
     />
     <link rel="icon" href="/pr-preview/pr-212/assets/images/favicon.ico" />
 
-    <title>이제 Transformers에서 llama.cpp 양자화 모델을 실행할 수 있습니다 | Hugging Face KREW</title>
-
-    <!-- Begin Jekyll SEO tag v2.9.0 -->
+    <!-- Begin Jekyll SEO tag v2.9.1 -->
 <title>이제 Transformers에서 llama.cpp 양자화 모델을 실행할 수 있습니다 | Hugging Face KREW</title>
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="이제 Transformers에서 llama.cpp 양자화 모델을 실행할 수 있습니다" />
 <meta name="author" content="dailybot" />
 <meta property="og:locale" content="ko" />
-<meta name="description" content="이 글은 Hugging Face 블로그의 Transformers now runs llama.cpp quants를 한국어로 번역한 글입니다." />
-<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Transformers now runs llama.cpp quants를 한국어로 번역한 글입니다." />
+<meta name="description" content="Transformers에서 GGUF 모델을 효율적으로 실행하는 방법을 소개합니다. llama.cpp의 ggml 커널 재사용과 generate 오버헤드 감소로 Apple Silicon에서 로컬 추론 성능을 llama.cpp 수준에 가깝게 끌어올린 과정을 설명합니다." />
+<meta name="twitter:description" property="og:description" content="Transformers에서 GGUF 모델을 효율적으로 실행하는 방법을 소개합니다. llama.cpp의 ggml 커널 재사용과 generate 오버헤드 감소로 Apple Silicon에서 로컬 추론 성능을 llama.cpp 수준에 가깝게 끌어올린 과정을 설명합니다." />
+<link rel="canonical" href="https://huggingface-krew.co/pr-preview/pr-212/transformers-llama-cpp-quants/" />
+<meta property="og:url" content="https://huggingface-krew.co/pr-preview/pr-212/transformers-llama-cpp-quants/" />
 <meta property="og:site_name" content="Hugging Face KREW" />
-<meta property="og:image" content="/pr-preview/pr-212/transformers-llama-cpp-quants/assets/images/blog/posts/2026-09-22-transformers-llama-cpp-quants/thumbnail.png" />
+<meta property="og:image" content="https://huggingface-krew.co/pr-preview/pr-212/transformers-llama-cpp-quants/assets/images/blog/posts/2026-09-22-transformers-llama-cpp-quants/thumbnail.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2026-09-22T00:00:00+09:00" />
 <meta property="article:modified_time" content="2026-09-22T00:00:00+09:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="/pr-preview/pr-212/transformers-llama-cpp-quants/assets/images/blog/posts/2026-09-22-transformers-llama-cpp-quants/thumbnail.png" />
+<meta name="twitter:image" content="https://huggingface-krew.co/pr-preview/pr-212/transformers-llama-cpp-quants/assets/images/blog/posts/2026-09-22-transformers-llama-cpp-quants/thumbnail.png" />
 <meta name="twitter:title" content="이제 Transformers에서 llama.cpp 양자화 모델을 실행할 수 있습니다" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-09-22T00:00:00+09:00","datePublished":"2026-09-22T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Transformers now runs llama.cpp quants를 한국어로 번역한 글입니다.","headline":"이제 Transformers에서 llama.cpp 양자화 모델을 실행할 수 있습니다","image":"/pr-preview/pr-212/transformers-llama-cpp-quants/assets/images/blog/posts/2026-09-22-transformers-llama-cpp-quants/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"/pr-preview/pr-212/transformers-llama-cpp-quants/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/pr-preview/pr-212/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"/pr-preview/pr-212/transformers-llama-cpp-quants/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-09-22T00:00:00+09:00","datePublished":"2026-09-22T00:00:00+09:00","description":"Transformers에서 GGUF 모델을 효율적으로 실행하는 방법을 소개합니다. llama.cpp의 ggml 커널 재사용과 generate 오버헤드 감소로 Apple Silicon에서 로컬 추론 성능을 llama.cpp 수준에 가깝게 끌어올린 과정을 설명합니다.","headline":"이제 Transformers에서 llama.cpp 양자화 모델을 실행할 수 있습니다","image":"https://huggingface-krew.co/pr-preview/pr-212/transformers-llama-cpp-quants/assets/images/blog/posts/2026-09-22-transformers-llama-cpp-quants/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://huggingface-krew.co/pr-preview/pr-212/transformers-llama-cpp-quants/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://huggingface-krew.co/pr-preview/pr-212/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"https://huggingface-krew.co/pr-preview/pr-212/transformers-llama-cpp-quants/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -170,6 +170,9 @@
     <main class="container"><!-- Begin Article
 ================================================== -->
 
+
+
+
 	<div class="row">
 
 		<!-- Post -->        
@@ -206,7 +209,7 @@
                 <!-- End Categories -->
                 
                 <!-- Post Title -->
-				<h1 class="posttitle">이제 Transformers에서 llama.cpp 양자화 모델을 실행할 수 있습니다</h1> 
+				<h1 class="posttitle">이제 Transformers에서 llama.cpp 양자화 모델을 실행할 수 있습니다</h1>
                 
 			</div>
 
@@ -214,7 +217,8 @@
 
 			<!-- Post Content -->
 			<div class="article-post serif-font">
-				<ul id="markdown-toc">
+                
+                    <ul id="markdown-toc">
   <li><a href="#이제-transformers에서-llamacpp-양자화-모델을-실행할-수-있습니다" id="markdown-toc-이제-transformers에서-llamacpp-양자화-모델을-실행할-수-있습니다">이제 Transformers에서 llama.cpp 양자화 모델을 실행할 수 있습니다</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">GGUF 파일 형식이란?</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">Transformers로 GGUF 로드하기</a></li>
@@ -247,19 +251,19 @@ Review instructions:
 
 <h1 id="이제-transformers에서-llamacpp-양자화-모델을-실행할-수-있습니다">이제 Transformers에서 llama.cpp 양자화 모델을 실행할 수 있습니다</h1>
 
-<p><strong>GGUF 모델을 Transformers에서 효율적으로 실행할 수 있도록 지원을 추가하고 있습니다.</strong> 따라서 노트북 메모리 크기에 맞게 조정된 체크포인트를 익숙한 Transformers API를 통해 사용할 수 있습니다. Hugging Face Hub에서 GGUF를 선택하고 <code class="language-plaintext highlighter-rouge">from_pretrained</code>으로 로드한 다음, 자신의 머신에서 생성을 시작해 보세요.</p>
+<p><strong>GGUF 모델을 Transformers에서 효율적으로 실행할 수 있도록 지원을 추가하고 있습니다.</strong> 따라서 노트북 메모리 크기에 맞게 조정된 체크포인트를 익숙한 Transformers API를 통해 사용할 수 있습니다. Hugging Face Hub에서 GGUF를 선택하고 <code class="language-plaintext highlighter-rouge">from_pretrained()</code>로 로드한 다음, 자신의 머신에서 생성을 시작해 보세요.</p>
 
 <video controls="" width="100%">
   <source src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/transformers-llama-cpp-quants/transformers-gguf.mp4" type="video/mp4" />
 </video>
 
-<p>노트북에서 AI 모델을 실행하는 일이 훨씬 쉬워졌으며, <a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a>가 그 과정에서 큰 역할을 해 왔습니다. <a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a>의 추론 엔진은 Ollama, LM Studio, Jan과 같은 로컬 AI 도구를 구동합니다. 또한 <a href="https://github.com/ml-explore/mlx">MLX</a>와 같은 프로젝트와 함께 일상적인 사용에서 로컬 추론을 실용적인 선택지로 만드는 데 기여했습니다.</p>
+<p>노트북에서 AI 모델을 실행하는 일이 훨씬 쉬워졌으며, <a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a>가 그 과정에서 큰 역할을 해 왔습니다. llama.cpp의 추론 엔진은 Ollama, LM Studio, Jan과 같은 로컬 AI 도구를 구동합니다. 또한 <a href="https://github.com/ml-explore/mlx">MLX</a>와 같은 프로젝트와 함께 일상적인 사용에서 로컬 추론을 실용적인 선택지로 만드는 데 기여했습니다.</p>
 
-<p><em>A recent example of what local AI can feel like:</em></p>
+<p><em>최근 로컬 AI가 어떤 느낌인지 보여주는 사례:</em></p>
 <blockquote class="twitter-tweet" data-conversation="none"><p lang="en" dir="ltr">This is where we are right now. And i’m not gonna lie it feels pretty magical 🧙‍♀️<br /><br />Qwen3.6 27B running inside of Pi coding agent via Llama.cpp on the MacBook Pro<br /><br />For non-trivial tasks on the <a href="https://x.com/huggingface?ref_src=twsrc%5Etfw">@huggingface</a> codebases, this feels very, very close to hitting the latest Opus in Claude… <a href="https://t.co/lsIxLoUneU">pic.twitter.com/lsIxLoUneU</a></p>&mdash; Julien Chaumond (@julien_c) <a href="https://x.com/julien_c/status/2047647522173104145?ref_src=twsrc%5Etfw">April 24, 2026</a></blockquote>
 <script async="" src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 
-<p><strong>GGUF</strong>는 llama.cpp 팀이 개발한 로컬 추론용으로 널리 사용되는 형식입니다. 이 팀은 <a href="https://huggingface.co/ggml-org">ggml-org on the Hub</a>에서 양자화된 체크포인트도 공유합니다. <a href="https://huggingface.co/unsloth">Unsloth</a>, <a href="https://huggingface.co/lmstudio-community">LM Studio Community</a>, <a href="https://huggingface.co/bartowski">bartowski</a>와 같은 게시자는 다양한 양자화 수준의 바로 사용할 수 있는 GGUF 체크포인트도 제공하므로, 사용자는 자신의 머신에 맞는 버전을 선택할 수 있습니다. GGUF 모델은 수백만 회 다운로드되었습니다.</p>
+<p><strong>GGUF</strong>는 llama.cpp 팀이 개발한 로컬 추론용으로 널리 사용되는 형식입니다. 이 팀은 Hub의 <a href="https://huggingface.co/ggml-org">ggml-org</a>에서 양자화된 체크포인트도 공유합니다. <a href="https://huggingface.co/unsloth">Unsloth</a>, <a href="https://huggingface.co/lmstudio-community">LM Studio Community</a>, <a href="https://huggingface.co/bartowski">bartowski</a>와 같은 게시자는 다양한 양자화 수준의 바로 사용할 수 있는 GGUF 체크포인트도 제공하므로, 사용자는 자신의 머신에 맞는 버전을 선택할 수 있습니다. GGUF 모델은 수백만 회 다운로드되었습니다.</p>
 
 <p>이러한 모델을 Transformers로도 더 쉽게 로컬에서 실행할 수 있도록 하려 합니다. 모델을 실행하기 불편하다면 호환성만으로는 충분하지 않습니다. 성능을 llama.cpp에 가깝게 만들기 위해 <a href="https://huggingface.co/docs/kernels/index"><code class="language-plaintext highlighter-rouge">kernels</code></a> 라이브러리를 통해 기반이 되는 ggml 커널을 재사용하고, <code class="language-plaintext highlighter-rouge">generate</code>의 오버헤드를 줄이고 있습니다. 현재는 Apple Silicon에서의 로컬 추론에 초점을 맞추고 있으며, Qwen3.5 아키텍처부터 시작합니다.</p>
 
@@ -301,7 +305,7 @@ Review instructions:
   </tbody>
 </table>
 
-<p><code class="language-plaintext highlighter-rouge">Q4_K_M</code>부터 시작한 다음, 메모리가 더 충분하다면 <code class="language-plaintext highlighter-rouge">Q5_K_M</code> 또는 <code class="language-plaintext highlighter-rouge">Q6_K</code>를 시도해 보는 것을 권장합니다. 더 공격적인 양자화는 더 큰 모델을 적합시키는 데 도움이 될 수 있지만, 품질의 절충점은 모델과 작업에 따라 달라집니다. 실제로 모델이 수행하게 하려는 작업을 기준으로 평가하세요. <a href="https://huggingface.co/docs/hub/gguf#quantization-types">Hub’s GGUF documentation</a>에는 사용 가능한 양자화 유형이 설명되어 있습니다.</p>
+<p><code class="language-plaintext highlighter-rouge">Q4_K_M</code>부터 시작한 다음, 메모리가 더 충분하다면 <code class="language-plaintext highlighter-rouge">Q5_K_M</code> 또는 <code class="language-plaintext highlighter-rouge">Q6_K</code>를 시도해 보는 것을 권장합니다. 더 공격적인 양자화는 더 큰 모델을 적합시키는 데 도움이 될 수 있지만, 품질의 절충점은 모델과 작업에 따라 달라집니다. 실제로 모델이 수행하게 하려는 작업을 기준으로 평가하세요. <a href="https://huggingface.co/docs/hub/gguf#quantization-types">Hub의 GGUF 문서</a>에는 사용 가능한 양자화 유형이 설명되어 있습니다.</p>
 
 <h2 id="section-2">Transformers로 GGUF 로드하기</h2>
 
@@ -310,15 +314,15 @@ Review instructions:
 <ul>
   <li><strong>Apple Silicon Mac</strong>.</li>
   <li><strong>공개된 <a href="https://huggingface.co/kernels/ggml-org/ggml-quantization">ggml-quantization kernel builds</a>에서 지원하는 PyTorch 버전</strong>. 일반적으로 최신 PyTorch 릴리스 두 개입니다.</li>
-  <li><strong>최신 버전의 Transformers(현재는 다음 릴리스 전까지 main)와 호환되는 <code class="language-plaintext highlighter-rouge">kernels</code> 버전</strong>.</li>
+  <li><strong>Transformers의 최신 버전(다음 릴리스 전까지는 main)과 호환되는 <code class="language-plaintext highlighter-rouge">kernels</code> 버전</strong>.</li>
 </ul>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="nt">-U</span> <span class="s2">"git+https://github.com/huggingface/transformers.git"</span> kernels
 </code></pre></div></div>
 
-<p>GGUF 모델을 로드하려면 Hub <code class="language-plaintext highlighter-rouge">model_id</code>와 파일명을 <code class="language-plaintext highlighter-rouge">gguf_file</code>로 전달하여 <code class="language-plaintext highlighter-rouge">from_pretrained</code>에 지정합니다.</p>
+<p>GGUF 모델을 로드하려면 Hub의 <code class="language-plaintext highlighter-rouge">model_id</code>와 파일명을 <code class="language-plaintext highlighter-rouge">gguf_file</code> 인자로 지정해 <code class="language-plaintext highlighter-rouge">from_pretrained</code>에 전달합니다.</p>
 
-<p>추가 설정은 필요하지 않습니다. 가중치가 Metal에 패킹된 상태로 유지되면 Transformers가 호환되는 ggml/Metal 레이어 커널을 자동으로 로드하고 <code class="language-plaintext highlighter-rouge">ggml-org/ggml-attn</code>을 어텐션 구현으로 사용합니다. 해당 커널을 가져올 수 없으면 모델은 경고와 함께 <code class="language-plaintext highlighter-rouge">"sdpa"</code>로 대체되며, <code class="language-plaintext highlighter-rouge">attn_implementation="sdpa"</code>을 명시적으로 전달하여 언제든 <code class="language-plaintext highlighter-rouge">"sdpa"</code>을 강제로 사용할 수 있습니다. 더 많은 로딩 옵션은 <a href="https://huggingface.co/docs/transformers/main/en/quantization/gguf">GGUF documentation</a>을 참조하세요.</p>
+<p>추가 설정은 필요하지 않습니다. 가중치가 Metal에 패킹된 상태로 유지되면 Transformers가 호환되는 ggml/Metal 레이어 커널을 자동으로 로드하고 <code class="language-plaintext highlighter-rouge">ggml-org/ggml-attn</code>을 어텐션 구현으로 사용합니다. 해당 커널을 가져올 수 없으면 모델은 경고와 함께 <code class="language-plaintext highlighter-rouge">"sdpa"</code>로 대체되며, <code class="language-plaintext highlighter-rouge">attn_implementation="sdpa"</code>을 명시적으로 전달하여 언제든 <code class="language-plaintext highlighter-rouge">"sdpa"</code>을 강제로 사용할 수 있습니다. 더 많은 로딩 옵션은 <a href="https://huggingface.co/docs/transformers/main/en/quantization/gguf">GGUF 문서</a>을 참조하세요.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">torch</span>
 <span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
@@ -368,7 +372,7 @@ transformers serve <span class="s2">"unsloth/Qwen3.5-4B-GGUF:Qwen3.5-4B-Q4_K_M.g
 
 <p>채팅 템플릿이 thinking을 지원하는 모델에서는 <code class="language-plaintext highlighter-rouge">--reasoning off</code>을 추가하여 이를 건너뛰거나 <code class="language-plaintext highlighter-rouge">--reasoning on</code>을 추가하여 활성화할 수 있습니다. 기본값인 <code class="language-plaintext highlighter-rouge">--reasoning auto</code>는 채팅 템플릿의 기본 설정을 따릅니다. 자세한 내용은 <a href="https://huggingface.co/docs/transformers/main/en/serve-cli/serving#enable-reasoning-on-the-server">reasoning options</a>을 참조하세요.</p>
 
-<p><a href="https://www.jan.ai/docs/desktop/remote-models/custom-endpoint">Jan</a> 또는 <a href="https://pi.dev">Pi</a>과 같은 클라이언트를 연결하려면 다음 설정으로 사용자 지정 OpenAI 호환 provider를 추가하면 됩니다.</p>
+<p><a href="https://www.jan.ai/docs/desktop/remote-models/custom-endpoint">Jan</a> 또는 <a href="https://pi.dev">Pi</a>와 같은 클라이언트를 연결하려면 다음 설정으로 사용자 지정 OpenAI 호환 프로바이더(provider)를 추가하면 됩니다.</p>
 
 <table>
   <thead>
@@ -395,12 +399,12 @@ transformers serve <span class="s2">"unsloth/Qwen3.5-4B-GGUF:Qwen3.5-4B-Q4_K_M.g
 
 <p>로컬 추론 성능의 기준은 llama.cpp입니다. 아래 비교는 소형 dense 모델, 대형 dense 모델, mixture-of-experts 모델 등 세 가지 GGUF 체크포인트에 초점을 맞춥니다.</p>
 
-<p>llama.cpp 열의 수치는 <a href="https://github.com/ggml-org/llama.cpp/tree/master/tools/llama-bench"><code class="language-plaintext highlighter-rouge">llama-bench</code></a> 도구(build <code class="language-plaintext highlighter-rouge">5f55650a7</code>, 릴리스 b10200, ggml 0.18.0의 Metal 백엔드)를 사용해 <code class="language-plaintext highlighter-rouge">llama-bench -m &lt;file&gt; -p 0 -n 128 -r 3</code>로 실행한 결과입니다. 이 도구는 <code class="language-plaintext highlighter-rouge">tg128</code>을 보고합니다. 즉, 프롬프트 처리를 제외하고 128개의 디코딩된 토큰에 대한 토큰 생성 속도를 세 번 반복하여 평균낸 값입니다. Transformers 열은 12토큰 프롬프트에서 동일한 128개 토큰을 생성하는 <code class="language-plaintext highlighter-rouge">generate</code>의 결과로, 워밍업된 세 번의 실행 중 가장 좋은 값이며 prefill을 포함합니다.</p>
+<p>llama.cpp 열의 수치는 <a href="https://github.com/ggml-org/llama.cpp/tree/master/tools/llama-bench"><code class="language-plaintext highlighter-rouge">llama-bench</code></a> 도구(build <code class="language-plaintext highlighter-rouge">5f55650a7</code>, 릴리스 b10200, ggml 0.18.0의 Metal 백엔드)를 사용해 <code class="language-plaintext highlighter-rouge">llama-bench -m &lt;file&gt; -p 0 -n 128 -r 3</code>로 실행한 결과입니다. 이 도구는 <code class="language-plaintext highlighter-rouge">tg128</code>을 보고합니다. 즉, 프롬프트 처리를 제외하고 128개의 디코딩된 토큰에 대한 토큰 생성 속도를 세 번 반복하여 평균낸 값입니다. Transformers 열은 12토큰 프롬프트에서 동일한 128개 토큰을 생성하는 <code class="language-plaintext highlighter-rouge">generate</code>의 결과로, 워밍업된 세 번의 실행 중 가장 좋은 값이며 프리필(prefill)을 포함합니다.</p>
 
 <p>MacBook Pro M2 Max, 통합 메모리 32 GB, macOS 26.6, PyTorch 2.12.1, kernels 0.17.0 환경에서 전원을 연결한 상태로 측정했습니다.</p>
 
 <details>
-  <summary>The benchmark script</summary>
+  <summary>벤치마크 스크립트</summary>
 
 ```python
 import time
@@ -436,7 +440,7 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 </details>
 
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/transformers-llama-cpp-quants/benchmark-comparison.svg" alt="GGUF generation throughput compared with llama.cpp" /></p>
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/transformers-llama-cpp-quants/benchmark-comparison.svg" alt="llama.cpp와 비교한 GGUF 생성 처리량" /></p>
 
 <p>세 체크포인트 모두에서 Transformers는 llama.cpp에 근접한 성능을 보입니다. 차트에는 위에서 설명한 동일한 측정값이 사용되었습니다. 다만 Transformers 측정에는 prefill이 포함되고 <code class="language-plaintext highlighter-rouge">llama-bench</code>은 디코드 전용 처리량을 보고하므로, 벤치마크 조건이 동일하다는 의미는 아닙니다.</p>
 
@@ -522,7 +526,7 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <p>레이어 커널의 기여도를 보여 주기 위해 동일한 패킹된 GGUF 체크포인트를 커널 사용 여부에 따라 비교합니다. 양자화 커널은 두 구성에서 모두 활성화된 상태로 유지합니다. 이를 비활성화하면 가중치 표현 방식도 달라져 다른 절충점을 측정하게 되기 때문입니다.</p>
 
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/transformers-llama-cpp-quants/layer-kernel-benchmark.svg" alt="Throughput improvement from the layer kernels" /></p>
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/transformers-llama-cpp-quants/layer-kernel-benchmark.svg" alt="레이어 커널로 인한 처리량 향상" /></p>
 
 <h3 id="cpu와-gpu의-협력-유지">CPU와 GPU의 협력 유지</h3>
 
@@ -537,7 +541,7 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <p>이러한 변경은 모델을 둘러싼 생성 루프를 개선하므로 GGUF를 넘어 활용할 수 있습니다. 또한 커널 작업을 보완합니다. 커널은 연산 비용을 줄이고, 동기화 지점을 줄이면 CPU 스케줄링과 GPU 실행이 겹쳐 진행될 수 있습니다.</p>
 
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/transformers-llama-cpp-quants/generation-loop-benchmark.svg" alt="Throughput improvement from the generation loop changes" /></p>
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/transformers-llama-cpp-quants/generation-loop-benchmark.svg" alt="생성 루프 변경으로 인한 처리량 향상" /></p>
 
 <p>이 측정에서는 모든 레이어 커널을 활성화했으며, 막대는 생성 루프에 대한 변경 사항만 분리하여 보여 줍니다.</p>
 
@@ -557,6 +561,7 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <p>이번 작업을 시작하고 제 모든 PR을 검토해 주신 <a href="https://huggingface.co/ArthurZ">Arthur Zucker</a>님, 그리고 <code class="language-plaintext highlighter-rouge">generate</code> PR을 맡아 주신 <a href="https://huggingface.co/cyrilvallez">Cyril Vallez</a>님께 감사드립니다. 커널 통합을 도와주신 <a href="https://huggingface.co/sayakpaul">Sayak Paul</a>, <a href="https://github.com/ggml-org/llama.cpp">llama.cpp team</a>, Bertrand Chevalier께도 감사드립니다. 이 블로그 게시물을 검토해 주신 <a href="https://huggingface.co/ariG23498">Aritra Roy Gosthipaty</a>님과 <a href="https://huggingface.co/pcuenq">Pedro Cuenca</a>님, 프로젝트를 총괄해 주신 <a href="https://huggingface.co/lysandre">Lysandre Debut</a>님께도 감사드립니다.</p>
 
+                
                 <div class="clearfix"></div>
 			</div>
 
@@ -663,7 +668,7 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
     <div class="filter-tabs">
       <button class="filter-btn active" data-category="all">
         All
-        <span class="count">21</span>
+        <span class="count">27</span>
       </button>
 
       
@@ -671,7 +676,7 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
         
           <button class="filter-btn" data-category="translation">
             Translation
-            <span class="count">21</span>
+            <span class="count">27</span>
           </button>
         
       
@@ -679,7 +684,7 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
         
           <button class="filter-btn" data-category="huggingface">
             HuggingFace
-            <span class="count">20</span>
+            <span class="count">26</span>
           </button>
         
       
@@ -689,6 +694,18 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 
 <section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
   
       
   
@@ -746,12 +763,126 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/grabette/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/nemotron-halloween/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-10-30-nemotron-halloween/thumbnail.png" alt="NVIDIA Nemotron 오픈 모델로 유령의 집 만들기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/nemotron-halloween/">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 nemotron-halloween를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">31 Oct 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/granite-switch-4-1-1/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-10-29-granite-switch-4-1-1/thumbnail.png" alt="Granite Switch 4.1.1 — 소프트웨어를 업데이트하듯 모델을 업데이트하세요" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/granite-switch-4-1-1/">Granite Switch 4.1.1 — 소프트웨어를 업데이트하듯 모델을 업데이트하세요</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Granite Switch 4.1.1 — Update models like you update software를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">29 Oct 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/omlx/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-09-22-omlx/thumbnail.jpg" alt="oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/omlx/">oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Jun Kim, oMLX creator and maintainer, joins Hugging Face to...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">22 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/ibm-releases-sota-granite-time-series/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png" alt="상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/ibm-releases-sota-granite-time-series/">상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 IBM releases SOTA Granite Time Series PatchTST-FM-r2 model with commercial-friendly...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">10 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/grabette/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -774,12 +905,42 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/thinkingmachines-inkling/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/security-incident-july-2026/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-07-16-security-incident-july-2026/thumbnail.png" alt="보안 사고 공개 — 2026년 7월" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/security-incident-july-2026/">보안 사고 공개 — 2026년 7월</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Security incident disclosure — July 2026를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">16 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/thinkingmachines-inkling/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" alt="Thinking Machines의 Inkling에 오신 것을 환영합니다" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
         <p class="card-text text-muted">
 이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.
 </p>
@@ -804,12 +965,40 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/torch-attention-profile/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/real-world-voiceeq/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" alt="Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/real-world-voiceeq/">Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing Real World VoiceEQ: Measuring the human quality of voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/torch-attention-profile/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" alt="파이토치의 프로파일링(3부): 어텐션이 전부다" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -832,12 +1021,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/native-speed-vllm-transformers-backend/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/native-speed-vllm-transformers-backend/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
         <p class="card-text text-muted">
 이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
 </p>
@@ -862,12 +1051,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/lerobot-release-v060/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/lerobot-release-v060/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" alt="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
         <p class="card-text text-muted">
 이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.
 </p>
@@ -892,12 +1081,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/cerebras-gemma4-voice-ai/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/cerebras-gemma4-voice-ai/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -920,12 +1109,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/eee-community-evals/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/eee-community-evals/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" alt="Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Featuring Every Eval Ever Results on Hugging Face Model Pages를...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -948,12 +1137,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/vllm-jobs/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/vllm-jobs/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -976,12 +1165,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/ffasr-leaderboard/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/ffasr-leaderboard/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1004,12 +1193,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/huggingface-hub-release-ci/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/huggingface-hub-release-ci/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" alt="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/huggingface-hub-release-ci/">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/huggingface-hub-release-ci/">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1032,12 +1221,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/cross-origin-storage/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/cross-origin-storage/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1060,12 +1249,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/peft-beyond-lora/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/peft-beyond-lora/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1088,12 +1277,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/is-it-agentic-enough/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/is-it-agentic-enough/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" alt="충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1116,12 +1305,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/agentic-resource-discovery-launch/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/agentic-resource-discovery-launch/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-06-17-agentic-resource-discovery-launch/thumbnail.png" alt="에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
         <p class="card-text text-muted">
 이 글은 Hugging Face 블로그의 Agentic Resource Discovery: Let agents search를 한국어로 번역한 글입니다.
 </p>
@@ -1146,12 +1335,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/github-ci-hf-jobs/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/github-ci-hf-jobs/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-06-09-github-ci-hf-jobs/thumbnail.gif" alt="GitHub CI를 Hugging Face Jobs로 마이그레이션" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Migrating Your GitHub CI to Hugging Face Jobs를 한국어로 번역한...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1174,12 +1363,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/openenv-agentic-rl/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/openenv-agentic-rl/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-06-08-openenv-agentic-rl/thumbnail.png" alt="오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Open Source Community is backing OpenEnv for Agentic RL를...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1202,12 +1391,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/torch-profiler/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/torch-profiler/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-05-29-torch-profiler/thumbnail.png" alt="PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 1): A Beginner’s Guide to torch.profiler를...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1230,12 +1419,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/local-reachy-mini-conversation/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/local-reachy-mini-conversation/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
         <p class="card-text text-muted">
 이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
 </p>
@@ -1260,12 +1449,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/olmoearth-v1-1/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/olmoearth-v1-1/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-05-20-olmoearth-v1-1/thumbnail.png" alt="OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 OlmoEarth v1.1: A more efficient family of models를 한국어로 번역한...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1288,12 +1477,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/paddleocr-transformers/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/paddleocr-transformers/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
         <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
         <div class="metafooter">
             <div class="wrapfooter small d-flex align-items-center">
@@ -1316,12 +1505,12 @@ llama-bench -hf unsloth/Qwen3.5-4B-GGUF:Q4_K_M -p 0 -n 128 -r 3
 
 <div class="card">
     
-    <a class="post-thumbnail-link" href="/pr-preview/pr-212/how-to-use-translator/">
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-212/how-to-use-translator/">
         <img class="post-thumbnail rounded" src="/pr-preview/pr-212/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
     </a>
     
     <div class="card-block">
-        <h2 class="card-title h4 serif-font"><a href="/pr-preview/pr-212/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-212/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
         <p class="card-text text-muted">
 Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
 </p>
