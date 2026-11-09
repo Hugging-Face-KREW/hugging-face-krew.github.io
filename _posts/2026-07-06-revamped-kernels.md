@@ -41,24 +41,24 @@ Review instructions:
 
 **목차**
 
-* [Kernels — 새로운 저장소 유형](#kernels--a-new-repository-type)
-* [보안 개선](#improved-security)
-* [CLI 개편](#revamped-clis)
-* [프레임워크와 백엔드 지원 확대](#more-coverage-of-frameworks-and-backends)
-* [agentic kernel 개발을 위한 기반](#foundation-for-agentic-kernel-development)
-* [기타 업데이트](#misc)
-* [마무리](#conclusion)
+* [Kernels — 새로운 저장소 유형](#section-1)
+* [보안 개선](#section-2)
+* [CLI 개편](#section-3)
+* [프레임워크와 백엔드 지원 확대](#section-4)
+* [agentic kernel 개발을 위한 기반](#section-5)
+* [기타 업데이트](#section-6)
+* [마무리](#section-7)
 
 ## Kernels — 새로운 저장소 유형 {#section-1}
 
 Hub에 ["kernel"](https://huggingface.co/kernels)이라는 새로운 repository type을 도입했습니다. 이를 통해 compute 관련 요구가 구체적인 사용자들을 더 잘 지원할 수 있습니다. 예를 들어 사용자는 특정 kernel이 어떤 accelerator, operating system, backend version을 지원하는지 확인할 수 있습니다.
 
 <figure align="center">
-    <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/revamped-kernels/flash-attn3.png" alt="Flash Attention 3 Kernel Page" width="600"/>
-    <figcaption>Kernel page: <a href="https://huggingface.co/kernels/kernels-community/flash-attn3">kernels-community/flash-attn3</a></figcaption>
+    <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/revamped-kernels/flash-attn3.png" alt="Flash Attention 3 커널 페이지" width="600"/>
+    <figcaption>커널 페이지: <a href="https://huggingface.co/kernels/kernels-community/flash-attn3">kernels-community/flash-attn3</a></figcaption>
 </figure>
 
-Hub에서 사용 가능한 모든 kernel은 [https://huggingface.co/kernels.](https://huggingface.co/kernels)에서 둘러볼 수 있습니다.
+Hub에서 사용 가능한 모든 커널은 [https://huggingface.co/kernels](https://huggingface.co/kernels)에서 둘러볼 수 있습니다.
 
 이 kernel들을 Hub의 first-class citizen으로 만들면 AI 생태계에도 도움이 됩니다. 이제 사용자는 kernel, model, 그리고 이를 사용하는 application 전반의 흐름을 볼 수 있습니다. 또한 kernel은 사용자에게 더 쉽게 발견될 수 있습니다.
 
@@ -70,9 +70,9 @@ Kernel은 이를 불러오는 Python process와 같은 권한으로 native code�
 
 최근 몇 달 동안 trusted kernel publisher와 code signing이라는 추가 방어 계층도 도입했습니다.
 
-### Trusted kernel publisher
+### 신뢰할 수 있는 커널 게시자(trusted kernel publishers)
 
-새로운 repo type과 함께 “trusted publisher”도 도입했습니다. Kernel은 사용되는 machine에서 Python process와 같은 권한으로 code를 실행하므로, 공격자는 악성 kernel을 업로드하고 사용자가 그 kernel을 쓰도록 유도해 machine을 compromise할 수 있습니다. 이런 악성 kernel을 피할 수 있도록, 이제 kernels package는 기본적으로 *trusted publisher*의 kernel만 load합니다. trusted publisher는 community가 선의로 행동한다고 신뢰하는 organization입니다.
+새로운 repo type과 함께 “trusted publishers(신뢰할 수 있는 게시자)”도 도입했습니다. Kernel은 사용되는 machine에서 Python process와 같은 권한으로 code를 실행하므로, 공격자는 악성 kernel을 업로드하고 사용자가 그 kernel을 쓰도록 유도해 machine을 compromise할 수 있습니다. 이런 악성 kernel을 피할 수 있도록, 이제 kernels 패키지는 기본적으로 *trusted publishers*가 게시한 커널만 로드합니다. trusted publisher는 community가 선의로 행동한다고 신뢰하는 organization입니다.
 
 물론 trusted publisher가 아닌 organization이나 user의 kernel도 load할 수 있어야 합니다. 다만 Hub에서 kernel을 load할 때 `trust_remote_code` argument를 사용해 명시적으로 opt in해야 합니다.
 
@@ -93,7 +93,7 @@ kernel_module = get_kernel(
 
 보안을 더 강화하기 위해 Sigstore의 cosign을 사용해 ephemeral private key로 서명합니다. 이 signing key는 제한된 시간 동안만 유효하므로, 유출되더라도 공격자가 private key를 사용하기 어렵습니다. 또한 kernel이 trusted GitHub repository의 trusted GitHub workflow에서 서명되었는지도 검증합니다.
 
-Kernel signing은 이미 `kernel-builder`에서 지원되며, kernel을 검증할 수 있도록 `kernels verify-signature`도 제공합니다. 다만 Kernels는 아직 kernel load 시점에 signature를 검증하지 않습니다. 이 기능을 완전히 rollout하기 전에 더 테스트하고 싶기 때문입니다. 자체 kernel에 code signing을 설정하는 예비 안내는 kernels 0.16.0 release note에서 볼 수 있습니다. [https://github.com/huggingface/kernels/releases/tag/v0.16.0.](https://github.com/huggingface/kernels/releases/tag/v0.16.0)
+Kernel signing은 이미 `kernel-builder`에서 지원되며, kernel을 검증할 수 있도록 `kernels verify-signature`도 제공합니다. 다만 Kernels는 아직 kernel load 시점에 signature를 검증하지 않습니다. 이 기능을 완전히 rollout하기 전에 더 테스트하고 싶기 때문입니다. 자체 커널의 코드 서명 설정에 관한 예비 안내는 [kernels 0.16.0 릴리스 노트](https://github.com/huggingface/kernels/releases/tag/v0.16.0)에서 확인할 수 있습니다.
 
 ## CLI 개편 {#section-3}
 
@@ -104,7 +104,7 @@ Kernel signing은 이미 `kernel-builder`에서 지원되며, kernel을 검증�
 * [`kernels` CLI](https://huggingface.co/docs/kernels/en/cli)
 * [`kernel-builder` CLI](https://huggingface.co/docs/kernels/en/builder-cli)
 
-개선된 CLI 경험은 agentic kernel development가 부상하는 흐름에도 더 잘 대응하게 해 줍니다. 이에 대해서는 [뒤에서](#foundation-for-agentic-kernel-development) 더 설명합니다.
+개선된 CLI 경험은 agentic kernel development가 부상하는 흐름에도 더 잘 대응하게 해 줍니다. 이에 대해서는 [뒤에서](#section-5) 더 설명합니다.
 
 ## 프레임워크와 백엔드 지원 확대 {#section-4}
 
@@ -143,8 +143,8 @@ kernel을 성공적으로 build하는 것만이 목표는 아닙니다. target h
 kernel이 build된 뒤에는 각 kernel에 대해 system card를 생성합니다. 여기에는 사용 방법과 노출된 interface 등 유용한 정보가 포함됩니다. kernel이 Hub에 push되면 이 system card가 kernel의 front matter가 됩니다.
 
 <figure align="center">
-    <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/revamped-kernels/kernel-card.png" alt="System card for a kernel" width="600"/>
-    <figcaption>System card for <a href="https://huggingface.co/kernels/kernels-community/flash-attn3">kernels-community/flash-attn3</a></figcaption>
+    <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/revamped-kernels/kernel-card.png" alt="커널용 시스템 카드" width="600"/>
+    <figcaption><a href="https://huggingface.co/kernels/kernels-community/flash-attn3">kernels-community/flash-attn3</a>의 시스템 카드</figcaption>
 </figure>
 
 ### 내 system에서 kernel이 호환되나요?
