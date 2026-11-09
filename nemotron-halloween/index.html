@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/assets/images/favicon.ico" />
+
+    <!-- Begin Jekyll SEO tag v2.9.1 -->
+<title>NVIDIA Nemotron 오픈 모델로 유령의 집 만들기 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="NVIDIA Nemotron 오픈 모델로 유령의 집 만들기" />
+<meta name="author" content="dailybot" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="NVIDIA Nemotron Voice Agent와 Nemotron 모델들로 할로윈에 말을 거는 유령의 집 MonsterHouse를 만든 과정을 소개합니다." />
+<meta name="twitter:description" property="og:description" content="NVIDIA Nemotron Voice Agent와 Nemotron 모델들로 할로윈에 말을 거는 유령의 집 MonsterHouse를 만든 과정을 소개합니다." />
+<link rel="canonical" href="https://huggingface-krew.co/nemotron-halloween/" />
+<meta property="og:url" content="https://huggingface-krew.co/nemotron-halloween/" />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="https://huggingface-krew.co/nemotron-halloween/assets/images/blog/posts/2026-10-30-nemotron-halloween/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-10-31T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-10-31T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://huggingface-krew.co/nemotron-halloween/assets/images/blog/posts/2026-10-30-nemotron-halloween/thumbnail.png" />
+<meta name="twitter:title" content="NVIDIA Nemotron 오픈 모델로 유령의 집 만들기" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-10-31T00:00:00+09:00","datePublished":"2026-10-31T00:00:00+09:00","description":"NVIDIA Nemotron Voice Agent와 Nemotron 모델들로 할로윈에 말을 거는 유령의 집 MonsterHouse를 만든 과정을 소개합니다.","headline":"NVIDIA Nemotron 오픈 모델로 유령의 집 만들기","image":"https://huggingface-krew.co/nemotron-halloween/assets/images/blog/posts/2026-10-30-nemotron-halloween/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://huggingface-krew.co/nemotron-halloween/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://huggingface-krew.co/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"https://huggingface-krew.co/nemotron-halloween/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/assets/css/custom.css" rel="stylesheet" />
+    <link href="/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/"
+          >
+            
+            <img class="mr-2" src="/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+
+
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/assets/images/blog/posts/2026-10-30-nemotron-halloween/thumbnail.png" alt="NVIDIA Nemotron 오픈 모델로 유령의 집 만들기">    
+                <img class="featured-image img-fluid rounded" src="/assets/images/blog/posts/2026-10-30-nemotron-halloween/thumbnail.png" alt="NVIDIA Nemotron 오픈 모델로 유령의 집 만들기">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/categories#huggingface">HuggingFace</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/categories#translation">Translation</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</h1>
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+                
+                    <ul id="markdown-toc">
+  <li><a href="#nvidia-nemotron-오픈-모델로-유령의-집-만들기" id="markdown-toc-nvidia-nemotron-오픈-모델로-유령의-집-만들기">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</a></li>
+  <li><a href="#으악-이제-내-잔디밭에서-나가" id="markdown-toc-으악-이제-내-잔디밭에서-나가">으악! 이제 내 잔디밭에서 나가!</a>    <ul>
+      <li><a href="#monsterhouse의-작동-방식" id="markdown-toc-monsterhouse의-작동-방식">MonsterHouse의 작동 방식</a></li>
+      <li><a href="#가시가-가득한-미소" id="markdown-toc-가시가-가득한-미소">가시가 가득한 미소</a></li>
+      <li><a href="#나쁜-매너-가르치기" id="markdown-toc-나쁜-매너-가르치기">나쁜 매너 가르치기</a></li>
+      <li><a href="#기다릴-가치가-있는-목소리" id="markdown-toc-기다릴-가치가-있는-목소리">기다릴 가치가 있는 목소리</a></li>
+      <li><a href="#괴물에게는-컨트롤-데스크가-있다" id="markdown-toc-괴물에게는-컨트롤-데스크가-있다">괴물에게는 컨트롤 데스크가 있다</a></li>
+      <li><a href="#다음-문-두드림" id="markdown-toc-다음-문-두드림">다음 문 두드림</a></li>
+      <li><a href="#나만의-터무니없는-캐릭터-만들기" id="markdown-toc-나만의-터무니없는-캐릭터-만들기">나만의 터무니없는 캐릭터 만들기</a>        <ul>
+          <li><a href="#리소스" id="markdown-toc-리소스">리소스</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/nvidia/nemotron-halloween">nemotron-halloween</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/nvidia/nemotron-halloween -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h2 id="nvidia-nemotron-오픈-모델로-유령의-집-만들기">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</h2>
+
+<p>아니, 정확히 말하면…</p>
+
+<h2 id="으악-이제-내-잔디밭에서-나가">으악! 이제 내 잔디밭에서 나가!</h2>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/5bIvVxc791He8vRKSaBH4.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/5bIvVxc791He8vRKSaBH4.png" alt="유령의 집 MonsterHouse 썸네일" /></a></p>
+
+<p>요약: MonsterHouse는 제가 할로윈을 위해 만든 인터랙티브 프로젝션입니다. 이 집은 trick-or-treater들의 말을 듣고, 심술궂은 낡은 해적선의 목소리로 대답하며, 방문객이 예의를 지키면 누그러집니다. 이 시스템은 <a href="https://github.com/NVIDIA-AI-Blueprints/nemotron-voice-agent">NVIDIA Nemotron Voice Agent</a>를 기반으로 NVIDIA <a href="https://huggingface.co/nvidia/nemotron-speech-streaming-en-0.6b">Nemotron ASR</a>, <a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB">Nemotron 3.5 Bolt E4B 4GB</a>, <a href="https://build.nvidia.com/nvidia/magpie-tts-zeroshot">Magpie TTS Zeroshot</a> 및 <a href="https://github.com/NVIDIA/Audio2Face-3D">Audio2Face-3D</a>를 사용해 구축했으며, 단일 워크스테이션에서 실행됩니다.</p>
+
+<p>할로윈에 우리 집을 찾아오는 아이들이 재미있고 독특한 방식으로 상호작용할 수 있기를 바랐습니다. 집이 주도권을 쥐고 간식을 나눠 주되, 무섭기보다는 더 심술궂은 존재가 되기를 원했죠. 어쩌다 보니 제 해결책은 차고 문에 입을 달고 불평하는 법을 가르치는 것이었습니다.</p>
+
+<p>그렇게 MonsterHouse가 탄생했습니다. 해적 이야기와 불타는 미소, 그리고 “please”에 대한 수상할 정도로 약한 면을 가진 심술궂은 낡은 건물입니다. NVIDIA Nemotron Voice Agent가 대화의 기반을 제공합니다. Nemotron Speech는 듣고, Bolt E4B는 두뇌 역할을 하며, NVIDIA Magpie TTS Zeroshot은 실시간 목소리를 내고, NVIDIA Audio2Face-3D는 나무로 된 입을 말하게 합니다.</p>
+
+<h3 id="monsterhouse의-작동-방식">MonsterHouse의 작동 방식</h3>
+
+<ul>
+  <li>
+    <p>듣기: <a href="https://huggingface.co/nvidia/nemotron-speech-streaming-en-0.6b">NVIDIA Nemotron 3 ASR</a>가 방문객의 음성을 텍스트로 변환합니다. [<code class="language-plaintext highlighter-rouge">nemotron-speech-streaming-en-0.6b.q8_0.gguf</code> ]</p>
+  </li>
+  <li>
+    <p>생각하기: 대화형 에이전트를 위한 오픈 소형 언어 모델인 <a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB">NVIDIA Nemotron 3.5 Bolt E4B 4GB</a>가 매번 답변을 작성합니다. LoRA 어댑터가 성격을 부여합니다.</p>
+  </li>
+  <li>
+    <p>말하기: <a href="https://build.nvidia.com/nvidia/magpie-tts-zeroshot">NVIDIA Magpie TTS Zeroshot</a>가 캐릭터의 짧은 참조 샘플을 바탕으로 각 답변에 목소리를 입힙니다.</p>
+  </li>
+  <li>
+    <p>애니메이션 적용: <a href="https://github.com/NVIDIA/Audio2Face-3D">NVIDIA Audio2Face-3D</a>가 정제된 음성을 Unreal Engine 5에서 입 모양 애니메이션으로 변환합니다.</p>
+  </li>
+  <li>
+    <p>보기: <a href="https://huggingface.co/nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16">NVIDIA Nemotron 3 Nano Omni</a>가 의상을 설명하고, YOLO와 ByteTrack이 방문객을 세고 추적합니다.</p>
+  </li>
+  <li>
+    <p>실행: <a href="https://github.com/NVIDIA-AI-Blueprints/nemotron-voice-agent">NVIDIA Nemotron Voice Agent</a>가 NVIDIA RTX PRO 6000 Blackwell Max-Q와 NVIDIA RTX PRO 4000 Blackwell이 장착된 단일 워크스테이션에서 모든 작업을 조율합니다.</p>
+  </li>
+</ul>
+
+<h3 id="가시가-가득한-미소">가시가 가득한 미소</h3>
+
+<p>입이 가장 먼저였습니다. 저주받은 입을 열 때마다 나무로 된 차고 문 판자가 들쭉날쭉한 입술처럼 갈라지고, 그 너머 지옥의 불꽃이 진입로를 환하게 비추는 모습을 상상했습니다. 고대의 느낌이 나면서도 표정이 풍부하고, 방문객이 존재한다는 사실에 살짝 불쾌해하는 모습이어야 했습니다.</p>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/CzzK5VpTMFR9Azps_6Qbv.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/CzzK5VpTMFR9Azps_6Qbv.png" alt="불꽃이 이는 입 그래픽" /></a>할 말이 아주 많은 집의 표정 몇 가지입니다.</p>
+
+<p>맞춤형 애니메이션 리그를 만드는 일은 제작 과정에서 손이 많이 가는 작업 중 하나였습니다. 리그를 두들겨 복종시킨 뒤에는 Audio2Face-3D가 나중에 애니메이션으로 만들 수 있는 얼굴 표현 셰이프를 내보낼 수 있었습니다. 캐릭터 SkelMesh는 Autodesk Maya에서 만든 다음 Unreal Engine으로 내보냈고, 그곳에서 문 뒤에 가상의 불과 효과를 추가했습니다. 눈도, 눈썹도, 깜박임도 없으니 놀랄 만큼 경제적인 괴물입니다.</p>
+
+<p>캐릭터를 만드는 온갖 난리를 벌이는 동안 NVIDIA는 Nemotron Voice Agent를 만들고 있었습니다. 원래 제작 과정에서 가장 어려울 거라고 생각했던 부분이 이제는 꽤 재미있고, 반복 작업이 가능하며, 쉬운 일이 되었습니다. 별다른 설정 없이도 듣기와 대화, 음성을 위한 기반을 바로 얻을 수 있었죠. 집에는 이미 입이 있었습니다. 이제 마침내 불평할 무언가를 찾을 수 있게 된 겁니다.</p>
+
+<h3 id="나쁜-매너-가르치기">나쁜 매너 가르치기</h3>
+
+<p>이 집의 성격만큼이나 심술궂은 과거가 필요했기에, 폭풍 같은 과거에 사로잡힌 채 침몰한 해적선의 목재로 지어졌다는 뒷이야기를 만들었습니다. 이제 항해와 관련된 불평에도 이유가 생겼습니다. 이 배는 부동산으로 환생했지만, 그 사실이 썩 마음에 들지는 않는 모양입니다.</p>
+
+<p>공연에는 간식을 나눠 주면서 인사부터 작별까지 따라갈 수 있는 안내자와 경로가 필요했습니다. 처음에는 “난 지금 투덜거리느라 바쁘니까 이웃을 괴롭혀!” 같은 말로 방문객을 쫓아내려 했습니다. 하지만 끈질기게 구는 방문객 앞에서는 결국 태도가 누그러지게 했죠. “Please” 한마디면 즉시 마음을 열 수 있고, “thank you”를 들으면 따뜻하게 작별 인사를 건넵니다. 방문객이 한 번 마음을 사로잡으면 계속 그 상태를 유지하기를 바랐습니다. 누구도 같은 차고 문과 두 번 협상하고 싶어 하지는 않으니까요.</p>
+
+<p>바로 여기서 Voice Agent가 진가를 발휘합니다. 원하는 LLM을 무엇이든 선택할 수 있죠. 시스템을 오프라인 환경에서 완전히 독립적으로 실행하고 싶었기 때문에 메모리와 연산 예산이 정해져 있었습니다.</p>
+
+<p>이 캐릭터에는 “심술궂게 굴어”라고 말하는 프롬프트만으로는 부족했습니다. 전체 대화 흐름을 따라가고, 방문객이 실제로 한 말에 응답하며, 만남의 상태를 추적하는 동시에 파이프라인의 나머지 부분을 위한 연산 여유도 남겨야 했습니다.</p>
+
+<p>12개가 넘는 모델을 테스트한 끝에 실시간 대화를 담당할 모델로 <a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB">Bolt E4B</a>를 선택했습니다. 이 모델은 로컬 대화형 에이전트와 인터랙티브 캐릭터를 위해 특별히 제작된 오픈 소형 언어 모델이며, 말하는 차고 문을 설명하기에 꽤 적절한 모델입니다. 기본 응답 모델로는 4비트 양자화 릴리스(이름에 들어간 “4GB”가 이를 뜻합니다)를 사용하고, 비교를 위해 <a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB-BF16">BF16 체크포인트</a>도 사용할 수 있게 해 두었습니다.</p>
+
+<p>이제는 눈치채셨겠지만 저는 NVIDIA에서 일하고 있습니다. 덕분에 공개 출시 전에 Bolt E4B를 테스트해 볼 수 있었고, 다른 유력 모델인 Qwen3 30B-A3B 및 Qwen 3.6 35B-A3B보다 작은 풋프린트로도 탄탄한 선택지라는 것을 확인했습니다.</p>
+
+<p>이 모델은 Nemotron Voice Agent 파이프라인 안에서 작동하며, 방문객의 말을 다음 차례의 적당히 마지못한 대답으로 바꿉니다.</p>
+
+<p>Bolt는 대화의 기반을 제공합니다. 제가 작성한 프롬프트와 애플리케이션 로직, 그리고 수천 개의 검토된 예시 대화로 학습한 LoRA 어댑터가 이 모델을 이 고집 센 배로 다듬습니다.</p>
+
+<p>5,000개가 넘는 멀티턴 대화로 데이터셋을 만들었기 때문에, 선택지로 삼을 만하다고 판단한 각 모델에 맞춰 LoRA를 학습할 수 있었습니다. 어떤 것은 학습에 한 시간 정도 걸렸고, 어떤 것은 두어 시간이 걸렸습니다. 로컬 에이전트가 모든 작업을 실행하고 결과를 벤치마크했습니다. 처음에 이 에이전트와 아주 큰 LLM이 데이터셋을 만들고 평가했습니다. 이 작업은 밤이나 본업을 하는 동안 진행되었습니다.</p>
+
+<p>LoRA를 적용한 뒤에는 응답의 연속성, 타이밍과 어조를 확인하고, 모델과 어댑터의 품질·반복성·속도를 벤치마크한 다음 실제 공연을 들어 봅니다. 집은 결국에는 마음을 열어야 하지만, 그렇다고 유쾌한 컨시어지로 변해서는 안 됩니다. 약간의 저항이 매력의 일부니까요. 차고 문과 끝없이 말싸움을 하는 건 매력이 아닙니다.</p>
+
+<h3 id="기다릴-가치가-있는-목소리">기다릴 가치가 있는 목소리</h3>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/iVLQ71tHCdvLRIuaJ6oLk.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/iVLQ71tHCdvLRIuaJ6oLk.png" alt="작성된 텍스트와 저장된 오디오를 이용한 두 가지 지름길을 설명하는 그림" /></a>두 가지 지름길, 두 가지 출력입니다. 작성된 텍스트를 사용하면 새로운 대화 생성 과정을 건너뛰고, 저장된 오디오를 사용하면 합성을 건너뜁니다. 정제된 음성이 관객 효과와 별도로 애니메이션을 구동합니다.</p>
+
+<p>불평하는 데 너무 오래 걸리면 유령의 집의 위엄이 사라집니다. 이 파이프라인은 전체 답변이 끝나기 전에 말할 수 있는 텍스트를 내보내므로, 문장의 나머지 부분이 아직 오는 중이어도 집이 말하기 시작할 수 있습니다. 준비된 인사말과 사탕 농담은 익숙한 만남을 처리합니다. 텍스트 뱅크는 언어 모델 작업을 줄이고, 캐시된 녹음은 음성 합성을 줄입니다. 아무리 오래된 심술쟁이라도 리허설의 도움은 받는 법입니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>median end-of-speech-to-audio with Bolt Q4 &amp; TTS = 1.70 seconds
+median end-of-speech-to-audio cached responses = 0.72 seconds
+(note: speech-end detection currently waits for 300 ms of silence )
+</code></pre></div></div>
+
+<p><a href="https://build.nvidia.com/nvidia/magpie-tts-zeroshot">NVIDIA Magpie TTS Zeroshot</a>가 텍스트를 표준 영국 영어(Queen’s English)로 변환합니다. 이 zero-shot 음성 조건화는 학습된 음성 대신 짧은 참조 샘플을 사용하며, 제 샘플은 심술궂은 해적 캐릭터의 목소리를 제공합니다. 이 집에는 심술궂음과 위협부터 재미있어함과 기쁨까지 일곱 가지 분위기가 있으며, 프롬프트 템플릿이 지정하고 LLM이 제공하는 감정 태그가 각 대사를 어떤 방식으로 전달할지 선택합니다. 감정마다 서로 다른 3-10초 음성 샘플이 필요하기 때문에 UI의 도구 탭에 “Sample your Voice” 블록을 추가했습니다. 그 덕분에 행복한 해적 또는 화난 해적 흉내를 내며 샘플 텍스트를 읽고 녹음할 수 있었습니다. “Go” 시간이 되면 Bolt E4B가 무엇을 말할지 결정하고, Magpie가 적절한 기쁨이나 절망을 담아 그 텍스트를 음성으로 바꿉니다.</p>
+
+<p>파이프라인의 다음 단계에는 <a href="https://github.com/NVIDIA/Audio2Face-3D">Audio2Face-3D</a>와 Epic의 Unreal Engine에서 만든 3D 캐릭터 장면이 있습니다. 기본 모델 가중치는 너무 깊지도 높지도 않은 깨끗하고 중립적인 남성 또는 여성 음성에서 가장 잘 작동합니다(사용 사례에 맞는 성별 모델을 선택하세요). 저는 집에 매우 깊고 악마 같은 목소리와 에코 및 잔향을 더하고 싶었습니다. 이 경우 제 음성 샘플에는 그런 연극적인 무게감이 없다는 점이 오히려 장점이 됩니다. Audio2Face-3D는 샘플에서 깨끗한 음성을 가져오고, 두 번째 오디오 스트림은 스피커로 재생되는 조절 가능한 실시간 보컬 효과를 추가합니다.</p>
+
+<p>모든 작업을 원활하게 실행하기 위해 작업을 두 GPU에 나눴습니다. 언어 및 음성 모델 파이프라인은 NVIDIA RTX PRO 6000 Blackwell Max-Q에서 실행하고, Audio2Face-3D를 사용하는 Unreal Engine 그래픽은 NVIDIA RTX PRO 4000 Blackwell에서 실행합니다. 문제는 메모리가 아니라 연산 능력입니다. 에이전트 파이프라인이 어떤 처리를 수행하든 애니메이션의 프레임 속도를 일정하게 유지하고 싶습니다.</p>
+
+<p>음성, 애니메이션과 효과는 동시에 맞아야 합니다. 설득력 있는 괴물에게는 빠른 대답만으로 부족합니다. 그 불평이 건물 자체에서 나오는 것처럼 들려야 하죠. 제 경우에는 실제로 그렇습니다. 오디오 전달 동기화를 조정할 수 있는 설정이 있습니다. 저는 설정해 두고 잊어도 된다는 사실을 알아냈습니다. (100ms는 Audio2Face-3D 버퍼링을 보정합니다.)</p>
+
+<h3 id="괴물에게는-컨트롤-데스크가-있다">괴물에게는 컨트롤 데스크가 있다</h3>
+
+<p>어느 순간부터 “집이 말하게 만들기”에는 제어 기능으로 가득한 인터페이스가 필요해졌습니다. 캐시된 대사를 오디션하고, 시작 분위기를 조정하고, 대화를 따라가며, 음성 처리를 바꾸고, 입 모양 애니메이션을 조정할 수 있습니다. 탭에는 대화, 모델 선택, 녹음, 프롬프트, 성능 모니터링과 카메라 피드가 있으며, 사운드보드와 사용자 지정 대화 입력란을 통해 집의 입에 제가 직접 말을 넣을 수 있습니다. 모델 로딩 제어 기능과 Unreal Engine 연결 표시기도 있습니다. 가끔 괴물이 삐친 게 아니거든요. 연결이 끊긴 겁니다.</p>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/8AZqpHSWLOS4hpRwACGOY.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/8AZqpHSWLOS4hpRwACGOY.png" alt="MonsterHouse 컨트롤 데스크 화면" /></a>사운드보드, 사용자 지정 대사, 시작 분위기와 대화 흐름을 보여 주는 MonsterHouse 컨트롤 데스크입니다.</p>
+
+<p>불과 빛도 공연에 합류했습니다. 편집 가능한 규칙으로 시각적 단서를 전달 방식에 연결합니다. 실시간 단서는 음성과 함께 시작하고, 녹화된 공연은 저장된 타임라인을 따를 수 있습니다. 장면을 다시 구축하지 않고도 분위기 변화를 지시할 수 있습니다.</p>
+
+<p>라이브 모드는 trick-or-treat 캐릭터를 실행합니다. 데모 모드에서는 집이 자신을 설명하도록 설득합니다. 마이크 모드를 사용하면 인식, 대화 생성과 음성 합성을 우회하고 집을 통해 직접 말할 수 있습니다. 제 깨끗한 목소리가 입을 구동하고, 관객은 처리된 버전을 듣습니다. 집은 이를 빙의라고 생각합니다. 저는 유용한 대체 수단이라고 생각하고요.</p>
+
+<h3 id="다음-문-두드림">다음 문 두드림</h3>
+
+<p><a href="https://huggingface.co/nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16">NVIDIA Nemotron 3 Nano Omni</a>는 집에 시각적 맥락을 제공하는 VLM입니다. 선택 사항인 관찰자로서 카메라 이미지를 해석하고 눈에 보이는 의상을 설명하므로, 캐릭터가 구체적으로 반응할 무언가를 얻습니다. 모든 바퀴를 새로 발명할 생각은 없었기에, 현재 시야에 들어온 사람을 세고 추적하는 데 널리 사용되는 객체 감지 및 추적 모델인 YOLO와 ByteTrack을 선택했습니다. 이러한 작업을 분리해 두면 집이 Omni에게 모든 프레임을 설명해 달라고 하지 않고도 여러 명의 방문객을 알아챌 수 있습니다.</p>
+
+<p>적절히 우스꽝스러운 테스트를 위해 문 앞에 온 의상을 입은 양 다섯 마리의 영상을 Omni에 제공했습니다. 저장된 분석 결과는 해적, 뱀파이어, 마녀, 호박과 유령 의상을 식별했습니다. 이것이 바로 집이 활용하기를 바라는 시각적 맥락입니다. 아무래도 가축조차 저보다 더 거창한 할로윈 계획을 세우는 모양입니다.</p>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/v5ff_abLrivfqmxH5ZPqf.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/v5ff_abLrivfqmxH5ZPqf.png" alt="합성 테스트 재생 영상 속 의상을 입은 양 다섯 마리" /></a>합성 테스트 재생 영상 속 털이 아주 복슬복슬한 trick-or-treater 다섯 명입니다. 의상 레이블은 저장된 Omni 분석에서 가져왔으며, 상자와 추적 ID(track ID)는 설명을 위한 예시입니다.</p>
+
+<p>양들은 합성 테스트일 뿐, 성공적인 할로윈 밤의 증거가 아닙니다. 실제 진입로의 방문객 그룹과 의상, 야간 조명은 여전히 테스트가 필요합니다. 감지는 자동 인사말을 트리거하지만, 유행하는 의상을 식별하고 그에 걸맞게 재치 있게 응수하는 기능에는 약간의 추가 학습이 필요할 것 같습니다. 집에는 눈이 없기 때문에 집은 자신의 방문객 인식을 반향정위라고 부릅니다. 그 정도는 그냥 인정해 주기로 했습니다.</p>
+
+<p>아직 할 일이 더 있습니다. 애니메이션은 언제든 개선할 수 있고, 전체 성능 테스트에는 실제 방문객이 필요하며, 언젠가는 사탕도 자동으로 제공할 수 있어야 합니다. 가족과 함께 다른 동네의 유령들을 보러 떠나는 동안 집을 할로윈 내내 혼자 운영하게 하겠다는 원래 목표에는 아직 도달하지 못했습니다. 하지만 그게 바로 이 모든 작업의 목적입니다. 언젠가 한 아이가 심술궂은 낡은 집을 만나 작은 친절을 베풀고, 오래된 목재에도 부드러운 구석이 있다는 사실을 발견할 겁니다. 그리고 집은 사탕도 나눠 주겠죠.</p>
+
+<h3 id="나만의-터무니없는-캐릭터-만들기">나만의 터무니없는 캐릭터 만들기</h3>
+
+<p>MonsterHouse 코드 자체는 출시용으로 패키징되어 있지 않지만, 이 프로젝트에서 사용하는 모든 NVIDIA 모델은 현재 이용할 수 있으며 NVIDIA Nemotron Voice Agent만으로도 대부분의 작업을 해결할 수 있습니다. 제가 따른다면 다음과 같은 경로를 택하겠습니다.</p>
+
+<ul>
+  <li>
+    <p>음성 파이프라인에서 시작하세요. <a href="https://github.com/NVIDIA-AI-Blueprints/nemotron-voice-agent">NVIDIA Nemotron Voice Agent</a>를 clone하고 Generic Assistant 예제를 실행하세요. Nemotron Speech ASR, LLM과 Magpie TTS로 구성된 캐스케이드 파이프라인에 음성 활동 감지와 발화 종료 처리가 더해져, 캐릭터가 언제 말해야 하는지 알 수 있습니다.</p>
+  </li>
+  <li>
+    <p>Bolt E4B를 두뇌로 사용하세요. Voice Agent에는 클라우드, 서버 및 단일 GPU 배포를 위한 <a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB">Bolt E4B</a> 프로필이 포함되어 있습니다. 먼저 <a href="https://build.nvidia.com/nvidia/nemotron-3.5-bolt-e4b">build.nvidia.com</a>에서 모델을 사용해 볼 수 있습니다. 짧고 음성으로 바로 출력할 수 있는 응답에는 대화 모드를 사용하고, 더 단순한 대화에서는 추론을 비활성화하세요.</p>
+  </li>
+  <li>
+    <p>성격을 부여하세요. 시스템 프롬프트와 서로 이어지는 몇 개의 예시 대화로 시작하세요. 누가 이미 please라고 말했는지 같은 대화 상태는 모델에 기억을 요청하는 대신 애플리케이션에서 유지하세요. 프롬프트만으로 충분하지 않다면 LoRA 어댑터를 학습하세요. <a href="https://docs.nvidia.com/nemo/automodel/model-coverage/vision-language-models/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB-BF16">NVIDIA NeMo AutoModel</a>에는 Bolt E4B용 LoRA 레시피가 있습니다.</p>
+  </li>
+  <li>
+    <p>목소리를 부여하세요. Magpie TTS Multilingual은 Voice Agent의 기본값입니다. 사용자 지정 캐릭터에는 <a href="https://build.nvidia.com/nvidia/magpie-tts-zeroshot">Magpie TTS Zeroshot</a>가 짧은 참조 샘플을 사용해 작동합니다. build.nvidia.com에서 사용해 보고, 직접 실행할 수 있도록 액세스를 요청하세요. [CONFIRM: access path and link] 사용 권한이 있는 목소리만 사용하세요.</p>
+  </li>
+  <li>
+    <p>얼굴을 부여하세요. <a href="https://github.com/NVIDIA/Audio2Face-3D">NVIDIA Audio2Face-3D</a>는 음성을 캐릭터의 얼굴 애니메이션으로 변환합니다. 깨끗한 음성을 입력하고 효과는 나중에 추가하세요.</p>
+  </li>
+  <li>
+    <p>선택 사항: 눈을 부여하세요. Voice Agent의 Nemotron Omni Assistant Subagents 예제는 <a href="https://huggingface.co/nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16">Nemotron 3 Nano Omni</a>를 사용해 실시간 웹캠 이해 기능을 추가합니다. 인원수가 필요하다면 가벼운 사람 추적기와 결합하세요.</p>
+  </li>
+</ul>
+
+<p>가장 자주 사용하는 대사를 위한 캐시된 응답 뱅크와 저장된 오디오를 준비하면 느린 괴물도 빠르게 느껴질 겁니다. 실제로 연산 능력이 제한되어 있다면 Nemotron 3 ASR과 python 대화 라우터, 그리고 모든 오디오 캐시만 사용하는 Live 버전을 만들지 못할 이유가 없습니다. Bolt E4B와 Magpie 파이프라인을 사용해 오프라인에서 수백 개의 응답을 생성한 다음, 공연에서는 캐시를 사용할 수 있습니다. 저는 인터랙티브 호박에 이 방식을 적용할 예정입니다.</p>
+
+<h4 id="리소스">리소스</h4>
+
+<ul>
+  <li>
+    <p><a href="https://github.com/NVIDIA-AI-Blueprints/nemotron-voice-agent">NVIDIA Nemotron Voice Agent on GitHub</a> 및 <a href="https://build.nvidia.com/nvidia/nemotron-voice-agent">build.nvidia.com</a>에서</p>
+  </li>
+  <li>
+    <p><a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB">NVIDIA Nemotron 3.5 Bolt E4B 4GB on Hugging Face</a> 및 해당 <a href="https://research.nvidia.com/labs/nemotron/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB/">technical blog</a></p>
+  </li>
+  <li>
+    <p><a href="https://huggingface.co/nvidia/nemotron-speech-streaming-en-0.6b">NVIDIA Nemotron 3 ASR (streaming, English)</a></p>
+  </li>
+  <li>
+    <p><a href="https://build.nvidia.com/nvidia/magpie-tts-zeroshot">NVIDIA Magpie TTS Zeroshot</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/NVIDIA/Audio2Face-3D">NVIDIA Audio2Face-3D</a></p>
+  </li>
+  <li>
+    <p><a href="https://huggingface.co/nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16">NVIDIA Nemotron 3 Nano Omni</a></p>
+  </li>
+</ul>
+
+                
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-10-31">31 Oct 2026</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#nvidia-nemotron-오픈-모델로-유령의-집-만들기" id="markdown-toc-nvidia-nemotron-오픈-모델로-유령의-집-만들기">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</a></li>
+  <li><a href="#으악-이제-내-잔디밭에서-나가" id="markdown-toc-으악-이제-내-잔디밭에서-나가">으악! 이제 내 잔디밭에서 나가!</a>    <ul>
+      <li><a href="#monsterhouse의-작동-방식" id="markdown-toc-monsterhouse의-작동-방식">MonsterHouse의 작동 방식</a></li>
+      <li><a href="#가시가-가득한-미소" id="markdown-toc-가시가-가득한-미소">가시가 가득한 미소</a></li>
+      <li><a href="#나쁜-매너-가르치기" id="markdown-toc-나쁜-매너-가르치기">나쁜 매너 가르치기</a></li>
+      <li><a href="#기다릴-가치가-있는-목소리" id="markdown-toc-기다릴-가치가-있는-목소리">기다릴 가치가 있는 목소리</a></li>
+      <li><a href="#괴물에게는-컨트롤-데스크가-있다" id="markdown-toc-괴물에게는-컨트롤-데스크가-있다">괴물에게는 컨트롤 데스크가 있다</a></li>
+      <li><a href="#다음-문-두드림" id="markdown-toc-다음-문-두드림">다음 문 두드림</a></li>
+      <li><a href="#나만의-터무니없는-캐릭터-만들기" id="markdown-toc-나만의-터무니없는-캐릭터-만들기">나만의 터무니없는 캐릭터 만들기</a>        <ul>
+          <li><a href="#리소스" id="markdown-toc-리소스">리소스</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/" alt="">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href=""></a>
+        <span class="author-description"></span>                        
+    </div>
+</div>
+
+
+
+
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">26</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="translation">
+            Translation
+            <span class="count">26</span>
+          </button>
+        
+      
+        
+        
+          <button class="filter-btn" data-category="huggingface">
+            HuggingFace
+            <span class="count">25</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/granite-switch-4-1-1/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-10-29-granite-switch-4-1-1/thumbnail.png" alt="Granite Switch 4.1.1 — 소프트웨어를 업데이트하듯 모델을 업데이트하세요" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/granite-switch-4-1-1/">Granite Switch 4.1.1 — 소프트웨어를 업데이트하듯 모델을 업데이트하세요</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Granite Switch 4.1.1 — Update models like you update software를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">29 Oct 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/omlx/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-09-22-omlx/thumbnail.jpg" alt="oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/omlx/">oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Jun Kim, oMLX creator and maintainer, joins Hugging Face to...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">22 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/ibm-releases-sota-granite-time-series/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png" alt="상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/ibm-releases-sota-granite-time-series/">상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 IBM releases SOTA Granite Time Series PatchTST-FM-r2 model with commercial-friendly...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">10 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/grabette/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">21 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/security-incident-july-2026/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-07-16-security-incident-july-2026/thumbnail.png" alt="보안 사고 공개 — 2026년 7월" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/security-incident-july-2026/">보안 사고 공개 — 2026년 7월</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Security incident disclosure — July 2026를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">16 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/thinkingmachines-inkling/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" alt="Thinking Machines의 Inkling에 오신 것을 환영합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/real-world-voiceeq/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" alt="Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/real-world-voiceeq/">Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing Real World VoiceEQ: Measuring the human quality of voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/torch-attention-profile/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" alt="파이토치의 프로파일링(3부): 어텐션이 전부다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">10 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/native-speed-vllm-transformers-backend/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/lerobot-release-v060/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" alt="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">07 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/cerebras-gemma4-voice-ai/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">01 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/eee-community-evals/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" alt="Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Featuring Every Eval Ever Results on Hugging Face Model Pages를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">30 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/vllm-jobs/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">26 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/ffasr-leaderboard/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">24 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/huggingface-hub-release-ci/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" alt="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/huggingface-hub-release-ci/">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/cross-origin-storage/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/peft-beyond-lora/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/is-it-agentic-enough/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" alt="충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/agentic-resource-discovery-launch/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-06-17-agentic-resource-discovery-launch/thumbnail.png" alt="에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Agentic Resource Discovery: Let agents search를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">17 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/github-ci-hf-jobs/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-06-09-github-ci-hf-jobs/thumbnail.gif" alt="GitHub CI를 Hugging Face Jobs로 마이그레이션" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Migrating Your GitHub CI to Hugging Face Jobs를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">09 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/openenv-agentic-rl/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-06-08-openenv-agentic-rl/thumbnail.png" alt="오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Open Source Community is backing OpenEnv for Agentic RL를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/torch-profiler/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-05-29-torch-profiler/thumbnail.png" alt="PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 1): A Beginner’s Guide to torch.profiler를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">29 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/local-reachy-mini-conversation/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">27 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/olmoearth-v1-1/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-05-20-olmoearth-v1-1/thumbnail.png" alt="OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 OlmoEarth v1.1: A more efficient family of models를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">20 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/paddleocr-transformers/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">19 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="transformers translation ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/how-to-use-translator/">
+        <img class="post-thumbnail rounded" src="/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
+        <p class="card-text text-muted">
+Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">05 Oct 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+</main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/codecopy.js"></script>
+    <script src="/assets/js/category.js"></script>
+  </body>
+</html>
