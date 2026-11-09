@@ -1,4 +1,228 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/pr-preview/pr-131/feed.xml" rel="self" type="application/atom+xml" /><link href="/pr-preview/pr-131/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-10-05T00:21:28+09:00</updated><id>/pr-preview/pr-131/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다</title><link href="/pr-preview/pr-131/omlx/" rel="alternate" type="text/html" title="oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다" /><published>2026-09-22T00:00:00+09:00</published><updated>2026-09-22T00:00:00+09:00</updated><id>/pr-preview/pr-131/omlx</id><content type="html" xml:base="/pr-preview/pr-131/omlx/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://huggingface-krew.co/pr-preview/pr-131/feed.xml" rel="self" type="application/atom+xml" /><link href="https://huggingface-krew.co/pr-preview/pr-131/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-11-09T23:27:43+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-131/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</title><link href="https://huggingface-krew.co/pr-preview/pr-131/nemotron-halloween/" rel="alternate" type="text/html" title="NVIDIA Nemotron 오픈 모델로 유령의 집 만들기" /><published>2026-10-31T00:00:00+09:00</published><updated>2026-10-31T00:00:00+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-131/nemotron-halloween</id><content type="html" xml:base="https://huggingface-krew.co/pr-preview/pr-131/nemotron-halloween/"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#nvidia-nemotron-오픈-모델로-유령의-집-만들기" id="markdown-toc-nvidia-nemotron-오픈-모델로-유령의-집-만들기">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</a></li>
+  <li><a href="#으악-이제-내-잔디밭에서-나가" id="markdown-toc-으악-이제-내-잔디밭에서-나가">으악! 이제 내 잔디밭에서 나가!</a>    <ul>
+      <li><a href="#monsterhouse의-작동-방식" id="markdown-toc-monsterhouse의-작동-방식">MonsterHouse의 작동 방식</a></li>
+      <li><a href="#가시가-가득한-미소" id="markdown-toc-가시가-가득한-미소">가시가 가득한 미소</a></li>
+      <li><a href="#나쁜-매너-가르치기" id="markdown-toc-나쁜-매너-가르치기">나쁜 매너 가르치기</a></li>
+      <li><a href="#기다릴-가치가-있는-목소리" id="markdown-toc-기다릴-가치가-있는-목소리">기다릴 가치가 있는 목소리</a></li>
+      <li><a href="#괴물에게는-컨트롤-데스크가-있다" id="markdown-toc-괴물에게는-컨트롤-데스크가-있다">괴물에게는 컨트롤 데스크가 있다</a></li>
+      <li><a href="#다음-문-두드림" id="markdown-toc-다음-문-두드림">다음 문 두드림</a></li>
+      <li><a href="#나만의-터무니없는-캐릭터-만들기" id="markdown-toc-나만의-터무니없는-캐릭터-만들기">나만의 터무니없는 캐릭터 만들기</a>        <ul>
+          <li><a href="#리소스" id="markdown-toc-리소스">리소스</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/nvidia/nemotron-halloween">nemotron-halloween</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/nvidia/nemotron-halloween -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h2 id="nvidia-nemotron-오픈-모델로-유령의-집-만들기">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</h2>
+
+<p>아니, 정확히 말하면…</p>
+
+<h2 id="으악-이제-내-잔디밭에서-나가">으악! 이제 내 잔디밭에서 나가!</h2>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/5bIvVxc791He8vRKSaBH4.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/5bIvVxc791He8vRKSaBH4.png" alt="유령의 집 MonsterHouse 썸네일" /></a></p>
+
+<p>요약: MonsterHouse는 제가 할로윈을 위해 만든 인터랙티브 프로젝션입니다. 이 집은 trick-or-treater들의 말을 듣고, 심술궂은 낡은 해적선의 목소리로 대답하며, 방문객이 예의를 지키면 누그러집니다. 이 시스템은 <a href="https://github.com/NVIDIA-AI-Blueprints/nemotron-voice-agent">NVIDIA Nemotron Voice Agent</a>를 기반으로 NVIDIA <a href="https://huggingface.co/nvidia/nemotron-speech-streaming-en-0.6b">Nemotron ASR</a>, <a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB">Nemotron 3.5 Bolt E4B 4GB</a>, <a href="https://build.nvidia.com/nvidia/magpie-tts-zeroshot">Magpie TTS Zeroshot</a> 및 <a href="https://github.com/NVIDIA/Audio2Face-3D">Audio2Face-3D</a>를 사용해 구축했으며, 단일 워크스테이션에서 실행됩니다.</p>
+
+<p>할로윈에 우리 집을 찾아오는 아이들이 재미있고 독특한 방식으로 상호작용할 수 있기를 바랐습니다. 집이 주도권을 쥐고 간식을 나눠 주되, 무섭기보다는 더 심술궂은 존재가 되기를 원했죠. 어쩌다 보니 제 해결책은 차고 문에 입을 달고 불평하는 법을 가르치는 것이었습니다.</p>
+
+<p>그렇게 MonsterHouse가 탄생했습니다. 해적 이야기와 불타는 미소, 그리고 “please”에 대한 수상할 정도로 약한 면을 가진 심술궂은 낡은 건물입니다. NVIDIA Nemotron Voice Agent가 대화의 기반을 제공합니다. Nemotron Speech는 듣고, Bolt E4B는 두뇌 역할을 하며, NVIDIA Magpie TTS Zeroshot은 실시간 목소리를 내고, NVIDIA Audio2Face-3D는 나무로 된 입을 말하게 합니다.</p>
+
+<h3 id="monsterhouse의-작동-방식">MonsterHouse의 작동 방식</h3>
+
+<ul>
+  <li>
+    <p>듣기: <a href="https://huggingface.co/nvidia/nemotron-speech-streaming-en-0.6b">NVIDIA Nemotron 3 ASR</a>가 방문객의 음성을 텍스트로 변환합니다. [<code class="language-plaintext highlighter-rouge">nemotron-speech-streaming-en-0.6b.q8_0.gguf</code> ]</p>
+  </li>
+  <li>
+    <p>생각하기: 대화형 에이전트를 위한 오픈 소형 언어 모델인 <a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB">NVIDIA Nemotron 3.5 Bolt E4B 4GB</a>가 매번 답변을 작성합니다. LoRA 어댑터가 성격을 부여합니다.</p>
+  </li>
+  <li>
+    <p>말하기: <a href="https://build.nvidia.com/nvidia/magpie-tts-zeroshot">NVIDIA Magpie TTS Zeroshot</a>가 캐릭터의 짧은 참조 샘플을 바탕으로 각 답변에 목소리를 입힙니다.</p>
+  </li>
+  <li>
+    <p>애니메이션 적용: <a href="https://github.com/NVIDIA/Audio2Face-3D">NVIDIA Audio2Face-3D</a>가 정제된 음성을 Unreal Engine 5에서 입 모양 애니메이션으로 변환합니다.</p>
+  </li>
+  <li>
+    <p>보기: <a href="https://huggingface.co/nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16">NVIDIA Nemotron 3 Nano Omni</a>가 의상을 설명하고, YOLO와 ByteTrack이 방문객을 세고 추적합니다.</p>
+  </li>
+  <li>
+    <p>실행: <a href="https://github.com/NVIDIA-AI-Blueprints/nemotron-voice-agent">NVIDIA Nemotron Voice Agent</a>가 NVIDIA RTX PRO 6000 Blackwell Max-Q와 NVIDIA RTX PRO 4000 Blackwell이 장착된 단일 워크스테이션에서 모든 작업을 조율합니다.</p>
+  </li>
+</ul>
+
+<h3 id="가시가-가득한-미소">가시가 가득한 미소</h3>
+
+<p>입이 가장 먼저였습니다. 저주받은 입을 열 때마다 나무로 된 차고 문 판자가 들쭉날쭉한 입술처럼 갈라지고, 그 너머 지옥의 불꽃이 진입로를 환하게 비추는 모습을 상상했습니다. 고대의 느낌이 나면서도 표정이 풍부하고, 방문객이 존재한다는 사실에 살짝 불쾌해하는 모습이어야 했습니다.</p>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/CzzK5VpTMFR9Azps_6Qbv.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/CzzK5VpTMFR9Azps_6Qbv.png" alt="불꽃이 이는 입 그래픽" /></a>할 말이 아주 많은 집의 표정 몇 가지입니다.</p>
+
+<p>맞춤형 애니메이션 리그를 만드는 일은 제작 과정에서 손이 많이 가는 작업 중 하나였습니다. 리그를 두들겨 복종시킨 뒤에는 Audio2Face-3D가 나중에 애니메이션으로 만들 수 있는 얼굴 표현 셰이프를 내보낼 수 있었습니다. 캐릭터 SkelMesh는 Autodesk Maya에서 만든 다음 Unreal Engine으로 내보냈고, 그곳에서 문 뒤에 가상의 불과 효과를 추가했습니다. 눈도, 눈썹도, 깜박임도 없으니 놀랄 만큼 경제적인 괴물입니다.</p>
+
+<p>캐릭터를 만드는 온갖 난리를 벌이는 동안 NVIDIA는 Nemotron Voice Agent를 만들고 있었습니다. 원래 제작 과정에서 가장 어려울 거라고 생각했던 부분이 이제는 꽤 재미있고, 반복 작업이 가능하며, 쉬운 일이 되었습니다. 별다른 설정 없이도 듣기와 대화, 음성을 위한 기반을 바로 얻을 수 있었죠. 집에는 이미 입이 있었습니다. 이제 마침내 불평할 무언가를 찾을 수 있게 된 겁니다.</p>
+
+<h3 id="나쁜-매너-가르치기">나쁜 매너 가르치기</h3>
+
+<p>이 집의 성격만큼이나 심술궂은 과거가 필요했기에, 폭풍 같은 과거에 사로잡힌 채 침몰한 해적선의 목재로 지어졌다는 뒷이야기를 만들었습니다. 이제 항해와 관련된 불평에도 이유가 생겼습니다. 이 배는 부동산으로 환생했지만, 그 사실이 썩 마음에 들지는 않는 모양입니다.</p>
+
+<p>공연에는 간식을 나눠 주면서 인사부터 작별까지 따라갈 수 있는 안내자와 경로가 필요했습니다. 처음에는 “난 지금 투덜거리느라 바쁘니까 이웃을 괴롭혀!” 같은 말로 방문객을 쫓아내려 했습니다. 하지만 끈질기게 구는 방문객 앞에서는 결국 태도가 누그러지게 했죠. “Please” 한마디면 즉시 마음을 열 수 있고, “thank you”를 들으면 따뜻하게 작별 인사를 건넵니다. 방문객이 한 번 마음을 사로잡으면 계속 그 상태를 유지하기를 바랐습니다. 누구도 같은 차고 문과 두 번 협상하고 싶어 하지는 않으니까요.</p>
+
+<p>바로 여기서 Voice Agent가 진가를 발휘합니다. 원하는 LLM을 무엇이든 선택할 수 있죠. 시스템을 오프라인 환경에서 완전히 독립적으로 실행하고 싶었기 때문에 메모리와 연산 예산이 정해져 있었습니다.</p>
+
+<p>이 캐릭터에는 “심술궂게 굴어”라고 말하는 프롬프트만으로는 부족했습니다. 전체 대화 흐름을 따라가고, 방문객이 실제로 한 말에 응답하며, 만남의 상태를 추적하는 동시에 파이프라인의 나머지 부분을 위한 연산 여유도 남겨야 했습니다.</p>
+
+<p>12개가 넘는 모델을 테스트한 끝에 실시간 대화를 담당할 모델로 <a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB">Bolt E4B</a>를 선택했습니다. 이 모델은 로컬 대화형 에이전트와 인터랙티브 캐릭터를 위해 특별히 제작된 오픈 소형 언어 모델이며, 말하는 차고 문을 설명하기에 꽤 적절한 모델입니다. 기본 응답 모델로는 4비트 양자화 릴리스(이름에 들어간 “4GB”가 이를 뜻합니다)를 사용하고, 비교를 위해 <a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB-BF16">BF16 체크포인트</a>도 사용할 수 있게 해 두었습니다.</p>
+
+<p>이제는 눈치채셨겠지만 저는 NVIDIA에서 일하고 있습니다. 덕분에 공개 출시 전에 Bolt E4B를 테스트해 볼 수 있었고, 다른 유력 모델인 Qwen3 30B-A3B 및 Qwen 3.6 35B-A3B보다 작은 풋프린트로도 탄탄한 선택지라는 것을 확인했습니다.</p>
+
+<p>이 모델은 Nemotron Voice Agent 파이프라인 안에서 작동하며, 방문객의 말을 다음 차례의 적당히 마지못한 대답으로 바꿉니다.</p>
+
+<p>Bolt는 대화의 기반을 제공합니다. 제가 작성한 프롬프트와 애플리케이션 로직, 그리고 수천 개의 검토된 예시 대화로 학습한 LoRA 어댑터가 이 모델을 이 고집 센 배로 다듬습니다.</p>
+
+<p>5,000개가 넘는 멀티턴 대화로 데이터셋을 만들었기 때문에, 선택지로 삼을 만하다고 판단한 각 모델에 맞춰 LoRA를 학습할 수 있었습니다. 어떤 것은 학습에 한 시간 정도 걸렸고, 어떤 것은 두어 시간이 걸렸습니다. 로컬 에이전트가 모든 작업을 실행하고 결과를 벤치마크했습니다. 처음에 이 에이전트와 아주 큰 LLM이 데이터셋을 만들고 평가했습니다. 이 작업은 밤이나 본업을 하는 동안 진행되었습니다.</p>
+
+<p>LoRA를 적용한 뒤에는 응답의 연속성, 타이밍과 어조를 확인하고, 모델과 어댑터의 품질·반복성·속도를 벤치마크한 다음 실제 공연을 들어 봅니다. 집은 결국에는 마음을 열어야 하지만, 그렇다고 유쾌한 컨시어지로 변해서는 안 됩니다. 약간의 저항이 매력의 일부니까요. 차고 문과 끝없이 말싸움을 하는 건 매력이 아닙니다.</p>
+
+<h3 id="기다릴-가치가-있는-목소리">기다릴 가치가 있는 목소리</h3>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/iVLQ71tHCdvLRIuaJ6oLk.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/iVLQ71tHCdvLRIuaJ6oLk.png" alt="작성된 텍스트와 저장된 오디오를 이용한 두 가지 지름길을 설명하는 그림" /></a>두 가지 지름길, 두 가지 출력입니다. 작성된 텍스트를 사용하면 새로운 대화 생성 과정을 건너뛰고, 저장된 오디오를 사용하면 합성을 건너뜁니다. 정제된 음성이 관객 효과와 별도로 애니메이션을 구동합니다.</p>
+
+<p>불평하는 데 너무 오래 걸리면 유령의 집의 위엄이 사라집니다. 이 파이프라인은 전체 답변이 끝나기 전에 말할 수 있는 텍스트를 내보내므로, 문장의 나머지 부분이 아직 오는 중이어도 집이 말하기 시작할 수 있습니다. 준비된 인사말과 사탕 농담은 익숙한 만남을 처리합니다. 텍스트 뱅크는 언어 모델 작업을 줄이고, 캐시된 녹음은 음성 합성을 줄입니다. 아무리 오래된 심술쟁이라도 리허설의 도움은 받는 법입니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>median end-of-speech-to-audio with Bolt Q4 &amp; TTS = 1.70 seconds
+median end-of-speech-to-audio cached responses = 0.72 seconds
+(note: speech-end detection currently waits for 300 ms of silence )
+</code></pre></div></div>
+
+<p><a href="https://build.nvidia.com/nvidia/magpie-tts-zeroshot">NVIDIA Magpie TTS Zeroshot</a>가 텍스트를 표준 영국 영어(Queen’s English)로 변환합니다. 이 zero-shot 음성 조건화는 학습된 음성 대신 짧은 참조 샘플을 사용하며, 제 샘플은 심술궂은 해적 캐릭터의 목소리를 제공합니다. 이 집에는 심술궂음과 위협부터 재미있어함과 기쁨까지 일곱 가지 분위기가 있으며, 프롬프트 템플릿이 지정하고 LLM이 제공하는 감정 태그가 각 대사를 어떤 방식으로 전달할지 선택합니다. 감정마다 서로 다른 3-10초 음성 샘플이 필요하기 때문에 UI의 도구 탭에 “Sample your Voice” 블록을 추가했습니다. 그 덕분에 행복한 해적 또는 화난 해적 흉내를 내며 샘플 텍스트를 읽고 녹음할 수 있었습니다. “Go” 시간이 되면 Bolt E4B가 무엇을 말할지 결정하고, Magpie가 적절한 기쁨이나 절망을 담아 그 텍스트를 음성으로 바꿉니다.</p>
+
+<p>파이프라인의 다음 단계에는 <a href="https://github.com/NVIDIA/Audio2Face-3D">Audio2Face-3D</a>와 Epic의 Unreal Engine에서 만든 3D 캐릭터 장면이 있습니다. 기본 모델 가중치는 너무 깊지도 높지도 않은 깨끗하고 중립적인 남성 또는 여성 음성에서 가장 잘 작동합니다(사용 사례에 맞는 성별 모델을 선택하세요). 저는 집에 매우 깊고 악마 같은 목소리와 에코 및 잔향을 더하고 싶었습니다. 이 경우 제 음성 샘플에는 그런 연극적인 무게감이 없다는 점이 오히려 장점이 됩니다. Audio2Face-3D는 샘플에서 깨끗한 음성을 가져오고, 두 번째 오디오 스트림은 스피커로 재생되는 조절 가능한 실시간 보컬 효과를 추가합니다.</p>
+
+<p>모든 작업을 원활하게 실행하기 위해 작업을 두 GPU에 나눴습니다. 언어 및 음성 모델 파이프라인은 NVIDIA RTX PRO 6000 Blackwell Max-Q에서 실행하고, Audio2Face-3D를 사용하는 Unreal Engine 그래픽은 NVIDIA RTX PRO 4000 Blackwell에서 실행합니다. 문제는 메모리가 아니라 연산 능력입니다. 에이전트 파이프라인이 어떤 처리를 수행하든 애니메이션의 프레임 속도를 일정하게 유지하고 싶습니다.</p>
+
+<p>음성, 애니메이션과 효과는 동시에 맞아야 합니다. 설득력 있는 괴물에게는 빠른 대답만으로 부족합니다. 그 불평이 건물 자체에서 나오는 것처럼 들려야 하죠. 제 경우에는 실제로 그렇습니다. 오디오 전달 동기화를 조정할 수 있는 설정이 있습니다. 저는 설정해 두고 잊어도 된다는 사실을 알아냈습니다. (100ms는 Audio2Face-3D 버퍼링을 보정합니다.)</p>
+
+<h3 id="괴물에게는-컨트롤-데스크가-있다">괴물에게는 컨트롤 데스크가 있다</h3>
+
+<p>어느 순간부터 “집이 말하게 만들기”에는 제어 기능으로 가득한 인터페이스가 필요해졌습니다. 캐시된 대사를 오디션하고, 시작 분위기를 조정하고, 대화를 따라가며, 음성 처리를 바꾸고, 입 모양 애니메이션을 조정할 수 있습니다. 탭에는 대화, 모델 선택, 녹음, 프롬프트, 성능 모니터링과 카메라 피드가 있으며, 사운드보드와 사용자 지정 대화 입력란을 통해 집의 입에 제가 직접 말을 넣을 수 있습니다. 모델 로딩 제어 기능과 Unreal Engine 연결 표시기도 있습니다. 가끔 괴물이 삐친 게 아니거든요. 연결이 끊긴 겁니다.</p>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/8AZqpHSWLOS4hpRwACGOY.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/8AZqpHSWLOS4hpRwACGOY.png" alt="MonsterHouse 컨트롤 데스크 화면" /></a>사운드보드, 사용자 지정 대사, 시작 분위기와 대화 흐름을 보여 주는 MonsterHouse 컨트롤 데스크입니다.</p>
+
+<p>불과 빛도 공연에 합류했습니다. 편집 가능한 규칙으로 시각적 단서를 전달 방식에 연결합니다. 실시간 단서는 음성과 함께 시작하고, 녹화된 공연은 저장된 타임라인을 따를 수 있습니다. 장면을 다시 구축하지 않고도 분위기 변화를 지시할 수 있습니다.</p>
+
+<p>라이브 모드는 trick-or-treat 캐릭터를 실행합니다. 데모 모드에서는 집이 자신을 설명하도록 설득합니다. 마이크 모드를 사용하면 인식, 대화 생성과 음성 합성을 우회하고 집을 통해 직접 말할 수 있습니다. 제 깨끗한 목소리가 입을 구동하고, 관객은 처리된 버전을 듣습니다. 집은 이를 빙의라고 생각합니다. 저는 유용한 대체 수단이라고 생각하고요.</p>
+
+<h3 id="다음-문-두드림">다음 문 두드림</h3>
+
+<p><a href="https://huggingface.co/nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16">NVIDIA Nemotron 3 Nano Omni</a>는 집에 시각적 맥락을 제공하는 VLM입니다. 선택 사항인 관찰자로서 카메라 이미지를 해석하고 눈에 보이는 의상을 설명하므로, 캐릭터가 구체적으로 반응할 무언가를 얻습니다. 모든 바퀴를 새로 발명할 생각은 없었기에, 현재 시야에 들어온 사람을 세고 추적하는 데 널리 사용되는 객체 감지 및 추적 모델인 YOLO와 ByteTrack을 선택했습니다. 이러한 작업을 분리해 두면 집이 Omni에게 모든 프레임을 설명해 달라고 하지 않고도 여러 명의 방문객을 알아챌 수 있습니다.</p>
+
+<p>적절히 우스꽝스러운 테스트를 위해 문 앞에 온 의상을 입은 양 다섯 마리의 영상을 Omni에 제공했습니다. 저장된 분석 결과는 해적, 뱀파이어, 마녀, 호박과 유령 의상을 식별했습니다. 이것이 바로 집이 활용하기를 바라는 시각적 맥락입니다. 아무래도 가축조차 저보다 더 거창한 할로윈 계획을 세우는 모양입니다.</p>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/v5ff_abLrivfqmxH5ZPqf.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/6ab2a746c7d0655b3d8dfbb9/v5ff_abLrivfqmxH5ZPqf.png" alt="합성 테스트 재생 영상 속 의상을 입은 양 다섯 마리" /></a>합성 테스트 재생 영상 속 털이 아주 복슬복슬한 trick-or-treater 다섯 명입니다. 의상 레이블은 저장된 Omni 분석에서 가져왔으며, 상자와 추적 ID(track ID)는 설명을 위한 예시입니다.</p>
+
+<p>양들은 합성 테스트일 뿐, 성공적인 할로윈 밤의 증거가 아닙니다. 실제 진입로의 방문객 그룹과 의상, 야간 조명은 여전히 테스트가 필요합니다. 감지는 자동 인사말을 트리거하지만, 유행하는 의상을 식별하고 그에 걸맞게 재치 있게 응수하는 기능에는 약간의 추가 학습이 필요할 것 같습니다. 집에는 눈이 없기 때문에 집은 자신의 방문객 인식을 반향정위라고 부릅니다. 그 정도는 그냥 인정해 주기로 했습니다.</p>
+
+<p>아직 할 일이 더 있습니다. 애니메이션은 언제든 개선할 수 있고, 전체 성능 테스트에는 실제 방문객이 필요하며, 언젠가는 사탕도 자동으로 제공할 수 있어야 합니다. 가족과 함께 다른 동네의 유령들을 보러 떠나는 동안 집을 할로윈 내내 혼자 운영하게 하겠다는 원래 목표에는 아직 도달하지 못했습니다. 하지만 그게 바로 이 모든 작업의 목적입니다. 언젠가 한 아이가 심술궂은 낡은 집을 만나 작은 친절을 베풀고, 오래된 목재에도 부드러운 구석이 있다는 사실을 발견할 겁니다. 그리고 집은 사탕도 나눠 주겠죠.</p>
+
+<h3 id="나만의-터무니없는-캐릭터-만들기">나만의 터무니없는 캐릭터 만들기</h3>
+
+<p>MonsterHouse 코드 자체는 출시용으로 패키징되어 있지 않지만, 이 프로젝트에서 사용하는 모든 NVIDIA 모델은 현재 이용할 수 있으며 NVIDIA Nemotron Voice Agent만으로도 대부분의 작업을 해결할 수 있습니다. 제가 따른다면 다음과 같은 경로를 택하겠습니다.</p>
+
+<ul>
+  <li>
+    <p>음성 파이프라인에서 시작하세요. <a href="https://github.com/NVIDIA-AI-Blueprints/nemotron-voice-agent">NVIDIA Nemotron Voice Agent</a>를 clone하고 Generic Assistant 예제를 실행하세요. Nemotron Speech ASR, LLM과 Magpie TTS로 구성된 캐스케이드 파이프라인에 음성 활동 감지와 발화 종료 처리가 더해져, 캐릭터가 언제 말해야 하는지 알 수 있습니다.</p>
+  </li>
+  <li>
+    <p>Bolt E4B를 두뇌로 사용하세요. Voice Agent에는 클라우드, 서버 및 단일 GPU 배포를 위한 <a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB">Bolt E4B</a> 프로필이 포함되어 있습니다. 먼저 <a href="https://build.nvidia.com/nvidia/nemotron-3.5-bolt-e4b">build.nvidia.com</a>에서 모델을 사용해 볼 수 있습니다. 짧고 음성으로 바로 출력할 수 있는 응답에는 대화 모드를 사용하고, 더 단순한 대화에서는 추론을 비활성화하세요.</p>
+  </li>
+  <li>
+    <p>성격을 부여하세요. 시스템 프롬프트와 서로 이어지는 몇 개의 예시 대화로 시작하세요. 누가 이미 please라고 말했는지 같은 대화 상태는 모델에 기억을 요청하는 대신 애플리케이션에서 유지하세요. 프롬프트만으로 충분하지 않다면 LoRA 어댑터를 학습하세요. <a href="https://docs.nvidia.com/nemo/automodel/model-coverage/vision-language-models/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB-BF16">NVIDIA NeMo AutoModel</a>에는 Bolt E4B용 LoRA 레시피가 있습니다.</p>
+  </li>
+  <li>
+    <p>목소리를 부여하세요. Magpie TTS Multilingual은 Voice Agent의 기본값입니다. 사용자 지정 캐릭터에는 <a href="https://build.nvidia.com/nvidia/magpie-tts-zeroshot">Magpie TTS Zeroshot</a>가 짧은 참조 샘플을 사용해 작동합니다. build.nvidia.com에서 사용해 보고, 직접 실행할 수 있도록 액세스를 요청하세요. [CONFIRM: access path and link] 사용 권한이 있는 목소리만 사용하세요.</p>
+  </li>
+  <li>
+    <p>얼굴을 부여하세요. <a href="https://github.com/NVIDIA/Audio2Face-3D">NVIDIA Audio2Face-3D</a>는 음성을 캐릭터의 얼굴 애니메이션으로 변환합니다. 깨끗한 음성을 입력하고 효과는 나중에 추가하세요.</p>
+  </li>
+  <li>
+    <p>선택 사항: 눈을 부여하세요. Voice Agent의 Nemotron Omni Assistant Subagents 예제는 <a href="https://huggingface.co/nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16">Nemotron 3 Nano Omni</a>를 사용해 실시간 웹캠 이해 기능을 추가합니다. 인원수가 필요하다면 가벼운 사람 추적기와 결합하세요.</p>
+  </li>
+</ul>
+
+<p>가장 자주 사용하는 대사를 위한 캐시된 응답 뱅크와 저장된 오디오를 준비하면 느린 괴물도 빠르게 느껴질 겁니다. 실제로 연산 능력이 제한되어 있다면 Nemotron 3 ASR과 python 대화 라우터, 그리고 모든 오디오 캐시만 사용하는 Live 버전을 만들지 못할 이유가 없습니다. Bolt E4B와 Magpie 파이프라인을 사용해 오프라인에서 수백 개의 응답을 생성한 다음, 공연에서는 캐시를 사용할 수 있습니다. 저는 인터랙티브 호박에 이 방식을 적용할 예정입니다.</p>
+
+<h4 id="리소스">리소스</h4>
+
+<ul>
+  <li>
+    <p><a href="https://github.com/NVIDIA-AI-Blueprints/nemotron-voice-agent">NVIDIA Nemotron Voice Agent on GitHub</a> 및 <a href="https://build.nvidia.com/nvidia/nemotron-voice-agent">build.nvidia.com</a>에서</p>
+  </li>
+  <li>
+    <p><a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB">NVIDIA Nemotron 3.5 Bolt E4B 4GB on Hugging Face</a> 및 해당 <a href="https://research.nvidia.com/labs/nemotron/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB/">technical blog</a></p>
+  </li>
+  <li>
+    <p><a href="https://huggingface.co/nvidia/nemotron-speech-streaming-en-0.6b">NVIDIA Nemotron 3 ASR (streaming, English)</a></p>
+  </li>
+  <li>
+    <p><a href="https://build.nvidia.com/nvidia/magpie-tts-zeroshot">NVIDIA Magpie TTS Zeroshot</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/NVIDIA/Audio2Face-3D">NVIDIA Audio2Face-3D</a></p>
+  </li>
+  <li>
+    <p><a href="https://huggingface.co/nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16">NVIDIA Nemotron 3 Nano Omni</a></p>
+  </li>
+</ul>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[NVIDIA Nemotron Voice Agent와 Nemotron 모델들로 할로윈에 말을 거는 유령의 집 MonsterHouse를 만든 과정을 소개합니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-10-30-nemotron-halloween/thumbnail.png" /><media:content medium="image" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-10-30-nemotron-halloween/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Granite Switch 4.1.1 — 소프트웨어를 업데이트하듯 모델을 업데이트하세요</title><link href="https://huggingface-krew.co/pr-preview/pr-131/granite-switch-4-1-1/" rel="alternate" type="text/html" title="Granite Switch 4.1.1 — 소프트웨어를 업데이트하듯 모델을 업데이트하세요" /><published>2026-10-29T00:00:00+09:00</published><updated>2026-10-29T00:00:00+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-131/granite-switch-4-1-1</id><content type="html" xml:base="https://huggingface-krew.co/pr-preview/pr-131/granite-switch-4-1-1/"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#granite-switch-411--소프트웨어를-업데이트하듯-모델을-업데이트하세요" id="markdown-toc-granite-switch-411--소프트웨어를-업데이트하듯-모델을-업데이트하세요">Granite Switch 4.1.1 — 소프트웨어를 업데이트하듯 모델을 업데이트하세요</a></li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1">Granite Switch 4.1.1 — Update models like you update software</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1 -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="granite-switch-411--소프트웨어를-업데이트하듯-모델을-업데이트하세요">Granite Switch 4.1.1 — 소프트웨어를 업데이트하듯 모델을 업데이트하세요</h1>
+
+<p><a href="https://cdn-uploads.huggingface.co/production/uploads/662836b742709fe826510597/F5YZJX3QZ8HbecaJnHe4Q.png"><img src="https://cdn-uploads.huggingface.co/production/uploads/662836b742709fe826510597/F5YZJX3QZ8HbecaJnHe4Q.png" alt="Granite Switch 어댑터 교체 개념도" /></a></p>
+
+<p>일주일 조금 전, <a href="https://huggingface.co/blog/ibm-granite/granite-switch-4-1">Granite Switch 4.1</a>을 출시했습니다. 이를 통해 모듈형 Switch 아키텍처로 특화된 캐시 효율적인 어댑터를 이용해 언어 모델을 구성해 단일 엔드포인트에 새로운 전문성을 추가할 수 있음을 보여드렸습니다.</p>
+
+<p><a href="https://huggingface.co/ibm-granite/granite-switch-4.1-30b">Granite Switch 4.1.1</a>은 패치 릴리스입니다. 버전 번호는 소프트웨어에서 의미하는 그대로입니다. 4.1과 완전히 하위 호환되며, 마이그레이션이 필요 없고, 내부적으로 점진적인 개선이 이루어졌습니다.</p>
+
+<ul>
+  <li>
+    <p><a href="https://huggingface.co/ibm-granite/granite-speech-5.0-470m-turboctc">업데이트된 Granite Speech ASR 모델</a> — 10개 언어를 지원하는 다국어 음성-텍스트 변환으로, 별도 처리 없이 원래부터 적용되는 구두점과 대소문자 표기를 제공합니다. 따라서 별도의 서식 처리 없이도 전사 결과를 후속 모델에 바로 사용할 수 있습니다.</p>
+  </li>
+  <li>
+    <p><a href="https://huggingface.co/ibm-granite/granitelib-core-r1.0">granitelib-core</a>의 업데이트된 Decision 어댑터 — Jev Decision Index 테스트셋에서 전반적으로 향상된 성능을 제공합니다.</p>
+  </li>
+</ul>
+
+<p>이러한 새로운 기능도 기대되지만, 특히 주목할 점은 우리 팀이 이 업데이트를 출시할 수 있었던 속도와 효율성입니다. 새로운 ASR 모델과 Decision 어댑터를 학습한 것 외에는 아무것도 다시 계산하지 않았습니다. 베이스 모델은 변경되지 않았습니다. 원하는 최신 어댑터를 조합해 배포하면 됩니다.</p>
+
+<p>이 패턴은 IBM이 제공하는 모델의 패치 릴리스를 넘어 훨씬 더 다양한 방식으로 활용될 수 있습니다. 현재 개발자와 타사 제공업체가 직접 어댑터를 구축할 수 있도록 튜토리얼과 Adapter SDK를 준비하고 있습니다. 버전을 반복해서 개선하고, 기능을 테스트하며, 소프트웨어를 출시하듯 업데이트를 제공할 수 있습니다. 곧 더 자세히 소개하겠습니다.</p>
+
+<p>그때까지 <a href="https://huggingface.co/collections/ibm-granite/granite-switch">최신 모델</a>을 테스트하고, <a href="https://huggingface.co/spaces/ibm-granite/speech-to-decisions">Speech-to-Decisions</a> 데모를 지원하는 새로운 다국어 및 구두점 기능을 사용해 보세요.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[Granite Switch 4.1.1 패치 릴리스: 4.1과 완전히 하위 호환되면서 새로운 다국어 음성 인식 모델과 Decision 어댑터를 교체해 모델을 소프트웨어처럼 업데이트하는 방법을 소개합니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-10-29-granite-switch-4-1-1/thumbnail.png" /><media:content medium="image" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-10-29-granite-switch-4-1-1/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다</title><link href="https://huggingface-krew.co/pr-preview/pr-131/omlx/" rel="alternate" type="text/html" title="oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다" /><published>2026-09-22T00:00:00+09:00</published><updated>2026-09-22T00:00:00+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-131/omlx</id><content type="html" xml:base="https://huggingface-krew.co/pr-preview/pr-131/omlx/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#omlx의-제작자이자-유지-관리자인-jun-kim이-mlx-커뮤니티를-지원하기-위해-hugging-face에-합류합니다" id="markdown-toc-omlx의-제작자이자-유지-관리자인-jun-kim이-mlx-커뮤니티를-지원하기-위해-hugging-face에-합류합니다">oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">oMLX에는 어떤 영향이 있을까요?</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">MLX 전반에는 어떤 영향이 있을까요?</a></li>
@@ -36,7 +260,7 @@ Review instructions:
 
 <p>앞으로가 정말 기대됩니다.</p>
 
-<p>Jun, 환영합니다! 🙌</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[oMLX 제작자 Jun Kim이 Hugging Face에 합류합니다. oMLX의 지속적인 개발과 MLX 생태계 협력, Transformers 모델의 MLX 지원을 확대합니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-131/assets/images/blog/posts/2026-09-22-omlx/thumbnail.jpg" /><media:content medium="image" url="/pr-preview/pr-131/assets/images/blog/posts/2026-09-22-omlx/thumbnail.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시</title><link href="/pr-preview/pr-131/ibm-releases-sota-granite-time-series/" rel="alternate" type="text/html" title="상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시" /><published>2026-09-10T00:00:00+09:00</published><updated>2026-09-10T00:00:00+09:00</updated><id>/pr-preview/pr-131/ibm-releases-sota-granite-time-series</id><content type="html" xml:base="/pr-preview/pr-131/ibm-releases-sota-granite-time-series/"><![CDATA[<ul id="markdown-toc">
+<p>Jun, 환영합니다! 🙌</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[oMLX 제작자 Jun Kim이 Hugging Face에 합류합니다. oMLX의 지속적인 개발과 MLX 생태계 협력, Transformers 모델의 MLX 지원을 확대합니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-09-22-omlx/thumbnail.jpg" /><media:content medium="image" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-09-22-omlx/thumbnail.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시</title><link href="https://huggingface-krew.co/pr-preview/pr-131/ibm-releases-sota-granite-time-series/" rel="alternate" type="text/html" title="상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시" /><published>2026-09-10T00:00:00+09:00</published><updated>2026-09-10T00:00:00+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-131/ibm-releases-sota-granite-time-series</id><content type="html" xml:base="https://huggingface-krew.co/pr-preview/pr-131/ibm-releases-sota-granite-time-series/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#상업-친화적-라이선스와-함께-sota-granite-time-series-patchtst-fm-r2-모델-출시" id="markdown-toc-상업-친화적-라이선스와-함께-sota-granite-time-series-patchtst-fm-r2-모델-출시">상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">TL;DR</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">GIFT-Eval에서 강력한 제로샷 예측</a></li>
@@ -225,7 +449,7 @@ forecast = pipe(df.iloc[-512:])
   <li>
     <p><a href="https://events.confluent.io/early-access-flink-features">Early Access 등록하기</a>.</p>
   </li>
-</ul>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[IBM Granite Time Series PatchTST-FM-r2의 제로샷 시계열 예측 성능, Conformer 기반 아키텍처, 학습 데이터와 이중 라이선스, 사용 방법을 소개합니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-131/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-131/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*</title><link href="/pr-preview/pr-131/grabette/" rel="alternate" type="text/html" title="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*" /><published>2026-07-21T00:00:00+09:00</published><updated>2026-07-21T00:00:00+09:00</updated><id>/pr-preview/pr-131/grabette</id><content type="html" xml:base="/pr-preview/pr-131/grabette/"><![CDATA[<ul id="markdown-toc">
+</ul>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[IBM Granite Time Series PatchTST-FM-r2의 제로샷 시계열 예측 성능, Conformer 기반 아키텍처, 학습 데이터와 이중 라이선스, 사용 방법을 소개합니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png" /><media:content medium="image" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*</title><link href="https://huggingface-krew.co/pr-preview/pr-131/grabette/" rel="alternate" type="text/html" title="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. *함께 공유 데이터셋을 구축합니다.*" /><published>2026-07-21T00:00:00+09:00</published><updated>2026-07-21T00:00:00+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-131/grabette</id><content type="html" xml:base="https://huggingface-krew.co/pr-preview/pr-131/grabette/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#grabette-로봇-조작-데이터를-기록하기-위한-오픈-시스템--함께-공유-데이터셋을-구축합니다" id="markdown-toc-grabette-로봇-조작-데이터를-기록하기-위한-오픈-시스템--함께-공유-데이터셋을-구축합니다">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br /> <em>함께 공유 데이터셋을 구축합니다.</em></a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">The bottleneck isn’t the model. It’s the data.</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">UMI의 어깨 위에 서다</a></li>
@@ -404,7 +628,7 @@ Review instructions:
 
 <p>👉 <strong><a href="https://github.com/pollen-robotics/grabette">Build a Grabette (GitHub)</a></strong> · <a href="https://huggingface.co/spaces/pollen-robotics/grabette-slam">Process your data (HF Space)</a> · 데이터셋에 기여하기</p>
 
-<p><em>Pollen Robotics가 ❤️로 만들어졌습니다.</em></p>]]></content><author><name>KREW</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-131/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-131/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">보안 사고 공개 — 2026년 7월</title><link href="/pr-preview/pr-131/security-incident-july-2026/" rel="alternate" type="text/html" title="보안 사고 공개 — 2026년 7월" /><published>2026-07-16T00:00:00+09:00</published><updated>2026-07-16T00:00:00+09:00</updated><id>/pr-preview/pr-131/security-incident-july-2026</id><content type="html" xml:base="/pr-preview/pr-131/security-incident-july-2026/"><![CDATA[<ul id="markdown-toc">
+<p><em>Pollen Robotics가 ❤️로 만들어졌습니다.</em></p>]]></content><author><name>KREW</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" /><media:content medium="image" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">보안 사고 공개 — 2026년 7월</title><link href="https://huggingface-krew.co/pr-preview/pr-131/security-incident-july-2026/" rel="alternate" type="text/html" title="보안 사고 공개 — 2026년 7월" /><published>2026-07-16T00:00:00+09:00</published><updated>2026-07-16T00:00:00+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-131/security-incident-july-2026</id><content type="html" xml:base="https://huggingface-krew.co/pr-preview/pr-131/security-incident-july-2026/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#보안-사고-공개--2026년-7월" id="markdown-toc-보안-사고-공개--2026년-7월">보안 사고 공개 — 2026년 7월</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">무슨 일이 있었나요</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">수행한 작업</a></li>
@@ -476,7 +700,7 @@ Review instructions:
 
 <h2 id="section-5">이것이 의미하는 바</h2>
 
-<p>자율적이고 AI 주도적인 공격 도구는 더 이상 이론적이지 않습니다. 광범위하고 인내심 있는 다단계 캠페인을 실행하는 비용을 낮추고, 기계 속도로 작동합니다. 온라인 플랫폼을 방어하려면 이제 데이터와 모델 영역을 핵심 공격 표면으로 간주하고, 방어에도 AI를 활용해 공격 속도에 대응해야 합니다. 앞으로도 이 분야에 계속 투자하고, 그 과정에서 얻은 경험을 계속 공유하겠습니다.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[2026년 7월 Hugging Face 보안 사고의 탐지, 대응, 영향 범위와 후속 보안 조치를 설명합니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-131/assets/images/blog/posts/2026-07-16-security-incident-july-2026/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-131/assets/images/blog/posts/2026-07-16-security-incident-july-2026/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정</title><link href="/pr-preview/pr-131/real-world-voiceeq/" rel="alternate" type="text/html" title="Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정" /><published>2026-07-15T00:00:00+09:00</published><updated>2026-07-15T00:00:00+09:00</updated><id>/pr-preview/pr-131/real-world-voiceeq</id><content type="html" xml:base="/pr-preview/pr-131/real-world-voiceeq/"><![CDATA[<ul id="markdown-toc">
+<p>자율적이고 AI 주도적인 공격 도구는 더 이상 이론적이지 않습니다. 광범위하고 인내심 있는 다단계 캠페인을 실행하는 비용을 낮추고, 기계 속도로 작동합니다. 온라인 플랫폼을 방어하려면 이제 데이터와 모델 영역을 핵심 공격 표면으로 간주하고, 방어에도 AI를 활용해 공격 속도에 대응해야 합니다. 앞으로도 이 분야에 계속 투자하고, 그 과정에서 얻은 경험을 계속 공유하겠습니다.</p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[2026년 7월 Hugging Face 보안 사고의 탐지, 대응, 영향 범위와 후속 보안 조치를 설명합니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-07-16-security-incident-july-2026/thumbnail.png" /><media:content medium="image" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-07-16-security-incident-july-2026/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정</title><link href="https://huggingface-krew.co/pr-preview/pr-131/real-world-voiceeq/" rel="alternate" type="text/html" title="Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정" /><published>2026-07-15T00:00:00+09:00</published><updated>2026-07-15T00:00:00+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-131/real-world-voiceeq</id><content type="html" xml:base="https://huggingface-krew.co/pr-preview/pr-131/real-world-voiceeq/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#real-world-voiceeq-소개-음성-ai의-사람다운-품질-측정" id="markdown-toc-real-world-voiceeq-소개-음성-ai의-사람다운-품질-측정">Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">음성 AI를 위한 더 포괄적인 벤치마크</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">Real World VoiceEQ의 주요 발견</a>        <ul>
@@ -561,7 +785,7 @@ Review instructions:
 
 <p>수십 년에 걸쳐 음성 AI는 표준화된 벤치마크에 대한 정량적 지표를 최적화하는 방식으로 발전해 왔으며, 전사 정확도(WER)에서 음성 품질을 평가하는 객관적 지각 기반 지표인 PESQ 및 DNSMOS에 이르기까지 다양한 지표를 활용해 왔습니다. Real World VoiceEQ가 합성 음성 상호작용의 구성 요소를 평가하는 인간 기반의 지표를 제공함으로써 이러한 패러다임을 확장할 수 있기를 바랍니다.</p>
 
-<p><strong><a href="https://huggingface.co/papers/2607.14846">전체 기술 보고서</a>를 읽고 <a href="https://huggingface.co/spaces/HumeAI/rw-voice-eq">공개 리더보드</a>를 살펴보세요. 또는 <a href="https://www.hume.ai/sales-form">Hume에 문의해</a> Real World VoiceEQ로 음성 모델이나 에이전트를 평가하는 방법을 알아보거나, 특정 사용 사례에 맞춘 맞춤형 평가를 설계해 보세요.</strong></p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정에 대한 한국어 번역 글.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-131/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-131/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Thinking Machines의 Inkling에 오신 것을 환영합니다</title><link href="/pr-preview/pr-131/thinkingmachines-inkling/" rel="alternate" type="text/html" title="Thinking Machines의 Inkling에 오신 것을 환영합니다" /><published>2026-07-15T00:00:00+09:00</published><updated>2026-07-15T00:00:00+09:00</updated><id>/pr-preview/pr-131/thinkingmachines-inkling</id><content type="html" xml:base="/pr-preview/pr-131/thinkingmachines-inkling/"><![CDATA[<ul id="markdown-toc">
+<p><strong><a href="https://huggingface.co/papers/2607.14846">전체 기술 보고서</a>를 읽고 <a href="https://huggingface.co/spaces/HumeAI/rw-voice-eq">공개 리더보드</a>를 살펴보세요. 또는 <a href="https://www.hume.ai/sales-form">Hume에 문의해</a> Real World VoiceEQ로 음성 모델이나 에이전트를 평가하는 방법을 알아보거나, 특정 사용 사례에 맞춘 맞춤형 평가를 설계해 보세요.</strong></p>]]></content><author><name>dailybot</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정에 대한 한국어 번역 글.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" /><media:content medium="image" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Thinking Machines의 Inkling에 오신 것을 환영합니다</title><link href="https://huggingface-krew.co/pr-preview/pr-131/thinkingmachines-inkling/" rel="alternate" type="text/html" title="Thinking Machines의 Inkling에 오신 것을 환영합니다" /><published>2026-07-15T00:00:00+09:00</published><updated>2026-07-15T00:00:00+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-131/thinkingmachines-inkling</id><content type="html" xml:base="https://huggingface-krew.co/pr-preview/pr-131/thinkingmachines-inkling/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#thinking-machines의-inkling에-오신-것을-환영합니다" id="markdown-toc-thinking-machines의-inkling에-오신-것을-환영합니다">Thinking Machines의 Inkling에 오신 것을 환영합니다</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">Inkling이 특별한 이유는 무엇인가?</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">전반적인 기능과 아키텍처</a></li>
@@ -1575,7 +1799,7 @@ uv run --env-file .env \
       <td>98.5%</td>
     </tr>
   </tbody>
-</table>]]></content><author><name>KREW</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-131/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-131/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">파이토치의 프로파일링(3부): 어텐션이 전부다</title><link href="/pr-preview/pr-131/torch-attention-profile/" rel="alternate" type="text/html" title="파이토치의 프로파일링(3부): 어텐션이 전부다" /><published>2026-07-10T00:00:00+09:00</published><updated>2026-07-10T00:00:00+09:00</updated><id>/pr-preview/pr-131/torch-attention-profile</id><content type="html" xml:base="/pr-preview/pr-131/torch-attention-profile/"><![CDATA[<ul id="markdown-toc">
+</table>]]></content><author><name>KREW</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" /><media:content medium="image" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">파이토치의 프로파일링(3부): 어텐션이 전부다</title><link href="https://huggingface-krew.co/pr-preview/pr-131/torch-attention-profile/" rel="alternate" type="text/html" title="파이토치의 프로파일링(3부): 어텐션이 전부다" /><published>2026-07-10T00:00:00+09:00</published><updated>2026-07-10T00:00:00+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-131/torch-attention-profile</id><content type="html" xml:base="https://huggingface-krew.co/pr-preview/pr-131/torch-attention-profile/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#파이토치의-프로파일링3부-어텐션이-전부다" id="markdown-toc-파이토치의-프로파일링3부-어텐션이-전부다">파이토치의 프로파일링(3부): 어텐션이 전부다</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">나이브 어텐션</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">인플레이스 인과 마스크가 적용된 나이브 어텐션</a></li>
@@ -2317,7 +2541,7 @@ uvx trace-util <span class="nt">-f</span> traces <span class="nt">-b</span> &lt;
 <blockquote>
   <p>[!NOTE]
 이 블로그 포스트는 LLM을 이용해 다듬었습니다. 이것이 배경에서 에이전트가 포스트를 생성하도록 합니다는 뜻은 결코 아닙니다. 팀의 일부는 영어를 모국어로 하지 않으며, LLM(대부분 영어로 학습된 모델)이 어리석은 문법 실수를 바로잡거나 더 덜 위협적으로 들리고 깔끔하게 들리는 문장을 재구성할 수 있습니다고 생각합니다. 이 점이 “왜 읽어야 하나, 이것이 LLM으로 생성되었기 때문인가”라는 아이디어에 도움이 되길 바랍니다. 🤗</p>
-</blockquote>]]></content><author><name>KREW</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-131/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-131/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">네이티브-스피드 vLLM transformers 모델링 백엔드</title><link href="/pr-preview/pr-131/native-speed-vllm-transformers-backend/" rel="alternate" type="text/html" title="네이티브-스피드 vLLM transformers 모델링 백엔드" /><published>2026-07-08T00:00:00+09:00</published><updated>2026-07-08T00:00:00+09:00</updated><id>/pr-preview/pr-131/native-speed-vllm-transformers-backend</id><content type="html" xml:base="/pr-preview/pr-131/native-speed-vllm-transformers-backend/"><![CDATA[<ul id="markdown-toc">
+</blockquote>]]></content><author><name>KREW</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" /><media:content medium="image" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">네이티브-스피드 vLLM transformers 모델링 백엔드</title><link href="https://huggingface-krew.co/pr-preview/pr-131/native-speed-vllm-transformers-backend/" rel="alternate" type="text/html" title="네이티브-스피드 vLLM transformers 모델링 백엔드" /><published>2026-07-08T00:00:00+09:00</published><updated>2026-07-08T00:00:00+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-131/native-speed-vllm-transformers-backend</id><content type="html" xml:base="https://huggingface-krew.co/pr-preview/pr-131/native-speed-vllm-transformers-backend/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#네이티브-스피드-vllm-transformers-모델링-백엔드" id="markdown-toc-네이티브-스피드-vllm-transformers-모델링-백엔드">네이티브-스피드 vLLM transformers 모델링 백엔드</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">쇼케이스</a>        <ul>
           <li><a href="#어떻게-측정했나" id="markdown-toc-어떻게-측정했나">어떻게 측정했나</a></li>
@@ -2468,375 +2692,4 @@ vllm serve Qwen/Qwen3-235B-A22B-FP8 <span class="nt">--model-impl</span> transfo
   <li><a href="https://vllm.ai/blog/2025-12-17-large-scale-serving">Large scale serving</a></li>
   <li><a href="https://docs.pytorch.org/docs/2.12/fx.html">Torch FX</a></li>
   <li><a href="https://docs.python.org/3/library/ast.html">Abstract syntax tree</a></li>
-</ul>]]></content><author><name>KREW</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-131/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-131/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</title><link href="/pr-preview/pr-131/lerobot-release-v060/" rel="alternate" type="text/html" title="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" /><published>2026-07-07T00:00:00+09:00</published><updated>2026-07-07T00:00:00+09:00</updated><id>/pr-preview/pr-131/lerobot-release-v060</id><content type="html" xml:base="/pr-preview/pr-131/lerobot-release-v060/"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#lerobot-v060-상상하고-평가하고-개선하기" id="markdown-toc-lerobot-v060-상상하고-평가하고-개선하기">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a>    <ul>
-      <li><a href="#section-1" id="markdown-toc-section-1">한줄 요약</a></li>
-      <li><a href="#section-2" id="markdown-toc-section-2">목차</a></li>
-      <li><a href="#section-3" id="markdown-toc-section-3">월드 모델: 미래를 상상하는 정책들</a>        <ul>
-          <li><a href="#vla-jepa" id="markdown-toc-vla-jepa">VLA-JEPA</a></li>
-          <li><a href="#lingbot-va" id="markdown-toc-lingbot-va">LingBot-VA</a></li>
-          <li><a href="#fastwam" id="markdown-toc-fastwam">FastWAM</a></li>
-        </ul>
-      </li>
-      <li><a href="#section-4" id="markdown-toc-section-4">VLAs: 모델 모음이 계속 확장됩니다</a>        <ul>
-          <li><a href="#gr00t-n17" id="markdown-toc-gr00t-n17">GR00T N1.7</a></li>
-          <li><a href="#molmoact2" id="markdown-toc-molmoact2">MolmoAct2</a></li>
-          <li><a href="#eo-1" id="markdown-toc-eo-1">EO-1</a></li>
-          <li><a href="#multitask-dit" id="markdown-toc-multitask-dit">Multitask DiT</a></li>
-          <li><a href="#evo1" id="markdown-toc-evo1">EVO1</a></li>
-        </ul>
-      </li>
-      <li><a href="#section-5" id="markdown-toc-section-5">보상 모델: 로봇이 성공했는지 아는 방법</a>        <ul>
-          <li><a href="#robometer" id="markdown-toc-robometer">Robometer</a></li>
-          <li><a href="#topreward" id="markdown-toc-topreward">TOPReward</a></li>
-        </ul>
-      </li>
-      <li><a href="#section-6" id="markdown-toc-section-6">데이터셋: 더 빠른 로딩, 더 풍부한 데이터</a>        <ul>
-          <li><a href="#당신의-코덱-당신의-규칙" id="markdown-toc-당신의-코덱-당신의-규칙">당신의 코덱, 당신의 규칙</a></li>
-          <li><a href="#깊이-지원-엔드-투-엔드" id="markdown-toc-깊이-지원-엔드-투-엔드">깊이 지원, 엔드 투 엔드</a></li>
-          <li><a href="#대규모-언어-주석" id="markdown-toc-대규모-언어-주석">대규모 언어 주석</a></li>
-          <li><a href="#데이터-로딩-최대-2배-빠르게" id="markdown-toc-데이터-로딩-최대-2배-빠르게">데이터 로딩 최대 2배 빠르게</a></li>
-        </ul>
-      </li>
-      <li><a href="#section-7" id="markdown-toc-section-7">벤치마크: 모든 것을 평가하는 하나의 CLI</a></li>
-      <li><a href="#section-8" id="markdown-toc-section-8">훈련 및 추론</a>        <ul>
-          <li><a href="#lerobot-rollout-배포-전용-cli를-제공합니다" id="markdown-toc-lerobot-rollout-배포-전용-cli를-제공합니다"><code class="language-plaintext highlighter-rouge">lerobot-rollout</code>: 배포 전용 CLI를 제공합니다</a></li>
-          <li><a href="#fsdp-gpu보다-큰-모델-학습" id="markdown-toc-fsdp-gpu보다-큰-모델-학습">FSDP: GPU보다 큰 모델 학습</a></li>
-          <li><a href="#hf-jobs로-클라우드-학습" id="markdown-toc-hf-jobs로-클라우드-학습">HF Jobs로 클라우드 학습</a></li>
-        </ul>
-      </li>
-      <li><a href="#section-9" id="markdown-toc-section-9">코드베이스: 더 간결하고 깔끔하게</a></li>
-      <li><a href="#section-10" id="markdown-toc-section-10">커뮤니티 &amp; 생태계</a></li>
-      <li><a href="#section-11" id="markdown-toc-section-11">Final thoughts</a></li>
-    </ul>
-  </li>
-</ul>
-<!--toc-->
-<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/lerobot-release-v060">LeRobot v0.6.0: Imagine, Evaluate, Improve</a>를 한국어로 번역한 글입니다.</em></p>
-
-<!-- Source: https://huggingface.co/blog/lerobot-release-v060 -->
-
-<hr />
-
-<!--
-Review instructions:
-- Verify the Korean translation against the source post.
-- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
--->
-
-<h1 id="lerobot-v060-상상하고-평가하고-개선하기">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</h1>
-
-<p>이 새 릴리스의 핵심은 로봇 학습 루프를 닫는 것입니다: 행동하기 전에 미래를 상상하는 정책, 로봇이 성공했는지 알려주는 보상 모델, 실패를 학습 데이터로 바꿔주는 배포 CLI, 그리고 이를 모두 측정하기 위한 여섯 개의 새로운 시뮬레이션 벤치마크. 또한 깊이 센싱, VLM 기반 데이터셋 주석, 맞춤 비디오 인코딩, HF Jobs에서의 클라우드 학습, 그리고 더 간소해진 설치를 제공합니다.</p>
-
-<h2 id="section-1">한줄 요약</h2>
-
-<p>LeRobot v0.6.0은 미래를 상상하는 월드 모델 정책(VLA-JEPA, FastWAM, LingBot-VA)을 도입하고, 미래를 상상하는 VLAs의 물결(GR00T N1.7, MolmoAct2, EO-1, EVO1, Multitask DiT), 그리고 새로운 보상 모델 API(Robometer, TOPReward)를 포함합니다. 또한 <code class="language-plaintext highlighter-rouge">lerobot-eval</code> 아래에 여섯 개의 새로운 시뮬레이션 벤치마크를 포함하고, DAgger 스타일의 휴먼-인-더 루프 보정을 갖춘 <code class="language-plaintext highlighter-rouge">lerobot-rollout</code> CLI, FSDP 학습, HF Jobs에서의 클라우드 학습이 함께 제공됩니다. 데이터셋은 깊이 지원, 자동 언어 주석 파이프라인, 맞춤 비디오 인코딩, 그리고 최대 2배 빠른 데이터 로딩을 제공하며, 더 간소화된 설치 위에 구축됩니다.</p>
-
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/lerobot-blog/release-v0.6.0/lerobot%20v0.6.0.png" alt="LeRobot 0.6.0" /></p>
-
-<h2 id="section-2">목차</h2>
-
-<ul>
-  <li><a href="#section-3">월드 모델: 미래를 상상하는 정책들</a></li>
-  <li><a href="#section-4">VLAs: 모델 모음이 계속 확장됩니다</a></li>
-  <li><a href="#section-5">보상 모델: 로봇이 성공했는지 아는 방법</a></li>
-  <li><a href="#section-6">데이터셋: 더 빠른 로딩, 더 풍부한 데이터</a></li>
-  <li><a href="#section-7">벤치마크: 모든 것을 평가하는 하나의 CLI</a></li>
-  <li><a href="#section-8">훈련 및 추론</a></li>
-  <li><a href="#section-9">코드베이스: 더 간결하고 깔끔하게</a></li>
-  <li><a href="#section-10">커뮤니티 &amp; 생태계</a></li>
-  <li><a href="#section-11">Final thoughts</a></li>
-</ul>
-
-<h2 id="section-3">월드 모델: 미래를 상상하는 정책들</h2>
-
-<p>로봇 공학 세계는 큰 질문에 직면해 있다: 월드 모델이 실제로 로봇 정책에 도움이 되는가? v0.6.0은 이 질문에 답하기 위해 LeRobot에 세 가지 정책을 도입합니다. 각 정책은 학습의 일부로 미래를 상상하는 법을 배우고, 각각은 그 상상을 합리적으로 유지하기 위해 서로 다른 경로를 택합니다.</p>
-
-<h3 id="vla-jepa">VLA-JEPA</h3>
-
-<p>VLA-JEPA는 잠재 공간에서 미래를 예측하도록 컴팩트한 VLA(Qwen3-VL-2B 기반)를 학습하는 동안, 행동하는 방법을 배우게 합니다: 학습 중에 JEPA 월드 모델은 모델의 자체 행동으로 다가오는 프레임을 예측해야 합니다는 점입니다. 비밀은 추론 시 월드 모델이 사라져 추가 추론 비용 없이 월드-모델 감독을 얻을 수 있다는 것입니다. 허브에 준비된 세 가지 바로 사용 가능한 체크포인트가 있으며, 미세 조정을 위한 DROID 사전학습 기본 모델도 포함되어 있다:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lerobot-train <span class="se">\</span>
-  <span class="nt">--policy</span>.path<span class="o">=</span>lerobot/VLA-JEPA-Pretrain <span class="se">\</span>
-  <span class="nt">--dataset</span>.repo_id<span class="o">=</span><span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/my_dataset <span class="se">\</span>
-  <span class="nt">--policy</span>.repo_id<span class="o">=</span><span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/my_finetuned_policy
-</code></pre></div></div>
-
-<p>자세한 내용은 <a href="https://huggingface.co/docs/lerobot/v0.6.0/vla_jepa">VLA-JEPA documentation</a>와 <a href="https://arxiv.org/abs/2602.10098">paper</a>를 확인하십시오.</p>
-
-<h3 id="lingbot-va">LingBot-VA</h3>
-
-<p>LingBot-VA는 한 걸음 더 나아가: 미래의 비디오와 행동을 함께 예측하는 자기회귀 비디오-액션 모델로, 청크 단위로 처리하고 실제 관측값을 다시 피드백해 상상을 구체화합니다. 로봇이 상상한 것을 저장하고 (<code class="language-plaintext highlighter-rouge">--policy.save_predicted_video=true</code>) 실제로 일어난 일과 비교할 수 있다. 추론은 한 개의 24–32 GB GPU에서 실행됩니다. 기술적 세부 내용은 <a href="https://huggingface.co/docs/lerobot/v0.6.0/lingbot_va">documentation</a>와 <a href="https://arxiv.org/pdf/2601.21998">paper</a>를 참고하세요.</p>
-
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/lerobot-blog/release-v0.6.0/gifs/lingbot_va_viz_1.gif" alt="LingBot-VA imagined rollout vs real rollout" /></p>
-
-<h3 id="fastwam">FastWAM</h3>
-
-<p>FastWAM은 논문 제목에서 질문을 던진다: 테스트 시점의 미래 상상이 필요할까? 약 50억 파라미터 규모의 비디오 생성 전문가와 하나의 네트워크에 연결된 컴팩트한 행동 전문가를 매치한 구조로, 모델이 실제로 자신의 롤아웃을 꿈꾸도록 학습합니다. 추론 시에는 꿈꾸는 단계 자체를 건너뛰고 직접 액션 청크를 노이즈 제거합니다. <a href="https://huggingface.co/lerobot/fastwam_base">lerobot/fastwam_base</a>에서 미세조정하고, 자세한 내용은 <a href="https://huggingface.co/docs/lerobot/v0.6.0/fastwam">documentation</a>를 참조하세요.</p>
-
-<h2 id="section-4">VLAs: 모델 모음이 계속 확장됩니다</h2>
-
-<h3 id="gr00t-n17">GR00T N1.7</h3>
-
-<p>NVIDIA의 교차 구현 기반 파운데이션 모델의 최신 공개 세대인 GR00T N1.7으로 NVIDIA GR00T 연동을 업데이트했다. N1.7은 이전 VLM을 Cosmos-Reason2-2B(Qwen3-VL 기반)로 교체하고, 흐름 매칭 액션 헤드를 공급합니다. 우리의 통합은 NVIDIA의 원래 Isaac-GR00T 구현과 동등하게 테스트되었으며, 입력은 동일하고 출력도 같다. Flash-attention은 이제 선택 가능하며, <code class="language-plaintext highlighter-rouge">pip install 'lerobot[groot]'</code>는 그대로 작동하고 <a href="https://huggingface.co/nvidia/GR00T-N1.7-3B">NVIDIA’s published checkpoints</a>를 바로 로드할 수 있다.</p>
-
-<blockquote>
-  <p>[!NOTE]
-GR00T N1.7은 LeRobot에서 N1.5를 대체합니다. N1.5가 필요하면 <code class="language-plaintext highlighter-rouge">lerobot==0.5.1</code>를 고정(pin)하십시오.</p>
-</blockquote>
-
-<h3 id="molmoact2">MolmoAct2</h3>
-
-<p>Allen Institute for AI의 비전-언어-액션 모델 MolmoAct2가 LeRobot에 포팅되었으며, 전체 수명주기를 다룹니다: 미세 조정(전체 또는 LoRA), 평가, 그리고 실제 로봇 배포까지. 보정이 내장된 미리 제작된 체크포인트를 사용하면 SO-100/101에서 제로샷으로 실행할 수 있다:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lerobot-rollout <span class="se">\</span>
-  <span class="nt">--policy</span>.path<span class="o">=</span>lerobot/MolmoAct2-SO100_101-LeRobot <span class="se">\</span>
-  <span class="nt">--robot</span>.type<span class="o">=</span>so100_follower <span class="se">\</span>
-  <span class="nt">--robot</span>.port<span class="o">=</span>/dev/ttyACM0 <span class="se">\</span>
-  <span class="nt">--robot</span>.cameras<span class="o">=</span><span class="s1">'{cam0: {type: opencv, index_or_path: 0, width: 640, height: 480, fps: 30}, cam1: {type: opencv, index_or_path: 2, width: 640, height: 480, fps: 30}}'</span> <span class="se">\</span>
-  <span class="nt">--task</span><span class="o">=</span><span class="s2">"pick up the red cube"</span> <span class="nt">--duration</span><span class="o">=</span>30
-</code></pre></div></div>
-
-<p>추론은 bf16에서 약 12 GB로 가능하고, LoRA 미세 조정은 단일 24 GB GPU에서 가능하다. 전체 배포 가이드는 <a href="https://huggingface.co/docs/lerobot/v0.6.0/molmoact2">MolmoAct2 documentation</a>를 참조하세요.</p>
-
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/lerobot-blog/release-v0.6.0/gifs/molmoact2_4.gif" alt="MolmoAct2 Zero-Shot in LeRobot" /></p>
-
-<h3 id="eo-1">EO-1</h3>
-
-<p>EO-1은 간섭된 비전-텍스트-액션 데이터로 사전학습된 VLA를 LeRobot에 합류시켰다: Qwen2.5-VL-3B 백본과 흐름 매칭 액션 헤드를 포함하며, 논문 저자 중 한 명이 기여했다. 표준 <code class="language-plaintext highlighter-rouge">lerobot-train</code> 워크플로우를 사용하여 <code class="language-plaintext highlighter-rouge">--policy.type=eo1</code>로 학습합니다. 세부 내용은 <a href="https://huggingface.co/docs/lerobot/v0.6.0/eo1">documentation</a>와 <a href="https://arxiv.org/abs/2508.21112">paper</a>에 있다.</p>
-
-<h3 id="multitask-dit">Multitask DiT</h3>
-
-<p>다중 작업 확산 트랜스포머 정책은 TRI Large Behavior Models 레시피를 LeRobot으로 가져온다: CLIP 비전 및 언어 임베딩으로 조건화된 약 4.5억 파라미터의 확산 트랜스포머로, 자연어로 선택된 여러 작업을 하나의 모델이 학습합니다. 확산 및 흐름 매칭 목표를 모두 지원하며, 직접 학습하기에 충분할 정도로 작습니다. 자세한 내용은 <a href="https://huggingface.co/docs/lerobot/v0.6.0/multi_task_dit">documentation</a>를 참고하세요.</p>
-
-<h3 id="evo1">EVO1</h3>
-
-<p>VLAs가 반드시 거대할 필요는 없다. EVO1은 0.77B 파라미터의 정책을 InternVL3-1B 백본과 함께, 흐름 매칭 액션 헤드를 탑재하고 담아 두어, 보유한 modest GPUs에서도 미세 조정 및 실시간 실행이 가능하다. 두 단계의 미세 조정과 실시간 청킹 지원이 기본으로 제공됩니다. <a href="https://huggingface.co/docs/lerobot/v0.6.0/evo1">EVO1 documentation</a>와 <a href="https://arxiv.org/abs/2511.04555">paper</a>를 참고하세요.</p>
-
-<h2 id="section-5">보상 모델: 로봇이 성공했는지 아는 방법</h2>
-
-<p>성공 탐지와 진행 추정은 로봇 학습 루프에서 빠진 조각이며, v0.6.0이 이를 지원합니다. LeRobot은 이제 정책 API를 모방하는 단일 인터페이스 뒤에 네 가지 보상 모델을 제공하는 통합 보상 모델 API(<code class="language-plaintext highlighter-rouge">lerobot.rewards</code>)를 갖추었다. 여기에 HIL-SERL 보상 분류기, SARM, 그리고 두 가지 새로운 추가 항목이 포함됩니다:</p>
-
-<h3 id="robometer">Robometer</h3>
-
-<p>Robometer는 사전학습된 범용 보상 모델입니다: 어떤 LeRobot 데이터셋이든 <a href="https://huggingface.co/lerobot/Robometer-4B">lerobot/Robometer-4B</a>를 지시점으로 삼아 원시 비디오와 언어 지시를 바탕으로 작업 진행도와 성공 여부를 점수화하며, 특정 작업에 대한 학습이 필요 없다. Qwen3-VL-4B 위에 구축되었고, 백만 개가 넘는 로봇 궤적 데이터셋(<a href="https://arxiv.org/abs/2603.02115">RSS 2026 paper</a>)에 걸친 궤적 비교를 통해 학습되었다.</p>
-
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/lerobot-blog/release-v0.6.0/gifs/rm_robometer.gif" alt="LeRobot Robometer" /></p>
-
-<h3 id="topreward">TOPReward</h3>
-
-<p>TOPReward은 완전히 제로샷으로 동작합니다: 보상 가중치가 전혀 없다. 일반 상용 VLM(Qwen3-VL)을 래핑하고, 궤적 비디오와 작업 지시에 주어진 토큰 “True”의 로그-확률을 읽는다. 능력 있는 어떤 VLM도 보상 함수가 됩니다.</p>
-
-<p>두 모델 모두 각 프레임의 진행 곡선을 데이터셋에 쓰는 라벨링 스크립트를 함께 제공하므로 보상 인식 행동 복제(RA-BC), 데이터셋 품질 검사, 진행 오버레이 동영상에 대비됩니다. <a href="https://huggingface.co/docs/lerobot/v0.6.0/robometer">Robometer</a>와 <a href="https://huggingface.co/docs/lerobot/v0.6.0/topreward">TOPReward</a> 문서를 확인하세요.</p>
-
-<h2 id="section-6">데이터셋: 더 빠른 로딩, 더 풍부한 데이터</h2>
-
-<h3 id="당신의-코덱-당신의-규칙">당신의 코덱, 당신의 규칙</h3>
-
-<p>녹음은 더 이상 하나의 하드코드된 코덱에 갇히지 않습니다. 새로운 <code class="language-plaintext highlighter-rouge">--dataset.rgb_encoder.*</code> 옵션은 전체 인코딩 표면(codec, 품질, 픽셀 형식, GOP, 프리셋)을 노출하고, <code class="language-plaintext highlighter-rouge">vcodec=auto</code>은 NVENC, VideoToolbox, VAAPI, QSV와 같은 하드웨어 인코더를 먼저 탐지한 후 기본 소프트웨어 AV1 인코더로 전환합니다. 기존 데이터셋에 대해서는 한 번의 명령으로 모든 것을 재인코딩합니다:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lerobot-edit-dataset <span class="se">\</span>
-    <span class="nt">--repo_id</span> <span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/my_dataset <span class="se">\</span>
-    <span class="nt">--operation</span>.type reencode_videos <span class="se">\</span>
-    <span class="nt">--operation</span>.rgb_encoder.vcodec h264 <span class="se">\</span>
-    <span class="nt">--operation</span>.rgb_encoder.crf 23
-</code></pre></div></div>
-
-<p>전체 세부 정보는 <a href="https://huggingface.co/docs/lerobot/v0.6.0/video_encoding_parameters">video encoding documentation</a>에 있습니다.</p>
-
-<h3 id="깊이-지원-엔드-투-엔드">깊이 지원, 엔드 투 엔드</h3>
-
-<p>Intel RealSense를 연결하고 <code class="language-plaintext highlighter-rouge">use_depth: true</code>를 설정하면 LeRobot은 깊이 맵을 엔드 투 엔드로 기록합니다: 밀리미터 단위로 캡처되며, RGB 카메라 옆에 12비트 깊이 비디오 스트림으로 압축되고 학습 시 물리적 단위로 다시 디코딩됩니다. 깊이는 녹화 중 실시간으로 렌더링되며 <code class="language-plaintext highlighter-rouge">lerobot-dataset-viz</code>에서도 확인 가능하고, SO-100/101, Koch, OpenArm, reBot, Unitree G1 등에서도 작동합니다.</p>
-
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/lerobot-blog/release-v0.6.0/gifs/depth2.gif" alt="LeRobot Depth Camera" /></p>
-
-<h3 id="대규모-언어-주석">대규모 언어 주석</h3>
-
-<p>데이터셋은 더 이상 에피소드당 하나의 작업 문자열이 아니다. LeRobot 데이터셋은 이제 풍부한 언어 주석(타임스탬프가 달린 하위 작업, 계획, 메모리, 수정, 음성, 및 카메라별 VQA 페어)을 네이티브로 저장하며, 새로운 <code class="language-plaintext highlighter-rouge">lerobot-annotate</code> CLI가 에피소드를 관찰하는 VLM을 사용해 이를 자동으로 채운다:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lerobot-annotate <span class="se">\</span>
-    <span class="nt">--repo_id</span><span class="o">=</span><span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/my_dataset <span class="se">\</span>
-    <span class="nt">--new_repo_id</span><span class="o">=</span><span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/my_dataset_annotated <span class="se">\</span>
-    <span class="nt">--vlm</span>.model_id<span class="o">=</span>Qwen/Qwen2.5-VL-7B-Instruct <span class="se">\</span>
-    <span class="nt">--push_to_hub</span><span class="o">=</span><span class="nb">true</span>
-</code></pre></div></div>
-
-<p>그 다음 YAML 레시피 레이어가 이 주석들을 샘플 시점의 채팅 스타일 학습 메시지로 렌더링합니다: 내일의 장기적 계획과 대화를 나누는 로봇 정책이 학습할 정확한 데이터다. HF Jobs로 확장하고 더 자세한 내용은 <a href="https://huggingface.co/docs/lerobot/v0.6.0/annotation_pipeline">annotation pipeline docs</a>를 읽어보라.</p>
-
-<h3 id="데이터-로딩-최대-2배-빠르게">데이터 로딩 최대 2배 빠르게</h3>
-
-<p>비디오 데이터셋으로의 학습은 이제 기본적으로 약 2배 빠르다: 다중 카메라 프레임은 병렬로 디코딩되고, 데이터로더 워커는 컴팩트한 uint8 프레임을 전송하며(프로세스 간 메모리 4배 감소), 지속형 워커가 에포크 간에 디코더 캐시를 유지합니다. 대형 데이터셋의 하위 집합(<code class="language-plaintext highlighter-rouge">episodes=[...]</code>) 로딩은 벤치마크에서 275초에서 0.06초로 감소했다. 샘플링은 이제 결정적이고 재개 가능하므로 중단된 학습도 샘플-정확하게 재개됩니다.</p>
-
-<h2 id="section-7">벤치마크: 모든 것을 평가하는 하나의 CLI</h2>
-
-<!-- TODO: gif idea: grid of rollouts across the six new benchmarks, hosted at documentation-images/lerobot-blog/release-v0.6.0/ -->
-
-<p>v0.5.0은 LeRobot을 VLAs 평가 허브로 확립했고, v0.6.0은 여섯 개의 새로운 시뮬레이션 벤치마크를 추가하여 실제 기능으로 만들었다. 모두 동일한 <code class="language-plaintext highlighter-rouge">lerobot-eval</code> CLI를 통해 실행 가능하고, 각 벤치마크에는 문서 페이지, Docker 이미지, CI에서 스모크 테스트된 SmolVLA 기준 체크포인트가 있다:</p>
-
-<ul>
-  <li><a href="https://huggingface.co/docs/lerobot/v0.6.0/libero_plus">LIBERO-plus</a>는 VLAs에 약 10,000개의 변형 버전의 LIBERO를 7개 축에 걸쳐 스트레스 테스트하며, 조명과 카메라 시점에서부터 재작성된 지시문에 이르기까지 포괄합니다. 정책이 실패하는 시점을 알려줍니다.</li>
-  <li><a href="https://huggingface.co/docs/lerobot/v0.6.0/robotwin">RoboTwin 2.0</a>은 SAPIEN에서 50개의 양손 조작 작업을 다루고, 도메인 무작위화를 크게 적용하며, Hub의 <a href="https://huggingface.co/datasets/lerobot/robotwin_unified">more than 100k ready-to-train trajectories</a>를 포함합니다.</li>
-  <li><a href="https://huggingface.co/docs/lerobot/v0.6.0/robocasa">RoboCasa365</a>은 모바일 매니퓰레이터의 2,500개 절차적으로 생성된 주방 작업 365개를 포괄하는 가장 큰 작업 면적을 다룹니다.</li>
-  <li><a href="https://huggingface.co/docs/lerobot/v0.6.0/robocerebra">RoboCerebra</a>는 언어 기반의 중간 지시하에 3~6개의 하위 목표를 연결한 에피소드로 장기 행동을 평가하고, 6,660-에피소드 데이터셋을 제공합니다.</li>
-  <li><a href="https://huggingface.co/docs/lerobot/v0.6.0/robomme">RoboMME</a>는 기억력 시험입니다: 정책이 반복 수를 셀 수 있는가, 숨겨진 물체를 추적하는가, 시연된 절차를 모방하는가? 4개의 기억 구간에서 16개의 작업.</li>
-  <li><a href="https://huggingface.co/docs/lerobot/v0.6.0/vlabench">VLABench</a>은 조작에서의 지식과 추론을 테스트합니다. 물리 문제에서 커피 양조와 같은 복합 작업까지 다룹니다.</li>
-</ul>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lerobot-eval <span class="se">\</span>
-  <span class="nt">--policy</span>.path<span class="o">=</span>lerobot/smolvla_robotwin <span class="se">\</span>
-  <span class="nt">--env</span>.type<span class="o">=</span>robotwin <span class="se">\</span>
-  <span class="nt">--env</span>.task<span class="o">=</span>beat_block_hammer <span class="se">\</span>
-  <span class="nt">--eval</span>.n_episodes<span class="o">=</span>100 <span class="nt">--eval</span>.batch_size<span class="o">=</span>1
-</code></pre></div></div>
-
-<p>시뮬레이터 백엔드는 고유 설치 단계가 필요한 특정 시스템 의존성을 요구합니다. 각 문서 페이지에는 정확한 레시피가 있고, 설정을 건너뛰고 싶다면 각 벤치마크에는 미리 만든 Docker 이미지가 함께 제공합니다.</p>
-
-<p>LIBERO, Meta-World, NVIDIA IsaacLab-Arena와 함께 한 지붕 아래 9개 벤치마크 계열이 구성되며, 새 <a href="https://huggingface.co/docs/lerobot/v0.6.0/adding_benchmarks">Adding a New Benchmark guide</a>은 자신만의 벤치를 연결하는 방법을 정확히 문서화합니다. 평가도 빨라졌는데, 병렬 평가가 이제 비동기 벡터화 환경으로 기본값으로 설정되어 최대 2배 빠름으로 벤치마크됩니다.</p>
-
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/lerobot-blog/release-v0.6.0/gifs/benchmarks2.gif" alt="LeRobot benchmarks" /></p>
-
-<h2 id="section-8">훈련 및 추론</h2>
-
-<h3 id="lerobot-rollout-배포-전용-cli를-제공합니다"><code class="language-plaintext highlighter-rouge">lerobot-rollout</code>: 배포 전용 CLI를 제공합니다</h3>
-
-<p>정책 배포는 예전에 <code class="language-plaintext highlighter-rouge">lerobot-record</code> 위에 얹은 해킹에 가까웠습니다. 새로운 <code class="language-plaintext highlighter-rouge">lerobot-rollout</code> CLI는 배포를 독립적인 워크플로우로 만들고, 플러그 가능한 전략과 추론 백엔드를 제공합니다(느린 호환 VLAs에 대해 실시간 청킹 포함). <code class="language-plaintext highlighter-rouge">base</code> 전략은 단순히 정책을 실행합니다. <code class="language-plaintext highlighter-rouge">sentry</code>는 연속적으로 기록하며 에피소드를 순환하고 진행 중 허브에 업로드합니다. <code class="language-plaintext highlighter-rouge">highlight</code>는 링 버퍼를 유지하고 키를 누르면 마지막 N초를 저장해 흥미로운 순간을 놓치지 않게 합니다. <code class="language-plaintext highlighter-rouge">episodic</code>는 전형적인 에피소드/리셋 기록 워크플로를 반영합니다. 그리고 <code class="language-plaintext highlighter-rouge">dagger</code>은 배포를 데이터 수집으로 바꿉니다.</p>
-
-<p>DAgger 전략을 사용하면 정책이 작동하는 모습을 지켜보다, 잘못되었을 때 순간에 키를 누르고(USB 풋 페달도 가능) 리더 팔로 제어를 넘겨 보정을 기록한 뒤 다시 제어를 넘겨줍니다. 작동하는 리더는 제어를 넘길 때까지 팔로워의 포즈로 이동해 핸드오버를 매끄럽게 만듭니다. 모든 보정 프레임은 <code class="language-plaintext highlighter-rouge">intervention</code> 플래그가 달려 있으며, 결과 데이터세트는 다음 미세 조정을 위해 준비됩니다:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lerobot-rollout <span class="se">\</span>
-    <span class="nt">--strategy</span>.type<span class="o">=</span>dagger <span class="se">\</span>
-    <span class="nt">--policy</span>.path<span class="o">=</span><span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/my_policy <span class="se">\</span>
-    <span class="nt">--robot</span>.type<span class="o">=</span>so100_follower <span class="se">\</span>
-    <span class="nt">--robot</span>.port<span class="o">=</span>/dev/ttyACM0 <span class="se">\</span>
-    <span class="nt">--teleop</span>.type<span class="o">=</span>so101_leader <span class="se">\</span>
-    <span class="nt">--teleop</span>.port<span class="o">=</span>/dev/ttyACM1 <span class="se">\</span>
-    <span class="nt">--dataset</span>.repo_id<span class="o">=</span><span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/dagger_corrections <span class="se">\</span>
-    <span class="nt">--dataset</span>.single_task<span class="o">=</span><span class="s2">"Grasp the block"</span>
-</code></pre></div></div>
-
-<p>배포하고, 보정을 수집하고, 미세 조정하고, 반복하세요: 로봇 학습 플라이휠은 이제 CLI 플래그입니다. <a href="https://huggingface.co/docs/lerobot/v0.6.0/inference">deployment docs</a>를 읽어보라.</p>
-
-<!-- TODO: gif idea: DAgger takeover moment (policy fails, human grabs leader arm, correction recorded), hosted at documentation-images/lerobot-blog/release-v0.6.0/ -->
-
-<h3 id="fsdp-gpu보다-큰-모델-학습">FSDP: GPU보다 큰 모델 학습</h3>
-
-<p>로봇 파운데이션 모델은 단일 GPU를 넘어 커지고 있다. LeRobot 학습은 이제 Accelerate를 통해 FSDP(완전 분할 데이터 병렬) 학습을 지원합니다: 파라미터, 그래디언트, 옵티마이저 상태가 GPU 간에 샤딩되고, 체크포인트는 다른 정책처럼 로드되는 단일 파일 <code class="language-plaintext highlighter-rouge">model.safetensors</code>로 다시 모아진다. 다른 GPU 수에서 FSDP 실행을 재개할 수도 있다. <a href="https://huggingface.co/docs/lerobot/v0.6.0/multi_gpu_training">multi-GPU training docs</a>를 참조하세요.</p>
-
-<h3 id="hf-jobs로-클라우드-학습">HF Jobs로 클라우드 학습</h3>
-
-<p>GPU가 없나요? 문제 없습니다. 동일한 <code class="language-plaintext highlighter-rouge">lerobot-train</code> 명령에 하나의 플래그를 더하면 이제 클라우드에서도 실행됩니다.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lerobot-train <span class="se">\</span>
-  <span class="nt">--dataset</span>.repo_id<span class="o">=</span><span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/so101_test <span class="se">\</span>
-  <span class="nt">--policy</span>.type<span class="o">=</span>act <span class="se">\</span>
-  <span class="nt">--policy</span>.repo_id<span class="o">=</span><span class="k">${</span><span class="nv">HF_USER</span><span class="k">}</span>/my_policy <span class="se">\</span>
-  <span class="nt">--job</span>.target<span class="o">=</span>a10g-small
-</code></pre></div></div>
-
-<p>LeRobot은 필요하다면 로컬 데이터셋을 개인 Hub 리포지토리로 푸시하고, 작업을 제출하며, 로그를 터미널로 스트리밍하고, 학습된 정책을 끝에 Hub로 푸시합니다. T4에서 8x H200까지의 리소스를 <code class="language-plaintext highlighter-rouge">--job.target</code>으로 선택할 수 있으며(계산은 사용량에 따라 청구됩니다). <a href="https://huggingface.co/docs/lerobot/v0.6.0/hardware_guide#hugging-face-jobs">Check out the documentation</a></p>
-
-<h2 id="section-9">코드베이스: 더 간결하고 깔끔하게</h2>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">pip install lerobot</code>은 이제 본질적으로 가볍고, 기본 의존성이 약 40% 정도 줄었다. 기능 범위의 확장 추가(<code class="language-plaintext highlighter-rouge">[training]</code>, <code class="language-plaintext highlighter-rouge">[core_scripts]</code>, <code class="language-plaintext highlighter-rouge">[evaluation]</code>, …)가 나머지를 커버하며, 누락된 의존성 오류는 어떤 확장을 추가해야 하는지 정확히 알려줍니다. LeRobot 데이터셋만 사용합니다면 더 이상 하드웨어 관련 의존성을 설치할 필요가 없다 ;)</li>
-  <li>지원되는 PyTorch 버전은 2.7–2.11로 옮겨졌으며, CUDA 12.8 휠은 Linux <code class="language-plaintext highlighter-rouge">uv</code> 설치를 위해 기본으로 고정되어 있다. <code class="language-plaintext highlighter-rouge">--policy.dtype=bfloat16</code>은 이제 Accelerate를 통해 실제 혼합-정밀도 학습을 구동합니다.</li>
-  <li>약속된 <code class="language-plaintext highlighter-rouge">uv.lock</code>은 CI, Docker, 개발에 대한 권위 있는 의존성 명세이며, 문서에는 모든 단계에 대한 <code class="language-plaintext highlighter-rouge">uv</code> 설치 경로가 포함되어 있으며, CUDA 휠을 단일 플래그로 선택하는 방법까지 자세히 설명합니다.</li>
-  <li><code class="language-plaintext highlighter-rouge">--display_mode=foxglove</code>은 원격 조작, 녹화, 롤아웃을 <a href="https://foxglove.dev">Foxglove</a>로 스트리밍하며, 이 시각화 도구는 로봇 공학 세계의 많은 사람들에 의해 이미 사용됩니다. 원격 설정에서도 작동하며, <code class="language-plaintext highlighter-rouge">lerobot-dataset-viz</code>은 정리 가능한 데이터셋 재생을 제공합니다.</li>
-  <li>Pip로 설치 가능한 <code class="language-plaintext highlighter-rouge">lerobot_env_*</code> 패키지들은 이제 환경 сам 등록을 수행합니다. 플러그인 시스템은 로봇, 카메라, 원격 조작기, 정책, 엔벌(Environment) 등 다섯 가지 구성 요소 유형을 다룹니다.</li>
-  <li>녹화 중 키보드 컨트롤은 이제 Wayland에서, SSH를 통해, 헤드리스 설정에서, macOS에서도 접근성 권한 없이 작동합니다.</li>
-</ul>
-
-<blockquote>
-  <p>[!WARNING]
-전체 목록과 breaking changes에 대한 마이그레이션 포인터는 <a href="https://github.com/huggingface/lerobot/releases">release notes</a>를 확인하십시오.</p>
-</blockquote>
-
-<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/lerobot-blog/release-v0.6.0/gifs/LeLab.gif" alt="LeLab a graphical user interface for LeRobot" /></p>
-
-<h2 id="section-10">커뮤니티 &amp; 생태계</h2>
-
-<ul>
-  <li>LeLab은 전체 LeRobot 워크플로우(보정, 원격 조작, 녹화, 로컬 혹은 HF Jobs에서의 학습, 배포)를 브라우저 UI에 담아 CLI가 필요 없다. 현재 SO-ARM101을 지원합니다. <a href="https://github.com/huggingface/leLab">Try it out!</a></li>
-  <li>Isaac Teleop은 NVIDIA 팀과의 협업으로 CloudXR/OpenXR를 통해 VR 컨트롤러로 SO-101를 원격 조작할 수 있다. 결과는 <a href="https://github.com/NVIDIA/IsaacTeleop">NVIDIA’s Isaac Teleop stack</a>이며, 더 자세한 내용은 <a href="https://huggingface.co/docs/lerobot/v0.6.0/isaac_teleop">documentation</a>를 참조하세요.</li>
-  <li>새롭게 추가된 <a href="https://huggingface.co/docs/lerobot/v0.6.0/hardware_guide">compute hardware guide</a>은 모든 신규 사용자가 묻는 두 가지 질문에 답합니다: 어떤 GPU가 필요한가, 학습 시간이 얼마나 걸리는가? 정책 계열별로 측정된 VRAM 엔벨로프와 RTX 4090에서 4x H100까지의 참조 학습 시간을 제공합니다.</li>
-  <li>재작성된 <a href="https://huggingface.co/docs/lerobot/v0.6.0/bring_your_own_policies">Adding a Policy guide</a>은 PR 없이도 자체 정책을 택배하는 방법을 보여줍니다.</li>
-</ul>
-
-<h2 id="section-11">Final thoughts</h2>
-
-<p>이들 핵심 기능 외에도 v0.6.0은 코드베이스 전반에 걸친 수백 가지 버그 수정, 문서 개선, 그리고 더 나은 기본값에서 더 신뢰할 수 있는 CI까지 다양한 품질 개선을 포함합니다.</p>
-
-<p>커뮤니티 모든 분들께 거대한 감사의 마음을 전합니다. 이번 릴리스에는 학계, 산업계, 취미 팀이 LeRobot을 그들의 모델과 벤치마크의 보금자리로 선택한 작업이 포함되어 있다. 모든 PR과 버그 리포트가 오픈 소스 로보틱스를 앞으로 나아가게 합니다.</p>
-
-<p>더 많은 소식이 곧 다가옵니다 🤗 시작하려면 <a href="https://github.com/huggingface/lerobot">here</a>를 확인하세요!
-– The LeRobot 팀 ❤️</p>]]></content><author><name>KREW</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-131/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-131/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</title><link href="/pr-preview/pr-131/cerebras-gemma4-voice-ai/" rel="alternate" type="text/html" title="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" /><published>2026-07-01T00:00:00+09:00</published><updated>2026-07-01T00:00:00+09:00</updated><id>/pr-preview/pr-131/cerebras-gemma4-voice-ai</id><content type="html" xml:base="/pr-preview/pr-131/cerebras-gemma4-voice-ai/"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#hugging-face와-cerebras가-gemma-4를-실시간-음성-ai로-선보입니다" id="markdown-toc-hugging-face와-cerebras가-gemma-4를-실시간-음성-ai로-선보입니다">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a>    <ul>
-      <li><a href="#section-1" id="markdown-toc-section-1">아키텍처: 개방형 계층형 음성-음성 스택</a></li>
-      <li><a href="#section-2" id="markdown-toc-section-2">Cerebras와 Hugging Face 파트너십</a></li>
-      <li><a href="#section-3" id="markdown-toc-section-3">실제 세계의 상호작용을 위한 설계</a></li>
-    </ul>
-  </li>
-</ul>
-<!--toc-->
-<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/cerebras-gemma4-voice-ai">Hugging Face and Cerebras bring Gemma 4 to real-time voice AI</a>를 한국어로 번역한 글입니다.</em></p>
-
-<!-- Source: https://huggingface.co/blog/cerebras-gemma4-voice-ai -->
-
-<hr />
-
-<!--
-Review instructions:
-- Verify the Korean translation against the source post.
-- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
--->
-
-<h1 id="hugging-face와-cerebras가-gemma-4를-실시간-음성-ai로-선보입니다">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</h1>
-
-<video controls="" width="100%">
-  <source src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/cerebras-gemma4-voice-ai/s2s-space-demo.mp4" type="video/mp4" />
-</video>
-
-<p>음성 AI의 경우 지연은 중요한 매개변수입니다. 개발자들은 모델 품질에서 상당한 진전을 이뤘지만, 사용자 경험은 여전히 응답 시간에 의해 좌우되는 경우가 많습니다. Hugging Face와 Cerebras가 그 경험을 바꾸고 있습니다. 오늘은 개방적이고 모듈형인 음성 AI 아키텍처와 업계 최고 수준의 추론 속도가 결합될 때 가능해지는 것을 시연합니다.</p>
-
-<p>그 결과는 훨씬 더 자연스럽게 느껴지는 음성-음성 대화 경험입니다. AI의 응답을 기다리는 대신, 대화는 인간 간의 상호작용에서 사용자가 기대하는 반응 속도로 흐릅니다.</p>
-
-<script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/5.38.0/gradio.js"></script>
-
-<gradio-app theme_mode="light" space="smolagents/hf-realtime-voice"></gradio-app>
-
-<h2 id="section-1">아키텍처: 개방형 계층형 음성-음성 스택</h2>
-
-<p>데모는 실시간 음성-음성 파이프라인으로 구축되었습니다. 시스템의 각 부분은 모듈식이며 개방적이고 대체 가능하여, 개발자가 다양한 어시스턴트, 로봇, 제품 또는 연구 프로젝트에 맞게 스택을 쉽게 조정할 수 있습니다.</p>
-
-<p>이는 완전히 개방된 음성-음성 루프를 만듭니다:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Speech input
-  -&gt; speech recognition with Nvidia's Parakeet
-  -&gt; Gemma 4 VLM inference on Cerebras
-  -&gt; text-to-speech with Alibaba's Qwen3TTS
-  -&gt; spoken response
-</code></pre></div></div>
-
-<p>이 아키텍처는 오픈 소스 AI 생태계의 강점을 한데 모읍니다: 빠른 추론을 위한 Cerebras, 언어 모델을 위한 Google DeepMind의 Gemma 4 31B, 텍스트 음성 변환을 위한 Qwen. 개발자들은 모든 층을 검사, 수정, 확장할 수 있습니다</p>
-
-<h2 id="section-2">Cerebras와 Hugging Face 파트너십</h2>
-
-<p>오늘날 일부 프로덕션 시스템은 합리적인 중앙값 지연을 보이지만, P95에서 여전히 다수의 초에 걸친 지연을 경험합니다. 도구 호출이나 다중 모달 단계가 여러 차례의 턴을 필요로 할 때 이러한 지연은 더욱 두드러집니다.</p>
-
-<p>Cerebras는 스택에서 가장 중요한 병목 중 하나인 언어 모델의 응답 시간을 해결하는 데 도움을 줍니다. 추론을 현저히 더 빠르고 안정적으로 만들어, 나머지 Hugging Face 파이프라인이 빛나도록 합니다.</p>
-
-<p>그 안정성은 특히 롱테일에서 중요합니다. 많은 시스템이 합리적인 중앙값 응답 시간을 제공할 수 있지만, 간헐적으로 발생하는 느린 응답은 대화를 여전히 불안정하게 만듭니다.</p>
-
-<h2 id="section-3">실제 세계의 상호작용을 위한 설계</h2>
-
-<p>이 동일한 Hugging Face의 음성-음성 파이프라인은 이미 Reachy Mini 로봇에 동력을 제공하고 있으며, 야생에서 9,000대가 넘는 로봇이 작동 중입니다. 로봇, 음성 비서, 구현된 AI의 경우 반응성은 미적 개선이 아닙니다. 그것이 상호작용을 살아있게 만드는 핵심 요소입니다.</p>
-
-<p>따라서 Cerebras를 사용하는 동기는 단순한 비용 절감이 아닙니다. 낮은 지연 시간, 예측 가능한 성능, 그리고 대규모에서도 자연스럽게 느껴지는 실시간 경험을 만들어낼 수 있는 능력입니다.</p>
-
-<p>이 협력은 AI의 미래가 개방적이면서도 성능이 뛰어날 것이라는 공동의 믿음을 반영합니다. 오픈 소스 모델, 개방형 인프라, 그리고 획기적인 추론 속도가 함께 차세대 대화형 AI의 토대를 형성합니다.</p>
-
-<p>개발자들이 데모를 탐색하고, 코드를 실험하며, 실시간 음성 AI의 차후 발전 방향을 함께 만들어 가도록 초대합니다.</p>
-
-<p>데모: <a href="https://huggingface.co/spaces/smolagents/hf-realtime-voice">Hugging Face Space</a></p>
-
-<p>저장소: <a href="https://github.com/huggingface/speech-to-speech">huggingface/speech-to-speech</a></p>]]></content><author><name>KREW</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice AI를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/pr-preview/pr-131/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" /><media:content medium="image" url="/pr-preview/pr-131/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+</ul>]]></content><author><name>KREW</name></author><category term="Translation" /><category term="HuggingFace" /><summary type="html"><![CDATA[이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" /><media:content medium="image" url="https://huggingface-krew.co/pr-preview/pr-131/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
