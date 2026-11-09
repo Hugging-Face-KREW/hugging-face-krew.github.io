@@ -257,6 +257,10 @@
 <lastmod>2026-08-18T00:00:00+09:00</lastmod>
 </url>
 <url>
+<loc>https://huggingface-krew.co/asr-benchmark-optimization/</loc>
+<lastmod>2026-08-21T00:00:00+09:00</lastmod>
+</url>
+<url>
 <loc>https://huggingface-krew.co/gradio-workflow-guide/</loc>
 <lastmod>2026-08-25T00:00:00+09:00</lastmod>
 </url>
@@ -338,6 +342,10 @@
 </url>
 <url>
 <loc>https://huggingface-krew.co/thinkingbox-training/</loc>
+<lastmod>2026-10-23T00:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>https://huggingface-krew.co/torch-neuronx-model-support/</loc>
 <lastmod>2026-10-23T00:00:00+09:00</lastmod>
 </url>
 <url>
