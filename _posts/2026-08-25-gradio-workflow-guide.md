@@ -57,7 +57,7 @@ Review instructions:
 
 하나의 캔버스에서 Hugging Face Inference Providers를 통해 모델을 두 번 호출하고, Gradio Spaces도 두 번 호출합니다.
 
-이것은 워크플로이므로 세 출력 각각에도 고유한 REST 엔드포인트가 생성됩니다: `/sticker`, `/voiceover`, `/episode_title`. UI를 열지 않고도 코드에서 어느 엔드포인트든 직접 호출할 수 있습니다. 실행 가능한 예시는 아래의 [코드에서 호출하기](#section-7)를 참고하세요.
+이것은 워크플로이므로 세 출력 각각에도 고유한 REST 엔드포인트가 생성됩니다: `/sticker`, `/voiceover`, `/episode_title`. UI를 열지 않고도 코드에서 어느 엔드포인트든 직접 호출할 수 있습니다. 실행 가능한 예시는 아래의 [코드에서 호출하기](#call-it-from-code)를 참고하세요.
 
 👉 **[AI 미디어 스튜디오 사용해 보기](https://huggingface.co/spaces/ysharma/gr-workflow-04-ai-media-studio)**
 
@@ -95,9 +95,9 @@ Diffusers를 통해 로드한 [Lightricks/LTX-Video](https://huggingface.co/Ligh
 
 ## 작동 방식 한눈에 보기 {#section-6}
 
-모든 워크플로는 세 종류의 노드로 구성된 그래프입니다. **references**(입력), **operators**(작업을 수행하는 단계), **subjects**(출력)입니다. 연산자는 직접 작성한 Python 함수일 수도 있고, Hugging Face Inference Providers의 모델, 다른 Gradio Space, Hub 데이터셋의 행일 수도 있습니다. 타입이 지정된 포트 사이를 드래그해 연결하고 Run을 누르면 각 결과가 해당 위치에 나타나는 모습을 확인할 수 있습니다.
+모든 워크플로는 세 종류의 노드로 구성된 그래프입니다. **references**(입력), **연산자**(작업을 수행하는 단계)입니다. 연산자는 직접 작성한 Python 함수일 수도 있고, Hugging Face Inference Providers의 모델, 다른 Gradio Space, Hub 데이터셋의 행일 수도 있습니다. 타입이 지정된 포트 사이를 드래그해 연결하고 Run을 누르면 각 결과가 해당 위치에 나타나는 모습을 확인할 수 있습니다.
 
-## 코드에서 호출하기 {#section-7}
+## 코드에서 호출하기 {#call-it-from-code}
 
 빌드한 모든 워크플로는 추가 작업 없이 API이기도 합니다. 각 출력은 레이블을 이름으로 사용하는 REST 엔드포인트가 되며, Gradio client를 사용해 Python에서 호출할 수 있습니다. 다음은 여러 엔드포인트를 제공하는 데모 Space를 대상으로 한, 토큰이 필요 없는 라이브 예제이며 원문 그대로 실행할 수 있습니다.
 
