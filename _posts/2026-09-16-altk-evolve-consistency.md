@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "에이전트가 작업을 해냈다. 다시 해낼 수 있을까?"
+description: "에이전트는 평균 77.4% 성공해도 5번 모두 성공하는 작업은 53.0%에 불과합니다. ALTK-Evolve의 일관성 가이드라인과 Consistency Analyzer로 평균 정확도를 잃지 않고 일관성 격차를 절반으로 줄이는 방법을 소개합니다."
 author: dailybot
 categories: [Translation, HuggingFace]
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/6435a1131860001f144239ea/dI5J2sSc3TSprk9VB4EVJ.jpeg
@@ -47,11 +48,11 @@ TL;DR
 
 - 정확도는 신뢰성 문제를 가립니다. 평균적으로 77.4%의 성공률을 보이는 ReAct 에이전트(GPT-4.1 on AppWorld `test_normal`)가 5회 반복 실행 모두에서 성공하는 작업은 53.0%에 불과합니다. 일관성 격차는 24.4포인트이며, 어려운 작업에서는 30포인트에 달합니다.
 
-- 우리는 바로 이 문제를 위한 진단 도구를 만들었습니다. Consistency Analyzer는 에이전트가 기록한 자신의 궤적을 다시 샘플링해, 결과가 뒤집히기 쉬운 의사결정 지점을 찾습니다. 이는 모델이 다른 행동을 하기까지 토큰 하나만 더 샘플링하면 되었던 단계입니다. 하나의 트레이스와 ground truth 없이 동작하며, 작업을 처음부터 끝까지 다시 실행하는 대신 해당 트레이스의 각 의사결정 지점에서 한 번의 호출로 k개의 완료를 요청해 다시 샘플링합니다(k=5가 기본값).
+- 우리는 바로 이 문제를 위한 진단 도구를 만들었습니다. Consistency Analyzer는 에이전트가 기록한 자신의 궤적을 다시 샘플링해, 결과가 뒤집히기 쉬운 의사결정 지점을 찾습니다. 이는 모델이 다른 행동을 하기까지 토큰 하나만 더 샘플링하면 되었던 단계입니다. 하나의 트레이스(trace)와 정답(ground truth) 없이 동작하며, 작업을 처음부터 끝까지 다시 실행하는 대신 해당 트레이스의 각 의사결정 지점에서 한 번의 호출로 k개의 완료를 요청해 다시 샘플링합니다(k=5가 기본값).
 
 - 이 진단을 가이드라인으로 바꾸면 격차가 절반으로 줄어듭니다. 평균 정확도에는 아무런 비용도 발생하지 않으면서 24.4pp에서 12.0pp로 감소합니다(동일 작업의 Pass⁵ +16.0pp, 유사 작업 +13.0pp).
 
-- 전체 방법론과 평가는 [technical report on arXiv](https://arxiv.org/abs/2609.08832)에 있습니다.
+- 전체 방법론과 평가는 [arXiv 기술 보고서](https://arxiv.org/abs/2609.08832)에 있습니다.
 
 ## 거의 아무도 보고하지 않는 지표 {#section-1}
 
@@ -61,7 +62,7 @@ Mean@k는 "이 에이전트는 평균적으로 얼마나 좋은가?"라는 질�
 
 ⚠️ Pass^k는 Pass@k가 아닙니다. 익숙한 Pass@k는 낙관적인 지표입니다. k번의 시도 중 최소 한 번 성공했는지를 묻으며, 검증하고 재시도할 수 있을 때 적절한 질문입니다. Pass^k는 그 비관적인 거울상입니다. 모든 시도가 성공해야 합니다. 같은 문자지만 정반대의 질문입니다. 항상 Pass^k ≤ Mean@k ≤ Pass@k입니다.
 
-![Mean@5 vs. Pass^5 by task difficulty, GPT-4.1 on AppWorld test_normal, with the consistency gap called out in red](https://cdn-uploads.huggingface.co/production/uploads/6435a1131860001f144239ea/BdzmSgkon1dAtbOCWqmKF.png)
+![작업 난이도별 Mean@5와 Pass^5 비교 (GPT-4.1, AppWorld test_normal), 일관성 격차를 빨간색으로 표시](https://cdn-uploads.huggingface.co/production/uploads/6435a1131860001f144239ea/BdzmSgkon1dAtbOCWqmKF.png)
 
 GPT-4.1을 기반으로 하는 ReAct 에이전트는 Mean@5 77.4%를 기록합니다. 이는 실제로 매우 높은 수치입니다. 하지만 Pass^5는 53.0%에 불과합니다. 벤치마크의 거의 4분의 1은 작업 자체에는 아무런 변화가 없는데도 에이전트가 때로는 해결하고 때로는 해결하지 못하는 작업으로 구성됩니다. 우리는 이 격차, 즉 Mean@k에서 Pass^k를 뺀 값을 일관성 격차라고 부릅니다.
 
@@ -75,7 +76,7 @@ LLM 에이전트가 무언가를 결정할 때마다, 즉 어떤 API를 호출�
 
 이 문제는 디코딩 설정을 바꿔도 사라지지 않습니다. Greedy decoding과 고정 시드는 분포를 토큰으로 변환하는 방식을 제어할 뿐이며, 분포 자체에 대해서는 아무것도 말해주지 않습니다. 호스팅 엔드포인트에서는 실행할 때마다 확률이 조금씩 달라지므로, temperature zero에서 같은 모델에 같은 프롬프트를 보내도 오늘은 근소한 차이의 승자를 한쪽으로 결정하고 내일은 다른 쪽으로 결정할 수 있습니다.
 
-우리의 설정은 다음과 같습니다. ReAct 에이전트는 temperature 0.0에서 실행되므로, 위에서 설명한 변동성 중 어느 것도 일반적인 샘플링에 의한 것이 아닙니다.
+> **설정:** ReAct 에이전트는 temperature 0.0에서 실행되므로, 위에서 설명한 변동성 중 어느 것도 일반적인 샘플링에 의한 것이 아닙니다.
 
 ## 진단한 다음, 수정하기 {#section-3}
 
@@ -83,7 +84,7 @@ LLM 에이전트가 무언가를 결정할 때마다, 즉 어떤 API를 호출�
 
 일관성 가이드라인은 ALTK-Evolve의 기존 도구에 연결되는 2단계 파이프라인에서 생성되며, 무엇을 작성할지 결정하는 새로운 소스 신호를 사용합니다.
 
-![consistency-guideline-pipeline](https://cdn-uploads.huggingface.co/production/uploads/6435a1131860001f144239ea/gdUd7l6Q8DzXCgzmchxi3.png)
+![일관성 가이드라인 파이프라인](https://cdn-uploads.huggingface.co/production/uploads/6435a1131860001f144239ea/gdUd7l6Q8DzXCgzmchxi3.png)
 
 1. 감지 — Consistency Analyzer. 
 기록된 궤적 하나를 입력으로 받아 analyzer는 제어된 재샘플링을 통해 각 의사결정 단계를 재생하고, 해당 시점에서 모델의 출력이 실제로 얼마나 변하는지 측정합니다. 구체적으로는 의사결정 단계마다 모델을 한 번 추가로 호출하며, 오프라인에서 한 번만 수행합니다. 이 호출은 한 번에 k개의 완료를 샘플링하도록 sampling parameter를 설정해 실행합니다(k=5가 기본값). 이미 기록된 컨텍스트를 대상으로 재생하며, 새로운 도구 호출이나 새로운 환경 상호작용을 하지 않고 작업을 처음부터 끝까지 두 번째로 롤아웃하지도 않습니다. 그 결과 각 의사결정 단계에 대한 일관성 점수가 생성되고 scorecard에 기록되어, 다음 실행에서 정확히 어떤 결정이 뒤집힐 위험이 있는지 식별할 수 있습니다. 감지는 완전한 블랙박스 방식으로 이루어집니다. logits나 모델 내부 정보가 필요하지 않으며, 이미 보유한 트레이스 외에 별도의 계측도 필요하지 않습니다.
@@ -96,15 +97,15 @@ LLM 에이전트가 무언가를 결정할 때마다, 즉 어떤 API를 호출�
 
 여기에는 작업에만 해당하는 사소한 정보가 없습니다. 문자열 개수 세기 버그와 검증되지 않은 검색 결과는 많은 AppWorld 작업에서 높은 불확실성을 보이는 의사결정 지점입니다. 이것이 핵심입니다. analyzer는 실패가 아니라 불안정성을 겨냥하므로, 에이전트가 이번에는 우연히 올바르게 처리했지만 다음에는 쉽게 틀릴 수 있는 단계를 포착합니다.
 
-[Watch the 2-minute demo](https://www.youtube.com/watch?v=qlp7EzXe8Pg) — 에이전트를 병렬로 5회 실행하면 에이전트가 개수 세기 전략을 확신하지 못해 이 작업에서 3-2로 나뉘지만, 컨텍스트에 이 가이드라인을 넣고 다시 실행하면 5회 모두 같은 결과를 냅니다.
+[2분 데모 보기](https://www.youtube.com/watch?v=qlp7EzXe8Pg) — 에이전트를 병렬로 5회 실행하면 에이전트가 개수 세기 전략을 확신하지 못해 이 작업에서 3-2로 나뉘지만, 컨텍스트에 이 가이드라인을 넣고 다시 실행하면 5회 모두 같은 결과를 냅니다.
 
 ## 결과: 정확도를 잃지 않고 격차 줄이기 {#section-4}
 
 AppWorld `test_normal`(168개 작업)에서 GPT-4.1을 사용하는 ReAct 에이전트를 평가했습니다. 작업별 단일 기준선 궤적에서 일관성 가이드라인을 생성하고, 새로 실행한 5회의 실행에서 이를 테스트했습니다.
 
-![Pass⁵ lift from baseline to consistency guidelines, by task difficulty, GPT-4.1 on AppWorld test_normal](https://cdn-uploads.huggingface.co/production/uploads/6435a1131860001f144239ea/E_7HyAt5BSzZy9Pj0k3Wc.png)
+![작업 난이도별 기준선 대비 일관성 가이드라인 적용 후 Pass^5 향상 (GPT-4.1, AppWorld test_normal)](https://cdn-uploads.huggingface.co/production/uploads/6435a1131860001f144239ea/E_7HyAt5BSzZy9Pj0k3Wc.png)
 
-![Mean@5 aggregate, baseline vs. consistency guidelines, same scale as the Pass⁵ chart above](https://cdn-uploads.huggingface.co/production/uploads/6435a1131860001f144239ea/jzxSU5MJ8Ajf21aEjANyB.png)
+![Mean@5 집계값, 기준선 대비 일관성 가이드라인, 위 Pass^5 차트와 동일한 척도](https://cdn-uploads.huggingface.co/production/uploads/6435a1131860001f144239ea/jzxSU5MJ8Ajf21aEjANyB.png)
 
 Mean@5 (%), 집계값 — 위의 Pass^5와 동일한 척도입니다.
 
@@ -128,13 +129,13 @@ Mean@5는 한 번도 하락하지 않았습니다. 평균 정확도를 유지하
 
 - 먼저 더 큰 모델을 선택하지 마세요. 일관성은 능력과 직교합니다. 더 강력한 모델은 Mean@k를 높이지만, 일관성 격차를 반드시 줄이지는 않습니다.
 
-- 진단에는 grader나 실시간 재생이 필요하지 않습니다. 의사결정 단계마다 LLM을 한 번 추가로 호출하고(기본적으로 k=5개의 완료를 샘플링) 충분합니다. ground truth도, 환경에서 작업을 다시 실행하는 과정도 필요하지 않습니다. 따라서 프로덕션 트래픽에서 사용할 수 있습니다. 프로덕션에서는 작업을 처음부터 끝까지 한 번만이라도 재생할 수 없는 경우가 많기 때문입니다.
+- 진단에는 채점기(grader)나 실시간 재생이 필요하지 않습니다. 의사결정 단계마다 LLM을 한 번 추가로 호출하고(기본적으로 k=5개의 완료를 샘플링) 충분합니다. 정답도, 환경에서 작업을 다시 실행하는 과정도 필요하지 않습니다. 따라서 프로덕션 트래픽에서 사용할 수 있습니다. 프로덕션에서는 작업을 처음부터 끝까지 한 번만이라도 재생할 수 없는 경우가 많기 때문입니다.
 
 ## 직접 사용해 보기 {#section-6}
 
-[ALTK-Evolve](https://github.com/AgentToolkit/altk-evolve)을 사용해 보세요. 오픈 소스 저장소에는 이제 이 실험에서 사용한 Consistency Analyzer와 일관성 가이드라인 생성 기능이 포함되어 있습니다. 또는 [technical report on arXiv](https://arxiv.org/abs/2609.08832)에서 전체 방법론을 확인할 수 있습니다.
+> **[ALTK-Evolve](https://github.com/AgentToolkit/altk-evolve) 사용해 보기** — 오픈 소스 저장소에는 이제 이 실험에서 사용한 Consistency Analyzer와 일관성 가이드라인 생성 기능이 포함되어 있습니다. 또는 [arXiv 기술 보고서](https://arxiv.org/abs/2609.08832)에서 전체 방법론을 확인할 수 있습니다.
 
-자신의 작업에서는 재현할 수 없는 정확도 수치가 익숙하게 들린다면, 그 이야기를 듣고 싶습니다. 에이전트에서 결과가 뒤집히기 쉬운 동작에 대한 구체적인 사례는 우리가 다음에 무엇을 만들지 결정하는 데 정확히 필요한 피드백입니다. [Open an issue or a discussion](https://github.com/AgentToolkit/altk-evolve).
+자신의 작업에서는 재현할 수 없는 정확도 수치가 익숙하게 들린다면, 그 이야기를 듣고 싶습니다. 에이전트에서 결과가 뒤집히기 쉬운 동작에 대한 구체적인 사례는 우리가 다음에 무엇을 만들지 결정하는 데 정확히 필요한 피드백입니다. [이슈 또는 토론 열기](https://github.com/AgentToolkit/altk-evolve).
 
 ## 부록: 지표 이해하기 {#section-7}
 
@@ -142,14 +143,14 @@ Mean@5는 한 번도 하락하지 않았습니다. 평균 정확도를 유지하
 
 - Pass^k. 에이전트가 독립적인 k회 실행 모두에서 성공한 작업의 비율입니다. 항상 ≤ Mean@k입니다. 사용자가 같은 쿼리를 두 번 실행했을 때 경험하는 값입니다.
 
-- Pass@k k회 실행 중 최소 한 번 성공하는 경우입니다. 낙관적인 대응 지표이며 코드 생성 논문에서 흔히 사용됩니다.
+- **Pass@k.** k회 실행 중 최소 한 번 성공하는 경우입니다. 낙관적인 대응 지표이며 코드 생성 논문에서 흔히 사용됩니다.
 
 - 일관성 격차. Mean@k − Pass^k이며, 퍼센트 포인트로 표시합니다.
 
-## 연결된 산출물 / 참고 자료 {#section-8}
+## 연결된 자료 {#section-8}
 
 - ALTK-Evolve 오픈 소스 저장소 — [github.com/AgentToolkit/altk-evolve](https://github.com/AgentToolkit/altk-evolve)
 
 - 기술 보고서 — [arXiv](https://arxiv.org/abs/2609.08832)
 
-- 일관성 가이드라인 데모 —[2 min video](https://www.youtube.com/watch?v=qlp7EzXe8Pg)
+- 일관성 가이드라인 데모 — [2분 영상](https://www.youtube.com/watch?v=qlp7EzXe8Pg)
