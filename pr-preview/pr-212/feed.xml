@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://huggingface-krew.co/pr-preview/pr-212/feed.xml" rel="self" type="application/atom+xml" /><link href="https://huggingface-krew.co/pr-preview/pr-212/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-11-09T22:56:43+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-212/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</title><link href="https://huggingface-krew.co/pr-preview/pr-212/nemotron-halloween/" rel="alternate" type="text/html" title="NVIDIA Nemotron 오픈 모델로 유령의 집 만들기" /><published>2026-10-31T00:00:00+09:00</published><updated>2026-10-31T00:00:00+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-212/nemotron-halloween</id><content type="html" xml:base="https://huggingface-krew.co/pr-preview/pr-212/nemotron-halloween/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://huggingface-krew.co/pr-preview/pr-212/feed.xml" rel="self" type="application/atom+xml" /><link href="https://huggingface-krew.co/pr-preview/pr-212/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-11-10T00:06:24+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-212/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</title><link href="https://huggingface-krew.co/pr-preview/pr-212/nemotron-halloween/" rel="alternate" type="text/html" title="NVIDIA Nemotron 오픈 모델로 유령의 집 만들기" /><published>2026-10-31T00:00:00+09:00</published><updated>2026-10-31T00:00:00+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-212/nemotron-halloween</id><content type="html" xml:base="https://huggingface-krew.co/pr-preview/pr-212/nemotron-halloween/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#nvidia-nemotron-오픈-모델로-유령의-집-만들기" id="markdown-toc-nvidia-nemotron-오픈-모델로-유령의-집-만들기">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</a></li>
   <li><a href="#으악-이제-내-잔디밭에서-나가" id="markdown-toc-으악-이제-내-잔디밭에서-나가">으악! 이제 내 잔디밭에서 나가!</a>    <ul>
       <li><a href="#monsterhouse의-작동-방식" id="markdown-toc-monsterhouse의-작동-방식">MonsterHouse의 작동 방식</a></li>
@@ -293,7 +293,7 @@ Review instructions:
 
 <h1 id="이제-transformers에서-llamacpp-양자화-모델을-실행할-수-있습니다">이제 Transformers에서 llama.cpp 양자화 모델을 실행할 수 있습니다</h1>
 
-<p><strong>GGUF 모델을 Transformers에서 효율적으로 실행할 수 있도록 지원을 추가하고 있습니다.</strong> 따라서 노트북 메모리 크기에 맞게 조정된 체크포인트를 익숙한 Transformers API를 통해 사용할 수 있습니다. Hugging Face Hub에서 GGUF를 선택하고 <code class="language-plaintext highlighter-rouge">from_pretrained()</code>로 로드한 다음, 자신의 머신에서 생성을 시작해 보세요.</p>
+<p><strong>GGUF 모델을 Transformers에서 효율적으로 실행할 수 있도록 지원을 추가하고 있습니다.</strong> 따라서 노트북 메모리에 맞는 크기의 체크포인트를 익숙한 Transformers API를 통해 사용할 수 있습니다. Hugging Face Hub에서 GGUF를 선택하고 <code class="language-plaintext highlighter-rouge">from_pretrained</code>로 로드한 다음, 자신의 머신에서 생성을 시작해 보세요.</p>
 
 <video controls="" width="100%">
   <source src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/transformers-llama-cpp-quants/transformers-gguf.mp4" type="video/mp4" />
@@ -364,7 +364,7 @@ Review instructions:
 
 <p>GGUF 모델을 로드하려면 Hub의 <code class="language-plaintext highlighter-rouge">model_id</code>와 파일명을 <code class="language-plaintext highlighter-rouge">gguf_file</code> 인자로 지정해 <code class="language-plaintext highlighter-rouge">from_pretrained</code>에 전달합니다.</p>
 
-<p>추가 설정은 필요하지 않습니다. 가중치가 Metal에 패킹된 상태로 유지되면 Transformers가 호환되는 ggml/Metal 레이어 커널을 자동으로 로드하고 <code class="language-plaintext highlighter-rouge">ggml-org/ggml-attn</code>을 어텐션 구현으로 사용합니다. 해당 커널을 가져올 수 없으면 모델은 경고와 함께 <code class="language-plaintext highlighter-rouge">"sdpa"</code>로 대체되며, <code class="language-plaintext highlighter-rouge">attn_implementation="sdpa"</code>을 명시적으로 전달하여 언제든 <code class="language-plaintext highlighter-rouge">"sdpa"</code>을 강제로 사용할 수 있습니다. 더 많은 로딩 옵션은 <a href="https://huggingface.co/docs/transformers/main/en/quantization/gguf">GGUF 문서</a>을 참조하세요.</p>
+<p>추가 설정은 필요하지 않습니다. 가중치가 Metal에 패킹된 상태로 유지되면 Transformers가 호환되는 ggml/Metal 레이어 커널을 자동으로 로드하고 <code class="language-plaintext highlighter-rouge">ggml-org/ggml-attn</code>을 어텐션 구현으로 사용합니다. 해당 커널을 가져올 수 없으면 모델은 경고와 함께 <code class="language-plaintext highlighter-rouge">"sdpa"</code>로 대체되며, <code class="language-plaintext highlighter-rouge">attn_implementation="sdpa"</code>를 명시적으로 전달하여 언제든 <code class="language-plaintext highlighter-rouge">"sdpa"</code>을 강제로 사용할 수 있습니다. 더 많은 로딩 옵션은 <a href="https://huggingface.co/docs/transformers/main/en/quantization/gguf">GGUF 문서</a>를 참조하세요.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">torch</span>
 <span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
@@ -403,7 +403,7 @@ Review instructions:
 
 <h2 id="section-3">원하는 인터페이스로 GGUF 제공하기</h2>
 
-<p>동일한 체크포인트를 <a href="https://huggingface.co/docs/transformers/main/en/serve-cli/serving"><code class="language-plaintext highlighter-rouge">transformers serve</code></a>에서도 사용할 수 있으며, <a href="https://huggingface.co/docs/transformers/main/en/serve-cli/serving"><code class="language-plaintext highlighter-rouge">transformers serve</code></a>는 OpenAI 호환 API를 제공합니다.</p>
+<p>동일한 체크포인트를 <a href="https://huggingface.co/docs/transformers/main/en/serve-cli/serving"><code class="language-plaintext highlighter-rouge">transformers serve</code></a>에서도 사용할 수 있으며, transformers serve는 OpenAI 호환 API를 제공합니다.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="nt">-U</span> <span class="s2">"transformers[serving] @ git+https://github.com/huggingface/transformers.git"</span> kernels
 
