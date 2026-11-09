@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Sentence Transformers로 멀티 벡터 임베딩 모델 학습 및 미세 조정"
+description: "Sentence Transformers로 멀티 벡터(Late Interaction) 임베딩 모델을 학습하고 미세 조정하는 방법을 소개합니다. 시작점 선택, 데이터셋, 손실 함수, 학습 인자, 평가기, 트레이너, 평가와 인덱스 최적화를 다룹니다."
 author: dailybot
 categories: [Translation, HuggingFace]
 thumbnail: /blog/assets/train-sentence-transformers/st-hf-thumbnail.png
@@ -33,13 +34,13 @@ Review instructions:
 
 # Sentence Transformers로 멀티 벡터 임베딩 모델 학습 및 미세 조정
 
-[Sentence Transformers](https://sbert.net/)은 검색 증강 생성, 시맨틱 검색, 의미적 텍스트 유사도 등 다양한 애플리케이션을 위한 임베딩 및 reranker 모델을 사용하고 학습하는 Python 라이브러리입니다. v6.0 업데이트에서는 네 번째 모델 유형인 `MultiVectorEncoder`을 도입했습니다. 이는 ColBERT 스타일의 late interaction 검색을 위한 것으로, 이를 위한 완전한 학습 방식도 함께 제공합니다. 이 블로그 글에서는 이를 사용해 여러분의 데이터에서 범용 검색기보다 뛰어난 멀티 벡터 모델을 미세 조정하는 방법을 보여드리겠습니다. 이 방법으로 처음부터 강력한 새로운 멀티 벡터 모델을 학습할 수도 있습니다. 아래의 모든 내용은 `pip install -U "sentence-transformers[train]"`에서 실행됩니다.
+[Sentence Transformers](https://sbert.net/)는 검색 증강 생성, 시맨틱 검색, 의미적 텍스트 유사도 등 다양한 애플리케이션을 위한 임베딩 및 reranker 모델을 사용하고 학습하는 Python 라이브러리입니다. v6.0 업데이트에서는 네 번째 모델 유형인 `MultiVectorEncoder`을 도입했습니다. 이는 ColBERT 스타일의 late interaction 검색을 위한 것으로, 이를 위한 완전한 학습 방식도 함께 제공합니다. 이 블로그 글에서는 이를 사용해 여러분의 데이터에서 범용 검색기보다 뛰어난 멀티 벡터 모델을 미세 조정하는 방법을 보여드리겠습니다. 이 방법으로 처음부터 강력한 새로운 멀티 벡터 모델을 학습할 수도 있습니다. 아래의 모든 내용은 `pip install -U "sentence-transformers[train]"`에서 실행됩니다.
 
 멀티 벡터 모델을 미세 조정하려면 모델 자체, 데이터셋, 손실 함수, 학습 인자, 평가기, trainer 클래스 등 여러 구성 요소가 필요합니다. 각 구성 요소를 살펴보고, 강력한 멀티 벡터 모델을 미세 조정하는 데 어떻게 사용할 수 있는지 실용적인 예제와 함께 설명하겠습니다.
 
-마지막으로 [Evaluation](#evaluation) 섹션에서는 이 블로그 글과 함께 단일 RTX 3090에서 14.5시간 동안 학습한 미세 조정 [multi-vector-encoder/mLateOn-medical](https://huggingface.co/multi-vector-encoder/mLateOn-medical) 모델이, 의료 검색 평가에서 찾을 수 있었던 모든 범용 검색 모델을 쉽게 능가한다는 사실을 보여드리겠습니다. 여기에는 dense, sparse, lexical, multi-vector 모델이 모두 포함됩니다.
+마지막으로 [평가](#section-11) 섹션에서는 이 블로그 글과 함께 단일 RTX 3090에서 14.5시간 동안 학습한 미세 조정 [multi-vector-encoder/mLateOn-medical](https://huggingface.co/multi-vector-encoder/mLateOn-medical) 모델이, 의료 검색 평가에서 찾을 수 있었던 모든 범용 검색 모델을 쉽게 능가한다는 사실을 보여드리겠습니다. 여기에는 dense, sparse, lexical, multi-vector 모델이 모두 포함됩니다.
 
-![NDCG@10 on MIRIAD versus active parameters: the finetuned mLateOn-medical reaches the top at a fraction of the size of the strongest general-purpose models](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-multi-vector-encoder/mve_medical_model_size_ndcg.png)
+![MIRIAD에서의 NDCG@10 대 활성 파라미터 수: 미세 조정된 mLateOn-medical이 가장 강력한 범용 모델보다 훨씬 작은 크기로 최상위에 도달](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-multi-vector-encoder/mve_medical_model_size_ndcg.png)
 
 대신 dense 임베딩 모델, sparse 임베딩 모델 또는 reranker를 미세 조정하는 데 관심이 있다면 이전에 작성한 [Training and Finetuning Embedding Models](https://huggingface.co/blog/train-sentence-transformers), [Training and Finetuning Sparse Embedding Models](https://huggingface.co/blog/train-sparse-encoder), [Training and Finetuning Reranker Models](https://huggingface.co/blog/train-reranker) 블로그 글을 읽어 보세요.
 
@@ -65,9 +66,9 @@ Review instructions:
 
 dense 임베딩 모델은 전체 텍스트를 하나의 벡터로 압축하며, 유사도는 이러한 요약 벡터 두 개 사이의 단일 내적 값으로 계산됩니다. 멀티 벡터 모델(late-interaction 또는 ColBERT 스타일 모델이라고도 함)은 이러한 압축을 생략합니다. **토큰마다 하나의 작은 벡터**를 유지하고, MaxSim 연산자를 사용해 쿼리와 문서의 점수를 계산합니다. 이때 각 쿼리 토큰은 가장 잘 일치하는 문서 토큰을 찾고 그 점수들을 합산합니다. 토큰 수준의 매칭은 단일 벡터가 평균 내어 없애야 하는 세밀한 신호를 그대로 보존하므로 일반적으로 더 강력한 검색 성능을 제공하지만, 인덱스가 더 커진다는 비용이 따릅니다.
 
-함께 제공되는 [Multi-Vector Embedding Models](https://huggingface.co/blog/multi-vector-encoder) 블로그 글에서 아키텍처, 인코딩, 점수 계산, 인덱싱을 자세히 다루므로, 이 섹션은 짧게 마치고 학습으로 넘어가겠습니다.
+함께 제공되는 [Multi-Vector (Late Interaction) Embedding Models with Sentence Transformers](https://huggingface.co/blog/multi-vector-encoder) 블로그 글에서 아키텍처, 인코딩, 점수 계산, 인덱싱을 자세히 다루므로, 이 섹션은 짧게 마치고 학습으로 넘어가겠습니다.
 
-![Dense embedding versus multi-vector late interaction](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/multi-vector-encoder/maxsim_explainer.gif)
+![Dense 임베딩 대 멀티 벡터 late interaction 비교](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/multi-vector-encoder/maxsim_explainer.gif)
 
 ## 왜 미세 조정해야 할까요? {#section-3}
 
@@ -81,12 +82,12 @@ LightOn도 코드 검색에서 이와 같은 상황을 겪었습니다. 범용 [
 
 MultiVectorEncoder 모델을 학습하려면 다음 구성 요소가 필요합니다.
 
-1. [**Model**](#model): 미세 조정할 모델 또는 새로 구축할 아키텍처입니다.
-2. [**Dataset**](#dataset): 학습과 평가에 사용하는 데이터입니다.
-3. [**Loss Function**](#loss-function): 모델의 성능을 측정하고 최적화 과정을 이끄는 함수입니다.
-4. [**Training Arguments**](#training-arguments) (선택 사항): 학습 성능, 추적, 디버깅에 영향을 주는 파라미터입니다.
-5. [**Evaluator**](#evaluator) (선택 사항): 학습 전, 학습 중 또는 학습 후에 모델을 평가하는 클래스입니다.
-6. [**Trainer**](#trainer): 모든 학습 구성 요소를 하나로 결합합니다.
+1. [**모델**](#section-5): 미세 조정할 모델 또는 새로 구축할 아키텍처입니다.
+2. [**데이터셋**](#section-6): 학습과 평가에 사용하는 데이터입니다.
+3. [**손실 함수**](#section-7): 모델의 성능을 측정하고 최적화 과정을 이끄는 함수입니다.
+4. [**학습 인자**](#section-8) (선택 사항): 학습 성능, 추적, 디버깅에 영향을 주는 파라미터입니다.
+5. [**평가기**](#section-9) (선택 사항): 학습 전, 학습 중 또는 학습 후에 모델을 평가하는 클래스입니다.
+6. [**트레이너**](#section-10): 모든 학습 구성 요소를 하나로 결합합니다.
 
 각 구성 요소를 좀 더 자세히 살펴보겠습니다.
 
@@ -120,7 +121,7 @@ model[0].document_length = None
 ```
 
 
-작업별 제한을 설정하지 않으면 잘림은 tokenizer의 `model_max_length`으로 대체되므로, 위에서 로드할 때 이 제한을 설정했습니다.
+작업별 제한을 설정하지 않으면 잘림은 tokenizer의 `model_max_length`로 대체되므로, 위에서 로드할 때 이 제한을 설정했습니다.
 
 또 한 가지 변경 사항으로, 문서 측 점수 계산 및 저장에서 구두점 토큰을 제외하는 punctuation skiplist를 추가했습니다. 4가지 ablation(none, punctuation, stopwords, both)에서 품질이 소폭 향상되었고, 이 데이터에서는 별도 비용 없이 문서 인덱스가 9.6% 줄었습니다.
 
@@ -135,7 +136,7 @@ model[2].resolve_with_tokenizer(model.tokenizer)  # token ids are cached, so re-
 
 ### 기본 transformer로 구축하기
 
-`MultiVectorEncoder`을 모든 기본 transformer에 연결할 수도 있습니다. 그러면 무작위로 초기화된 새로운 토큰 수준 projection이 자동으로 추가됩니다.
+`MultiVectorEncoder`를 모든 기본 transformer에 연결할 수도 있습니다. 그러면 무작위로 초기화된 새로운 토큰 수준 projection이 자동으로 추가됩니다.
 
 ```python
 from sentence_transformers import MultiVectorEncoder
@@ -165,7 +166,7 @@ model = MultiVectorEncoder("answerdotai/ModernBERT-base", model_kwargs={"torch_d
 | [lightonai/LateOn-unsupervised](https://huggingface.co/lightonai/LateOn-unsupervised) | 0.9026 | **0.9206** | **+0.0180** |
 | [lightonai/LateOn](https://huggingface.co/lightonai/LateOn) | 0.9185 | 0.9105 | -0.0080 |
 | [lightonai/GTE-ModernColBERT-v1](https://huggingface.co/lightonai/GTE-ModernColBERT-v1) | 0.9198 | 0.9007 | -0.0191 |
-| [gte-modernbert-base](https://huggingface.co/Alibaba-NLP/gte-modernbert-base)의 새 head | - | 0.9177 | - |
+| [Alibaba-NLP/gte-modernbert-base](https://huggingface.co/Alibaba-NLP/gte-modernbert-base)에 새 head를 붙인 모델 | - | 0.9177 | - |
 
 결과는 예상 밖이었고 두 모델 제품군에서 동일하게 나타났습니다. *`-unsupervised` 체크포인트는 완성된 형제 모델보다 새로운 도메인에 훨씬 잘 적응했으며, 더 낮은 점수에서 시작했음에도 이들을 앞질렀습니다. 이 체크포인트는 대규모 contrastive pretraining 이후, 범용 검색에 대한 supervised 미세 조정 이전 단계에 있습니다. 따라서 late interaction 구조는 모두 갖추고 있지만, 도메인 학습 과정에서 되돌려야 하는 범용 튜닝은 전혀 포함하지 않습니다. 반면 완성된 체크포인트는 제가 시도한 모든 학습률에서 거의 변화가 없거나 오히려 성능이 하락했습니다.
 
@@ -173,7 +174,7 @@ model = MultiVectorEncoder("answerdotai/ModernBERT-base", model_kwargs={"torch_d
 
 ## 데이터셋 {#section-6}
 
-[`MultiVectorEncoderTrainer`](https://sbert.net/docs/package_reference/multi_vector_encoder/trainer.html)은 학습 및 평가에 [`datasets.Dataset`](https://huggingface.co/docs/datasets/main/en/package_reference/main_classes#datasets.Dataset) 또는 [`datasets.DatasetDict`](https://huggingface.co/docs/datasets/main/en/package_reference/main_classes#datasets.DatasetDict) 인스턴스를 사용합니다. [Hugging Face Datasets Hub](https://huggingface.co/datasets)에서 데이터를 로드하거나 CSV, JSON, Parquet, Arrow, SQL 등 원하는 형식의 로컬 데이터를 사용할 수 있습니다.
+[`MultiVectorEncoderTrainer`](https://sbert.net/docs/package_reference/multi_vector_encoder/trainer.html)는 학습 및 평가에 [`datasets.Dataset`](https://huggingface.co/docs/datasets/main/en/package_reference/main_classes#datasets.Dataset) 또는 [`datasets.DatasetDict`](https://huggingface.co/docs/datasets/main/en/package_reference/main_classes#datasets.DatasetDict) 인스턴스를 사용합니다. [Hugging Face Datasets Hub](https://huggingface.co/datasets)에서 데이터를 로드하거나 CSV, JSON, Parquet, Arrow, SQL 등 원하는 형식의 로컬 데이터를 사용할 수 있습니다.
 
 **참고:** Sentence Transformers에서 바로 사용할 수 있는 많은 공개 데이터셋에는 Hugging Face Hub에서 `sentence-transformers` 태그가 지정되어 있으므로 [https://huggingface.co/datasets?other=sentence-transformers](https://huggingface.co/datasets?other=sentence-transformers)에서 쉽게 찾을 수 있습니다. 여러분의 작업, 도메인 또는 언어에 유용할 수 있는 바로 사용 가능한 데이터셋을 찾기 위해 이들을 둘러보세요.
 
@@ -269,7 +270,7 @@ loss = CachedMultiVectorMultipleNegativesRankingLoss(
 
 [`MultiVectorEncoderTrainingArguments`](https://sbert.net/docs/package_reference/multi_vector_encoder/training_args.html) 클래스를 사용해 학습 과정을 사용자 지정할 수 있습니다. 이 클래스를 사용하면 학습 속도에 영향을 주는 파라미터를 조정하고 학습 중 발생하는 상황을 파악할 수 있습니다.
 
-가장 유용한 학습 인자에 대한 자세한 내용은 [Multi-Vector Encoder > Training Overview > Training Arguments](https://sbert.net/docs/multi_vector_encoder/training_overview.html#training-arguments)을 참조하세요. 학습을 최대한 활용하려면 읽어 볼 가치가 있습니다.
+가장 유용한 학습 인자에 대한 자세한 내용은 [Multi-Vector Encoder > Training Overview > Training Arguments](https://sbert.net/docs/multi_vector_encoder/training_overview.html#training-arguments)를 참조하세요. 학습을 최대한 활용하려면 읽어 볼 가치가 있습니다.
 
 다음은 실제 학습 실행에서 사용한 값으로 작성한 예제입니다.
 
@@ -361,7 +362,7 @@ evaluator = MultiVectorInformationRetrievalEvaluator(
 ```
 
 
-## Trainer {#section-10}
+## 트레이너(Trainer) {#section-10}
 
 [`MultiVectorEncoderTrainer`](https://sbert.net/docs/package_reference/multi_vector_encoder/trainer.html)은 앞서 살펴본 모든 구성 요소가 결합되는 곳입니다. 다음은 서론에서 소개한 모델인 [multi-vector-encoder/mLateOn-medical](https://huggingface.co/multi-vector-encoder/mLateOn-medical)을 학습한 전체 스크립트입니다.
 
@@ -504,9 +505,9 @@ MultiVectorEncoder trainer는 다음을 포함한 다양한 [`transformers.Train
 
 ## 평가 {#section-11}
 
-미세 조정된 모델의 위치를 확인하기 위해, 위 [Evaluator](#evaluator) 섹션에서 설명한 방식과 정확히 동일하게 구축한 MIRIAD 평가셋에서 네 가지 아키텍처 제품군의 50개가 넘는 검색 모델 구성으로 평가했습니다. 200,000개의 고유 문단을 검색하는 의료 질문 1,000개를 사용했으며, 이 중 정답 문단 10k개는 학습 split에서 중복 제거한 distractor 190k개 사이에 숨겨져 있습니다. 이 코퍼스는 [Which starting point should you pick?](#which-starting-point-should-you-pick)의 50,000개 문단 코퍼스보다 네 배 크므로 두 표의 점수는 서로 비교할 수 없습니다.
+미세 조정된 모델의 위치를 확인하기 위해, 위 [평가기](#section-9) 섹션에서 설명한 방식과 정확히 동일하게 구축한 MIRIAD 평가셋에서 네 가지 아키텍처 제품군의 50개가 넘는 검색 모델 구성으로 평가했습니다. 200,000개의 고유 문단을 검색하는 의료 질문 1,000개를 사용했으며, 이 중 정답 문단 10k개는 학습 split에서 중복 제거한 distractor 190k개 사이에 숨겨져 있습니다. 이 코퍼스는 [Which starting point should you pick?](#which-starting-point-should-you-pick)의 50,000개 문단 코퍼스보다 네 배 크므로 두 표의 점수는 서로 비교할 수 없습니다.
 
-![NDCG@10 versus active parameters on the MIRIAD 200k benchmark, with an arrow marking the finetuning jump from mLateOn-unsupervised to mLateOn-medical](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-multi-vector-encoder/mve_medical_model_size_ndcg.png)
+![MIRIAD 200k 벤치마크에서의 NDCG@10 대 활성 파라미터 수. 화살표는 mLateOn-unsupervised에서 mLateOn-medical로 이어지는 미세 조정 도약을 표시](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-multi-vector-encoder/mve_medical_model_size_ndcg.png)
 
 접을 수 있는 아래 표에 전체 결과가 있으며, 주요 결과는 다음과 같습니다.
 
@@ -528,9 +529,9 @@ BM25도 놀라울 정도로 좋은 성능을 보였습니다. 모든 sparse 모�
 
 전체 모델을 점수순으로 정렬하고 아키텍처 제품군별로 색을 지정한 결과를 한눈에 보면 다음과 같습니다.
 
-![Sorted NDCG@10 on the MIRIAD 200k benchmark for every evaluated model, colored by architecture family](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-multi-vector-encoder/mve_medical_ndcg_by_model.png)
+![MIRIAD 200k 벤치마크에서 평가한 모든 모델의 정렬된 NDCG@10, 아키텍처 계열별 색상 구분](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-multi-vector-encoder/mve_medical_ndcg_by_model.png)
 
-<details><summary>Click to see the full evaluation table</summary>
+<details><summary>전체 평가 표 보기</summary>
 
 | 모델 | 제품군 | NDCG@10 | acc@1 |
 |---|---|---:|---:|
@@ -613,7 +614,7 @@ document_embeddings = model.encode_document(passages, token_pooling=pooling)
 
 pooling을 고려한 학습 없이 완성된 모델에서 사후에 측정했는데, 긴 문서에서는 놀라울 정도로 비용이 적었습니다.
 
-![Embedding size for the 200,000-passage corpus versus NDCG@10, with the token pooling trajectory sweeping the multi-vector index into dense-model territory](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-multi-vector-encoder/mve_medical_index_size_ndcg.png)
+![200,000개 패시지 말뭉치의 임베딩 크기 대 NDCG@10. 토큰 풀링 궤적이 멀티 벡터 인덱스를 Dense 모델 영역으로 이동](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/train-multi-vector-encoder/mve_medical_index_size_ndcg.png)
 
 실선으로 표시된 점은 압축하지 않은 임베딩입니다. 따라서 모든 제품군을 동일한 방식으로 계산하고 exact search로 점수를 매겼습니다. 하지만 실제로는 어느 것도 이런 방식으로 배포하지 않을 것입니다. Dense 인덱스는 일반적으로 rescoring과 함께 int8 또는 binary quantization을 사용하고, sparse 인덱스는 postings를 압축하며, 멀티 벡터 인덱스는 PLAID 스타일 residual compression을 사용합니다. 이 점들을 실제로 구매해야 할 디스크 용량으로 보지 말고 상대적인 저장 비용으로 보세요.
 
@@ -635,7 +636,7 @@ pooling을 고려한 학습 없이 완성된 모델에서 사후에 측정했는
 
 ## 감사의 말 {#section-12}
 
-[Omar Khattab](https://github.com/okhat)이 [Optimizing the index](#optimizing-the-index)에서 quantized 및 pruned 인덱스 구성을 측정하고 late-interaction 인덱스 비용에 관해 논의해 주신 데 감사드립니다.
+[Omar Khattab](https://github.com/okhat)이 [인덱스 최적화](#section-11)에서 quantized 및 pruned 인덱스 구성을 측정하고 late-interaction 인덱스 비용에 관해 논의해 주신 데 감사드립니다.
 
 ## 추가 자료 {#section-13}
 
