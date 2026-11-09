@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nunchaku 4비트 확산 추론을 Diffusers에 도입하기"
-description: "Nunchaku의 4비트 diffusion inference를 Diffusers에 통합하고 성능과 사용 흐름을 개선하는 방법을 소개합니다."
+description: "Nunchaku의 4비트 확산 추론을 Diffusers에 통합하고 성능과 사용 흐름을 개선하는 방법을 소개합니다."
 author: dailybot
 categories: [Translation, HuggingFace]
 thumbnail: /blog/assets/nunchaku-diffusers/thumbnail.png
@@ -34,7 +34,7 @@ Review instructions:
 
 # Nunchaku 4비트 확산 추론을 Diffusers에 도입하기
 
-대형 확산 트랜스포머는 멋진 이미지뿐 아니라 비디오, 짧은 오디오, 이제는 텍스트까지 생성할 수 있지만, 최신 텍스트-이미지 모델을 BF16 정밀도로 불러오려면 보통 20~30GB의 VRAM이 필요합니다. 이 때문에 대부분의 소비자용 GPU에서는 이러한 모델을 사용하기 어렵습니다. 양자화는 이 문제를 해결하는 강력한 방법이며, Diffusers는 이미 bitsandbytes, GGUF, torchao, Quanto 등의 여러 양자화 백엔드를 통합하고 있습니다. 자세한 내용은 [Diffusers의 양자화 백엔드 살펴보기](https://huggingface.co/blog/diffusers-quantization)에서 설명했습니다.
+대형 확산 트랜스포머는 멋진 이미지뿐 아니라 비디오, 짧은 오디오, 이제는 텍스트까지 생성할 수 있지만, 최신 텍스트-이미지 모델을 BF16 정밀도로 불러오려면 보통 20~30 GB의 VRAM이 필요합니다. 이 때문에 대부분의 소비자용 GPU에서는 이러한 모델을 사용하기 어렵습니다. 양자화는 이 문제를 해결하는 강력한 방법이며, Diffusers는 이미 bitsandbytes, GGUF, torchao, Quanto 등의 여러 양자화 백엔드를 통합하고 있습니다. 자세한 내용은 [Diffusers의 양자화 백엔드 살펴보기](https://huggingface.co/blog/diffusers-quantization)에서 설명했습니다.
 
 대부분의 이러한 백엔드는 _weight-only_ 입니다. 이는 가중치를 저정밀도로 저장하고 계산 시 다시 고정밀도로 디퀀타이즈해 사용하는 것을 의미합니다. 이렇게 하면 메모리 사용량이 크게 감소하지만, 일반적으로 추론 속도를 높이지 못하고, 심지어 약간의 지연 시간(latency) 오버헤드를 추가할 수 있습니다.
 
@@ -43,7 +43,7 @@ Review instructions:
 현재 Diffusers에서는 `from_pretrained()`를 호출하는 것만으로 Nunchaku 체크포인트를 로드하는 것이 가능하며, 로컬 CUDA 컴파일이 필요 없도록 [`kernels`](https://github.com/huggingface/kernels) 패키지가 제공됩니다. 또한 동반 도구 [diffuse-compressor](https://github.com/rootonchair/diffuse-compressor)를 사용하면 새 아키텍처를 직접 양자화하고 일반 Diffusers 저장소로 게시할 수 있습니다.
 
 <figure class="image text-center">
-  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/nunchaku-diffusers/contact_sheet_top3_metrics_bold.png" alt="Nunchaku Lite image quality and performance comparison">
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/nunchaku-diffusers/contact_sheet_top3_metrics_bold.png" alt="Nunchaku Lite 이미지 품질 및 성능 비교">
 </figure>
 
 ## 목차 {#section-1}
@@ -93,28 +93,28 @@ image.save("output.png")
 
 
 <figure class="image text-center">
-  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/nunchaku-diffusers/fox_bf16_vs_nunchaku_no_metrics.png" alt="BF16 and Nunchaku Lite outputs for a red fox prompt">
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/nunchaku-diffusers/fox_bf16_vs_nunchaku_no_metrics.png" alt="붉은 여우 프롬프트에 대한 BF16과 Nunchaku Lite 출력">
 </figure>
 
 커스텀 파이프라인 클래스나 별도의 추론 엔진이 필요하지 않으며, 로컬에서 컴파일할 필요도 없습니다. NVFP4 커널은 사용 시 처음으로 [Nunchaku Lite kernels page](https://huggingface.co/kernels/rootonchair/nunchaku-lite-kernels)를 통해 허브에서 다운로드됩니다. 이 체크포인트는 Nunchaku NVFP4 트랜스포머와 bitsandbytes NF4 텍스트 인코더를 쌍지으며, RTX 5090에서 약 1.7초 만에 1024x1024 이미지를 생성하고 피크 메모리 사용량은 약 12 GB로, BF16 파이프라인의 약 24 GB와 비교됩니다. Nunchaku Lite 체크포인트 포맷에 대한 자세한 내용은 [공식 Diffusers 문서](https://huggingface.co/docs/diffusers/main/en/quantization/nunchaku)에서 확인할 수 있습니다.
 
-> [!참고]
-> NVFP4 체크포인트는 NVIDIA Blackwell GPU( RTX 50 시리즈, RTX PRO 6000, B200 )가 필요합니다. 초기 세대의 경우 INT4 변형을 사용하십시오. 자세한 내용은 아래 [hardware support](#hardware-support) 표를 참조하십시오.
+> [!NOTE]
+> NVFP4 체크포인트는 NVIDIA Blackwell GPU( RTX 50 시리즈, RTX PRO 6000, B200 )가 필요합니다. 초기 세대의 경우 INT4 변형을 사용하십시오. 자세한 내용은 아래 [하드웨어 지원](#hardware-support) 표를 참조하십시오.
 
 ## 배경: SVDQuant와 Nunchaku {#background-svdquant-and-nunchaku}
 
 **SVDQuant**는 양자화 방식이며, **Nunchaku**는 이를 구현한 참조 CUDA 추론 엔진입니다. 표준 4비트 양자화는 가중치와 활성화 모두에 큰 이상값(outlier)이 포함되어 있어 확산 트랜스포머에 적용하기 어렵습니다. SVDQuant는 활성화의 이상값을 가중치로 옮기고, 각 가중치 행렬에서 가장 까다로운 부분을 작은 16비트 저랭크 분기로 표현한 뒤 나머지 잔차를 4비트로 양자화합니다. Nunchaku는 4비트 경로와 저랭크 분기에 융합 커널을 사용해 이를 빠르게 실행합니다.
 
 <figure class="image text-center">
-  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/nunchaku-diffusers/svdquant_kernel_fusion.png" alt="Nunchaku kernel fusion: the low-rank down projection is fused with input quantization, and the low-rank up projection is fused with the 4-bit matmul">
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/nunchaku-diffusers/svdquant_kernel_fusion.png" alt="Nunchaku 커널 융합: 저랭크 다운 프로젝션은 입력 양자화와 융합되고, 저랭크 업 프로젝션은 4비트 행렬 곱과 융합됨">
   <figcaption>Nunchaku는 저랭크 다운 프로젝션을 양자화 커널과 융합하고, 저랭크 업 프로젝션을 4비트 연산 커널과 융합해 16비트 분기의 메모리 접근 오버헤드를 제거합니다. 그림 출처: <a href="https://arxiv.org/abs/2411.05007">SVDQuant 논문</a>.</figcaption>
 </figure>
 
 ## Nunchaku Lite 소개 {#introducing-nunchaku-lite}
 
-**원래의 [Nunchaku engine](https://github.com/nunchaku-ai/nunchaku)는** [model-specific fused execution paths](#quantizing-models-with-structural-rewrites)에서 비롯된 속도의 대부분을 얻습니다. 예를 들어 QKV 프로젝션과 GELU/MLP 커널의 융합 등이 그러합니다. 이러한 최적화는 각 아키텍처의 모듈 구성 및 체크포인트 형식에 묶여 있어, 새로운 모델 패밀리를 지원하려면 보통 아키텍처 특화 통합 작업이 필요합니다.
+**원래의 [Nunchaku engine](https://github.com/nunchaku-ai/nunchaku)는** [모델별 융합 실행 경로](#quantizing-models-with-structural-rewrites)에서 비롯된 속도의 대부분을 얻습니다. 예를 들어 QKV 프로젝션과 GELU/MLP 커널의 융합 등이 그러합니다. 이러한 최적화는 각 아키텍처의 모듈 구성 및 체크포인트 형식에 묶여 있어, 새로운 모델 패밀리를 지원하려면 보통 아키텍처 특화 통합 작업이 필요합니다.
 
-**Nunchaku Lite**는 Diffusers의 새로운 통합 경로입니다. 이를 통해 Diffusers는 커스텀 파이프라인이나 별도의 추론 엔진 없이 Nunchaku 스타일의 체크포인트를 로드할 수 있습니다. 내부적으로, Nunchaku Lite는 재고 Diffusers 모델의 관련 `nn.Linear` 모듈을 로드되기 전에 런타임 SVDQ/AWQ 선형 계층으로 패치합니다. CUDA 커널은 `kernels` 패키지를 통해 Hub에서 제공합니다. 두 가지 커널 계열이 사용됩니다:
+**Nunchaku Lite**는 Diffusers의 새로운 통합 경로입니다. 이를 통해 Diffusers는 커스텀 파이프라인이나 별도의 추론 엔진 없이 Nunchaku 스타일의 체크포인트를 로드할 수 있습니다. 내부적으로, Nunchaku Lite는 기본 Diffusers 모델의 관련 `nn.Linear` 모듈을 체크포인트가 로드되기 전에 런타임 SVDQ/AWQ 선형 계층으로 패치합니다. CUDA 커널은 `kernels` 패키지를 통해 Hub에서 제공합니다. 두 가지 커널 계열이 사용됩니다:
 
 *   **`svdq_w4a4`**: SVDQuant 저랭크 보정이 적용된 4비트 가중치와 활성화. 이 계층은 트랜스포머의 어텐션과 MLP 프로젝션에 사용되며, 계산의 거의 전부가 이 계층에 소요되며, INT4 및 NVFP4 변형으로 제공됩니다.
 *   **`awq_w4a16`**: 4비트 가중치와 16비트 활성화를 사용하며, 적응 정규화 및 변조 프로젝션에 사용되는 예로 FLUX `adanorm_single` / `adanorm_zero` 또는 Qwen-Image 변조 계층. 이 계층은 메모리 바운드이며 정밀도에 민감하므로 AWQ가 메모리와 공간을 절약하면서도 정밀도를 유지하는 데 잘 맞습니다.
@@ -155,7 +155,7 @@ bitsandbytes나 torchao를 Diffusers에서 사용해 보셨다면 메커니즘�
 
 양자화된 모델은 밀집형 모델의 정확한 모듈 구조를 그대로 유지하기 때문에, 아래로 이어지는 모든 구성 요소(스케줄러, LoRA 로딩 훅, 오프로딩, `torch.compile` 등)가 일반 Diffusers 모델처럼 보게 됩니다.
 
-### 하드웨어 지원
+### 하드웨어 지원 {#hardware-support}
 
 Nunchaku Lite는 GPU 세대와 체크포인트 정밀도에 따라 서로 다른 커널 변형을 사용합니다:
 
@@ -165,14 +165,14 @@ Nunchaku Lite는 GPU 세대와 체크포인트 정밀도에 따라 서로 다른
 | `svdq_w4a4` | `int4` | Turing / Ampere / Ada (RTX 30 및 40 시리즈, A100, L40S) |
 | `awq_w4a16` | `int4` | Turing / Ampere / Ada (RTX 30 및 40 시리즈, A100, L40S) |
 
-> [!경고]
+> [!WARNING]
 > Volta 및 Hopper GPU는 현재 4비트 커널에서 지원되지 않습니다. 양자화 도구는 로드 시 GPU의 CUDA 기능을 검증하고, 잘못된 출력 대신 명확한 오류를 발생시킵니다.
 
 ## 더 빠른 속도와 더 낮은 메모리 사용량 얻기 {#getting-more-speed-and-lower-memory}
 
 Nunchaku Lite는 Diffusers의 다른 메모리 및 속도 최적화와 결합하여 사용할 수 있습니다.
 
-**`torch.compile`.** 트랜스포머를 컴파일하면 엔드투엔드 속도향상이 1.35배에서 1.8배로 향상됩니다:
+**`torch.compile`.** 트랜스포머를 컴파일하면 엔드투엔드 속도 향상이 1.35배에서 1.8배로 향상됩니다:
 
 ```python
 pipe.transformer.compile(fullgraph=True)
@@ -193,7 +193,7 @@ pipe.transformer.compile_repeated_blocks(fullgraph=True)
 
 ### 엔드투엔드 지연 및 메모리
 
-| 구성 | 전체 파이프라인 | 디노이즈 루프 | 피크 VRAM | 속도향상 |
+| 구성 | 전체 파이프라인 | 디노이즈 루프 | 피크 VRAM | 속도 향상 |
 |---|---|---|---|---|
 | BF16 baseline | 3.00 s | 2.86 s | 31.1 GB | 1.0x |
 | Nunchaku Lite NVFP4 | 2.27 s | 2.13 s | 20.6 GB | 1.35x |
@@ -205,8 +205,8 @@ pipe.transformer.compile_repeated_blocks(fullgraph=True)
 ### 이미지 품질
 
 <figure class="image text-center">
-  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/nunchaku-diffusers/quality_grid.png" alt="Quality comparison grid">
-  <figcaption>BF16 vs 4-bit outputs with identical seeds and settings.</figcaption>
+  <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/nunchaku-diffusers/quality_grid.png" alt="품질 비교 격자">
+  <figcaption>동일한 시드와 설정에서의 BF16 대 4비트 출력.</figcaption>
 </figure>
 
 ## 직접 모델 양자화하기 {#quantizing-your-own-model}
@@ -225,7 +225,7 @@ python examples/text_to_image/quantize_hf.py black-forest-labs/FLUX.2-klein-4B \
 ```
 
 
-양자화하기 전에 이 보고서를 항상 읽으십시오. FLUX.2 Klein 4B의 예상 결과는 100개의 SVDQ 타깃, 3개의 AWQ 타깃, 그리고 6개의 밀집 외부 선형으로, 패턴 누락이나 중복된 이름이 없어야 합니다.
+양자화하기 전에 이 보고서를 항상 읽으십시오. FLUX.2 Klein 4B의 예상 결과는 100개의 SVDQ 타깃, 3개의 AWQ 타깃, 그리고 6개의 dense outer linear(양자화 대상에서 제외된 바깥쪽 선형 계층)로, 패턴 누락이나 중복된 이름이 없어야 합니다.
 
 ### 2. 양자화 실행
 
@@ -238,7 +238,7 @@ python examples/text_to_image/quantize_hf.py black-forest-labs/FLUX.2-klein-4B \
 ```
 
 
-`--precision int4`를 `nvfp4`로 바꿔 Blackwell-네이티브 가중치를 구축합니다.
+`--precision int4`를 `nvfp4`로 바꿔 Blackwell 네이티브 가중치를 구축합니다.
 
 ### 3. Diffusers 파이프라인 패키징
 
@@ -274,11 +274,11 @@ image = pipe(
 
 출력이 올바르게 보이면 `pipe.push_to_hub("your-name/your-model-nunchaku-lite-int4")`를 실행합니다. 다른 사용자는 위와 동일한 `from_pretrained()` 패턴으로 로드할 수 있습니다.
 
-### 구조적 재작성으로 모델 양자화
+### 구조적 재작성으로 모델 양자화 {#quantizing-models-with-structural-rewrites}
 
 일반 경로는 아키텍처가 구조적 재작성 없이 양자화될 수 있다고 가정합니다. 추가 속도 향상을 위해 원래의 Nunchaku 엔진은 Diffusers 계층의 묶음을 융합 모듈로 재구성합니다. 일반 경로는 Q, K, V 투영을 하나의 모듈로 결합하거나 융합된 투영을 여러 모듈에 걸쳐 분할하는 등의 변경을 스스로 추론할 수 없습니다.
 
-FLUX.1-dev의 QKV 투영은 구체적인 예입니다. [Diffusers defines three separate modules](https://github.com/huggingface/diffusers/blob/main/src/diffusers/models/transformers/transformer_flux.py#L313-L329):
+FLUX.1-dev의 QKV 투영은 구체적인 예입니다. [Diffusers에서는 세 개의 독립적인 모듈을 정의합니다](https://github.com/huggingface/diffusers/blob/main/src/diffusers/models/transformers/transformer_flux.py#L313-L329):
 
 ```python
 self.to_q = torch.nn.Linear(query_dim, self.inner_dim, bias=bias)
@@ -287,7 +287,7 @@ self.to_v = torch.nn.Linear(query_dim, self.inner_dim, bias=bias)
 ```
 
 
-다음은 [Nunchaku FLUX module combines those layers](https://github.com/nunchaku-ai/nunchaku/blob/main/nunchaku/models/transformers/transformer_flux_v2.py#L63-L79)를 하나의 양자화된 `to_qkv` 모듈로 묶은 예시입니다:
+[Nunchaku FLUX 모듈은 해당 레이어들을 하나의 양자화된 `to_qkv` 모듈로 결합합니다](https://github.com/nunchaku-ai/nunchaku/blob/main/nunchaku/models/transformers/transformer_flux_v2.py#L63-L79):
 
 ```python
 to_qkv = fuse_linears([other.to_q, other.to_k, other.to_v])
@@ -326,7 +326,7 @@ qkv = fused_qkv_norm_rottary(
 
 이것은 일반 경로가 추론할 수 없는 구조적 재작성입니다. Diffusers는 `to_q`, `to_k`, 및 `to_v` 매개변수 접두사를 가진 세 개의 대상 모듈을 가지며, Nunchaku는 `to_qkv` 아래 하나의 그룹화 모듈을 가집니다. 모델별 대상 구성(target config) 또는 어댑터는 Q, K, V 매개변수를 출력 차원에 따라 순서대로 연결(concatenate)하고 `to_qkv`로 로드되어야 한다고 명시해야 합니다.
 
-이러한 구조적 재작성은 양자화 중 모델별 대상 구성(target config)에 의해 설명되며, 체크포인트가 로드될 때 소형 런타임 어댑터에 의해 처리됩니다. [FLUX.2 Klein 4B quantization script](https://github.com/rootonchair/diffuse-compressor/blob/main/examples/text_to_image/quantize_flux2_klein_4b.py)는 구조적으로 재작성된 체크포인트를 생성하기 위한 구체적인 대상 구성 예를 제공하고, [rootonchair/nunchaku-lite](https://github.com/rootonchair/nunchaku-lite)은 묶음 QKV 텐서를 로드하고 융합된 투영을 분할하는 등 다른 융합 작업을 로드하는 데 필요한 런타임 어댑터를 제공합니다. 전체 워크플로우는 [Adding A New Model](https://github.com/rootonchair/diffuse-compressor/blob/main/docs/adding_new_model.md) 가이드를 확인하면 됩니다.
+이러한 구조적 재작성은 양자화 중 모델별 대상 구성(target config)에 의해 설명되며, 체크포인트가 로드될 때 소형 런타임 어댑터에 의해 처리됩니다. [FLUX.2 Klein 4B quantization script](https://github.com/rootonchair/diffuse-compressor/blob/main/examples/text_to_image/quantize_flux2_klein_4b.py)는 구조적으로 재작성된 체크포인트를 생성하기 위한 구체적인 대상 구성 예를 제공하고, [rootonchair/nunchaku-lite](https://github.com/rootonchair/nunchaku-lite)은 그룹화된 QKV 텐서를 로드하고, 융합된 프로젝션을 분할하며, 그 밖의 융합 연산을 처리하는 데 필요한 런타임 어댑터를 제공합니다. 전체 워크플로우는 [Adding A New Model](https://github.com/rootonchair/diffuse-compressor/blob/main/docs/adding_new_model.md) 가이드를 확인하면 됩니다.
 
 ## 바로 사용 가능한 체크포인트 {#ready-to-use-checkpoints}
 
@@ -345,11 +345,11 @@ Nunchaku의 SVDQuant 커널은 소비자 하드웨어에서 확산 트랜스포�
 
 자세한 내용을 보려면 아래 리소스를 확인하세요:
 
-- [Diffusers Nunchaku documentation](https://huggingface.co/docs/diffusers/quantization/nunchaku)
-- [The integration PR (huggingface/diffusers#14100)](https://github.com/huggingface/diffusers/pull/14100)
-- [SVDQuant paper](https://arxiv.org/abs/2411.05007) 및 [Nunchaku engine](https://github.com/nunchaku-tech/nunchaku)와 함께
+- [Diffusers Nunchaku 문서](https://huggingface.co/docs/diffusers/quantization/nunchaku)
+- [통합 PR(huggingface/diffusers#14100)](https://github.com/huggingface/diffusers/pull/14100)
+- [SVDQuant 논문](https://arxiv.org/abs/2411.05007) 및 [Nunchaku 엔진](https://github.com/nunchaku-tech/nunchaku)와 함께
 - [diffuse-compressor](https://github.com/rootonchair/diffuse-compressor)
-- 이전 게시물: [Exploring Quantization Backends in Diffusers](https://huggingface.co/blog/diffusers-quantization) 및 [Memory-efficient Diffusion Transformers with Quanto and Diffusers](https://huggingface.co/blog/quanto-diffusers)
+- 이전 게시물: [Diffusers의 양자화 백엔드 살펴보기](https://huggingface.co/blog/diffusers-quantization) 및 [Quanto와 Diffusers를 이용한 메모리 효율적인 확산 트랜스포머](https://huggingface.co/blog/quanto-diffusers)
 
 ## 감사의 말씀 {#acknowledgements}
 
