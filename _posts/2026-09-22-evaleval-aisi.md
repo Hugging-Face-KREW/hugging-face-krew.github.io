@@ -42,7 +42,7 @@ Review instructions:
 
 # UK AISI와 EvalEval이 벤치마크 결과의 재현성을 높이는 방법
 
-EvalEval Coalition은 UK AI Security Institute(AISI)가 EvalEval의 인프라를 활용해 평가 결과를 공개적으로 공유하고, 더욱 재현 가능하고 검증 가능한 평가 과학에 기여하고 있다는 소식을 전하게 되어 기쁩니다.
+[EvalEval Coalition](https://evalevalai.com/)은 [UK AI Security Institute(AISI)](https://www.aisi.gov.uk/)가 EvalEval의 인프라를 활용해 평가 결과를 공개적으로 공유하고, 더욱 재현 가능하고 검증 가능한 평가 과학에 기여하고 있다는 소식을 전하게 되어 기쁩니다.
 
 AISI와 EvalEval은 이전에도 [NeurIPS 2025와 함께 열린 공동 워크숍](https://evalevalai.com/events/workshop-2025/)에서 시작된 연구를 공동으로 진행했으며, AISI의 피드백은 [Every Eval Ever (EEE) 스키마](https://evalevalai.com/projects/every-eval-ever/)를 형성하는 데 도움이 되었습니다. 이번 협력의 다음 단계에서는 이러한 공유 인프라를 실제로 적용합니다.
 
@@ -64,7 +64,7 @@ EvalEval의 사명은 공유 보고 스키마인 [Every Eval Ever](https://evale
 - SWE-Bench Pro
 - Terminal-Bench 2.0
 
-이 결과는 6개의 프런티어 모델을 대상으로 합니다. Claude Opus 4, Claude Opus 4.5, Claude Opus 4.6, GPT-5, GPT-5.2, GPT-5.4입니다. 또한 이번 공개에는 서로 연관된 두 가지 사이버 평가인 Cyber CTFs와 The Last Ones의 결과도 포함됩니다. 이 평가들은 일부 모델이 겹치지만 서로 다른 모델 집합을 사용합니다. 이 데이터는 [*How Inference Compute Shapes Frontier LLM Evaluation*](https://arxiv.org/abs/2606.17930) 논문과 함께 제공되며, 해당 논문은 추론 시간 컴퓨팅과 평가 프로토콜에 따라 벤치마크 성능이 어떻게 달라지는지를 연구합니다.
+이 결과는 Claude Opus 4, Claude Opus 4.5, Claude Opus 4.6, GPT-5, GPT-5.2, GPT-5.4 등 6개의 프런티어 모델을 다룹니다. 또한 이번 공개에는 서로 연관된 두 가지 사이버 평가인 Cyber CTFs와 The Last Ones의 결과도 포함됩니다. 이 평가들은 일부 모델이 겹치지만 서로 다른 모델 집합을 사용합니다. 이 데이터는 [*How Inference Compute Shapes Frontier LLM Evaluation*](https://arxiv.org/abs/2606.17930) 논문과 함께 제공되며, 해당 논문은 추론 시간 컴퓨팅과 평가 프로토콜에 따라 벤치마크 성능이 어떻게 달라지는지를 연구합니다.
 
 <iframe src="https://evaleval-general-eval-card.hf.space/embed/eval/trajectories/aisi-inference-scaling/hle?panel=tokens" frameborder="0" width="100%" height="670px"></iframe>
 
@@ -80,9 +80,9 @@ EvalEval의 사명은 공유 보고 스키마인 [Every Eval Ever](https://evale
 
 ## 공동의 사명에 기여하기 {#section-3}
 
-- **모델 개발자:** [검증된 평가 결과 보고하기](https://evalcards.evalevalai.com/help/get-verified).
+- **모델 개발자:** [검증된 평가 결과 보고하기](https://evalcards.evalevalai.com/help/get-verified)
 - **평가 개발자:** [Every Eval Ever 스키마](https://github.com/evaleval/every_eval_ever)를 사용해 벤치마크와 실행 데이터를 보고하세요.
-- **평가·거버넌스·정책 연구자:** 벤치마크 또는 모델별로 [Evaluation Cards 탐색하기](https://evalcards.evalevalai.com/)하거나, 이를 활용해 평가 보고 전반의 현황을 살펴보세요.
+- **평가·거버넌스·정책 연구자:** 벤치마크 또는 모델별로 [Evaluation Cards를 탐색](https://evalcards.evalevalai.com/)하거나, 이를 활용해 평가 보고 전반의 현황을 살펴보세요.
 
 ## EvalEval Coalition 소개 {#section-4}
 
@@ -94,7 +94,7 @@ EvalEval Coalition은 평가 생태계를 위한 과학적 근거에 기반한 �
 
 [UK AI Security Institute](https://www.aisi.gov.uk/)는 영국 정부의 Department for Science, Innovation and Technology 산하 연구 기관입니다. 이 기관의 사명은 첨단 AI가 초래하는 위험을 과학적으로 이해할 수 있도록 정부를 지원하는 것입니다. AISI는 첨단 AI의 능력과 영향을 이해하고, 완화책을 개발·검증하며, 정책 수립에 정보를 제공하기 위한 연구를 수행하고 인프라를 구축합니다.
 
-## 추가 읽을거리 {#section-6}
+## 추가 자료 {#section-6}
 
 - [*How Inference Compute Shapes Frontier LLM Evaluation*](https://arxiv.org/abs/2606.17930)
 - [HiBayES: Improving LLM evaluation with hierarchical Bayesian modelling](https://www.aisi.gov.uk/blog/hibayes-improving-llm-evaluation-with-hierarchical-bayesian-modelling)
