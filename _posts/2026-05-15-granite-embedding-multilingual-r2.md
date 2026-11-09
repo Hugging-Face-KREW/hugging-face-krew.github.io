@@ -70,7 +70,7 @@ Granite Embedding Multilingual R2 릴리스는 그 격차를 상당히 좁힙니
 
 주목할 만한 점은 granite-embedding-97m-multilingual-r2입니다. 9700만 매개변수로, 18개 언어에 걸친 Multilingual MTEB Retrieval에서 60.3점을 기록해, 100M 매개변수 미만의 오픈 다국어 임베딩 모델 중에서 가장 높은 검색 품질을 보여주었습니다. 동일한 규모 클래스의 다음으로 좋은 모델인 multilingual-e5-small은 같은 벤치마크에서 50.9점을 기록합니다 — 성숙한 벤치마크에서 +9.4 포인트 차이입니다.
 
-311M 풀사이즈 모델의 약 1/3 규모임에도 다국어, 코드, 장문 벤치마크에서 다수의 품질을 보유하고 있으며, 새로운 아키텍처, 개선된 학습 데이터, 새로운 가지치기 방법 덕분에 직접 선행 모델보다 +12.2 포인트의 MTEB 다국어 검색 향상을 보입니다. 풀사이즈 granite-embedding-311m-multilingual-r2는 동일 벤치마크에서 65.2를 기록하고, R1 선행 모델에 비해 +13.0 포인트의 향상을 제공합니다.
+311M 풀사이즈 모델의 약 1/3 규모임에도 다국어, 코드, 장문 벤치마크에서 검색 품질의 대부분을 유지하고 있으며, 새로운 아키텍처, 개선된 학습 데이터, 새로운 가지치기 방법 덕분에 바로 이전 모델보다 MTEB 다국어 검색에서 +12.2 포인트 향상됐습니다. 풀사이즈 granite-embedding-311m-multilingual-r2는 동일 벤치마크에서 65.2를 기록하고, R1 선행 모델에 비해 +13.0 포인트의 향상을 제공합니다.
 
 ![Granite Embedding R2 아키텍처](https://cdn-uploads.huggingface.co/production/uploads/642ae74b25442667e9bd72ed/jhz201_Ud5zUWfA3k4ITA.png)
 
@@ -80,7 +80,7 @@ Granite Embedding Multilingual R2 릴리스는 그 격차를 상당히 좁힙니
 
 Granite Embedding Multilingual R1 모델은 512 토큰 컨텍스트 윈도우를 가진 XLM-RoBERTa 인코더를 기반으로 했습니다. R2 세대는 처음부터 재구축한 버전입니다:
 
-[ModernBERT](https://huggingface.co/blog/modernbert)는 최근의 인코더 아키텍처로, 지난 5년간의 트랜스포머 연구의 기법들을 재고합니다. 실용적 이점으로는 긴 시퀀스에서의 어텐션 범위를 번갈아 적용하여 계산량을 줄이고(긴 시퀀스 처리 속도 크게 향상), 32K 컨텍스트 윈도우를 가능하게 하는 로터리 포지션 임베딩, 이전 아키텍처에서 문제가 되었던 위치 보간 해킹 없이도 32K 컨텍스트를 활용할 수 있는 구조, 그리고 Flash Attention 2.0 지원으로 현대 GPU에서 인코딩이 빨라지는 점 등이 있습니다.
+[ModernBERT](https://huggingface.co/blog/modernbert)는 최근의 인코더 아키텍처로, 지난 5년간의 트랜스포머 연구 기법들을 이용해 원래 BERT 설계를 재검토한 것입니다. 실용적 이점으로는 긴 시퀀스에서의 어텐션 범위를 번갈아 적용하여 계산량을 줄이고(긴 시퀀스 처리 속도 크게 향상), 32K 컨텍스트 윈도우를 가능하게 하는 로터리 포지션 임베딩, 이전 아키텍처에서 문제가 되었던 위치 보간 해킹 없이도 32K 컨텍스트를 활용할 수 있는 구조, 그리고 Flash Attention 2.0 지원으로 현대 GPU에서 인코딩이 빨라지는 점 등이 있습니다.
 
 새로운 다국어 토크나이저도 주목할 만합니다. XLM-RoBERTa의 250K 토큰 어휘를 재사용하기보다, 강력한 다국어 및 코드 커버리지를 가진 기존 토크나이저를 채택했습니다. 311M 모델은 Gemma 3 토크나이저(262K 토큰)를 사용하고, 97M 모델은 GPT-OSS 토크나이저에서 시작해 180K 토큰 어휘로 축소하여 광범위한 다국어 커버리지를 유지하면서 임베딩 테이블의 매개변수 규모를 줄였습니다. 토크나이저의 효율성은 우리가 생각하는 것보다 더 중요합니다 — 32K 컨텍스트 윈도우가 인상적으로 들리더라도, 토크나이저가 태국어 한 문단을 인코딩하는 데 절반을 소모하면 의미가 반감됩니다.
 
@@ -96,13 +96,13 @@ Granite Embedding Multilingual R1 모델은 512 토큰 컨텍스트 윈도우를
 
 - 모델 병합(Model merging): 학습 후, 다양한 학습 단계 및 구성의 체크포인트를 병합합니다. 이는 다국어 폭넓은 모델과 영어 심층 모델처럼 서로 다른 목표를 최적화한 모델들의 강점을 하나의 가중치 세트로 합쳐 추가 학습 계산 없이 사용할 수 있게 합니다.
 
-- Matryoshka 표현 학습(마트료시카 표현 학습): 768 차원의 임베딩을 512, 384, 256, 또는 128 차원으로 잘라내더라도 손실이 최소화되도록 Matryoshka 목표로 학습합니다(아래의 [마트료시카 임베딩](#matryoshka-embeddings-311m) 참조).
+- 마트료시카 표현 학습(Matryoshka Representation Learning): 768 차원의 임베딩을 512, 384, 256, 또는 128 차원으로 잘라내더라도 손실이 최소화되도록 Matryoshka 목표로 학습합니다(아래의 [마트료시카 임베딩](#matryoshka-embeddings-311m) 참조).
 
-그 결과 MTEB 다국어 검색에서 65.2, 전체 평균에서 56.3의 점수를 얻어 R1 선행 모델에 비해 +13.0 포인트의 이득을 제공합니다.
+그 결과 MTEB 다국어 검색에서 65.2, 전체 평균에서 56.3의 점수를 얻어 R1 선행 모델에 비해 평균 +14.5 포인트의 이득을 제공합니다.
 
 <a id="building-the-compact-97m-multilingual-model"></a>
 
-## Building the compact 97M Multilingual model
+## 소형 97M 다국어 모델 구축
 
 97M 모델은 어휘 선택과 지식 증류의 조합으로 학습됩니다:
 
@@ -170,7 +170,7 @@ Granite Embedding Multilingual R1 모델은 512 토큰 컨텍스트 윈도우를
 
 ![임베딩 차원 축소에 따른 검색 품질 변화](https://cdn-uploads.huggingface.co/production/uploads/642ae74b25442667e9bd72ed/myYhY1YHLY9Vs3l0gyMJB.png)
 
-차원 축소로 인한 품질 손실은 놀랄 정도로 작습니다. 768에서 256 차원으로 축소하면 저장 및 유사도 계산 비용이 3배 감소하지만 MTEB 다국어 검색은 65.2에서 64.7로 단 0.5포인트 하락하고, 코드 검색도 63.9에서 63.4로 0.5포인트 하락합니다. 128 차원(6배 축소)에서도 다국어 검색은 63.7, 코드 검색은 62.3으로 여전히 전체 차원 성능의 97% 이상을 유지합니다. 실무적으로는 인덱스 크기를 크게 줄이고 검색 지연 시간을 감소시키되 결과 품질에 미치는 영향은 최소화할 수 있습니다. (참고: 위 그림의 결과는 영어 및 다국어 검색에 대해 컨텍스트 길이 1024, 코드에 대해 8192로 평가되었다는 점을 양해 바랍니다.)
+차원 축소로 인한 품질 손실은 놀랄 정도로 작습니다. 768에서 256 차원으로 축소하면 저장 및 유사도 계산 비용이 3배 감소하지만 MTEB 다국어 검색은 65.2에서 64.7로 단 0.5포인트 하락하고, 코드 검색도 63.9에서 63.4로 0.5포인트 하락합니다. 128 차원(6배 축소)에서도 다국어 검색은 63.7, 코드 검색은 62.3으로 여전히 전체 차원 성능의 97% 이상을 유지합니다. 실무적으로는 인덱스 크기를 크게 줄이고 검색 지연 시간을 감소시키되 결과 품질에 미치는 영향은 최소화할 수 있습니다. (참고: 위 그림의 결과는 영어 및 다국어 검색은 컨텍스트 길이 1024, 코드는 8192로 평가되었습니다.)
 
 참고로 311M 모델을 384 차원으로 축소한 경우(97M 모델의 기본 출력과 동일 차원) 세 벤치마크 모두에서 여전히 97M 모델보다 우수합니다. 384 차원 임베딩이 필요하고 311M 모델의 인코딩 비용을 감당할 수 있다면 Matryoshka 축소가 더 강력한 선택입니다.
 
@@ -392,7 +392,7 @@ for hit in results[0]:
 
 - [granite-embedding-97m-multilingual-r2](https://huggingface.co/ibm-granite/granite-embedding-97m-multilingual-r2)
 
-또한 곧 Granite Embedding 데모(곧 공개 예정) Hugging Face Spaces에서를 통해 작은 모델을 CPU에서 대화식으로 체험하거나 Google Colab에서 전체 예제 노트북을 실행해 볼 수 있습니다:
+작은 모델은 Hugging Face Spaces의 [Granite Embedding 데모](https://huggingface.co/spaces/ibm-granite/granite-embedding-r2-demo)에서 CPU로 대화식으로 체험하거나, Google Colab에서 전체 예제 노트북을 실행해 볼 수 있습니다:
 
 [Google Colab에서 예제 노트북 열기](https://colab.research.google.com/github/ibm-granite/granite-embedding-models/blob/main/code/multilingual_r2_examples.ipynb)
 
