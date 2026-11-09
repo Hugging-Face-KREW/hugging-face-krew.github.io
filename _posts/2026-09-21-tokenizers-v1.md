@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "tokenizers v1: 인코드, 디코드 및 스케일링 측정"
+title: "tokenizers v1: 인코딩, 디코딩 및 스케일링 성능 측정"
+description: "tokenizers v1은 인코딩을 3~30배 빠르게 만드는 성능 중심의 메이저 버전입니다. 정규식 대신 비트스트림 분할, 단어 캐시, 무할당 병합 루프 등 v1이 v0.23보다 빠른 이유와 벤치마크 방법을 소개합니다."
 author: dailybot
 categories: [Translation, HuggingFace]
 thumbnail: /blog/assets/tokenizers-v1/thumbnail.png
@@ -34,7 +35,7 @@ Review instructions:
 - Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
 -->
 
-# tokenizers v1: 인코드, 디코드 및 스케일링 측정
+# tokenizers v1: 인코딩, 디코딩 및 스케일링 성능 측정
 
 <figure class="image text-center">
   <iframe src="https://lysandre-tokenizers-v1-header.static.hf.space" width="100%" height="352" frameborder="0" scrolling="no"></iframe>
@@ -50,7 +51,7 @@ ML 워크플로에서 토크나이저가 병목이었던 적은 지금까지 많
 
 이 글에서는 v1이 v0.23보다 더 빠른 이유를 살펴봅니다. 그 차이는 종종 수십 배에 달합니다.
 
-이 작업은 나머지 생태계 덕분에 전적으로 가능했습니다. 토큰화는 오픈 소스에서 매우 활발하게 개발되는 분야이며, [gigatoken](https://github.com/marcelroed/gigatoken), [tiktoken](https://crates.io/crates/tiktoken-rs), [kitoken](https://crates.io/crates/kitoken), [tokie](https://crates.io/crates/tokie), [fastokens](https://crates.io/crates/fastokens), [wordchipper](https://crates.io/crates/wordchipper), [ai-tokenizer](https://www.npmjs.com/package/ai-tokenizer)과 같은 라이브러리와 그 밖의 많은 프로젝트가 빠른 토크나이저의 가능성을 계속 확장해 왔습니다. 우리는 이러한 작업을 살펴보았고, 아래에서 소개하는 아이디어 중 몇 가지는 다른 프로젝트가 시도해 볼 가치가 있음을 보여주었기 때문에 알게 되었습니다.
+이 작업은 오픈소스 생태계의 다른 프로젝트들 덕분에 가능했습니다. 토큰화는 오픈 소스에서 매우 활발하게 개발되는 분야이며, [gigatoken](https://github.com/marcelroed/gigatoken), [tiktoken](https://crates.io/crates/tiktoken-rs), [kitoken](https://crates.io/crates/kitoken), [tokie](https://crates.io/crates/tokie), [fastokens](https://crates.io/crates/fastokens), [wordchipper](https://crates.io/crates/wordchipper), [ai-tokenizer](https://www.npmjs.com/package/ai-tokenizer)와 같은 라이브러리와 그 밖의 많은 라이브러리가 빠른 토크나이저의 가능성을 계속 확장해 왔습니다. 우리는 이러한 작업을 살펴보았고, 아래에서 소개하는 아이디어 중 몇 가지는 다른 프로젝트가 시도해 볼 만한 가치가 있음을 보여준 덕분에 접하게 되었습니다.
 
 이 리팩터링 이전의 tokenizers는 낼 수 있었던 성능에 훨씬 못 미쳤기 때문에, 기여할 가치가 없어 보였을 수도 있습니다. 이번 리팩터링을 통해 tokenizers가 기여할 가치가 있는 라이브러리라는 점을 분명히 보여주고자 합니다.
 
@@ -68,13 +69,13 @@ tokenizers v1 릴리스 후보와 널리 사용되는 다른 대안의 결과를
 
 ## V1이란 {#section-2}
 
-v1은 v0.23과 동일한 토큰 ID를 생성합니다. 목표는 출력, API, 어휘 및 병합 순위를 유지하면서 개선할 수 **있는** 모든 것을 개선하는 것이었습니다. 여기에는 지원 범위도 포함됩니다. 라이브러리는 BPE에 특화되는 대신 여러 토크나이저 계열을 포괄하는 범용성을 유지하므로, v1은 v0.23이 로드하던 모든 것을 로드합니다.
+v1은 v0.23과 동일한 토큰 ID를 생성합니다. 목표는 출력, API, 어휘 및 병합 순위를 유지하면서 **개선할 수 있는** 모든 것을 개선하는 것이었습니다. 여기에는 지원 범위도 포함됩니다. 라이브러리는 BPE에 특화되는 대신 여러 토크나이저 계열을 포괄하는 범용성을 유지하므로, v1은 v0.23이 로드하던 모든 것을 로드합니다.
 
-토크나이저는 텍스트를 모델이 읽는 정수 목록으로 변환합니다. tokenizers는 이 변환을 네 단계로 수행합니다. 정규화는 원시 텍스트에 소문자화나 유니코드 정규화와 같은 연산을 적용합니다. 사전 토큰화는 텍스트를 프리토큰이라고 하는 더 작은 조각으로 나눕니다. 모델은 각 프리토큰을 토큰으로 변환하고 어휘에서 해당 ID를 매핑합니다. 후처리는 모델이 요구하는 특수 토큰을 추가합니다.
+토크나이저는 텍스트를 모델이 읽는 정수 목록으로 변환합니다. tokenizers는 이 변환을 네 단계로 수행합니다. 정규화는 원시 텍스트에 소문자화나 유니코드 정규화와 같은 연산을 적용합니다. 사전 토큰화는 텍스트를 프리토큰이라고 하는 더 작은 조각으로 나눕니다. 모델은 각 프리토큰을 토큰으로 변환한 뒤, 어휘에 있는 ID로 매핑합니다. 후처리는 모델이 요구하는 특수 토큰을 추가합니다.
 
 여기서 설명하는 작업 대부분은 모델 단계에서 수행됩니다. 이 글에서 측정한 10개 모델 계열 중 8개는 바이트 페어 인코딩, 즉 BPE를 사용합니다. BPE는 프리토큰의 바이트에서 시작해 순위가 가장 높은 인접 쌍을 더 이상 순위가 매겨진 쌍이 남지 않을 때까지 반복해서 결합합니다. 순위는 토크나이저 학습 시 학습되어 토크나이저와 함께 제공되므로, 동일한 텍스트는 항상 동일한 ID를 생성합니다. 병합은 프리토큰 경계를 넘지 않습니다. 나머지 두 계열은 라이브러리가 지원하는 다른 두 모델 유형인 WordPiece와 Unigram을 사용합니다.
 
-[tokenization pipeline](https://huggingface.co/docs/tokenizers/pipeline) 페이지에서는 네 단계를 설명합니다. [Tokenization algorithms](https://huggingface.co/docs/transformers/tokenizer_summary)에서는 BPE, WordPiece 및 Unigram을 설명합니다.
+[토큰화 파이프라인(tokenization pipeline)](https://huggingface.co/docs/tokenizers/pipeline) 페이지에서는 네 단계를 설명합니다. [토큰화 알고리즘(Tokenization algorithms)](https://huggingface.co/docs/transformers/tokenizer_summary)에서는 BPE, WordPiece 및 Unigram을 설명합니다.
 
 <figure class="image text-center">
   <iframe src="https://lysandre-tokenizers-v1-pipeline.static.hf.space" width="100%" height="341" frameborder="0" scrolling="no"></iframe>
@@ -88,12 +89,12 @@ v1은 v0.23과 동일한 토큰 ID를 생성합니다. 목표는 출력, API, �
 | no-alloc 모델 | 병합 작업 집합이 호출자가 소유한 스크래치 버퍼에 저장되며, 루프는 allocator에 전혀 접근하지 않습니다. |
 | bitcannon | 분할 패턴을 비트스트림에 대한 불리언 연산으로 변환하여, 정규식 엔진 대신 SIMD 명령으로 분할 지점을 찾습니다. |
 | 병합 루프 재작성 | 병합되는 조각을 하나의 사전 할당 버퍼 안에 intrusive 이중 연결 리스트로 구성하므로, 병합 시 데이터를 이동하지 않고 두 인덱스만 갱신합니다. |
-| 단어 캐시 | 프리토큰 바이트에서 완성된 ID로 매핑하는 스레드 로컬 메모입니다. 따라서 같은 단어는 한 번만 병합됩니다. |
+| 단어 캐시 | 프리토큰 바이트를 완성된 ID로 변환한 결과를 저장하는 스레드 로컬 메모입니다. 따라서 같은 단어는 한 번만 병합됩니다. |
 | 네이티브 병렬성 | 하나의 공유 토크나이저가 여러 스레드에서 동시에 인코딩합니다. 각 스레드는 자체 하위 풀에서 스크래치 버퍼와 단어 캐시를 가져오므로, 스레드가 더 이상 하나의 잠금에서 대기하지 않습니다([#2365](https://github.com/huggingface/tokenizers/pull/2365)). |
 
 ### 분할: 정규식 대신 비트스트림
 
-BPE 모델은 정규식을 사용해 입력 텍스트를 프리토큰이라는 더 작고 처리하기 쉬운 청크로 나눕니다. 병합은 프리토큰 내부에서 일어나며 두 프리토큰 사이의 경계를 넘지 않습니다. 따라서 이 분할이 파이프라인의 나머지 부분에서 보게 되는 내용을 결정합니다.
+BPE 모델은 정규식을 사용해 입력 텍스트를 프리토큰이라는 더 작고 처리하기 쉬운 청크로 나눕니다. 병합은 프리토큰 내부에서 일어나며 두 프리토큰 사이의 경계를 넘지 않습니다. 따라서 이 분할에 따라 파이프라인의 나머지 단계에 전달되는 내용이 결정됩니다.
 
 이 정규식은 모델의 고정 매개변수입니다. 토크나이저와 함께 제공되며 런타임에 변경되지 않으므로, 매번 인코딩할 때 범용 정규식 엔진이 이를 해석할 필요가 없습니다. 특정 모델이 실제로 사용하는 패턴에 맞는 동등한 분할 함수를 한 번 직접 작성할 수 있습니다.
 
@@ -109,7 +110,7 @@ BPE 모델은 정규식을 사용해 입력 텍스트를 프리토큰이라는 �
 
 실제 텍스트에는 반복되는 단어가 많습니다. BPE는 특정 프리토큰에 대해 항상 동일한 토큰 ID를 생성하므로, v1은 한 번 처리한 결과를 저장할 수 있습니다. 스레드 로컬 캐시는 각 프리토큰의 바이트를 토큰 ID에 매핑하여, 이후에 같은 프리토큰이 등장하면 병합 과정을 건너뛸 수 있게 합니다.
 
-당연히 입력이 커질수록 고유 단어 수는 전체 단어 수보다 느리게 증가할 수 있습니다. 그러면 반복되는 단어가 입력에서 차지하는 비중이 커집니다. 새로운 단어도 계속 등장하므로, 아래 애니메이션에서 간혹 캐시 미스가 발생합니다.
+당연히 입력이 커질수록 고유 단어 수는 전체 단어 수보다 느리게 증가할 수 있습니다. 그러면 반복되는 단어가 입력에서 차지하는 비중이 커집니다. 새로운 단어도 계속 등장하므로, 아래 애니메이션에서 간혹 미스가 발생합니다.
 
 <figure class="image text-center">
   <iframe src="https://lysandre-tokenizers-v1-cache.static.hf.space" width="100%" height="976" frameborder="0" scrolling="no"></iframe>
@@ -148,7 +149,7 @@ v1은 호출자가 소유한 스크래치 버퍼를 재사용하여 이러한 �
 | 공통 셀만 사용 | 모든 엔진이 실행하고 검증한 셀에 대해서만 중앙값을 계산합니다. |
 | 프로세스별 전체 스윕 | 각 반복은 새 프로세스에서 시작하며 모든 셀을 유지합니다. |
 | 물리 코어 고정 | 작업자를 서로 다른 8개의 물리 코어에 고정하며, 같은 코어의 SMT 스레드는 사용하지 않습니다. |
-| 독립적인 Jobs | 호스트 간 변동을 측정하기 위해 별도의 Jobs를 사용합니다. |
+| 독립적인 Jobs | 별도의 Jobs로 호스트 간 변동을 측정합니다. |
 
 하나의 문서를 반복해서 인코딩하는 것은 동일한 빌드에서 서로 다른 문서의 스트림을 인코딩하는 것보다 빠를 수 있습니다. 전자의 방식은 문서 전체가 이미 캐시에 표현되어 있는 경우의 성능을 측정합니다. 후자의 방식은 이전에 본 프리토큰을 캐시에 남겨 둔 채 새로운 입력을 처리하는 성능을 측정합니다.
 
@@ -156,7 +157,7 @@ v1은 호출자가 소유한 스크래치 버퍼를 재사용하여 이러한 �
 
 ## 종합 결과 {#section-4}
 
-v1의 encode 경로가 지원하는 10개 모델 계열 전체에서, Apple M4 Max의 단일 스레드 환경에서 v1은 v0.23보다 텍스트를 **3~30배 빠르게** 인코딩합니다. 하한은 t5-base, 상한은 gpt2입니다. 8개 워커에서 선형 확장의 **76%**로 스케일링됩니다. 이 모든 변경에도 불구하고 v1은 릴리스된 라이브러리와 정확히 동일한 토큰 ID를 생성합니다.
+v1의 encode 경로가 지원하는 10개 모델 계열 전체에서, Apple M4 Max의 단일 스레드 환경에서 v1은 v0.23보다 텍스트를 **3~30배 빠르게** 인코딩합니다. 하한은 t5-base, 상한은 gpt2입니다. v1은 8개 워커에서 선형 확장의 **76%**로 스케일링됩니다. 이 모든 변경에도 불구하고 v1은 릴리스된 라이브러리와 정확히 동일한 토큰 ID를 생성합니다.
 
 전반적인 개선은 여러 변경 사항이 함께 작동한 결과입니다. 정규식 엔진 대신 직접 작성한 분할기를 사용하고, 반복되는 단어를 다시 병합하지 않고 처리하는 캐시를 도입했으며, allocator에 전혀 접근하지 않는 병합 루프를 사용하고, 프리토큰마다 한 번씩 모델을 호출하는 대신 프리토큰 배치마다 한 번 호출합니다. 각각의 변경은 파이프라인의 서로 다른 지점에서 수행되는 작업을 줄입니다.
 
@@ -175,7 +176,7 @@ cargo add tokenizers --pre
 ```
 
 
-학습은 기본적으로 활성화된 기능 뒤에 있으며, 이 기능은 C++ 의존성도 함께 가져옵니다. 인코딩만 필요하다면 이 기능을 끄고 학습 구현을 제외할 수 있습니다.
+학습 기능은 기본적으로 활성화되어 있으며 C++ 의존성도 함께 가져옵니다. 인코딩만 필요하다면 이 기능을 끄고 학습 구현을 제외할 수 있습니다.
 
 ```bash
 cargo add tokenizers --pre --no-default-features --features http
@@ -192,9 +193,11 @@ fn main() -> Result<()> {
 
 let encoding = tokenizer.encode("The tokenizer is no longer the bottleneck.", false)?; println!("{:?}", encoding.get_ids()); // [671, 17840, 9160, 344, 1119, 5827, 270, 111127, 16] println!("{:?}", encoding.get_tokens()); // ["The", "Ġtoken", "izer", "Ġis", "Ġno", "Ġlonger", "Ġthe", "Ġbottleneck", "."]
 
-Ok(()) } ```
+Ok(())
+}
+```
 
-For a batch, `encode_batch` is what scales across cores. It is the call the scaling view above measures.
+배치의 경우, `encode_batch`가 코어 수에 따라 확장되는 호출입니다. 위의 스케일링 보기에서 측정하는 호출이 바로 이것입니다.
 
 ```rust
 let encodings = tokenizer.encode_batch(documents, false)?;
