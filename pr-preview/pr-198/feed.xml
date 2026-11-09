@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://huggingface-krew.co/pr-preview/pr-198/feed.xml" rel="self" type="application/atom+xml" /><link href="https://huggingface-krew.co/pr-preview/pr-198/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-11-09T22:06:34+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-198/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</title><link href="https://huggingface-krew.co/pr-preview/pr-198/nemotron-halloween/" rel="alternate" type="text/html" title="NVIDIA Nemotron 오픈 모델로 유령의 집 만들기" /><published>2026-10-31T00:00:00+09:00</published><updated>2026-10-31T00:00:00+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-198/nemotron-halloween</id><content type="html" xml:base="https://huggingface-krew.co/pr-preview/pr-198/nemotron-halloween/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://huggingface-krew.co/pr-preview/pr-198/feed.xml" rel="self" type="application/atom+xml" /><link href="https://huggingface-krew.co/pr-preview/pr-198/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-11-09T23:49:22+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-198/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</title><link href="https://huggingface-krew.co/pr-preview/pr-198/nemotron-halloween/" rel="alternate" type="text/html" title="NVIDIA Nemotron 오픈 모델로 유령의 집 만들기" /><published>2026-10-31T00:00:00+09:00</published><updated>2026-10-31T00:00:00+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-198/nemotron-halloween</id><content type="html" xml:base="https://huggingface-krew.co/pr-preview/pr-198/nemotron-halloween/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#nvidia-nemotron-오픈-모델로-유령의-집-만들기" id="markdown-toc-nvidia-nemotron-오픈-모델로-유령의-집-만들기">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</a></li>
   <li><a href="#으악-이제-내-잔디밭에서-나가" id="markdown-toc-으악-이제-내-잔디밭에서-나가">으악! 이제 내 잔디밭에서 나가!</a>    <ul>
       <li><a href="#monsterhouse의-작동-방식" id="markdown-toc-monsterhouse의-작동-방식">MonsterHouse의 작동 방식</a></li>
@@ -457,7 +457,7 @@ forecast = pipe(df.iloc[-512:])
       <li><a href="#section-4" id="markdown-toc-section-4">Hugging Face 데이터셋 프로파일링하기</a></li>
       <li><a href="#section-5" id="markdown-toc-section-5">직접 GPU 모델 실행하기</a></li>
       <li><a href="#section-6" id="markdown-toc-section-6">작동 방식 한눈에 보기</a></li>
-      <li><a href="#section-7" id="markdown-toc-section-7">코드에서 호출하기</a></li>
+      <li><a href="#call-it-from-code" id="markdown-toc-call-it-from-code">코드에서 호출하기</a></li>
       <li><a href="#section-8" id="markdown-toc-section-8">직접 빌드하기</a></li>
     </ul>
   </li>
@@ -499,7 +499,7 @@ Review instructions:
 
 <p>하나의 캔버스에서 Hugging Face Inference Providers를 통해 모델을 두 번 호출하고, Gradio Spaces도 두 번 호출합니다.</p>
 
-<p>이것은 워크플로이므로 세 출력 각각에도 고유한 REST 엔드포인트가 생성됩니다: <code class="language-plaintext highlighter-rouge">/sticker</code>, <code class="language-plaintext highlighter-rouge">/voiceover</code>, <code class="language-plaintext highlighter-rouge">/episode_title</code>. UI를 열지 않고도 코드에서 어느 엔드포인트든 직접 호출할 수 있습니다. 실행 가능한 예시는 아래의 <a href="#section-7">코드에서 호출하기</a>를 참고하세요.</p>
+<p>이것은 워크플로이므로 세 출력 각각에도 고유한 REST 엔드포인트가 생성됩니다: <code class="language-plaintext highlighter-rouge">/sticker</code>, <code class="language-plaintext highlighter-rouge">/voiceover</code>, <code class="language-plaintext highlighter-rouge">/episode_title</code>. UI를 열지 않고도 코드에서 어느 엔드포인트든 직접 호출할 수 있습니다. 실행 가능한 예시는 아래의 <a href="#call-it-from-code">코드에서 호출하기</a>를 참고하세요.</p>
 
 <p>👉 <strong><a href="https://huggingface.co/spaces/ysharma/gr-workflow-04-ai-media-studio">AI 미디어 스튜디오 사용해 보기</a></strong></p>
 
@@ -537,9 +537,9 @@ Review instructions:
 
 <h2 id="section-6">작동 방식 한눈에 보기</h2>
 
-<p>모든 워크플로는 세 종류의 노드로 구성된 그래프입니다. <strong>references</strong>(입력), <strong>operators</strong>(작업을 수행하는 단계), <strong>subjects</strong>(출력)입니다. 연산자는 직접 작성한 Python 함수일 수도 있고, Hugging Face Inference Providers의 모델, 다른 Gradio Space, Hub 데이터셋의 행일 수도 있습니다. 타입이 지정된 포트 사이를 드래그해 연결하고 Run을 누르면 각 결과가 해당 위치에 나타나는 모습을 확인할 수 있습니다.</p>
+<p>모든 워크플로는 세 종류의 노드로 구성된 그래프입니다. <strong>references</strong>(입력), <strong>연산자</strong>(작업을 수행하는 단계)입니다. 연산자는 직접 작성한 Python 함수일 수도 있고, Hugging Face Inference Providers의 모델, 다른 Gradio Space, Hub 데이터셋의 행일 수도 있습니다. 타입이 지정된 포트 사이를 드래그해 연결하고 Run을 누르면 각 결과가 해당 위치에 나타나는 모습을 확인할 수 있습니다.</p>
 
-<h2 id="section-7">코드에서 호출하기</h2>
+<h2 id="call-it-from-code">코드에서 호출하기</h2>
 
 <p>빌드한 모든 워크플로는 추가 작업 없이 API이기도 합니다. 각 출력은 레이블을 이름으로 사용하는 REST 엔드포인트가 되며, Gradio client를 사용해 Python에서 호출할 수 있습니다. 다음은 여러 엔드포인트를 제공하는 데모 Space를 대상으로 한, 토큰이 필요 없는 라이브 예제이며 원문 그대로 실행할 수 있습니다.</p>
 
