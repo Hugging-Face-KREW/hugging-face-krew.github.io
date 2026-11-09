@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://huggingface-krew.co/pr-preview/pr-211/feed.xml" rel="self" type="application/atom+xml" /><link href="https://huggingface-krew.co/pr-preview/pr-211/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-11-09T22:08:21+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-211/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</title><link href="https://huggingface-krew.co/pr-preview/pr-211/nemotron-halloween/" rel="alternate" type="text/html" title="NVIDIA Nemotron 오픈 모델로 유령의 집 만들기" /><published>2026-10-31T00:00:00+09:00</published><updated>2026-10-31T00:00:00+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-211/nemotron-halloween</id><content type="html" xml:base="https://huggingface-krew.co/pr-preview/pr-211/nemotron-halloween/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en_us"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://huggingface-krew.co/pr-preview/pr-211/feed.xml" rel="self" type="application/atom+xml" /><link href="https://huggingface-krew.co/pr-preview/pr-211/" rel="alternate" type="text/html" hreflang="en_us" /><updated>2026-11-10T00:04:31+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-211/feed.xml</id><title type="html">Hugging Face KREW</title><author><name>Admin</name></author><entry><title type="html">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</title><link href="https://huggingface-krew.co/pr-preview/pr-211/nemotron-halloween/" rel="alternate" type="text/html" title="NVIDIA Nemotron 오픈 모델로 유령의 집 만들기" /><published>2026-10-31T00:00:00+09:00</published><updated>2026-10-31T00:00:00+09:00</updated><id>https://huggingface-krew.co/pr-preview/pr-211/nemotron-halloween</id><content type="html" xml:base="https://huggingface-krew.co/pr-preview/pr-211/nemotron-halloween/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#nvidia-nemotron-오픈-모델로-유령의-집-만들기" id="markdown-toc-nvidia-nemotron-오픈-모델로-유령의-집-만들기">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</a></li>
   <li><a href="#으악-이제-내-잔디밭에서-나가" id="markdown-toc-으악-이제-내-잔디밭에서-나가">으악! 이제 내 잔디밭에서 나가!</a>    <ul>
       <li><a href="#monsterhouse의-작동-방식" id="markdown-toc-monsterhouse의-작동-방식">MonsterHouse의 작동 방식</a></li>
@@ -229,7 +229,7 @@ Review instructions:
       <li><a href="#section-3" id="markdown-toc-section-3">공동의 사명에 기여하기</a></li>
       <li><a href="#section-4" id="markdown-toc-section-4">EvalEval Coalition 소개</a></li>
       <li><a href="#section-5" id="markdown-toc-section-5">UK AI Security Institute 소개</a></li>
-      <li><a href="#section-6" id="markdown-toc-section-6">추가 읽을거리</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">추가 자료</a></li>
     </ul>
   </li>
 </ul>
@@ -248,7 +248,7 @@ Review instructions:
 
 <h1 id="uk-aisi와-evaleval이-벤치마크-결과의-재현성을-높이는-방법">UK AISI와 EvalEval이 벤치마크 결과의 재현성을 높이는 방법</h1>
 
-<p>EvalEval Coalition은 UK AI Security Institute(AISI)가 EvalEval의 인프라를 활용해 평가 결과를 공개적으로 공유하고, 더욱 재현 가능하고 검증 가능한 평가 과학에 기여하고 있다는 소식을 전하게 되어 기쁩니다.</p>
+<p><a href="https://evalevalai.com/">EvalEval Coalition</a>은 <a href="https://www.aisi.gov.uk/">UK AI Security Institute(AISI)</a>가 EvalEval의 인프라를 활용해 평가 결과를 공개적으로 공유하고, 더욱 재현 가능하고 검증 가능한 평가 과학에 기여하고 있다는 소식을 전하게 되어 기쁩니다.</p>
 
 <p>AISI와 EvalEval은 이전에도 <a href="https://evalevalai.com/events/workshop-2025/">NeurIPS 2025와 함께 열린 공동 워크숍</a>에서 시작된 연구를 공동으로 진행했으며, AISI의 피드백은 <a href="https://evalevalai.com/projects/every-eval-ever/">Every Eval Ever (EEE) 스키마</a>를 형성하는 데 도움이 되었습니다. 이번 협력의 다음 단계에서는 이러한 공유 인프라를 실제로 적용합니다.</p>
 
@@ -272,7 +272,7 @@ Review instructions:
   <li>Terminal-Bench 2.0</li>
 </ul>
 
-<p>이 결과는 6개의 프런티어 모델을 대상으로 합니다. Claude Opus 4, Claude Opus 4.5, Claude Opus 4.6, GPT-5, GPT-5.2, GPT-5.4입니다. 또한 이번 공개에는 서로 연관된 두 가지 사이버 평가인 Cyber CTFs와 The Last Ones의 결과도 포함됩니다. 이 평가들은 일부 모델이 겹치지만 서로 다른 모델 집합을 사용합니다. 이 데이터는 <a href="https://arxiv.org/abs/2606.17930"><em>How Inference Compute Shapes Frontier LLM Evaluation</em></a> 논문과 함께 제공되며, 해당 논문은 추론 시간 컴퓨팅과 평가 프로토콜에 따라 벤치마크 성능이 어떻게 달라지는지를 연구합니다.</p>
+<p>이 결과는 Claude Opus 4, Claude Opus 4.5, Claude Opus 4.6, GPT-5, GPT-5.2, GPT-5.4 등 6개의 프런티어 모델을 다룹니다. 또한 이번 공개에는 서로 연관된 두 가지 사이버 평가인 Cyber CTFs와 The Last Ones의 결과도 포함됩니다. 이 평가들은 일부 모델이 겹치지만 서로 다른 모델 집합을 사용합니다. 이 데이터는 <a href="https://arxiv.org/abs/2606.17930"><em>How Inference Compute Shapes Frontier LLM Evaluation</em></a> 논문과 함께 제공되며, 해당 논문은 추론 시간 컴퓨팅과 평가 프로토콜에 따라 벤치마크 성능이 어떻게 달라지는지를 연구합니다.</p>
 
 <iframe src="https://evaleval-general-eval-card.hf.space/embed/eval/trajectories/aisi-inference-scaling/hle?panel=tokens" frameborder="0" width="100%" height="670px"></iframe>
 
@@ -289,9 +289,9 @@ Review instructions:
 <h2 id="section-3">공동의 사명에 기여하기</h2>
 
 <ul>
-  <li><strong>모델 개발자:</strong> <a href="https://evalcards.evalevalai.com/help/get-verified">검증된 평가 결과 보고하기</a>.</li>
+  <li><strong>모델 개발자:</strong> <a href="https://evalcards.evalevalai.com/help/get-verified">검증된 평가 결과 보고하기</a></li>
   <li><strong>평가 개발자:</strong> <a href="https://github.com/evaleval/every_eval_ever">Every Eval Ever 스키마</a>를 사용해 벤치마크와 실행 데이터를 보고하세요.</li>
-  <li><strong>평가·거버넌스·정책 연구자:</strong> 벤치마크 또는 모델별로 <a href="https://evalcards.evalevalai.com/">Evaluation Cards 탐색하기</a>하거나, 이를 활용해 평가 보고 전반의 현황을 살펴보세요.</li>
+  <li><strong>평가·거버넌스·정책 연구자:</strong> 벤치마크 또는 모델별로 <a href="https://evalcards.evalevalai.com/">Evaluation Cards를 탐색</a>하거나, 이를 활용해 평가 보고 전반의 현황을 살펴보세요.</li>
 </ul>
 
 <h2 id="section-4">EvalEval Coalition 소개</h2>
@@ -304,7 +304,7 @@ Review instructions:
 
 <p><a href="https://www.aisi.gov.uk/">UK AI Security Institute</a>는 영국 정부의 Department for Science, Innovation and Technology 산하 연구 기관입니다. 이 기관의 사명은 첨단 AI가 초래하는 위험을 과학적으로 이해할 수 있도록 정부를 지원하는 것입니다. AISI는 첨단 AI의 능력과 영향을 이해하고, 완화책을 개발·검증하며, 정책 수립에 정보를 제공하기 위한 연구를 수행하고 인프라를 구축합니다.</p>
 
-<h2 id="section-6">추가 읽을거리</h2>
+<h2 id="section-6">추가 자료</h2>
 
 <ul>
   <li><a href="https://arxiv.org/abs/2606.17930"><em>How Inference Compute Shapes Frontier LLM Evaluation</em></a></li>
