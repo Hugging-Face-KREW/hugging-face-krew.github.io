@@ -36,7 +36,7 @@ Review instructions:
 
 # 이제 Transformers에서 llama.cpp 양자화 모델을 실행할 수 있습니다
 
-**GGUF 모델을 Transformers에서 효율적으로 실행할 수 있도록 지원을 추가하고 있습니다.** 따라서 노트북 메모리 크기에 맞게 조정된 체크포인트를 익숙한 Transformers API를 통해 사용할 수 있습니다. Hugging Face Hub에서 GGUF를 선택하고 `from_pretrained()`로 로드한 다음, 자신의 머신에서 생성을 시작해 보세요.
+**GGUF 모델을 Transformers에서 효율적으로 실행할 수 있도록 지원을 추가하고 있습니다.** 따라서 노트북 메모리에 맞는 크기의 체크포인트를 익숙한 Transformers API를 통해 사용할 수 있습니다. Hugging Face Hub에서 GGUF를 선택하고 `from_pretrained`로 로드한 다음, 자신의 머신에서 생성을 시작해 보세요.
 
 <video controls width="100%">
   <source src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/transformers-llama-cpp-quants/transformers-gguf.mp4" type="video/mp4">
@@ -82,7 +82,7 @@ pip install -U "git+https://github.com/huggingface/transformers.git" kernels
 
 GGUF 모델을 로드하려면 Hub의 `model_id`와 파일명을 `gguf_file` 인자로 지정해 `from_pretrained`에 전달합니다.
 
-추가 설정은 필요하지 않습니다. 가중치가 Metal에 패킹된 상태로 유지되면 Transformers가 호환되는 ggml/Metal 레이어 커널을 자동으로 로드하고 `ggml-org/ggml-attn`을 어텐션 구현으로 사용합니다. 해당 커널을 가져올 수 없으면 모델은 경고와 함께 `"sdpa"`로 대체되며, `attn_implementation="sdpa"`을 명시적으로 전달하여 언제든 `"sdpa"`을 강제로 사용할 수 있습니다. 더 많은 로딩 옵션은 [GGUF 문서](https://huggingface.co/docs/transformers/main/en/quantization/gguf)을 참조하세요.
+추가 설정은 필요하지 않습니다. 가중치가 Metal에 패킹된 상태로 유지되면 Transformers가 호환되는 ggml/Metal 레이어 커널을 자동으로 로드하고 `ggml-org/ggml-attn`을 어텐션 구현으로 사용합니다. 해당 커널을 가져올 수 없으면 모델은 경고와 함께 `"sdpa"`로 대체되며, `attn_implementation="sdpa"`를 명시적으로 전달하여 언제든 `"sdpa"`을 강제로 사용할 수 있습니다. 더 많은 로딩 옵션은 [GGUF 문서](https://huggingface.co/docs/transformers/main/en/quantization/gguf)를 참조하세요.
 
 ```python
 import torch
@@ -123,7 +123,7 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 
 ## 원하는 인터페이스로 GGUF 제공하기 {#section-3}
 
-동일한 체크포인트를 [`transformers serve`](https://huggingface.co/docs/transformers/main/en/serve-cli/serving)에서도 사용할 수 있으며, [`transformers serve`](https://huggingface.co/docs/transformers/main/en/serve-cli/serving)는 OpenAI 호환 API를 제공합니다.
+동일한 체크포인트를 [`transformers serve`](https://huggingface.co/docs/transformers/main/en/serve-cli/serving)에서도 사용할 수 있으며, transformers serve는 OpenAI 호환 API를 제공합니다.
 
 ```bash
 pip install -U "transformers[serving] @ git+https://github.com/huggingface/transformers.git" kernels
