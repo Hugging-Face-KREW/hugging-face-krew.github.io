@@ -1,0 +1,3424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="QZ-KTokmKMtUlByGsNQgbr3cEYN3fR5o_Iv8FzAr6MA" />
+   <!-- Google Search Console Verification end -->
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F80XVQTHJL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-F80XVQTHJL');
+    </script>
+    <!-- Google analytics end -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/pr-preview/pr-268/assets/images/favicon.ico" />
+
+    <!-- Begin Jekyll SEO tag v2.9.1 -->
+<title>Hugging Face의 의사결정 모델 | Hugging Face KREW</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Hugging Face의 의사결정 모델" />
+<meta name="author" content="dailybot" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="이 글은 Hugging Face 블로그의 Decision Models in Hugging Face를 한국어로 번역한 글입니다." />
+<meta name="twitter:description" property="og:description" content="이 글은 Hugging Face 블로그의 Decision Models in Hugging Face를 한국어로 번역한 글입니다." />
+<link rel="canonical" href="https://huggingface-krew.co/pr-preview/pr-268/decision/" />
+<meta property="og:url" content="https://huggingface-krew.co/pr-preview/pr-268/decision/" />
+<meta property="og:site_name" content="Hugging Face KREW" />
+<meta property="og:image" content="https://huggingface-krew.co/pr-preview/pr-268/decision/assets/images/blog/posts/2026-11-10-decision/thumbnail.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-11-10T00:00:00+09:00" />
+<meta property="article:modified_time" content="2026-11-10T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://huggingface-krew.co/pr-preview/pr-268/decision/assets/images/blog/posts/2026-11-10-decision/thumbnail.png" />
+<meta name="twitter:title" content="Hugging Face의 의사결정 모델" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dailybot"},"dateModified":"2026-11-10T00:00:00+09:00","datePublished":"2026-11-10T00:00:00+09:00","description":"이 글은 Hugging Face 블로그의 Decision Models in Hugging Face를 한국어로 번역한 글입니다.","headline":"Hugging Face의 의사결정 모델","image":"https://huggingface-krew.co/pr-preview/pr-268/decision/assets/images/blog/posts/2026-11-10-decision/thumbnail.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://huggingface-krew.co/pr-preview/pr-268/decision/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://huggingface-krew.co/pr-preview/pr-268/assets/images/hfkr_logo.png"},"name":"dailybot"},"url":"https://huggingface-krew.co/pr-preview/pr-268/decision/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link href="/pr-preview/pr-268/assets/css/theme.css" rel="stylesheet" />
+
+    <!-- custom CSS - Remove this if you don't use it or choose to customize the stylesheet with sass-->
+    <link href="/pr-preview/pr-268/assets/css/custom.css" rel="stylesheet" />
+    <link href="/pr-preview/pr-268/assets/css/syntax.css" rel="stylesheet" />
+    <!-- custom CSS end-->
+
+    
+
+    <!-- KaTeX -->
+    <!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  </head>
+
+  
+  <body class="layout-post">
+    <!-- Menu Navigation
+================================================== -->
+    <div class="navigation-wrap start-header start-style">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand text-dark font-weight-bold big d-flex align-items-center"
+            href="/pr-preview/pr-268/"
+          >
+            
+            <img class="mr-2" src="/pr-preview/pr-268/assets/images/hfkr_logo.png" alt="logo" />
+            
+
+            <span class="font-weight-bold serif-font"
+              >Hugging Face KREW Blog</span
+            >
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              fill="currentColor"
+              class="bi bi-three-dots-vertical"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul
+              class="navbar-nav ml-auto font-weight-bold d-flex align-items-center"
+            >
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-268/"
+                  alt="Home"
+                  >Home</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-268/about/"
+                  alt="About"
+                  >About</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 "
+                  href="/pr-preview/pr-268/activities/"
+                  alt="Activities"
+                  >Activities</a
+                >
+              </li>
+              
+              <li class="nav-item">
+                <a
+                  class="nav-link px-3 ml-2 btn btn-dark text-white px-3"
+                  href="https://hugging-face-krew.github.io/how-to-contribute/"
+                  alt="🤗 어떻게 기여하나요?"
+                  >🤗 어떻게 기여하나요?</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Container
+================================================== -->
+    <main class="container"><!-- Begin Article
+================================================== -->
+
+
+
+
+	<div class="row">
+
+		<!-- Post -->        
+        
+
+        <!-- Post Featured Image -->
+            
+        
+            <div id="featured-image">
+                <img class="back-image img-fluid rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-11-10-decision/thumbnail.png" alt="Hugging Face의 의사결정 모델">    
+                <img class="featured-image img-fluid rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-11-10-decision/thumbnail.png" alt="Hugging Face의 의사결정 모델">    
+            </div>
+        
+        <!-- End Featured Image -->
+
+		<div class="col-sm-8">
+			<div class="mainheading">             
+                
+                <!-- Post Categories -->
+                <div class="after-post-tags">
+                    <ul class="tags">
+                        
+                        
+                        <li>
+                         <a href="/pr-preview/pr-268/categories#huggingface">HuggingFace</a>
+                        </li>
+                        
+                        <li>
+                         <a href="/pr-preview/pr-268/categories#translation">Translation</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- End Categories -->
+                
+                <!-- Post Title -->
+				<h1 class="posttitle">Hugging Face의 의사결정 모델</h1>
+                
+			</div>
+
+			
+
+			<!-- Post Content -->
+			<div class="article-post serif-font">
+                
+                    <ul id="markdown-toc">
+  <li><a href="#hugging-face의-의사결정-모델" id="markdown-toc-hugging-face의-의사결정-모델">Hugging Face의 의사결정 모델</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">의사결정 모델이란 무엇인가요?</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">모든 작업에 LLM을 사용하지 않는 이유는 무엇인가요?</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">의사결정 모델은 분류 모델과 어떻게 다른가요?</a>        <ul>
+          <li><a href="#전통적-분류" id="markdown-toc-전통적-분류">전통적 분류</a></li>
+          <li><a href="#zero-shot-분류" id="markdown-toc-zero-shot-분류">Zero-shot 분류</a></li>
+          <li><a href="#의사결정-모델이-다른-점" id="markdown-toc-의사결정-모델이-다른-점">의사결정 모델이 다른 점</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-4" id="markdown-toc-section-4">의사결정 모델 인터페이스</a>        <ul>
+          <li><a href="#state" id="markdown-toc-state">State</a></li>
+          <li><a href="#questions와-해당-primitive" id="markdown-toc-questions와-해당-primitive">Questions와 해당 primitive</a>            <ul>
+              <li><a href="#choice-선택지에-대한-확률-분포" id="markdown-toc-choice-선택지에-대한-확률-분포">Choice: 선택지에 대한 확률 분포</a></li>
+              <li><a href="#score-순서가-있는-분포의-기댓값" id="markdown-toc-score-순서가-있는-분포의-기댓값">Score: 순서가 있는 분포의 기댓값</a></li>
+              <li><a href="#noul-베르누이-결정" id="markdown-toc-noul-베르누이-결정">Noul: 베르누이 결정</a></li>
+              <li><a href="#confidence-모델은-얼마나-확신하나요" id="markdown-toc-confidence-모델은-얼마나-확신하나요">Confidence: 모델은 얼마나 확신하나요?</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#section-5" id="markdown-toc-section-5">Hugging Face 생태계의 의사결정 모델</a>        <ul>
+          <li><a href="#1-transformers를-사용한-서빙" id="markdown-toc-1-transformers를-사용한-서빙">1. Transformers를 사용한 서빙</a></li>
+          <li><a href="#2-llamacpp를-사용한-서빙" id="markdown-toc-2-llamacpp를-사용한-서빙">2. llama.cpp를 사용한 서빙</a></li>
+          <li><a href="#3-hugging-face-hub에서-모델-찾기" id="markdown-toc-3-hugging-face-hub에서-모델-찾기">3. Hugging Face Hub에서 모델 찾기</a></li>
+          <li><a href="#4-hugging-face-도구를-사용한-의사결정-모델-학습" id="markdown-toc-4-hugging-face-도구를-사용한-의사결정-모델-학습">4. Hugging Face 도구를 사용한 의사결정 모델 학습</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-6" id="markdown-toc-section-6">마무리</a></li>
+    </ul>
+  </li>
+</ul>
+<!--toc-->
+<p><em>이 글은 Hugging Face 블로그의 <a href="https://huggingface.co/blog/decision">Decision Models in Hugging Face</a>를 한국어로 번역한 글입니다.</em></p>
+
+<!-- Source: https://huggingface.co/blog/decision -->
+
+<hr />
+
+<!--
+Review instructions:
+- Verify the Korean translation against the source post.
+- Preserve technical meaning, code blocks, links, headings, model names, API names, and product names.
+-->
+
+<h1 id="hugging-face의-의사결정-모델">Hugging Face의 의사결정 모델</h1>
+
+<p>대규모 언어 모델(LLM)은 텍스트 생성에 탁월합니다. 우리는 질문에 답하고, 코드를 작성하고, 문제를 추론하는 등 다양한 작업에 이를 사용합니다. <em>하지만 모든 문제에 텍스트 생성이 필요한 것은 아닙니다.</em></p>
+
+<p>다음과 같은 메시지를 받는 고객 지원 시스템을 생각해 보겠습니다.</p>
+
+<p>“구독 요금이 두 번 청구되었습니다. 오늘 환불받고 싶습니다.”</p>
+
+<p>시스템은 어떤 팀이 요청을 처리해야 하는지, 얼마나 긴급한지, 고객이 환불을 요청하는지를 판단해야 합니다.</p>
+
+<p>LLM에 이러한 답변을 포함하는 JSON 객체를 반환하도록 요청할 수도 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>llama cli <span class="nt">-hf</span> ggml-org/gemma-4-e4b-it-GGUF:Q4_0
+
+<span class="o">&gt;</span> We have the following customer support ticket, <span class="s2">"I was charged twice for my subscription. I need a refund today."</span>, which team should handle the request, how urgent it is, and whether the customer is requesting a refund. Give the answers <span class="k">in </span>JSON.
+
+<span class="o">[</span>Start thinking]
+...
+<span class="o">[</span>end thinking]
+<span class="sb">```</span>json
+<span class="o">{</span>
+  <span class="s2">"team_to_handle"</span>: <span class="s2">"Billing"</span>,
+  <span class="s2">"urgency"</span>: <span class="s2">"High"</span>,
+  <span class="s2">"request_refund"</span>: <span class="nb">true</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>하지만 모델이 텍스트를 전혀 생성하지 않고 사용 가능한 선택지를 직접 평가하여 그에 대한 확률 분포를 반환할 수 있다면 어떨까요?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="n">decide</span> <span class="o">=</span> <span class="nf">pipeline</span><span class="p">(</span><span class="sh">"</span><span class="s">decision</span><span class="sh">"</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">autotrust/GEV-26B-Decide</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">decision</span> <span class="o">=</span> <span class="nf">decide</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">state</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">I was charged twice for my order and want a refund.</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">questions</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">department</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">choice</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">instructions</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Which team should handle this?</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">criteria</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="sh">"</span><span class="s">billing</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Payments and refunds</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">technical</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Bugs and technical issues</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">sales</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Pricing and subscriptions</span><span class="sh">"</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># {
+#   'department': {
+#       'type': 'choice',
+#       'choice': 'billing',
+#       'confidence': 0.9974000453948975,
+#       'probabilities': {
+#         'billing': 0.9982666969299316,
+#         'technical': 0.0010246571619063616,
+#         'sales': 0.0007087149424478412
+#       }
+#     }
+# }
+</span>
+</code></pre></div></div>
+
+<p>이것이 바로 <strong>의사결정 모델</strong>의 핵심 아이디어입니다.</p>
+
+<h2 id="section-1">의사결정 모델이란 무엇인가요?</h2>
+
+<p>의사결정 모델은 입력 컨텍스트(상태)를 받아, 미리 정의된 가능한 답변 집합(primitive)을 사용해 질문을 평가하고, 확률과 함께 구조화된 결정을 반환합니다. 모델에 토큰 단위로 답변을 생성하도록 요청하는 대신, 애플리케이션이 이미 이해할 수 있는 답변에 확률을 할당하도록 요청하는 것입니다.</p>
+
+<p><img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/decision/decision-models.png" alt="state and primitives for the decision models" /></p>
+
+<p><a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev">TypeSafe AI는 Jev를 소개하며</a>, 이를 <a href="https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow"><em>System One 모델</em></a>이라고 설명했습니다. 이 이름은 빠르고 직관적인 사고(System 1)와 더 느리고 숙고하는 사고(System 2)의 구분에서 영감을 얻었습니다.</p>
+
+<blockquote>
+  <p>인지 이론을 특정해서 언급하기보다 모델의 계산상 역할을 설명하기 때문에, 커뮤니티에서는 <strong>의사결정 모델</strong>이라는 용어로 의견이 모였습니다. 이 글의 나머지 부분에서는 모델을 “system one 모델” 대신 “의사결정 모델”이라고 부르겠습니다. (<a href="https://x.com/ariG23498/status/2113220513158009022">이러한 모델을 어떻게 부를지 결정하기 위해 실시한 twitter 설문</a>)</p>
+</blockquote>
+
+<p>의사결정 모델의 기본 인터페이스는 다음과 같습니다.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>State + Questions + Allowed Answers → Decisions + Probabilities
+</code></pre></div></div>
+
+<h2 id="section-2">모든 작업에 LLM을 사용하지 않는 이유는 무엇인가요?</h2>
+
+<p>LLM에 우리의 결정을 포함하는 JSON 객체를 반환하도록 간단히 프롬프트할 수 있습니다. 실제로 많은 애플리케이션이 이미 분류, 라우팅 및 기타 구조화된 작업에 언어 모델을 이런 방식으로 사용하고 있습니다.</p>
+
+<p>하지만 이 접근 방식에는 몇 가지 문제가 있습니다.</p>
+
+<ul>
+  <li>LLM이 요청된 스키마를 따른다는 보장이 없습니다: 명시적인 지시를 따르더라도 모델은 잘못된 JSON을 생성하거나, 예상치 못한 키를 추가하거나, 허용된 선택지에 없는 답변을 반환할 수 있습니다.</li>
+  <li>제약 디코딩은 도움이 되지만 계산 오버헤드를 없애지는 못합니다: <a href="https://github.com/dottxt-ai/outlines">Outlines</a> 및 <a href="https://github.com/mlc-ai/xgrammar">XGrammar</a>와 같은 라이브러리는 각 단계에서 모델이 생성할 수 있는 토큰을 제한하여 문법 또는 JSON 스키마를 강제할 수 있습니다. 이를 통해 출력이 지원되는 구조적 제약을 따르도록 보장할 수 있지만, 추가 작업이 발생합니다.</li>
+  <li>전체 응답을 생성해야 하는 이유는 무엇인가요?: LLM은 개방형 생성을 위해 설계되었지만, 애플리케이션이 미리 정의된 답변 중 하나를 선택하기만 하면 되는 경우에는 자기회귀 디코딩이 불필요한 작업일 수 있습니다.</li>
+</ul>
+
+<h2 id="section-3">의사결정 모델은 분류 모델과 어떻게 다른가요?</h2>
+
+<p>의사결정 모델의 인터페이스를 이해하기 전에, 서로 밀접하게 관련된 두 가지 접근 방식인 전통적 분류와 zero-shot 분류를 다시 살펴보는 것이 유용합니다.</p>
+
+<h3 id="전통적-분류">전통적 분류</h3>
+
+<p>고객 지원 요청을 다음 세 부서로 라우팅하는 분류기를 학습한다고 가정해 보겠습니다.</p>
+
+<ul>
+  <li>결제</li>
+  <li>기술 지원</li>
+  <li>영업</li>
+</ul>
+
+<p>기존의 분류 모델은 입력을 미리 정의된 레이블 집합에 매핑하는 방법을 학습합니다. 학습 중에 모델은 예시를 통해 이러한 레이블을 예측하는 법을 배웁니다. 일반적으로 분류 헤드는 클래스마다 하나의 로짓을 생성하고, softmax는 이러한 로짓을 확률 분포로 변환합니다.</p>
+
+<p>여기서의 한계는 <strong><em>출력 클래스가 모델의 분류 헤드에 내장되어 있다는 것</em></strong>입니다.</p>
+
+<p>Legal과 같은 네 번째 부서를 추가하더라도 기존 분류기가 이에 대응하는 출력 클래스를 자동으로 얻지는 못합니다. 헤드를 수정하고, 학습 데이터를 수집한 다음, 모델을 <strong>재학습</strong>하거나 조정해야 할 수 있습니다.</p>
+
+<h3 id="zero-shot-분류">Zero-shot 분류</h3>
+
+<p><a href="https://huggingface.co/tasks/zero-shot-classification">Zero-shot 분류</a>는 이러한 한계의 중요한 부분을 해결합니다. 분류기가 모든 출력 카테고리에 대해 구체적으로 학습되어 있어야 하는 대신, 추론 시점에 후보 레이블을 제공합니다.</p>
+
+<p>예를 들어:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="n">classifier</span> <span class="o">=</span> <span class="nf">pipeline</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">zero-shot-classification</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">facebook/bart-large-mnli</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nf">classifier</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">My payment was deducted twice.</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">candidate_labels</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">billing</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">technical support</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">sales</span><span class="sh">"</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="c1"># {'sequence': 'My payment was deducted twice.',
+#  'labels': ['billing', 'sales', 'technical support'],
+#  'scores': [0.8466812372207642, 0.0962134450674057, 0.05710534751415253]}
+</span></code></pre></div></div>
+
+<p>기존의 고정 레이블 분류기와 달리 카테고리는 요청마다 달라질 수 있습니다. Legal과 같은 다른 부서를 추가하고 모델 출력을 확인해 보겠습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="n">classifier</span> <span class="o">=</span> <span class="nf">pipeline</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">zero-shot-classification</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">facebook/bart-large-mnli</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nf">classifier</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">My payment was deducted twice.</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">candidate_labels</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">billing</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">technical support</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">sales</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">legal</span><span class="sh">"</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="c1"># {'sequence': 'My payment was deducted twice.',
+#  'labels': ['billing', 'sales', 'technical support', 'legal'],
+#  'scores': [0.8185835480690002, 0.09302053600549698, 0.05521026626229286, 0.03318570926785469]}
+</span></code></pre></div></div>
+
+<p>일반적인 구현 중 하나는 자연어 추론(NLI)을 위해 학습된 모델을 사용합니다. 각 후보 레이블을 가설로 변환하고, 모델은 입력이 해당 가설을 얼마나 강하게 함의하는지 측정합니다.</p>
+
+<p>이는 이미 의사결정 모델과 상당히 비슷하게 들립니다. 실제로 여러 측면에서 그렇습니다.</p>
+
+<h3 id="의사결정-모델이-다른-점">의사결정 모델이 다른 점</h3>
+
+<p>의사결정 모델은 입력을 단순히 카테고리에 할당하는 것을 넘어 이 아이디어를 확장합니다. 의사결정 모델은 동일한 상태에 대해 서로 다른 답변 유형을 가진 여러 개의 이름 있는 질문을 받을 수 있습니다. 유형에는 대안 중 하나를 선택하는 것(choice), 순서가 있는 척도에서 점수를 매기는 것(score), 명제가 참일 확률을 추정하는 것(noul)이 있습니다.</p>
+
+<p>더 중요한 점은 인터페이스가 <strong>가능한 결정에 대한 확률 분포</strong>를 중심으로 설계되었다는 것입니다.</p>
+
+<p>다음 세 가지 접근 방식을 생각해 보겠습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>속성</th>
+      <th>분류</th>
+      <th>Zero-shot 분류</th>
+      <th>의사결정 모델</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>선택지에 대한 확률</td>
+      <td>예</td>
+      <td>예</td>
+      <td>예</td>
+    </tr>
+    <tr>
+      <td>추론 시 정의되는 레이블</td>
+      <td>아니요</td>
+      <td>예</td>
+      <td>예</td>
+    </tr>
+    <tr>
+      <td>유형이 지정된 여러 질문</td>
+      <td>아니요</td>
+      <td>아니요</td>
+      <td>예</td>
+    </tr>
+    <tr>
+      <td>순서가 있는 점수 및 yes/no 결정</td>
+      <td>작업별</td>
+      <td>조정으로 가능</td>
+      <td>기본 primitive</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>의사결정 모델의 장점은 런타임에 정의되는 레이블이나 확률적 분류를 새롭게 발명했다는 데 있지 않습니다. 이러한 기능을 일관된 인터페이스로 구성하고, 특히 의사결정에 최적화된 아키텍처와 학습 절차를 기반으로 할 수 있다는 점에 있습니다.</p>
+
+<h2 id="section-4">의사결정 모델 인터페이스</h2>
+
+<p>의사결정 모델 요청은 다음 두 가지 구성 요소로 이루어집니다.</p>
+
+<ol>
+  <li>state</li>
+  <li>questions</li>
+</ol>
+
+<h3 id="state">State</h3>
+
+<p>state는 모델이 평가해야 하는 정보입니다. 문자열, 구조화된 JSON 객체 또는 지원되는 omni-modal 모델의 경우 다른 모달리티일 수 있습니다.</p>
+
+<p>예를 들어:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"customer_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I was charged twice. Please refund me today."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pro"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"previous_tickets"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="questions와-해당-primitive">Questions와 해당 primitive</h3>
+
+<p>Questions는 상태에 대해 알고 싶은 내용을 설명합니다. 의사결정 모델 인터페이스에서는 세 가지 기본 primitive가 서로 다른 형태의 결정을 나타냅니다.</p>
+
+<ol>
+  <li><strong>Choice:</strong> 여러 가능한 답변 중 하나를 선택합니다.</li>
+  <li><strong>Score:</strong> 순서가 있는 척도에서 무언가를 평가합니다.</li>
+  <li><strong>Noul:</strong> yes/no 질문에 확률적으로 답합니다.</li>
+</ol>
+
+<p>하나씩 살펴보겠습니다.</p>
+
+<h4 id="choice-선택지에-대한-확률-분포">Choice: 선택지에 대한 확률 분포</h4>
+
+<p>Choice는 가장 직관적인 primitive이며 전통적 분류에 가장 가깝습니다.</p>
+
+<p>다음과 같이 질문한다고 가정해 보겠습니다.</p>
+
+<blockquote>
+  <p>이 고객 요청은 어느 부서에서 처리해야 하나요?</p>
+</blockquote>
+
+<p>사용 가능한 선택지는 Billing, Technical support, Sales입니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="n">decide</span> <span class="o">=</span> <span class="nf">pipeline</span><span class="p">(</span><span class="sh">"</span><span class="s">decision</span><span class="sh">"</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">autotrust/GEV-26B-Decide</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">decision</span> <span class="o">=</span> <span class="nf">decide</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">state</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">I was charged twice for my order and want a refund.</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">questions</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">department</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">choice</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">instructions</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Which team should handle this?</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">criteria</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="sh">"</span><span class="s">billing</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Payments and refunds</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">technical</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Bugs and technical issues</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">sales</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Pricing and subscriptions</span><span class="sh">"</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># {
+#   'department': {
+#     'type': 'choice',
+#     'choice': 'billing',
+#     'confidence': 0.9974000453948975,
+#     'probabilities': {
+#       'billing': 0.9982666969299316,
+#       'technical': 0.0010246571619063616,
+#       'sales': 0.0007087149424478412
+#     }
+#   }
+# }
+</span></code></pre></div></div>
+
+<p>모델은 각 선택지에 로짓을 할당합니다. 로짓 ($z_1,\ldots,z_K$)이 주어졌을 때 (K개 클래스), softmax를 사용하여 확률을 얻을 수 있습니다.</p>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>p</mi><mi>i</mi></msub><mo>=</mo><mfrac><mrow><mi>exp</mi><mo>⁡</mo><mo stretchy="false">(</mo><msub><mi>z</mi><mi>i</mi></msub><mi mathvariant="normal">/</mi><mi>T</mi><mo stretchy="false">)</mo></mrow><mrow><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>K</mi></munderover><mi>exp</mi><mo>⁡</mo><mo stretchy="false">(</mo><msub><mi>z</mi><mi>j</mi></msub><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">p_i=\frac{\exp(z_i/T)}{\sum_{j=1}^{K}\exp(z_j)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.734em;vertical-align:-1.307em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.1288em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9812em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0715em;">K</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4358em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">exp</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0572em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop">exp</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.307em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+
+<p>여기서 (K)는 선택지의 수입니다.</p>
+
+<p>다음과 같은 예시 분포를 생각해 보겠습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>선택지</th>
+      <th>확률</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Billing</td>
+      <td>0.998</td>
+    </tr>
+    <tr>
+      <td>Technical support</td>
+      <td>0.001</td>
+    </tr>
+    <tr>
+      <td>Sales</td>
+      <td>0.001</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>확률의 합은 1입니다.</p>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>K</mi></munderover><msub><mi>p</mi><mi>i</mi></msub><mo>=</mo><mn>1.</mn></mrow><annotation encoding="application/x-tex">\sum_{i=1}^{K}p_i=1.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.106em;vertical-align:-1.2777em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0715em;">K</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1.</span></span></span></span></span>
+
+<p>모델은 확률이 가장 큰 선택지를 선택합니다.</p>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>y</mi><mo>^</mo></mover><mo>=</mo><mi>arg</mi><mo>⁡</mo><munder><mrow><mi>max</mi><mo>⁡</mo></mrow><mi>i</mi></munder><msub><mi>p</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\hat y=\arg\max_i p_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6944em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1944em;"><span class="mord">^</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1944em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1582em;vertical-align:-0.7277em;"></span><span class="mop">ar<span style="margin-right:0.0139em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.4306em;"><span style="top:-2.3723em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop">max</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7277em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>
+
+<p>이 경우 선택지는 Billing이며 확률은 0.998입니다. 하지만 나머지 확률도 유용합니다. 이 확률들은 모델이 대안들 사이에 자신의 믿음을 어떻게 분배하는지 알려 줍니다.</p>
+
+<h4 id="score-순서가-있는-분포의-기댓값">Score: 순서가 있는 분포의 기댓값</h4>
+
+<p>Choice는 서로 구분되는 여러 대안이 있을 때 작동합니다. 그렇다면 순서가 있는 척도에서 무언가를 측정하려면 어떻게 해야 할까요?</p>
+
+<p>다음 질문을 생각해 보겠습니다.</p>
+
+<blockquote>
+  <p>이 고객 요청은 얼마나 긴급한가요?</p>
+</blockquote>
+
+<p>세 가지 수준을 정의합니다.</p>
+
+<ul>
+  <li>0: 낮은 긴급도</li>
+  <li>1: 중간 긴급도</li>
+  <li>2: 높은 긴급도</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="n">decide</span> <span class="o">=</span> <span class="nf">pipeline</span><span class="p">(</span><span class="sh">"</span><span class="s">decision</span><span class="sh">"</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">autotrust/GEV-26B-Decide</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">decision</span> <span class="o">=</span> <span class="nf">decide</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">state</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">I was charged twice for my order and want a refund.</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">questions</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">urgency</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">score</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">instructions</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">How urgent is the request?</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">criteria</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">low</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">medium</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">high</span><span class="sh">"</span><span class="p">]</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># {
+#   'urgency': {
+#     'type': 'score',
+#     'score': 1.7053890228271484,
+#     'legend': {
+#       '0': 'low',
+#       '1': 'medium',
+#       '2': 'high'
+#     },
+#     'confidence': 0.5580834252759814,
+#     'probabilities': {
+#       '0': 0.014908230863511562,
+#       '1': 0.26479458808898926,
+#       '2': 0.7202972173690796
+#     }
+#   }
+# }
+</span></code></pre></div></div>
+
+<p>모델은 다시 확률 분포를 생성합니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">수준</th>
+      <th style="text-align: center">확률</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">0 — 낮음</td>
+      <td style="text-align: center">0.01</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1 — 중간</td>
+      <td style="text-align: center">0.26</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2 — 높음</td>
+      <td style="text-align: center">0.72</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Score primitive는 가장 가능성이 높은 수준만 반환하는 대신 <strong>수준 인덱스의 기댓값</strong>을 계산합니다.</p>
+
+<p>수준을 나타내는 확률 변수 (X)에 대해 기댓값은 다음과 같습니다.</p>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="double-struck">E</mi><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>K</mi><mo>−</mo><mn>1</mn></mrow></munderover><mi>i</mi><msub><mi>p</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\mathbb{E}[X]=\sum_{i=0}^{K-1}ip_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathbb">E</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.0785em;">X</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3.106em;vertical-align:-1.2777em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0715em;">K</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">i</span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>
+
+<p>이 예시에서는 다음과 같습니다.</p>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="double-struck">E</mi><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo><mo>=</mo><mn>0</mn><mo stretchy="false">(</mo><mn>0.01</mn><mo stretchy="false">)</mo><mo>+</mo><mn>1</mn><mo stretchy="false">(</mo><mn>0.26</mn><mo stretchy="false">)</mo><mo>+</mo><mn>2</mn><mo stretchy="false">(</mo><mn>0.72</mn><mo stretchy="false">)</mo><mo>=</mo><mn>1.7</mn></mrow><annotation encoding="application/x-tex">\mathbb{E}[X] = 0(0.01)+1(0.26)+2(0.72)=1.7</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathbb">E</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.0785em;">X</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mopen">(</span><span class="mord">0.01</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mopen">(</span><span class="mord">0.26</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mopen">(</span><span class="mord">0.72</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1.7</span></span></span></span></span>
+
+<p>따라서 보고되는 점수는 <code class="language-plaintext highlighter-rouge">1.7</code>입니다.</p>
+
+<p>이는 모델이 중간과 높음 사이에 있는 가상의 수준을 선택했다는 뜻이 아닙니다. 모델의 확률 분포에 대한 기댓값이 1.7이라는 뜻입니다.</p>
+
+<h4 id="noul-베르누이-결정">Noul: 베르누이 결정</h4>
+
+<p>세 번째 primitive는 이진 질문을 나타내는 Noul입니다.</p>
+
+<p>예를 들어:</p>
+
+<blockquote>
+  <p>고객이 환불을 요청하고 있나요?</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="n">decide</span> <span class="o">=</span> <span class="nf">pipeline</span><span class="p">(</span><span class="sh">"</span><span class="s">decision</span><span class="sh">"</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">autotrust/GEV-26B-Decide</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">decision</span> <span class="o">=</span> <span class="nf">decide</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">state</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">I was charged twice for my order and want a refund.</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">questions</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">refund</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">noul</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">instructions</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Is the customer requesting a refund?</span><span class="sh">"</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># {
+#   'refund': {
+#     'type': 'noul',
+#     'noul': 0.9947046637535095
+#   }
+# }
+</span></code></pre></div></div>
+
+<p>선택지 목록을 정의하는 대신, 답변이 참일 확률을 반환하도록 모델에 요청합니다. 이는 베르누이 분포를 사용해 이해할 수 있습니다(noul은 Bernoulli에서 유래했습니다).</p>
+
+<p>이진 결과를 나타내는 (Y)를 다음과 같이 정의합니다.</p>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>Y</mi><mo>∼</mo><mi mathvariant="normal">Bernoulli</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Y\sim\operatorname{Bernoulli}(p)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.2222em;">Y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mord mathrm">Bernoulli</span></span><span class="mopen">(</span><span class="mord mathnormal">p</span><span class="mclose">)</span></span></span></span></span>
+
+<p>여기서</p>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>Y</mi><mo>=</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mi>p</mi><mo separator="true">,</mo><mspace width="2em"/><mi>P</mi><mo stretchy="false">(</mo><mi>Y</mi><mo>=</mo><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><mi>p</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">P(Y=1)=p,\qquad P(Y=0)=1-p.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.2222em;">Y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.2222em;">Y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span><span class="mord">.</span></span></span></span></span>
+
+<p>모델이 다음을 반환한다고 가정해 보겠습니다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"noul"</span><span class="p">,</span><span class="w"> </span><span class="nl">"noul"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.92</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Yes에 <code class="language-plaintext highlighter-rouge">0.92</code>, No에 <code class="language-plaintext highlighter-rouge">0.08</code>의 확률을 할당합니다.</p>
+
+<p>여기서 모델은 이진 답변을 무작위로 샘플링하지 않습니다. 확률 매개변수 자체를 반환하고, 애플리케이션이 이를 바탕으로 어떻게 동작할지 결정하도록 둡니다.</p>
+
+<h4 id="confidence-모델은-얼마나-확신하나요">Confidence: 모델은 얼마나 확신하나요?</h4>
+
+<p>지금까지 모델에서 확률 분포를 얻었습니다. 하지만 의사결정 모델 인터페이스는 Choice와 Score에 대해 <code class="language-plaintext highlighter-rouge">confidence</code>라는 필드도 반환합니다.</p>
+
+<p>전체 분포에는 여러 가능한 답변이 포함될 수 있으며, 모델의 믿음이 얼마나 집중되어 있는지를 요약하면 유용합니다. <code class="language-plaintext highlighter-rouge">confidence</code>를 사용하면 바로 이를 얻을 수 있습니다.</p>
+
+<p>(K)개의 선택지가 있는 Choice에서 confidence는 다음과 같습니다.</p>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><msub><mi>p</mi><mi>max</mi><mo>⁡</mo></msub><mo>−</mo><mfrac><mn>1</mn><mi>K</mi></mfrac></mrow><mrow><mn>1</mn><mo>−</mo><mfrac><mn>1</mn><mi>K</mi></mfrac></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{p_{\max}-\frac{1}{K}}{1-\frac{1}{K}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.6602em;vertical-align:-1.0801em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5801em;"><span style="top:-2.2649em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0715em;">K</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.735em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mtight">m</span><span class="mtight">a</span><span class="mtight">x</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0715em;">K</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.0801em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+
+<p>여기서 ($p_{\max}$)는 예측된 확률 중 가장 큰 값입니다.</p>
+
+<p>여기서의 직관은 다음과 같습니다.</p>
+
+<ul>
+  <li>균등 분포의 confidence는 0입니다. ($p_{\max} = \frac{1}{K}$). 이는 모델이 모든 선택지가 동일한 확률을 가진다고 추정한다는 뜻입니다.</li>
+  <li>한 선택지에 완전히 집중된 분포의 confidence는 1입니다. ($p_{\max} = 1$)</li>
+  <li>균등 분포에 비해 우승 선택지의 확률이 클수록 confidence가 높습니다.</li>
+</ul>
+
+<p>앞서 살펴본 세 선택지 예시에서 Billing의 확률은 0.80이었습니다.</p>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>C</mi><mo>=</mo><mfrac><mrow><mn>3</mn><mo stretchy="false">(</mo><mn>0.99</mn><mo stretchy="false">)</mo><mo>−</mo><mn>1</mn></mrow><mn>2</mn></mfrac><mo>=</mo><mn>0.98</mn></mrow><annotation encoding="application/x-tex">C=\frac{3(0.99)-1}{2}=0.98</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.113em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">3</span><span class="mopen">(</span><span class="mord">0.99</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.98</span></span></span></span></span>
+
+<p>우승 확률은 0.99이지만 보고된 confidence는 0.98이라는 점에 주목하세요. confidence는 사용 가능한 선택지 수를 기준으로 가장 큰 확률을 정규화합니다. 반면 순서가 있는 Score 예시의 confidence는 0.558에 불과했습니다.</p>
+
+<h2 id="section-5">Hugging Face 생태계의 의사결정 모델</h2>
+
+<p>의사결정 모델은 새롭고 빠르게 변화하는 분야입니다. 각 모델은 내부적으로 서로 다른 방식으로 결정을 내립니다(전체 스키마를 함께 점수화하는 헤드, LLM 백본 위에 별도로 추가된 readout, 엣지 규모 및 멀티모달 변형 등). 이러한 다양성은 건전하지만 비용이 따릅니다. 모든 모델이 각자의 인터페이스를 노출하면 이를 둘러싼 모든 도구가 모델별 조정을 필요로 합니다.</p>
+
+<p>Hugging Face의 목표는 공통 <strong>구현</strong>을 강제하지 않고 공통 <strong>인터페이스</strong>에 합의하는 것입니다. 의사결정 모델은 내부적으로 원하는 방식으로 자유롭게 작동하되, 동일한 state와 questions를 받아 동일한 유형의 결정을 반환해야 합니다. 이 계약이 존재하면 나머지 생태계는 이를 한 번만 기반으로 구축할 수 있습니다.</p>
+
+<ul>
+  <li>llama.cpp와 같은 추론 엔진은 동일한 API를 통해 모든 의사결정 모델을 제공할 수 있습니다.</li>
+  <li>Hub는 이를 일관된 방식으로 패키징하고 표시할 수 있습니다.</li>
+  <li>학습 도구는 개별 아키텍처가 아니라 공유 primitive를 대상으로 할 수 있습니다.</li>
+</ul>
+
+<p>이 절의 나머지 부분에서는 이러한 각 요소를 차례로 살펴봅니다.</p>
+
+<h3 id="1-transformers를-사용한-서빙">1. Transformers를 사용한 서빙</h3>
+
+<p>이제 Transformers는 <code class="language-plaintext highlighter-rouge">DecisionPipeline</code>, <code class="language-plaintext highlighter-rouge">AutoModelForDecision</code>, <code class="language-plaintext highlighter-rouge">DecisionConfig</code> 클래스를 지원합니다. 이 클래스들은 <code class="language-plaintext highlighter-rouge">transformers</code>의 pipeline 및 model 클래스와 동일한 전반적인 구조를 따르지만, 의사결정 모델에 맞게 특별히 설계되었습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="n">decide</span> <span class="o">=</span> <span class="nf">pipeline</span><span class="p">(</span><span class="sh">"</span><span class="s">decision</span><span class="sh">"</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">autotrust/GEV-26B-Decide</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">decide</span><span class="p">)</span>
+
+<span class="c1"># DecisionPipeline: {'model': 'JevForDecision', 'dtype': 'bfloat16', 'device': 'cuda', 'input_modalities': 'text'}
+</span></code></pre></div></div>
+
+<p>다음과 같이 configuration과 model을 검사할 수도 있습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForDecision</span><span class="p">,</span> <span class="n">DecisionConfig</span>
+
+<span class="n">model_id</span> <span class="o">=</span> <span class="sh">"</span><span class="s">autotrust/GEV-26B-Decide</span><span class="sh">"</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">DecisionConfig</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">model_id</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForDecision</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">model_id</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><a href="https://huggingface.co/docs/transformers/main/en/serve-cli/serving#v1systemone">Transformers는 <code class="language-plaintext highlighter-rouge">/v1/systemone</code> endpoint도 지원합니다</a>.</p>
+
+<p>서빙 종속성을 사용하여 로컬 서버를 시작할 수 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="s2">"transformers[serving]"</span>
+transformers serve
+</code></pre></div></div>
+
+<p>호환되는 버전의 Transformers를 사용하면 의사결정 요청을 보낼 수 있습니다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">curl</span><span class="w"> </span><span class="err">http://localhost:</span><span class="mi">8000</span><span class="err">/v</span><span class="mi">1</span><span class="err">/systemone</span><span class="w"> </span><span class="err">\</span><span class="w">
+  </span><span class="err">-H</span><span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="err">\</span><span class="w">
+  </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="w">
+    </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"autotrust/GEV-26B-Decide"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I was charged twice. Please refund me today."</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"questions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"department"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"choice"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Which team should handle this?"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"criteria"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"billing"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payments and refunds"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"technical"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bugs and technical issues"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"sales"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pricing and subscriptions"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"urgency"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"score"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"How urgent is the request?"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"criteria"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"low"</span><span class="p">,</span><span class="w"> </span><span class="s2">"medium"</span><span class="p">,</span><span class="w"> </span><span class="s2">"high"</span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"refund"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"noul"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Is the customer requesting a refund?"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="err">'</span><span class="w">
+</span></code></pre></div></div>
+
+<p>응답에는 해당하는 유형별 결과와 확률이 포함된 세 개의 이름 있는 답변이 들어 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
+  <span class="s2">"model"</span>:<span class="s2">"autotrust/GEV-26B-Decide"</span>,
+  <span class="s2">"answers"</span>:<span class="o">{</span>
+    <span class="s2">"department"</span>:<span class="o">{</span>
+      <span class="s2">"type"</span>:<span class="s2">"choice"</span>,
+      <span class="s2">"choice"</span>:<span class="s2">"billing"</span>,
+      <span class="s2">"confidence"</span>:0.9974000453948975,
+      <span class="s2">"probabilities"</span>:<span class="o">{</span>
+        <span class="s2">"billing"</span>:0.9982666969299316,
+        <span class="s2">"technical"</span>:0.0010246571619063616,
+        <span class="s2">"sales"</span>:0.0007087149424478412
+        <span class="o">}</span>
+    <span class="o">}</span>,
+    <span class="s2">"urgency"</span>:<span class="o">{</span>
+      <span class="s2">"type"</span>:<span class="s2">"score"</span>,
+      <span class="s2">"score"</span>:1.7525686174631119,
+      <span class="s2">"legend"</span>:<span class="o">{</span><span class="s2">"0"</span>:<span class="s2">"low"</span>,<span class="s2">"1"</span>:<span class="s2">"medium"</span>,<span class="s2">"2"</span>:<span class="s2">"high"</span><span class="o">}</span>,
+      <span class="s2">"confidence"</span>:0.6288529792800546,
+      <span class="s2">"probabilities"</span>:<span class="o">{</span>
+        <span class="s2">"0"</span>:0.014000383205711842,
+        <span class="s2">"1"</span>:0.2194305807352066,
+        <span class="s2">"2"</span>:0.7665690183639526
+      <span class="o">}</span>
+    <span class="o">}</span>,
+    <span class="s2">"refund"</span>:<span class="o">{</span>
+      <span class="s2">"type"</span>:<span class="s2">"noul"</span>,
+      <span class="s2">"noul"</span>:0.9953224062919617
+    <span class="o">}</span>
+  <span class="o">}</span>,
+  <span class="s2">"usage"</span>:<span class="o">{</span><span class="s2">"input_tokens"</span>:148,<span class="s2">"output_tokens"</span>:0<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>[!NOTE]
+흥미로운 점은 위 API가 호환되는 자기회귀 언어 모델에서도 작동한다는 것입니다. Transformers는 의사결정 프롬프트를 구성하고, 배치 forward pass에서 답변 레이블 로짓을 평가한 다음, 응답 텍스트를 생성하지 않고 softmax를 적용합니다. 따라서 반드시 새로운 모델을 학습하지 않고도 의사결정 인터페이스를 실험할 수 있습니다.</p>
+</blockquote>
+
+<h3 id="2-llamacpp를-사용한-서빙">2. llama.cpp를 사용한 서빙</h3>
+
+<p><a href="https://huggingface.co/blog/ggml-org/decision-models-in-llamacpp">llama.cpp도 동일한 <code class="language-plaintext highlighter-rouge">/v1/systemone</code> API를 사용하여 의사결정 모델을 지원합니다</a>.</p>
+
+<p>예를 들어 Hub에서 GGUF 의사결정 모델을 실행할 수 있습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>llama serve <span class="nt">-hf</span> ggml-org/Kev-4B-GGUF
+</code></pre></div></div>
+
+<p>기본 서버는 포트 9931에서 실행됩니다.</p>
+
+<p>그런 다음 <code class="language-plaintext highlighter-rouge">http://localhost:9931/v1/systemone</code>을 사용하여 동일한 state와 questions를 포함하는 요청을 보낼 수 있습니다. 서버가 모델을 선택하므로 요청에서 <code class="language-plaintext highlighter-rouge">model</code> 필드를 생략할 수 있습니다.</p>
+
+<p>여기서 유용한 특성은 인터페이스 호환성입니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">curl</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">9931</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">systemone</span> \
+  <span class="o">-</span><span class="n">H</span> <span class="sh">"</span><span class="s">Content-Type: application/json</span><span class="sh">"</span> \
+  <span class="o">-</span><span class="n">d</span> <span class="sh">'</span><span class="s">{
+    </span><span class="sh">"</span><span class="s">model</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">ggml-org/Kev-4B-GGUF</span><span class="sh">"</span><span class="s">,
+    </span><span class="sh">"</span><span class="s">state</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">I was charged twice. Please refund me today.</span><span class="sh">"</span><span class="s">,
+    </span><span class="sh">"</span><span class="s">questions</span><span class="sh">"</span><span class="s">: {
+      </span><span class="sh">"</span><span class="s">department</span><span class="sh">"</span><span class="s">: {
+        </span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">choice</span><span class="sh">"</span><span class="s">,
+        </span><span class="sh">"</span><span class="s">instructions</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">Which team should handle this?</span><span class="sh">"</span><span class="s">,
+        </span><span class="sh">"</span><span class="s">criteria</span><span class="sh">"</span><span class="s">: {
+          </span><span class="sh">"</span><span class="s">billing</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">Payments and refunds</span><span class="sh">"</span><span class="s">,
+          </span><span class="sh">"</span><span class="s">technical</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">Bugs and technical issues</span><span class="sh">"</span><span class="s">,
+          </span><span class="sh">"</span><span class="s">sales</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">Pricing and subscriptions</span><span class="sh">"</span><span class="s">
+        }
+      },
+      </span><span class="sh">"</span><span class="s">urgency</span><span class="sh">"</span><span class="s">: {
+        </span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">score</span><span class="sh">"</span><span class="s">,
+        </span><span class="sh">"</span><span class="s">instructions</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">How urgent is the request?</span><span class="sh">"</span><span class="s">,
+        </span><span class="sh">"</span><span class="s">criteria</span><span class="sh">"</span><span class="s">: [</span><span class="sh">"</span><span class="s">low</span><span class="sh">"</span><span class="s">, </span><span class="sh">"</span><span class="s">medium</span><span class="sh">"</span><span class="s">, </span><span class="sh">"</span><span class="s">high</span><span class="sh">"</span><span class="s">]
+      },
+      </span><span class="sh">"</span><span class="s">refund</span><span class="sh">"</span><span class="s">: {
+        </span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">noul</span><span class="sh">"</span><span class="s">,
+        </span><span class="sh">"</span><span class="s">instructions</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">Is the customer requesting a refund?</span><span class="sh">"</span><span class="s">
+      }
+    }
+  }</span><span class="sh">'</span>
+</code></pre></div></div>
+
+<h3 id="3-hugging-face-hub에서-모델-찾기">3. Hugging Face Hub에서 모델 찾기</h3>
+
+<p>Hugging Face는 호환되는 모델을 찾을 수 있도록 전용 <a href="https://huggingface.co/models?other=decision-model&amp;sort=trending"><code class="language-plaintext highlighter-rouge">decision-model</code> 태그</a>를 도입했습니다. 의사결정 모델은 하나의 백본이나 아키텍처를 공유할 필요가 없기 때문에 유용합니다.</p>
+
+<p>예를 들어 생태계에는 ModernBERT와 같은 encoder 아키텍처를 기반으로 하는 모델뿐 아니라, 더 큰 생성 언어 모델 백본에서 파생된 모델도 포함되어 있습니다.</p>
+
+<h3 id="4-hugging-face-도구를-사용한-의사결정-모델-학습">4. Hugging Face 도구를 사용한 의사결정 모델 학습</h3>
+
+<p>추론을 이해했다면 다음 질문은 의사결정 모델을 조정할 수 있는지 여부입니다. 의사결정 모델은 transformers에 통합되어 있으므로 <code class="language-plaintext highlighter-rouge">Trainer</code> API를 사용해 fine-tuning할 수 있습니다.</p>
+
+<p>다음은 지원 요청을 라우팅하도록 <code class="language-plaintext highlighter-rouge">JEV-9B</code>을 fine-tuning하는 간단한 예시입니다. 의도적으로 작게 구성했지만, 중요한 부분을 보여 줍니다.</p>
+
+<ul>
+  <li>각 예시는 정답과 연결된 의사결정 요청(<code class="language-plaintext highlighter-rouge">state</code>와 <code class="language-plaintext highlighter-rouge">questions</code>)입니다.</li>
+  <li><code class="language-plaintext highlighter-rouge">model.decision_config.prepare_inputs</code>는 추론 시와 동일한 방식으로 요청을 모델 입력으로 변환합니다.</li>
+  <li>모델은 선택지마다 하나의 로짓을 반환하므로 <code class="language-plaintext highlighter-rouge">choice</code> 질문은 선택지에 대한 일반적인 cross-entropy loss로 학습합니다.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span><span class="p">;</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">"</span><span class="s">CUDA_VISIBLE_DEVICES</span><span class="sh">"</span><span class="p">]</span><span class="o">=</span><span class="sh">"</span><span class="s">2</span><span class="sh">"</span>
+<span class="kn">import</span> <span class="n">torch</span>
+<span class="kn">import</span> <span class="n">torch.nn.functional</span> <span class="k">as</span> <span class="n">F</span>
+<span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForDecision</span><span class="p">,</span> <span class="n">Trainer</span><span class="p">,</span> <span class="n">TrainingArguments</span>
+
+<span class="n">checkpoint</span> <span class="o">=</span> <span class="sh">"</span><span class="s">autotrust/JEV-9B</span><span class="sh">"</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForDecision</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">)</span>
+
+<span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">I was charged twice. Please refund me.</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">refund</span><span class="sh">"</span><span class="p">),</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">My package has not arrived.</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">shipping</span><span class="sh">"</span><span class="p">),</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">The application crashes when I open it.</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">technical</span><span class="sh">"</span><span class="p">),</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">I want my money back.</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">refund</span><span class="sh">"</span><span class="p">),</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">Where is my delivery?</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">shipping</span><span class="sh">"</span><span class="p">),</span>
+    <span class="p">(</span><span class="sh">"</span><span class="s">I cannot log into my account.</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">technical</span><span class="sh">"</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">"</span><span class="s">refund</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Billing issues and refunds</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">shipping</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Orders and deliveries</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">technical</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Software and account issues</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+    <span class="n">request</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">state</span><span class="sh">"</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">questions</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">category</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">choice</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">instructions</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Classify the support request.</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">criteria</span><span class="sh">"</span><span class="p">:</span> <span class="n">options</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+    <span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">questions</span><span class="p">),</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">decision_config</span><span class="p">.</span><span class="nf">prepare_inputs</span><span class="p">(</span>
+        <span class="n">request</span><span class="p">,</span> <span class="n">tokenizer</span>
+    <span class="p">)</span>
+    <span class="n">inputs</span><span class="p">[</span><span class="sh">"</span><span class="s">marks</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="sh">"</span><span class="s">marks</span><span class="sh">"</span><span class="p">].</span><span class="nf">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">inputs</span><span class="p">[</span><span class="sh">"</span><span class="s">num_options</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">tensor</span><span class="p">([[</span><span class="nf">len</span><span class="p">(</span><span class="n">questions</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">options</span><span class="p">)]])</span>
+    <span class="n">inputs</span><span class="p">[</span><span class="sh">"</span><span class="s">question_type_ids</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">]])</span>  <span class="c1"># choice
+</span>    <span class="n">inputs</span><span class="p">[</span><span class="sh">"</span><span class="s">labels</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">tensor</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">questions</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">options</span><span class="p">.</span><span class="nf">index</span><span class="p">(</span><span class="n">label</span><span class="p">)]</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">inputs</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="p">[</span><span class="nf">preprocess</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="k">for</span> <span class="n">text</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">DecisionTrainer</span><span class="p">(</span><span class="n">Trainer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">compute_loss</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">return_outputs</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">.</span><span class="nf">pop</span><span class="p">(</span><span class="sh">"</span><span class="s">labels</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="nf">model</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">logits</span><span class="p">.</span><span class="nf">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># [3] -&gt; [1, 3]
+</span>        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">.</span><span class="nf">float</span><span class="p">(),</span> <span class="n">labels</span><span class="p">)</span>
+
+        <span class="nf">return </span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">logits</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_outputs</span> <span class="k">else</span> <span class="n">loss</span>
+
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="nc">DecisionTrainer</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">args</span><span class="o">=</span><span class="nc">TrainingArguments</span><span class="p">(</span>
+        <span class="n">output_dir</span><span class="o">=</span><span class="sh">"</span><span class="s">./decision-toy</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">max_steps</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+        <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+        <span class="n">logging_steps</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">save_strategy</span><span class="o">=</span><span class="sh">"</span><span class="s">no</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">report_to</span><span class="o">=</span><span class="sh">"</span><span class="s">none</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">remove_unused_columns</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">train_dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+    <span class="n">data_collator</span><span class="o">=</span><span class="k">lambda</span> <span class="n">batch</span><span class="p">:</span> <span class="n">batch</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">trainer</span><span class="p">.</span><span class="nf">train</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>의사결정 모델 학습에 대한 일급 지원도 TRL에 추가될 예정이므로(<a href="https://github.com/huggingface/trl/pull/8040">huggingface/trl#8040</a>), 이러한 연결 코드를 직접 작성할 필요가 없어집니다. 이 글을 작성하는 시점에는 PR이 아직 열려 있습니다.</p>
+
+<p>더 나아가 생성형 LLM을 의사결정 모델로 전환하려는 경우, <a href="https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth">Unsloth가 레시피를 제공합니다</a>. 이 레시피는 Qwen과 같은 모델을 LoRA 및 의사결정 점수화 헤드와 함께 fine-tuning합니다.</p>
+
+<h2 id="section-6">마무리</h2>
+
+<p>의사결정 모델이 흥미로운 이유는 분류가 새롭기 때문이 아니라, <strong>소프트웨어를 위한 결정과 확률을 일급 출력으로 만든다는 점</strong>에 있습니다.</p>
+
+<p>기존 분류기는 이미 확률을 생성하며, zero-shot 분류기는 런타임에 정의되는 카테고리를 이미 허용합니다. 의사결정 모델은 이러한 아이디어를 여러 질문 primitive, 비생성 점수화, 신뢰할 수 있고 보정된 결정을 위한 특화 학습의 가능성을 갖춘 유형 지정 인터페이스로 통합합니다.</p>
+
+                
+                <div class="clearfix"></div>
+			</div>
+
+            <!-- Post Date -->
+            <p>
+
+            <small>
+                <span class="post-date"><time class="post-date" datetime=" 2026-11-10">10 Nov 2026</time></span>
+                
+            </small>
+        </p>
+
+
+        <!-- Begin Comments
+            ================================================== -->
+        <section>
+            <div id="comments">
+                <!-- Disqus 발급 시, 해당 주석 해제
+<section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+-->
+
+            </div>
+        </section>
+        <!--End Comments
+            ================================================== -->
+
+
+
+    </div>
+    <button class="sidebar-toggle-btn d-lg-none" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </button>
+    <div class="col-sm-4 sidebar-wrapper">
+        <div class="sidebar sticky-top">
+    <div class="toc-content">
+        <ul id="markdown-toc">
+  <li><a href="#hugging-face의-의사결정-모델" id="markdown-toc-hugging-face의-의사결정-모델">Hugging Face의 의사결정 모델</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">의사결정 모델이란 무엇인가요?</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">모든 작업에 LLM을 사용하지 않는 이유는 무엇인가요?</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">의사결정 모델은 분류 모델과 어떻게 다른가요?</a>        <ul>
+          <li><a href="#전통적-분류" id="markdown-toc-전통적-분류">전통적 분류</a></li>
+          <li><a href="#zero-shot-분류" id="markdown-toc-zero-shot-분류">Zero-shot 분류</a></li>
+          <li><a href="#의사결정-모델이-다른-점" id="markdown-toc-의사결정-모델이-다른-점">의사결정 모델이 다른 점</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-4" id="markdown-toc-section-4">의사결정 모델 인터페이스</a>        <ul>
+          <li><a href="#state" id="markdown-toc-state">State</a></li>
+          <li><a href="#questions와-해당-primitive" id="markdown-toc-questions와-해당-primitive">Questions와 해당 primitive</a>            <ul>
+              <li><a href="#choice-선택지에-대한-확률-분포" id="markdown-toc-choice-선택지에-대한-확률-분포">Choice: 선택지에 대한 확률 분포</a></li>
+              <li><a href="#score-순서가-있는-분포의-기댓값" id="markdown-toc-score-순서가-있는-분포의-기댓값">Score: 순서가 있는 분포의 기댓값</a></li>
+              <li><a href="#noul-베르누이-결정" id="markdown-toc-noul-베르누이-결정">Noul: 베르누이 결정</a></li>
+              <li><a href="#confidence-모델은-얼마나-확신하나요" id="markdown-toc-confidence-모델은-얼마나-확신하나요">Confidence: 모델은 얼마나 확신하나요?</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#section-5" id="markdown-toc-section-5">Hugging Face 생태계의 의사결정 모델</a>        <ul>
+          <li><a href="#1-transformers를-사용한-서빙" id="markdown-toc-1-transformers를-사용한-서빙">1. Transformers를 사용한 서빙</a></li>
+          <li><a href="#2-llamacpp를-사용한-서빙" id="markdown-toc-2-llamacpp를-사용한-서빙">2. llama.cpp를 사용한 서빙</a></li>
+          <li><a href="#3-hugging-face-hub에서-모델-찾기" id="markdown-toc-3-hugging-face-hub에서-모델-찾기">3. Hugging Face Hub에서 모델 찾기</a></li>
+          <li><a href="#4-hugging-face-도구를-사용한-의사결정-모델-학습" id="markdown-toc-4-hugging-face-도구를-사용한-의사결정-모델-학습">4. Hugging Face 도구를 사용한 의사결정 모델 학습</a></li>
+        </ul>
+      </li>
+      <li><a href="#section-6" id="markdown-toc-section-6">마무리</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!-- Author Box -->
+
+<div class="row post-top-meta ">
+    <div class="profile">
+        <img class="author-thumb" src="/pr-preview/pr-268/" alt="">
+    </div>
+    <div class="desc">
+        <a target="_blank" class="link-dark" href=""></a>
+        <span class="author-description"></span>                        
+    </div>
+</div>
+
+
+
+
+    <!-- End Article
+================================================== -->
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+
+
+
+
+
+
+<section class="category-filter-section mb-5">
+  <div class="category-filters">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all">
+        All
+        <span class="count">72</span>
+      </button>
+
+      
+        
+        
+          <button class="filter-btn" data-category="translation">
+            Translation
+            <span class="count">72</span>
+          </button>
+        
+      
+        
+        
+          <button class="filter-btn" data-category="huggingface">
+            HuggingFace
+            <span class="count">71</span>
+          </button>
+        
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="row featured-posts">
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+</section>
+
+<section class="row">
+  <div class="col-sm-12">
+    <div class="row posts-container">
+      
+          
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/toyblocks/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-11-06-toyblocks/thumbnail.jpeg" alt="ToyBlocks: 로봿 학습과 평가를 위한 통제된 세계" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/toyblocks/">ToyBlocks: 로봿 학습과 평가를 위한 통제된 세계</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 ToyBlocks: A controlled world for robot learning and evaluation를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">06 Nov 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/open-asr-leaderboard-liva/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-11-06-open-asr-leaderboard-liva/thumbnail.png" alt="이집트 및 나이지리아 영어, Open ASR Leaderboard에 합류" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/open-asr-leaderboard-liva/">이집트 및 나이지리아 영어, Open ASR Leaderboard에 합류</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Egyptian and Nigerian English join the Open ASR Leaderboard를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">06 Nov 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/phonon-tts/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-11-05-phonon-tts/thumbnail.png" alt="Phonon TTS 자세히 살펴보기: 벤치마크를 뛰어넘는 고품질 온디바이스 음성 출시" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/phonon-tts/">Phonon TTS 자세히 살펴보기: 벤치마크를 뛰어넘는 고품질 온디바이스 음성 출시</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 A Closer Look at Phonon TTS. Launching High-Quality On-Device Speech...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">05 Nov 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/statebench/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-11-03-statebench/thumbnail.png" alt="StateBench: 긴 문서에서 언어 모델이 상태 변화를 추적하는 방식 테스트" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/statebench/">StateBench: 긴 문서에서 언어 모델이 상태 변화를 추적하는 방식 테스트</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 StateBench: Testing how language models track state changes over long...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">04 Nov 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/cwe-bench/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-11-03-cwe-bench/thumbnail.jpg" alt="CWE-bench v2: 더 넓은 범위, 높은 품질, 향상된 투명성" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/cwe-bench/">CWE-bench v2: 더 넓은 범위, 높은 품질, 향상된 투명성</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 CWE-bench v2: More coverage, quality, and transparency를 한국어로 번역한 글입니다....</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">03 Nov 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/nemotron-halloween/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-10-30-nemotron-halloween/thumbnail.png" alt="NVIDIA Nemotron 오픈 모델로 유령의 집 만들기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/nemotron-halloween/">NVIDIA Nemotron 오픈 모델로 유령의 집 만들기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 nemotron-halloween를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">31 Oct 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/mistral-large4/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-10-29-mistral-large4/thumbnail.png" alt="Hugging Face의 Le Chonk 소개: Mistral Large 4" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/mistral-large4/">Hugging Face의 Le Chonk 소개: Mistral Large 4</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Welcome Le Chonk: Mistral Large 4 on Hugging Face를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">29 Oct 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/granite-switch-4-1-1/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-10-29-granite-switch-4-1-1/thumbnail.png" alt="Granite Switch 4.1.1 — 소프트웨어를 업데이트하듯 모델을 업데이트하세요" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/granite-switch-4-1-1/">Granite Switch 4.1.1 — 소프트웨어를 업데이트하듯 모델을 업데이트하세요</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Granite Switch 4.1.1 — Update models like you update software를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">29 Oct 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/announcing-project-protostar/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-10-29-announcing-project-protostar/thumbnail.jpg" alt="Project ProtoStar 발표: 공공 자금으로 수행된 과학을 AI-ready하게 만들기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/announcing-project-protostar/">Project ProtoStar 발표: 공공 자금으로 수행된 과학을 AI-ready하게 만들기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Announcing Project ProtoStar: Making Publicly Funded Science AI-Ready를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">29 Oct 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/novelty-bench/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-10-27-novelty-bench/thumbnail.png" alt="LLM이 연구 아이디어의 신규성을 판단한다고 믿을 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/novelty-bench/">LLM이 연구 아이디어의 신규성을 판단한다고 믿을 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Can we trust LLMs to judge whether a research idea...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">28 Oct 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/nemotron-transcribe-granary/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-10-28-nemotron-transcribe-granary/thumbnail.jpeg" alt="NVIDIA Nemotron 3.5 Transcribe and Granary v2: 프롬프트로 지시하고 조정할 수 있는 지능형 다국어 전사" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/nemotron-transcribe-granary/">NVIDIA Nemotron 3.5 Transcribe and Granary v2: 프롬프트로 지시하고 조정할 수 있는 지능형 다국어 전사</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 NVIDIA Nemotron 3.5 Transcribe and Granary v2: Intelligent Multilingual Transcription...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">28 Oct 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/lfm3/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-10-27-lfm3/thumbnail.png" alt="LFM3로 특화 멀티모달 모델 구축하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/lfm3/">LFM3로 특화 멀티모달 모델 구축하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Build specialized multimodal models with LFM3를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">28 Oct 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/litpivot/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-10-23-litpivot/thumbnail.png" alt="LitPivot: 문헌 지형 내 동적 맥락화를 통한 연구 아이디어 개발" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/litpivot/">LitPivot: 문헌 지형 내 동적 맥락화를 통한 연구 아이디어 개발</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 LitPivot: Developing research ideas through dynamic contextualization within the literature...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">24 Oct 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/torch-neuronx-model-support/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-10-23-torch-neuronx-model-support/thumbnail.jpg" alt="AWS Trainium에서 모델이 실행되나요? 확인해 보세요." width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/torch-neuronx-model-support/">AWS Trainium에서 모델이 실행되나요? 확인해 보세요.</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Does Your Model Run on AWS Trainium? Look It Up를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">23 Oct 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/thinkingbox-training/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-10-22-thinkingbox-training/thumbnail.png" alt="데이터베이스 채점을 RL 보상으로 전환하기: ThinkingBox를 활용한 에이전트 사후 학습" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/thinkingbox-training/">데이터베이스 채점을 RL 보상으로 전환하기: ThinkingBox를 활용한 에이전트 사후 학습</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Turning Database Grading into RL Rewards: Post-Training Agents with ThinkingBox를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">23 Oct 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/granite-timeseries-ensemble-r1/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-10-22-granite-timeseries-ensemble-r1/thumbnail.png" alt="IBM Granite 시계열 모델을 활용한 앙상블 예측" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/granite-timeseries-ensemble-r1/">IBM Granite 시계열 모델을 활용한 앙상블 예측</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Ensemble forecasting with IBM Granite time-series models를 한국어로 번역한 글입니다....</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">22 Oct 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/thinkingbox/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-10-03-thinkingbox/thumbnail.png" alt="에이전트는 끝났다고 말했다. 데이터베이스는 동의하지 않았다." width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/thinkingbox/">에이전트는 끝났다고 말했다. 데이터베이스는 동의하지 않았다.</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Agent Said It Was Done. The Database Disagreed.를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">04 Oct 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/autosynthdata/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-10-02-autosynthdata/thumbnail.png" alt="AutoSynthData: 엔터프라이즈 에이전트를 위한 학습 데이터 생성" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/autosynthdata/">AutoSynthData: 엔터프라이즈 에이전트를 위한 학습 데이터 생성</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 AutoSynthData: Generating Training Data for Enterprise Agents를 한국어로 번역한 글입니다....</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">02 Oct 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/open-tts-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-09-30-open-tts-leaderboard/thumbnail.png" alt="Open TTS Leaderboard: 다국어 Text-to-Speech 및 Voice Cloning을 위한 확장 가능한 평가" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/open-tts-leaderboard/">Open TTS Leaderboard: 다국어 Text-to-Speech 및 Voice Cloning을 위한 확장 가능한 평가</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Open TTS Leaderboard: Scalable Evaluation for Multilingual Text-to-Speech and Voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">30 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/getting-the-source-right-not-just-the-fact-source/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-09-29-getting-the-source-right-not-just-the-fact-source/thumbnail.png" alt="사실만이 아니라 출처를 올바르게: MCP 에이전트를 위한 출처 인식 검증" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/getting-the-source-right-not-just-the-fact-source/">사실만이 아니라 출처를 올바르게: MCP 에이전트를 위한 출처 인식 검증</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Getting the Source Right, Not Just the Fact: Source-Aware Verification...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">29 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/holo4/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-09-28-holo4/thumbnail.jpeg" alt="Holo4: 범용 컴퓨터 사용 에이전트를 구동하다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/holo4/">Holo4: 범용 컴퓨터 사용 에이전트를 구동하다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Holo4: powering generalist computer-use agents를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">28 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/lfm2-5-vl-dspark/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-09-24-lfm2-5-vl-dspark/thumbnail.gif" alt="LFM2.5-VL-DSpark로 비전-언어 모델 가속하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/lfm2-5-vl-dspark/">LFM2.5-VL-DSpark로 비전-언어 모델 가속하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Accelerating vision-language models with LFM2.5-VL-DSpark를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">24 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/transformers-llama-cpp-quants/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-09-22-transformers-llama-cpp-quants/thumbnail.png" alt="이제 Transformers에서 llama.cpp 양자화 모델을 실행할 수 있습니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/transformers-llama-cpp-quants/">이제 Transformers에서 llama.cpp 양자화 모델을 실행할 수 있습니다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Transformers now runs llama.cpp quants를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">22 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/omlx/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-09-22-omlx/thumbnail.jpg" alt="oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/omlx/">oMLX의 제작자이자 유지 관리자인 Jun Kim이 MLX 커뮤니티를 지원하기 위해 Hugging Face에 합류합니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Jun Kim, oMLX creator and maintainer, joins Hugging Face to...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">22 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/evaleval-aisi/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-09-22-evaleval-aisi/thumbnail.png" alt="UK AISI와 EvalEval이 벤치마크 결과의 재현성을 높이는 방법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/evaleval-aisi/">UK AISI와 EvalEval이 벤치마크 결과의 재현성을 높이는 방법</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 How UK AISI and EvalEval Are Making Benchmark Results Reproducible를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">22 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/tokenizers-v1/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-09-21-tokenizers-v1/thumbnail.png" alt="tokenizers v1: 인코딩, 디코딩 및 스케일링 성능 측정" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/tokenizers-v1/">tokenizers v1: 인코딩, 디코딩 및 스케일링 성능 측정</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 tokenizers v1: encode, decode and scaling, measured를 한국어로 번역한 글입니다....</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">21 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/pruning-llms-like-a-physicist-block-removal-as-an/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-09-21-pruning-llms-like-a-physicist-block-removal-as-an/thumbnail.png" alt="물리학자처럼 LLM 가지치기하기: 블록 제거를 Ising 최적화 문제로 보기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/pruning-llms-like-a-physicist-block-removal-as-an/">물리학자처럼 LLM 가지치기하기: 블록 제거를 Ising 최적화 문제로 보기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Pruning LLMs Like a Physicist: Block Removal as an Ising...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">21 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/altk-evolve-consistency/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-09-15-altk-evolve-consistency/thumbnail.jpeg" alt="에이전트가 작업을 해냈다. 다시 해낼 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/altk-evolve-consistency/">에이전트가 작업을 해냈다. 다시 해낼 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Your Agent Aced the Task. Will It Do It Again?를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">16 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/ibm-releases-sota-granite-time-series/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-09-09-ibm-releases-sota-granite-time-series/thumbnail.png" alt="상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/ibm-releases-sota-granite-time-series/">상업 친화적 라이선스와 함께 SOTA Granite Time Series PatchTST-FM-r2 모델 출시</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 IBM releases SOTA Granite Time Series PatchTST-FM-r2 model with commercial-friendly...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">10 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/safety-for-whom/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-09-08-safety-for-whom/thumbnail.png" alt="누구를 위한 안전성인가? 주제 전체가 아니라 올바른 하위 집합을 거부하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/safety-for-whom/">누구를 위한 안전성인가? 주제 전체가 아니라 올바른 하위 집합을 거부하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Safety for Whom? Refusing the Right Subset of a Topic,...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">08 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/train-to-paint-with-code/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-09-03-train-to-paint-with-code/thumbnail.png" alt="TRL과 OpenEnv로 수채화를 그리는 코딩 모델 학습하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/train-to-paint-with-code/">TRL과 OpenEnv로 수채화를 그리는 코딩 모델 학습하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Training a coding model to paint watercolours with TRL and...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">03 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/grpo-with-trl-ifstruct/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-09-03-grpo-with-trl-ifstruct/thumbnail.png" alt="Fine-tuning a 350M Model for Better Structured Outputs in 100 GRPO Steps" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/grpo-with-trl-ifstruct/">Fine-tuning a 350M Model for Better Structured Outputs in 100 GRPO Steps</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Fine-tuning a 350M Model for Better Structured Outputs in 100...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">03 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/funes/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-09-03-funes/thumbnail.jpg" alt="여러분이 소유하는 메모리를 코딩 에이전트에 제공하세요" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/funes/">여러분이 소유하는 메모리를 코딩 에이전트에 제공하세요</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Give Your Coding Agents a Memory You Own를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">03 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/webgpu-kernels/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-09-01-webgpu-kernels/thumbnail.png" alt="@huggingface/kernels 소개: 로컬 AI를 위한 200개 이상의 WebGPU 커널" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/webgpu-kernels/">@huggingface/kernels 소개: 로컬 AI를 위한 200개 이상의 WebGPU 커널</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing @huggingface/kernels: 200+ WebGPU Kernels for Local AI를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">01 Sep 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/open-asr-leaderboard-global-south/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-08-28-open-asr-leaderboard-global-south/thumbnail.png" alt="Open ASR Leaderboard에 최초의 글로벌 사우스 언어가 추가되다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/open-asr-leaderboard-global-south/">Open ASR Leaderboard에 최초의 글로벌 사우스 언어가 추가되다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Open ASR Leaderboard Adds Its First Global South Language를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">28 Aug 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/train-multi-vector-encoder/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-08-26-train-multi-vector-encoder/thumbnail.png" alt="Sentence Transformers로 멀티 벡터 임베딩 모델 학습 및 미세 조정" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/train-multi-vector-encoder/">Sentence Transformers로 멀티 벡터 임베딩 모델 학습 및 미세 조정</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Training and Finetuning Multi-Vector Embedding Models with Sentence Transformers를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">26 Aug 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/gradio-workflow-guide/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-08-25-gradio-workflow-guide/thumbnail.png" alt="gr.Workflow로 무엇이든 만들기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/gradio-workflow-guide/">gr.Workflow로 무엇이든 만들기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Wire It, Run It, Deploy It: AI Workflows in Gradio를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">25 Aug 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/asr-benchmark-optimization/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-08-21-asr-benchmark-optimization/thumbnail.png" alt="음성 인식에서 벤치마크 최적화 측정" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/asr-benchmark-optimization/">음성 인식에서 벤치마크 최적화 측정</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Measuring benchmark optimization in speech recognition를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">21 Aug 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/multi-vector-encoder/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-08-18-multi-vector-encoder/thumbnail.png" alt="멀티 벡터 (Late Interaction) 임베딩 모델과 Sentence Transformers" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/multi-vector-encoder/">멀티 벡터 (Late Interaction) 임베딩 모델과 Sentence Transformers</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Multi-Vector (Late Interaction) Embedding Models with Sentence Transformers를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">18 Aug 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/state-of-open-models-summer-2026/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-08-14-state-of-open-models-summer-2026/thumbnail.png" alt="오픈 모델 현황: 2026년 여름 동향" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/state-of-open-models-summer-2026/">오픈 모델 현황: 2026년 여름 동향</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 State of Open Models: Summer 2026 Observations를 한국어로 번역한 글입니다....</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">14 Aug 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/icml-2026-open-reproductions/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-08-13-icml-2026-open-reproductions/thumbnail.png" alt="ICML에서 2,200편의 논문 재현으로 배운 것" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/icml-2026-open-reproductions/">ICML에서 2,200편의 논문 재현으로 배운 것</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 What We Learned by Reproducing 2,200 papers from ICML를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">13 Aug 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/muse-glimmer/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-08-10-muse-glimmer/thumbnail.png" alt="Meta가 Muse Glimmer로 돌아왔다: 로컬, 에이전트형, 멀티모달, 그리고 오픈 소스!" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/muse-glimmer/">Meta가 Muse Glimmer로 돌아왔다: 로컬, 에이전트형, 멀티모달, 그리고 오픈 소스!</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Meta is back with Muse Glimmer: local, agentic, multimodal, and...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">10 Aug 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/baseten/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-08-06-baseten/thumbnail.png" alt="Baseten, Hugging Face Inference Providers에 합류 🔥" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/baseten/">Baseten, Hugging Face Inference Providers에 합류 🔥</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Baseten on Hugging Face Inference Providers 🔥를 한국어로 번역한 글입니다....</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">06 Aug 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/nunchaku-diffusers/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-07-23-nunchaku-diffusers/thumbnail.png" alt="Nunchaku 4비트 확산 추론을 Diffusers에 도입하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/nunchaku-diffusers/">Nunchaku 4비트 확산 추론을 Diffusers에 도입하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Bringing Nunchaku 4-bit Diffusion Inference to Diffusers를 한국어로 번역한 글입니다....</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">23 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/grabette/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-07-21-grabette/thumbnail.png" alt="Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/grabette/">Grabette: 로봇-조작 데이터를 기록하기 위한 오픈 시스템. <br> *함께 공유 데이터셋을 구축합니다.*</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Grabette: an open system to record robot-manipulation data를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">21 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/security-incident-july-2026/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-07-16-security-incident-july-2026/thumbnail.png" alt="보안 사고 공개 — 2026년 7월" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/security-incident-july-2026/">보안 사고 공개 — 2026년 7월</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Security incident disclosure — July 2026를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">16 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/thinkingmachines-inkling/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-07-15-thinkingmachines-inkling/thumbnail.png" alt="Thinking Machines의 Inkling에 오신 것을 환영합니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/thinkingmachines-inkling/">Thinking Machines의 Inkling에 오신 것을 환영합니다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Welcome Inkling by Thinking Machines를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/real-world-voiceeq/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-07-15-real-world-voiceeq/thumbnail.png" alt="Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/real-world-voiceeq/">Real World VoiceEQ 소개: 음성 AI의 사람다운 품질 측정</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing Real World VoiceEQ: Measuring the human quality of voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">15 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/torch-attention-profile/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-07-10-torch-attention-profile/thumbnail.png" alt="파이토치의 프로파일링(3부): 어텐션이 전부다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/torch-attention-profile/">파이토치의 프로파일링(3부): 어텐션이 전부다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 3): Attention is all you profile를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">10 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/native-speed-vllm-transformers-backend/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-07-08-native-speed-vllm-transformers-backend/thumbnail.png" alt="네이티브-스피드 vLLM transformers 모델링 백엔드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/native-speed-vllm-transformers-backend/">네이티브-스피드 vLLM transformers 모델링 백엔드</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Native-speed vLLM transformers modeling backend를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/lerobot-release-v060/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-07-07-lerobot-release-v060/thumbnail.png" alt="LeRobot v0.6.0: 상상하고, 평가하고, 개선하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/lerobot-release-v060/">LeRobot v0.6.0: 상상하고, 평가하고, 개선하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 LeRobot v0.6.0: Imagine, Evaluate, Improve를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">07 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/revamped-kernels/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-07-06-revamped-kernels/thumbnail.png" alt="🤗 Kernels: 주요 업데이트" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/revamped-kernels/">🤗 Kernels: 주요 업데이트</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 🤗 Kernels: Major Updates를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">06 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/cerebras-gemma4-voice-ai/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-07-01-cerebras-gemma4-voice-ai/thumbnail.png" alt="Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/cerebras-gemma4-voice-ai/">Hugging Face와 Cerebras가 Gemma 4를 실시간 음성 AI로 선보입니다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Hugging Face and Cerebras bring Gemma 4 to real-time voice...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">01 Jul 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/eee-community-evals/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-06-30-eee-community-evals/thumbnail.png" alt="Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/eee-community-evals/">Hugging Face 모델 페이지에서 Every Eval Ever 결과 보기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Featuring Every Eval Ever Results on Hugging Face Model Pages를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">30 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/vllm-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-06-26-vllm-jobs/thumbnail.png" alt="HF Jobs에서 vLLM 서버를 한 명령으로 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/vllm-jobs/">HF Jobs에서 vLLM 서버를 한 명령으로 실행하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Run a vLLM Server on HF Jobs in One Command를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">26 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/ffasr-leaderboard/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-06-24-ffasr-leaderboard/thumbnail.png" alt="FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/ffasr-leaderboard/">FFASR Leaderboard 소개: 현실 세계에서의 ASR 벤치마크</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Introducing the FFASR Leaderboard: Benchmarking ASR in the Real World를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">24 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/huggingface-hub-release-ci/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-06-23-huggingface-hub-release-ci/thumbnail.png" alt="매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/huggingface-hub-release-ci/">매주 AI, 오픈 도구, 그리고 휴먼 인 더 루프가 포함된 huggingface_hub 배포</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Shipping huggingface_hub every week with AI, open tools, and a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/cross-origin-storage/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-06-23-cross-origin-storage/thumbnail.jpg" alt="Transformers.js에서 제안된 Cross-Origin Storage API 실험하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/cross-origin-storage/">Transformers.js에서 제안된 Cross-Origin Storage API 실험하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Experimenting with the proposed Cross-Origin Storage API in Transformers.js를 한국어로...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">23 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/peft-beyond-lora/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-06-18-peft-beyond-lora/thumbnail.png" alt="Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/peft-beyond-lora/">Beyond LoRA: 가장 인기 있는 미세조정 기법을 이길 수 있을까?</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Beyond LoRA: Can you beat the most popular fine-tuning technique?를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/is-it-agentic-enough/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-06-18-is-it-agentic-enough/thumbnail.png" alt="충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/is-it-agentic-enough/">충분히 에이전트적인가요? 자체 도구로 오픈 모델 벤치마킹하기</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Is it agentic enough? Benchmarking open models on your own...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">18 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/agentic-resource-discovery-launch/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-06-17-agentic-resource-discovery-launch/thumbnail.png" alt="에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/agentic-resource-discovery-launch/">에이전트 기반 리소스 탐색: 에이전트에게 도구·스킬·다른 에이전트 검색을 맡기다</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Agentic Resource Discovery: Let agents search를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">17 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/github-ci-hf-jobs/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-06-09-github-ci-hf-jobs/thumbnail.gif" alt="GitHub CI를 Hugging Face Jobs로 마이그레이션" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/github-ci-hf-jobs/">GitHub CI를 Hugging Face Jobs로 마이그레이션</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Migrating Your GitHub CI to Hugging Face Jobs를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">09 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/openenv-agentic-rl/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-06-08-openenv-agentic-rl/thumbnail.png" alt="오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/openenv-agentic-rl/">오픈 소스 커뮤니티가 에이전틱 RL을 위한 OpenEnv에 힘을 싣다</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 The Open Source Community is backing OpenEnv for Agentic RL를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">08 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/hf-cli-for-agents/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-06-04-hf-cli-for-agents/thumbnail.png" alt="에이전트에 최적화된 Hub 작업을 위한 hf CLI 설계" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/hf-cli-for-agents/">에이전트에 최적화된 Hub 작업을 위한 hf CLI 설계</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Designing the hf CLI as an agent-optimized way to work...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">04 Jun 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/torch-profiler/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-05-29-torch-profiler/thumbnail.png" alt="PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/torch-profiler/">PyTorch에서의 프로파일링(Part 1): torch.profiler에 대한 초보자 가이드</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Profiling in PyTorch (Part 1): A Beginner’s Guide to torch.profiler를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">29 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/local-reachy-mini-conversation/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-05-27-local-reachy-mini-conversation/thumbnail.png" alt="Reachy Mini를 로컬에서 완전히 실행하기" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/local-reachy-mini-conversation/">Reachy Mini를 로컬에서 완전히 실행하기</a></h2>
+        <p class="card-text text-muted">
+이 글은 Hugging Face 블로그의 Reachy Mini goes fully local를 한국어로 번역한 글입니다.
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">27 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/delta-weight-sync/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-05-27-delta-weight-sync/thumbnail.png" alt="TRL에서 Hub Bucket으로 1조 매개변수 전송: 델타 가중치 동기화" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/delta-weight-sync/">TRL에서 Hub Bucket으로 1조 매개변수 전송: 델타 가중치 동기화</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Shipping a Trillion Parameters With a Hub Bucket: Delta Weight...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">27 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/olmoearth-v1-1/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-05-20-olmoearth-v1-1/thumbnail.png" alt="OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/olmoearth-v1-1/">OlmoEarth v1.1: 더 효율적인 지구관측 모델 제품군</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 OlmoEarth v1.1: A more efficient family of models를 한국어로 번역한...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">20 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/paddleocr-transformers/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-05-19-paddleocr-transformers/thumbnail.jpeg" alt="PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/paddleocr-transformers/">PaddleOCR 3.5: Transformers 백엔드를 활용한 OCR 및 문서 파싱 작업 실행</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 PaddleOCR 3.5: Running OCR and Document Parsing Tasks with a...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> Hugging Face KREW Translation Bot, </span>             
+                on <span class="post-date">19 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/granite-embedding-multilingual-r2/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-05-15-granite-embedding-multilingual-r2/thumbnail.png" alt="Granite Embedding Multilingual R2: 32K 다국어 임베딩" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/granite-embedding-multilingual-r2/">Granite Embedding Multilingual R2: 32K 다국어 임베딩</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Granite Embedding Multilingual R2: Open Apache 2.0 Multilingual Embeddings with...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">15 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="translation huggingface ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/foundation-model-building-blocks/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2026-05-12-foundation-model-building-blocks/thumbnail.png" alt="AWS에서 파운데이션 모델 학습 및 추론을 위한 구성 요소" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/foundation-model-building-blocks/">AWS에서 파운데이션 모델 학습 및 추론을 위한 구성 요소</a></h2>
+        <p class="card-text text-muted">이 글은 Hugging Face 블로그의 Building Blocks for 파운데이션 모델 Training and Inference on AWS를...</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> , </span>             
+                on <span class="post-date">12 May 2026</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+      
+      <div class="col-md-4 mb-5 post-item" data-categories="transformers translation ">
+        <!-- begin post -->
+
+<div class="card">
+    
+    <a class="post-thumbnail-link" href="https://huggingface-krew.co/pr-preview/pr-268/how-to-use-translator/">
+        <img class="post-thumbnail rounded" src="/pr-preview/pr-268/assets/images/blog/posts/2024-10-05-how-to-use-translator/thumbnail.png" alt="Hugging Face Transformers 한글화 - 초벌 번역기 사용법" width="1160" height="580">
+    </a>
+    
+    <div class="card-block">
+        <h2 class="card-title h4 serif-font"><a href="https://huggingface-krew.co/pr-preview/pr-268/how-to-use-translator/">Hugging Face Transformers 한글화 - 초벌 번역기 사용법</a></h2>
+        <p class="card-text text-muted">
+Hugging Face Transformers 문서를 한글로 번역하는 초벌 번역기 사용 방법을 안내하는 가이드입니다. 😊
+</p>
+        <div class="metafooter">
+            <div class="wrapfooter small d-flex align-items-center">
+                <span class="author-meta">
+                By  <span class="post-name"> minju, </span>             
+                on <span class="post-date">05 Oct 2024</span>
+                </span>               
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end post -->
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+</main>
+
+
+    <a class="contribute_link" href="https://hugging-face-krew.github.io/how-to-contribute/">🤗 Hugging Face KREW의 일원으로<br>생태계에 기여하는 방법을 안내합니다.</a>
+
+    <!-- Footer
+================================================== -->
+    <footer class="footer text-center">
+      <ul class="p-0 mb-1 small">
+        
+        <li>
+          <a
+            href="/pr-preview/pr-268/"
+            alt="Home"
+            >Home</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-268/privacy-policy/"
+            alt="Privacy Policy"
+            >Privacy Policy</a
+          >
+        </li>
+        
+        <li>
+          <a
+            href="/pr-preview/pr-268/contact/"
+            alt="Contact"
+            >Contact</a
+          >
+        </li>
+        
+      </ul>
+      <div class="copyright small">
+        Copyright © Hugging Face KREW. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript
+================================================== -->
+    <script src="/pr-preview/pr-268/assets/js/jquery.min.js"></script>
+    <script src="/pr-preview/pr-268/assets/js/bootstrap.min.js"></script>
+    <script src="/pr-preview/pr-268/assets/js/theme.js"></script>
+    <script src="/pr-preview/pr-268/assets/js/codecopy.js"></script>
+    <script src="/pr-preview/pr-268/assets/js/category.js"></script>
+  </body>
+</html>
