@@ -1,21 +1,24 @@
 ---
 layout: post
-title: "미세 조정 작업이 FLOPs가 말하는 것보다 오래 걸리는 이유"
+title: 미세 조정 작업이 FLOPs가 말하는 것보다 오래 걸리는 이유
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/6a725daa5ca641a21ab61956/J6DIf4Len_31Tj-CQlQXY.png
 image: assets/images/blog/posts/2026-11-18-predicting-fine-tuning-time/thumbnail.png
 authors:
-  - user: Dharma-AI
-slug: "predicting-fine-tuning-time"
-source_url: "https://huggingface.co/blog/Dharma-AI/predicting-fine-tuning-time"
-source_published_date: "2026-11-18"
-source_published_at: "2026-11-18T18:53:43+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: Dharma-AI
+slug: predicting-fine-tuning-time
+source_url: https://huggingface.co/blog/Dharma-AI/predicting-fine-tuning-time
+source_published_date: '2026-11-18'
+source_published_at: '2026-11-18T18:53:43+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: '* TOC {:toc} <!--toc--> _이 글은 Hugging Face 블로그의 [Why your fine-tuning
+  job takes longer than the FLOPs say](https://huggingface.'
 ---
-
 * TOC
 {:toc}
 <!--toc-->
