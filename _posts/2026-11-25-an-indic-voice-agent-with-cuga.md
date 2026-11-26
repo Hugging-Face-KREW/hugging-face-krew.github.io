@@ -1,21 +1,25 @@
 ---
 layout: post
-title: "CUGA를 활용한 인도 지역 언어 음성 에이전트"
+title: CUGA를 활용한 인도 지역 언어 음성 에이전트
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/67fe070a4e8cc28ba346f53c/-QNcrxSDbjI8VOCBlhi-C.png
 image: assets/images/blog/posts/2026-11-25-an-indic-voice-agent-with-cuga/thumbnail.png
 authors:
-  - user: ibm-research
-slug: "an-indic-voice-agent-with-cuga"
-source_url: "https://huggingface.co/blog/ibm-research/an-indic-voice-agent-with-cuga"
-source_published_date: "2026-11-25"
-source_published_at: "2026-11-25T10:22:09+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: ibm-research
+slug: an-indic-voice-agent-with-cuga
+source_url: https://huggingface.co/blog/ibm-research/an-indic-voice-agent-with-cuga
+source_published_date: '2026-11-25'
+source_published_at: '2026-11-25T10:22:09+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: '* TOC {:toc} <!--toc--> _이 글은 Hugging Face 블로그의 [An Indic Voice Agent
+  with CUGA](https://huggingface.co/blog/ibm-research/an-indic-voice-agent-with-cuga)를
+  한국어로 번역한 글입니다_.'
 ---
-
 * TOC
 {:toc}
 <!--toc-->
