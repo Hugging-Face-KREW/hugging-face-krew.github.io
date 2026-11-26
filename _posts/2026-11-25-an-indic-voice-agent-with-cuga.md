@@ -19,7 +19,7 @@ translator: "openai"
 * TOC
 {:toc}
 <!--toc-->
-_이 글은 Hugging Face 블로그의 [An Indic Voice Agent with CUGA](https://huggingface.co/blog/ibm-research/an-indic-voice-agent-with-cuga)를 한국어로 번역한 글입니다._
+_이 글은 Hugging Face 블로그의 [An Indic Voice Agent with CUGA](https://huggingface.co/blog/ibm-research/an-indic-voice-agent-with-cuga)를 한국어로 번역한 글입니다_.
 
 <!-- Source: https://huggingface.co/blog/ibm-research/an-indic-voice-agent-with-cuga -->
 
@@ -98,11 +98,11 @@ audio ──▶ speech-to-text ──▶ knowledge.search ──▶ CUGA (ground
 
 [Hugging Face의 CUGA Apps →](https://huggingface.co/spaces/ibm-research/cuga-apps)
 
-직접 만들어 보고 싶으신가요? 단계별 튜토리얼인 [Build an Indic Voice Agent with CUGA](/blog/ibm-research/build-an-indic-voice-agent-with-cuga.md)에서는 빈 폴더에서 시작해 각 계층을 차례로 추가합니다.
+직접 만들어 보고 싶으신가요? 단계별 튜토리얼인 [Build an Indic Voice Agent with CUGA](https://huggingface.co/blog/ibm-research/build-an-indic-voice-agent-with-cuga)에서는 빈 폴더에서 시작해 각 계층을 차례로 추가합니다.
 
 ## 농업을 넘어: Bharat를 위한 확장 {#section-4}
 
-여기서 사용한 방식은 농업에만 해당하지 않습니다. 핸드북을 정부 제도 문서, 건강 관련 안내문 또는 법률 가이드로 바꾸면 다른 도우미를 만들 수 있습니다. 음성 제공업체를 바꾸면 에이전트를 다시 작성하지 않고도 배포 모델을 변경할 수 있습니다. 예를 들어 속도를 위해 클라우드를 사용하거나 데이터 주권을 위해 온프레미스를 사용할 수 있습니다.
+여기서 사용한 방식은 농업에만 해당되지 않습니다. 핸드북을 정부 제도 문서, 건강 관련 안내문 또는 법률 가이드로 바꾸면 다른 도우미를 만들 수 있습니다. 음성 제공업체를 바꾸면 에이전트를 다시 작성하지 않고도 배포 모델을 변경할 수 있습니다. 예를 들어 속도를 위해 클라우드를 사용하거나 데이터 주권을 위해 온프레미스를 사용할 수 있습니다.
 
 음성 우선의 다국어 도우미는 영어 전용 텍스트 화면으로는 충분히 지원받지 못했던 사람들에게 디지털 서비스가 도달할 수 있게 하는 방법입니다. 사람들이 확인할 수 있는 출처에 답변을 연결하고, 개방적이며 감사 가능한 하니스 위에 이를 구축해야 신뢰를 얻을 수 있습니다.
 
@@ -137,3 +137,4 @@ Hugging Face 블로그에서 더 많은 CUGA 게시물을 확인해 보세요.
 - [CUGA를 사용해 실제 에이전트 앱 구축하기: 경량 하니스에서 작동하는 24개의 예제](https://huggingface.co/blog/ibm-research/cuga-apps): 이 음성 에이전트가 속한 앱 갤러리입니다.
 
 - [같은 모델, 다른 하니스: CUGA, Hermes, Deep Agents — CUGA는 언제 선택해야 할까?](https://huggingface.co/blog/ibm-research/cuga-harness): 모델이 같을 때 하니스가 얼마나 중요한지 설명합니다.
+
