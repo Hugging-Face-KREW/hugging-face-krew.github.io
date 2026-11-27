@@ -1,21 +1,24 @@
 ---
 layout: post
-title: "AMD Ryzen 및 Radeon을 위한 llama.cpp 벤치마크 대시보드 소개"
+title: AMD Ryzen 및 Radeon을 위한 llama.cpp 벤치마크 대시보드 소개
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/67289c93ff90038d9a6e5675/tbIvyMSISXCm64WYP3atl.png
 image: assets/images/blog/posts/2026-11-26-llamacpp-amd-bench/thumbnail.png
 authors:
-  - user: ggml-org
-slug: "llamacpp-amd-bench"
-source_url: "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench"
-source_published_date: "2026-11-26"
-source_published_at: "2026-11-26T11:37:17+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: ggml-org
+slug: llamacpp-amd-bench
+source_url: https://huggingface.co/blog/ggml-org/llamacpp-amd-bench
+source_published_date: '2026-11-26'
+source_published_at: '2026-11-26T11:37:17+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: '* TOC {:toc} <!--toc--> _이 글은 Hugging Face 블로그의 [Introducing the llama.cpp
+  benchmark dashboard for AMD Ryzen and Radeon](https://huggingface.'
 ---
-
 * TOC
 {:toc}
 <!--toc-->
