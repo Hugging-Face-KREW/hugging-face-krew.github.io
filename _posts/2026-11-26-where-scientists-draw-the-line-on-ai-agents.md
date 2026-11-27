@@ -1,21 +1,24 @@
 ---
 layout: post
-title: "과학자들이 AI agent에 선을 긋는 지점"
+title: 과학자들이 AI agent에 선을 긋는 지점
 author: dailybot
-categories: [Translation, HuggingFace]
+categories:
+- Translation
+- HuggingFace
 thumbnail: https://cdn-uploads.huggingface.co/production/uploads/638e39b249de7ae552d977b5/F32BgZC_rj0kg99apJlto.png
 image: assets/images/blog/posts/2026-11-25-where-scientists-draw-the-line-on-ai-agents/thumbnail.png
 authors:
-  - user: allenai
-slug: "where-scientists-draw-the-line-on-ai-agents"
-source_url: "https://huggingface.co/blog/allenai/where-scientists-draw-the-line-on-ai-agents"
-source_published_date: "2026-11-25"
-source_published_at: "2026-11-25T18:52:55+00:00"
-locale: "ko"
-translation_status: "draft"
-translator: "openai"
+- user: allenai
+slug: where-scientists-draw-the-line-on-ai-agents
+source_url: https://huggingface.co/blog/allenai/where-scientists-draw-the-line-on-ai-agents
+source_published_date: '2026-11-25'
+source_published_at: '2026-11-25T18:52:55+00:00'
+locale: ko
+translation_status: draft
+translator: openai
+description: '* TOC {:toc} <!--toc--> _이 글은 Hugging Face 블로그의 [Where scientists draw
+  the line on AI agents](https://huggingface.'
 ---
-
 * TOC
 {:toc}
 <!--toc-->
